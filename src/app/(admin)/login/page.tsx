@@ -3,17 +3,20 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Plane } from "lucide-react";
+import { Plane, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError("");
     const res = await signIn("credentials", {
       email,
       password,
@@ -22,6 +25,7 @@ export default function LoginPage() {
 
     if (res?.error) {
       setError("Invalid credentials");
+      setIsLoading(false);
     } else {
       router.push("/admin");
     }
@@ -63,8 +67,9 @@ export default function LoginPage() {
               />
             </div>
           </div>
-          <Button type="submit" className="w-full text-md h-12 rounded-xl">
-            Sign In
+          <Button type="submit" disabled={isLoading} className="w-full text-md h-12 rounded-xl flex items-center justify-center gap-2">
+            {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
+            {isLoading ? "Signing In..." : "Sign In"}
           </Button>
         </form>
       </div>
