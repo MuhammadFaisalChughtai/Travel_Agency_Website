@@ -5,8 +5,9 @@ import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { Hero } from "@/components/ui/Hero";
 
 export const metadata = {
-  title: "Travel Blogs & Guides | Terrific Travel",
-  description: "Read our latest insights, travel hacks, destination guides, and spiritual preparation for Umrah & Hajj.",
+  title: "Travel Blogs & Guides | Terrific Travel Ltd",
+  description:
+    "Read our latest insights, travel hacks, destination guides, and spiritual preparation for Umrah & Hajj.",
 };
 
 export default async function BlogIndexPage() {
@@ -24,15 +25,24 @@ export default async function BlogIndexPage() {
       <Hero
         backgroundImage="https://images.unsplash.com/photo-1512453979436-5a50c8115191?auto=format&fit=crop&w=2000&q=80"
         badgeText="Official Blog"
-        title={<>Terrific <span className="text-[#eed6c4] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">Journals</span></>}
+        title={
+          <>
+            Terrific{" "}
+            <span className="text-[#eed6c4] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">
+              Journals
+            </span>
+          </>
+        }
         description="Expert insights, spiritual guidance, and the ultimate hacks for navigating the globe."
         showTrustpilot={false}
       />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 space-y-24">
         {categories.map((category) => {
-          const categoryBlogs = blogs.filter((b: any) => b.category === category);
-          
+          const categoryBlogs = blogs.filter(
+            (b: any) => b.category === category,
+          );
+
           return (
             <section key={category}>
               <div className="flex items-center justify-between border-b-2 border-slate-200 pb-4 mb-10">
@@ -43,19 +53,19 @@ export default async function BlogIndexPage() {
                   {categoryBlogs.length} Articles
                 </span>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {categoryBlogs.map((post: any) => (
-                  <article 
-                    key={post.id} 
+                  <article
+                    key={post.id}
                     className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#6b4f4f]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1"
                   >
                     <div className="relative h-52 w-full overflow-hidden">
-                      <Image 
-                        src={post.image} 
-                        alt={post.title} 
-                        fill 
-                        className="object-cover group-hover:scale-105 transition-transform duration-500" 
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute top-4 left-4">
                         <span className="px-3 py-1 rounded-full bg-[#6b4f4f] text-white text-[9px] font-black uppercase tracking-wider shadow-sm">
@@ -85,8 +95,8 @@ export default async function BlogIndexPage() {
                       </p>
 
                       <div className="border-t border-slate-100 pt-4">
-                        <Link 
-                          href={`/blog/${post.slug}`} 
+                        <Link
+                          href={`/blog/${post.slug}`}
                           className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#6b4f4f] group-hover:text-slate-900 transition-colors duration-300 uppercase tracking-widest"
                         >
                           <span>Read Article</span>

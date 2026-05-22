@@ -2,6 +2,7 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { TrustpilotReviews } from "@/components/home/TrustpilotReviews";
 import { HomeBlogSection } from "@/components/home/HomeBlogSection";
 import { TrendingFlightsSection } from "@/components/flights/TrendingFlightsSection";
+import { PackageCard } from "@/components/umrah/PackageCard";
 import { prisma } from "@/lib/prisma";
 
 // Utility to shuffle an array
@@ -25,6 +26,32 @@ const AIRLINE_PARTNERS = [
 export default async function Home() {
   const trendingFlights = await (prisma as any).trendingFlight.findMany({
     orderBy: { createdAt: "desc" },
+  });
+
+  const featuredUmrahPackages = await prisma.package.findMany({
+    where: { type: "UMRAH" },
+    orderBy: { price: "asc" },
+    take: 6,
+  });
+
+  const formattedUmrahPackages = featuredUmrahPackages.map((pkg: any) => {
+    let image = "";
+    try {
+      const images = JSON.parse(pkg.images);
+      image = images[0] || "";
+    } catch (e) {
+      image = pkg.images;
+    }
+
+    return {
+      id: pkg.id,
+      title: pkg.title,
+      image,
+      stars: pkg.stars || 3,
+      price: `£${pkg.price}`,
+      detailsUrl: `/view/package/${pkg.id}`,
+      isSold: pkg.isSold,
+    };
   });
 
   // Fetch all blogs
@@ -58,39 +85,24 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-heading">
-              Featured Packages
+              Featured Umrah Packages
             </h2>
             <p className="mt-4 text-lg leading-8 text-slate-600 max-w-2xl mx-auto">
-              Explore our handpicked selection of premium holidays, spiritual
-              journeys, and more.
+              Explore our handpicked selection of premium spiritual journeys at
+              the lowest prices.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Placeholder for Package Cards */}
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="aspect-[4/3] w-full rounded-xl bg-slate-100 mb-6 flex items-center justify-center overflow-hidden relative">
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-10" />
-                  <span className="absolute bottom-4 left-4 z-20 text-white font-medium text-lg">
-                    Package {i}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold font-heading text-slate-900 mb-2">
-                  Amazing Destination
-                </h3>
-                <p className="text-slate-600 text-sm mb-4">
-                  7 Days, 6 Nights premium experience.
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-primary font-bold text-lg">£999</span>
-                  <button className="text-sm font-semibold text-primary hover:text-primary-hover">
-                    View Details &rarr;
-                  </button>
-                </div>
-              </div>
+            {formattedUmrahPackages.map((pkg: any) => (
+              <PackageCard
+                key={pkg.id}
+                title={pkg.title}
+                image={pkg.image}
+                stars={pkg.stars}
+                price={pkg.price}
+                detailsUrl={pkg.detailsUrl}
+                isSold={pkg.isSold}
+              />
             ))}
           </div>
         </div>

@@ -40,14 +40,20 @@ export default function LoginPage() {
             Admin Portal
           </h2>
           <p className="mt-2 text-sm text-slate-600">
-            Sign in to manage Terrific Travel.
+            Sign in to manage Terrific Travel Ltd.
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && <div className="text-red-500 text-sm text-center font-medium bg-red-50 p-2 rounded">{error}</div>}
+          {error && (
+            <div className="text-red-500 text-sm text-center font-medium bg-red-50 p-2 rounded">
+              {error}
+            </div>
+          )}
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium leading-6 text-slate-900">Email Address</label>
+              <label className="block text-sm font-medium leading-6 text-slate-900">
+                Email Address
+              </label>
               <input
                 type="email"
                 required
@@ -57,7 +63,9 @@ export default function LoginPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium leading-6 text-slate-900">Password</label>
+              <label className="block text-sm font-medium leading-6 text-slate-900">
+                Password
+              </label>
               <input
                 type="password"
                 required
@@ -67,7 +75,11 @@ export default function LoginPage() {
               />
             </div>
           </div>
-          <Button type="submit" disabled={isLoading} className="w-full text-md h-12 rounded-xl flex items-center justify-center gap-2">
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className="w-full text-md h-12 rounded-xl flex items-center justify-center gap-2"
+          >
             {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
             {isLoading ? "Signing In..." : "Sign In"}
           </Button>

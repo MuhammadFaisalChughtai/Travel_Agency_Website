@@ -701,7 +701,7 @@ interface ViewPageProps {
 
 export async function generateMetadata({ params }: ViewPageProps) {
   const item = await resolveItem(params.type, params.id);
-  if (!item) return { title: "Item Not Found | Terrific Travel" };
+  if (!item) return { title: "Item Not Found | Terrific Travel Ltd" };
 
   const titleText =
     item.metaTitle ||
@@ -713,10 +713,10 @@ export async function generateMetadata({ params }: ViewPageProps) {
     item.metaDescription ||
     item.description ||
     item.excerpt ||
-    `Detailed view for ${titleText} with Terrific Travel UK.`;
+    `Detailed view for ${titleText} with Terrific Travel Ltd UK.`;
 
   return {
-    title: item.metaTitle ? titleText : `${titleText} | Terrific Travel`,
+    title: item.metaTitle ? titleText : `${titleText} | Terrific Travel Ltd`,
     description: descText,
   };
 }

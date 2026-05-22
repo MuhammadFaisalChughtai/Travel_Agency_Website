@@ -10,20 +10,30 @@ export async function generateStaticParams() {
   return blogPostsData.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = getBlogBySlug(params.slug);
-  if (!post) return { title: "Article Not Found | Terrific Travel" };
+  if (!post) return { title: "Article Not Found | Terrific Travel Ltd" };
   return {
-    title: `${post.title} | Terrific Travel Journals`,
+    title: `${post.title} | Terrific Travel Ltd Journals`,
     description: post.excerpt,
   };
 }
 
-export default function BlogArticlePage({ params }: { params: { slug: string } }) {
+export default function BlogArticlePage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = getBlogBySlug(params.slug);
   if (!post) notFound();
 
-  const relatedPosts = blogPostsData.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const relatedPosts = blogPostsData
+    .filter((p) => p.slug !== post.slug)
+    .slice(0, 3);
 
   return (
     <>
@@ -43,7 +53,12 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
           {/* Breadcrumb + Meta */}
           <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 pt-20 max-w-4xl mx-auto w-full">
             <div className="flex items-center gap-2 text-[#eed6c4]/80 text-xs font-bold uppercase tracking-widest mb-4">
-              <Link href="/umrah" className="hover:text-[#eed6c4] transition-colors">Umrah</Link>
+              <Link
+                href="/umrah"
+                className="hover:text-[#eed6c4] transition-colors"
+              >
+                Umrah
+              </Link>
               <span>/</span>
               <span>Journals</span>
               <span>/</span>
@@ -75,7 +90,6 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
         {/* Article Body */}
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-14">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-
             {/* Main Article Content */}
             <main className="lg:col-span-8">
               {/* Back Link */}
@@ -105,8 +119,13 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
                     <BookOpen className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <p className="text-xs font-black text-[#483434] uppercase tracking-widest">Terrific Travel Journals</p>
-                    <p className="text-xs text-slate-400 font-light mt-0.5">UK-based IATA & ATOL accredited travel agency specialising in Umrah & Hajj.</p>
+                    <p className="text-xs font-black text-[#483434] uppercase tracking-widest">
+                      Terrific Travel Ltd Journals
+                    </p>
+                    <p className="text-xs text-slate-400 font-light mt-0.5">
+                      UK-based IATA & ATOL accredited travel agency specialising
+                      in Umrah & Hajj.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -114,8 +133,12 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
               {/* CTA */}
               <div className="mt-10 p-6 rounded-3xl bg-[#483434] text-white flex flex-col sm:flex-row items-start sm:items-center gap-6">
                 <div className="flex-grow">
-                  <p className="text-xs font-black uppercase tracking-widest text-[#eed6c4] mb-1">Ready to Begin Your Journey?</p>
-                  <h3 className="text-xl font-heading font-black leading-tight">Book Your Umrah Package with Terrific Travel</h3>
+                  <p className="text-xs font-black uppercase tracking-widest text-[#eed6c4] mb-1">
+                    Ready to Begin Your Journey?
+                  </p>
+                  <h3 className="text-xl font-heading font-black leading-tight">
+                    Book Your Umrah Package with Terrific Travel Ltd
+                  </h3>
                 </div>
                 <Link
                   href="/umrah"
@@ -131,7 +154,9 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
               <div className="sticky top-24 space-y-8">
                 {/* Article info card */}
                 <div className="rounded-3xl border border-[#eed6c4]/30 bg-[#eed6c4]/10 p-6 space-y-4">
-                  <h3 className="text-sm font-heading font-black text-[#483434] uppercase tracking-widest">Article Details</h3>
+                  <h3 className="text-sm font-heading font-black text-[#483434] uppercase tracking-widest">
+                    Article Details
+                  </h3>
                   <div className="space-y-3 text-sm">
                     <div className="flex items-center gap-2 text-slate-600">
                       <Tag className="w-4 h-4 text-[#6b4f4f]" />
@@ -150,7 +175,9 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
 
                 {/* Related Articles */}
                 <div>
-                  <h3 className="text-sm font-heading font-black text-[#483434] uppercase tracking-widest mb-5">Related Articles</h3>
+                  <h3 className="text-sm font-heading font-black text-[#483434] uppercase tracking-widest mb-5">
+                    Related Articles
+                  </h3>
                   <div className="space-y-4">
                     {relatedPosts.map((related) => (
                       <Link
@@ -159,12 +186,23 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
                         className="group flex gap-3 items-start rounded-2xl p-3 border border-[#eed6c4]/20 hover:border-[#6b4f4f]/40 hover:bg-[#eed6c4]/10 transition-all duration-300"
                       >
                         <div className="relative w-16 h-14 rounded-xl overflow-hidden shrink-0">
-                          <Image src={related.image} alt={related.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                          <Image
+                            src={related.image}
+                            alt={related.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
                         </div>
                         <div className="flex-grow min-w-0">
-                          <span className="text-[9px] font-black uppercase tracking-wider text-[#6b4f4f]">{related.category}</span>
-                          <p className="text-xs font-bold text-[#483434] leading-snug mt-0.5 group-hover:text-[#6b4f4f] transition-colors line-clamp-2">{related.title}</p>
-                          <p className="text-[9px] text-slate-400 mt-1">{related.readTime}</p>
+                          <span className="text-[9px] font-black uppercase tracking-wider text-[#6b4f4f]">
+                            {related.category}
+                          </span>
+                          <p className="text-xs font-bold text-[#483434] leading-snug mt-0.5 group-hover:text-[#6b4f4f] transition-colors line-clamp-2">
+                            {related.title}
+                          </p>
+                          <p className="text-[9px] text-slate-400 mt-1">
+                            {related.readTime}
+                          </p>
                         </div>
                       </Link>
                     ))}
@@ -173,8 +211,13 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
 
                 {/* Quick Contact */}
                 <div className="rounded-3xl bg-[#6b4f4f] text-white p-6 space-y-3">
-                  <h3 className="text-sm font-heading font-black uppercase tracking-widest text-[#eed6c4]">Need Help Planning?</h3>
-                  <p className="text-xs text-white/80 leading-relaxed">Our expert Umrah advisors are ready to assist you with tailored packages and guidance.</p>
+                  <h3 className="text-sm font-heading font-black uppercase tracking-widest text-[#eed6c4]">
+                    Need Help Planning?
+                  </h3>
+                  <p className="text-xs text-white/80 leading-relaxed">
+                    Our expert Umrah advisors are ready to assist you with
+                    tailored packages and guidance.
+                  </p>
                   <a
                     href="https://wa.me/441215291630"
                     target="_blank"

@@ -1,7 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone, User, Send, CheckCircle, AlertCircle, X, MessageSquare } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  User,
+  Send,
+  CheckCircle,
+  AlertCircle,
+  X,
+  MessageSquare,
+} from "lucide-react";
 
 interface Props {
   flightId: string;
@@ -10,12 +19,21 @@ interface Props {
 
 export function FlightEnquireButton({ flightId, flightTitle }: Props) {
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -60,20 +78,35 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
 
       {/* Modal Overlay */}
       {open && (
-        <div className="fixed inset-0 z-[999] flex items-center justify-center p-4" onClick={(e) => { e.preventDefault(); e.stopPropagation(); setOpen(false); }}>
+        <div
+          className="fixed inset-0 z-[999] flex items-center justify-center p-4"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setOpen(false);
+          }}
+        >
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           <div
             className="relative z-10 w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#eed6c4]/50"
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
             <div className="bg-gradient-to-r from-[#382626] to-[#6b4f4f] px-6 py-5 flex items-center justify-between">
               <div>
-                <h2 className="text-white font-heading font-black text-base tracking-tight">Flight Enquiry</h2>
-                <p className="text-[#eed6c4]/80 text-xs mt-0.5 truncate max-w-[240px]">{flightTitle}</p>
+                <h2 className="text-white font-heading font-black text-base tracking-tight">
+                  Flight Enquiry
+                </h2>
+                <p className="text-[#eed6c4]/80 text-xs mt-0.5 truncate max-w-[240px]">
+                  {flightTitle}
+                </p>
               </div>
               <button
-                onClick={(e) => { e.preventDefault(); e.stopPropagation(); setOpen(false); }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setOpen(false);
+                }}
                 className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
               >
                 <X className="w-4 h-4" />
@@ -88,12 +121,21 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
                     <CheckCircle className="w-8 h-8 text-emerald-500" />
                   </div>
                   <div>
-                    <h3 className="font-heading font-black text-[#382626] text-lg">Enquiry Sent!</h3>
-                    <p className="text-slate-500 text-sm mt-1">Our team will contact you within 24 hours.</p>
+                    <h3 className="font-heading font-black text-[#382626] text-lg">
+                      Enquiry Sent!
+                    </h3>
+                    <p className="text-slate-500 text-sm mt-1">
+                      Our team will contact you within 24 hours.
+                    </p>
                   </div>
                   <button
                     type="button"
-                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); setOpen(false); setStatus("idle"); }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setOpen(false);
+                      setStatus("idle");
+                    }}
                     className="px-6 py-2.5 rounded-xl bg-[#6b4f4f] text-white font-bold text-xs uppercase tracking-widest hover:bg-[#382626] transition-colors"
                   >
                     Close
@@ -164,9 +206,24 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
                   >
                     {status === "loading" ? (
                       <>
-                        <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                        <svg
+                          className="animate-spin w-4 h-4"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          />
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                          />
                         </svg>
                         Sending…
                       </>
@@ -180,7 +237,9 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
 
                   <p className="text-center text-[10px] text-slate-400">
                     Sent directly to{" "}
-                    <span className="text-[#6b4f4f] font-semibold">inquiry@terrifictravel.co.uk</span>
+                    <span className="text-[#6b4f4f] font-semibold">
+                      inquiry@terrifictravel.co.uk
+                    </span>
                   </p>
                 </>
               )}

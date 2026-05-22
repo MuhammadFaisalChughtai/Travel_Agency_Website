@@ -8,8 +8,9 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Terrific Travel Ltd | Discover the World",
-  description: "Book unforgettable holidays, Umrah, Hajj packages, flights, and premium transport with Terrific Travel Ltd.",
+  title: "Terrific Travel Ltd Ltd | Discover the World",
+  description:
+    "Book unforgettable holidays, Umrah, Hajj packages, flights, and premium transport with Terrific Travel Ltd Ltd.",
 };
 
 export default function RootLayout({

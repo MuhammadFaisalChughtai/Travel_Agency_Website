@@ -8,7 +8,7 @@ import { FaqAccordion } from "@/components/umrah/FaqAccordion";
 import { prisma } from "@/lib/prisma";
 
 export const metadata = {
-  title: "Umrah Packages | Terrific Travel",
+  title: "Umrah Packages | Terrific Travel Ltd",
   description:
     "Affordable Umrah packages from the UK for families, groups, and individuals. Our all-inclusive deals cover flights, hotels, visas, and transport.",
 };
@@ -16,7 +16,7 @@ export const metadata = {
 export default async function UmrahPage() {
   const allPackages = await prisma.package.findMany({
     where: { type: "UMRAH" },
-    orderBy: { price: "asc" }
+    orderBy: { price: "asc" },
   });
 
   const formatPackages = (stars: number) => {
@@ -27,7 +27,7 @@ export default async function UmrahPage() {
         try {
           const images = JSON.parse(pkg.images);
           image = images[0] || "";
-        } catch(e) {
+        } catch (e) {
           image = pkg.images;
         }
 
@@ -49,7 +49,7 @@ export default async function UmrahPage() {
 
   const blogs = await prisma.blog.findMany({
     where: { category: "Umrah" },
-    orderBy: { createdAt: "desc" }
+    orderBy: { createdAt: "desc" },
   });
 
   return (
@@ -59,7 +59,15 @@ export default async function UmrahPage() {
         backgroundImage="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
         badgeText="Sacred Journeys 2026"
         badgeIcon={<Sparkles className="w-3.5 h-3.5 text-[#eed6c4]" />}
-        title={<>Elite <span className="text-[#eed6c4] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">Umrah</span> Packages</>}
+        title={
+          <>
+            Elite{" "}
+            <span className="text-[#eed6c4] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">
+              Umrah
+            </span>{" "}
+            Packages
+          </>
+        }
         description="Experience spiritual fulfillment with bespoke travel curation, premium accommodations steps from the Haram, and VIP logistics."
         showTrustpilot={true}
       />

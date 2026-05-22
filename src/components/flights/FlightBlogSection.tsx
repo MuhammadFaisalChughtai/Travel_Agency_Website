@@ -8,7 +8,11 @@ import { Button } from "@/components/ui/Button";
 
 export function FlightBlogSection({ blogs }: { blogs: any[] }) {
   const [visibleCount, setVisibleCount] = useState(3);
-  const flightBlogs = blogs.filter((post: any) => post.category.includes("Flight") || post.category.includes("Travel Hacks"));
+  const flightBlogs = blogs.filter(
+    (post: any) =>
+      post.category.includes("Flight") ||
+      post.category.includes("Travel Hacks"),
+  );
 
   const handleLoadMore = () => {
     setVisibleCount((prev) => Math.min(prev + 3, flightBlogs.length));
@@ -21,34 +25,34 @@ export function FlightBlogSection({ blogs }: { blogs: any[] }) {
   return (
     <section className="py-16 bg-white border-t border-[#eed6c4]/30" id="blog">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="text-center space-y-3 mb-12">
           <span className="inline-block px-3 py-1 rounded-full bg-[#eed6c4]/20 border border-[#eed6c4]/40 text-[#6b4f4f] text-[10px] font-extrabold uppercase tracking-widest">
             Travel Guides & News
           </span>
           <h2 className="text-2xl md:text-3xl font-heading font-black text-[#483434] tracking-tight">
-            Terrific Travel Journals
+            Terrific Travel Ltd Journals
           </h2>
           <p className="text-xs md:text-sm text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
-            Gain deep insights, tips, and official protocols to prepare mentally, physically, and spiritually for your next journey.
+            Gain deep insights, tips, and official protocols to prepare
+            mentally, physically, and spiritually for your next journey.
           </p>
         </div>
 
         {/* Blog Post Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {flightBlogs.slice(0, visibleCount).map((post) => (
-            <article 
-              key={post.id} 
+            <article
+              key={post.id}
               className="bg-white rounded-3xl overflow-hidden border border-[#eed6c4]/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.06)] hover:border-[#6b4f4f]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1"
             >
               {/* Image Banner */}
               <div className="relative h-48 sm:h-52 w-full overflow-hidden">
-                <Image 
-                  src={post.image} 
-                  alt={post.title} 
-                  fill 
-                  className="object-cover group-hover:scale-105 transition-transform duration-500" 
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 rounded-full bg-[#6b4f4f] text-white text-[9px] font-black uppercase tracking-wider shadow-sm">
@@ -83,8 +87,8 @@ export function FlightBlogSection({ blogs }: { blogs: any[] }) {
 
                 {/* Divider Line */}
                 <div className="border-t border-[#eed6c4]/30 pt-4">
-                  <Link 
-                    href={`/view/blog/${post.slug}`} 
+                  <Link
+                    href={`/view/blog/${post.slug}`}
                     className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#6b4f4f] group-hover:text-[#483434] transition-colors duration-300 uppercase tracking-widest"
                   >
                     <span>Read Article</span>
@@ -108,7 +112,6 @@ export function FlightBlogSection({ blogs }: { blogs: any[] }) {
             </Button>
           </div>
         )}
-
       </div>
     </section>
   );

@@ -18,6 +18,14 @@ import { VisaBookingForm } from "../visa/VisaBookingForm";
 
 const CAROUSEL_SLIDES = [
   {
+    id: "flights",
+    title: "Global Flight Deals",
+    subtitle:
+      "Seamless connections and exclusive fares to take you wherever your heart desires.",
+    image:
+      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80",
+  },
+  {
     id: "holidays",
     title: "Premium Holiday Packages",
     subtitle:
@@ -33,14 +41,7 @@ const CAROUSEL_SLIDES = [
     image:
       "https://images.unsplash.com/photo-1454391304352-2bf4678b1a7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
   },
-  {
-    id: "flights",
-    title: "Global Flight Deals",
-    subtitle:
-      "Seamless connections and exclusive fares to take you wherever your heart desires.",
-    image:
-      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80",
-  },
+
   {
     id: "umrah",
     title: "Spiritual Umrah Journeys",

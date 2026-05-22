@@ -12,15 +12,39 @@ const EMAIL = "inquires@terrifictravel.co.uk";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, email, phone, airport, date, category, duration, travelers, message, type, packageId } = body;
+    const {
+      name,
+      email,
+      phone,
+      airport,
+      date,
+      category,
+      duration,
+      travelers,
+      message,
+      type,
+      packageId,
+    } = body;
 
     if (!name || !email) {
-      return NextResponse.json({ error: "Name and email are required." }, { status: 400 });
+      return NextResponse.json(
+        { error: "Name and email are required." },
+        { status: 400 },
+      );
     }
 
-    const tripDetails = JSON.stringify({ airport, date, category, duration, travelers, packageId });
+    const tripDetails = JSON.stringify({
+      airport,
+      date,
+      category,
+      duration,
+      travelers,
+      packageId,
+    });
 
-    const formattedType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "General Enquiry";
+    const formattedType = type
+      ? type.charAt(0).toUpperCase() + type.slice(1)
+      : "General Enquiry";
 
     await prisma.enquiry.create({
       data: {
@@ -30,8 +54,8 @@ export async function POST(req: NextRequest) {
         type: formattedType,
         message,
         tripDetails,
-        status: "PENDING"
-      }
+        status: "PENDING",
+      },
     });
 
     const subject = type
@@ -106,7 +130,7 @@ export async function POST(req: NextRequest) {
       <tr>
         <td style="background:linear-gradient(135deg,#2a1a1a 0%,#5a3a3a 100%);padding:36px 32px;text-align:center;">
           <div style="display:inline-block;background:rgba(255,255,255,0.08);border:1px solid rgba(238,214,196,0.3);border-radius:12px;padding:10px 24px;margin-bottom:12px;">
-            <span style="color:#eed6c4;font-size:18px;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;">Terrific Travel</span>
+            <span style="color:#eed6c4;font-size:18px;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;">Terrific Travel Ltd</span>
           </div>
           <p style="color:#fff3e4;font-size:12px;margin:0;opacity:0.7;letter-spacing:0.2em;text-transform:uppercase;">New Enquiry Received</p>
         </td>
@@ -135,7 +159,9 @@ export async function POST(req: NextRequest) {
             <tr>
               <td style="padding:16px 18px;">
                 <table width="100%" cellpadding="0" cellspacing="0">
-                  ${name ? `
+                  ${
+                    name
+                      ? `
                   <tr>
                     <td class="email-details-row" style="padding:8px 0;border-bottom:1px solid #eed6c4;width:130px;vertical-align:top;">
                       <span class="email-details-label" style="font-size:11px;color:#6b4f4f;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;">Name</span>
@@ -143,8 +169,12 @@ export async function POST(req: NextRequest) {
                     <td class="email-details-row" style="padding:8px 0;border-bottom:1px solid #eed6c4;">
                       <span class="email-details-value" style="font-size:14px;color:#2a1a1a;font-weight:700;">${name}</span>
                     </td>
-                  </tr>` : ""}
-                  ${email ? `
+                  </tr>`
+                      : ""
+                  }
+                  ${
+                    email
+                      ? `
                   <tr>
                     <td class="email-details-row" style="padding:8px 0;border-bottom:1px solid #eed6c4;width:130px;vertical-align:top;">
                       <span class="email-details-label" style="font-size:11px;color:#6b4f4f;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;">Email</span>
@@ -152,8 +182,12 @@ export async function POST(req: NextRequest) {
                     <td class="email-details-row" style="padding:8px 0;border-bottom:1px solid #eed6c4;">
                       <span class="email-details-value" style="font-size:14px;color:#6b4f4f;font-weight:700;"><a href="mailto:${email}" style="color:#6b4f4f;text-decoration:none;">${email}</a></span>
                     </td>
-                  </tr>` : ""}
-                  ${phone ? `
+                  </tr>`
+                      : ""
+                  }
+                  ${
+                    phone
+                      ? `
                   <tr>
                     <td style="padding:8px 0;width:130px;vertical-align:top;">
                       <span class="email-details-label" style="font-size:11px;color:#6b4f4f;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;">Phone</span>
@@ -161,14 +195,18 @@ export async function POST(req: NextRequest) {
                     <td style="padding:8px 0;">
                       <span class="email-details-value" style="font-size:14px;color:#6b4f4f;font-weight:700;"><a href="tel:${phone}" style="color:#6b4f4f;text-decoration:none;">${phone}</a></span>
                     </td>
-                  </tr>` : ""}
+                  </tr>`
+                      : ""
+                  }
                 </table>
               </td>
             </tr>
           </table>
 
           <!-- Trip Details Card -->
-          ${(airport || date || category || duration || travelers || packageId) ? `
+          ${
+            airport || date || category || duration || travelers || packageId
+              ? `
           <table width="100%" cellpadding="0" cellspacing="0" class="email-details-card" style="background:#fff8f0;border-radius:14px;border:1px solid #eed6c4;overflow:hidden;margin-bottom:24px;">
             <tr>
               <td style="background:#6b4f4f;padding:10px 18px;">
@@ -187,10 +225,14 @@ export async function POST(req: NextRequest) {
                 </table>
               </td>
             </tr>
-          </table>` : ""}
+          </table>`
+              : ""
+          }
 
           <!-- Message -->
-          ${message ? `
+          ${
+            message
+              ? `
           <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
             <tr>
               <td class="email-msg-td" style="background:#fff8f0;border-left:4px solid #6b4f4f;border-radius:0 10px 10px 0;padding:16px 20px;">
@@ -198,7 +240,9 @@ export async function POST(req: NextRequest) {
                 <p class="email-msg-text" style="font-size:14px;color:#382626;line-height:1.7;margin:0;">${message}</p>
               </td>
             </tr>
-          </table>` : ""}
+          </table>`
+              : ""
+          }
 
           <!-- CTA to reply -->
           <table width="100%" cellpadding="0" cellspacing="0">
@@ -217,7 +261,7 @@ export async function POST(req: NextRequest) {
       <!-- Footer -->
       <tr>
         <td style="background:#2a1a1a;padding:20px 32px;text-align:center;">
-          <p style="color:#eed6c4;font-size:11px;margin:0;opacity:0.6;">Sent automatically from the Terrific Travel website enquiry form.</p>
+          <p style="color:#eed6c4;font-size:11px;margin:0;opacity:0.6;">Sent automatically from the Terrific Travel Ltd website enquiry form.</p>
         </td>
       </tr>
 
@@ -280,7 +324,7 @@ export async function POST(req: NextRequest) {
       <tr>
         <td style="background:linear-gradient(135deg,#2a1a1a 0%,#5a3a3a 100%);padding:40px 32px;text-align:center;">
           <div style="display:inline-block;background:rgba(255,255,255,0.08);border:1px solid rgba(238,214,196,0.3);border-radius:12px;padding:10px 24px;margin-bottom:16px;">
-            <span style="color:#eed6c4;font-size:18px;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;">Terrific Travel</span>
+            <span style="color:#eed6c4;font-size:18px;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;">Terrific Travel Ltd</span>
           </div>
           <br>
           <div style="display:inline-block;background:#00b37a;border-radius:50%;width:52px;height:52px;line-height:52px;text-align:center;font-size:24px;margin:8px 0 4px;color:#ffffff;font-weight:bold;">✓</div>
@@ -300,7 +344,9 @@ export async function POST(req: NextRequest) {
       </tr>
 
       <!-- Enquiry Summary -->
-      ${(airport || date || category || duration || travelers) ? `
+      ${
+        airport || date || category || duration || travelers
+          ? `
       <tr>
         <td style="padding:0 32px 24px;">
           <table width="100%" cellpadding="0" cellspacing="0" class="email-details-card" style="background:#fff8f0;border-radius:14px;border:1px solid #e8d5c0;overflow:hidden;">
@@ -322,7 +368,9 @@ export async function POST(req: NextRequest) {
             </tr>
           </table>
         </td>
-      </tr>` : ""}
+      </tr>`
+          : ""
+      }
 
       <!-- Contact Us -->
       <tr>
@@ -363,7 +411,7 @@ export async function POST(req: NextRequest) {
       <!-- Footer -->
       <tr>
         <td style="background:#2a1a1a;padding:20px 32px;text-align:center;">
-          <p style="color:#eed6c4;font-size:11px;margin:0 0 4px;opacity:0.5;">Terrific Travel Ltd &nbsp;&middot;&nbsp; terrifictravel.co.uk</p>
+          <p style="color:#eed6c4;font-size:11px;margin:0 0 4px;opacity:0.5;">Terrific Travel Ltd Ltd &nbsp;&middot;&nbsp; terrifictravel.co.uk</p>
           <p style="color:#eed6c4;font-size:10px;margin:0;opacity:0.35;">You are receiving this because you submitted an enquiry on our website.</p>
         </td>
       </tr>
@@ -376,7 +424,7 @@ export async function POST(req: NextRequest) {
 
     // Send both emails
     await transporter.sendMail({
-      from: `"Terrific Travel" <${INQUIRY_FROM}>`,
+      from: `"Terrific Travel Ltd" <${INQUIRY_FROM}>`,
       to: INQUIRY_TO,
       replyTo: email,
       subject,
@@ -384,15 +432,18 @@ export async function POST(req: NextRequest) {
     });
 
     await transporter.sendMail({
-      from: `"Terrific Travel" <${INQUIRY_FROM}>`,
+      from: `"Terrific Travel Ltd" <${INQUIRY_FROM}>`,
       to: email,
-      subject: `We've received your enquiry, ${name} — Terrific Travel`,
+      subject: `We've received your enquiry, ${name} — Terrific Travel Ltd`,
       html: customerHtml,
     });
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (err: any) {
     console.error("[ENQUIRY EMAIL ERROR]", err);
-    return NextResponse.json({ error: "Failed to send enquiry. Please try again." }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to send enquiry. Please try again." },
+      { status: 500 },
+    );
   }
 }

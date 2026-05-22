@@ -15,11 +15,13 @@ export const blogPostsData: BlogPost[] = [
     id: "blog-1",
     slug: "step-by-step-guide-how-to-perform-umrah",
     title: "Step-by-Step Guide on How to Perform Umrah",
-    excerpt: "A complete spiritual and practical guide detailing Ihram, Tawaf, Sa'i, and Halq/Taqsir for pilgrims planning their holy journey.",
+    excerpt:
+      "A complete spiritual and practical guide detailing Ihram, Tawaf, Sa'i, and Halq/Taqsir for pilgrims planning their holy journey.",
     category: "Umrah Guide",
     readTime: "6 min read",
     date: "May 15, 2026",
-    image: "https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?auto=format&fit=crop&w=1200&q=80",
     content: `
 <h2>Introduction to Umrah</h2>
 <p>Umrah is a voluntary act of worship that can be performed at any time of the year. Though not obligatory like Hajj, it is a deeply spiritual journey that millions of Muslims undertake each year to seek forgiveness, closeness to Allah, and spiritual renewal.</p>
@@ -70,7 +72,7 @@ export const blogPostsData: BlogPost[] = [
   <li>Plan your Tawaf during off-peak hours (late night or early morning) to avoid crowds</li>
   <li>Wear comfortable, worn-in footwear for the extensive walking</li>
   <li>Stay hydrated — Makkah can be extremely hot</li>
-  <li>Travel with a reputable, ATOL and IATA accredited agency like Terrific Travel</li>
+  <li>Travel with a reputable, ATOL and IATA accredited agency like Terrific Travel Ltd</li>
   <li>Learn basic Arabic phrases and supplications before your journey</li>
 </ul>
     `,
@@ -79,11 +81,13 @@ export const blogPostsData: BlogPost[] = [
     id: "blog-2",
     slug: "best-places-visit-makkah-madinah-ziyarat",
     title: "Best Places to Visit in Makkah & Madinah (Ziyarat)",
-    excerpt: "Discover the historical significance and spiritual power of Jabal al-Nour, Mount Uhud, Quba Mosque, and other holy sites in the Hijaz.",
+    excerpt:
+      "Discover the historical significance and spiritual power of Jabal al-Nour, Mount Uhud, Quba Mosque, and other holy sites in the Hijaz.",
     category: "Ziyarat Guide",
     readTime: "8 min read",
     date: "May 10, 2026",
-    image: "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1200&q=80",
     content: `
 <h2>The Sacred Ziyarat of Makkah Al-Mukarramah</h2>
 <p>Beyond performing the rites of Umrah, Makkah and its surroundings are home to countless historical and spiritual landmarks that connect pilgrims deeply with the history of Islam.</p>
@@ -119,11 +123,13 @@ export const blogPostsData: BlogPost[] = [
     id: "blog-3",
     slug: "essential-packing-list-umrah-2026",
     title: "Essential Packing List for Umrah: 2026 Edition",
-    excerpt: "Make sure your journey is comfortable and spiritual with our ultimate checklist covering clothing, travel essentials, and medical tips.",
+    excerpt:
+      "Make sure your journey is comfortable and spiritual with our ultimate checklist covering clothing, travel essentials, and medical tips.",
     category: "Travel Tips",
     readTime: "4 min read",
     date: "May 08, 2026",
-    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80",
     content: `
 <h2>The Complete Umrah Packing Checklist for 2026</h2>
 <p>Packing correctly for Umrah ensures you can focus entirely on your spiritual journey without being distracted by discomfort or forgotten essentials. Here is our comprehensive, pilgrim-tested guide.</p>
@@ -197,11 +203,13 @@ export const blogPostsData: BlogPost[] = [
     id: "blog-4",
     slug: "understanding-nuances-ihram-rules",
     title: "Understanding the Nuances of Ihram Rules",
-    excerpt: "Learn the precise regulations, prohibitions, and conditions for entering the state of Ihram safely and devoutly.",
+    excerpt:
+      "Learn the precise regulations, prohibitions, and conditions for entering the state of Ihram safely and devoutly.",
     category: "Fiqh Guide",
     readTime: "5 min read",
     date: "May 05, 2026",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
     content: `
 <h2>What is Ihram?</h2>
 <p>Ihram is the sacred state that a Muslim must enter before performing Hajj or Umrah. It represents a state of spiritual purity, detachment from worldly desires, and total submission to Allah. The word "Ihram" itself comes from the Arabic root meaning "to make sacred or forbidden."</p>
@@ -246,11 +254,13 @@ export const blogPostsData: BlogPost[] = [
     id: "blog-5",
     slug: "how-to-book-rawdah-appointment-nusuk-app",
     title: "How to Book Rawdah Appointment via Nusuk App",
-    excerpt: "A complete step-by-step walkthrough on securing your slot for praying in the Riyadhul Jannah using the official Nusuk application.",
+    excerpt:
+      "A complete step-by-step walkthrough on securing your slot for praying in the Riyadhul Jannah using the official Nusuk application.",
     category: "Tech Guide",
     readTime: "4 min read",
     date: "May 02, 2026",
-    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=80",
     content: `
 <h2>What is the Rawdah?</h2>
 <p>The Rawdah (Riyadhul Jannah — Garden of Paradise) refers to the area between the Prophet's ﷺ grave and his minbar (pulpit) inside Masjid al-Nabawi in Madinah. The Prophet ﷺ said: "Between my house and my pulpit is a garden from the gardens of Paradise." (Bukhari & Muslim). Access is controlled and requires an official appointment through the Nusuk app.</p>
@@ -305,11 +315,13 @@ export const blogPostsData: BlogPost[] = [
     id: "blog-6",
     slug: "top-health-fitness-tips-pilgrims",
     title: "Top Health and Fitness Tips for Pilgrims",
-    excerpt: "How to physically prepare for the intense walking required during Tawaf and Sa'i, with nutritional and hydration protocols.",
+    excerpt:
+      "How to physically prepare for the intense walking required during Tawaf and Sa'i, with nutritional and hydration protocols.",
     category: "Health Tips",
     readTime: "7 min read",
     date: "April 28, 2026",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80",
     content: `
 <h2>Why Physical Preparation Matters for Umrah</h2>
 <p>Umrah is a physically demanding journey. Between Tawaf, Sa'i, Ziyarat tours, and daily prayers in the Haram, pilgrims can walk 15–20 kilometres per day on hard marble floors. The extreme heat of Makkah (often exceeding 40°C in summer) adds further physical strain. Proper preparation can make the difference between a comfortable, spiritually focused experience and an exhausting one.</p>
@@ -370,11 +382,13 @@ export const blogPostsData: BlogPost[] = [
     id: "blog-7",
     slug: "top-tips-for-surviving-long-haul-flights",
     title: "Top 10 Tips for Surviving Long-Haul Flights",
-    excerpt: "Make your 12+ hour journey a breeze with these expert tips on hydration, seating, and sleep strategies.",
+    excerpt:
+      "Make your 12+ hour journey a breeze with these expert tips on hydration, seating, and sleep strategies.",
     category: "Flight Guide",
     readTime: "5 min read",
     date: "June 02, 2026",
-    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80",
     content: `
 <h2>Surviving the Long Haul</h2>
 <p>Long-haul flights can be exhausting, but with the right preparation, you can step off the plane feeling refreshed and ready for your holiday.</p>
@@ -396,11 +410,13 @@ export const blogPostsData: BlogPost[] = [
     id: "blog-8",
     slug: "when-is-the-best-time-to-book-flights",
     title: "When is the Best Time to Book Flights?",
-    excerpt: "Stop guessing and start saving. Discover the optimal booking windows for domestic and international travel.",
+    excerpt:
+      "Stop guessing and start saving. Discover the optimal booking windows for domestic and international travel.",
     category: "Flight Tips",
     readTime: "6 min read",
     date: "June 10, 2026",
-    image: "https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1200&q=80",
     content: `
 <h2>The Secret to Cheap Flights</h2>
 <p>Timing your booking correctly can save you hundreds of pounds. While there is no magic day of the week to book, there are optimal booking windows.</p>
@@ -419,11 +435,13 @@ export const blogPostsData: BlogPost[] = [
     id: "blog-9",
     slug: "how-to-get-upgraded-on-your-next-flight",
     title: "How to Score an Upgrade on Your Next Flight",
-    excerpt: "Want to fly Business Class without the price tag? Here are the best strategies to increase your chances of a free upgrade.",
+    excerpt:
+      "Want to fly Business Class without the price tag? Here are the best strategies to increase your chances of a free upgrade.",
     category: "Travel Hacks",
     readTime: "4 min read",
     date: "June 15, 2026",
-    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
     content: `
 <h2>The Elusive Free Upgrade</h2>
 <p>While airlines are becoming stricter with free upgrades, it is still possible if you know the right strategies.</p>
@@ -445,11 +463,13 @@ export const blogPostsData: BlogPost[] = [
     id: "blog-10",
     slug: "navigating-airport-security-like-a-pro",
     title: "Navigating Airport Security Like a Pro",
-    excerpt: "Breeze through security checkpoints with our expert advice on packing, dressing, and preparing for the scanners.",
+    excerpt:
+      "Breeze through security checkpoints with our expert advice on packing, dressing, and preparing for the scanners.",
     category: "Flight Guide",
     readTime: "3 min read",
     date: "June 18, 2026",
-    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80",
     content: `
 <h2>Bypass the Queues</h2>
 <p>Airport security doesn't have to be a stressful bottleneck if you know the rules.</p>
@@ -465,11 +485,13 @@ export const blogPostsData: BlogPost[] = [
     id: "blog-11",
     slug: "jet-lag-cures-that-actually-work",
     title: "Jet Lag Cures That Actually Work",
-    excerpt: "Crossing multiple time zones? Use these scientifically backed methods to reset your body clock quickly.",
+    excerpt:
+      "Crossing multiple time zones? Use these scientifically backed methods to reset your body clock quickly.",
     category: "Travel Hacks",
     readTime: "4 min read",
     date: "June 21, 2026",
-    image: "https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1200&q=80",
     content: `
 <h2>Beat the Time Zone Shift</h2>
 <p>Jet lag can ruin the first few days of a trip. Here is how to fight it effectively.</p>
@@ -485,11 +507,13 @@ export const blogPostsData: BlogPost[] = [
     id: "blog-12",
     slug: "understanding-airline-baggage-allowances",
     title: "Understanding Airline Baggage Allowances",
-    excerpt: "Avoid unexpected fees at the check-in desk by mastering the complex world of airline baggage rules.",
+    excerpt:
+      "Avoid unexpected fees at the check-in desk by mastering the complex world of airline baggage rules.",
     category: "Flight Tips",
     readTime: "5 min read",
     date: "June 25, 2026",
-    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
     content: `
 <h2>Don't Get Caught Out</h2>
 <p>Every airline has different rules for cabin and hold luggage. Always check the specific weight and dimension limits on your ticket.</p>

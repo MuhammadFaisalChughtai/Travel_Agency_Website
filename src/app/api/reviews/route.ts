@@ -31,7 +31,7 @@ const FALLBACK_REVIEWS = [
     rating: 5,
     date: "Mar 2026",
     title: "Best opportunity to perform Umrah",
-    text: "Terrific Travels gave us the best opportunity to perform Umrah. We had a great experience. Hotels, flights and taxi services were also incredible. I was at peace of mind because everything was done by Terrific Travels.",
+    text: "Terrific Travel Ltds gave us the best opportunity to perform Umrah. We had a great experience. Hotels, flights and taxi services were also incredible. I was at peace of mind because everything was done by Terrific Travel Ltds.",
     tag: "Umrah Package",
   },
   {
@@ -41,7 +41,7 @@ const FALLBACK_REVIEWS = [
     rating: 4,
     date: "May 2026",
     title: "Amazing time and good communication",
-    text: "Alhamdulillah, I and my cousin came back from Umrah. We had a great time and good communication with Terrific Travel Ltd throughout our journey. Very good drivers taking us from the airport to the hotel.",
+    text: "Alhamdulillah, I and my cousin came back from Umrah. We had a great time and good communication with Terrific Travel Ltd Ltd throughout our journey. Very good drivers taking us from the airport to the hotel.",
     tag: "Umrah Trip",
   },
   {
@@ -61,7 +61,7 @@ const FALLBACK_REVIEWS = [
     rating: 5,
     date: "Mar 2026",
     title: "Always go above and beyond",
-    text: "I have used Terrific Travel multiple times now, they never fail to disappoint! Always go above and beyond for me and ensure I have a stress free and peaceful journey/holiday. They always find the best prices on the market.",
+    text: "I have used Terrific Travel Ltd multiple times now, they never fail to disappoint! Always go above and beyond for me and ensure I have a stress free and peaceful journey/holiday. They always find the best prices on the market.",
     tag: "Flights & Holidays",
   },
   {

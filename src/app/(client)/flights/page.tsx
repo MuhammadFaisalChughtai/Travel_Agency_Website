@@ -17,9 +17,9 @@ import { Hero } from "@/components/ui/Hero";
 import { prisma } from "@/lib/prisma";
 
 export const metadata = {
-  title: "Flights | Terrific Travel",
+  title: "Flights | Terrific Travel Ltd",
   description:
-    "Book direct and connecting flights from the UK to Jeddah, Madinah, Dubai, and worldwide destinations. Best prices guaranteed with IATA-accredited Terrific Travel.",
+    "Book direct and connecting flights from the UK to Jeddah, Madinah, Dubai, and worldwide destinations. Best prices guaranteed with IATA-accredited Terrific Travel Ltd.",
 };
 
 const WHY_US = [
