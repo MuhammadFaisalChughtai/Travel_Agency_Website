@@ -2,11 +2,24 @@ import { prisma } from "@/lib/prisma";
 import { deleteBlog } from "./actions";
 import { BlogEditorForm } from "@/components/admin/BlogEditorForm";
 import Link from "next/link";
+import { Pagination } from "@/components/admin/Pagination";
 
-export default async function AdminBlogsPage() {
-  const blogs = await prisma.blog.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+const PAGE_SIZE = 10;
+
+export default async function AdminBlogsPage({ searchParams }: { searchParams: { page?: string } }) {
+  const page = parseInt(searchParams.page || "1") || 1;
+  const skip = (page - 1) * PAGE_SIZE;
+
+  const [blogs, totalBlogs] = await Promise.all([
+    prisma.blog.findMany({
+      orderBy: { createdAt: "desc" },
+      skip,
+      take: PAGE_SIZE,
+    }),
+    prisma.blog.count(),
+  ]);
+
+  const totalPages = Math.ceil(totalBlogs / PAGE_SIZE);
 
   return (
     <div>
@@ -59,6 +72,7 @@ export default async function AdminBlogsPage() {
                   )}
                 </tbody>
               </table>
+              <Pagination currentPage={page} totalPages={totalPages} basePath="/admin/blogs" />
             </div>
           </div>
         </div>

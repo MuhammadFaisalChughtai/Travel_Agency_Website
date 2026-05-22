@@ -20,6 +20,8 @@ export async function createPackage(formData: FormData) {
   const description = formData.get("description") as string;
   const image = formData.get("image") as string;
   const isSold = formData.get("isSold") === "true";
+  const metaTitle = formData.get("metaTitle") as string;
+  const metaDescription = formData.get("metaDescription") as string;
 
   await prisma.package.create({
     data: {
@@ -35,6 +37,8 @@ export async function createPackage(formData: FormData) {
       availability: true,
       isSold,
       stars,
+      metaTitle,
+      metaDescription,
     }
   });
 
@@ -53,6 +57,8 @@ export async function updatePackage(id: string, formData: FormData) {
   const description = formData.get("description") as string;
   const image = formData.get("image") as string;
   const isSold = formData.get("isSold") === "true";
+  const metaTitle = formData.get("metaTitle") as string;
+  const metaDescription = formData.get("metaDescription") as string;
 
   const updateData: any = {
     title,
@@ -63,6 +69,8 @@ export async function updatePackage(id: string, formData: FormData) {
     travelDates,
     stars,
     isSold,
+    metaTitle,
+    metaDescription,
   };
 
   if (image) {

@@ -18,6 +18,8 @@ export async function createFlight(formData: FormData) {
   const destinationCode = formData.get("destinationCode") as string || null;
   const price = parseFloat(formData.get("price") as string);
   const month = formData.get("month") as string || null;
+  const metaTitle = formData.get("metaTitle") as string || null;
+  const metaDescription = formData.get("metaDescription") as string || null;
 
   const isTransit = formData.get("isTransit") === "true";
   const transitAirport = isTransit ? (formData.get("transitAirport") as string || null) : null;
@@ -82,6 +84,8 @@ export async function createFlight(formData: FormData) {
       returnTransitDuration,
       returnBaggage,
       returnAircraft,
+      metaTitle,
+      metaDescription,
     }
   });
 
@@ -98,6 +102,8 @@ export async function updateFlight(id: string, formData: FormData) {
   const destinationCode = formData.get("destinationCode") as string || null;
   const price = parseFloat(formData.get("price") as string);
   const month = formData.get("month") as string || null;
+  const metaTitle = formData.get("metaTitle") as string || null;
+  const metaDescription = formData.get("metaDescription") as string || null;
 
   const isTransit = formData.get("isTransit") === "true";
   const transitAirport = isTransit ? (formData.get("transitAirport") as string || null) : null;
@@ -162,6 +168,8 @@ export async function updateFlight(id: string, formData: FormData) {
       returnTransitDuration,
       returnBaggage,
       returnAircraft,
+      metaTitle,
+      metaDescription,
     }
   });
 

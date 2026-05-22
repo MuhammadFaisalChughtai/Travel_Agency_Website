@@ -5,11 +5,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { Edit2, Flame, Plane, ArrowRight, RefreshCw, Trash2, TrendingUp } from "lucide-react";
 import { FlightEditorForm } from "@/components/admin/FlightEditorForm";
+import { Pagination } from "@/components/admin/Pagination";
 
-export default async function AdminFlightsPage({ searchParams }: { searchParams: { editId?: string } }) {
-  const flights = await prisma.flight.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+const PAGE_SIZE = 10;
+
+export default async function AdminFlightsPage({ searchParams }: { searchParams: { editId?: string; page?: string } }) {
+  const page = parseInt(searchParams.page || "1") || 1;
+  const skip = (page - 1) * PAGE_SIZE;
+
+  const [flights, totalFlights] = await Promise.all([
+    prisma.flight.findMany({
+      orderBy: { createdAt: "desc" },
+      skip,
+      take: PAGE_SIZE,
+    }),
+    prisma.flight.count(),
+  ]);
+
+  const totalPages = Math.ceil(totalFlights / PAGE_SIZE);
 
   const trendingFlights = await (prisma as any).trendingFlight.findMany({
     orderBy: { createdAt: "desc" },
@@ -232,6 +245,7 @@ export default async function AdminFlightsPage({ searchParams }: { searchParams:
               )}
             </tbody>
           </table>
+          <Pagination currentPage={page} totalPages={totalPages} basePath="/admin/flights" />
         </div>
       </div>
     </div>

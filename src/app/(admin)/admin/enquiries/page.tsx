@@ -1,9 +1,23 @@
 import { prisma } from "@/lib/prisma";
 
-export default async function AdminEnquiriesPage() {
-  const enquiries = await prisma.enquiry.findMany({
-    orderBy: { createdAt: "desc" },
-  });
+import { Pagination } from "@/components/admin/Pagination";
+
+const PAGE_SIZE = 10;
+
+export default async function AdminEnquiriesPage({ searchParams }: { searchParams: { page?: string } }) {
+  const page = parseInt(searchParams.page || "1") || 1;
+  const skip = (page - 1) * PAGE_SIZE;
+
+  const [enquiries, totalEnquiries] = await Promise.all([
+    prisma.enquiry.findMany({
+      orderBy: { createdAt: "desc" },
+      skip,
+      take: PAGE_SIZE,
+    }),
+    prisma.enquiry.count(),
+  ]);
+
+  const totalPages = Math.ceil(totalEnquiries / PAGE_SIZE);
 
   return (
     <div>
@@ -59,6 +73,7 @@ export default async function AdminEnquiriesPage() {
                   )}
                 </tbody>
               </table>
+              <Pagination currentPage={page} totalPages={totalPages} basePath="/admin/enquiries" />
             </div>
           </div>
         </div>

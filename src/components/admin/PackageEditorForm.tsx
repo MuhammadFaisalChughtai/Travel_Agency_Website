@@ -20,6 +20,8 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSold, setIsSold] = useState(initialData?.isSold || false);
+  const [metaTitle, setMetaTitle] = useState(initialData?.metaTitle || "");
+  const [metaDescription, setMetaDescription] = useState(initialData?.metaDescription || "");
 
   const quillRef = useRef<any>(null);
 
@@ -91,6 +93,8 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
       formData.append("description", content);
       formData.append("image", imageUrl);
       formData.append("isSold", isSold.toString());
+      formData.append("metaTitle", metaTitle);
+      formData.append("metaDescription", metaDescription);
 
       if (initialData?.id) {
         const { updatePackage } = await import("@/app/(admin)/admin/packages/actions");
@@ -101,7 +105,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
         await createPackage(formData);
         setTitle(""); setType("UMRAH"); setStars("3"); setPrice("");
         setDuration(""); setContent(""); setImageFile(null); setImagePreview("");
-        setIsSold(false);
+        setIsSold(false); setMetaTitle(""); setMetaDescription("");
         alert("Package added successfully!");
       }
     } catch (err) {
@@ -192,6 +196,30 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
           type="text"
           className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
         />
+      </div>
+
+      {/* SEO Fields */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-slate-50 border border-slate-200 rounded-lg">
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Title</label>
+          <input
+            value={metaTitle}
+            onChange={e => setMetaTitle(e.target.value)}
+            type="text"
+            placeholder="e.g. Best 5 Star Umrah Package | Terrific Travel"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Description</label>
+          <textarea
+            value={metaDescription}
+            onChange={e => setMetaDescription(e.target.value)}
+            rows={2}
+            placeholder="A short description for search engines..."
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+          />
+        </div>
       </div>
 
       {/* Sold Out Option */}

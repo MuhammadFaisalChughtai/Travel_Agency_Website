@@ -603,6 +603,8 @@ async function resolveItem(type: string, id: string) {
           sightseeing: parseArr(dbPackage.sightseeing),
           visaInfo: parseArr(dbPackage.visaInfo),
           packageFeatures: parseArr(dbPackage.packageFeatures),
+          metaTitle: dbPackage.metaTitle,
+          metaDescription: dbPackage.metaDescription,
         };
       }
     } catch (e) {
@@ -654,6 +656,8 @@ async function resolveItem(type: string, id: string) {
           returnTransitDuration: dbFlight.returnTransitDuration,
           returnBaggage: dbFlight.returnBaggage,
           returnAircraft: dbFlight.returnAircraft,
+          metaTitle: dbFlight.metaTitle,
+          metaDescription: dbFlight.metaDescription,
         };
       }
     } catch (e) {

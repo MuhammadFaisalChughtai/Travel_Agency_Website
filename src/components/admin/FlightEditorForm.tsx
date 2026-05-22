@@ -37,6 +37,9 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
   const [returnBaggage, setReturnBaggage] = useState(initialData?.returnBaggage || "30kg Checked, 7kg Cabin");
   const [returnAircraft, setReturnAircraft] = useState(initialData?.returnAircraft || "Boeing 777");
 
+  const [metaTitle, setMetaTitle] = useState(initialData?.metaTitle || "");
+  const [metaDescription, setMetaDescription] = useState(initialData?.metaDescription || "");
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -78,6 +81,9 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
         formData.append("returnAircraft", returnAircraft);
       }
 
+      formData.append("metaTitle", metaTitle);
+      formData.append("metaDescription", metaDescription);
+
       if (initialData) {
         await updateFlight(initialData.id, formData);
         alert("Flight deal updated successfully!");
@@ -109,6 +115,8 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
         setReturnTransitDuration("");
         setReturnBaggage("30kg Checked, 7kg Cabin");
         setReturnAircraft("Boeing 777");
+        setMetaTitle("");
+        setMetaDescription("");
         alert("Flight deal added successfully!");
       }
 
@@ -432,6 +440,30 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
             )}
           </div>
         )}
+      </div>
+
+      {/* SEO Fields */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-slate-50 border border-slate-200 rounded-lg">
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Title</label>
+          <input
+            value={metaTitle}
+            onChange={e => setMetaTitle(e.target.value)}
+            type="text"
+            placeholder="e.g. Cheap Flights to Dubai | Terrific Travel"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Description</label>
+          <textarea
+            value={metaDescription}
+            onChange={e => setMetaDescription(e.target.value)}
+            rows={2}
+            placeholder="A short description for search engines..."
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+          />
+        </div>
       </div>
 
       <div className="pt-2 flex justify-end">

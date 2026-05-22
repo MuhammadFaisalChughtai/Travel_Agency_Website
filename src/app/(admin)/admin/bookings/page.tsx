@@ -1,14 +1,28 @@
 import { prisma } from "@/lib/prisma";
 import { CheckCircle, XCircle, Clock } from "lucide-react";
 
-export default async function AdminBookingsPage() {
-  const bookings = await prisma.booking.findMany({
-    include: {
-      package: true,
-      flight: true,
-    },
-    orderBy: { createdAt: "desc" },
-  });
+import { Pagination } from "@/components/admin/Pagination";
+
+const PAGE_SIZE = 10;
+
+export default async function AdminBookingsPage({ searchParams }: { searchParams: { page?: string } }) {
+  const page = parseInt(searchParams.page || "1") || 1;
+  const skip = (page - 1) * PAGE_SIZE;
+
+  const [bookings, totalBookings] = await Promise.all([
+    prisma.booking.findMany({
+      include: {
+        package: true,
+        flight: true,
+      },
+      orderBy: { createdAt: "desc" },
+      skip,
+      take: PAGE_SIZE,
+    }),
+    prisma.booking.count(),
+  ]);
+
+  const totalPages = Math.ceil(totalBookings / PAGE_SIZE);
 
   return (
     <div>
@@ -78,6 +92,7 @@ export default async function AdminBookingsPage() {
                   )}
                 </tbody>
               </table>
+              <Pagination currentPage={page} totalPages={totalPages} basePath="/admin/bookings" />
             </div>
           </div>
         </div>

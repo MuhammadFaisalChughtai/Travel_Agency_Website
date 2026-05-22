@@ -2,10 +2,24 @@ import { prisma } from "@/lib/prisma";
 import { deletePackage } from "./actions";
 import { PackageEditorForm } from "@/components/admin/PackageEditorForm";
 
-export default async function AdminPackagesPage() {
-  const packages = await prisma.package.findMany({
-    orderBy: [{ type: "asc" }, { stars: "asc" }, { createdAt: "desc" }],
-  });
+import { Pagination } from "@/components/admin/Pagination";
+
+const PAGE_SIZE = 10;
+
+export default async function AdminPackagesPage({ searchParams }: { searchParams: { page?: string } }) {
+  const page = parseInt(searchParams.page || "1") || 1;
+  const skip = (page - 1) * PAGE_SIZE;
+
+  const [packages, totalCount] = await Promise.all([
+    prisma.package.findMany({
+      orderBy: [{ type: "asc" }, { stars: "asc" }, { createdAt: "desc" }],
+      skip,
+      take: PAGE_SIZE,
+    }),
+    prisma.package.count(),
+  ]);
+
+  const totalPages = Math.ceil(totalCount / PAGE_SIZE);
 
   const typeLabel: Record<string, string> = {
     UMRAH: "Umrah",
@@ -40,7 +54,7 @@ export default async function AdminPackagesPage() {
       <div className="bg-white shadow-sm rounded-xl border border-slate-200 overflow-hidden">
         <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
           <h2 className="text-lg font-bold text-slate-900">
-            All Packages <span className="text-slate-400 font-normal text-sm">({packages.length})</span>
+            All Packages <span className="text-slate-400 font-normal text-sm">({totalCount})</span>
           </h2>
         </div>
 
@@ -124,6 +138,7 @@ export default async function AdminPackagesPage() {
                 })}
               </tbody>
             </table>
+            <Pagination currentPage={page} totalPages={totalPages} basePath="/admin/packages" />
           </div>
         )}
       </div>
