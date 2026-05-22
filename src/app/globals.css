@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #ffffff; /* Sober, clean pure white page background */
+    --foreground: #483434; /* Espresso dark brown text */
+    --card: #ffffff;
+    --card-foreground: #483434;
+    --border: #eed6c4; /* Sand / peach champagne borders */
+  }
+
+  .dark {
+    --background: #382626; /* Darker espresso base */
+    --foreground: #fff3e4;
+    --card: #483434;
+    --card-foreground: #fff3e4;
+    --border: #6b4f4f;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--background)] text-[var(--foreground)] antialiased font-sans transition-colors duration-300;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight text-primary font-extrabold;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .glass {
+    @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-white/20 dark:border-slate-800/50 shadow-sm;
+  }
+}

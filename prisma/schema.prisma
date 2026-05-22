@@ -1,0 +1,174 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String   // Hashed password for admin
+  role      String   @default("USER") // ADMIN or USER
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Package {
+  id               String   @id @default(cuid())
+  title            String
+  type             String   // HOLIDAY, UMRAH, HAJJ
+  destination      String
+  duration         String
+  price            Float
+  description      String   @db.Text
+  includedServices String   @db.Text // JSON string or comma-separated
+  images           String   @db.Text // JSON string of image URLs
+  travelDates      String   
+  availability     Boolean  @default(true)
+  isSold           Boolean  @default(false)
+  stars            Int?     @default(3)
+  // Pricing tiers
+  priceQuad        Float?
+  priceTriple      Float?
+  priceDouble      Float?
+  // Accommodation
+  meccaHotel       String?
+  meccaNights      Int?
+  meccaRoomType    String?
+  medinaHotel      String?
+  medinaNights     Int?
+  medinaRoomType   String?
+  // Extra details stored as JSON arrays
+  transportation   String?  @db.Text  // JSON
+  sightseeing      String?  @db.Text  // JSON
+  visaInfo         String?  @db.Text  // JSON
+  packageFeatures  String?  @db.Text  // JSON
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  bookings         Booking[]
+}
+
+model Blog {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  excerpt   String   @db.Text
+  content   String   @db.Text
+  category  String
+  readTime  String
+  date      String
+  image     String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  metaTitle       String?  @db.Text
+  metaDescription String?  @db.Text
+}
+
+model Enquiry {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  type        String
+  message     String?  @db.Text
+  status      String   @default("PENDING") // PENDING, CONTACTED, RESOLVED
+  tripDetails String?  @db.Text // JSON string for airport, date, category, duration, travelers, packageId
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Flight {
+  id                    String    @id @default(cuid())
+  airline               String
+  airlineCode           String?
+  departure             String
+  departureCode         String?   @default("LHR")
+  destination           String
+  destinationCode       String?   @default("DXB")
+  price                 Float
+  status                String    @default("AVAILABLE")
+  month                 String?
+
+  // Transit fields (outbound)
+  isTransit             Boolean   @default(false)
+  transitAirport        String?
+  transitDuration       String?
+  duration              String?   @default("7h 00m")
+  baggage               String?   @default("30kg Checked, 7kg Cabin")
+  aircraft              String?   @default("Boeing 777")
+
+  // Return flight option
+  isReturn              Boolean   @default(false)
+  returnAirline         String?
+  returnAirlineCode     String?
+  returnDuration        String?
+  returnIsTransit       Boolean   @default(false)
+  returnTransitAirport  String?
+  returnTransitDuration String?
+  returnBaggage         String?   @default("30kg Checked, 7kg Cabin")
+  returnAircraft        String?   @default("Boeing 777")
+
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  bookings              Booking[]
+}
+
+model VisaService {
+  id                String   @id @default(cuid())
+  country           String
+  visaType          String
+  processingTime    String
+  requiredDocuments String   @db.Text
+  price             Float
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model TransportService {
+  id          String   @id @default(cuid())
+  type        String   // AIRPORT_TRANSFER, HOTEL_TRANSFER, PRIVATE
+  vehicleType String
+  price       Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Booking {
+  id              String   @id @default(cuid())
+  packageId       String?
+  flightId        String?
+  travelerDetails String   @db.Text // JSON string of traveler info
+  travelDate      DateTime
+  status          String   @default("PENDING") // PENDING, CONFIRMED, CANCELLED
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  package         Package? @relation(fields: [packageId], references: [id])
+  flight          Flight?  @relation(fields: [flightId], references: [id])
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  author    String
+  content   String   @db.Text
+  rating    Int      @default(5)
+  image     String?
+  createdAt DateTime @default(now())
+}
+
+model TrendingFlight {
+  id          String   @id @default(cuid())
+  destination String
+  price       Float
+  image       String   @db.Text
+  tag         String?  // e.g. "Most Popular", "Best Value"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

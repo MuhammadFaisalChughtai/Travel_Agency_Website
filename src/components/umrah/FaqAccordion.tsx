@@ -1,0 +1,105 @@
+"use client";
+
+import { useState } from "react";
+import { Plus, Minus } from "lucide-react";
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+const faqs: FaqItem[] = [
+  {
+    question: "What is the best time to perform Umrah?",
+    answer: "Select the ideal time for your Umrah journey—consider the cooler months from October to April for a comfortable visit, or explore the less crowded period of June and August."
+  },
+  {
+    question: "What are the prices of the Umrah packages for 2026?",
+    answer: "The prices of Umrah packages for 2026 depend on the type of package you choose (e.g., budget, standard, luxury) and your preferred accommodation in Makkah and Madinah. We offer budget-friendly Umrah packages starting from £690 per person, while our 5-star luxury packages with premium experiences start from £900 per person."
+  },
+  {
+    question: "What if I need spiritual guidance during my Umrah?",
+    answer: "We partner with renowned scholars and Imams who can provide spiritual guidance and are there to answer your questions about the rituals and significance of Umrah."
+  },
+  {
+    question: "I am interested in exploring beyond the holy sites. Do you offer Ziyarat tours?",
+    answer: "Yes, we do! We offer add-on personalized Ziyarah tours to the important historical and religious sites in Makkah and Madinah. We also have curated cultural immersion experiences that allow you to discover the beauty and traditions of Saudi Arabia."
+  },
+  {
+    question: "I am looking for a luxurious Umrah experience. Do you offer premium services like private guides or VIP access?",
+    answer: "Absolutely yes! We also cater to travellers seeking a luxurious Umrah experience. We offer exclusive packages with private guides, VIP access to holy sites, and premium accommodation options."
+  },
+  {
+    question: "Are there specific requirements to apply for Umrah through Terrific Travel?",
+    answer: "There are a few specific requirements that need to be met to apply for Umrah through Terrific Travel or any other agency in UK. You need to have a valid passport with a minimum of six months validity, a valid Umrah visa, and proof of vaccination against meningitis and other required diseases. Terrific Travel's Umrah experts will guide you through the visa processing and approval process."
+  },
+  {
+    question: "Are there particular mobile apps for navigating Makkah and Madinah?",
+    answer: "Several helpful apps are available, like Google Maps with off-line access, official Umrah guides like Nusuk, and language translation tools. We can recommend the best apps to download before your journey to ensure you are well prepared."
+  }
+];
+
+export function FaqAccordion() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const toggleFaq = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <div className="py-12 bg-background">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8">
+          <span className="inline-block px-3 py-0.5 rounded-full bg-[#fff3e4] border border-[#eed6c4]/30 text-[#6b4f4f] text-[10px] font-bold tracking-widest uppercase mb-3">
+            Frequently Asked Questions
+          </span>
+          <h2 className="text-2xl md:text-3xl font-heading font-black text-[#6b4f4f]">
+            Got Questions? We've Got Answers
+          </h2>
+        </div>
+
+        <div className="space-y-3">
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+            
+            return (
+              <div 
+                key={index} 
+                className={`border rounded-xl transition-all duration-300 overflow-hidden ${
+                  isOpen ? 'border-[#6b4f4f]/40 shadow-sm bg-card' : 'border-[#eed6c4]/30 bg-[#fff3e4]/40 hover:border-[#6b4f4f]/35'
+                }`}
+              >
+                <button
+                  className="w-full px-5 py-4 flex items-center justify-between focus:outline-none text-left"
+                  onClick={() => toggleFaq(index)}
+                  aria-expanded={isOpen}
+                >
+                  <span className={`font-semibold pr-8 text-sm md:text-base ${isOpen ? 'text-[#6b4f4f] font-black' : 'text-[#382626] font-medium'}`}>
+                    {faq.question}
+                  </span>
+                  <div className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors ${
+                    isOpen ? 'bg-[#6b4f4f] text-white' : 'bg-[#eed6c4]/20 text-[#6b4f4f]'
+                  }`}>
+                    {isOpen ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
+                  </div>
+                </button>
+                
+                <div 
+                  className={`px-5 overflow-hidden transition-all duration-300 ease-in-out ${
+                    isOpen ? 'max-h-[500px] opacity-100 pb-4' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <div className="pt-1.5 border-t border-[#eed6c4]/20">
+                    <p className="text-slate-700 text-xs md:text-sm leading-relaxed font-light">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}

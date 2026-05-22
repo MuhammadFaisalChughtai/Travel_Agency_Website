@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: terrific_travel_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: terrific_travel
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+
+  adminer:
+    image: adminer:latest
+    container_name: terrific_travel_adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
