@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, MessageCircleQuestion } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import Link from "next/link";
 
 interface FaqItem {
   question: string;
@@ -123,6 +125,18 @@ export function FaqAccordion() {
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-10 text-center">
+          <p className="text-[#6b4f4f] text-sm mb-4">
+            Still have questions? Our travel experts are ready to help.
+          </p>
+          <Link href="/contact">
+            <Button className="rounded-full gap-2 px-6 py-5 bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4] font-bold text-xs uppercase tracking-widest shadow-md">
+              <MessageCircleQuestion className="w-4 h-4" />
+              Contact Support
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

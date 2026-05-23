@@ -7,10 +7,21 @@ import { UmrahBlogSection } from "@/components/umrah/UmrahBlogSection";
 import { FaqAccordion } from "@/components/umrah/FaqAccordion";
 import { prisma } from "@/lib/prisma";
 
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Umrah Packages | Terrific Travel Ltd",
   description:
     "Affordable Umrah packages from the UK for families, groups, and individuals. Our all-inclusive deals cover flights, hotels, visas, and transport.",
+  openGraph: {
+    title: "Umrah Packages | Terrific Travel Ltd",
+    description: "Affordable Umrah packages from the UK for families, groups, and individuals. Our all-inclusive deals cover flights, hotels, visas, and transport.",
+    url: "https://terrifictravel.co.uk/umrah",
+  },
+  twitter: {
+    title: "Umrah Packages | Terrific Travel Ltd",
+    description: "Affordable Umrah packages from the UK for families, groups, and individuals. Our all-inclusive deals cover flights, hotels, visas, and transport.",
+  },
 };
 
 export default async function UmrahPage() {
@@ -37,7 +48,7 @@ export default async function UmrahPage() {
           image,
           stars: pkg.stars || 3,
           price: `£${pkg.price}`,
-          detailsUrl: `/view/package/${pkg.id}`,
+          detailsUrl: `/v/${pkg.slug || pkg.id}`,
           isSold: pkg.isSold,
         };
       });

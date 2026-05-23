@@ -43,6 +43,7 @@ const config: Config = {
         "fade-in": "fadeIn 0.5s ease-out",
         "slide-up": "slideUp 0.5s ease-out",
         "subtle-zoom": "subtleZoom 20s infinite alternate",
+        "marquee": "marquee 35s linear infinite",
       },
       keyframes: {
         fadeIn: {
@@ -56,6 +57,10 @@ const config: Config = {
         subtleZoom: {
           "0%": { transform: "scale(1)" },
           "100%": { transform: "scale(1.08)" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
         },
       },
     },

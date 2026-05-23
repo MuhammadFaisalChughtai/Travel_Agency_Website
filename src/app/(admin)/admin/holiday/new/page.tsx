@@ -42,7 +42,8 @@ export default function NewPackagePage() {
         router.push("/admin/packages");
         router.refresh();
       } else {
-        alert("Failed to create package");
+        const errorData = await res.json();
+        alert(errorData.error || "Failed to create package");
       }
     } catch (error) {
       console.error(error);

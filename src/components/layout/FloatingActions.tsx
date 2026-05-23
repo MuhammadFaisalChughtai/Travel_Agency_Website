@@ -16,7 +16,7 @@ export function FloatingActions() {
 
   return (
     <div
-      className={`fixed bottom-6 right-6 z-[998] flex flex-col items-end gap-3 transition-all duration-700 ${
+      className={`fixed bottom-6 left-6 z-[998] flex flex-col items-start gap-3 transition-all duration-700 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
     >
@@ -29,9 +29,9 @@ export function FloatingActions() {
         className="group relative flex items-center gap-3 cursor-pointer"
       >
         {/* Tooltip */}
-        <span className="absolute right-16 whitespace-nowrap bg-[#382626] text-[#fff3e4] text-xs font-bold px-3 py-1.5 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0 pointer-events-none">
+        <span className="absolute left-16 whitespace-nowrap bg-[#382626] text-[#fff3e4] text-xs font-bold px-3 py-1.5 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0 pointer-events-none">
           Chat with us on WhatsApp
-          <span className="absolute right-[-6px] top-1/2 -translate-y-1/2 border-4 border-transparent border-l-[#382626]" />
+          <span className="absolute left-[-6px] top-1/2 -translate-y-1/2 border-4 border-transparent border-r-[#382626]" />
         </span>
 
         {/* Pulse ring */}

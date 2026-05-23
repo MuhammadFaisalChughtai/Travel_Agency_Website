@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { TawkToWidget } from "@/components/layout/TawkToWidget";
 import { FloatingActions } from "@/components/layout/FloatingActions";
+import { CookieConsent } from "@/components/layout/CookieConsent";
 
 export default function RootLayout({
   children,
@@ -15,6 +16,7 @@ export default function RootLayout({
       <Footer />
       <TawkToWidget />
       <FloatingActions />
+      <CookieConsent />
     </div>
   );
 }

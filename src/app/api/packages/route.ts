@@ -22,9 +22,31 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+
+    if (!body.title) {
+      return NextResponse.json({ error: "Title is required" }, { status: 400 });
+    }
+
+    const slug = body.title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+
+    const existingPackage = await prisma.package.findUnique({
+      where: { slug },
+    });
+
+    if (existingPackage) {
+      return NextResponse.json(
+        { error: "A package with this name already exists. Please insert a different name." },
+        { status: 400 }
+      );
+    }
+
     const newPackage = await prisma.package.create({
       data: {
         title: body.title,
+        slug: slug,
         type: body.type,
         destination: body.destination,
         duration: body.duration,

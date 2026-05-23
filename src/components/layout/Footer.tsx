@@ -159,11 +159,13 @@ export function Footer() {
             <ul className="space-y-2.5">
               {[
                 { label: "Home", href: "/" },
-                { label: "Destinations", href: "/packages" },
-                { label: "Tours", href: "/packages" },
+                { label: "Destinations", href: "/holiday" },
+                { label: "Tours", href: "/holiday" },
                 { label: "Flight", href: "/flights" },
                 { label: "About Us", href: "/about" },
-                { label: "Privacy Policy", href: "/privacy" },
+                { label: "Contact Us", href: "/contact" },
+                { label: "Privacy Policy", href: "/privacy-policy" },
+                { label: "Terms & Conditions", href: "/terms-and-conditions" },
               ].map((link, i) => (
                 <li key={i}>
                   <Link
@@ -192,15 +194,15 @@ export function Footer() {
             </div>
             <ul className="space-y-3">
               {[
-                { label: "How To Perform Umrah?", href: "/umrah" },
-                { label: "How To Book Rawada Appointment?", href: "/umrah" },
+                { label: "How To Perform Umrah?", href: "/v/step-by-step-guide-how-to-perform-umrah" },
+                { label: "How To Book Rawada Appointment?", href: "/v/how-to-book-rawdah-appointment-nusuk-app" },
                 {
-                  label: "How To Book Kiswah Factory Appointment?",
-                  href: "/umrah",
+                  label: "Understanding Ihram Rules",
+                  href: "/v/understanding-nuances-ihram-rules",
                 },
                 {
                   label: "Places To Visit in Makkah and Madinah",
-                  href: "/umrah",
+                  href: "/v/best-places-visit-makkah-madinah-ziyarat",
                 },
               ].map((link, i) => (
                 <li key={i}>
@@ -230,10 +232,10 @@ export function Footer() {
             </div>
             <ul className="space-y-2.5">
               {[
-                { label: "Luxury Umrah Packages", href: "/umrah" },
-                { label: "Premium umrah Packages", href: "/umrah" },
-                { label: "Group Umrah Packages", href: "/umrah" },
-                { label: "Hajj Packages", href: "/hajj" },
+                { label: "Luxury Umrah Packages", href: "/v/7-nights-5-star-umrah" },
+                { label: "Premium Umrah Packages", href: "/v/7-nights-4-star-umrah" },
+                { label: "Family Umrah Packages", href: "/v/3-star-family-umrah" },
+                { label: "Hajj Packages", href: "/v/vip-non-shifting-hajj-package" },
               ].map((link, i) => (
                 <li key={i}>
                   <Link
@@ -285,14 +287,17 @@ export function Footer() {
                   +441215291630
                 </a>
               </li>
-              <li className="flex items-center gap-2 pt-2 border-t border-[#483434]/15">
-                {/* IATA Logo badge exact styling matching the screenshot */}
-                <div className="flex items-center gap-1.5 bg-[#483434] text-white px-2 py-0.5 rounded shadow-sm text-[9px] font-black uppercase tracking-wider">
-                  <span className="text-[#eed6c4]">IATA</span>
-                </div>
-                <span className="text-[11px] font-black tracking-wider text-[#483434]">
-                  91206076
-                </span>
+              <li className="flex items-center gap-4 pt-4 border-t border-[#483434]/15">
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/IATA_logo.svg/200px-IATA_logo.svg.png" 
+                  alt="IATA Logo" 
+                  className="h-7 w-auto object-contain mix-blend-multiply opacity-90"
+                />
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/ATOL_logo.svg/120px-ATOL_logo.svg.png" 
+                  alt="ATOL Protected" 
+                  className="h-9 w-auto object-contain mix-blend-multiply"
+                />
               </li>
             </ul>
           </div>

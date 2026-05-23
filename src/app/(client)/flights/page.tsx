@@ -10,16 +10,28 @@ import {
   Crown,
 } from "lucide-react";
 import { FlightBookingForm } from "@/components/flights/FlightBookingForm";
-import { FlightListCard } from "@/components/flights/FlightListCard";
+import { PaginatedFlightList } from "@/components/flights/PaginatedFlightList";
 import { FlightBlogSection } from "@/components/flights/FlightBlogSection";
 import { TrendingFlightsSection } from "@/components/flights/TrendingFlightsSection";
+import { FaqAccordion } from "@/components/flights/FaqAccordion";
 import { Hero } from "@/components/ui/Hero";
 import { prisma } from "@/lib/prisma";
 
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Flights | Terrific Travel Ltd",
   description:
     "Book direct and connecting flights from the UK to Jeddah, Madinah, Dubai, and worldwide destinations. Best prices guaranteed with IATA-accredited Terrific Travel Ltd.",
+  openGraph: {
+    title: "Flights | Terrific Travel Ltd",
+    description: "Book direct and connecting flights from the UK to Jeddah, Madinah, Dubai, and worldwide destinations. Best prices guaranteed with IATA-accredited Terrific Travel Ltd.",
+    url: "https://terrifictravel.co.uk/flights",
+  },
+  twitter: {
+    title: "Flights | Terrific Travel Ltd",
+    description: "Book direct and connecting flights from the UK to Jeddah, Madinah, Dubai, and worldwide destinations. Best prices guaranteed with IATA-accredited Terrific Travel Ltd.",
+  },
 };
 
 const WHY_US = [
@@ -85,9 +97,14 @@ export default async function FlightsPage() {
     });
   }
 
+  const totalFlightsCount = await prisma.flight.count({
+    where: { status: "AVAILABLE" },
+  });
+
   const flightsData = await prisma.flight.findMany({
     where: { status: "AVAILABLE" },
     orderBy: { price: "asc" },
+    take: 6,
   });
 
   const flights = flightsData.map((f) => ({
@@ -258,16 +275,18 @@ export default async function FlightsPage() {
               Flights - Top Deals
             </h2>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-4">
-            {flights.map((flight) => (
-              <FlightListCard key={flight.id} {...flight} />
-            ))}
-          </div>
+          <PaginatedFlightList
+            initialFlights={flights}
+            totalFlightsCount={totalFlightsCount}
+          />
         </div>
       </section>
 
       {/* ─── Blog Section ─── */}
       <FlightBlogSection blogs={blogs} />
+
+      {/* ─── FAQs Section ─── */}
+      <FaqAccordion />
 
       {/* ─── Custom Flight Request ─── */}
       <section className="py-16 bg-[#eed6c4]/10 border-t border-[#eed6c4]/30">

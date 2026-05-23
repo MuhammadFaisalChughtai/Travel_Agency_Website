@@ -13,8 +13,8 @@ import {
 } from "lucide-react";
 import { UmrahBookingForm } from "../umrah/UmrahBookingForm";
 import { FlightBookingForm } from "../flights/FlightBookingForm";
-import { HolidaysBookingForm } from "../packages/HolidaysBookingForm";
 import { VisaBookingForm } from "../visa/VisaBookingForm";
+import { HolidaysBookingForm } from "../holiday/HolidaysBookingForm";
 
 const CAROUSEL_SLIDES = [
   {
@@ -195,27 +195,27 @@ export function HeroSection() {
             </button>
           </div>
 
-          <div className="w-full transition-all duration-500 overflow-hidden">
+          <div className="hero__transparent w-full transition-all duration-500 overflow-hidden">
             {activeTab === "flight" && (
               <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 rounded-3xl pb-8">
-                <FlightBookingForm />
+                <FlightBookingForm isHome={true} />
               </div>
             )}
 
             {activeTab === "umrah" && (
               <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 rounded-3xl pb-8">
-                <UmrahBookingForm />
+                <UmrahBookingForm isHome={true} />
               </div>
             )}
 
             {activeTab === "holidays" && (
               <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 rounded-3xl pb-8">
-                <HolidaysBookingForm />
+                <HolidaysBookingForm isHome={true} />
               </div>
             )}
             {activeTab === "visa" && (
               <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 rounded-3xl pb-8">
-                <VisaBookingForm />
+                <VisaBookingForm isHome={true} />
               </div>
             )}
           </div>

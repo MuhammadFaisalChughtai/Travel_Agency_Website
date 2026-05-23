@@ -88,7 +88,7 @@ export function FlightBlogSection({ blogs }: { blogs: any[] }) {
                 {/* Divider Line */}
                 <div className="border-t border-[#eed6c4]/30 pt-4">
                   <Link
-                    href={`/view/blog/${post.slug}`}
+                    href={`/v/${post.slug}`}
                     className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#6b4f4f] group-hover:text-[#483434] transition-colors duration-300 uppercase tracking-widest"
                   >
                     <span>Read Article</span>

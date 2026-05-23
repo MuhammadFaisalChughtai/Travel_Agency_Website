@@ -117,7 +117,7 @@ export default async function AdminPackagesPage({ searchParams }: { searchParams
                             Edit
                           </a>
                           <a
-                            href={`/view/package/${pkg.id}`}
+                            href={`/v/${pkg.slug}`}
                             target="_blank"
                             className="text-indigo-600 hover:text-indigo-800 text-sm font-medium"
                           >

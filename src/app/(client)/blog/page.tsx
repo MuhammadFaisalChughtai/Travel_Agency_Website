@@ -4,10 +4,21 @@ import Link from "next/link";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { Hero } from "@/components/ui/Hero";
 
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Travel Blogs & Guides | Terrific Travel Ltd",
   description:
     "Read our latest insights, travel hacks, destination guides, and spiritual preparation for Umrah & Hajj.",
+  openGraph: {
+    title: "Travel Blogs & Guides | Terrific Travel Ltd",
+    description: "Read our latest insights, travel hacks, destination guides, and spiritual preparation for Umrah & Hajj.",
+    url: "https://terrifictravel.co.uk/blog",
+  },
+  twitter: {
+    title: "Travel Blogs & Guides | Terrific Travel Ltd",
+    description: "Read our latest insights, travel hacks, destination guides, and spiritual preparation for Umrah & Hajj.",
+  },
 };
 
 export default async function BlogIndexPage() {

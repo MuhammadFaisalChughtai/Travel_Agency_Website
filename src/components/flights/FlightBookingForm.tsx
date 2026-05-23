@@ -10,9 +10,10 @@ import {
   CheckCircle,
   MapPin,
   AlertCircle,
+  User,
 } from "lucide-react";
 
-export function FlightBookingForm() {
+export function FlightBookingForm({ isHome = false }: { isHome?: boolean }) {
   const [formData, setFormData] = useState({
     journeyType: "Round Trip",
     from: "",
@@ -20,6 +21,7 @@ export function FlightBookingForm() {
     departure: "",
     returnDate: "",
     travelers: "1",
+    name: "",
     email: "",
     phone: "",
   });
@@ -53,7 +55,7 @@ Passengers: ${formData.travelers}
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: "Flight Customer",
+          name: formData.name || "Flight Customer",
           email: formData.email,
           phone: formData.phone,
           airport: formData.from,
@@ -76,6 +78,7 @@ Passengers: ${formData.travelers}
         departure: "",
         returnDate: "",
         travelers: "1",
+        name: "",
         email: "",
         phone: "",
       });
@@ -95,7 +98,13 @@ Passengers: ${formData.travelers}
       id="enquiry"
       className="w-full max-w-4xl mx-auto px-4 relative z-20 mt-2"
     >
-      <div className="bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#eed6c4]/60">
+      <div
+        className={
+          isHome
+            ? "bg-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-white/30"
+            : "bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#eed6c4]/60"
+        }
+      >
         <div className="text-center mb-6">
           <span className="inline-block px-3 py-1 rounded-full bg-[#fff3e4] text-[#6b4f4f] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
             Quick Quote
@@ -107,8 +116,7 @@ Passengers: ${formData.travelers}
         </div>
 
         <form onSubmit={handleSubmit}>
-          {/* Journey Type */}
-          <div className="flex justify-center mb-6 mt-4">
+          <div className="flex justify-center mb-6">
             <div className="flex p-1 bg-slate-100 rounded-full border border-slate-200/60 shadow-inner">
               <button
                 type="button"
@@ -146,7 +154,7 @@ Passengers: ${formData.travelers}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Flying From */}
             <div className="relative">
               <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
@@ -206,9 +214,7 @@ Passengers: ${formData.travelers}
                 aria-label="Return Date"
               />
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
             {/* Travelers */}
             <div className="relative">
               <Users className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
@@ -253,6 +259,20 @@ Passengers: ${formData.travelers}
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="Phone Number"
+                className={fieldClass}
+                required
+              />
+            </div>
+
+            {/* Name Input */}
+            <div className="relative">
+              <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Your Name"
                 className={fieldClass}
                 required
               />

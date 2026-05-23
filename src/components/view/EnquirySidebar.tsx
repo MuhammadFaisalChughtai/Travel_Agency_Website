@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Phone, User, Send, CheckCircle, AlertCircle, X, MessageSquare } from "lucide-react";
 
 interface Props {
@@ -18,6 +18,25 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  // Set context for Tawk.to chat if available
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const setTawkContext = () => {
+        if ((window as any).Tawk_API && (window as any).Tawk_API.setAttributes) {
+          (window as any).Tawk_API.setAttributes({
+            'Interested In': packageTitle || type,
+            'Package ID': id
+          }, function (error: any) {});
+        }
+      };
+      
+      // Try setting it immediately and after a short delay in case Tawk is still loading
+      setTawkContext();
+      const timer = setTimeout(setTawkContext, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [id, packageTitle, type]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,7 +77,9 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
 
       {/* WhatsApp Button */}
       <a
-        href="https://wa.me/441215291630"
+        href={`https://wa.me/441215291630?text=${encodeURIComponent(
+          `Hello, I am interested in the ${packageTitle ? `"${packageTitle}"` : type} package (ID: ${id}). Could you provide more details?`
+        )}`}
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-center gap-2 w-full h-10 rounded-2xl border border-[#eed6c4]/30 text-[#eed6c4]/70 hover:text-[#eed6c4] hover:border-[#eed6c4]/60 font-heading font-bold text-[10px] uppercase tracking-wider transition-all duration-300 cursor-pointer"

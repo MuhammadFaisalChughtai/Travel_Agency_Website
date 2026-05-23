@@ -23,6 +23,7 @@ model User {
 
 model Package {
   id               String   @id @default(cuid())
+  slug             String   @unique
   title            String
   type             String   // HOLIDAY, UMRAH, HAJJ
   destination      String

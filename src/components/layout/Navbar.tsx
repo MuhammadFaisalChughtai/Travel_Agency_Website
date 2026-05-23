@@ -68,9 +68,14 @@ export function Navbar() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Button className="rounded-full gap-2 px-6 py-5 bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4] border border-[#eed6c4]/40 hover:border-[#eed6c4] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 font-extrabold text-xs tracking-wider uppercase">
-              <PhoneCall className="w-3.5 h-3.5" />
-              <span>Contact Us</span>
+            <Button
+              asChild
+              className="rounded-full gap-2 px-6 py-5 bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4] border border-[#eed6c4]/40 hover:border-[#eed6c4] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 font-extrabold text-xs tracking-wider uppercase"
+            >
+              <Link href="/contact">
+                <PhoneCall className="w-3.5 h-3.5" />
+                <span>Contact Us</span>
+              </Link>
             </Button>
           </div>
         </nav>
@@ -119,9 +124,18 @@ export function Navbar() {
                   ))}
                 </div>
                 <div className="py-6">
-                  <Button className="w-full rounded-full gap-2 bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4] py-5 border border-[#eed6c4]/45 font-extrabold uppercase text-xs tracking-wider shadow-md transition-colors duration-300">
-                    <PhoneCall className="w-4 h-4" />
-                    <span>Contact Us</span>
+                  <Button
+                    asChild
+                    className="w-full rounded-full gap-2 bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4] py-5 border border-[#eed6c4]/45 font-extrabold uppercase text-xs tracking-wider shadow-md transition-colors duration-300"
+                  >
+                    <Link
+                      className="flex gap-3"
+                      href="/contact"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <PhoneCall className="w-4 h-4" />
+                      <span>Contact Us</span>
+                    </Link>
                   </Button>
                 </div>
               </div>

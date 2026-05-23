@@ -5,6 +5,7 @@ import { Button } from "./Button";
 
 interface PackageCardProps {
   id: string;
+  slug?: string;
   title: string;
   destination: string;
   duration: string;
@@ -16,6 +17,7 @@ interface PackageCardProps {
 
 export function PackageCard({
   id,
+  slug,
   title,
   destination,
   duration,
@@ -81,7 +83,7 @@ export function PackageCard({
             <p className="text-2xl font-bold text-primary">£{price}</p>
           </div>
           <Button asChild variant={isSold ? "secondary" : "outline"} className="rounded-full">
-            <Link href={`/view/package/${id}`}>
+            <Link href={`/v/${slug || id}`}>
               {isSold ? "Enquire" : "View Details"}
             </Link>
           </Button>

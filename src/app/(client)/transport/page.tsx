@@ -11,10 +11,21 @@ import {
 } from "lucide-react";
 import { Hero } from "@/components/ui/Hero";
 
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Transport Services | Terrific Travel Ltd",
   description:
     "VIP ground transport and airport transfers in Saudi Arabia, Dubai, and the UK. Premium Sedan, SUV, and coach vehicles with professional chauffeurs.",
+  openGraph: {
+    title: "Transport Services | Terrific Travel Ltd",
+    description: "VIP ground transport and airport transfers in Saudi Arabia, Dubai, and the UK. Premium Sedan, SUV, and coach vehicles with professional chauffeurs.",
+    url: "https://terrifictravel.co.uk/transport",
+  },
+  twitter: {
+    title: "Transport Services | Terrific Travel Ltd",
+    description: "VIP ground transport and airport transfers in Saudi Arabia, Dubai, and the UK. Premium Sedan, SUV, and coach vehicles with professional chauffeurs.",
+  },
 };
 
 const TRANSPORT_VEHICLES = [

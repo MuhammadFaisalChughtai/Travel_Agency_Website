@@ -37,7 +37,7 @@ const airports = [
   "Humberside",
 ];
 
-export function UmrahBookingForm() {
+export function UmrahBookingForm({ isHome = false }: { isHome?: boolean }) {
   const [formData, setFormData] = useState({
     airport: "",
     date: "",
@@ -96,7 +96,13 @@ export function UmrahBookingForm() {
       id="enquiry"
       className="w-full max-w-5xl mx-auto px-4 relative z-20 mt-2"
     >
-      <div className="bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#eed6c4]/60">
+      <div
+        className={
+          isHome
+            ? "bg-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-white/30"
+            : "bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#eed6c4]/60"
+        }
+      >
         {/* Modern Luxury Title */}
         <div className="text-center mb-6">
           <span className="inline-block px-3 py-1 rounded-full bg-[#fff3e4] text-[#6b4f4f] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
@@ -114,29 +120,15 @@ export function UmrahBookingForm() {
             {/* Airport Input */}
             <div className="relative">
               <Plane className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
-              <select
+              <input
+                type="text"
                 name="airport"
                 value={formData.airport}
                 onChange={handleChange}
-                className="w-full pl-10 pr-8 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none appearance-none cursor-pointer font-medium"
+                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none font-medium placeholder-slate-400"
+                placeholder="Departure Airport"
                 required
-              >
-                <option value="" className="text-slate-500">
-                  Departure Airport
-                </option>
-                {airports.map((airport) => (
-                  <option
-                    key={airport}
-                    value={airport}
-                    className="text-slate-800"
-                  >
-                    {airport}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                ▼
-              </div>
+              />
             </div>
 
             {/* Date Input */}

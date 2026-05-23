@@ -13,10 +13,21 @@ import {
 } from "lucide-react";
 import { Hero } from "@/components/ui/Hero";
 
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Visa Services | Terrific Travel Ltd",
   description:
     "Fast-track Saudi Arabia Umrah, UAE Dubai, and worldwide visa processing from the UK. Expert handling, rapid turnaround, IATA & ATOL accredited.",
+  openGraph: {
+    title: "Visa Services | Terrific Travel Ltd",
+    description: "Fast-track Saudi Arabia Umrah, UAE Dubai, and worldwide visa processing from the UK. Expert handling, rapid turnaround, IATA & ATOL accredited.",
+    url: "https://terrifictravel.co.uk/visa",
+  },
+  twitter: {
+    title: "Visa Services | Terrific Travel Ltd",
+    description: "Fast-track Saudi Arabia Umrah, UAE Dubai, and worldwide visa processing from the UK. Expert handling, rapid turnaround, IATA & ATOL accredited.",
+  },
 };
 
 const VISA_SERVICES = [

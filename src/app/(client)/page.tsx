@@ -4,6 +4,25 @@ import { HomeBlogSection } from "@/components/home/HomeBlogSection";
 import { TrendingFlightsSection } from "@/components/flights/TrendingFlightsSection";
 import { PackageCard } from "@/components/umrah/PackageCard";
 import { prisma } from "@/lib/prisma";
+import { AirlineMarquee } from "@/components/home/AirlineMarquee";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terrific Travel Ltd | Holidays, Umrah & Flights from the UK",
+  description:
+    "Book unforgettable holidays, low-cost Umrah and Hajj packages, global flights, and premium transport with Terrific Travel Ltd. ATOL protected.",
+  openGraph: {
+    title: "Terrific Travel Ltd | Holidays, Umrah & Flights from the UK",
+    description:
+      "Book unforgettable holidays, low-cost Umrah and Hajj packages, global flights, and premium transport with Terrific Travel Ltd. ATOL protected.",
+    url: "https://terrifictravel.co.uk",
+  },
+  twitter: {
+    title: "Terrific Travel Ltd | Holidays, Umrah & Flights from the UK",
+    description:
+      "Book unforgettable holidays, low-cost Umrah and Hajj packages, global flights, and premium transport with Terrific Travel Ltd. ATOL protected.",
+  },
+};
 
 // Utility to shuffle an array
 function shuffleArray(array: any[]) {
@@ -14,15 +33,6 @@ function shuffleArray(array: any[]) {
   }
   return newArr;
 }
-const AIRLINE_PARTNERS = [
-  "Emirates",
-  "Qatar Airways",
-  "British Airways",
-  "Saudi Airlines",
-  "Turkish Airlines",
-  "Etihad",
-  "Oman Air",
-];
 export default async function Home() {
   const trendingFlights = await (prisma as any).trendingFlight.findMany({
     orderBy: { createdAt: "desc" },
@@ -49,7 +59,33 @@ export default async function Home() {
       image,
       stars: pkg.stars || 3,
       price: `£${pkg.price}`,
-      detailsUrl: `/view/package/${pkg.id}`,
+      detailsUrl: `/v/${pkg.slug || pkg.id}`,
+      isSold: pkg.isSold,
+    };
+  });
+
+  const featuredHolidayPackages = await prisma.package.findMany({
+    where: { type: "HOLIDAY" },
+    orderBy: { price: "asc" },
+    take: 6,
+  });
+
+  const formattedHolidayPackages = featuredHolidayPackages.map((pkg: any) => {
+    let image = "";
+    try {
+      const images = JSON.parse(pkg.images);
+      image = images[0] || "";
+    } catch (e) {
+      image = pkg.images;
+    }
+
+    return {
+      id: pkg.id,
+      title: pkg.title,
+      image,
+      stars: pkg.stars || 4,
+      price: `£${pkg.price}`,
+      detailsUrl: `/v/${pkg.slug || pkg.id}`,
       isSold: pkg.isSold,
     };
   });
@@ -80,6 +116,33 @@ export default async function Home() {
         <TrendingFlightsSection routes={trendingFlights} />
       </div>
 
+      {/* Featured Holiday Packages Section */}
+      <section className="py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-heading">
+              Featured Holiday Packages
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-slate-600 max-w-2xl mx-auto">
+              Discover breathtaking destinations and handpicked luxury holiday experiences.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {formattedHolidayPackages.map((pkg: any) => (
+              <PackageCard
+                key={pkg.id}
+                title={pkg.title}
+                image={pkg.image}
+                stars={pkg.stars}
+                price={pkg.price}
+                detailsUrl={pkg.detailsUrl}
+                isSold={pkg.isSold}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Featured Packages Section */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -108,27 +171,10 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ─── Airline Partners ─── */}
-      <div className="bg-[#382626] py-12 border-b border-[#eed6c4]/20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-6 text-center">
-          <p className="text-[#eed6c4] text-[10px] font-bold uppercase tracking-[0.3em]">
-            Partnering With Top Global Airlines
-          </p>
-        </div>
-        <div className="flex gap-8 md:gap-16 items-center justify-center flex-wrap max-w-6xl mx-auto px-6 opacity-70">
-          {AIRLINE_PARTNERS.map((partner) => (
-            <span
-              key={partner}
-              className="text-white font-heading font-black text-xl md:text-2xl tracking-tighter uppercase"
-            >
-              {partner}
-            </span>
-          ))}
-        </div>
-      </div>
-
       {/* Blog Section grouped by Categories */}
       <HomeBlogSection blogsByCategory={blogsByCategory} />
+      {/* ─── Airline Partners ─── */}
+      <AirlineMarquee />
       {/* Trustpilot Reviews Section */}
       <TrustpilotReviews />
     </div>

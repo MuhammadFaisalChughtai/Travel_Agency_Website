@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import {
-  Plane,
+  MapPin,
   Calendar,
   Building,
   Clock,
@@ -16,7 +16,22 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-export function HolidaysBookingForm() {
+const destinations = [
+  "Maldives",
+  "Dubai, UAE",
+  "Switzerland",
+  "Turkey",
+  "Paris, France",
+  "Bali, Indonesia",
+  "Rome, Italy",
+  "Santorini, Greece",
+  "New York, USA",
+  "Tokyo, Japan",
+  "Phuket, Thailand",
+  "Mauritius",
+];
+
+export function HolidayBookingForm() {
   const [formData, setFormData] = useState({
     destination: "",
     date: "",
@@ -47,11 +62,7 @@ export function HolidaysBookingForm() {
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          ...formData, 
-          type: "holiday",
-          message: `Destination: ${formData.destination}`
-        }),
+        body: JSON.stringify({ ...formData, type: "holiday" }),
       });
       if (!res.ok) {
         const data = await res.json();
@@ -80,32 +91,41 @@ export function HolidaysBookingForm() {
       className="w-full max-w-5xl mx-auto px-4 relative z-20 mt-2"
     >
       <div className="bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#eed6c4]/60">
-        {/* Modern Luxury Title */}
         <div className="text-center mb-6">
           <span className="inline-block px-3 py-1 rounded-full bg-[#fff3e4] text-[#6b4f4f] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
-            Quick Quote
+            Tailor Your Trip
           </span>
           <h2 className="text-[#382626] text-xl md:text-2xl font-heading font-black tracking-tight">
-            Plan Your Holiday Journey
+            Design Your Dream Holiday
           </h2>
           <div className="h-[2px] w-12 bg-[#6b4f4f]/30 mx-auto mt-2 rounded-full"></div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Form Fields Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* destination Input */}
+            {/* Destination Input */}
             <div className="relative">
-              <Plane className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
-              <input
-                type="text"
+              <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <select
                 name="destination"
                 value={formData.destination}
                 onChange={handleChange}
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none font-medium"
-                placeholder="Destination"
+                className="w-full pl-10 pr-8 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none appearance-none cursor-pointer font-medium"
                 required
-              />
+              >
+                <option value="" className="text-slate-500">
+                  Where to?
+                </option>
+                {destinations.map((dest) => (
+                  <option key={dest} value={dest} className="text-slate-800">
+                    {dest}
+                  </option>
+                ))}
+                <option value="Other">Other / Not Sure</option>
+              </select>
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                ▼
+              </div>
             </div>
 
             {/* Date Input */}
@@ -117,7 +137,6 @@ export function HolidaysBookingForm() {
                 value={formData.date}
                 onChange={handleChange}
                 className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none font-medium"
-                placeholder="Departure Date"
                 required
               />
             </div>
@@ -231,7 +250,6 @@ export function HolidaysBookingForm() {
             </div>
           </div>
 
-          {/* Submit Button */}
           <div className="mt-6 space-y-4">
             {status === "success" && (
               <div className="flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl px-4 py-3 text-sm font-semibold">
