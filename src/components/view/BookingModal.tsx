@@ -106,17 +106,17 @@ export function BookingModal({ type, id, title, isSold }: BookingModalProps) {
             </div>
 
             {/* Form Body */}
-            <div className="pb-6">
+            <div className="pb-6 px-2 sm:px-4">
               {type === "transport" && (
-                <TransportBookingForm isHome={false} packageId={id} packageTitle={title} />
+                <TransportBookingForm isHome={false} isModal={true} packageId={id} packageTitle={title} />
               )}
               {type === "visa" && (
-                <VisaBookingForm isHome={false} packageId={id} packageTitle={title} />
+                <VisaBookingForm isHome={false} isModal={true} packageId={id} packageTitle={title} />
               )}
-              {type === "flight" && <FlightBookingForm isHome={false} />}
-              {type === "holiday" && <HolidaysBookingForm isHome={false} />}
+              {type === "flight" && <FlightBookingForm isHome={false} isModal={true} />}
+              {type === "holiday" && <HolidaysBookingForm isHome={false} isModal={true} />}
               {(type === "package" || type === "umrah" || type === "hajj") && (
-                <UmrahBookingForm isHome={false} />
+                <UmrahBookingForm isHome={false} isModal={true} />
               )}
             </div>
           </div>

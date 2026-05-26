@@ -31,10 +31,12 @@ const serviceTypes = [
 
 export function TransportBookingForm({
   isHome = false,
+  isModal = false,
   packageId,
   packageTitle,
 }: {
   isHome?: boolean;
+  isModal?: boolean;
   packageId?: string;
   packageTitle?: string;
 }) {
@@ -100,16 +102,18 @@ export function TransportBookingForm({
   return (
     <div
       id="enquiry"
-      className={`w-full max-w-5xl mx-auto px-4 relative z-20 ${isHome ? 'mt-2' : '-mt-12 md:-mt-20'}`}
+      className={`w-full max-w-5xl mx-auto ${isModal ? 'px-0' : 'px-4'} relative z-20 ${isModal ? '' : (isHome ? 'mt-2' : '-mt-12 md:-mt-20')}`}
     >
       <div
         className={
-          isHome
-            ? "bg-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-white/30"
-            : "bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#eed6c4]/60"
+          isModal 
+            ? "p-2 sm:p-4"
+            : (isHome
+              ? "bg-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-white/30"
+              : "bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#eed6c4]/60")
         }
       >
-        {!isHome && (
+        {!isHome && !isModal && (
           <div className="text-center mb-6">
             <span className="inline-block px-3 py-1 rounded-full bg-[#fff3e4] text-[#6b4f4f] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
               Free Quote

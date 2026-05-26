@@ -13,7 +13,7 @@ import {
   User,
 } from "lucide-react";
 
-export function FlightBookingForm({ isHome = false }: { isHome?: boolean }) {
+export function FlightBookingForm({ isHome = false, isModal = false }: { isHome?: boolean; isModal?: boolean }) {
   const [formData, setFormData] = useState({
     journeyType: "Round Trip",
     from: "",
@@ -96,24 +96,27 @@ Passengers: ${formData.travelers}
   return (
     <div
       id="enquiry"
-      className={`w-full max-w-5xl mx-auto px-4 relative z-20 ${isHome ? 'mt-2' : '-mt-12 md:-mt-20'}`}
+      className={`w-full max-w-5xl mx-auto ${isModal ? 'px-0' : 'px-4'} relative z-20 ${isModal ? '' : (isHome ? 'mt-2' : '-mt-12 md:-mt-20')}`}
     >
       <div
         className={
-          isHome
-            ? "bg-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-white/30"
-            : "bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#eed6c4]/60"
+          isModal
+            ? "p-2 sm:p-4"
+            : (isHome
+              ? "bg-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-white/30"
+              : "bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#eed6c4]/60")
         }
       >
-        <div className="text-center mb-6">
-          <span className="inline-block px-3 py-1 rounded-full bg-[#fff3e4] text-[#6b4f4f] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
-            Quick Quote
-          </span>
-          <h2 className="text-[#382626] text-xl md:text-2xl font-heading font-black tracking-tight">
-            Find Your Flight
-          </h2>
-          {/* <div className="h-[2px] w-12 bg-[#6b4f4f]/30 mx-auto mt-2 rounded-full"></div> */}
-        </div>
+        {!isHome && !isModal && (
+          <div className="text-center mb-6">
+            <span className="inline-block px-3 py-1 rounded-full bg-[#fff3e4] text-[#6b4f4f] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
+              Quick Quote
+            </span>
+            <h2 className="text-[#382626] text-xl md:text-2xl font-heading font-black tracking-tight">
+              Find Your Flight
+            </h2>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit}>
           <div className="flex justify-center mb-6">

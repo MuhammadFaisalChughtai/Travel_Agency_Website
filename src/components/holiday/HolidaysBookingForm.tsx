@@ -14,18 +14,21 @@ import {
   ArrowRight,
   CheckCircle,
   AlertCircle,
+  MapPin,
+  Banknote,
 } from "lucide-react";
 
-export function HolidaysBookingForm({ isHome = false }: { isHome?: boolean }) {
+export function HolidaysBookingForm({ isHome = false, isModal = false }: { isHome?: boolean; isModal?: boolean }) {
   const [formData, setFormData] = useState({
     destination: "",
+    departureAirport: "",
     date: "",
-    category: "",
     duration: "",
     travelers: "",
     name: "",
-    phone: "",
     email: "",
+    phone: "",
+    budget: "",
   });
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -43,14 +46,27 @@ export function HolidaysBookingForm({ isHome = false }: { isHome?: boolean }) {
     e.preventDefault();
     setStatus("loading");
     setErrorMsg("");
+
+    const customMessage = `
+Destination: ${formData.destination}
+Flying from: ${formData.departureAirport}
+Date: ${formData.date}
+Duration: ${formData.duration}
+Passengers: ${formData.travelers}
+Budget per person: ${formData.budget || "Not specified"}
+    `.trim();
+
     try {
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          ...formData, 
-          type: "holiday",
-          message: `Destination: ${formData.destination}`
+        body: JSON.stringify({
+          name: formData.name || "Holiday Customer",
+          email: formData.email,
+          phone: formData.phone,
+          message: customMessage,
+          type: "Holiday",
+          airport: formData.departureAirport,
         }),
       });
       if (!res.ok) {
@@ -60,13 +76,14 @@ export function HolidaysBookingForm({ isHome = false }: { isHome?: boolean }) {
       setStatus("success");
       setFormData({
         destination: "",
+        departureAirport: "",
         date: "",
-        category: "",
         duration: "",
         travelers: "",
         name: "",
-        phone: "",
         email: "",
+        phone: "",
+        budget: "",
       });
     } catch (err: any) {
       setStatus("error");
@@ -74,31 +91,38 @@ export function HolidaysBookingForm({ isHome = false }: { isHome?: boolean }) {
     }
   };
 
+  const fieldClass =
+    "w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none font-medium placeholder:text-slate-400";
+  const selectClass =
+    "w-full pl-10 pr-8 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none appearance-none cursor-pointer font-medium";
+
   return (
     <div
       id="enquiry"
-      className={`w-full max-w-5xl mx-auto px-4 relative z-20 ${isHome ? 'mt-2' : '-mt-12 md:-mt-20'}`}
+      className={`w-full max-w-5xl mx-auto ${isModal ? 'px-0' : 'px-4'} relative z-20 ${isModal ? '' : (isHome ? 'mt-2' : '-mt-12 md:-mt-20')}`}
     >
       <div
         className={
-          isHome
-            ? "bg-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-white/30"
-            : "bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#eed6c4]/60"
+          isModal
+            ? "p-2 sm:p-4"
+            : (isHome
+              ? "bg-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-white/30"
+              : "bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#eed6c4]/60")
         }
       >
-        {/* Modern Luxury Title */}
-        <div className="text-center mb-6">
-          <span className="inline-block px-3 py-1 rounded-full bg-[#fff3e4] text-[#6b4f4f] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
-            Quick Quote
-          </span>
-          <h2 className="text-[#382626] text-xl md:text-2xl font-heading font-black tracking-tight">
-            Plan Your Holiday Journey
-          </h2>
-          <div className="h-[2px] w-12 bg-[#6b4f4f]/30 mx-auto mt-2 rounded-full"></div>
-        </div>
+        {!isHome && !isModal && (
+          <div className="text-center mb-6">
+            <span className="inline-block px-3 py-1 rounded-full bg-[#fff3e4] text-[#6b4f4f] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
+              Free Quote
+            </span>
+            <h2 className="text-[#382626] text-xl md:text-2xl font-heading font-black tracking-tight">
+              Design Your Perfect Holiday
+            </h2>
+            <div className="h-[2px] w-12 bg-[#6b4f4f]/30 mx-auto mt-2 rounded-full"></div>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Form Fields Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* destination Input */}
             <div className="relative">
