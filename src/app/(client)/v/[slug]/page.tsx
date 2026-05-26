@@ -32,6 +32,7 @@ import { PackageCard } from "@/components/ui/PackageCard";
 import { FaqAccordion } from "@/components/holiday/FaqAccordion";
 import { EnquirySidebar } from "@/components/view/EnquirySidebar";
 import { Hero } from "@/components/ui/Hero";
+import { BookingModal } from "@/components/view/BookingModal";
 
 export const revalidate = 0; // Disable static rendering caching to allow dynamic prisma lookups
 
@@ -191,17 +192,25 @@ export async function generateMetadata({ params }: ViewPageProps) {
   const item = await resolveItem(params.slug);
   if (!item) return { title: "Item Not Found | Terrific Travel Ltd" };
 
-  const titleText =
-    item.metaTitle ||
-    item.title ||
-    item.country ||
-    item.airline ||
-    "Detail View";
+  const type = item.itemType;
+  
+  // Use the same robust title logic as the page component
+  const fallbackTitle = 
+    type === "visa"
+      ? `${item.country} ${item.visaType || item.type}`
+      : type === "transport"
+        ? `${item.vehicleType} — ${item.type}`
+        : type === "flight"
+          ? `${item.airline} flight to ${item.destination}`
+          : "Detail View";
+
+  const titleText = item.metaTitle || item.title || fallbackTitle;
+
   const descText =
     item.metaDescription ||
     item.description ||
     item.excerpt ||
-    `Detailed view for ${titleText} with Terrific Travel Ltd UK.`;
+    `Discover ${titleText} with Terrific Travel Ltd. Expert services, great prices, and fully protected bookings.`;
 
   return {
     title: item.metaTitle ? titleText : `${titleText} | Terrific Travel Ltd`,
@@ -220,13 +229,41 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
   const type = item.itemType; // "package", "blog", "flight", "visa", "transport"
   const id = item.id || slug;
 
-  const relatedArticles =
-    type === "blog"
-      ? await (prisma as any).blog.findMany({
-          where: { slug: { not: slug } },
-          take: 3,
-        })
-      : [];
+  // Find relevant blogs for SEO interlinking
+  let blogCategory = "Travel Guide";
+  if (type === "package") {
+    blogCategory =
+      item.type === "UMRAH" ? "Umrah" : item.type === "HAJJ" ? "Hajj" : "Holiday";
+  } else if (type === "visa") {
+    blogCategory = "Visa";
+  } else if (type === "flight") {
+    blogCategory = "Flight";
+  } else if (type === "transport") {
+    blogCategory = "Transport";
+  }
+
+  let relatedArticles = await prisma.blog.findMany({
+    where: { 
+      slug: { not: slug },
+      category: { contains: blogCategory }
+    },
+    take: 3,
+    orderBy: { createdAt: "desc" },
+  });
+
+  // Fallback to latest blogs if we don't have enough specific ones
+  if (relatedArticles.length < 3) {
+    const existingIds = relatedArticles.map((a) => a.id);
+    const fallbackBlogs = await prisma.blog.findMany({
+      where: { 
+        slug: { not: slug },
+        id: { notIn: existingIds }
+      },
+      take: 3 - relatedArticles.length,
+      orderBy: { createdAt: "desc" },
+    });
+    relatedArticles = [...relatedArticles, ...fallbackBlogs];
+  }
 
   // Common properties
   const title =
@@ -242,6 +279,11 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
     "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1200&q=80";
   const price = item.price;
   const displayPrice = typeof price === "number" ? `£${price}` : price;
+
+  // Strip HTML tags for the hero subtitle to prevent raw HTML rendering
+  const cleanDescription = item.description 
+    ? item.description.replace(/<[^>]*>?/gm, ' ').replace(/\s+/g, ' ').trim() 
+    : "";
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-[#483434]">
@@ -265,11 +307,9 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
         description={
           type === "blog"
             ? item.excerpt || ""
-            : item.description
-              ? item.description.length > 150
-                ? item.description.substring(0, 150) + "..."
-                : item.description
-              : ""
+            : cleanDescription.length > 150
+              ? cleanDescription.substring(0, 150) + "..."
+              : cleanDescription
         }
         showTrustpilot={false}
         customRatingBadge={
@@ -862,139 +902,240 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
             {/* D: VISA DETAIL LAYOUT */}
             {type === "visa" && (
               <div className="space-y-10">
-                <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
-                  <h2 className="text-xl font-heading font-black text-[#483434] flex items-center gap-2">
-                    <FileCheck className="w-5 h-5 text-[#6b4f4f]" /> Visa
-                    Specifications
-                  </h2>
+                {/* Main Specs Section */}
+                <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-8">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#eed6c4]/20 pb-6">
+                    <div>
+                      <h2 className="text-2xl font-heading font-black text-[#483434] flex items-center gap-2">
+                        <FileCheck className="w-6 h-6 text-[#6b4f4f]" /> Visa Overview
+                      </h2>
+                      <p className="text-xs text-slate-500 font-medium mt-1">Official Immigration &amp; Travel Permits</p>
+                    </div>
+                    <div className="bg-[#fff3e4] px-4 py-2 rounded-xl border border-[#eed6c4]/40 flex items-center gap-2">
+                      <ShieldCheck className="w-4 h-4 text-[#6b4f4f]" />
+                      <span className="text-xs font-black text-[#483434] tracking-wider uppercase">Verified Agent</span>
+                    </div>
+                  </div>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {[
-                      {
-                        label: "Country",
-                        value: item.country,
-                        flag: item.flag,
-                      },
-                      { label: "Validity", value: item.validity },
-                      { label: "Entries", value: item.entries },
-                      { label: "Processing Time", value: item.processingTime },
+                      { icon: <MapPin className="w-5 h-5" />, label: "Country", value: item.country, flag: item.flag },
+                      { icon: <Calendar className="w-5 h-5" />, label: "Validity", value: item.validity },
+                      { icon: <CheckCircle className="w-5 h-5" />, label: "Entries", value: item.entries },
+                      { icon: <Clock className="w-5 h-5" />, label: "Processing", value: item.processingTime },
                     ].map((spec, i) => (
                       <div
                         key={i}
-                        className="bg-[#fff3e4] rounded-2xl p-4 border border-[#eed6c4]/40 text-center"
+                        className="bg-slate-50 rounded-2xl p-5 border border-slate-100 text-center hover:bg-[#fff3e4]/50 hover:border-[#eed6c4]/40 transition-colors duration-300 flex flex-col items-center group"
                       >
-                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#6b4f4f] shadow-sm mb-3 group-hover:scale-110 transition-transform">
+                          {spec.icon}
+                        </div>
+                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
                           {spec.label}
                         </p>
-                        <p className="text-xs font-black text-[#483434] mt-1.5 flex items-center justify-center gap-1">
-                          {spec.flag && (
-                            <span className="text-base leading-none">
-                              {spec.flag}
-                            </span>
-                          )}
+                        <p className="text-sm font-black text-[#483434] flex items-center justify-center gap-1.5">
+                          {spec.flag && <span className="text-lg leading-none">{spec.flag}</span>}
                           {spec.value}
                         </p>
                       </div>
                     ))}
                   </div>
-
-                  <h3 className="text-sm font-heading font-black text-[#483434] pt-4">
-                    Key Benefits
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                    {item?.features?.map((feature: string, idx: number) => (
-                      <div
-                        key={idx}
-                        className="flex items-center gap-2 text-xs text-slate-600 font-light"
-                      >
-                        <CheckCircle className="w-4 h-4 text-[#6b4f4f] shrink-0" />
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
                 </section>
 
-                <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-4">
+                {/* Description or Default Luxury Text */}
+                <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
                   <h2 className="text-xl font-heading font-black text-[#483434] flex items-center gap-2">
-                    <FileCheck className="w-5 h-5 text-[#6b4f4f]" /> Required
-                    Documents
+                    <Sparkles className="w-5 h-5 text-[#6b4f4f]" /> Visa Services
                   </h2>
-                  <div className="space-y-3">
-                    {item?.documents?.map((doc: string, idx: number) => (
-                      <div
-                        key={idx}
-                        className="flex items-start gap-3 p-3 bg-[#eed6c4]/10 rounded-xl border border-[#eed6c4]/20"
-                      >
-                        <div className="w-5 h-5 rounded-full bg-[#6b4f4f] text-white flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">
-                          {idx + 1}
-                        </div>
-                        <span className="text-xs font-bold text-[#483434] leading-relaxed">
-                          {doc}
-                        </span>
-                      </div>
-                    ))}
+                  <div className="text-sm text-slate-600 leading-relaxed font-light space-y-4">
+                    {item.description ? (
+                      item.description.split('\n').map((paragraph: string, idx: number) => (
+                        <p key={idx}>{paragraph}</p>
+                      ))
+                    ) : (
+                      <p>
+                        Navigating international travel requirements can be complex, but our expert visa team 
+                        is here to ensure a smooth, hassle-free process. We handle the paperwork, compliance checks, 
+                        and embassy communications so you can focus on planning your trip. Benefit from our high 
+                        approval rates and dedicated support for all your immigration needs.
+                      </p>
+                    )}
                   </div>
                 </section>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  {/* Required Documents */}
+                  <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6 h-full flex flex-col">
+                    <h2 className="text-xl font-heading font-black text-[#483434] flex items-center gap-2 mb-2">
+                      <FileText className="w-5 h-5 text-[#6b4f4f]" /> Required Documents
+                    </h2>
+                    <div className="space-y-4 flex-1">
+                      {item?.documents?.length > 0 ? (
+                        item.documents.map((doc: string, idx: number) => (
+                          <div
+                            key={idx}
+                            className="flex items-start gap-4 p-4 bg-[#eed6c4]/10 rounded-2xl border border-[#eed6c4]/20 hover:border-[#6b4f4f]/30 transition-colors"
+                          >
+                            <div className="w-6 h-6 rounded-full bg-[#6b4f4f] text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5 shadow-md">
+                              {idx + 1}
+                            </div>
+                            <span className="text-sm font-bold text-[#483434] leading-relaxed">
+                              {doc}
+                            </span>
+                          </div>
+                        ))
+                      ) : (
+                        <p className="text-xs text-slate-500 italic">No specific documents listed. Our team will advise you.</p>
+                      )}
+                    </div>
+                  </section>
+
+                  {/* Key Benefits */}
+                  <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6 h-full flex flex-col">
+                    <h2 className="text-xl font-heading font-black text-[#483434] flex items-center gap-2 mb-2">
+                      <Award className="w-5 h-5 text-[#6b4f4f]" /> Key Benefits
+                    </h2>
+                    <div className="space-y-3 flex-1">
+                      {item?.features?.length > 0 ? (
+                        item.features.map((feature: string, idx: number) => (
+                          <div
+                            key={idx}
+                            className="flex items-center gap-3 text-sm text-[#483434] font-medium p-3 rounded-xl bg-slate-50 border border-slate-100"
+                          >
+                            <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />
+                            {feature}
+                          </div>
+                        ))
+                      ) : (
+                        <>
+                          {[
+                            "Expert Document Review", 
+                            "Fast-Track Processing", 
+                            "High Approval Rate", 
+                            "Dedicated Visa Consultant"
+                          ].map((feat, idx) => (
+                            <div
+                              key={idx}
+                              className="flex items-center gap-3 text-sm text-[#483434] font-medium p-3 rounded-xl bg-slate-50 border border-slate-100"
+                            >
+                              <CheckCircle className="w-5 h-5 text-[#6b4f4f] shrink-0" />
+                              {feat}
+                            </div>
+                          ))}
+                        </>
+                      )}
+                    </div>
+                  </section>
+                </div>
               </div>
             )}
 
             {/* E: TRANSPORT DETAIL LAYOUT */}
             {type === "transport" && (
               <div className="space-y-10">
-                <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
-                  <h2 className="text-xl font-heading font-black text-[#483434] flex items-center gap-2">
-                    <Car className="w-5 h-5 text-[#6b4f4f]" /> Transport Specifications
-                  </h2>
+                {/* Main Specs Section */}
+                <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-8">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#eed6c4]/20 pb-6">
+                    <div>
+                      <h2 className="text-2xl font-heading font-black text-[#483434] flex items-center gap-2">
+                        <Car className="w-6 h-6 text-[#6b4f4f]" /> Vehicle Overview
+                      </h2>
+                      <p className="text-xs text-slate-500 font-medium mt-1">Premium Ground Transportation Details</p>
+                    </div>
+                    <div className="bg-[#fff3e4] px-4 py-2 rounded-xl border border-[#eed6c4]/40 flex items-center gap-2">
+                      <Star className="w-4 h-4 text-[#6b4f4f] fill-[#6b4f4f]" />
+                      <span className="text-xs font-black text-[#483434] tracking-wider uppercase">VIP Standard</span>
+                    </div>
+                  </div>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {[
-                      { label: "Vehicle Type", value: item.vehicleType },
-                      { label: "Service Type", value: item.type },
-                      { label: "Capacity", value: item.capacity || "N/A" },
-                      { label: "Starting Price", value: `£${item.price}` },
+                      { icon: <Car className="w-5 h-5" />, label: "Vehicle Type", value: item.vehicleType },
+                      { icon: <MapPin className="w-5 h-5" />, label: "Service Route", value: item.type },
+                      { icon: <Users className="w-5 h-5" />, label: "Max Capacity", value: item.capacity || "N/A" },
+                      { icon: <Tag className="w-5 h-5" />, label: "Starting Price", value: `£${item.price}` },
                     ].map((spec, i) => (
                       <div
                         key={i}
-                        className="bg-[#fff3e4] rounded-2xl p-4 border border-[#eed6c4]/40 text-center"
+                        className="bg-slate-50 rounded-2xl p-5 border border-slate-100 text-center hover:bg-[#fff3e4]/50 hover:border-[#eed6c4]/40 transition-colors duration-300 flex flex-col items-center group"
                       >
-                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#6b4f4f] shadow-sm mb-3 group-hover:scale-110 transition-transform">
+                          {spec.icon}
+                        </div>
+                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
                           {spec.label}
                         </p>
-                        <p className="text-xs font-black text-[#483434] mt-1.5 flex items-center justify-center gap-1">
+                        <p className="text-sm font-black text-[#483434]">
                           {spec.value}
                         </p>
                       </div>
                     ))}
                   </div>
+                </section>
 
-                  <h3 className="text-sm font-heading font-black text-[#483434] pt-4">
-                    Key Features
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                    {item?.features?.map((feature: string, idx: number) => (
-                      <div
-                        key={idx}
-                        className="flex items-center gap-2 text-xs text-slate-600 font-light"
-                      >
-                        <CheckCircle className="w-4 h-4 text-[#6b4f4f] shrink-0" />
-                        {feature}
-                      </div>
-                    ))}
+                {/* Description or Default Luxury Text */}
+                <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
+                  <h2 className="text-xl font-heading font-black text-[#483434] flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-[#6b4f4f]" /> The Experience
+                  </h2>
+                  <div className="text-sm text-slate-600 leading-relaxed font-light space-y-4">
+                    {item.description ? (
+                      item.description.split('\n').map((paragraph: string, idx: number) => (
+                        <p key={idx}>{paragraph}</p>
+                      ))
+                    ) : (
+                      <p>
+                        Experience the pinnacle of ground transportation with our premium fleet. 
+                        Whether you require a seamless airport transfer, elegant inter-city travel, 
+                        or a dedicated chauffeur for Ziyarat, our meticulously maintained vehicles 
+                        offer unmatched comfort, privacy, and safety. Sit back, relax, and let our 
+                        professional drivers navigate while you enjoy the journey.
+                      </p>
+                    )}
                   </div>
                 </section>
 
-                {item.description && (
-                  <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-4">
-                    <h2 className="text-xl font-heading font-black text-[#483434] flex items-center gap-2">
-                      <FileText className="w-5 h-5 text-[#6b4f4f]" /> Service Description
-                    </h2>
-                    <div className="text-sm text-slate-600 leading-relaxed font-light space-y-4">
-                      {item.description.split('\n').map((paragraph: string, idx: number) => (
-                        <p key={idx}>{paragraph}</p>
-                      ))}
-                    </div>
-                  </section>
-                )}
+                {/* Features & Amenities (Dynamic + Static Guarantees) */}
+                <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
+                  <h2 className="text-xl font-heading font-black text-[#483434] flex items-center gap-2 mb-6">
+                    <ShieldCheck className="w-5 h-5 text-[#6b4f4f]" /> Premium Amenities
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Database Features */}
+                    {item?.features?.length > 0 ? (
+                      item.features.map((feature: string, idx: number) => (
+                        <div
+                          key={idx}
+                          className="flex items-center gap-3 text-sm text-[#483434] font-medium p-3 rounded-xl bg-slate-50 border border-slate-100"
+                        >
+                          <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />
+                          {feature}
+                        </div>
+                      ))
+                    ) : (
+                      /* Fallback Standard Features if DB is empty */
+                      <>
+                        {[
+                          "Professional Chauffeur", 
+                          "Air-Conditioned Cabin", 
+                          "Complimentary Bottled Water", 
+                          "Meet & Greet Service",
+                          "Flight Tracking included",
+                          "Luggage Assistance"
+                        ].map((feat, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-center gap-3 text-sm text-[#483434] font-medium p-3 rounded-xl bg-slate-50 border border-slate-100"
+                          >
+                            <CheckCircle className="w-5 h-5 text-[#6b4f4f] shrink-0" />
+                            {feat}
+                          </div>
+                        ))}
+                      </>
+                    )}
+                  </div>
+                </section>
               </div>
             )}
           </main>
@@ -1090,19 +1231,13 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                   </div>
 
                   <div className="space-y-3 pt-2">
-                    {/* Booking Link / CTA */}
-                    {item.isSold ? (
-                      <span className="flex items-center justify-center w-full h-12 rounded-2xl bg-slate-700/50 text-slate-400 font-heading font-black text-xs uppercase tracking-[0.15em] border border-slate-600/30 cursor-not-allowed select-none">
-                        Sold Out
-                      </span>
-                    ) : (
-                      <a
-                        href={`/book?type=${type}&id=${id}`}
-                        className="flex items-center justify-center w-full h-12 rounded-2xl bg-gradient-to-r from-[#eed6c4] to-[#f5e6d8] hover:from-[#fff3e4] hover:to-[#eed6c4] text-[#382626] font-heading font-black text-xs uppercase tracking-[0.15em] transition-all duration-300 shadow-lg shadow-[#eed6c4]/5 hover:shadow-[#eed6c4]/15 hover:-translate-y-0.5 cursor-pointer"
-                      >
-                        Book This {type}
-                      </a>
-                    )}
+                    {/* Booking CTA — opens modal with the inquiry form */}
+                    <BookingModal
+                      type={type}
+                      id={id}
+                      title={title}
+                      isSold={item.isSold}
+                    />
 
                     {/* Enquiry Modal + WhatsApp */}
                     <EnquirySidebar type={type} id={id} packageTitle={title} />
@@ -1115,11 +1250,11 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                 </div>
               )}
 
-              {/* Sidebar Related Articles (for Blog) */}
-              {type === "blog" && (
+              {/* Sidebar Related Articles (for SEO Interlinking) */}
+              {relatedArticles.length > 0 && (
                 <div className="rounded-3xl border border-[#eed6c4]/25 p-6 bg-white space-y-5">
                   <h3 className="text-xs font-heading font-black text-[#483434] uppercase tracking-[0.2em] mb-4">
-                    Related Articles
+                    {type === "blog" ? "Related Articles" : "Travel Guides"}
                   </h3>
                   <div className="space-y-4">
                     {relatedArticles.map((related: any) => (

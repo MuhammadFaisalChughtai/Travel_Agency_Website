@@ -58,10 +58,21 @@ export default async function UmrahPage() {
   const fourStarPackages = formatPackages(4);
   const fiveStarPackages = formatPackages(5);
 
-  const blogs = await prisma.blog.findMany({
-    where: { category: "Umrah" },
+  let blogs = await prisma.blog.findMany({
+    where: { category: { contains: "Umrah" } },
     orderBy: { createdAt: "desc" },
+    take: 3,
   });
+
+  if (blogs.length < 3) {
+    const existingIds = blogs.map((b) => b.id);
+    const fallbackBlogs = await prisma.blog.findMany({
+      where: { id: { notIn: existingIds } },
+      take: 3 - blogs.length,
+      orderBy: { createdAt: "desc" },
+    });
+    blogs = [...blogs, ...fallbackBlogs];
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-background">

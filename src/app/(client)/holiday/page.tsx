@@ -51,9 +51,21 @@ export default async function PackagesPage() {
     };
   });
 
-  const blogs = await prisma.blog.findMany({
+  let blogs = await prisma.blog.findMany({
+    where: { category: { contains: "Holiday" } },
     orderBy: { createdAt: "desc" },
+    take: 3,
   });
+
+  if (blogs.length < 3) {
+    const existingIds = blogs.map((b) => b.id);
+    const fallbackBlogs = await prisma.blog.findMany({
+      where: { id: { notIn: existingIds } },
+      take: 3 - blogs.length,
+      orderBy: { createdAt: "desc" },
+    });
+    blogs = [...blogs, ...fallbackBlogs];
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-[#f5f0eb]">

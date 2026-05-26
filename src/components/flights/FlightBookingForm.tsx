@@ -96,7 +96,7 @@ Passengers: ${formData.travelers}
   return (
     <div
       id="enquiry"
-      className="w-full max-w-4xl mx-auto px-4 relative z-20 mt-2"
+      className={`w-full max-w-5xl mx-auto px-4 relative z-20 ${isHome ? 'mt-2' : '-mt-12 md:-mt-20'}`}
     >
       <div
         className={

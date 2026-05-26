@@ -13,6 +13,7 @@ import {
   Clock,
 } from "lucide-react";
 import { Hero } from "@/components/ui/Hero";
+import { TransportBookingForm } from "@/components/transport/TransportBookingForm";
 
 import type { Metadata } from "next";
 
@@ -75,23 +76,11 @@ export default async function TransportPage() {
           </>
         }
         description="Experience maximum comfort with our private transfer services between airports, hotels, and Ziyarat sites."
-        showTrustpilot={false}
-        customRatingBadge={
-          <div className="flex items-center gap-2 pt-1 text-[11px] text-[#eed6c4] font-medium">
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-3.5 h-3.5 fill-[#eed6c4] stroke-none"
-                />
-              ))}
-            </div>
-            <span className="text-slate-300 font-light">
-              • Professional Drivers &amp; Modern Fleet
-            </span>
-          </div>
-        }
+        showTrustpilot={true}
       />
+
+      {/* Floating Booking Form */}
+      <TransportBookingForm />
 
       {/* ─── How It Works ─── */}
       <section className="py-14 bg-[#eed6c4]/10 border-b border-[#eed6c4]/30">

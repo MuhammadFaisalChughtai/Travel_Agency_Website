@@ -75,7 +75,7 @@ const visa = [
   "Seychelles Tourist Visa",
 ];
 
-export function VisaBookingForm({ isHome = false }: { isHome?: boolean }) {
+export function VisaBookingForm({ isHome = false, packageId, packageTitle }: { isHome?: boolean; packageId?: string; packageTitle?: string }) {
   const [formData, setFormData] = useState({
     airport: "",
     date: "",
@@ -106,7 +106,7 @@ export function VisaBookingForm({ isHome = false }: { isHome?: boolean }) {
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, type: "visa" }),
+        body: JSON.stringify({ ...formData, type: "Visa Enquiry", packageId, packageTitle }),
       });
       if (!res.ok) {
         const data = await res.json();
@@ -132,7 +132,7 @@ export function VisaBookingForm({ isHome = false }: { isHome?: boolean }) {
   return (
     <div
       id="enquiry"
-      className="w-full max-w-5xl mx-auto px-4 relative z-20 mt-2"
+      className={`w-full max-w-5xl mx-auto px-4 relative z-20 ${isHome ? 'mt-2' : '-mt-12 md:-mt-20'}`}
     >
       <div
         className={

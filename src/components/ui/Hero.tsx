@@ -44,9 +44,8 @@ export function Hero({
           className="object-cover scale-100 animate-[subtle-zoom_25s_infinite_alternate]"
           priority
         />
-        {/* Modern dark luxury gradient mask to ensure perfect text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#382626] via-[#382626]/90 to-transparent z-1" />
-        {/* <div className="absolute inset-0 bg-gradient-to-t from-[#382626] via-transparent to-black/20 z-1" /> */}
+        {/* Modern dark luxury overlay to ensure perfect text contrast while keeping the whole image visible */}
+        <div className="absolute inset-0 bg-[#2a1a1a]/70 z-1" />
       </div>
 
       {/* Sleek Content Container */}

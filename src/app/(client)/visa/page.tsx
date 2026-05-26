@@ -12,6 +12,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { Hero } from "@/components/ui/Hero";
+import { VisaBookingForm } from "@/components/visa/VisaBookingForm";
 
 import type { Metadata } from "next";
 
@@ -74,23 +75,11 @@ export default async function VisaPage() {
           </>
         }
         description="Expert visa processing for Saudi Arabia, UAE, and worldwide destinations. Leave the paperwork to us."
-        showTrustpilot={false}
-        customRatingBadge={
-          <div className="flex items-center gap-2 pt-1 text-[11px] text-[#eed6c4] font-medium">
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-3.5 h-3.5 fill-[#eed6c4] stroke-none"
-                />
-              ))}
-            </div>
-            <span className="text-slate-300 font-light">
-              • 99% Approval Rate · 10,000+ Visas Processed
-            </span>
-          </div>
-        }
+        showTrustpilot={true}
       />
+
+      {/* Floating Booking Form */}
+      <VisaBookingForm />
 
       {/* ─── How It Works ─── */}
       <section className="py-14 bg-[#eed6c4]/10 border-b border-[#eed6c4]/30">

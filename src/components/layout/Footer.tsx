@@ -289,14 +289,14 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-4 pt-4 border-t border-[#483434]/15">
                 <img 
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/IATA_logo.svg/200px-IATA_logo.svg.png" 
+                  src="/IATA.svg" 
                   alt="IATA Logo" 
-                  className="h-7 w-auto object-contain mix-blend-multiply opacity-90"
+                  className="h-8 w-auto object-contain mix-blend-multiply opacity-90"
                 />
                 <img 
-                  src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/ATOL_logo.svg/120px-ATOL_logo.svg.png" 
+                  src="/ATOL.svg" 
                   alt="ATOL Protected" 
-                  className="h-9 w-auto object-contain mix-blend-multiply"
+                  className="h-10 w-auto object-contain mix-blend-multiply"
                 />
               </li>
             </ul>

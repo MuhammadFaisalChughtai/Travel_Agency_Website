@@ -128,7 +128,7 @@ export async function POST(req: NextRequest) {
 
       <!-- Header -->
       <tr>
-        <td style="background:linear-gradient(135deg,#2a1a1a 0%,#5a3a3a 100%);padding:36px 32px;text-align:center;">
+        <td bgcolor="#382626" style="background-color:#382626;background:linear-gradient(135deg,#2a1a1a 0%,#5a3a3a 100%);padding:36px 32px;text-align:center;">
           <div style="display:inline-block;background:rgba(255,255,255,0.08);border:1px solid rgba(238,214,196,0.3);border-radius:12px;padding:10px 24px;margin-bottom:12px;">
             <span style="color:#eed6c4;font-size:18px;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;">Terrific Travel Ltd</span>
           </div>
@@ -248,7 +248,7 @@ export async function POST(req: NextRequest) {
           <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
               <td align="center" style="padding-top:8px;">
-                <a href="mailto:${email}?subject=Re: ${encodeURIComponent(subject)}" style="display:inline-block;background:linear-gradient(135deg,#5a3a3a,#2a1a1a);color:#fff3e4;font-size:13px;font-weight:800;text-decoration:none;padding:14px 32px;border-radius:50px;letter-spacing:0.1em;text-transform:uppercase;">
+                <a href="mailto:${email}?subject=Re: ${encodeURIComponent(subject)}" style="display:inline-block;background-color:#382626;background:linear-gradient(135deg,#5a3a3a,#2a1a1a);color:#fff3e4;font-size:13px;font-weight:800;text-decoration:none;padding:14px 32px;border-radius:50px;letter-spacing:0.1em;text-transform:uppercase;">
                   Reply to ${name} &#8594;
                 </a>
               </td>
@@ -322,7 +322,7 @@ export async function POST(req: NextRequest) {
 
       <!-- Header -->
       <tr>
-        <td style="background:linear-gradient(135deg,#2a1a1a 0%,#5a3a3a 100%);padding:40px 32px;text-align:center;">
+        <td bgcolor="#382626" style="background-color:#382626;background:linear-gradient(135deg,#2a1a1a 0%,#5a3a3a 100%);padding:40px 32px;text-align:center;">
           <div style="display:inline-block;background:rgba(255,255,255,0.08);border:1px solid rgba(238,214,196,0.3);border-radius:12px;padding:10px 24px;margin-bottom:16px;">
             <span style="color:#eed6c4;font-size:18px;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;">Terrific Travel Ltd</span>
           </div>

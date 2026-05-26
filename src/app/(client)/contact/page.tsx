@@ -1,6 +1,6 @@
 import { MapPin, Phone, Mail, Clock, ShieldCheck } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 import { Hero } from "@/components/ui/Hero";
+import { ContactForm } from "@/components/contact/ContactForm";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -42,98 +42,7 @@ export default function ContactPage() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Form */}
-          <div className="bg-[#fff8f0] rounded-3xl p-8 md:p-10 shadow-xl shadow-[#483434]/5 border border-[#eed6c4]/60">
-            <h2 className="text-3xl font-black text-[#2a1a1a] mb-8 font-heading">
-              Send us a message
-            </h2>
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label
-                    htmlFor="first-name"
-                    className="block text-sm font-black tracking-wide uppercase leading-6 text-[#2a1a1a]"
-                  >
-                    First name
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      type="text"
-                      name="first-name"
-                      id="first-name"
-                      className="block w-full rounded-xl border-0 py-3 text-[#2a1a1a] shadow-sm ring-1 ring-inset ring-[#eed6c4]/80 placeholder:text-[#6b4f4f]/50 focus:ring-2 focus:ring-inset focus:ring-[#6b4f4f] sm:text-sm sm:leading-6 px-4 bg-[#f5f0eb]/50"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="last-name"
-                    className="block text-sm font-black tracking-wide uppercase leading-6 text-[#2a1a1a]"
-                  >
-                    Last name
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      type="text"
-                      name="last-name"
-                      id="last-name"
-                      className="block w-full rounded-xl border-0 py-3 text-[#2a1a1a] shadow-sm ring-1 ring-inset ring-[#eed6c4]/80 placeholder:text-[#6b4f4f]/50 focus:ring-2 focus:ring-inset focus:ring-[#6b4f4f] sm:text-sm sm:leading-6 px-4 bg-[#f5f0eb]/50"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-black tracking-wide uppercase leading-6 text-[#2a1a1a]"
-                >
-                  Email address
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="block w-full rounded-xl border-0 py-3 text-[#2a1a1a] shadow-sm ring-1 ring-inset ring-[#eed6c4]/80 placeholder:text-[#6b4f4f]/50 focus:ring-2 focus:ring-inset focus:ring-[#6b4f4f] sm:text-sm sm:leading-6 px-4 bg-[#f5f0eb]/50"
-                  />
-                </div>
-              </div>
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-black tracking-wide uppercase leading-6 text-[#2a1a1a]"
-                >
-                  Phone number
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="tel"
-                    name="phone"
-                    id="phone"
-                    className="block w-full rounded-xl border-0 py-3 text-[#2a1a1a] shadow-sm ring-1 ring-inset ring-[#eed6c4]/80 placeholder:text-[#6b4f4f]/50 focus:ring-2 focus:ring-inset focus:ring-[#6b4f4f] sm:text-sm sm:leading-6 px-4 bg-[#f5f0eb]/50"
-                  />
-                </div>
-              </div>
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-black tracking-wide uppercase leading-6 text-[#2a1a1a]"
-                >
-                  Message
-                </label>
-                <div className="mt-2">
-                  <textarea
-                    name="message"
-                    id="message"
-                    rows={4}
-                    className="block w-full rounded-xl border-0 py-3 text-[#2a1a1a] shadow-sm ring-1 ring-inset ring-[#eed6c4]/80 placeholder:text-[#6b4f4f]/50 focus:ring-2 focus:ring-inset focus:ring-[#6b4f4f] sm:text-sm sm:leading-6 px-4 bg-[#f5f0eb]/50 resize-none"
-                  />
-                </div>
-              </div>
-              <Button type="submit" className="w-full h-12 text-md">
-                Send Message
-              </Button>
-            </form>
-          </div>
+          <ContactForm />
 
           {/* Contact Info */}
           <div className="space-y-10">

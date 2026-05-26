@@ -15,6 +15,7 @@ import { UmrahBookingForm } from "../umrah/UmrahBookingForm";
 import { FlightBookingForm } from "../flights/FlightBookingForm";
 import { VisaBookingForm } from "../visa/VisaBookingForm";
 import { HolidaysBookingForm } from "../holiday/HolidaysBookingForm";
+import { TransportBookingForm } from "../transport/TransportBookingForm";
 
 const CAROUSEL_SLIDES = [
   {
@@ -55,7 +56,7 @@ const CAROUSEL_SLIDES = [
 export function HeroSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<
-    "flight" | "umrah" | "holidays" | "visa"
+    "flight" | "umrah" | "holidays" | "visa" | "transport"
   >("flight");
 
   // Auto-play interval
@@ -193,6 +194,16 @@ export function HeroSection() {
             >
               Visa Inquiry
             </button>
+            {/* <button
+              onClick={() => setActiveTab("transport")}
+              className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
+                activeTab === "transport"
+                  ? "bg-white text-slate-900 shadow-md"
+                  : "text-white hover:bg-white/20"
+              }`}
+            >
+              Transport
+            </button> */}
           </div>
 
           <div className="hero__transparent w-full transition-all duration-500 overflow-hidden">
@@ -216,6 +227,11 @@ export function HeroSection() {
             {activeTab === "visa" && (
               <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 rounded-3xl pb-8">
                 <VisaBookingForm isHome={true} />
+              </div>
+            )}
+            {activeTab === "transport" && (
+              <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 rounded-3xl pb-8">
+                <TransportBookingForm isHome={true} />
               </div>
             )}
           </div>

@@ -25,6 +25,9 @@ export async function createTransport(formData: FormData) {
     ? customSlug.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "")
     : generateSlug(`${vehicleType}-${type}`);
 
+  // Safety net: if slug is still empty (e.g. both fields were blank), generate a random one
+  if (!slug) slug = generateSlug(`transport-${Date.now()}`);
+
   const existing = await prisma.transportService.findUnique({ where: { slug } });
   if (existing) {
     slug = `${slug}-${Math.floor(Math.random() * 1000)}`;
@@ -61,6 +64,9 @@ export async function updateTransport(id: string, formData: FormData) {
   let slug = customSlug
     ? customSlug.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "")
     : generateSlug(`${vehicleType}-${type}`);
+
+  // Safety net: if slug is still empty, keep the existing one
+  if (!slug) slug = generateSlug(`transport-${id.slice(-6)}`);
 
   const existing = await prisma.transportService.findUnique({ where: { slug } });
   if (existing && existing.id !== id) {

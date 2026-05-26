@@ -200,7 +200,7 @@ export function FlightListCard({
         <div className="flex gap-2">
           <FlightEnquireButton flightId={id} flightTitle={`Flight to ${destination} with ${airline}`} />
           <Link
-            href={`/view/flight/${id}`}
+            href={`/v/${id}`}
             className="flex-1 h-10 flex items-center justify-center gap-1.5 rounded-xl bg-[#6b4f4f] text-white font-heading font-black text-[10px] uppercase tracking-widest transition-all duration-300 shadow-sm hover:bg-[#483434] hover:shadow-md"
           >
             View Details
