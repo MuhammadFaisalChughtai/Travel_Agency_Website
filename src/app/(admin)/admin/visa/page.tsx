@@ -33,7 +33,7 @@ export default async function AdminVisaPage({
       <div id="visa-form" className={`rounded-xl border p-8 mb-10 shadow-sm ${visaToEdit ? 'bg-blue-50 border-blue-200' : 'bg-white border-slate-200'}`}>
         <div className="flex items-center justify-between mb-1">
           <h2 className="text-lg font-bold text-slate-900">
-            {visaToEdit ? `✏️ Editing: ${visaToEdit.country} — ${visaToEdit.visaType}` : "Add New Visa Service"}
+            {visaToEdit ? `Editing: ${visaToEdit.country} — ${visaToEdit.visaType}` : "Add New Visa Service"}
           </h2>
           {visaToEdit && (
             <a href="/admin/visa" className="text-xs text-slate-500 hover:text-slate-700 font-semibold border border-slate-300 rounded-lg px-3 py-1.5 hover:bg-white transition-colors">
@@ -42,7 +42,7 @@ export default async function AdminVisaPage({
           )}
         </div>
         <p className="text-xs text-slate-400 mb-6">Fields marked * are required.</p>
-        <VisaEditorForm initialData={visaToEdit} />
+        <VisaEditorForm key={visaToEdit?.id || 'new'} initialData={visaToEdit} />
       </div>
 
       {/* Visas List */}

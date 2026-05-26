@@ -55,8 +55,8 @@ export function Footer() {
               <Image
                 src={logoUrl}
                 alt="Terrific Travel Ltd"
-                width={180}
-                height={70}
+                width={200}
+                height={80}
                 className="w-auto h-16 sm:h-20"
               />
             </Link>

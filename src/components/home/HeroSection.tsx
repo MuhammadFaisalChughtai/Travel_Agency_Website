@@ -229,11 +229,11 @@ export function HeroSection() {
                 <VisaBookingForm isHome={true} />
               </div>
             )}
-            {activeTab === "transport" && (
-              <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 rounded-3xl pb-8">
-                <TransportBookingForm isHome={true} />
-              </div>
-            )}
+            {/* {activeTab === "transport" && (
+                <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 rounded-3xl pb-8">
+                  <TransportBookingForm isHome={true} />
+                </div>
+              )} */}
           </div>
         </motion.div>
 

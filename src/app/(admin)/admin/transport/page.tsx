@@ -33,7 +33,7 @@ export default async function AdminTransportPage({
       <div id="transport-form" className={`rounded-xl border p-8 mb-10 shadow-sm ${transportToEdit ? 'bg-blue-50 border-blue-200' : 'bg-white border-slate-200'}`}>
         <div className="flex items-center justify-between mb-1">
           <h2 className="text-lg font-bold text-slate-900">
-            {transportToEdit ? `✏️ Editing: ${transportToEdit.vehicleType} — ${transportToEdit.type}` : "Add New Transport Service"}
+            {transportToEdit ? `Editing: ${transportToEdit.vehicleType} — ${transportToEdit.type}` : "Add New Transport Service"}
           </h2>
           {transportToEdit && (
             <a href="/admin/transport" className="text-xs text-slate-500 hover:text-slate-700 font-semibold border border-slate-300 rounded-lg px-3 py-1.5 hover:bg-white transition-colors">
@@ -42,7 +42,7 @@ export default async function AdminTransportPage({
           )}
         </div>
         <p className="text-xs text-slate-400 mb-6">Fields marked * are required.</p>
-        <TransportEditorForm initialData={transportToEdit} />
+        <TransportEditorForm key={transportToEdit?.id || 'new'} initialData={transportToEdit} />
       </div>
 
       {/* Transports List */}
