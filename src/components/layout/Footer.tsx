@@ -4,8 +4,6 @@ import {
   Phone,
   Mail,
   ChevronRight,
-  Facebook,
-  Instagram,
   PhoneCall,
   Compass,
 } from "lucide-react";
@@ -193,8 +191,14 @@ export function Footer() {
             </div>
             <ul className="space-y-3">
               {[
-                { label: "How To Perform Umrah?", href: "/v/step-by-step-guide-how-to-perform-umrah" },
-                { label: "How To Book Rawada Appointment?", href: "/v/how-to-book-rawdah-appointment-nusuk-app" },
+                {
+                  label: "How To Perform Umrah?",
+                  href: "/v/step-by-step-guide-how-to-perform-umrah",
+                },
+                {
+                  label: "How To Book Rawada Appointment?",
+                  href: "/v/how-to-book-rawdah-appointment-nusuk-app",
+                },
                 {
                   label: "Understanding Ihram Rules",
                   href: "/v/understanding-nuances-ihram-rules",
@@ -231,10 +235,22 @@ export function Footer() {
             </div>
             <ul className="space-y-2.5">
               {[
-                { label: "Luxury Umrah Packages", href: "/v/7-nights-5-star-umrah" },
-                { label: "Premium Umrah Packages", href: "/v/7-nights-4-star-umrah" },
-                { label: "Family Umrah Packages", href: "/v/3-star-family-umrah" },
-                { label: "Hajj Packages", href: "/v/vip-non-shifting-hajj-package" },
+                {
+                  label: "Luxury Umrah Packages",
+                  href: "/v/7-nights-5-star-umrah",
+                },
+                {
+                  label: "Premium Umrah Packages",
+                  href: "/v/7-nights-4-star-umrah",
+                },
+                {
+                  label: "Family Umrah Packages",
+                  href: "/v/3-star-family-umrah",
+                },
+                {
+                  label: "Hajj Packages",
+                  href: "/v/vip-non-shifting-hajj-package",
+                },
               ].map((link, i) => (
                 <li key={i}>
                   <Link
@@ -287,15 +303,20 @@ export function Footer() {
                 </a>
               </li>
               <li className="flex items-center gap-4 pt-4 border-t border-[#483434]/15">
-                <img 
-                  src="/IATA.svg" 
-                  alt="IATA Logo" 
+                <img
+                  src="/IATA.svg"
+                  alt="IATA Logo"
                   className="h-8 w-auto object-contain mix-blend-multiply opacity-90"
                 />
-                <img 
-                  src="/ATOL.svg" 
-                  alt="ATOL Protected" 
+                <img
+                  src="/ATOL.svg"
+                  alt="ATOL Protected"
                   className="h-10 w-auto object-contain mix-blend-multiply"
+                />
+                <img
+                  src="/Ministry_Hajj.svg"
+                  alt="Ministry of Hajj and Umrah"
+                  className="h-16 w-auto object-contain mix-blend-multiply"
                 />
               </li>
             </ul>

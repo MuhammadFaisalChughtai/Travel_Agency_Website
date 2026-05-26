@@ -15,7 +15,8 @@ const staticFlights = {
     duration: "7h 00m",
     type: "Direct",
     price: 450,
-    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80",
     baggage: "30kg Checked, 7kg Cabin",
     aircraft: "Boeing 777-300ER",
   },
@@ -30,7 +31,8 @@ const staticFlights = {
     duration: "6h 35m",
     type: "Direct",
     price: 620,
-    image: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80",
     baggage: "23kg Checked, 23kg Cabin",
     aircraft: "Boeing 787 Dreamliner",
   },
@@ -45,7 +47,8 @@ const staticFlights = {
     duration: "11h 20m",
     type: "1 Stop (Doha)",
     price: 850,
-    image: "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=80",
     baggage: "25kg Checked, 7kg Cabin",
     aircraft: "Airbus A350-900",
   },
@@ -60,7 +63,8 @@ const staticFlights = {
     duration: "6h 20m",
     type: "Direct",
     price: 530,
-    image: "https://images.unsplash.com/photo-1600804340584-c7db2eacf0bf?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1600804340584-c7db2eacf0bf?auto=format&fit=crop&w=1200&q=80",
     baggage: "46kg (2x23kg) Checked, 7kg Cabin",
     aircraft: "Boeing 777-300ER",
   },
@@ -75,7 +79,8 @@ const staticFlights = {
     duration: "4h 05m",
     type: "Direct",
     price: 290,
-    image: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=80",
     baggage: "20kg Checked, 8kg Cabin",
     aircraft: "Airbus A321neo",
   },
@@ -90,7 +95,8 @@ const staticFlights = {
     duration: "7h 45m",
     type: "Direct",
     price: 480,
-    image: "https://images.unsplash.com/photo-1518639192441-8fce0a366e2e?auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.unsplash.com/photo-1518639192441-8fce0a366e2e?auto=format&fit=crop&w=1200&q=80",
     baggage: "30kg Checked, 7kg Cabin",
     aircraft: "Boeing 787-9 Dreamliner",
   },
@@ -102,7 +108,8 @@ const staticVisas = {
     type: "Umrah & Tourist Visa",
     processingTime: "24–48 Hours",
     price: 150,
-    requiredDocuments: "Clear passport bio page scan, Passport sized photo, Proof of address",
+    requiredDocuments:
+      "Clear passport bio page scan, Passport sized photo, Proof of address",
   },
   "visa-uae": {
     country: "UAE / Dubai",
@@ -187,7 +194,9 @@ async function main() {
         baggage: f.baggage,
         aircraft: f.aircraft,
         isTransit: f.type.includes("Stop"),
-        transitAirport: f.type.includes("Stop") ? f.type.replace("1 Stop (", "").replace(")", "") : null,
+        transitAirport: f.type.includes("Stop")
+          ? f.type.replace("1 Stop (", "").replace(")", "")
+          : null,
       },
     });
   }
