@@ -12,8 +12,7 @@ import {
 import Image from "next/image";
 import { TrustpilotWidget } from "./TrustpilotWidget";
 
-const logoUrl =
-  "https://terrifictravel.co.uk/wp-content/uploads/2025/07/TT-4.svg";
+const logoUrl = "/Logo.svg";
 
 export function Footer() {
   return (

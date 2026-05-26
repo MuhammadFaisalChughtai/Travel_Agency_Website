@@ -6,8 +6,7 @@ import { Menu, X, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 
-const logoUrl =
-  "https://terrifictravel.co.uk/wp-content/uploads/2025/07/TT-4.svg";
+const logoUrl = "/Logo.svg";
 
 const navigation = [
   { name: "Home", href: "/" },
