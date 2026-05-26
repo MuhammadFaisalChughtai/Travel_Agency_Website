@@ -119,11 +119,14 @@ export default async function Home() {
       {/* Featured Holiday Packages Section */}
       <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-heading">
+          <div className="text-center space-y-4 mb-16 flex flex-col items-center">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-[#eed6c4]/20 border border-[#eed6c4]/40 text-[#6b4f4f] text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.2em]">
+              Luxury Getaways
+            </span>
+            <h2 className="text-3xl md:text-4xl font-heading font-black text-[#483434] tracking-tight">
               Featured Holiday Packages
             </h2>
-            <p className="mt-4 text-lg leading-8 text-slate-600 max-w-2xl mx-auto">
+            <p className="text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
               Discover breathtaking destinations and handpicked luxury holiday
               experiences.
             </p>
@@ -147,11 +150,14 @@ export default async function Home() {
       {/* Featured Packages Section */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl font-heading">
+          <div className="text-center space-y-4 mb-16 flex flex-col items-center">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-[#eed6c4]/20 border border-[#eed6c4]/40 text-[#6b4f4f] text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.2em]">
+              Spiritual Journeys
+            </span>
+            <h2 className="text-3xl md:text-4xl font-heading font-black text-[#483434] tracking-tight">
               Featured Umrah Packages
             </h2>
-            <p className="mt-4 text-lg leading-8 text-slate-600 max-w-2xl mx-auto">
+            <p className="text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
               Explore our handpicked selection of premium spiritual journeys at
               the lowest prices.
             </p>

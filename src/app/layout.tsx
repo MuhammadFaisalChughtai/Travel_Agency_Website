@@ -35,6 +35,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Preconnect to critical third-party domains to reduce connection latency */}
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://upload.wikimedia.org" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://upload.wikimedia.org" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+      </head>
       <body className={`${inter.variable} ${outfit.variable} font-sans`}>
         {children}
         <GoogleAnalytics />

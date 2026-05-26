@@ -20,11 +20,14 @@ export function TrendingFlightsSection({ routes }: { routes: any[] }) {
     <section className="py-20 bg-slate-50/50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center space-y-3 mb-12">
-          <h2 className="text-3xl md:text-4xl font-heading font-black text-[#382626] tracking-tight">
+        <div className="text-center space-y-4 mb-12 flex flex-col items-center">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[#eed6c4]/20 border border-[#eed6c4]/40 text-[#6b4f4f] text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.2em]">
+            Popular Destinations
+          </span>
+          <h2 className="text-3xl md:text-4xl font-heading font-black text-[#483434] tracking-tight">
             Trending Flights
           </h2>
-          <p className="text-sm md:text-base text-slate-500 font-medium max-w-xl mx-auto leading-relaxed">
+          <p className="text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
             Discover our most popular flight routes at unbeatable prices.
           </p>
         </div>

@@ -492,12 +492,12 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                       {
                         icon: <Car className="w-7 h-7 text-[#6b4f4f]" />,
                         label: "Transport",
-                        sub: "Makkah ↔ Madinah",
+                        sub: item.type === "HOLIDAY" ? "Transfers Included" : "Makkah ↔ Madinah",
                       },
                       {
                         icon: <FileCheck className="w-7 h-7 text-[#6b4f4f]" />,
                         label: "Visa",
-                        sub: "Umrah visa included",
+                        sub: item.type === "HOLIDAY" ? "Tourist Visa" : "Umrah visa included",
                       },
                     ].map(({ icon, label, sub }) => (
                       <div
@@ -539,14 +539,14 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                         {
                           step: "02",
                           icon: <Building2 className="w-5 h-5" />,
-                          label: "Makkah",
+                          label: item.type === "HOLIDAY" ? "Arrival" : "Makkah",
                           sub: "Hotel Check-in",
                         },
                         {
                           step: "03",
-                          icon: <Bus className="w-5 h-5" />,
-                          label: "Madinah",
-                          sub: "Transfer & Stay",
+                          icon: item.type === "HOLIDAY" ? <MapPin className="w-5 h-5" /> : <Bus className="w-5 h-5" />,
+                          label: item.type === "HOLIDAY" ? "Relax & Enjoy" : "Madinah",
+                          sub: item.type === "HOLIDAY" ? "Your Holiday Stay" : "Transfer & Stay",
                         },
                         {
                           step: "04",
@@ -624,7 +624,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                   <AlertCircle className="w-6 h-6 text-[#6b4f4f] shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-heading font-black text-[#483434] text-base mb-1.5">
-                      Sacred Journey Guarantee
+                      {item.type === "HOLIDAY" ? "Terrific Holiday Guarantee" : "Sacred Journey Guarantee"}
                     </h3>
                     <p className="text-xs text-slate-600 leading-relaxed font-light">
                       All package pricing is based on quad/family accommodation
