@@ -21,8 +21,6 @@ RUN npx prisma generate
 
 # Build Next.js
 ENV NEXT_TELEMETRY_DISABLED 1
-# Disable Prisma queries during build to avoid DB connection errors if no DB is available
-ENV PRISMA_GENERATE_DATAPROXY 1
 RUN npm run build
 
 # Production image, copy all the files and run next
