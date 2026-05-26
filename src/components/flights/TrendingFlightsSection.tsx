@@ -35,9 +35,10 @@ export function TrendingFlightsSection({ routes }: { routes: any[] }) {
             const price = route.price || route.priceNum || 0;
             const originalPrice = Math.round(price * 1.25);
             return (
-              <div
+              <Link
                 key={route.id || idx}
-                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col group cursor-pointer"
+                href={`/book?type=flight&destination=${encodeURIComponent((route.destination || route.dest).split(",")[0])}`}
+                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col group cursor-pointer block"
               >
                 {/* Image Section */}
                 <div className="relative h-60 w-full overflow-hidden">
@@ -72,7 +73,7 @@ export function TrendingFlightsSection({ routes }: { routes: any[] }) {
                     £{originalPrice}
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

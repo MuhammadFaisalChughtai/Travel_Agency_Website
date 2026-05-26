@@ -1,4 +1,4 @@
-import UniversalViewPage, { generateMetadata as viewGenerateMetadata } from "../../view/[type]/[id]/page";
+import UniversalViewPage, { generateMetadata as viewGenerateMetadata } from "../../v/[slug]/page";
 import { blogPostsData } from "@/lib/blogData";
 
 export async function generateStaticParams() {
@@ -6,9 +6,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  return viewGenerateMetadata({ params: { type: "blog", id: params.slug } });
+  return viewGenerateMetadata({ params: { slug: params.slug } });
 }
 
 export default function BlogSlugPage({ params }: { params: { slug: string } }) {
-  return <UniversalViewPage params={{ type: "blog", id: params.slug }} />;
+  return <UniversalViewPage params={{ slug: params.slug }} />;
 }

@@ -23,6 +23,9 @@ import {
   Sparkles,
   Award,
   Star,
+  FileText,
+  CalendarDays,
+  List,
 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { PackageCard } from "@/components/ui/PackageCard";
@@ -32,28 +35,27 @@ import { Hero } from "@/components/ui/Hero";
 
 export const revalidate = 0; // Disable static rendering caching to allow dynamic prisma lookups
 
-
-
 // ────────────────────────────────────────────────────────────────────────
 // HELPER LOOKUP FUNCTIONS (Prisma DB + Static Fallbacks)
 // ────────────────────────────────────────────────────────────────────────
 
 async function resolveItem(slug: string) {
+  const parseArr = (raw: string | null) => {
+    if (!raw) return [];
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return raw
+        .split(",")
+        .map((s: string) => s.trim())
+        .filter(Boolean);
+    }
+  };
+
   // 1. Try Database: Package
   try {
     const dbPackage = await prisma.package.findUnique({ where: { slug } });
     if (dbPackage) {
-      const parseArr = (raw: string | null) => {
-        if (!raw) return [];
-        try {
-          return JSON.parse(raw);
-        } catch {
-          return raw
-            .split(",")
-            .map((s: string) => s.trim())
-            .filter(Boolean);
-        }
-      };
       const images = parseArr(dbPackage.images);
       return {
         id: dbPackage.id,
@@ -145,6 +147,33 @@ async function resolveItem(slug: string) {
     }
   } catch (e) {}
 
+  // 4. Try Database: Visa
+  try {
+    const dbVisa = await prisma.visaService.findUnique({ where: { slug } });
+    if (dbVisa) {
+      return {
+        ...dbVisa,
+        features: parseArr(dbVisa.features),
+        documents: parseArr(dbVisa.requiredDocuments),
+        itemType: "visa",
+      };
+    }
+  } catch (e) {}
+
+  // 5. Try Database: TransportService
+  try {
+    const dbTransport = await prisma.transportService.findUnique({
+      where: { slug },
+    });
+    if (dbTransport) {
+      return {
+        ...dbTransport,
+        features: parseArr(dbTransport.features),
+        itemType: "transport",
+      };
+    }
+  } catch (e) {}
+
   return null;
 }
 
@@ -191,13 +220,22 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
   const type = item.itemType; // "package", "blog", "flight", "visa", "transport"
   const id = item.id || slug;
 
+  const relatedArticles =
+    type === "blog"
+      ? await (prisma as any).blog.findMany({
+          where: { slug: { not: slug } },
+          take: 3,
+        })
+      : [];
 
   // Common properties
   const title =
     item.title ||
     (type === "visa"
-      ? `${item.country} ${item.type}`
-      : `${item.airline} flight to ${item.destination}`);
+      ? `${item.country} ${item.visaType || item.type}`
+      : type === "transport"
+        ? `${item.vehicleType} — ${item.type}`
+        : `${item.airline} flight to ${item.destination}`);
   const image =
     item.imageUrl ||
     item.image ||
@@ -864,7 +902,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                     Key Benefits
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                    {item.features.map((feature: string, idx: number) => (
+                    {item?.features?.map((feature: string, idx: number) => (
                       <div
                         key={idx}
                         className="flex items-center gap-2 text-xs text-slate-600 font-light"
@@ -882,7 +920,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                     Documents
                   </h2>
                   <div className="space-y-3">
-                    {item.documents.map((doc: string, idx: number) => (
+                    {item?.documents?.map((doc: string, idx: number) => (
                       <div
                         key={idx}
                         className="flex items-start gap-3 p-3 bg-[#eed6c4]/10 rounded-xl border border-[#eed6c4]/20"
@@ -905,34 +943,35 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
               <div className="space-y-10">
                 <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
                   <h2 className="text-xl font-heading font-black text-[#483434] flex items-center gap-2">
-                    <Car className="w-5 h-5 text-[#6b4f4f]" /> Vehicle Details
+                    <Car className="w-5 h-5 text-[#6b4f4f]" /> Transport Specifications
                   </h2>
 
-                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6 bg-[#fff3e4]/50 rounded-2xl border border-[#eed6c4]/40">
-                    <div>
-                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
-                        Service Category
-                      </p>
-                      <h3 className="text-lg font-heading font-black text-[#483434]">
-                        {item.title}
-                      </h3>
-                      <p className="text-xs text-slate-500 font-light mt-0.5">
-                        {item.vehicleType}
-                      </p>
-                    </div>
-                    <div className="bg-[#6b4f4f] px-4 py-2 rounded-2xl text-[#fff3e4] text-center flex items-center gap-2 shrink-0">
-                      <Users className="w-4 h-4" />
-                      <span className="text-xs font-black uppercase tracking-wider">
-                        {item.capacity}
-                      </span>
-                    </div>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {[
+                      { label: "Vehicle Type", value: item.vehicleType },
+                      { label: "Service Type", value: item.type },
+                      { label: "Capacity", value: item.capacity || "N/A" },
+                      { label: "Starting Price", value: `£${item.price}` },
+                    ].map((spec, i) => (
+                      <div
+                        key={i}
+                        className="bg-[#fff3e4] rounded-2xl p-4 border border-[#eed6c4]/40 text-center"
+                      >
+                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                          {spec.label}
+                        </p>
+                        <p className="text-xs font-black text-[#483434] mt-1.5 flex items-center justify-center gap-1">
+                          {spec.value}
+                        </p>
+                      </div>
+                    ))}
                   </div>
 
                   <h3 className="text-sm font-heading font-black text-[#483434] pt-4">
-                    Service Inclusions
+                    Key Features
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                    {item.features.map((feature: string, idx: number) => (
+                    {item?.features?.map((feature: string, idx: number) => (
                       <div
                         key={idx}
                         className="flex items-center gap-2 text-xs text-slate-600 font-light"
@@ -943,6 +982,19 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                     ))}
                   </div>
                 </section>
+
+                {item.description && (
+                  <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-4">
+                    <h2 className="text-xl font-heading font-black text-[#483434] flex items-center gap-2">
+                      <FileText className="w-5 h-5 text-[#6b4f4f]" /> Service Description
+                    </h2>
+                    <div className="text-sm text-slate-600 leading-relaxed font-light space-y-4">
+                      {item.description.split('\n').map((paragraph: string, idx: number) => (
+                        <p key={idx}>{paragraph}</p>
+                      ))}
+                    </div>
+                  </section>
+                )}
               </div>
             )}
           </main>
@@ -1070,36 +1122,33 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                     Related Articles
                   </h3>
                   <div className="space-y-4">
-                    {blogPostsData
-                      .filter((p) => p.slug !== id)
-                      .slice(0, 3)
-                      .map((related) => (
-                        <Link
-                          key={related.id}
-                          href={`/v/${related.slug}`}
-                          className="group flex gap-3.5 items-start rounded-2xl p-3 border border-[#eed6c4]/20 hover:border-[#6b4f4f]/40 hover:bg-[#eed6c4]/10 transition-all duration-300"
-                        >
-                          <div className="relative w-16 h-14 rounded-xl overflow-hidden shrink-0">
-                            <Image
-                              src={related.image}
-                              alt={related.title}
-                              fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-500"
-                            />
-                          </div>
-                          <div className="flex-grow min-w-0">
-                            <span className="text-[9px] font-black uppercase tracking-wider text-[#6b4f4f]">
-                              {related.category}
-                            </span>
-                            <p className="text-xs font-bold text-[#483434] leading-snug mt-0.5 group-hover:text-[#6b4f4f] transition-colors line-clamp-2">
-                              {related.title}
-                            </p>
-                            <p className="text-[9px] text-slate-400 mt-1">
-                              {related.readTime}
-                            </p>
-                          </div>
-                        </Link>
-                      ))}
+                    {relatedArticles.map((related: any) => (
+                      <Link
+                        key={related.id}
+                        href={`/v/${related.slug}`}
+                        className="group flex gap-3.5 items-start rounded-2xl p-3 border border-[#eed6c4]/20 hover:border-[#6b4f4f]/40 hover:bg-[#eed6c4]/10 transition-all duration-300"
+                      >
+                        <div className="relative w-16 h-14 rounded-xl overflow-hidden shrink-0">
+                          <Image
+                            src={related.image}
+                            alt={related.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                        <div className="flex-grow min-w-0">
+                          <span className="text-[9px] font-black uppercase tracking-wider text-[#6b4f4f]">
+                            {related.category}
+                          </span>
+                          <p className="text-xs font-bold text-[#483434] leading-snug mt-0.5 group-hover:text-[#6b4f4f] transition-colors line-clamp-2">
+                            {related.title}
+                          </p>
+                          <p className="text-[9px] text-slate-400 mt-1">
+                            {related.readTime}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
                 </div>
               )}

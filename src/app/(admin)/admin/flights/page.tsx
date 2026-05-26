@@ -3,7 +3,7 @@ import { deleteFlight } from "./actions";
 import { createTrendingFlight, deleteTrendingFlight } from "./trendingActions";
 import Image from "next/image";
 import Link from "next/link";
-import { Edit2, Flame, Plane, ArrowRight, RefreshCw, Trash2, TrendingUp } from "lucide-react";
+import { Edit2, Plane, ArrowRight, RefreshCw, Trash2 } from "lucide-react";
 import { FlightEditorForm } from "@/components/admin/FlightEditorForm";
 import { Pagination } from "@/components/admin/Pagination";
 
@@ -31,25 +31,20 @@ export default async function AdminFlightsPage({ searchParams }: { searchParams:
   const flightToEdit = searchParams.editId ? flights.find(f => f.id === searchParams.editId) : undefined;
 
   return (
-    <div className="space-y-10">
+    <div>
       {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold font-heading text-slate-900">Flights</h1>
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold font-heading text-slate-900">Flights Manager</h1>
         <p className="mt-1 text-sm text-slate-500">Manage flight deals and trending destinations shown on the flights page.</p>
       </div>
 
       {/* ── Trending Flights ── */}
-      <div className="bg-white shadow-sm rounded-xl border border-slate-200 overflow-hidden">
-        <div className="px-6 py-5 border-b border-slate-100 flex items-center gap-2">
-          <TrendingUp className="w-5 h-5 text-indigo-500" />
-          <div>
-            <h2 className="text-lg font-bold text-slate-900">Trending Flight Routes</h2>
-            <p className="text-xs text-slate-400 mt-0.5">These appear as destination cards on the public flights page with a Load More button.</p>
-          </div>
-        </div>
+      <div className="bg-white shadow-sm rounded-xl border border-slate-200 p-8 mb-10">
+        <h2 className="text-lg font-bold text-slate-900 mb-1">Trending Flight Routes</h2>
+        <p className="text-xs text-slate-400 mb-6">These appear as destination cards on the public flights page with a Load More button.</p>
 
         {/* Add Trending Flight */}
-        <div className="p-6 border-b border-slate-100 bg-slate-50/50">
+        <div className="mb-8 p-6 border border-slate-100 bg-slate-50/50 rounded-lg">
           <h3 className="text-sm font-bold text-slate-700 mb-4">Add Trending Destination</h3>
           <form action={createTrendingFlight} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
             <div>
@@ -108,7 +103,7 @@ export default async function AdminFlightsPage({ searchParams }: { searchParams:
         {trendingFlights.length === 0 ? (
           <div className="py-12 text-center text-sm text-slate-400">No trending destinations yet. Add your first one above.</div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {trendingFlights.map((tf: any) => (
               <div key={tf.id} className="relative group rounded-2xl overflow-hidden border border-slate-200 shadow-sm h-52">
                 {tf.image && (
@@ -139,16 +134,22 @@ export default async function AdminFlightsPage({ searchParams }: { searchParams:
       </div>
 
       {/* ── Flight Editor Form ── */}
-      <FlightEditorForm initialData={flightToEdit} />
+      <div className="bg-white shadow-sm rounded-xl border border-slate-200 p-8 mb-10">
+        <h2 className="text-lg font-bold text-slate-900 mb-1">
+          {flightToEdit ? "Edit Flight Deal" : "Add New Flight Deal"}
+        </h2>
+        <p className="text-xs text-slate-400 mb-6">
+          Fields marked * are required.
+        </p>
+        <FlightEditorForm initialData={flightToEdit} />
+      </div>
 
       {/* ── Regular Flight Deals ── */}
       <div className="bg-white shadow-sm rounded-xl border border-slate-200 overflow-hidden">
-        <div className="px-6 py-5 border-b border-slate-100 flex items-center gap-2">
-          <Plane className="w-5 h-5 text-indigo-500" />
-          <div>
-            <h2 className="text-lg font-bold text-slate-900">Flight Deals</h2>
-            <p className="text-xs text-slate-400 mt-0.5">These appear in the "Flights – Top Deals" section on the client portal.</p>
-          </div>
+        <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+          <h2 className="text-lg font-bold text-slate-900">
+            Flight Deals <span className="text-slate-400 font-normal text-sm">({totalFlights})</span>
+          </h2>
         </div>
 
         <div className="overflow-x-auto">
@@ -221,7 +222,7 @@ export default async function AdminFlightsPage({ searchParams }: { searchParams:
                     </div>
                   </td>
                   <td className="px-3 py-4 text-sm font-bold text-slate-900">£{flight.price}</td>
-                  <td className="px-3 py-4 text-right pr-6 text-sm">
+                  <td className="px-3 py-4 text-right pr-6">
                     <div className="flex items-center justify-end gap-4">
                       <Link href={`/admin/flights?editId=${flight.id}`} className="text-blue-500 hover:text-blue-700 text-xs font-semibold flex items-center gap-1">
                         <Edit2 className="w-3.5 h-3.5" />

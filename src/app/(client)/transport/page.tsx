@@ -2,12 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Car,
-  Bus,
   Users,
   ShieldCheck,
-  ArrowRight,
   Star,
+  ArrowRight,
+  CheckCircle,
   PhoneCall,
+  AlertCircle,
+  MapPin,
+  Clock,
 } from "lucide-react";
 import { Hero } from "@/components/ui/Hero";
 
@@ -19,80 +22,45 @@ export const metadata: Metadata = {
     "VIP ground transport and airport transfers in Saudi Arabia, Dubai, and the UK. Premium Sedan, SUV, and coach vehicles with professional chauffeurs.",
   openGraph: {
     title: "Transport Services | Terrific Travel Ltd",
-    description: "VIP ground transport and airport transfers in Saudi Arabia, Dubai, and the UK. Premium Sedan, SUV, and coach vehicles with professional chauffeurs.",
+    description:
+      "VIP ground transport and airport transfers in Saudi Arabia, Dubai, and the UK. Premium Sedan, SUV, and coach vehicles with professional chauffeurs.",
     url: "https://terrifictravel.co.uk/transport",
   },
   twitter: {
     title: "Transport Services | Terrific Travel Ltd",
-    description: "VIP ground transport and airport transfers in Saudi Arabia, Dubai, and the UK. Premium Sedan, SUV, and coach vehicles with professional chauffeurs.",
+    description:
+      "VIP ground transport and airport transfers in Saudi Arabia, Dubai, and the UK. Premium Sedan, SUV, and coach vehicles with professional chauffeurs.",
   },
 };
 
-const TRANSPORT_VEHICLES = [
+import { prisma } from "@/lib/prisma";
+
+const HOW_IT_WORKS = [
   {
-    id: "trans-sedan",
-    title: "Private Car (Sedan)",
-    type: "Private Transfer",
-    image:
-      "https://images.unsplash.com/photo-1549317661-bd32c8ce0be2?auto=format&fit=crop&w=600&q=80",
-    vehicleType: "Toyota Camry / Hyundai Sonata or similar",
-    price: "£90",
-    capacity: "Up to 3 Guests",
-    description:
-      "Comfortable and efficient, our sedan category is ideal for single travelers, couples, or small families with light luggage.",
-    features: [
-      "Professional English-speaking driver",
-      "Air-conditioned premium vehicle",
-      "Flight tracking for airport delays",
-      "Free 60 mins waiting at arrivals",
-    ],
-    popular: false,
+    step: "01",
+    title: "Choose Your Vehicle",
+    desc: "Browse our fleet and select the vehicle class that best suits your group size and comfort requirements.",
   },
   {
-    id: "trans-suv",
-    title: "Premium GMC / SUV",
-    type: "VIP Transfer",
-    image:
-      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80",
-    vehicleType: "GMC Yukon / Chevrolet Suburban or similar",
-    price: "£150",
-    capacity: "Up to 7 Guests",
-    description:
-      "Perfect for families. Premium comfort, spacious leather seating, and ample room for bags and strollers.",
-    features: [
-      "VIP service & leather interior",
-      "Spacious luggage capacity",
-      "Complimentary water & wipes",
-      "Ideal for family packages",
-    ],
-    popular: true,
+    step: "02",
+    title: "Send Your Details",
+    desc: "Share your pickup location, destination, date, and time via WhatsApp or our enquiry form.",
   },
   {
-    id: "trans-minibus",
-    title: "Minibus (Coaster)",
-    type: "Group Transfer",
-    image:
-      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80",
-    vehicleType: "Toyota Coaster / Hyundai H1 or similar",
-    price: "£290",
-    capacity: "Up to 20 Guests",
-    description:
-      "Designed for group Ziyarat tours or large families wishing to travel together in air-conditioned comfort.",
-    features: [
-      "Separate luggage compartment",
-      "Full AC and PA speaker system",
-      "Customizable stopovers permitted",
-      "Dedicated coordinator support",
-    ],
-    popular: false,
+    step: "03",
+    title: "Sit Back & Relax",
+    desc: "Our professional chauffeur will greet you on time and transport you in style to your destination.",
   },
 ];
 
-export default function TransportPage() {
+export default async function TransportPage() {
+  const transports = await prisma.transportService.findMany({
+    orderBy: { updatedAt: "desc" },
+  });
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* ─── Hero ─── */}
-      {/* Hero Banner */}
       <Hero
         backgroundImage="https://images.unsplash.com/photo-1549317661-bd32c8ce0be2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
         badgeText="Chauffeur & Airport Services"
@@ -125,8 +93,44 @@ export default function TransportPage() {
         }
       />
 
-      {/* ─── Vehicle Selection ─── */}
-      <section className="py-16 bg-white animate-fade-in">
+      {/* ─── How It Works ─── */}
+      <section className="py-14 bg-[#eed6c4]/10 border-b border-[#eed6c4]/30">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="inline-block px-3 py-1 rounded-full bg-[#eed6c4]/20 border border-[#eed6c4]/40 text-[#6b4f4f] text-[10px] font-extrabold uppercase tracking-widest">
+              Simple Process
+            </span>
+            <h2 className="text-2xl md:text-3xl font-heading font-black text-[#483434] tracking-tight mt-3">
+              How It Works
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {HOW_IT_WORKS.map((step) => (
+              <div
+                key={step.step}
+                className="flex flex-col items-center text-center gap-4"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-[#6b4f4f] flex items-center justify-center shadow-lg">
+                  <span className="text-xl font-heading font-black text-[#eed6c4]">
+                    {step.step}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-sm font-heading font-black text-[#483434] mb-1.5">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs text-slate-500 font-light leading-relaxed max-w-xs mx-auto">
+                    {step.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Transport Cards ─── */}
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center space-y-3 mb-12">
             <span className="inline-block px-3 py-1 rounded-full bg-[#eed6c4]/20 border border-[#eed6c4]/40 text-[#6b4f4f] text-[10px] font-extrabold uppercase tracking-widest">
@@ -137,109 +141,172 @@ export default function TransportPage() {
             </h2>
             <p className="text-xs md:text-sm text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
               We offer pre-booked airport transfers, inter-city rides, and
-              customized full-day Ziyarat tours in Saudi Arabia, UAE, and the
-              UK.
+              customized full-day Ziyarat tours in Saudi Arabia, UAE, and the UK.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {TRANSPORT_VEHICLES.map((vehicle) => (
-              <article
-                key={vehicle.id}
-                className={`bg-white rounded-3xl overflow-hidden border transition-all duration-300 flex flex-col group hover:-translate-y-1.5 relative ${
-                  vehicle.popular
-                    ? "border-[#6b4f4f]/40 shadow-[0_15px_45px_rgba(107,79,79,0.12)]"
-                    : "border-[#eed6c4]/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.08)]"
-                }`}
-              >
-                {vehicle.popular && (
-                  <div className="absolute top-4 right-4 z-20">
-                    <span className="px-3 py-1.5 rounded-full bg-[#6b4f4f] text-white text-[9px] font-black uppercase tracking-wider shadow-sm">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {transports.map((vehicle: any) => {
+              let parsedFeatures: string[] = [];
+              try {
+                parsedFeatures = JSON.parse(vehicle.features || "[]");
+              } catch (e) {
+                // fallback
+              }
 
-                {/* Card Image */}
-                <div className="relative h-48 w-full overflow-hidden">
-                  <Image
-                    src={vehicle.image}
-                    alt={vehicle.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#483434]/60 to-transparent" />
-
-                  {/* Category and capacity */}
-                  <div className="absolute bottom-4 left-5 right-5 flex items-center justify-between">
-                    <div>
-                      <p className="text-white font-heading font-black text-sm leading-none">
-                        {vehicle.title}
-                      </p>
-                      <p className="text-[#eed6c4] text-[10px] font-bold mt-0.5">
-                        {vehicle.type}
-                      </p>
+              const hasSlug = !!vehicle.slug;
+              return (
+                <Link
+                  key={vehicle.id}
+                  href={hasSlug ? `/v/${vehicle.slug}` : '#'}
+                  onClick={!hasSlug ? (e) => e.preventDefault() : undefined}
+                  className={`bg-white rounded-3xl overflow-hidden border transition-all duration-300 flex flex-col group ${hasSlug ? 'hover:-translate-y-1 cursor-pointer' : 'opacity-75 cursor-default'} relative block ${
+                    vehicle.isPopular
+                      ? "border-[#6b4f4f]/40 shadow-[0_15px_45px_rgba(107,79,79,0.12)]"
+                      : "border-[#eed6c4]/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.08)] hover:border-[#6b4f4f]/30"
+                  }`}
+                >
+                  {vehicle.isPopular && (
+                    <div className="absolute top-4 right-4 z-20">
+                      <span className="px-3 py-1.5 rounded-full bg-[#6b4f4f] text-white text-[9px] font-black uppercase tracking-wider shadow-sm">
+                        Most Popular
+                      </span>
                     </div>
-                    <div className="bg-[#6b4f4f] px-3 py-1 rounded-full text-white text-[9px] font-black uppercase tracking-wider flex items-center gap-1">
-                      <Users className="w-3 h-3 text-[#eed6c4]" />
-                      <span>{vehicle.capacity}</span>
+                  )}
+                  {!hasSlug && (
+                    <div className="absolute top-4 left-4 z-20">
+                      <span className="px-3 py-1.5 rounded-full bg-slate-500 text-white text-[9px] font-black uppercase tracking-wider shadow-sm">
+                        Coming Soon
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Image */}
+                  <div className="relative h-44 w-full overflow-hidden">
+                    <Image
+                      src={
+                        vehicle.image ||
+                        "https://images.unsplash.com/photo-1549317661-bd32c8ce0be2?auto=format&fit=crop&w=800&q=80"
+                      }
+                      alt={vehicle.vehicleType}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#483434]/60 to-transparent" />
+                    <div className="absolute bottom-4 left-5 flex items-center gap-2">
+                      <div className="bg-white/10 p-2 rounded-full backdrop-blur-sm">
+                        <Car className="w-5 h-5 text-[#eed6c4]" />
+                      </div>
+                      <div>
+                        <p className="text-white font-heading font-black text-sm leading-none">
+                          {vehicle.vehicleType}
+                        </p>
+                        <p className="text-[#eed6c4] text-[10px] font-bold mt-0.5">
+                          {vehicle.type}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Card Body */}
-                <div className="p-6 flex flex-col flex-grow space-y-4">
-                  <p className="text-xs text-[#483434]/80 font-bold uppercase tracking-wider font-heading leading-tight">
-                    {vehicle.vehicleType}
-                  </p>
-
-                  <p className="text-xs text-slate-500 font-light leading-relaxed flex-grow">
-                    {vehicle.description}
-                  </p>
-
-                  <ul className="space-y-2 border-t border-[#eed6c4]/20 pt-4">
-                    {vehicle.features.map((feature) => (
-                      <li
-                        key={feature}
-                        className="flex items-center gap-2 text-xs text-slate-600 font-light"
-                      >
-                        <ShieldCheck className="w-4 h-4 text-[#6b4f4f] shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Price + CTA */}
-                  <div className="border-t border-[#eed6c4]/30 pt-4 flex items-center justify-between">
-                    <div>
-                      <p className="text-[9px] text-slate-400 uppercase tracking-widest font-bold">
-                        One-Way from
-                      </p>
-                      <p className="text-2xl font-heading font-black text-[#483434]">
-                        {vehicle.price}
-                      </p>
-                      <p className="text-[9px] text-slate-400 font-light">
-                        inclusive of VAT
-                      </p>
+                  {/* Body */}
+                  <div className="p-6 flex flex-col flex-grow space-y-4">
+                    {/* Quick stats */}
+                    <div className="grid grid-cols-3 gap-3">
+                      {[
+                        {
+                          label: "Capacity",
+                          value: vehicle.capacity || "N/A",
+                          icon: <Users className="w-3 h-3" />,
+                        },
+                        {
+                          label: "Service",
+                          value: vehicle.type || "Transfer",
+                          icon: <MapPin className="w-3 h-3" />,
+                        },
+                        {
+                          label: "Booking",
+                          value: "Pre-Book",
+                          icon: <Clock className="w-3 h-3" />,
+                        },
+                      ].map((stat) => (
+                        <div
+                          key={stat.label}
+                          className="bg-[#eed6c4]/10 rounded-xl p-2.5 text-center"
+                        >
+                          <div className="flex justify-center mb-1 text-[#6b4f4f]">
+                            {stat.icon}
+                          </div>
+                          <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">
+                            {stat.label}
+                          </p>
+                          <p className="text-[10px] font-black text-[#483434] mt-0.5 truncate">
+                            {stat.value}
+                          </p>
+                        </div>
+                      ))}
                     </div>
 
-                    <Link
-                      href={`/view/transport/${vehicle.id}`}
-                      className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#6b4f4f] hover:bg-[#483434] text-white text-[10px] font-extrabold uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg group/btn"
-                    >
-                      Details
-                      <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform duration-300" />
-                    </Link>
+                    {/* Features */}
+                    <ul className="space-y-2 flex-grow">
+                      {parsedFeatures.slice(0, 4).map((feature: string) => (
+                        <li
+                          key={feature}
+                          className="flex items-center gap-2 text-xs text-slate-600 font-light"
+                        >
+                          <ShieldCheck className="w-3.5 h-3.5 text-[#6b4f4f] shrink-0" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Price + CTA */}
+                    <div className="border-t border-[#eed6c4]/30 pt-4 flex items-center justify-between">
+                      <div>
+                        <p className="text-[9px] text-slate-400 uppercase tracking-widest font-bold">
+                          One-Way from
+                        </p>
+                        <p className="text-2xl font-heading font-black text-[#483434]">
+                          £{vehicle.price}
+                        </p>
+                        <p className="text-[9px] text-slate-400 font-light">
+                          inclusive of VAT
+                        </p>
+                      </div>
+                      <span className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#6b4f4f] hover:bg-[#483434] text-white text-[10px] font-extrabold uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg group/btn">
+                        Details
+                        <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform duration-300" />
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* ─── Extra custom transport info CTA ─── */}
-      <section className="py-16 bg-[#eed6c4]/10 border-t border-[#eed6c4]/30">
+      {/* ─── Important Note ─── */}
+      <section className="py-10 bg-[#eed6c4]/10 border-t border-[#eed6c4]/30">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+          <div className="flex items-start gap-4 p-6 rounded-3xl border border-[#6b4f4f]/20 bg-white shadow-sm">
+            <AlertCircle className="w-5 h-5 text-[#6b4f4f] shrink-0 mt-0.5" />
+            <div>
+              <h3 className="text-sm font-heading font-black text-[#483434] mb-2">
+                Important Information
+              </h3>
+              <p className="text-xs text-slate-600 font-light leading-relaxed">
+                All transfers must be pre-booked at least 24 hours in advance.
+                Prices shown are one-way and may vary based on exact pickup/drop-off
+                locations. For groups of 20+ passengers, coach hire, or bespoke
+                multi-day Ziyarat tours, please contact our logistics team directly.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CTA Banner ─── */}
+      <section className="py-16 bg-white border-t border-[#eed6c4]/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="rounded-3xl bg-[#382626] overflow-hidden relative">
             <div className="absolute inset-0 opacity-10">
@@ -259,10 +326,20 @@ export default function TransportPage() {
                   Need a Coach or Luxury Limousine?
                 </h2>
                 <p className="text-slate-300 text-sm font-light max-w-lg leading-relaxed">
-                  For groups exceeding 20 passengers, luxury bullet train
-                  reservations, or bespoke private drivers for multi-day
-                  ziyarats, contact our logistics coordinators.
+                  For groups exceeding 20 passengers, luxury limousine hire, or
+                  bespoke private drivers for multi-day Ziyarats, contact our
+                  logistics coordinators.
                 </p>
+                <div className="flex flex-wrap gap-4 pt-2">
+                  {["Makkah", "Madinah", "Dubai", "London"].map((c) => (
+                    <span
+                      key={c}
+                      className="flex items-center gap-1.5 text-[#eed6c4]/80 text-[10px] font-bold"
+                    >
+                      <CheckCircle className="w-3 h-3" /> {c}
+                    </span>
+                  ))}
+                </div>
               </div>
               <div className="shrink-0 flex flex-col gap-3">
                 <a

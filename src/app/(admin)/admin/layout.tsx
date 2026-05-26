@@ -13,7 +13,9 @@ import {
   Menu,
   X,
   Mail,
-  BookOpen
+  BookOpen,
+  FileCheck,
+  Car
 } from "lucide-react";
 import { SessionProvider, signOut } from "next-auth/react";
 
@@ -21,7 +23,8 @@ const navigation = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
   { name: 'Packages', href: '/admin/packages', icon: Package },
   { name: 'Flights', href: '/admin/flights', icon: PlaneTakeoff },
-  { name: 'Bookings', href: '/admin/bookings', icon: CreditCard },
+  { name: 'Visa', href: '/admin/visa', icon: FileCheck },
+  { name: 'Transport', href: '/admin/transport', icon: Car },
   { name: 'Enquiries', href: '/admin/enquiries', icon: Mail },
   { name: 'Blogs', href: '/admin/blogs', icon: BookOpen },
   { name: 'Testimonials', href: '/admin/testimonials', icon: MessageSquare },

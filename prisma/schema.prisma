@@ -129,11 +129,17 @@ model VisaService {
   country           String
   visaType          String
   processingTime    String
+  validity          String?
+  entries           String?
   requiredDocuments String   @db.Text
+  features          String?  @db.Text // JSON array of features
+  image             String?  @db.Text
+  isPopular         Boolean  @default(false)
   price             Float
   updatedAt         DateTime @updatedAt
   metaTitle         String?  @db.Text
   metaDescription   String?  @db.Text
+  slug              String?  @unique
 }
 
 model TransportService {
@@ -141,10 +147,16 @@ model TransportService {
   type        String   // AIRPORT_TRANSFER, HOTEL_TRANSFER, PRIVATE
   vehicleType String
   price       Float
+  capacity    String?
+  description String?  @db.Text
+  features    String?  @db.Text // JSON array of features
+  image       String?  @db.Text
+  isPopular   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   metaTitle       String?  @db.Text
   metaDescription String?  @db.Text
+  slug              String?  @unique
 }
 
 model Booking {

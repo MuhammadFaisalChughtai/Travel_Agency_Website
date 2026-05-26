@@ -22,6 +22,11 @@ export async function createPackage(formData: FormData) {
   const isSold = formData.get("isSold") === "true";
   const metaTitle = formData.get("metaTitle") as string;
   const metaDescription = formData.get("metaDescription") as string;
+  const customSlug = formData.get("slug") as string;
+
+  let slug = customSlug ? customSlug.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "") : title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
+  let existing = await prisma.package.findUnique({ where: { slug } });
+  if (existing) slug = `${slug}-${Math.floor(Math.random() * 1000)}`;
 
   await prisma.package.create({
     data: {
@@ -39,6 +44,7 @@ export async function createPackage(formData: FormData) {
       stars,
       metaTitle,
       metaDescription,
+      slug,
     }
   });
 
@@ -59,6 +65,11 @@ export async function updatePackage(id: string, formData: FormData) {
   const isSold = formData.get("isSold") === "true";
   const metaTitle = formData.get("metaTitle") as string;
   const metaDescription = formData.get("metaDescription") as string;
+  const customSlug = formData.get("slug") as string;
+
+  let slug = customSlug ? customSlug.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "") : title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
+  let existing = await prisma.package.findUnique({ where: { slug } });
+  if (existing && existing.id !== id) slug = `${slug}-${Math.floor(Math.random() * 1000)}`;
 
   const updateData: any = {
     title,
@@ -71,6 +82,7 @@ export async function updatePackage(id: string, formData: FormData) {
     isSold,
     metaTitle,
     metaDescription,
+    slug,
   };
 
   if (image) {

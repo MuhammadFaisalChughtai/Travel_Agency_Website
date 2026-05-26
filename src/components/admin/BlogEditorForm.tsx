@@ -16,6 +16,7 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
   const [content, setContent] = useState(initialData?.content || "");
   const [metaTitle, setMetaTitle] = useState(initialData?.metaTitle || "");
   const [metaDescription, setMetaDescription] = useState(initialData?.metaDescription || "");
+  const [slug, setSlug] = useState(initialData?.slug || "");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>(initialData?.image || "");
@@ -112,6 +113,7 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
       blogData.append("content", content);
       blogData.append("metaTitle", metaTitle);
       blogData.append("metaDescription", metaDescription);
+      blogData.append("slug", slug);
 
       if (initialData?.id) {
         const { updateBlog } = await import("@/app/(admin)/admin/blogs/actions");
@@ -126,6 +128,7 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
         setContent("");
         setImageFile(null);
         setImagePreview("");
+        setSlug("");
         alert("Blog created successfully!");
       }
     } catch (error) {
@@ -165,6 +168,18 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
             <option value="Transport">Transport</option>
           </select>
         </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-slate-700 mb-1">URL Slug</label>
+        <input 
+          value={slug}
+          onChange={(e) => setSlug(e.target.value)}
+          type="text" 
+          className="block w-full rounded-md border-slate-300 shadow-sm sm:text-sm px-4 py-2 border" 
+          placeholder="e.g. best-places-in-makkah (leave blank to auto-generate)"
+        />
+        <p className="mt-1 text-xs text-slate-500">Leave blank to auto-generate from the Title.</p>
       </div>
 
       <div>

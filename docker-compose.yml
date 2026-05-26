@@ -3,12 +3,12 @@ services:
     image: mysql:8.0
     container_name: terrific_travel_db
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: "StrongRootPassword2026!"
       MYSQL_DATABASE: terrific_travel
       MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_PASSWORD: "StrongUserPassword2026!"
     ports:
-      - "3306:3306"
+      - "127.0.0.1:3306:3306" # Bind to localhost to prevent public internet access
     volumes:
       - mysql_data:/var/lib/mysql
     restart: unless-stopped
@@ -28,7 +28,7 @@ services:
     ports:
       - "5173:5173"
     environment:
-      - DATABASE_URL=mysql://user:password@mysql:3306/terrific_travel
+      - DATABASE_URL=mysql://user:StrongUserPassword2026!@mysql:3306/terrific_travel
       - NEXTAUTH_URL=http://localhost:5173
     env_file:
       - .env

@@ -72,7 +72,7 @@ export function Navbar() {
               asChild
               className="rounded-full gap-2 px-6 py-5 bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4] border border-[#eed6c4]/40 hover:border-[#eed6c4] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 font-extrabold text-xs tracking-wider uppercase"
             >
-              <Link href="/contact">
+              <Link className="flex gap-2 items-center" href="/contact">
                 <PhoneCall className="w-3.5 h-3.5" />
                 <span>Contact Us</span>
               </Link>

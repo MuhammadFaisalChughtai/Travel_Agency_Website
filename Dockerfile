@@ -46,6 +46,8 @@ COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 
+USER root
+RUN npm install -g prisma@5.14.0
 USER nextjs
 
 EXPOSE 5173
@@ -53,6 +55,5 @@ EXPOSE 5173
 ENV PORT 5173
 ENV HOSTNAME "0.0.0.0"
 
-# server.js is created by next build from the standalone output
-# https://nextjs.org/docs/pages/api-reference/next-config-js/output
+# Automatically start the server (db push removed to prevent database wipe loops)
 CMD ["node", "server.js"]

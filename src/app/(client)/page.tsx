@@ -124,7 +124,8 @@ export default async function Home() {
               Featured Holiday Packages
             </h2>
             <p className="mt-4 text-lg leading-8 text-slate-600 max-w-2xl mx-auto">
-              Discover breathtaking destinations and handpicked luxury holiday experiences.
+              Discover breathtaking destinations and handpicked luxury holiday
+              experiences.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

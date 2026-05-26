@@ -22,6 +22,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
   const [isSold, setIsSold] = useState(initialData?.isSold || false);
   const [metaTitle, setMetaTitle] = useState(initialData?.metaTitle || "");
   const [metaDescription, setMetaDescription] = useState(initialData?.metaDescription || "");
+  const [slug, setSlug] = useState(initialData?.slug || "");
 
   const quillRef = useRef<any>(null);
 
@@ -95,6 +96,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
       formData.append("isSold", isSold.toString());
       formData.append("metaTitle", metaTitle);
       formData.append("metaDescription", metaDescription);
+      formData.append("slug", slug);
 
       if (initialData?.id) {
         const { updatePackage } = await import("@/app/(admin)/admin/packages/actions");
@@ -105,7 +107,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
         await createPackage(formData);
         setTitle(""); setType("UMRAH"); setStars("3"); setPrice("");
         setDuration(""); setContent(""); setImageFile(null); setImagePreview("");
-        setIsSold(false); setMetaTitle(""); setMetaDescription("");
+        setIsSold(false); setMetaTitle(""); setMetaDescription(""); setSlug("");
         alert("Package added successfully!");
       }
     } catch (err) {
@@ -144,6 +146,12 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
             <option value="HOLIDAY">Holiday</option>
           </select>
         </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-semibold text-slate-700 mb-1">URL Slug</label>
+        <input value={slug} onChange={e => setSlug(e.target.value)} type="text" className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500" placeholder="e.g. 7-nights-5-star-umrah (leave blank to auto-generate)" />
+        <p className="text-xs text-slate-500 mt-1">Leave blank to auto-generate from Package Title.</p>
       </div>
 
       {/* Row 2: Stars + Price + Duration */}

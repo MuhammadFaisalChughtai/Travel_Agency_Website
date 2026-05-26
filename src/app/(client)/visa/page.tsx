@@ -21,77 +21,18 @@ export const metadata: Metadata = {
     "Fast-track Saudi Arabia Umrah, UAE Dubai, and worldwide visa processing from the UK. Expert handling, rapid turnaround, IATA & ATOL accredited.",
   openGraph: {
     title: "Visa Services | Terrific Travel Ltd",
-    description: "Fast-track Saudi Arabia Umrah, UAE Dubai, and worldwide visa processing from the UK. Expert handling, rapid turnaround, IATA & ATOL accredited.",
+    description:
+      "Fast-track Saudi Arabia Umrah, UAE Dubai, and worldwide visa processing from the UK. Expert handling, rapid turnaround, IATA & ATOL accredited.",
     url: "https://terrifictravel.co.uk/visa",
   },
   twitter: {
     title: "Visa Services | Terrific Travel Ltd",
-    description: "Fast-track Saudi Arabia Umrah, UAE Dubai, and worldwide visa processing from the UK. Expert handling, rapid turnaround, IATA & ATOL accredited.",
+    description:
+      "Fast-track Saudi Arabia Umrah, UAE Dubai, and worldwide visa processing from the UK. Expert handling, rapid turnaround, IATA & ATOL accredited.",
   },
 };
 
-const VISA_SERVICES = [
-  {
-    id: "visa-saudi",
-    country: "Saudi Arabia",
-    type: "Umrah & Tourist Visa",
-    flag: "🇸🇦",
-    image:
-      "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=800&q=80",
-    processingTime: "24–48 Hours",
-    price: "£150",
-    validity: "1 Year",
-    entries: "Multiple Entry",
-    features: [
-      "Electronic e-Visa processing",
-      "Health insurance included",
-      "Multiple entry permitted",
-      "Valid for Umrah & tourism",
-      "Expert document guidance",
-    ],
-    popular: true,
-  },
-  {
-    id: "visa-uae",
-    country: "UAE / Dubai",
-    type: "30-Day Tourist Visa",
-    flag: "🇦🇪",
-    image:
-      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80",
-    processingTime: "24–72 Hours",
-    price: "£120",
-    validity: "30 Days",
-    entries: "Single Entry",
-    features: [
-      "Fast e-Visa issuance",
-      "Minimal documentation",
-      "Extension available",
-      "Ideal for holidays & stopovers",
-      "Dedicated visa team",
-    ],
-    popular: false,
-  },
-  {
-    id: "visa-uae-60",
-    country: "UAE / Dubai",
-    type: "60-Day Tourist Visa",
-    flag: "🇦🇪",
-    image:
-      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
-    processingTime: "24–72 Hours",
-    price: "£195",
-    validity: "60 Days",
-    entries: "Multiple Entry",
-    features: [
-      "Extended stay option",
-      "Multiple re-entries allowed",
-      "Business & leisure use",
-      "Quick online processing",
-      "24/7 support available",
-    ],
-    popular: false,
-  },
-];
+import { prisma } from "@/lib/prisma";
 
 const HOW_IT_WORKS = [
   {
@@ -111,7 +52,10 @@ const HOW_IT_WORKS = [
   },
 ];
 
-export default function VisaPage() {
+export default async function VisaPage() {
+  const visas = await prisma.visaService.findMany({
+    orderBy: { updatedAt: "desc" },
+  });
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* ─── Hero ─── */}
@@ -201,120 +145,132 @@ export default function VisaPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {VISA_SERVICES.map((visa) => (
-              <article
-                key={visa.id}
-                className={`bg-white rounded-3xl overflow-hidden border transition-all duration-300 flex flex-col group hover:-translate-y-1 relative ${
-                  visa.popular
-                    ? "border-[#6b4f4f]/40 shadow-[0_15px_45px_rgba(107,79,79,0.12)]"
-                    : "border-[#eed6c4]/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.08)] hover:border-[#6b4f4f]/30"
-                }`}
-              >
-                {visa.popular && (
-                  <div className="absolute top-4 right-4 z-20">
-                    <span className="px-3 py-1.5 rounded-full bg-[#6b4f4f] text-white text-[9px] font-black uppercase tracking-wider shadow-sm">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
+            {visas.map((visa: any) => {
+              let parsedFeatures = [];
+              try {
+                parsedFeatures = JSON.parse(visa.features || "[]");
+              } catch (e) {
+                // fallback
+              }
 
-                {/* Image */}
-                <div className="relative h-44 w-full overflow-hidden">
-                  <Image
-                    src={visa.image}
-                    alt={visa.country}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#483434]/60 to-transparent" />
-                  <div className="absolute bottom-4 left-5 flex items-center gap-2">
-                    <span className="text-2xl">{visa.flag}</span>
-                    <div>
-                      <p className="text-white font-heading font-black text-sm leading-none">
-                        {visa.country}
-                      </p>
-                      <p className="text-[#eed6c4] text-[10px] font-bold mt-0.5">
-                        {visa.type}
-                      </p>
+              return (
+                <Link
+                  key={visa.id}
+                  href={`/v/${visa?.slug}`}
+                  className={`bg-white rounded-3xl overflow-hidden border transition-all duration-300 flex flex-col group hover:-translate-y-1 relative block ${
+                    visa.isPopular
+                      ? "border-[#6b4f4f]/40 shadow-[0_15px_45px_rgba(107,79,79,0.12)]"
+                      : "border-[#eed6c4]/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.08)] hover:border-[#6b4f4f]/30"
+                  }`}
+                >
+                  {visa.isPopular && (
+                    <div className="absolute top-4 right-4 z-20">
+                      <span className="px-3 py-1.5 rounded-full bg-[#6b4f4f] text-white text-[9px] font-black uppercase tracking-wider shadow-sm">
+                        Most Popular
+                      </span>
                     </div>
-                  </div>
-                </div>
+                  )}
 
-                {/* Body */}
-                <div className="p-6 flex flex-col flex-grow space-y-4">
-                  {/* Quick stats */}
-                  <div className="grid grid-cols-3 gap-3">
-                    {[
-                      {
-                        label: "Processing",
-                        value: visa.processingTime,
-                        icon: <Clock className="w-3 h-3" />,
-                      },
-                      {
-                        label: "Validity",
-                        value: visa.validity,
-                        icon: <Globe className="w-3 h-3" />,
-                      },
-                      {
-                        label: "Entry",
-                        value: visa.entries.split(" ")[0],
-                        icon: <FileCheck className="w-3 h-3" />,
-                      },
-                    ].map((stat) => (
-                      <div
-                        key={stat.label}
-                        className="bg-[#eed6c4]/10 rounded-xl p-2.5 text-center"
-                      >
-                        <div className="flex justify-center mb-1 text-[#6b4f4f]">
-                          {stat.icon}
-                        </div>
-                        <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">
-                          {stat.label}
+                  {/* Image */}
+                  <div className="relative h-44 w-full overflow-hidden">
+                    <Image
+                      src={
+                        visa.image ||
+                        "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=800&q=80"
+                      }
+                      alt={visa.country}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#483434]/60 to-transparent" />
+                    <div className="absolute bottom-4 left-5 flex items-center gap-2">
+                      <div className="bg-white/10 p-2 rounded-full backdrop-blur-sm">
+                        <Globe className="w-5 h-5 text-[#eed6c4]" />
+                      </div>
+                      <div>
+                        <p className="text-white font-heading font-black text-sm leading-none">
+                          {visa.country}
                         </p>
-                        <p className="text-[10px] font-black text-[#483434] mt-0.5">
-                          {stat.value}
+                        <p className="text-[#eed6c4] text-[10px] font-bold mt-0.5">
+                          {visa.visaType}
                         </p>
                       </div>
-                    ))}
-                  </div>
-
-                  {/* Features */}
-                  <ul className="space-y-2 flex-grow">
-                    {visa.features.map((feature) => (
-                      <li
-                        key={feature}
-                        className="flex items-center gap-2 text-xs text-slate-600 font-light"
-                      >
-                        <ShieldCheck className="w-3.5 h-3.5 text-[#6b4f4f] shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Price + CTA */}
-                  <div className="border-t border-[#eed6c4]/30 pt-4 flex items-center justify-between">
-                    <div>
-                      <p className="text-[9px] text-slate-400 uppercase tracking-widest font-bold">
-                        From
-                      </p>
-                      <p className="text-2xl font-heading font-black text-[#483434]">
-                        {visa.price}
-                      </p>
-                      <p className="text-[9px] text-slate-400 font-light">
-                        per person
-                      </p>
                     </div>
-                    <Link
-                      href={`/view/visa/${visa.id}`}
-                      className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#6b4f4f] hover:bg-[#483434] text-white text-[10px] font-extrabold uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg group/btn"
-                    >
-                      Details
-                      <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform duration-300" />
-                    </Link>
                   </div>
-                </div>
-              </article>
-            ))}
+
+                  {/* Body */}
+                  <div className="p-6 flex flex-col flex-grow space-y-4">
+                    {/* Quick stats */}
+                    <div className="grid grid-cols-3 gap-3">
+                      {[
+                        {
+                          label: "Processing",
+                          value: visa.processingTime,
+                          icon: <Clock className="w-3 h-3" />,
+                        },
+                        {
+                          label: "Validity",
+                          value: visa.validity || "Varies",
+                          icon: <Globe className="w-3 h-3" />,
+                        },
+                        {
+                          label: "Entry",
+                          value: visa.entries?.split(" ")[0] || "Varies",
+                          icon: <FileCheck className="w-3 h-3" />,
+                        },
+                      ].map((stat) => (
+                        <div
+                          key={stat.label}
+                          className="bg-[#eed6c4]/10 rounded-xl p-2.5 text-center"
+                        >
+                          <div className="flex justify-center mb-1 text-[#6b4f4f]">
+                            {stat.icon}
+                          </div>
+                          <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">
+                            {stat.label}
+                          </p>
+                          <p className="text-[10px] font-black text-[#483434] mt-0.5">
+                            {stat.value}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Features */}
+                    <ul className="space-y-2 flex-grow">
+                      {parsedFeatures.map((feature: string) => (
+                        <li
+                          key={feature}
+                          className="flex items-center gap-2 text-xs text-slate-600 font-light"
+                        >
+                          <ShieldCheck className="w-3.5 h-3.5 text-[#6b4f4f] shrink-0" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Price + CTA */}
+                    <div className="border-t border-[#eed6c4]/30 pt-4 flex items-center justify-between">
+                      <div>
+                        <p className="text-[9px] text-slate-400 uppercase tracking-widest font-bold">
+                          From
+                        </p>
+                        <p className="text-2xl font-heading font-black text-[#483434]">
+                          {visa.price}
+                        </p>
+                        <p className="text-[9px] text-slate-400 font-light">
+                          per person
+                        </p>
+                      </div>
+                      <span className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#6b4f4f] hover:bg-[#483434] text-white text-[10px] font-extrabold uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg group/btn">
+                        Details
+                        <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform duration-300" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

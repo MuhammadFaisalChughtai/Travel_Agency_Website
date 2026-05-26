@@ -10,7 +10,8 @@ export async function deleteBlog(id: string) {
 
 export async function createBlog(formData: FormData) {
   const title = formData.get("title") as string;
-  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
+  const customSlug = formData.get("slug") as string;
+  const slug = customSlug ? customSlug.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "") : title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
   const excerpt = formData.get("excerpt") as string;
   const content = formData.get("content") as string;
   const category = formData.get("category") as string;
@@ -40,7 +41,8 @@ export async function createBlog(formData: FormData) {
 
 export async function updateBlog(id: string, formData: FormData) {
   const title = formData.get("title") as string;
-  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
+  const customSlug = formData.get("slug") as string;
+  const slug = customSlug ? customSlug.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "") : title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
   const excerpt = formData.get("excerpt") as string;
   const content = formData.get("content") as string;
   const category = formData.get("category") as string;

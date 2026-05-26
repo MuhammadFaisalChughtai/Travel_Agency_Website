@@ -32,7 +32,9 @@ export function Hero({
   children,
 }: HeroProps) {
   return (
-    <div className={`relative w-full pt-28 pb-16 md:pt-36 md:pb-24 bg-[#382626] overflow-hidden border-b border-[#eed6c4]/20 flex items-center ${className}`}>
+    <div
+      className={`relative w-full pt-28 pb-16 md:pt-36 md:pb-24 bg-[#382626] overflow-hidden border-b border-[#eed6c4]/20 flex items-center ${className}`}
+    >
       {/* Background Image with ultra-sleek dark overlay */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -44,7 +46,7 @@ export function Hero({
         />
         {/* Modern dark luxury gradient mask to ensure perfect text contrast */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#382626] via-[#382626]/90 to-transparent z-1" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#382626] via-transparent to-black/20 z-1" />
+        {/* <div className="absolute inset-0 bg-gradient-to-t from-[#382626] via-transparent to-black/20 z-1" /> */}
       </div>
 
       {/* Sleek Content Container */}
