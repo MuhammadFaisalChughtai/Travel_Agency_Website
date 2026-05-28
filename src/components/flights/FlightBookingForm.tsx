@@ -200,23 +200,22 @@ Passengers: ${formData.travelers}
               />
             </div>
 
-            {/* Return Date */}
-            <div className="relative">
-              <Calendar
-                className={`absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none ${formData.journeyType === "One Way" ? "text-slate-300" : "text-[#6b4f4f]"}`}
-              />
-              <input
-                type="date"
-                name="returnDate"
-                value={formData.returnDate}
-                onChange={handleChange}
-                className={`${fieldClass} ${formData.journeyType === "One Way" ? "opacity-50 cursor-not-allowed bg-slate-100" : ""}`}
-                disabled={formData.journeyType === "One Way"}
-                required={formData.journeyType === "Round Trip"}
-                placeholder="Return Date"
-                aria-label="Return Date"
-              />
-            </div>
+            {/* Return Date - Only show for Round Trip */}
+            {formData.journeyType === "Round Trip" && (
+              <div className="relative animate-in fade-in zoom-in-95 duration-300">
+                <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+                <input
+                  type="date"
+                  name="returnDate"
+                  value={formData.returnDate}
+                  onChange={handleChange}
+                  className={fieldClass}
+                  required
+                  placeholder="Return Date"
+                  aria-label="Return Date"
+                />
+              </div>
+            )}
 
             {/* Travelers */}
             <div className="relative">

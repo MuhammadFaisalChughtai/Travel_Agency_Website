@@ -98,16 +98,16 @@ export function HeroSection() {
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/30 via-transparent to-black/70 pointer-events-none" />
 
       {/* Manual Navigation Arrows (Visible on Hover) */}
-      <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-20 flex justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:flex">
+      <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-40 flex justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:flex pointer-events-none">
         <button
           onClick={handlePrev}
-          className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-colors border border-white/20"
+          className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-colors border border-white/20 pointer-events-auto"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
         <button
           onClick={handleNext}
-          className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-colors border border-white/20"
+          className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-colors border border-white/20 pointer-events-auto"
         >
           <ChevronRight className="w-6 h-6" />
         </button>
