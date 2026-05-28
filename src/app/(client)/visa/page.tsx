@@ -34,6 +34,8 @@ export const metadata: Metadata = {
 };
 
 import { prisma } from "@/lib/prisma";
+import { headers } from "next/headers";
+import { getSiteConfig, formatPrice } from "@/lib/siteConfig";
 
 const HOW_IT_WORKS = [
   {
@@ -54,9 +56,19 @@ const HOW_IT_WORKS = [
 ];
 
 export default async function VisaPage() {
-  const visas = await prisma.visaService.findMany({
+  const headersList = headers();
+  const domain = headersList.get("x-site-domain");
+  const siteConfig = getSiteConfig(domain);
+
+  const rawVisas = await prisma.visaService.findMany({
     orderBy: { updatedAt: "desc" },
   });
+
+  const visas = rawVisas.map((v: any) => ({
+    ...v,
+    price: formatPrice(v.price, siteConfig),
+  }));
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* ─── Hero ─── */}

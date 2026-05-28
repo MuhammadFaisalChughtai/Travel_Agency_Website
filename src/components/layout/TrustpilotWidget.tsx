@@ -9,7 +9,9 @@ export function TrustpilotWidget() {
       className="group flex flex-col items-start justify-center py-2 cursor-pointer"
     >
       <div className="flex items-center gap-1.5 justify-center mb-1 bg-white/40 px-3 py-1.5 rounded-xl border border-white/20 hover:bg-white/60 transition-all duration-300">
-        <span className="text-xs font-bold text-slate-800 tracking-tight">4.5 Rating</span>
+        <span className="text-xs font-bold text-slate-800 tracking-tight">
+          4.5 Rating
+        </span>
         <div className="flex gap-0.5">
           {[...Array(4)].map((_, i) => (
             <span
@@ -26,7 +28,10 @@ export function TrustpilotWidget() {
         </div>
       </div>
       <p className="text-[9px] text-[#483434]/70 font-bold uppercase tracking-widest pl-1">
-        Review us on <span className="text-[#00b67a] font-black group-hover:underline">Trustpilot</span>
+        Review us on{" "}
+        <span className="text-[#00b67a] font-black group-hover:underline">
+          Trustpilot
+        </span>
       </p>
     </a>
   );
