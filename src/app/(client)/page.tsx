@@ -6,7 +6,7 @@ import { PackageCard } from "@/components/umrah/PackageCard";
 import { prisma } from "@/lib/prisma";
 import { AirlineMarquee } from "@/components/home/AirlineMarquee";
 import { headers } from "next/headers";
-import { getSiteConfig } from "@/lib/siteConfig";
+import { getSiteConfig, formatPrice } from "@/lib/siteConfig";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -40,9 +40,15 @@ export default async function Home() {
   const domain = headersList.get("x-site-domain");
   const siteConfig = getSiteConfig(domain);
 
-  const trendingFlights = siteConfig.allowedTabs.includes("flight") ? await (prisma as any).trendingFlight.findMany({
+  const rawTrendingFlights = siteConfig.allowedTabs.includes("flight") ? await (prisma as any).trendingFlight.findMany({
     orderBy: { createdAt: "desc" },
   }) : [];
+
+  const trendingFlights = rawTrendingFlights.map((flight: any) => ({
+    ...flight,
+    price: formatPrice(flight.price, siteConfig),
+    originalPrice: formatPrice(flight.price * 1.25, siteConfig),
+  }));
 
   const featuredUmrahPackages = siteConfig.allowedTabs.includes("umrah") ? await prisma.package.findMany({
     where: { type: "UMRAH" },
@@ -64,7 +70,7 @@ export default async function Home() {
       title: pkg.title,
       image,
       stars: pkg.stars || 3,
-      price: pkg.price,
+      price: formatPrice(pkg.price, siteConfig),
       detailsUrl: `/v/${pkg.slug || pkg.id}`,
       isSold: pkg.isSold,
     };
@@ -90,7 +96,7 @@ export default async function Home() {
       title: pkg.title,
       image,
       stars: pkg.stars || 4,
-      price: pkg.price,
+      price: formatPrice(pkg.price, siteConfig),
       detailsUrl: `/v/${pkg.slug || pkg.id}`,
       isSold: pkg.isSold,
     };

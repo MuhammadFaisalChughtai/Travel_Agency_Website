@@ -25,8 +25,14 @@ export function Footer() {
     { label: "Contact Us", href: "/contact", id: "contact" },
     { label: "Privacy Policy", href: "/privacy-policy", id: "privacy" },
     { label: "Terms & Conditions", href: "/terms-and-conditions", id: "terms" },
-  ].filter(link => 
-    link.id === "home" || link.id === "about" || link.id === "contact" || link.id === "privacy" || link.id === "terms" || siteConfig.allowedTabs.includes(link.id)
+  ].filter(
+    (link) =>
+      link.id === "home" ||
+      link.id === "about" ||
+      link.id === "contact" ||
+      link.id === "privacy" ||
+      link.id === "terms" ||
+      siteConfig.allowedTabs.includes(link.id),
   );
 
   return (
@@ -65,7 +71,7 @@ export function Footer() {
           {/* Column 1: Logo & About (lg:col-span-3) */}
           <div className="lg:col-span-3 space-y-6 flex flex-col">
             <Link href="/" className="flex items-center gap-2 self-start">
-              <span className="sr-only">Terrific Travel Ltd Ltd</span>
+              <span className="sr-only">Terrific Travel Ltd</span>
               <Image
                 src={siteConfig.logoUrl}
                 alt="Terrific Travel Ltd"

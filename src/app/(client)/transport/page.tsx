@@ -35,6 +35,8 @@ export const metadata: Metadata = {
 };
 
 import { prisma } from "@/lib/prisma";
+import { headers } from "next/headers";
+import { getSiteConfig, formatPrice } from "@/lib/siteConfig";
 
 const HOW_IT_WORKS = [
   {
@@ -55,9 +57,18 @@ const HOW_IT_WORKS = [
 ];
 
 export default async function TransportPage() {
-  const transports = await prisma.transportService.findMany({
+  const headersList = headers();
+  const domain = headersList.get("x-site-domain");
+  const siteConfig = getSiteConfig(domain);
+
+  const rawTransports = await prisma.transportService.findMany({
     orderBy: { updatedAt: "desc" },
   });
+
+  const transports = rawTransports.map((t: any) => ({
+    ...t,
+    price: formatPrice(t.price, siteConfig),
+  }));
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -255,7 +266,7 @@ export default async function TransportPage() {
                           One-Way from
                         </p>
                         <p className="text-2xl font-heading font-black text-[#483434]">
-                          £{vehicle.price}
+                          {vehicle.price}
                         </p>
                         <p className="text-[9px] text-slate-400 font-light">
                           inclusive of VAT

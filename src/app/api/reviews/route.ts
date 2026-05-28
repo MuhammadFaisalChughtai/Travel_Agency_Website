@@ -41,7 +41,7 @@ const FALLBACK_REVIEWS = [
     rating: 4,
     date: "May 2026",
     title: "Amazing time and good communication",
-    text: "Alhamdulillah, I and my cousin came back from Umrah. We had a great time and good communication with Terrific Travel Ltd Ltd throughout our journey. Very good drivers taking us from the airport to the hotel.",
+    text: "Alhamdulillah, I and my cousin came back from Umrah. We had a great time and good communication with Terrific Travel Ltd throughout our journey. Very good drivers taking us from the airport to the hotel.",
     tag: "Umrah Trip",
   },
   {

@@ -411,7 +411,7 @@ export async function POST(req: NextRequest) {
       <!-- Footer -->
       <tr>
         <td style="background:#2a1a1a;padding:20px 32px;text-align:center;">
-          <p style="color:#eed6c4;font-size:11px;margin:0 0 4px;opacity:0.5;">Terrific Travel Ltd Ltd &nbsp;&middot;&nbsp; terrifictravel.co.uk</p>
+          <p style="color:#eed6c4;font-size:11px;margin:0 0 4px;opacity:0.5;">Terrific Travel Ltd &nbsp;&middot;&nbsp; terrifictravel.co.uk</p>
           <p style="color:#eed6c4;font-size:10px;margin:0;opacity:0.35;">You are receiving this because you submitted an enquiry on our website.</p>
         </td>
       </tr>

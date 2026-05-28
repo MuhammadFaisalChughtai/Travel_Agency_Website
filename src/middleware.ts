@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   // Get hostname (e.g., 'terrifictravelltd.com', 'roadtoumrah.co.uk')
-  const hostname = request.headers.get('host') || '';
+  const hostname = request.headers.get('x-forwarded-host') || request.headers.get('host') || '';
 
   // Clone the request headers
   const requestHeaders = new Headers(request.headers);

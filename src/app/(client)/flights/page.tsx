@@ -106,6 +106,7 @@ export default async function FlightsPage() {
   const formattedTrendingFlights = trendingFlights.map((flight: any) => ({
     ...flight,
     price: formatPrice(flight.price, siteConfig),
+    originalPrice: formatPrice(flight.price * 1.25, siteConfig),
   }));
 
   const totalFlightsCount = await prisma.flight.count({

@@ -1,8 +1,14 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { headers } from "next/headers";
+import { getSiteConfig, formatPrice } from "@/lib/siteConfig";
 
 export async function getMoreFlights(skip: number, take: number) {
+  const headersList = headers();
+  const domain = headersList.get("x-site-domain");
+  const siteConfig = getSiteConfig(domain);
+
   const flightsData = await prisma.flight.findMany({
     where: { status: "AVAILABLE" },
     orderBy: { price: "asc" },
@@ -18,7 +24,7 @@ export async function getMoreFlights(skip: number, take: number) {
     departureCode: f.departureCode || "LHR",
     destination: f.destination,
     destinationCode: f.destinationCode || "DXB",
-    price: `£${f.price}`,
+    price: formatPrice(f.price, siteConfig),
     baggage: f.baggage || "30kg Checked, 7kg Cabin",
     month: f.month,
 

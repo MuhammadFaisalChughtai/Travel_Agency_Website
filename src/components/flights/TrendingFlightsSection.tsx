@@ -35,8 +35,8 @@ export function TrendingFlightsSection({ routes }: { routes: any[] }) {
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {routes.slice(0, visible).map((route, idx) => {
-            const price = route.price || route.priceNum || 0;
-            const originalPrice = Math.round(price * 1.25);
+            const price = route.price || 0;
+            const originalPrice = route.originalPrice || route.price;
             return (
               <Link
                 key={route.id || idx}
@@ -69,12 +69,14 @@ export function TrendingFlightsSection({ routes }: { routes: any[] }) {
                       {(route.destination || route.dest).split(",")[0]}
                     </h3>
                     <p className="text-[#6b4f4f] font-black text-2xl leading-none">
-                      £{price}
+                      {price}
                     </p>
                   </div>
-                  <div className="text-slate-400 font-bold text-sm line-through pb-0.5">
-                    £{originalPrice}
-                  </div>
+                  {route.originalPrice && (
+                    <div className="text-slate-400 font-bold text-sm line-through pb-0.5">
+                      {originalPrice}
+                    </div>
+                  )}
                 </div>
               </Link>
             );

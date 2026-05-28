@@ -9,7 +9,7 @@ interface PackageCardProps {
   title: string;
   destination: string;
   duration: string;
-  price: number;
+  price: number | string;
   imageUrl: string;
   type: string;
   isSold?: boolean;
@@ -80,7 +80,7 @@ export function PackageCard({
         <div className="mt-auto flex items-center justify-between border-t border-slate-100 pt-4">
           <div>
             <p className="text-xs text-slate-500 font-medium">From</p>
-            <p className="text-2xl font-bold text-primary">£{price}</p>
+            <p className="text-2xl font-bold text-primary">{price}</p>
           </div>
           <Button asChild variant={isSold ? "secondary" : "outline"} className="rounded-full">
             <Link href={`/v/${slug || id}`}>

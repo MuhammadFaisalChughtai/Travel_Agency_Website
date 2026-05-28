@@ -4,10 +4,12 @@ import { useState } from "react";
 import { Plus, Minus, MessageCircleQuestion } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
+import { useSiteConfig } from "@/components/SiteProvider";
+import { formatPrice } from "@/lib/siteConfig";
 
 interface FaqItem {
   question: string;
-  answer: string;
+  answer: string | ((config: any) => string);
 }
 
 const faqs: FaqItem[] = [
@@ -18,8 +20,8 @@ const faqs: FaqItem[] = [
   },
   {
     question: "What are the prices of the Umrah packages for 2026?",
-    answer:
-      "The prices of Umrah packages for 2026 depend on the type of package you choose (e.g., budget, standard, luxury) and your preferred accommodation in Makkah and Madinah. We offer budget-friendly Umrah packages starting from £690 per person, while our 5-star luxury packages with premium experiences start from £900 per person.",
+    answer: (config: any) =>
+      `The prices of Umrah packages for 2026 depend on the type of package you choose (e.g., budget, standard, luxury) and your preferred accommodation in Makkah and Madinah. We offer budget-friendly Umrah packages starting from ${formatPrice(690, config)} per person, while our 5-star luxury packages with premium experiences start from ${formatPrice(900, config)} per person.`,
   },
   {
     question: "What if I need spiritual guidance during my Umrah?",
@@ -54,6 +56,7 @@ const faqs: FaqItem[] = [
 
 export function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const siteConfig = useSiteConfig();
 
   const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -118,7 +121,7 @@ export function FaqAccordion() {
                 >
                   <div className="pt-1.5 border-t border-[#eed6c4]/20">
                     <p className="text-slate-700 text-xs md:text-sm leading-relaxed font-light">
-                      {faq.answer}
+                      {typeof faq.answer === 'function' ? faq.answer(siteConfig) : faq.answer}
                     </p>
                   </div>
                 </div>
