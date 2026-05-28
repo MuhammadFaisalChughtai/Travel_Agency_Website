@@ -6,6 +6,8 @@ import { HolidayInfoSection } from "@/components/holiday/HolidayInfoSection";
 import { HolidayBlogSection } from "@/components/holiday/HolidayBlogSection";
 import { FaqAccordion } from "@/components/holiday/FaqAccordion";
 import { PackageCarousel } from "@/components/umrah/PackageCarousel";
+import { headers } from "next/headers";
+import { getSiteConfig, formatPrice } from "@/lib/siteConfig";
 
 import type { Metadata } from "next";
 
@@ -27,6 +29,10 @@ export const metadata: Metadata = {
 
 
 export default async function PackagesPage() {
+  const headersList = headers();
+  const domain = headersList.get("x-site-domain");
+  const siteConfig = getSiteConfig(domain);
+
   let packages = await prisma.package.findMany({
     where: { type: "HOLIDAY" },
     orderBy: { price: "asc" },
@@ -45,7 +51,7 @@ export default async function PackagesPage() {
       title: pkg.title,
       image,
       stars: pkg.stars || 4,
-      price: `£${pkg.price}`,
+      price: formatPrice(pkg.price, siteConfig),
       detailsUrl: `/v/${pkg.slug || pkg.id}`,
       isSold: pkg.isSold,
     };

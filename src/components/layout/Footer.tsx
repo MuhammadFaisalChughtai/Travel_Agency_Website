@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   MapPin,
@@ -9,10 +11,24 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { TrustpilotWidget } from "./TrustpilotWidget";
-
-const logoUrl = "/Logo.svg";
+import { useSiteConfig } from "@/components/SiteProvider";
 
 export function Footer() {
+  const siteConfig = useSiteConfig();
+
+  const usefulLinks = [
+    { label: "Home", href: "/", id: "home" },
+    { label: "Destinations", href: "/holiday", id: "holiday" },
+    { label: "Tours", href: "/holiday", id: "holiday" },
+    { label: "Flight", href: "/flights", id: "flight" },
+    { label: "About Us", href: "/about", id: "about" },
+    { label: "Contact Us", href: "/contact", id: "contact" },
+    { label: "Privacy Policy", href: "/privacy-policy", id: "privacy" },
+    { label: "Terms & Conditions", href: "/terms-and-conditions", id: "terms" },
+  ].filter(link => 
+    link.id === "home" || link.id === "about" || link.id === "contact" || link.id === "privacy" || link.id === "terms" || siteConfig.allowedTabs.includes(link.id)
+  );
+
   return (
     <footer className="relative bg-[#eed6c4] text-[#483434] border-t border-[#6b4f4f]/25 overflow-hidden">
       {/* Decorative Travel Vectors (Mimics the high-end illustrative style of the reference image) */}
@@ -51,7 +67,7 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2 self-start">
               <span className="sr-only">Terrific Travel Ltd Ltd</span>
               <Image
-                src={logoUrl}
+                src={siteConfig.logoUrl}
                 alt="Terrific Travel Ltd"
                 width={200}
                 height={80}
@@ -154,16 +170,7 @@ export function Footer() {
               </div>
             </div>
             <ul className="space-y-2.5">
-              {[
-                { label: "Home", href: "/" },
-                { label: "Destinations", href: "/holiday" },
-                { label: "Tours", href: "/holiday" },
-                { label: "Flight", href: "/flights" },
-                { label: "About Us", href: "/about" },
-                { label: "Contact Us", href: "/contact" },
-                { label: "Privacy Policy", href: "/privacy-policy" },
-                { label: "Terms & Conditions", href: "/terms-and-conditions" },
-              ].map((link, i) => (
+              {usefulLinks.map((link, i) => (
                 <li key={i}>
                   <Link
                     href={link.href}

@@ -5,21 +5,25 @@ import Link from "next/link";
 import { Menu, X, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
-
-const logoUrl = "/Logo.svg";
+import { useSiteConfig } from "@/components/SiteProvider";
 
 const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Flights", href: "/flights" },
-  { name: "Holiday", href: "/holiday" },
-  { name: "Umrah", href: "/umrah" },
-  { name: "Hajj", href: "/hajj" },
-  { name: "Visa", href: "/visa" },
-  { name: "Transport", href: "/transport" },
+  { name: "Home", href: "/", id: "home" },
+  { name: "Flights", href: "/flights", id: "flight" },
+  { name: "Holiday", href: "/holiday", id: "holiday" },
+  { name: "Umrah", href: "/umrah", id: "umrah" },
+  { name: "Hajj", href: "/hajj", id: "hajj" },
+  { name: "Visa", href: "/visa", id: "visa" },
+  { name: "Transport", href: "/transport", id: "transport" },
 ];
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const siteConfig = useSiteConfig();
+
+  const filteredNavigation = navigation.filter(
+    (item) => item.id === "home" || siteConfig.allowedTabs.includes(item.id)
+  );
 
   return (
     <>
@@ -35,7 +39,7 @@ export function Navbar() {
             >
               <span className="sr-only">Terrific Travel Ltd Ltd</span>
               <Image
-                src={logoUrl}
+                src={siteConfig.logoUrl}
                 alt="Terrific Travel Ltd"
                 width={150}
                 height={50}
@@ -54,7 +58,7 @@ export function Navbar() {
             </button>
           </div>
           <div className="hidden lg:flex lg:gap-x-10">
-            {navigation.map((item) => (
+            {filteredNavigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
@@ -92,7 +96,7 @@ export function Navbar() {
               <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
                 <span className="sr-only">Terrific Travel Ltd Ltd</span>
                 <Image
-                  src={logoUrl}
+                  src={siteConfig.logoUrl}
                   alt="Terrific Travel Ltd"
                   width={120}
                   height={50}
@@ -111,7 +115,7 @@ export function Navbar() {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-[#eed6c4]/40">
                 <div className="space-y-2 py-6">
-                  {navigation.map((item) => (
+                  {filteredNavigation.map((item) => (
                     <Link
                       key={item.name}
                       href={item.href}

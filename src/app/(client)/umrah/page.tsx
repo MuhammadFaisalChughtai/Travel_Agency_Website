@@ -6,6 +6,8 @@ import { UmrahInfoSection } from "@/components/umrah/UmrahInfoSection";
 import { UmrahBlogSection } from "@/components/umrah/UmrahBlogSection";
 import { FaqAccordion } from "@/components/umrah/FaqAccordion";
 import { prisma } from "@/lib/prisma";
+import { headers } from "next/headers";
+import { getSiteConfig, formatPrice } from "@/lib/siteConfig";
 
 import type { Metadata } from "next";
 
@@ -25,6 +27,10 @@ export const metadata: Metadata = {
 };
 
 export default async function UmrahPage() {
+  const headersList = headers();
+  const domain = headersList.get("x-site-domain");
+  const siteConfig = getSiteConfig(domain);
+
   const allPackages = await prisma.package.findMany({
     where: { type: "UMRAH" },
     orderBy: { price: "asc" },
@@ -47,7 +53,7 @@ export default async function UmrahPage() {
           title: pkg.title,
           image,
           stars: pkg.stars || 3,
-          price: `£${pkg.price}`,
+          price: formatPrice(pkg.price, siteConfig),
           detailsUrl: `/v/${pkg.slug || pkg.id}`,
           isSold: pkg.isSold,
         };

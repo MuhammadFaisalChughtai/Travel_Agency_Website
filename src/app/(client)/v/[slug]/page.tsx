@@ -19,6 +19,10 @@ import {
   Bus,
   CheckCircle,
   AlertCircle,
+  CheckCircle2,
+  Download,
+  Phone,
+  Mail,
   ChevronRight,
   Sparkles,
   Award,
@@ -27,6 +31,10 @@ import {
   CalendarDays,
   List,
 } from "lucide-react";
+import { format } from "date-fns";
+import type { Metadata } from "next";
+import { headers } from "next/headers";
+import { getSiteConfig, formatPrice } from "@/lib/siteConfig";
 import { prisma } from "@/lib/prisma";
 import { PackageCard } from "@/components/ui/PackageCard";
 import { FaqAccordion } from "@/components/holiday/FaqAccordion";
@@ -277,8 +285,12 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
     item.imageUrl ||
     item.image ||
     "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1200&q=80";
+  const headersList = headers();
+  const domain = headersList.get("x-site-domain");
+  const siteConfig = getSiteConfig(domain);
+
   const price = item.price;
-  const displayPrice = typeof price === "number" ? `£${price}` : price;
+  const displayPrice = price ? formatPrice(price, siteConfig) : "N/A";
 
   // Strip HTML tags for the hero subtitle to prevent raw HTML rendering
   const cleanDescription = item.description 
@@ -1054,7 +1066,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                       { icon: <Car className="w-5 h-5" />, label: "Vehicle Type", value: item.vehicleType },
                       { icon: <MapPin className="w-5 h-5" />, label: "Service Route", value: item.type },
                       { icon: <Users className="w-5 h-5" />, label: "Max Capacity", value: item.capacity || "N/A" },
-                      { icon: <Tag className="w-5 h-5" />, label: "Starting Price", value: `£${item.price}` },
+                      { icon: <Tag className="w-5 h-5" />, label: "Starting Price", value: displayPrice },
                     ].map((spec, i) => (
                       <div
                         key={i}

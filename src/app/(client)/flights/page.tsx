@@ -16,6 +16,8 @@ import { TrendingFlightsSection } from "@/components/flights/TrendingFlightsSect
 import { FaqAccordion } from "@/components/flights/FaqAccordion";
 import { Hero } from "@/components/ui/Hero";
 import { prisma } from "@/lib/prisma";
+import { headers } from "next/headers";
+import { getSiteConfig, formatPrice } from "@/lib/siteConfig";
 
 import type { Metadata } from "next";
 
@@ -68,6 +70,10 @@ const POPULAR_ROUTES = [
 ];
 
 export default async function FlightsPage() {
+  const headersList = headers();
+  const domain = headersList.get("x-site-domain");
+  const siteConfig = getSiteConfig(domain);
+
   let trendingFlights = await (prisma as any).trendingFlight.findMany({
     orderBy: { createdAt: "desc" },
   });
@@ -97,6 +103,11 @@ export default async function FlightsPage() {
     });
   }
 
+  const formattedTrendingFlights = trendingFlights.map((flight: any) => ({
+    ...flight,
+    price: formatPrice(flight.price, siteConfig),
+  }));
+
   const totalFlightsCount = await prisma.flight.count({
     where: { status: "AVAILABLE" },
   });
@@ -115,7 +126,7 @@ export default async function FlightsPage() {
     departureCode: f.departureCode || "LHR",
     destination: f.destination,
     destinationCode: f.destinationCode || "DXB",
-    price: `£${f.price}`,
+    price: formatPrice(f.price, siteConfig),
     baggage: f.baggage || "30kg Checked, 7kg Cabin",
     month: f.month,
 
@@ -192,7 +203,7 @@ export default async function FlightsPage() {
       </div>
 
       {/* ─── Popular Flight Routes ─── */}
-      <TrendingFlightsSection routes={trendingFlights} />
+      <TrendingFlightsSection routes={formattedTrendingFlights} />
 
       {/* ─── The Premium Travel Experience ─── */}
       <section className="py-20 bg-slate-50 border-y border-slate-200">

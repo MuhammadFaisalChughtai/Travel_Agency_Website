@@ -6,7 +6,8 @@ import { HajjInfoSection } from "@/components/hajj/HajjInfoSection";
 import { HajjBlogSection } from "@/components/hajj/HajjBlogSection";
 import { FaqAccordion } from "@/components/hajj/FaqAccordion";
 import { PackageCarousel } from "@/components/umrah/PackageCarousel";
-
+import { headers } from "next/headers";
+import { getSiteConfig, formatPrice } from "@/lib/siteConfig";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -24,9 +25,13 @@ export const metadata: Metadata = {
   },
 };
 
-
+export const dynamic = "force-dynamic";
 
 export default async function HajjPage() {
+  const headersList = headers();
+  const domain = headersList.get("x-site-domain");
+  const siteConfig = getSiteConfig(domain);
+
   let packages = await prisma.package.findMany({
     where: { type: "HAJJ" },
     orderBy: { price: "asc" },
@@ -47,7 +52,7 @@ export default async function HajjPage() {
       title: pkg.title,
       image,
       stars: pkg.stars || 5,
-      price: `£${pkg.price}`,
+      price: formatPrice(pkg.price, siteConfig),
       detailsUrl: `/v/${pkg.slug || pkg.id}`,
       isSold: pkg.isSold,
     };

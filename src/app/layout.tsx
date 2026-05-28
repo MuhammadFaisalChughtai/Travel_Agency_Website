@@ -28,11 +28,19 @@ export const metadata: Metadata = {
   },
 };
 
+import { headers } from "next/headers";
+import { getSiteConfig } from "@/lib/siteConfig";
+import { SiteProvider } from "@/components/SiteProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = headers();
+  const domain = headersList.get("x-site-domain");
+  const siteConfig = getSiteConfig(domain);
+
   return (
     <html lang="en">
       <head>
@@ -45,8 +53,10 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>
       <body className={`${inter.variable} ${outfit.variable} font-sans`}>
-        {children}
-        <GoogleAnalytics />
+        <SiteProvider config={siteConfig}>
+          {children}
+          <GoogleAnalytics />
+        </SiteProvider>
       </body>
     </html>
   );
