@@ -7,11 +7,27 @@ export function middleware(request: NextRequest) {
 
   // Clone the request headers
   const requestHeaders = new Headers(request.headers);
-
-  // Set a custom header so we can read it in Server Components
   requestHeaders.set('x-site-domain', hostname);
 
-  return NextResponse.next({
+  const url = request.nextUrl.clone();
+  
+  // Skip rewriting if the path is intended for admin or api
+  if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api')) {
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  }
+
+  // Rewrite based on domain
+  if (hostname.includes('roadtoumrah')) {
+    url.pathname = `/road-to-umrah${url.pathname === '/' ? '' : url.pathname}`;
+  } else {
+    url.pathname = `/terrific-travel${url.pathname === '/' ? '' : url.pathname}`;
+  }
+
+  return NextResponse.rewrite(url, {
     request: {
       headers: requestHeaders,
     },
@@ -21,6 +37,6 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Skip all internal paths (_next) and static files
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 };
