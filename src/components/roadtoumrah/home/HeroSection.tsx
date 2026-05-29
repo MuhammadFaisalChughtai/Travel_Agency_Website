@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
+import Image from "next/image";
 import {
   MapPin,
   Calendar,
@@ -119,9 +120,16 @@ export function HeroSection() {
           animate={{ opacity: 0.85, scale: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1.2, ease: "easeInOut" }}
-          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url('${currentSlide.image}')` }}
-        />
+          className="absolute inset-0 z-0"
+        >
+          <Image
+            src={currentSlide.image}
+            alt={currentSlide.title}
+            fill
+            priority
+            className="object-cover object-center"
+          />
+        </motion.div>
       </AnimatePresence>
 
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/30 via-transparent to-black/70 pointer-events-none" />

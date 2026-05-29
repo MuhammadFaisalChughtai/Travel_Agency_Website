@@ -75,7 +75,7 @@ export default async function HajjPage() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#f5f0eb]">
+    <div className="flex flex-col min-h-screen bg-slate-50">
       {/* Hero Banner */}
       <Hero
         backgroundImage="https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
@@ -98,7 +98,7 @@ export default async function HajjPage() {
       {/* Floating Booking Form */}
       <HajjBookingForm />
 
-      <div className="py-8 bg-[#f5f0eb]">
+      <div className="py-8 bg-slate-50">
         {/* Packages Carousel */}
         <PackageCarousel
           title="Featured Hajj Packages"

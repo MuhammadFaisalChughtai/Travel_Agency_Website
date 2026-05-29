@@ -89,9 +89,9 @@ Passengers: ${formData.travelers}
   };
 
   const fieldClass =
-    "w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none font-medium placeholder:text-slate-400";
+    "w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b] transition-all duration-300 outline-none font-medium placeholder:text-slate-400";
   const selectClass =
-    "w-full pl-10 pr-8 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none appearance-none cursor-pointer font-medium";
+    "w-full pl-10 pr-8 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b] transition-all duration-300 outline-none appearance-none cursor-pointer font-medium";
 
   return (
     <div
@@ -104,15 +104,15 @@ Passengers: ${formData.travelers}
             ? "p-2 sm:p-4"
             : (isHome
               ? "bg-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-white/30"
-              : "bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#eed6c4]/60")
+              : "bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#d4af37]/60")
         }
       >
         {!isHome && !isModal && (
           <div className="text-center mb-6">
-            <span className="inline-block px-3 py-1 rounded-full bg-[#fff3e4] text-[#6b4f4f] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
+            <span className="inline-block px-3 py-1 rounded-full bg-emerald-50 text-[#064e3b] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
               Quick Quote
             </span>
-            <h2 className="text-[#382626] text-xl md:text-2xl font-heading font-black tracking-tight">
+            <h2 className="text-[#064e3b] text-xl md:text-2xl font-heading font-black tracking-tight">
               Find Your Flight
             </h2>
           </div>
@@ -131,8 +131,8 @@ Passengers: ${formData.travelers}
                 }
                 className={`px-6 py-2 rounded-full text-xs font-bold transition-all duration-300 ${
                   formData.journeyType === "Round Trip"
-                    ? "bg-white text-[#382626] shadow-sm"
-                    : "text-slate-500 hover:text-[#382626]"
+                    ? "bg-white text-[#064e3b] shadow-sm"
+                    : "text-slate-500 hover:text-[#064e3b]"
                 }`}
               >
                 Round Trip
@@ -148,8 +148,8 @@ Passengers: ${formData.travelers}
                 }
                 className={`px-6 py-2 rounded-full text-xs font-bold transition-all duration-300 ${
                   formData.journeyType === "One Way"
-                    ? "bg-white text-[#382626] shadow-sm"
-                    : "text-slate-500 hover:text-[#382626]"
+                    ? "bg-white text-[#064e3b] shadow-sm"
+                    : "text-slate-500 hover:text-[#064e3b]"
                 }`}
               >
                 One Way
@@ -160,7 +160,7 @@ Passengers: ${formData.travelers}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Flying From */}
             <div className="relative">
-              <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <input
                 type="text"
                 name="from"
@@ -174,7 +174,7 @@ Passengers: ${formData.travelers}
 
             {/* Flying To */}
             <div className="relative">
-              <Plane className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <Plane className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <input
                 type="text"
                 name="to"
@@ -188,7 +188,7 @@ Passengers: ${formData.travelers}
 
             {/* Departure Date */}
             <div className="relative">
-              <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <input
                 type="date"
                 name="departure"
@@ -203,7 +203,7 @@ Passengers: ${formData.travelers}
             {/* Return Date - Only show for Round Trip */}
             {formData.journeyType === "Round Trip" && (
               <div className="relative animate-in fade-in zoom-in-95 duration-300">
-                <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+                <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
                 <input
                   type="date"
                   name="returnDate"
@@ -219,7 +219,7 @@ Passengers: ${formData.travelers}
 
             {/* Travelers */}
             <div className="relative">
-              <Users className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <Users className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <select
                 name="travelers"
                 value={formData.travelers}
@@ -240,7 +240,7 @@ Passengers: ${formData.travelers}
 
             {/* Email */}
             <div className="relative">
-              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <input
                 type="email"
                 name="email"
@@ -254,7 +254,7 @@ Passengers: ${formData.travelers}
 
             {/* Phone */}
             <div className="relative">
-              <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <input
                 type="tel"
                 name="phone"
@@ -268,7 +268,7 @@ Passengers: ${formData.travelers}
 
             {/* Name Input */}
             <div className="relative">
-              <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <input
                 type="text"
                 name="name"
@@ -303,7 +303,7 @@ Passengers: ${formData.travelers}
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full sm:w-auto px-12 py-5 text-xs font-bold bg-[#6b4f4f] hover:bg-[#382626] text-white rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 tracking-widest uppercase flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
+                className="w-full sm:w-auto px-12 py-5 text-xs font-bold bg-[#064e3b] hover:bg-[#043427] text-white rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 tracking-widest uppercase flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
               >
                 {status === "loading" ? (
                   <>

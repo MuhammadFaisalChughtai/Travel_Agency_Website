@@ -28,6 +28,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.76.0",
     "react-quill": "^2.0.0",
+    "svg-path-bounding-box": "^1.0.4",
     "tailwind-merge": "^3.6.0",
     "zod": "^4.4.3"
   },

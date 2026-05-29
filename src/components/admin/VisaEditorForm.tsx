@@ -6,7 +6,7 @@ import { createVisa, updateVisa } from "@/app/(admin)/admin/visa/actions";
 import { CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 
 const inputClass =
-  "block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#6b4f4f] focus:border-[#6b4f4f] transition-colors";
+  "block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#064e3b] focus:border-[#064e3b] transition-colors";
 
 export function VisaEditorForm({ initialData }: { initialData?: any }) {
   const router = useRouter();
@@ -147,7 +147,7 @@ export function VisaEditorForm({ initialData }: { initialData?: any }) {
         </div>
 
         <div className="flex items-center gap-2">
-          <input id="isPopularVisa" type="checkbox" checked={isPopular} onChange={e => setIsPopular(e.target.checked)} className="h-4 w-4 rounded border-slate-300 text-[#6b4f4f] focus:ring-[#6b4f4f] cursor-pointer" />
+          <input id="isPopularVisa" type="checkbox" checked={isPopular} onChange={e => setIsPopular(e.target.checked)} className="h-4 w-4 rounded border-slate-300 text-[#064e3b] focus:ring-[#064e3b] cursor-pointer" />
           <label htmlFor="isPopularVisa" className="text-sm font-semibold text-slate-700 cursor-pointer select-none">Mark as "Most Popular"</label>
         </div>
 
@@ -176,7 +176,7 @@ export function VisaEditorForm({ initialData }: { initialData?: any }) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-8 py-3 text-sm font-bold text-white shadow hover:bg-[#6b4f4f] transition-colors disabled:opacity-60"
+            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-8 py-3 text-sm font-bold text-white shadow hover:bg-[#064e3b] transition-colors disabled:opacity-60"
           >
             {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
             {isSubmitting ? "Saving…" : initialData?.id ? "Update Visa Service" : "Add Visa Service"}

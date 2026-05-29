@@ -92,9 +92,9 @@ Budget per person: ${formData.budget || "Not specified"}
   };
 
   const fieldClass =
-    "w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none font-medium placeholder:text-slate-400";
+    "w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b] transition-all duration-300 outline-none font-medium placeholder:text-slate-400";
   const selectClass =
-    "w-full pl-10 pr-8 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none appearance-none cursor-pointer font-medium";
+    "w-full pl-10 pr-8 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b] transition-all duration-300 outline-none appearance-none cursor-pointer font-medium";
 
   return (
     <div
@@ -107,18 +107,18 @@ Budget per person: ${formData.budget || "Not specified"}
             ? "p-2 sm:p-4"
             : (isHome
               ? "bg-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-white/30"
-              : "bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#eed6c4]/60")
+              : "bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#d4af37]/60")
         }
       >
         {!isHome && !isModal && (
           <div className="text-center mb-6">
-            <span className="inline-block px-3 py-1 rounded-full bg-[#fff3e4] text-[#6b4f4f] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
+            <span className="inline-block px-3 py-1 rounded-full bg-emerald-50 text-[#064e3b] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
               Free Quote
             </span>
-            <h2 className="text-[#382626] text-xl md:text-2xl font-heading font-black tracking-tight">
+            <h2 className="text-[#064e3b] text-xl md:text-2xl font-heading font-black tracking-tight">
               Design Your Perfect Holiday
             </h2>
-            <div className="h-[2px] w-12 bg-[#6b4f4f]/30 mx-auto mt-2 rounded-full"></div>
+            <div className="h-[2px] w-12 bg-[#064e3b]/30 mx-auto mt-2 rounded-full"></div>
           </div>
         )}
 
@@ -126,13 +126,13 @@ Budget per person: ${formData.budget || "Not specified"}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* destination Input */}
             <div className="relative">
-              <Plane className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <Plane className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <input
                 type="text"
                 name="destination"
                 value={formData.destination}
                 onChange={handleChange}
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none font-medium"
+                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b] transition-all duration-300 outline-none font-medium"
                 placeholder="Destination"
                 required
               />
@@ -140,13 +140,13 @@ Budget per person: ${formData.budget || "Not specified"}
 
             {/* Date Input */}
             <div className="relative">
-              <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <input
                 type="date"
                 name="date"
                 value={formData.date}
                 onChange={handleChange}
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none font-medium"
+                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b] transition-all duration-300 outline-none font-medium"
                 placeholder="Departure Date"
                 required
               />
@@ -154,12 +154,12 @@ Budget per person: ${formData.budget || "Not specified"}
 
             {/* Hotel Input */}
             <div className="relative">
-              <Building className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <Building className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <select
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="w-full pl-10 pr-8 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none appearance-none cursor-pointer font-medium"
+                className="w-full pl-10 pr-8 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b] transition-all duration-300 outline-none appearance-none cursor-pointer font-medium"
                 required
               >
                 <option value="">Hotel Category</option>
@@ -174,12 +174,12 @@ Budget per person: ${formData.budget || "Not specified"}
 
             {/* Duration Input */}
             <div className="relative">
-              <Clock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <Clock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <select
                 name="duration"
                 value={formData.duration}
                 onChange={handleChange}
-                className="w-full pl-10 pr-8 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none appearance-none cursor-pointer font-medium"
+                className="w-full pl-10 pr-8 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b] transition-all duration-300 outline-none appearance-none cursor-pointer font-medium"
                 required
               >
                 <option value="">Duration</option>
@@ -197,12 +197,12 @@ Budget per person: ${formData.budget || "Not specified"}
 
             {/* Travelers Input */}
             <div className="relative">
-              <Users className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <Users className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <select
                 name="travelers"
                 value={formData.travelers}
                 onChange={handleChange}
-                className="w-full pl-10 pr-8 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none appearance-none cursor-pointer font-medium"
+                className="w-full pl-10 pr-8 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b] transition-all duration-300 outline-none appearance-none cursor-pointer font-medium"
                 required
               >
                 <option value="">Travelers</option>
@@ -220,13 +220,13 @@ Budget per person: ${formData.budget || "Not specified"}
 
             {/* Name Input */}
             <div className="relative">
-              <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none font-medium placeholder-slate-400"
+                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b] transition-all duration-300 outline-none font-medium placeholder-slate-400"
                 placeholder="Your Name"
                 required
               />
@@ -234,13 +234,13 @@ Budget per person: ${formData.budget || "Not specified"}
 
             {/* Phone Input */}
             <div className="relative">
-              <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <input
                 type="tel"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none font-medium placeholder-slate-400"
+                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b] transition-all duration-300 outline-none font-medium placeholder-slate-400"
                 placeholder="Phone Number"
                 required
               />
@@ -248,13 +248,13 @@ Budget per person: ${formData.budget || "Not specified"}
 
             {/* Email Input */}
             <div className="relative">
-              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none font-medium placeholder-slate-400"
+                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b] transition-all duration-300 outline-none font-medium placeholder-slate-400"
                 placeholder="Email Address"
                 required
               />
@@ -282,7 +282,7 @@ Budget per person: ${formData.budget || "Not specified"}
               <Button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full md:w-2/5 py-6 text-xs font-bold bg-[#6b4f4f] hover:bg-[#382626] text-white rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 tracking-widest uppercase flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
+                className="w-full md:w-2/5 py-6 text-xs font-bold bg-[#064e3b] hover:bg-[#043427] text-white rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 tracking-widest uppercase flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
               >
                 {status === "loading" ? (
                   <>
