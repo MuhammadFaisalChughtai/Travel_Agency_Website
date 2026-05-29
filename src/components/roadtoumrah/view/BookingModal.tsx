@@ -70,7 +70,7 @@ export function BookingModal({ type, id, title, isSold }: BookingModalProps) {
       ) : (
         <button
           onClick={() => setOpen(true)}
-          className="flex items-center justify-center w-full h-12 rounded-2xl bg-gradient-to-r from-[#D4AF37] to-[#f5e6d8] hover:from-[#F9F6F0] hover:to-[#D4AF37] text-[#382626] font-heading font-black text-xs uppercase tracking-[0.15em] transition-all duration-300 shadow-lg hover:shadow-[#D4AF37]/15 hover:-translate-y-0.5 cursor-pointer"
+          className="flex items-center justify-center w-full h-12 rounded-2xl bg-[#009F75] hover:bg-[#454E63] text-[#382626] font-heading font-black text-xs uppercase tracking-[0.15em] transition-all duration-300 shadow-lg hover:shadow-[#DFDE7D]/15 hover:-translate-y-0.5 cursor-pointer"
         >
           {buttonLabel}
         </button>
@@ -88,12 +88,12 @@ export function BookingModal({ type, id, title, isSold }: BookingModalProps) {
             onClick={e => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="sticky top-0 z-10 bg-gradient-to-r from-[#382626] to-[#B8860B] px-6 py-5 flex items-start justify-between rounded-t-3xl">
+            <div className="sticky top-0 z-10 bg-[#009F75] px-6 py-5 flex items-start justify-between rounded-t-3xl">
               <div>
                 <h2 className="text-white font-heading font-black text-lg tracking-tight">
                   {modalTitle[type] ?? "Book Now"}
                 </h2>
-                <p className="text-[#D4AF37]/80 text-xs mt-0.5">
+                <p className="text-[#DFDE7D]/80 text-xs mt-0.5">
                   {modalSubtitle[type] ?? "Our team will get back to you shortly."}
                 </p>
               </div>

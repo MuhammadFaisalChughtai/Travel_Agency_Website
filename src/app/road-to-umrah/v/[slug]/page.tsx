@@ -298,7 +298,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
     : "";
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-[#1A472A]">
+    <div className="flex flex-col min-h-screen bg-background text-[#454E63]">
       {/* ─── Hero Header (Umrah Luxury Theme) ─── */}
       <Hero
         backgroundImage={image}
@@ -329,28 +329,28 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
             <div className="flex flex-wrap items-center gap-4 text-xs md:text-sm text-slate-300 font-light pt-1">
               {item.destination && (
                 <span className="flex items-center gap-1">
-                  <MapPin className="w-4 h-4 text-[#D4AF37]" />{" "}
+                  <MapPin className="w-4 h-4 text-[#DFDE7D]" />{" "}
                   {item.destination}
                 </span>
               )}
               {item.duration && (
                 <span className="flex items-center gap-1">
-                  <Clock className="w-4 h-4 text-[#D4AF37]" /> {item.duration}
+                  <Clock className="w-4 h-4 text-[#DFDE7D]" /> {item.duration}
                 </span>
               )}
               {item.stars && (
-                <div className="flex gap-0.5 text-[#D4AF37]">
+                <div className="flex gap-0.5 text-[#DFDE7D]">
                   {[...Array(item.stars)].map((_, i) => (
                     <Star
                       key={i}
-                      className="w-3.5 h-3.5 fill-[#D4AF37] stroke-none"
+                      className="w-3.5 h-3.5 fill-[#DFDE7D] stroke-none"
                     />
                   ))}
                 </div>
               )}
             </div>
           ) : (
-            <div className="flex flex-wrap items-center gap-4 text-xs text-[#D4AF37] font-bold uppercase tracking-widest pt-1">
+            <div className="flex flex-wrap items-center gap-4 text-xs text-[#DFDE7D] font-bold uppercase tracking-widest pt-1">
               <span>{item.category}</span>
               <span>•</span>
               <span>{item.date}</span>
@@ -362,15 +362,15 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
       />
 
       {/* ─── Breadcrumb ─── */}
-      <div className="bg-[#F9F6F0] border-b border-[#D4AF37]/30 py-3.5">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center gap-2 text-xs font-bold text-[#B8860B] uppercase tracking-wider">
-          <Link href="/" className="hover:text-[#1A472A]">
+      <div className="bg-[#F9FAFB] border-b border-[#DFDE7D]/30 py-3.5">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center gap-2 text-xs font-bold text-[#009F75] uppercase tracking-wider">
+          <Link href="/" className="hover:text-[#454E63]">
             Home
           </Link>
           <ChevronRight className="w-3 h-3 text-slate-400" />
           <Link
             href={type === "blog" ? "/umrah#blog" : `/${type}s`}
-            className="hover:text-[#1A472A]"
+            className="hover:text-[#454E63]"
           >
             {type === "blog" ? "Journals" : `${type}s`}
           </Link>
@@ -393,13 +393,13 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
               <article className="space-y-8">
                 <Link
                   href="/umrah"
-                  className="inline-flex items-center gap-2 text-[#B8860B] text-[10px] font-extrabold uppercase tracking-widest hover:text-[#1A472A] transition-colors group"
+                  className="inline-flex items-center gap-2 text-[#009F75] text-[10px] font-extrabold uppercase tracking-widest hover:text-[#454E63] transition-colors group"
                 >
                   <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform duration-300" />
                   Back to Umrah Journals
                 </Link>
 
-                <p className="text-base md:text-lg font-medium text-[#1A472A] leading-relaxed border-l-4 border-[#B8860B] pl-5 bg-[#D4AF37]/15 py-4.5 pr-4 rounded-r-3xl">
+                <p className="text-base md:text-lg font-medium text-[#454E63] leading-relaxed border-l-4 border-[#009F75] pl-5 bg-[#DFDE7D]/15 py-4.5 pr-4 rounded-r-3xl">
                   {item.excerpt}
                 </p>
 
@@ -411,7 +411,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                 <style>{`
                   .prose-article h1, .prose-article h2, .prose-article h3, .prose-article h4, .prose-article h5, .prose-article h6 {
                     font-family: var(--font-heading);
-                    color: #1A472A;
+                    color: #454E63;
                     margin-top: 2rem;
                     margin-bottom: 0.8rem;
                     line-height: 1.3;
@@ -419,8 +419,8 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                   }
                   .prose-article h1 { font-size: 1.75rem; }
                   .prose-article h2 { font-size: 1.45rem; }
-                  .prose-article h3 { font-size: 1.25rem; font-weight: 800; color: #B8860B; }
-                  .prose-article h4 { font-size: 1.1rem; font-weight: 800; color: #B8860B; }
+                  .prose-article h3 { font-size: 1.25rem; font-weight: 800; color: #009F75; }
+                  .prose-article h4 { font-size: 1.1rem; font-weight: 800; color: #009F75; }
                   
                   .prose-article p {
                     color: #4b5563;
@@ -440,23 +440,23 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                   .prose-article ol { list-style-type: decimal; }
                   .prose-article li { margin-bottom: 0.5rem; }
                   
-                  .prose-article strong { color: #1A472A; font-weight: 700; }
-                  .prose-article em { color: #B8860B; font-style: italic; }
+                  .prose-article strong { color: #454E63; font-weight: 700; }
+                  .prose-article em { color: #009F75; font-style: italic; }
                   
                   .prose-article a {
-                    color: #B8860B;
+                    color: #009F75;
                     text-decoration: underline;
                     font-weight: 600;
                   }
-                  .prose-article a:hover { color: #1A472A; }
+                  .prose-article a:hover { color: #454E63; }
                   
                   .prose-article blockquote {
-                    border-left: 4px solid #B8860B;
+                    border-left: 4px solid #009F75;
                     padding-left: 1.2rem;
                     margin: 1.5rem 0;
                     font-style: italic;
-                    color: #1A472A;
-                    background: #D4AF3715;
+                    color: #454E63;
+                    background: #DFDE7D15;
                     padding: 1rem 1.2rem;
                     border-radius: 0 0.5rem 0.5rem 0;
                   }
@@ -483,44 +483,44 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
             {type === "package" && (
               <div className="space-y-8">
                 {/* ── Always-visible: What's Included Icons ── */}
-                <section className="bg-white rounded-3xl p-8 border border-[#D4AF37]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)]">
-                  <h2 className="text-xl font-heading font-black text-[#1A472A] mb-6 flex items-center gap-2">
-                    <Award className="w-5 h-5 text-[#B8860B]" /> What's Included
+                <section className="bg-white rounded-3xl p-8 border border-[#DFDE7D]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)]">
+                  <h2 className="text-xl font-heading font-black text-[#454E63] mb-6 flex items-center gap-2">
+                    <Award className="w-5 h-5 text-[#009F75]" /> What's Included
                   </h2>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {[
                       {
                         icon: (
-                          <PlaneTakeoff className="w-7 h-7 text-[#B8860B]" />
+                          <PlaneTakeoff className="w-7 h-7 text-[#009F75]" />
                         ),
                         label: "Flights",
                         sub: "Return flights from UK",
                       },
                       {
-                        icon: <Building2 className="w-7 h-7 text-[#B8860B]" />,
+                        icon: <Building2 className="w-7 h-7 text-[#009F75]" />,
                         label: "Hotel",
                         sub: `${item.stars || 3}-Star accommodation`,
                       },
                       {
-                        icon: <Car className="w-7 h-7 text-[#B8860B]" />,
+                        icon: <Car className="w-7 h-7 text-[#009F75]" />,
                         label: "Transport",
                         sub: item.type === "HOLIDAY" ? "Transfers Included" : "Makkah ↔ Madinah",
                       },
                       {
-                        icon: <FileCheck className="w-7 h-7 text-[#B8860B]" />,
+                        icon: <FileCheck className="w-7 h-7 text-[#009F75]" />,
                         label: "Visa",
                         sub: item.type === "HOLIDAY" ? "Tourist Visa" : "Umrah visa included",
                       },
                     ].map(({ icon, label, sub }) => (
                       <div
                         key={label}
-                        className="flex flex-col items-center text-center gap-3 bg-[#F9F6F0] rounded-2xl p-5 border border-[#D4AF37]/40 hover:border-[#B8860B]/30 hover:shadow-md transition-all duration-300 group"
+                        className="flex flex-col items-center text-center gap-3 bg-[#F9FAFB] rounded-2xl p-5 border border-[#DFDE7D]/40 hover:border-[#009F75]/30 hover:shadow-md transition-all duration-300 group"
                       >
-                        <div className="w-14 h-14 rounded-2xl bg-white border border-[#D4AF37]/50 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
+                        <div className="w-14 h-14 rounded-2xl bg-white border border-[#DFDE7D]/50 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
                           {icon}
                         </div>
                         <div>
-                          <p className="font-heading font-black text-[#1A472A] text-sm">
+                          <p className="font-heading font-black text-[#454E63] text-sm">
                             {label}
                           </p>
                           <p className="text-[10px] text-slate-400 font-medium mt-0.5 leading-snug">
@@ -533,13 +533,13 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                 </section>
 
                 {/* ── Journey Steps ── */}
-                <section className="bg-white rounded-3xl p-8 border border-[#D4AF37]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)]">
-                  <h2 className="text-xl font-heading font-black text-[#1A472A] mb-6 flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-[#B8860B]" /> Your Journey
+                <section className="bg-white rounded-3xl p-8 border border-[#DFDE7D]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)]">
+                  <h2 className="text-xl font-heading font-black text-[#454E63] mb-6 flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-[#009F75]" /> Your Journey
                   </h2>
                   <div className="relative">
                     {/* Connecting line */}
-                    <div className="absolute top-8 left-8 right-8 h-[2px] bg-gradient-to-r from-[#D4AF37] via-[#B8860B]/30 to-[#D4AF37] hidden md:block" />
+                    <div className="absolute top-8 left-8 right-8 h-[2px] bg-gradient-to-r from-[#DFDE7D] via-[#009F75]/30 to-[#DFDE7D] hidden md:block" />
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 relative z-10">
                       {[
                         {
@@ -571,13 +571,13 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                           key={step}
                           className="flex flex-col items-center text-center gap-2"
                         >
-                          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#B8860B] to-[#1A472A] flex items-center justify-center text-white shadow-lg shadow-[#B8860B]/20 relative">
+                          <div className="w-16 h-16 rounded-full bg-[#009F75] flex items-center justify-center text-white shadow-lg shadow-[#009F75]/20 relative">
                             {icon}
-                            <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-[#D4AF37] text-[#1A472A] text-[9px] font-black flex items-center justify-center border border-white">
+                            <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-[#DFDE7D] text-[#454E63] text-[9px] font-black flex items-center justify-center border border-white">
                               {step}
                             </span>
                           </div>
-                          <p className="font-heading font-black text-[#1A472A] text-sm mt-1">
+                          <p className="font-heading font-black text-[#454E63] text-sm mt-1">
                             {label}
                           </p>
                           <p className="text-[10px] text-slate-400 font-medium">
@@ -591,9 +591,9 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
 
                 {/* ── Rich HTML content from editor (if any) ── */}
                 {item.description && item.description.trim().length > 0 && (
-                  <section className="bg-white rounded-3xl p-8 border border-[#D4AF37]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)]">
-                    <h2 className="text-xl font-heading font-black text-[#1A472A] mb-5 flex items-center gap-2">
-                      <Sparkles className="w-5 h-5 text-[#B8860B]" /> Package
+                  <section className="bg-white rounded-3xl p-8 border border-[#DFDE7D]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)]">
+                    <h2 className="text-xl font-heading font-black text-[#454E63] mb-5 flex items-center gap-2">
+                      <Sparkles className="w-5 h-5 text-[#009F75]" /> Package
                       Details
                     </h2>
                     <div
@@ -603,39 +603,39 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                     <style>{`
                       .prose-article h1, .prose-article h2, .prose-article h3, .prose-article h4 {
                         font-family: var(--font-heading);
-                        color: #1A472A;
+                        color: #454E63;
                         margin-top: 1.8rem;
                         margin-bottom: 0.7rem;
                         font-weight: 900;
                         line-height: 1.3;
                       }
                       .prose-article h1 { font-size: 1.6rem; }
-                      .prose-article h2 { font-size: 1.35rem; border-bottom: 2px solid #D4AF37; padding-bottom: 0.4rem; }
-                      .prose-article h3 { font-size: 1.15rem; color: #B8860B; }
+                      .prose-article h2 { font-size: 1.35rem; border-bottom: 2px solid #DFDE7D; padding-bottom: 0.4rem; }
+                      .prose-article h3 { font-size: 1.15rem; color: #009F75; }
                       .prose-article p { color: #4b5563; line-height: 1.9; margin-bottom: 1rem; font-size: 0.95rem; }
                       .prose-article ul, .prose-article ol { padding-left: 1.5rem; margin-bottom: 1.2rem; color: #4b5563; font-size: 0.95rem; line-height: 1.9; }
                       .prose-article ul { list-style-type: disc; }
                       .prose-article ol { list-style-type: decimal; }
                       .prose-article li { margin-bottom: 0.4rem; }
-                      .prose-article strong { color: #1A472A; font-weight: 700; }
-                      .prose-article em { color: #B8860B; font-style: italic; }
-                      .prose-article blockquote { border-left: 4px solid #B8860B; background: #D4AF3715; padding: 1rem 1.2rem; border-radius: 0 0.5rem 0.5rem 0; margin: 1.5rem 0; font-style: italic; color: #1A472A; }
+                      .prose-article strong { color: #454E63; font-weight: 700; }
+                      .prose-article em { color: #009F75; font-style: italic; }
+                      .prose-article blockquote { border-left: 4px solid #009F75; background: #DFDE7D15; padding: 1rem 1.2rem; border-radius: 0 0.5rem 0.5rem 0; margin: 1.5rem 0; font-style: italic; color: #454E63; }
                       .prose-article img { max-width: 100%; height: auto; border-radius: 0.75rem; margin: 1.5rem 0; box-shadow: 0 10px 35px rgba(72,52,52,0.06); }
-                      .prose-article a { color: #B8860B; text-decoration: underline; font-weight: 600; }
-                      .prose-article a:hover { color: #1A472A; }
+                      .prose-article a { color: #009F75; text-decoration: underline; font-weight: 600; }
+                      .prose-article a:hover { color: #454E63; }
                       .prose-article table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
-                      .prose-article th { background: #D4AF37; color: #1A472A; font-weight: 700; padding: 0.6rem 1rem; text-align: left; }
-                      .prose-article td { padding: 0.6rem 1rem; border-bottom: 1px solid #D4AF3720; color: #4b5563; }
+                      .prose-article th { background: #DFDE7D; color: #454E63; font-weight: 700; padding: 0.6rem 1rem; text-align: left; }
+                      .prose-article td { padding: 0.6rem 1rem; border-bottom: 1px solid #DFDE7D20; color: #4b5563; }
                       .prose-article tr:nth-child(even) td { background: #fffcf9; }
                     `}</style>
                   </section>
                 )}
 
                 {/* ── Guarantee note ── */}
-                <section className="bg-[#D4AF37]/15 border border-[#D4AF37]/40 rounded-3xl p-6 flex items-start gap-4">
-                  <AlertCircle className="w-6 h-6 text-[#B8860B] shrink-0 mt-0.5" />
+                <section className="bg-[#DFDE7D]/15 border border-[#DFDE7D]/40 rounded-3xl p-6 flex items-start gap-4">
+                  <AlertCircle className="w-6 h-6 text-[#009F75] shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-heading font-black text-[#1A472A] text-base mb-1.5">
+                    <h3 className="font-heading font-black text-[#454E63] text-base mb-1.5">
                       {item.type === "HOLIDAY" ? "Terrific Holiday Guarantee" : "Sacred Journey Guarantee"}
                     </h3>
                     <p className="text-xs text-slate-600 leading-relaxed font-light">
@@ -654,42 +654,42 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
             {type === "flight" && (
               <div className="space-y-10">
                 {/* Outbound Journey Section */}
-                <section className="bg-white rounded-3xl p-8 border border-[#D4AF37]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
-                  <h2 className="text-xl font-heading font-black text-[#1A472A] flex items-center gap-2">
-                    <PlaneTakeoff className="w-5 h-5 text-[#B8860B]" /> Outbound
+                <section className="bg-white rounded-3xl p-8 border border-[#DFDE7D]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
+                  <h2 className="text-xl font-heading font-black text-[#454E63] flex items-center gap-2">
+                    <PlaneTakeoff className="w-5 h-5 text-[#009F75]" /> Outbound
                     Flight Path
                   </h2>
 
                   {/* Visual Route */}
-                  <div className="flex flex-col md:flex-row items-center justify-between gap-6 p-6 bg-[#F9F6F0]/50 rounded-2xl border border-[#D4AF37]/40">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-6 p-6 bg-[#F9FAFB]/50 rounded-2xl border border-[#DFDE7D]/40">
                     {/* Departure */}
                     <div className="text-center md:text-left space-y-1 min-w-[120px]">
                       <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">
                         Departure Airport
                       </p>
-                      <p className="text-sm font-heading font-black text-[#1A472A] leading-tight">
+                      <p className="text-sm font-heading font-black text-[#454E63] leading-tight">
                         {item.departure}
                       </p>
-                      <span className="inline-block px-2.5 py-0.5 bg-[#B8860B] text-white text-[10px] font-black rounded-lg uppercase">
+                      <span className="inline-block px-2.5 py-0.5 bg-[#009F75] text-white text-[10px] font-black rounded-lg uppercase">
                         {item.departureCode}
                       </span>
                     </div>
 
                     {/* Timeline connection */}
                     <div className="flex-1 flex flex-col items-center justify-center min-w-[160px] w-full px-4">
-                      <span className="text-[10px] font-bold text-[#B8860B] uppercase tracking-widest mb-1">
+                      <span className="text-[10px] font-bold text-[#009F75] uppercase tracking-widest mb-1">
                         {item.duration}
                       </span>
 
                       {item.isTransit ? (
                         <div className="w-full flex items-center justify-between relative px-2">
                           {/* Connection line */}
-                          <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[2px] bg-[#D4AF37] z-0" />
+                          <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[2px] bg-[#DFDE7D] z-0" />
                           {/* Left dot */}
-                          <div className="w-3 h-3 rounded-full border-2 border-[#B8860B] bg-white z-10" />
+                          <div className="w-3 h-3 rounded-full border-2 border-[#009F75] bg-white z-10" />
 
                           {/* Transit node */}
-                          <div className="flex flex-col items-center bg-white border border-[#D4AF37] px-2 py-0.5 rounded-full z-10 shadow-sm">
+                          <div className="flex flex-col items-center bg-white border border-[#DFDE7D] px-2 py-0.5 rounded-full z-10 shadow-sm">
                             <span className="text-[9px] font-black text-amber-800 uppercase tracking-tight">
                               {item.transitAirport}
                             </span>
@@ -701,19 +701,19 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                           </div>
 
                           {/* Right dot */}
-                          <div className="w-3 h-3 rounded-full border-2 border-[#B8860B] bg-white z-10" />
+                          <div className="w-3 h-3 rounded-full border-2 border-[#009F75] bg-white z-10" />
                         </div>
                       ) : (
                         <div className="w-full flex items-center justify-between relative px-2">
-                          <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[2px] bg-[#D4AF37] z-0" />
-                          <div className="w-3 h-3 rounded-full border-2 border-[#B8860B] bg-white z-10" />
+                          <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[2px] bg-[#DFDE7D] z-0" />
+                          <div className="w-3 h-3 rounded-full border-2 border-[#009F75] bg-white z-10" />
 
                           {/* Direct marker */}
-                          <div className="bg-[#B8860B] text-white text-[8px] font-bold px-2 py-0.5 rounded-full z-10 uppercase tracking-widest">
+                          <div className="bg-[#009F75] text-white text-[8px] font-bold px-2 py-0.5 rounded-full z-10 uppercase tracking-widest">
                             Direct
                           </div>
 
-                          <div className="w-3 h-3 rounded-full border-2 border-[#B8860B] bg-white z-10" />
+                          <div className="w-3 h-3 rounded-full border-2 border-[#009F75] bg-white z-10" />
                         </div>
                       )}
 
@@ -727,10 +727,10 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                       <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">
                         Arrival Destination
                       </p>
-                      <p className="text-sm font-heading font-black text-[#1A472A] leading-tight">
+                      <p className="text-sm font-heading font-black text-[#454E63] leading-tight">
                         {item.destination}
                       </p>
-                      <span className="inline-block px-2.5 py-0.5 bg-[#B8860B] text-white text-[10px] font-black rounded-lg uppercase">
+                      <span className="inline-block px-2.5 py-0.5 bg-[#009F75] text-white text-[10px] font-black rounded-lg uppercase">
                         {item.destinationCode}
                       </span>
                     </div>
@@ -742,7 +742,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                       <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">
                         Airline
                       </p>
-                      <p className="text-xs font-black text-[#1A472A] mt-1">
+                      <p className="text-xs font-black text-[#454E63] mt-1">
                         {item.airline} ({item.airlineCode})
                       </p>
                     </div>
@@ -750,7 +750,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                       <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">
                         Baggage Allowance
                       </p>
-                      <p className="text-xs font-black text-[#1A472A] mt-1">
+                      <p className="text-xs font-black text-[#454E63] mt-1">
                         {item.baggage}
                       </p>
                     </div>
@@ -758,7 +758,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                       <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">
                         Aircraft Type
                       </p>
-                      <p className="text-xs font-black text-[#1A472A] mt-1">
+                      <p className="text-xs font-black text-[#454E63] mt-1">
                         {item.aircraft}
                       </p>
                     </div>
@@ -766,7 +766,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                       <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">
                         Departure Date
                       </p>
-                      <p className="text-xs font-black text-[#1A472A] mt-1">
+                      <p className="text-xs font-black text-[#454E63] mt-1">
                         {item.date}
                       </p>
                     </div>
@@ -775,39 +775,39 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
 
                 {/* Return Journey Section (if enabled) */}
                 {item.isReturn && (
-                  <section className="bg-white rounded-3xl p-8 border border-[#D4AF37]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
-                    <h2 className="text-xl font-heading font-black text-[#1A472A] flex items-center gap-2">
-                      <PlaneLanding className="w-5 h-5 text-[#B8860B]" /> Return
+                  <section className="bg-white rounded-3xl p-8 border border-[#DFDE7D]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
+                    <h2 className="text-xl font-heading font-black text-[#454E63] flex items-center gap-2">
+                      <PlaneLanding className="w-5 h-5 text-[#009F75]" /> Return
                       Flight Path
                     </h2>
 
                     {/* Visual Route */}
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-6 p-6 bg-[#F9F6F0]/50 rounded-2xl border border-[#D4AF37]/40">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-6 p-6 bg-[#F9FAFB]/50 rounded-2xl border border-[#DFDE7D]/40">
                       {/* Return Departure (original destination) */}
                       <div className="text-center md:text-left space-y-1 min-w-[120px]">
                         <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">
                           Departure Airport
                         </p>
-                        <p className="text-sm font-heading font-black text-[#1A472A] leading-tight">
+                        <p className="text-sm font-heading font-black text-[#454E63] leading-tight">
                           {item.destination}
                         </p>
-                        <span className="inline-block px-2.5 py-0.5 bg-[#B8860B] text-white text-[10px] font-black rounded-lg uppercase">
+                        <span className="inline-block px-2.5 py-0.5 bg-[#009F75] text-white text-[10px] font-black rounded-lg uppercase">
                           {item.destinationCode}
                         </span>
                       </div>
 
                       {/* Timeline connection */}
                       <div className="flex-1 flex flex-col items-center justify-center min-w-[160px] w-full px-4">
-                        <span className="text-[10px] font-bold text-[#B8860B] uppercase tracking-widest mb-1">
+                        <span className="text-[10px] font-bold text-[#009F75] uppercase tracking-widest mb-1">
                           {item.returnDuration || item.duration}
                         </span>
 
                         {item.returnIsTransit ? (
                           <div className="w-full flex items-center justify-between relative px-2">
-                            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[2px] bg-[#D4AF37] z-0" />
-                            <div className="w-3 h-3 rounded-full border-2 border-[#B8860B] bg-white z-10" />
+                            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[2px] bg-[#DFDE7D] z-0" />
+                            <div className="w-3 h-3 rounded-full border-2 border-[#009F75] bg-white z-10" />
 
-                            <div className="flex flex-col items-center bg-white border border-[#D4AF37] px-2 py-0.5 rounded-full z-10 shadow-sm">
+                            <div className="flex flex-col items-center bg-white border border-[#DFDE7D] px-2 py-0.5 rounded-full z-10 shadow-sm">
                               <span className="text-[9px] font-black text-amber-800 uppercase tracking-tight">
                                 {item.returnTransitAirport}
                               </span>
@@ -818,18 +818,18 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                               )}
                             </div>
 
-                            <div className="w-3 h-3 rounded-full border-2 border-[#B8860B] bg-white z-10" />
+                            <div className="w-3 h-3 rounded-full border-2 border-[#009F75] bg-white z-10" />
                           </div>
                         ) : (
                           <div className="w-full flex items-center justify-between relative px-2">
-                            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[2px] bg-[#D4AF37] z-0" />
-                            <div className="w-3 h-3 rounded-full border-2 border-[#B8860B] bg-white z-10" />
+                            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[2px] bg-[#DFDE7D] z-0" />
+                            <div className="w-3 h-3 rounded-full border-2 border-[#009F75] bg-white z-10" />
 
-                            <div className="bg-[#B8860B] text-white text-[8px] font-bold px-2 py-0.5 rounded-full z-10 uppercase tracking-widest">
+                            <div className="bg-[#009F75] text-white text-[8px] font-bold px-2 py-0.5 rounded-full z-10 uppercase tracking-widest">
                               Direct
                             </div>
 
-                            <div className="w-3 h-3 rounded-full border-2 border-[#B8860B] bg-white z-10" />
+                            <div className="w-3 h-3 rounded-full border-2 border-[#009F75] bg-white z-10" />
                           </div>
                         )}
 
@@ -845,10 +845,10 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                         <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">
                           Arrival Destination
                         </p>
-                        <p className="text-sm font-heading font-black text-[#1A472A] leading-tight">
+                        <p className="text-sm font-heading font-black text-[#454E63] leading-tight">
                           {item.departure}
                         </p>
-                        <span className="inline-block px-2.5 py-0.5 bg-[#B8860B] text-white text-[10px] font-black rounded-lg uppercase">
+                        <span className="inline-block px-2.5 py-0.5 bg-[#009F75] text-white text-[10px] font-black rounded-lg uppercase">
                           {item.departureCode}
                         </span>
                       </div>
@@ -860,7 +860,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                         <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">
                           Airline
                         </p>
-                        <p className="text-xs font-black text-[#1A472A] mt-1">
+                        <p className="text-xs font-black text-[#454E63] mt-1">
                           {item.returnAirline || item.airline} (
                           {item.returnAirlineCode || item.airlineCode})
                         </p>
@@ -869,7 +869,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                         <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">
                           Baggage Allowance
                         </p>
-                        <p className="text-xs font-black text-[#1A472A] mt-1">
+                        <p className="text-xs font-black text-[#454E63] mt-1">
                           {item.returnBaggage || item.baggage}
                         </p>
                       </div>
@@ -877,7 +877,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                         <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">
                           Aircraft Type
                         </p>
-                        <p className="text-xs font-black text-[#1A472A] mt-1">
+                        <p className="text-xs font-black text-[#454E63] mt-1">
                           {item.returnAircraft || item.aircraft}
                         </p>
                       </div>
@@ -885,7 +885,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                         <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">
                           Return Date
                         </p>
-                        <p className="text-xs font-black text-[#1A472A] mt-1">
+                        <p className="text-xs font-black text-[#454E63] mt-1">
                           {item.returnDate}
                         </p>
                       </div>
@@ -893,10 +893,10 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                   </section>
                 )}
 
-                <section className="bg-[#D4AF37]/15 border border-[#D4AF37]/40 rounded-3xl p-6.5 flex items-start gap-4">
-                  <AlertCircle className="w-6 h-6 text-[#B8860B] shrink-0 mt-0.5" />
+                <section className="bg-[#DFDE7D]/15 border border-[#DFDE7D]/40 rounded-3xl p-6.5 flex items-start gap-4">
+                  <AlertCircle className="w-6 h-6 text-[#009F75] shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-heading font-black text-[#1A472A] text-base mb-1.5">
+                    <h3 className="font-heading font-black text-[#454E63] text-base mb-1.5">
                       Airport Information
                     </h3>
                     <p className="text-xs text-slate-600 leading-relaxed font-light">
@@ -915,17 +915,17 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
             {type === "visa" && (
               <div className="space-y-10">
                 {/* Main Specs Section */}
-                <section className="bg-white rounded-3xl p-8 border border-[#D4AF37]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-8">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#D4AF37]/20 pb-6">
+                <section className="bg-white rounded-3xl p-8 border border-[#DFDE7D]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-8">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#DFDE7D]/20 pb-6">
                     <div>
-                      <h2 className="text-2xl font-heading font-black text-[#1A472A] flex items-center gap-2">
-                        <FileCheck className="w-6 h-6 text-[#B8860B]" /> Visa Overview
+                      <h2 className="text-2xl font-heading font-black text-[#454E63] flex items-center gap-2">
+                        <FileCheck className="w-6 h-6 text-[#009F75]" /> Visa Overview
                       </h2>
                       <p className="text-xs text-slate-500 font-medium mt-1">Official Immigration &amp; Travel Permits</p>
                     </div>
-                    <div className="bg-[#F9F6F0] px-4 py-2 rounded-xl border border-[#D4AF37]/40 flex items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-[#B8860B]" />
-                      <span className="text-xs font-black text-[#1A472A] tracking-wider uppercase">Verified Agent</span>
+                    <div className="bg-[#F9FAFB] px-4 py-2 rounded-xl border border-[#DFDE7D]/40 flex items-center gap-2">
+                      <ShieldCheck className="w-4 h-4 text-[#009F75]" />
+                      <span className="text-xs font-black text-[#454E63] tracking-wider uppercase">Verified Agent</span>
                     </div>
                   </div>
 
@@ -938,15 +938,15 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                     ].map((spec, i) => (
                       <div
                         key={i}
-                        className="bg-slate-50 rounded-2xl p-5 border border-slate-100 text-center hover:bg-[#F9F6F0]/50 hover:border-[#D4AF37]/40 transition-colors duration-300 flex flex-col items-center group"
+                        className="bg-slate-50 rounded-2xl p-5 border border-slate-100 text-center hover:bg-[#F9FAFB]/50 hover:border-[#DFDE7D]/40 transition-colors duration-300 flex flex-col items-center group"
                       >
-                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#B8860B] shadow-sm mb-3 group-hover:scale-110 transition-transform">
+                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#009F75] shadow-sm mb-3 group-hover:scale-110 transition-transform">
                           {spec.icon}
                         </div>
                         <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
                           {spec.label}
                         </p>
-                        <p className="text-sm font-black text-[#1A472A] flex items-center justify-center gap-1.5">
+                        <p className="text-sm font-black text-[#454E63] flex items-center justify-center gap-1.5">
                           {spec.flag && <span className="text-lg leading-none">{spec.flag}</span>}
                           {spec.value}
                         </p>
@@ -956,9 +956,9 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                 </section>
 
                 {/* Description or Default Luxury Text */}
-                <section className="bg-white rounded-3xl p-8 border border-[#D4AF37]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
-                  <h2 className="text-xl font-heading font-black text-[#1A472A] flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 text-[#B8860B]" /> Visa Services
+                <section className="bg-white rounded-3xl p-8 border border-[#DFDE7D]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
+                  <h2 className="text-xl font-heading font-black text-[#454E63] flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-[#009F75]" /> Visa Services
                   </h2>
                   <div className="text-sm text-slate-600 leading-relaxed font-light space-y-4">
                     {item.description ? (
@@ -978,21 +978,21 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   {/* Required Documents */}
-                  <section className="bg-white rounded-3xl p-8 border border-[#D4AF37]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6 h-full flex flex-col">
-                    <h2 className="text-xl font-heading font-black text-[#1A472A] flex items-center gap-2 mb-2">
-                      <FileText className="w-5 h-5 text-[#B8860B]" /> Required Documents
+                  <section className="bg-white rounded-3xl p-8 border border-[#DFDE7D]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6 h-full flex flex-col">
+                    <h2 className="text-xl font-heading font-black text-[#454E63] flex items-center gap-2 mb-2">
+                      <FileText className="w-5 h-5 text-[#009F75]" /> Required Documents
                     </h2>
                     <div className="space-y-4 flex-1">
                       {item?.documents?.length > 0 ? (
                         item.documents.map((doc: string, idx: number) => (
                           <div
                             key={idx}
-                            className="flex items-start gap-4 p-4 bg-[#D4AF37]/10 rounded-2xl border border-[#D4AF37]/20 hover:border-[#B8860B]/30 transition-colors"
+                            className="flex items-start gap-4 p-4 bg-[#DFDE7D]/10 rounded-2xl border border-[#DFDE7D]/20 hover:border-[#009F75]/30 transition-colors"
                           >
-                            <div className="w-6 h-6 rounded-full bg-[#B8860B] text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5 shadow-md">
+                            <div className="w-6 h-6 rounded-full bg-[#009F75] text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5 shadow-md">
                               {idx + 1}
                             </div>
-                            <span className="text-sm font-bold text-[#1A472A] leading-relaxed">
+                            <span className="text-sm font-bold text-[#454E63] leading-relaxed">
                               {doc}
                             </span>
                           </div>
@@ -1004,16 +1004,16 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                   </section>
 
                   {/* Key Benefits */}
-                  <section className="bg-white rounded-3xl p-8 border border-[#D4AF37]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6 h-full flex flex-col">
-                    <h2 className="text-xl font-heading font-black text-[#1A472A] flex items-center gap-2 mb-2">
-                      <Award className="w-5 h-5 text-[#B8860B]" /> Key Benefits
+                  <section className="bg-white rounded-3xl p-8 border border-[#DFDE7D]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6 h-full flex flex-col">
+                    <h2 className="text-xl font-heading font-black text-[#454E63] flex items-center gap-2 mb-2">
+                      <Award className="w-5 h-5 text-[#009F75]" /> Key Benefits
                     </h2>
                     <div className="space-y-3 flex-1">
                       {item?.features?.length > 0 ? (
                         item.features.map((feature: string, idx: number) => (
                           <div
                             key={idx}
-                            className="flex items-center gap-3 text-sm text-[#1A472A] font-medium p-3 rounded-xl bg-slate-50 border border-slate-100"
+                            className="flex items-center gap-3 text-sm text-[#454E63] font-medium p-3 rounded-xl bg-slate-50 border border-slate-100"
                           >
                             <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />
                             {feature}
@@ -1029,9 +1029,9 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                           ].map((feat, idx) => (
                             <div
                               key={idx}
-                              className="flex items-center gap-3 text-sm text-[#1A472A] font-medium p-3 rounded-xl bg-slate-50 border border-slate-100"
+                              className="flex items-center gap-3 text-sm text-[#454E63] font-medium p-3 rounded-xl bg-slate-50 border border-slate-100"
                             >
-                              <CheckCircle className="w-5 h-5 text-[#B8860B] shrink-0" />
+                              <CheckCircle className="w-5 h-5 text-[#009F75] shrink-0" />
                               {feat}
                             </div>
                           ))}
@@ -1047,17 +1047,17 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
             {type === "transport" && (
               <div className="space-y-10">
                 {/* Main Specs Section */}
-                <section className="bg-white rounded-3xl p-8 border border-[#D4AF37]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-8">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#D4AF37]/20 pb-6">
+                <section className="bg-white rounded-3xl p-8 border border-[#DFDE7D]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-8">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#DFDE7D]/20 pb-6">
                     <div>
-                      <h2 className="text-2xl font-heading font-black text-[#1A472A] flex items-center gap-2">
-                        <Car className="w-6 h-6 text-[#B8860B]" /> Vehicle Overview
+                      <h2 className="text-2xl font-heading font-black text-[#454E63] flex items-center gap-2">
+                        <Car className="w-6 h-6 text-[#009F75]" /> Vehicle Overview
                       </h2>
                       <p className="text-xs text-slate-500 font-medium mt-1">Premium Ground Transportation Details</p>
                     </div>
-                    <div className="bg-[#F9F6F0] px-4 py-2 rounded-xl border border-[#D4AF37]/40 flex items-center gap-2">
-                      <Star className="w-4 h-4 text-[#B8860B] fill-[#B8860B]" />
-                      <span className="text-xs font-black text-[#1A472A] tracking-wider uppercase">VIP Standard</span>
+                    <div className="bg-[#F9FAFB] px-4 py-2 rounded-xl border border-[#DFDE7D]/40 flex items-center gap-2">
+                      <Star className="w-4 h-4 text-[#009F75] fill-[#009F75]" />
+                      <span className="text-xs font-black text-[#454E63] tracking-wider uppercase">VIP Standard</span>
                     </div>
                   </div>
 
@@ -1070,15 +1070,15 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                     ].map((spec, i) => (
                       <div
                         key={i}
-                        className="bg-slate-50 rounded-2xl p-5 border border-slate-100 text-center hover:bg-[#F9F6F0]/50 hover:border-[#D4AF37]/40 transition-colors duration-300 flex flex-col items-center group"
+                        className="bg-slate-50 rounded-2xl p-5 border border-slate-100 text-center hover:bg-[#F9FAFB]/50 hover:border-[#DFDE7D]/40 transition-colors duration-300 flex flex-col items-center group"
                       >
-                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#B8860B] shadow-sm mb-3 group-hover:scale-110 transition-transform">
+                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#009F75] shadow-sm mb-3 group-hover:scale-110 transition-transform">
                           {spec.icon}
                         </div>
                         <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
                           {spec.label}
                         </p>
-                        <p className="text-sm font-black text-[#1A472A]">
+                        <p className="text-sm font-black text-[#454E63]">
                           {spec.value}
                         </p>
                       </div>
@@ -1087,9 +1087,9 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                 </section>
 
                 {/* Description or Default Luxury Text */}
-                <section className="bg-white rounded-3xl p-8 border border-[#D4AF37]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
-                  <h2 className="text-xl font-heading font-black text-[#1A472A] flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 text-[#B8860B]" /> The Experience
+                <section className="bg-white rounded-3xl p-8 border border-[#DFDE7D]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
+                  <h2 className="text-xl font-heading font-black text-[#454E63] flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-[#009F75]" /> The Experience
                   </h2>
                   <div className="text-sm text-slate-600 leading-relaxed font-light space-y-4">
                     {item.description ? (
@@ -1109,9 +1109,9 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                 </section>
 
                 {/* Features & Amenities (Dynamic + Static Guarantees) */}
-                <section className="bg-white rounded-3xl p-8 border border-[#D4AF37]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
-                  <h2 className="text-xl font-heading font-black text-[#1A472A] flex items-center gap-2 mb-6">
-                    <ShieldCheck className="w-5 h-5 text-[#B8860B]" /> Premium Amenities
+                <section className="bg-white rounded-3xl p-8 border border-[#DFDE7D]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
+                  <h2 className="text-xl font-heading font-black text-[#454E63] flex items-center gap-2 mb-6">
+                    <ShieldCheck className="w-5 h-5 text-[#009F75]" /> Premium Amenities
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Database Features */}
@@ -1119,7 +1119,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                       item.features.map((feature: string, idx: number) => (
                         <div
                           key={idx}
-                          className="flex items-center gap-3 text-sm text-[#1A472A] font-medium p-3 rounded-xl bg-slate-50 border border-slate-100"
+                          className="flex items-center gap-3 text-sm text-[#454E63] font-medium p-3 rounded-xl bg-slate-50 border border-slate-100"
                         >
                           <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />
                           {feature}
@@ -1138,9 +1138,9 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                         ].map((feat, idx) => (
                           <div
                             key={idx}
-                            className="flex items-center gap-3 text-sm text-[#1A472A] font-medium p-3 rounded-xl bg-slate-50 border border-slate-100"
+                            className="flex items-center gap-3 text-sm text-[#454E63] font-medium p-3 rounded-xl bg-slate-50 border border-slate-100"
                           >
-                            <CheckCircle className="w-5 h-5 text-[#B8860B] shrink-0" />
+                            <CheckCircle className="w-5 h-5 text-[#009F75] shrink-0" />
                             {feat}
                           </div>
                         ))}
@@ -1159,12 +1159,12 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
             <div className="sticky top-28 space-y-8">
               {/* Sidebar Booking Card */}
               {type !== "blog" && (
-                <div className="bg-gradient-to-br from-[#382626] to-[#251717] text-white rounded-3xl p-8 border border-[#D4AF37]/30 shadow-2xl space-y-6 relative overflow-hidden">
+                <div className="bg-[#009F75] text-white rounded-3xl p-8 border border-[#DFDE7D]/30 shadow-2xl space-y-6 relative overflow-hidden">
                   {/* Subtle top ambient glow */}
-                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent" />
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#DFDE7D]/50 to-transparent" />
 
                   <div>
-                    <span className="text-[10px] text-[#D4AF37] font-extrabold uppercase tracking-[0.2em] block mb-1">
+                    <span className="text-[10px] text-[#DFDE7D] font-extrabold uppercase tracking-[0.2em] block mb-1">
                       Rate / Pricing
                     </span>
                     <div className="flex items-baseline gap-2">
@@ -1172,29 +1172,29 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                         {displayPrice}
                       </span>
                       {type === "package" && (
-                        <span className="text-xs text-[#D4AF37]/70 font-medium">
+                        <span className="text-xs text-[#DFDE7D]/70 font-medium">
                           / person
                         </span>
                       )}
                       {type === "transport" && (
-                        <span className="text-xs text-[#D4AF37]/70 font-medium">
+                        <span className="text-xs text-[#DFDE7D]/70 font-medium">
                           / vehicle
                         </span>
                       )}
                       {type === "flight" && (
-                        <span className="text-xs text-[#D4AF37]/70 font-medium">
+                        <span className="text-xs text-[#DFDE7D]/70 font-medium">
                           / passenger
                         </span>
                       )}
                       {type === "visa" && (
-                        <span className="text-xs text-[#D4AF37]/70 font-medium">
+                        <span className="text-xs text-[#DFDE7D]/70 font-medium">
                           / applicant
                         </span>
                       )}
                     </div>
                   </div>
 
-                  <div className="space-y-4 border-t border-[#D4AF37]/20 pt-5">
+                  <div className="space-y-4 border-t border-[#DFDE7D]/20 pt-5">
                     {/* Availability */}
                     <div className="flex justify-between items-center text-xs">
                       <span className="text-slate-300 font-medium">
@@ -1225,7 +1225,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                         <span className="text-slate-300 text-xs font-medium">
                           Travel Dates
                         </span>
-                        <span className="text-[#F9F6F0] text-xs font-bold bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">
+                        <span className="text-[#F9FAFB] text-xs font-bold bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">
                           {item.travelDates}
                         </span>
                       </div>
@@ -1236,7 +1236,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                       <span className="text-slate-300 font-medium">
                         Protection
                       </span>
-                      <span className="text-[#D4AF37] font-extrabold uppercase tracking-widest text-[10px] bg-[#D4AF37]/10 px-2.5 py-1 rounded-md border border-[#D4AF37]/20">
+                      <span className="text-[#DFDE7D] font-extrabold uppercase tracking-widest text-[10px] bg-[#DFDE7D]/10 px-2.5 py-1 rounded-md border border-[#DFDE7D]/20">
                         IATA &amp; ATOL
                       </span>
                     </div>
@@ -1264,8 +1264,8 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
 
               {/* Sidebar Related Articles (for SEO Interlinking) */}
               {relatedArticles.length > 0 && (
-                <div className="rounded-3xl border border-[#D4AF37]/25 p-6 bg-white space-y-5">
-                  <h3 className="text-xs font-heading font-black text-[#1A472A] uppercase tracking-[0.2em] mb-4">
+                <div className="rounded-3xl border border-[#DFDE7D]/25 p-6 bg-white space-y-5">
+                  <h3 className="text-xs font-heading font-black text-[#454E63] uppercase tracking-[0.2em] mb-4">
                     {type === "blog" ? "Related Articles" : "Travel Guides"}
                   </h3>
                   <div className="space-y-4">
@@ -1273,7 +1273,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                       <Link
                         key={related.id}
                         href={`/v/${related.slug}`}
-                        className="group flex gap-3.5 items-start rounded-2xl p-3 border border-[#D4AF37]/20 hover:border-[#B8860B]/40 hover:bg-[#D4AF37]/10 transition-all duration-300"
+                        className="group flex gap-3.5 items-start rounded-2xl p-3 border border-[#DFDE7D]/20 hover:border-[#009F75]/40 hover:bg-[#DFDE7D]/10 transition-all duration-300"
                       >
                         <div className="relative w-16 h-14 rounded-xl overflow-hidden shrink-0">
                           <Image
@@ -1284,10 +1284,10 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                           />
                         </div>
                         <div className="flex-grow min-w-0">
-                          <span className="text-[9px] font-black uppercase tracking-wider text-[#B8860B]">
+                          <span className="text-[9px] font-black uppercase tracking-wider text-[#009F75]">
                             {related.category}
                           </span>
-                          <p className="text-xs font-bold text-[#1A472A] leading-snug mt-0.5 group-hover:text-[#B8860B] transition-colors line-clamp-2">
+                          <p className="text-xs font-bold text-[#454E63] leading-snug mt-0.5 group-hover:text-[#009F75] transition-colors line-clamp-2">
                             {related.title}
                           </p>
                           <p className="text-[9px] text-slate-400 mt-1">
@@ -1301,8 +1301,8 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
               )}
 
               {/* Sidebar General FAQ / Support Card */}
-              <div className="rounded-3xl border border-[#D4AF37]/30 bg-[#D4AF37]/10 p-6 space-y-4">
-                <h3 className="text-[10px] font-heading font-black text-[#1A472A] uppercase tracking-[0.2em]">
+              <div className="rounded-3xl border border-[#DFDE7D]/30 bg-[#DFDE7D]/10 p-6 space-y-4">
+                <h3 className="text-[10px] font-heading font-black text-[#454E63] uppercase tracking-[0.2em]">
                   Our Services
                 </h3>
                 <div className="space-y-2">
@@ -1331,9 +1331,9 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                     <Link
                       key={idx}
                       href={srv.href}
-                      className="flex items-center gap-2.5 text-xs font-bold text-[#B8860B] hover:text-[#1A472A] py-1.5 hover:translate-x-0.5 transition-all duration-200"
+                      className="flex items-center gap-2.5 text-xs font-bold text-[#009F75] hover:text-[#454E63] py-1.5 hover:translate-x-0.5 transition-all duration-200"
                     >
-                      <span className="w-6 h-6 rounded-full bg-[#D4AF37]/40 flex items-center justify-center shrink-0 text-[#B8860B]">
+                      <span className="w-6 h-6 rounded-full bg-[#DFDE7D]/40 flex items-center justify-center shrink-0 text-[#009F75]">
                         {srv.icon}
                       </span>
                       {srv.label}

@@ -166,11 +166,11 @@ export function HeroSection() {
           className="w-full max-w-5xl relative z-30 flex flex-col items-center mt-4"
         >
           {/* Tab Navigation */}
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-2 bg-slate-900/50 backdrop-blur-md p-2 rounded-2xl sm:rounded-full mb-4 border border-white/20 shadow-lg w-full max-w-3xl">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-2 bg-slate-900/50 backdrop-blur-md p-2 rounded-2xl sm:rounded-lg mb-4 border border-white/20 shadow-lg w-full max-w-3xl">
             {siteConfig.allowedTabs.includes("flight") && (
               <button
                 onClick={() => setActiveTab("flight")}
-                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
+                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-md text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
                   activeTab === "flight"
                     ? "bg-white text-slate-900 shadow-md"
                     : "text-white hover:bg-white/20"
@@ -182,7 +182,7 @@ export function HeroSection() {
             {siteConfig.allowedTabs.includes("umrah") && (
               <button
                 onClick={() => setActiveTab("umrah")}
-                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
+                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-md text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
                   activeTab === "umrah"
                     ? "bg-white text-slate-900 shadow-md"
                     : "text-white hover:bg-white/20"
@@ -194,7 +194,7 @@ export function HeroSection() {
             {siteConfig.allowedTabs.includes("holiday") && (
               <button
                 onClick={() => setActiveTab("holidays")}
-                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
+                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-md text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
                   activeTab === "holidays"
                     ? "bg-white text-slate-900 shadow-md"
                     : "text-white hover:bg-white/20"
@@ -206,7 +206,7 @@ export function HeroSection() {
             {siteConfig.allowedTabs.includes("visa") && (
               <button
                 onClick={() => setActiveTab("visa")}
-                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
+                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-md text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
                   activeTab === "visa"
                     ? "bg-white text-slate-900 shadow-md"
                     : "text-white hover:bg-white/20"

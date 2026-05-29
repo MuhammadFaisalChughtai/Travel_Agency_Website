@@ -12,11 +12,7 @@ export function SiteProvider({
   children: React.ReactNode;
   config: SiteConfig;
 }) {
-  return (
-    <SiteContext.Provider value={config}>
-      {children}
-    </SiteContext.Provider>
-  );
+  return <SiteContext.Provider value={config}>{children}</SiteContext.Provider>;
 }
 
 export function useSiteConfig() {

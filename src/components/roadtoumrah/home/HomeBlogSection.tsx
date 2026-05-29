@@ -41,10 +41,10 @@ export function HomeBlogSection({
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center space-y-4 mb-12 flex flex-col items-center">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#B8860B] text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.2em]">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[#DFDE7D]/20 border border-[#DFDE7D]/40 text-[#009F75] text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.2em]">
             Travel Journals
           </span>
-          <h2 className="text-3xl md:text-4xl font-heading font-black text-[#1A472A] tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-heading font-black text-[#454E63] tracking-tight">
             Latest Insights & Guides
           </h2>
           <p className="text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
@@ -58,7 +58,7 @@ export function HomeBlogSection({
           {currentBlogs.map((post) => (
             <article
               key={post.id}
-              className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#B8860B]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1"
+              className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#009F75]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1"
             >
               <div className="relative h-56 w-full overflow-hidden">
                 <Image
@@ -68,7 +68,7 @@ export function HomeBlogSection({
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute top-4 left-4 z-10">
-                  <span className="px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[#B8860B] text-[9px] font-black uppercase tracking-widest shadow-sm">
+                  <span className="px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[#009F75] text-[9px] font-black uppercase tracking-widest shadow-sm">
                     {post.category}
                   </span>
                 </div>
@@ -77,16 +77,16 @@ export function HomeBlogSection({
               <div className="p-8 flex flex-col flex-grow space-y-4">
                 <div className="flex items-center gap-4 text-[10px] text-slate-400 font-bold uppercase tracking-wider">
                   <span className="flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-[#B8860B]" />
+                    <Calendar className="w-3.5 h-3.5 text-[#009F75]" />
                     {post.date}
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-[#B8860B]" />
+                    <Clock className="w-3.5 h-3.5 text-[#009F75]" />
                     {post.readTime}
                   </span>
                 </div>
 
-                <h3 className="text-xl font-heading font-black text-slate-900 leading-snug group-hover:text-[#B8860B] transition-colors duration-300">
+                <h3 className="text-xl font-heading font-black text-slate-900 leading-snug group-hover:text-[#009F75] transition-colors duration-300">
                   {post.title}
                 </h3>
 
@@ -97,7 +97,7 @@ export function HomeBlogSection({
                 <div className="border-t border-slate-100 pt-5">
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-2 text-xs font-black text-[#B8860B] group-hover:text-slate-900 transition-colors duration-300 uppercase tracking-widest"
+                    className="inline-flex items-center gap-2 text-xs font-black text-[#009F75] group-hover:text-slate-900 transition-colors duration-300 uppercase tracking-widest"
                   >
                     <span>Read Full Article</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
@@ -112,7 +112,7 @@ export function HomeBlogSection({
           <div className="mt-16 text-center">
             <button
               onClick={() => setVisibleCount((prev) => prev + 4)}
-              className="inline-flex items-center justify-center whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 px-4 py-2 flex-1 h-11 text-xs rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 font-extrabold tracking-widest uppercase border bg-[#B8860B] hover:bg-[#1A472A] text-[#F9F6F0] border-[#D4AF37]/30"
+              className="inline-flex items-center justify-center whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 px-4 py-2 flex-1 h-11 text-xs rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 font-extrabold tracking-widest uppercase border bg-[#009F75] hover:bg-[#454E63] text-[#F9FAFB] border-[#DFDE7D]/30"
             >
               Load More <ArrowRight className="w-4 h-4 ml-2" />
             </button>

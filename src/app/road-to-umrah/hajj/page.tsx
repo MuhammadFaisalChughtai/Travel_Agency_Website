@@ -80,11 +80,11 @@ export default async function HajjPage() {
       <Hero
         backgroundImage="https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
         badgeText="Sacred Pilgrimage 2026 / 2027"
-        badgeIcon={<Plane className="w-3.5 h-3.5 text-[#D4AF37]" />}
+        badgeIcon={<Plane className="w-3.5 h-3.5 text-[#DFDE7D]" />}
         title={
           <>
             Comfort & Guidance{" "}
-            <span className="text-[#D4AF37] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">
+            <span className="text-[#DFDE7D] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">
               Hajj
             </span>{" "}
             Packages
