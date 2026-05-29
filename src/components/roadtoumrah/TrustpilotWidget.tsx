@@ -27,7 +27,7 @@ export function TrustpilotWidget() {
           </span>
         </div>
       </div>
-      <p className="text-[9px] text-[#483434]/70 font-bold uppercase tracking-widest pl-1">
+      <p className="text-[9px] text-slate-300 font-bold uppercase tracking-widest pl-1">
         Review us on{" "}
         <span className="text-[#00b67a] font-black group-hover:underline">
           Trustpilot

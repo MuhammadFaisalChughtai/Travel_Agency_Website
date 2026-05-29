@@ -166,13 +166,13 @@ export function Footer() {
           {/* Column 2: Useful Links (lg:col-span-2) */}
           <div className="lg:col-span-2 space-y-4">
             <div className="space-y-1.5">
-              <h3 className="text-xs md:text-sm font-black tracking-wider uppercase text-[#064e3b] font-heading">
+              <h3 className="text-xs md:text-sm font-black tracking-wider uppercase text-[#d4af37] font-heading">
                 Useful Links
               </h3>
               <div className="flex items-center gap-1.5">
-                <span className="h-[1.5px] w-8 bg-[#064e3b]"></span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#064e3b]"></span>
-                <span className="h-[1.5px] w-4 bg-[#064e3b]/30"></span>
+                <span className="h-[1.5px] w-8 bg-[#d4af37]"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></span>
+                <span className="h-[1.5px] w-4 bg-[#d4af37]/30"></span>
               </div>
             </div>
             <ul className="space-y-2.5">
@@ -180,9 +180,9 @@ export function Footer() {
                 <li key={i}>
                   <Link
                     href={link.href}
-                    className="text-xs font-semibold hover:text-[#064e3b] flex items-center gap-1 transition-colors duration-200 group"
+                    className="text-xs font-semibold hover:text-[#d4af37] flex items-center gap-1 transition-colors duration-200 group"
                   >
-                    <ChevronRight className="w-3 h-3 text-[#064e3b] group-hover:translate-x-0.5 transition-transform" />
+                    <ChevronRight className="w-3 h-3 text-[#d4af37] group-hover:translate-x-0.5 transition-transform" />
                     {link.label}
                   </Link>
                 </li>
@@ -193,13 +193,13 @@ export function Footer() {
           {/* Column 3: Informative Links (lg:col-span-2.5) */}
           <div className="lg:col-span-2 md:col-span-1 lg:col-span-2.5 space-y-4">
             <div className="space-y-1.5">
-              <h3 className="text-xs md:text-sm font-black tracking-wider uppercase text-[#064e3b] font-heading">
+              <h3 className="text-xs md:text-sm font-black tracking-wider uppercase text-[#d4af37] font-heading">
                 Informative Links
               </h3>
               <div className="flex items-center gap-1.5">
-                <span className="h-[1.5px] w-8 bg-[#064e3b]"></span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#064e3b]"></span>
-                <span className="h-[1.5px] w-4 bg-[#064e3b]/30"></span>
+                <span className="h-[1.5px] w-8 bg-[#d4af37]"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></span>
+                <span className="h-[1.5px] w-4 bg-[#d4af37]/30"></span>
               </div>
             </div>
             <ul className="space-y-3">
@@ -224,9 +224,9 @@ export function Footer() {
                 <li key={i}>
                   <Link
                     href={link.href}
-                    className="text-xs font-semibold hover:text-[#064e3b] flex items-start gap-1 transition-colors duration-200 group leading-snug"
+                    className="text-xs font-semibold hover:text-[#d4af37] flex items-start gap-1 transition-colors duration-200 group leading-snug"
                   >
-                    <ChevronRight className="w-3 h-3 text-[#064e3b] mt-0.5 group-hover:translate-x-0.5 transition-transform shrink-0" />
+                    <ChevronRight className="w-3 h-3 text-[#d4af37] mt-0.5 group-hover:translate-x-0.5 transition-transform shrink-0" />
                     <span>{link.label}</span>
                   </Link>
                 </li>
@@ -237,13 +237,13 @@ export function Footer() {
           {/* Column 4: Umrah & Hajj Packages (lg:col-span-2) */}
           <div className="lg:col-span-2 space-y-4">
             <div className="space-y-1.5">
-              <h3 className="text-xs md:text-sm font-black tracking-wider uppercase text-[#064e3b] font-heading">
+              <h3 className="text-xs md:text-sm font-black tracking-wider uppercase text-[#d4af37] font-heading">
                 Umrah & Hajj Packages
               </h3>
               <div className="flex items-center gap-1.5">
-                <span className="h-[1.5px] w-8 bg-[#064e3b]"></span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#064e3b]"></span>
-                <span className="h-[1.5px] w-4 bg-[#064e3b]/30"></span>
+                <span className="h-[1.5px] w-8 bg-[#d4af37]"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></span>
+                <span className="h-[1.5px] w-4 bg-[#d4af37]/30"></span>
               </div>
             </div>
             <ul className="space-y-2.5">
@@ -268,9 +268,9 @@ export function Footer() {
                 <li key={i}>
                   <Link
                     href={link.href}
-                    className="text-xs font-semibold hover:text-[#064e3b] flex items-center gap-1 transition-colors duration-200 group"
+                    className="text-xs font-semibold hover:text-[#d4af37] flex items-center gap-1 transition-colors duration-200 group"
                   >
-                    <ChevronRight className="w-3 h-3 text-[#064e3b] group-hover:translate-x-0.5 transition-transform" />
+                    <ChevronRight className="w-3 h-3 text-[#d4af37] group-hover:translate-x-0.5 transition-transform" />
                     {link.label}
                   </Link>
                 </li>
@@ -281,24 +281,24 @@ export function Footer() {
           {/* Column 5: Contact Us (lg:col-span-2.5) */}
           <div className="lg:col-span-2.5 space-y-4">
             <div className="space-y-1.5">
-              <h3 className="text-xs md:text-sm font-black tracking-wider uppercase text-[#064e3b] font-heading">
+              <h3 className="text-xs md:text-sm font-black tracking-wider uppercase text-[#d4af37] font-heading">
                 Contact Us
               </h3>
               <div className="flex items-center gap-1.5">
-                <span className="h-[1.5px] w-8 bg-[#064e3b]"></span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#064e3b]"></span>
-                <span className="h-[1.5px] w-4 bg-[#064e3b]/30"></span>
+                <span className="h-[1.5px] w-8 bg-[#d4af37]"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></span>
+                <span className="h-[1.5px] w-4 bg-[#d4af37]/30"></span>
               </div>
             </div>
             <ul className="space-y-3.5">
               <li className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#064e3b] mt-0.5 shrink-0" />
+                <MapPin className="w-4 h-4 text-[#d4af37] mt-0.5 shrink-0" />
                 <span className="text-xs font-semibold leading-relaxed">
                   Office 1, 11 Walford Road, Birmingham, B11 1NP
                 </span>
               </li>
               <li className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-[#064e3b] shrink-0" />
+                <Mail className="w-4 h-4 text-[#d4af37] shrink-0" />
                 <a
                   href="mailto:inquires@roadtoumrah.co.uk"
                   className="text-xs font-semibold hover:underline"
@@ -307,7 +307,7 @@ export function Footer() {
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-[#064e3b] shrink-0" />
+                <Phone className="w-4 h-4 text-[#d4af37] shrink-0" />
                 <a
                   href="tel:+441215291630"
                   className="text-xs font-semibold hover:underline"
@@ -315,7 +315,7 @@ export function Footer() {
                   +441215291630
                 </a>
               </li>
-              <li className="flex items-center gap-4 pt-4 border-t border-[#064e3b]/15">
+              <li className="flex items-center gap-4 pt-4 border-t border-[#d4af37]/30">
                 <img
                   src="/IATA.svg"
                   alt="IATA Logo"

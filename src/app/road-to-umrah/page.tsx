@@ -1,6 +1,7 @@
 import { HeroSection } from "@/components/roadtoumrah/home/HeroSection";
 import { TrustpilotReviews } from "@/components/roadtoumrah/home/TrustpilotReviews";
 import { HomeBlogSection } from "@/components/roadtoumrah/home/HomeBlogSection";
+import { EssentialServicesSection } from "@/components/roadtoumrah/home/EssentialServicesSection";
 import { TrendingFlightsSection } from "@/components/flights/TrendingFlightsSection";
 import { PackageCard } from "@/components/roadtoumrah/umrah/PackageCard";
 import { prisma } from "@/lib/prisma";
@@ -195,6 +196,8 @@ export default async function Home() {
           </div>
         </section>
       )}
+
+      <EssentialServicesSection siteConfig={siteConfig} />
 
       {/* Blog Section grouped by Categories */}
       <HomeBlogSection blogsByCategory={blogsByCategory} />
