@@ -30,7 +30,7 @@ export const SITE_CONFIGS: Record<string, SiteConfig> = {
     currencyCode: "GBP",
     exchangeRate: 1.0,
     allowedTabs: ["umrah", "hajj", "visa", "transport"],
-    logoUrl: "/roadtoumrah-logo.png", // The user should upload this file to the public folder
+    logoUrl: "/Logo_transparent.svg",
   },
 };
 

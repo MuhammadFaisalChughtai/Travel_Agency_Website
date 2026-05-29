@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/Button";
 import { CheckCircle, AlertCircle } from "lucide-react";
 
 export function ContactForm() {
@@ -59,8 +58,8 @@ export function ContactForm() {
   };
 
   return (
-    <div className="bg-[#fff8f0] rounded-3xl p-8 md:p-10 shadow-xl shadow-[#483434]/5 border border-[#eed6c4]/60">
-      <h2 className="text-3xl font-black text-[#2a1a1a] mb-8 font-heading">
+    <div className="bg-white rounded-3xl p-8 md:p-10 shadow-xl shadow-[#064e3b]/10 border border-[#d4af37]/30">
+      <h2 className="text-3xl font-black text-[#064e3b] mb-8 font-heading">
         Send us a message
       </h2>
       
@@ -69,7 +68,7 @@ export function ContactForm() {
           <div>
             <label
               htmlFor="firstName"
-              className="block text-sm font-black tracking-wide uppercase leading-6 text-[#2a1a1a]"
+              className="block text-sm font-black tracking-wide uppercase leading-6 text-[#064e3b]"
             >
               First name
             </label>
@@ -81,14 +80,14 @@ export function ContactForm() {
                 value={formData.firstName}
                 onChange={handleChange}
                 required
-                className="block w-full rounded-xl border-0 py-3 text-[#2a1a1a] shadow-sm ring-1 ring-inset ring-[#eed6c4]/80 placeholder:text-[#6b4f4f]/50 focus:ring-2 focus:ring-inset focus:ring-[#6b4f4f] sm:text-sm sm:leading-6 px-4 bg-[#f5f0eb]/50 outline-none transition-all duration-300"
+                className="block w-full rounded-xl border-0 py-3 text-[#064e3b] shadow-sm ring-1 ring-inset ring-[#d4af37]/40 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-[#064e3b] sm:text-sm sm:leading-6 px-4 bg-slate-50 outline-none transition-all duration-300"
               />
             </div>
           </div>
           <div>
             <label
               htmlFor="lastName"
-              className="block text-sm font-black tracking-wide uppercase leading-6 text-[#2a1a1a]"
+              className="block text-sm font-black tracking-wide uppercase leading-6 text-[#064e3b]"
             >
               Last name
             </label>
@@ -100,7 +99,7 @@ export function ContactForm() {
                 value={formData.lastName}
                 onChange={handleChange}
                 required
-                className="block w-full rounded-xl border-0 py-3 text-[#2a1a1a] shadow-sm ring-1 ring-inset ring-[#eed6c4]/80 placeholder:text-[#6b4f4f]/50 focus:ring-2 focus:ring-inset focus:ring-[#6b4f4f] sm:text-sm sm:leading-6 px-4 bg-[#f5f0eb]/50 outline-none transition-all duration-300"
+                className="block w-full rounded-xl border-0 py-3 text-[#064e3b] shadow-sm ring-1 ring-inset ring-[#d4af37]/40 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-[#064e3b] sm:text-sm sm:leading-6 px-4 bg-slate-50 outline-none transition-all duration-300"
               />
             </div>
           </div>
@@ -109,7 +108,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-black tracking-wide uppercase leading-6 text-[#2a1a1a]"
+            className="block text-sm font-black tracking-wide uppercase leading-6 text-[#064e3b]"
           >
             Email address
           </label>
@@ -121,7 +120,7 @@ export function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="block w-full rounded-xl border-0 py-3 text-[#2a1a1a] shadow-sm ring-1 ring-inset ring-[#eed6c4]/80 placeholder:text-[#6b4f4f]/50 focus:ring-2 focus:ring-inset focus:ring-[#6b4f4f] sm:text-sm sm:leading-6 px-4 bg-[#f5f0eb]/50 outline-none transition-all duration-300"
+              className="block w-full rounded-xl border-0 py-3 text-[#064e3b] shadow-sm ring-1 ring-inset ring-[#d4af37]/40 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-[#064e3b] sm:text-sm sm:leading-6 px-4 bg-slate-50 outline-none transition-all duration-300"
             />
           </div>
         </div>
@@ -129,7 +128,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="phone"
-            className="block text-sm font-black tracking-wide uppercase leading-6 text-[#2a1a1a]"
+            className="block text-sm font-black tracking-wide uppercase leading-6 text-[#064e3b]"
           >
             Phone number
           </label>
@@ -141,7 +140,7 @@ export function ContactForm() {
               value={formData.phone}
               onChange={handleChange}
               required
-              className="block w-full rounded-xl border-0 py-3 text-[#2a1a1a] shadow-sm ring-1 ring-inset ring-[#eed6c4]/80 placeholder:text-[#6b4f4f]/50 focus:ring-2 focus:ring-inset focus:ring-[#6b4f4f] sm:text-sm sm:leading-6 px-4 bg-[#f5f0eb]/50 outline-none transition-all duration-300"
+              className="block w-full rounded-xl border-0 py-3 text-[#064e3b] shadow-sm ring-1 ring-inset ring-[#d4af37]/40 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-[#064e3b] sm:text-sm sm:leading-6 px-4 bg-slate-50 outline-none transition-all duration-300"
             />
           </div>
         </div>
@@ -149,7 +148,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="message"
-            className="block text-sm font-black tracking-wide uppercase leading-6 text-[#2a1a1a]"
+            className="block text-sm font-black tracking-wide uppercase leading-6 text-[#064e3b]"
           >
             Message
           </label>
@@ -161,7 +160,7 @@ export function ContactForm() {
               value={formData.message}
               onChange={handleChange}
               required
-              className="block w-full rounded-xl border-0 py-3 text-[#2a1a1a] shadow-sm ring-1 ring-inset ring-[#eed6c4]/80 placeholder:text-[#6b4f4f]/50 focus:ring-2 focus:ring-inset focus:ring-[#6b4f4f] sm:text-sm sm:leading-6 px-4 bg-[#f5f0eb]/50 resize-none outline-none transition-all duration-300"
+              className="block w-full rounded-xl border-0 py-3 text-[#064e3b] shadow-sm ring-1 ring-inset ring-[#d4af37]/40 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-[#064e3b] sm:text-sm sm:leading-6 px-4 bg-slate-50 resize-none outline-none transition-all duration-300"
             />
           </div>
         </div>
@@ -181,10 +180,10 @@ export function ContactForm() {
           </div>
         )}
 
-        <Button 
+        <button 
           type="submit" 
           disabled={status === "loading"}
-          className="w-full h-12 text-md flex justify-center items-center gap-2"
+          className="w-full h-12 text-md flex justify-center items-center gap-2 bg-[#064e3b] hover:bg-[#d4af37] text-white hover:text-[#064e3b] rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 font-bold tracking-widest uppercase"
         >
           {status === "loading" ? (
             <>
@@ -197,7 +196,7 @@ export function ContactForm() {
           ) : (
             "Send Message"
           )}
-        </Button>
+        </button>
       </form>
     </div>
   );
