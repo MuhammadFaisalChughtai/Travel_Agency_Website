@@ -66,9 +66,9 @@ export default function ContactPage() {
                     Office Location
                   </h3>
                   <p className="text-slate-600 font-medium leading-relaxed">
-                    <a 
-                      target="_blank" 
-                      rel="nofollow noreferrer" 
+                    <a
+                      target="_blank"
+                      rel="nofollow noreferrer"
                       href="https://www.google.com/maps/place/Office+1,+11+Walford+Rd,+Sparkbrook,+Birmingham+B11+1NP,+UK/@52.4588429,-1.8714984,17z/data=!3m1!4b1!4m6!3m5!1s0x4870bb8e7a1aaaab:0x86292dcc415d08e6!8m2!3d52.4588429!4d-1.8689235!16s%2Fg%2F11xfdxrvnv?entry=ttu&g_ep=EgoyMDI1MDcyMS4wIKXMDSoASAFQAw%3D%3D"
                       className="hover:text-primary transition-colors hover:underline"
                     >
@@ -143,7 +143,9 @@ export default function ContactPage() {
             <div className="bg-[#064e3b] rounded-3xl p-8 mt-12 flex items-start gap-6 text-white shadow-xl">
               <ShieldCheck className="w-10 h-10 text-[#d4af37] flex-shrink-0" />
               <div>
-                <h4 className="font-black text-xl font-heading tracking-wide">ATOL Protected</h4>
+                <h4 className="font-black text-[#d4af37] text-xl font-heading tracking-wide">
+                  ATOL Protected
+                </h4>
                 <p className="text-sm text-[#d4af37]/80 mt-2 leading-relaxed">
                   Book with confidence. We are ATOL protected, ensuring your
                   financial security.
