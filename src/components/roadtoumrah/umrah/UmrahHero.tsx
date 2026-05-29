@@ -4,7 +4,7 @@ import { TrustpilotHeroBadge } from "./TrustpilotHeroBadge";
 
 export function UmrahHero() {
   return (
-    <div className="relative w-full pt-28 pb-16 md:pt-36 md:pb-24 bg-[#382626] overflow-hidden border-b border-[#f5edce]/20 flex items-center">
+    <div className="relative w-full pt-28 pb-16 md:pt-36 md:pb-24 bg-[#382626] overflow-hidden border-b border-[#d4af37]/20 flex items-center">
       {/* Background Image with ultra-sleek dark overlay */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -23,13 +23,13 @@ export function UmrahHero() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8">
         <div className="max-w-xl text-left space-y-4">
           {/* Elegant Micro-Tag */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5edce]/15 border border-[#f5edce]/30 text-[#f5edce] text-[10px] font-bold uppercase tracking-[0.2em] backdrop-blur-md">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#d4af37]/15 border border-[#d4af37]/30 text-[#d4af37] text-[10px] font-bold uppercase tracking-[0.2em] backdrop-blur-md">
             Sacred Journeys 2026
           </div>
 
           <h1 className="text-3xl md:text-5xl font-heading font-black text-white tracking-tight leading-tight">
             Elite{" "}
-            <span className="text-[#f5edce] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">
+            <span className="text-[#d4af37] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">
               Umrah
             </span>{" "}
             Packages

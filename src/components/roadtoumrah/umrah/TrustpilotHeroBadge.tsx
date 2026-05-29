@@ -24,9 +24,9 @@ export function TrustpilotHeroBadge({ label = "Pilgrims" }: { label?: string }) 
   if (!data) {
     return (
       <div className="flex items-center gap-2 pt-1 text-[11px] text-slate-300 font-medium">
-        <div className="flex gap-0.5 text-[#f5edce] opacity-50">
+        <div className="flex gap-0.5 text-[#d4af37] opacity-50">
           {[...Array(5)].map((_, i) => (
-            <Star key={i} className="w-3.5 h-3.5 fill-[#f5edce] stroke-none" />
+            <Star key={i} className="w-3.5 h-3.5 fill-[#d4af37] stroke-none" />
           ))}
         </div>
         <span className="opacity-50 animate-pulse w-40 h-3 bg-white/10 rounded"></span>

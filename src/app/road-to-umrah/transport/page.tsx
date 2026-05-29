@@ -76,11 +76,11 @@ export default async function TransportPage() {
       <Hero
         backgroundImage="https://images.unsplash.com/photo-1549317661-bd32c8ce0be2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
         badgeText="Chauffeur & Airport Services"
-        badgeIcon={<Car className="w-3.5 h-3.5 text-[#f5edce]" />}
+        badgeIcon={<Car className="w-3.5 h-3.5 text-[#d4af37]" />}
         title={
           <>
             VIP{" "}
-            <span className="text-[#f5edce] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">
+            <span className="text-[#d4af37] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">
               Transport
             </span>{" "}
             Services
@@ -94,13 +94,13 @@ export default async function TransportPage() {
       <TransportBookingForm />
 
       {/* ─── How It Works ─── */}
-      <section className="py-14 bg-[#f5edce]/10 border-b border-[#f5edce]/30">
+      <section className="py-14 bg-[#d4af37]/10 border-b border-[#d4af37]/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-10">
-            <span className="inline-block px-3 py-1 rounded-full bg-[#f5edce]/20 border border-[#f5edce]/40 text-[#89c4e1] text-[10px] font-extrabold uppercase tracking-widest">
+            <span className="inline-block px-3 py-1 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/40 text-[#064e3b] text-[10px] font-extrabold uppercase tracking-widest">
               Simple Process
             </span>
-            <h2 className="text-2xl md:text-3xl font-heading font-black text-[#89c4e1] tracking-tight mt-3">
+            <h2 className="text-2xl md:text-3xl font-heading font-black text-[#064e3b] tracking-tight mt-3">
               How It Works
             </h2>
           </div>
@@ -110,13 +110,13 @@ export default async function TransportPage() {
                 key={step.step}
                 className="flex flex-col items-center text-center gap-4"
               >
-                <div className="w-14 h-14 rounded-2xl bg-[#89c4e1] flex items-center justify-center shadow-lg">
-                  <span className="text-xl font-heading font-black text-[#f5edce]">
+                <div className="w-14 h-14 rounded-2xl bg-[#064e3b] flex items-center justify-center shadow-lg">
+                  <span className="text-xl font-heading font-black text-[#d4af37]">
                     {step.step}
                   </span>
                 </div>
                 <div>
-                  <h3 className="text-sm font-heading font-black text-[#89c4e1] mb-1.5">
+                  <h3 className="text-sm font-heading font-black text-[#064e3b] mb-1.5">
                     {step.title}
                   </h3>
                   <p className="text-xs text-slate-500 font-light leading-relaxed max-w-xs mx-auto">
@@ -133,10 +133,10 @@ export default async function TransportPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center space-y-3 mb-12">
-            <span className="inline-block px-3 py-1 rounded-full bg-[#f5edce]/20 border border-[#f5edce]/40 text-[#89c4e1] text-[10px] font-extrabold uppercase tracking-widest">
+            <span className="inline-block px-3 py-1 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/40 text-[#064e3b] text-[10px] font-extrabold uppercase tracking-widest">
               Available Fleet
             </span>
-            <h2 className="text-2xl md:text-3xl font-heading font-black text-[#89c4e1] tracking-tight">
+            <h2 className="text-2xl md:text-3xl font-heading font-black text-[#064e3b] tracking-tight">
               Select Your Class of Comfort
             </h2>
             <p className="text-xs md:text-sm text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
@@ -162,13 +162,13 @@ export default async function TransportPage() {
                   onClick={!hasSlug ? (e) => e.preventDefault() : undefined}
                   className={`bg-white rounded-3xl overflow-hidden border transition-all duration-300 flex flex-col group ${hasSlug ? 'hover:-translate-y-1 cursor-pointer' : 'opacity-75 cursor-default'} relative block ${
                     vehicle.isPopular
-                      ? "border-[#89c4e1]/40 shadow-[0_15px_45px_rgba(107,79,79,0.12)]"
-                      : "border-[#f5edce]/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.08)] hover:border-[#89c4e1]/30"
+                      ? "border-[#064e3b]/40 shadow-[0_15px_45px_rgba(107,79,79,0.12)]"
+                      : "border-[#d4af37]/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.08)] hover:border-[#064e3b]/30"
                   }`}
                 >
                   {vehicle.isPopular && (
                     <div className="absolute top-4 right-4 z-20">
-                      <span className="px-3 py-1.5 rounded-full bg-[#89c4e1] text-white text-[9px] font-black uppercase tracking-wider shadow-sm">
+                      <span className="px-3 py-1.5 rounded-full bg-[#064e3b] text-white text-[9px] font-black uppercase tracking-wider shadow-sm">
                         Most Popular
                       </span>
                     </div>
@@ -192,16 +192,16 @@ export default async function TransportPage() {
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#89c4e1]/60 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#064e3b]/60 to-transparent" />
                     <div className="absolute bottom-4 left-5 flex items-center gap-2">
                       <div className="bg-white/10 p-2 rounded-full backdrop-blur-sm">
-                        <Car className="w-5 h-5 text-[#f5edce]" />
+                        <Car className="w-5 h-5 text-[#d4af37]" />
                       </div>
                       <div>
                         <p className="text-white font-heading font-black text-sm leading-none">
                           {vehicle.vehicleType}
                         </p>
-                        <p className="text-[#f5edce] text-[10px] font-bold mt-0.5">
+                        <p className="text-[#d4af37] text-[10px] font-bold mt-0.5">
                           {vehicle.type}
                         </p>
                       </div>
@@ -231,15 +231,15 @@ export default async function TransportPage() {
                       ].map((stat) => (
                         <div
                           key={stat.label}
-                          className="bg-[#f5edce]/10 rounded-xl p-2.5 text-center"
+                          className="bg-[#d4af37]/10 rounded-xl p-2.5 text-center"
                         >
-                          <div className="flex justify-center mb-1 text-[#89c4e1]">
+                          <div className="flex justify-center mb-1 text-[#064e3b]">
                             {stat.icon}
                           </div>
                           <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">
                             {stat.label}
                           </p>
-                          <p className="text-[10px] font-black text-[#89c4e1] mt-0.5 truncate">
+                          <p className="text-[10px] font-black text-[#064e3b] mt-0.5 truncate">
                             {stat.value}
                           </p>
                         </div>
@@ -253,26 +253,26 @@ export default async function TransportPage() {
                           key={feature}
                           className="flex items-center gap-2 text-xs text-slate-600 font-light"
                         >
-                          <ShieldCheck className="w-3.5 h-3.5 text-[#89c4e1] shrink-0" />
+                          <ShieldCheck className="w-3.5 h-3.5 text-[#064e3b] shrink-0" />
                           {feature}
                         </li>
                       ))}
                     </ul>
 
                     {/* Price + CTA */}
-                    <div className="border-t border-[#f5edce]/30 pt-4 flex items-center justify-between">
+                    <div className="border-t border-[#d4af37]/30 pt-4 flex items-center justify-between">
                       <div>
                         <p className="text-[9px] text-slate-400 uppercase tracking-widest font-bold">
                           One-Way from
                         </p>
-                        <p className="text-2xl font-heading font-black text-[#89c4e1]">
+                        <p className="text-2xl font-heading font-black text-[#064e3b]">
                           {vehicle.price}
                         </p>
                         <p className="text-[9px] text-slate-400 font-light">
                           inclusive of VAT
                         </p>
                       </div>
-                      <span className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#89c4e1] hover:bg-[#89c4e1] text-white text-[10px] font-extrabold uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg group/btn">
+                      <span className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#064e3b] hover:bg-[#064e3b] text-white text-[10px] font-extrabold uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg group/btn">
                         Details
                         <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform duration-300" />
                       </span>
@@ -286,12 +286,12 @@ export default async function TransportPage() {
       </section>
 
       {/* ─── Important Note ─── */}
-      <section className="py-10 bg-[#f5edce]/10 border-t border-[#f5edce]/30">
+      <section className="py-10 bg-[#d4af37]/10 border-t border-[#d4af37]/30">
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
-          <div className="flex items-start gap-4 p-6 rounded-3xl border border-[#89c4e1]/20 bg-white shadow-sm">
-            <AlertCircle className="w-5 h-5 text-[#89c4e1] shrink-0 mt-0.5" />
+          <div className="flex items-start gap-4 p-6 rounded-3xl border border-[#064e3b]/20 bg-white shadow-sm">
+            <AlertCircle className="w-5 h-5 text-[#064e3b] shrink-0 mt-0.5" />
             <div>
-              <h3 className="text-sm font-heading font-black text-[#89c4e1] mb-2">
+              <h3 className="text-sm font-heading font-black text-[#064e3b] mb-2">
                 Important Information
               </h3>
               <p className="text-xs text-slate-600 font-light leading-relaxed">
@@ -306,7 +306,7 @@ export default async function TransportPage() {
       </section>
 
       {/* ─── CTA Banner ─── */}
-      <section className="py-16 bg-white border-t border-[#f5edce]/30">
+      <section className="py-16 bg-white border-t border-[#d4af37]/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="rounded-3xl bg-[#382626] overflow-hidden relative">
             <div className="absolute inset-0 opacity-10">
@@ -319,7 +319,7 @@ export default async function TransportPage() {
             </div>
             <div className="relative z-10 p-10 md:p-14 flex flex-col md:flex-row items-start md:items-center gap-8">
               <div className="flex-grow space-y-3">
-                <span className="inline-block px-3 py-1 rounded-full bg-[#f5edce]/15 border border-[#f5edce]/30 text-[#f5edce] text-[9px] font-extrabold uppercase tracking-[0.2em]">
+                <span className="inline-block px-3 py-1 rounded-full bg-[#d4af37]/15 border border-[#d4af37]/30 text-[#d4af37] text-[9px] font-extrabold uppercase tracking-[0.2em]">
                   Custom Transfers
                 </span>
                 <h2 className="text-2xl md:text-3xl font-heading font-black text-white">
@@ -334,7 +334,7 @@ export default async function TransportPage() {
                   {["Makkah", "Madinah", "Dubai", "London"].map((c) => (
                     <span
                       key={c}
-                      className="flex items-center gap-1.5 text-[#f5edce]/80 text-[10px] font-bold"
+                      className="flex items-center gap-1.5 text-[#d4af37]/80 text-[10px] font-bold"
                     >
                       <CheckCircle className="w-3 h-3" /> {c}
                     </span>
@@ -346,13 +346,13 @@ export default async function TransportPage() {
                   href="https://wa.me/441215291630"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-8 py-4 rounded-full bg-[#89c4e1] hover:bg-[#f5edce] hover:text-[#89c4e1] text-white text-[10px] font-extrabold uppercase tracking-widest transition-all duration-300 border border-[#f5edce]/20 hover:border-[#f5edce] text-center"
+                  className="px-8 py-4 rounded-full bg-[#064e3b] hover:bg-[#d4af37] hover:text-[#064e3b] text-white text-[10px] font-extrabold uppercase tracking-widest transition-all duration-300 border border-[#d4af37]/20 hover:border-[#d4af37] text-center"
                 >
                   WhatsApp Us
                 </a>
                 <Link
                   href="/contact"
-                  className="px-8 py-4 rounded-full border border-[#f5edce]/40 text-[#f5edce] hover:bg-[#f5edce]/10 text-[10px] font-extrabold uppercase tracking-widest transition-all duration-300 text-center flex items-center justify-center gap-1.5"
+                  className="px-8 py-4 rounded-full border border-[#d4af37]/40 text-[#d4af37] hover:bg-[#d4af37]/10 text-[10px] font-extrabold uppercase tracking-widest transition-all duration-300 text-center flex items-center justify-center gap-1.5"
                 >
                   Call Us <PhoneCall className="w-3 h-3" />
                 </Link>

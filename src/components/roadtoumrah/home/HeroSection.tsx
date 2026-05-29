@@ -240,7 +240,7 @@ export function HeroSection() {
                 onClick={() => setActiveIndex(idx)}
                 className={`h-2 rounded-full transition-all duration-500 ${
                   idx === activeIndex
-                    ? "w-10 bg-secondary"
+                    ? "w-10 bg-[#d4af37]"
                     : "w-2 bg-white/40 hover:bg-white/60"
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}

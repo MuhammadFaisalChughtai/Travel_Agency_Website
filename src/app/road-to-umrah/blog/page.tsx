@@ -39,7 +39,7 @@ export default async function BlogIndexPage() {
         title={
           <>
             Terrific{" "}
-            <span className="text-[#f5edce] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">
+            <span className="text-[#d4af37] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">
               Journals
             </span>
           </>
@@ -69,7 +69,7 @@ export default async function BlogIndexPage() {
                 {categoryBlogs.map((post: any) => (
                   <article
                     key={post.id}
-                    className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#89c4e1]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1"
+                    className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#064e3b]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1"
                   >
                     <div className="relative h-52 w-full overflow-hidden">
                       <Image
@@ -79,7 +79,7 @@ export default async function BlogIndexPage() {
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute top-4 left-4">
-                        <span className="px-3 py-1 rounded-full bg-[#89c4e1] text-white text-[9px] font-black uppercase tracking-wider shadow-sm">
+                        <span className="px-3 py-1 rounded-full bg-[#064e3b] text-white text-[9px] font-black uppercase tracking-wider shadow-sm">
                           {post.category}
                         </span>
                       </div>
@@ -88,16 +88,16 @@ export default async function BlogIndexPage() {
                     <div className="p-6 flex flex-col flex-grow space-y-4">
                       <div className="flex items-center gap-4 text-[10px] text-slate-400 font-bold uppercase tracking-wider">
                         <span className="flex items-center gap-1">
-                          <Calendar className="w-3.5 h-3.5 text-[#89c4e1]/60" />
+                          <Calendar className="w-3.5 h-3.5 text-[#064e3b]/60" />
                           {post.date}
                         </span>
                         <span className="flex items-center gap-1">
-                          <Clock className="w-3.5 h-3.5 text-[#89c4e1]/60" />
+                          <Clock className="w-3.5 h-3.5 text-[#064e3b]/60" />
                           {post.readTime}
                         </span>
                       </div>
 
-                      <h3 className="text-lg font-heading font-black text-slate-900 leading-snug group-hover:text-[#89c4e1] transition-colors duration-300">
+                      <h3 className="text-lg font-heading font-black text-slate-900 leading-snug group-hover:text-[#064e3b] transition-colors duration-300">
                         {post.title}
                       </h3>
 
@@ -108,7 +108,7 @@ export default async function BlogIndexPage() {
                       <div className="border-t border-slate-100 pt-4">
                         <Link
                           href={`/blog/${post.slug}`}
-                          className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#89c4e1] group-hover:text-slate-900 transition-colors duration-300 uppercase tracking-widest"
+                          className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#064e3b] group-hover:text-slate-900 transition-colors duration-300 uppercase tracking-widest"
                         >
                           <span>Read Article</span>
                           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />

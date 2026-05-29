@@ -135,10 +135,10 @@ export default async function Home() {
         <section className="py-24 bg-slate-50">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="text-center space-y-4 mb-16 flex flex-col items-center">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#f5edce]/20 border border-[#f5edce]/40 text-[#89c4e1] text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.2em]">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/40 text-[#064e3b] text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.2em]">
                 Luxury Getaways
               </span>
-              <h2 className="text-3xl md:text-4xl font-heading font-black text-[#89c4e1] tracking-tight">
+              <h2 className="text-3xl md:text-4xl font-heading font-black text-[#064e3b] tracking-tight">
                 Featured Holiday Packages
               </h2>
               <p className="text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
@@ -168,10 +168,10 @@ export default async function Home() {
         <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="text-center space-y-4 mb-16 flex flex-col items-center">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#f5edce]/20 border border-[#f5edce]/40 text-[#89c4e1] text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.2em]">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/40 text-[#064e3b] text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.2em]">
                 Spiritual Journeys
               </span>
-              <h2 className="text-3xl md:text-4xl font-heading font-black text-[#89c4e1] tracking-tight">
+              <h2 className="text-3xl md:text-4xl font-heading font-black text-[#064e3b] tracking-tight">
                 Featured Umrah Packages
               </h2>
               <p className="text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
