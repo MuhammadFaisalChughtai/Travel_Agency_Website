@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, PhoneCall } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 import { useSiteConfig } from "@/components/SiteProvider";
 
@@ -71,7 +70,7 @@ export function Navbar() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Button
+            <button
               asChild
               className="rounded-lg gap-2 px-6 py-5 bg-[#d4af37] hover:bg-[#043427] text-[#064e3b] hover:text-[#F9FAFB] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 font-extrabold text-xs tracking-wider uppercase"
             >
@@ -79,7 +78,7 @@ export function Navbar() {
                 <PhoneCall className="w-3.5 h-3.5" />
                 <span>Contact Us</span>
               </Link>
-            </Button>
+            </button>
           </div>
         </nav>
       </header>
@@ -127,7 +126,7 @@ export function Navbar() {
                   ))}
                 </div>
                 <div className="py-6">
-                  <Button
+                  <button
                     asChild
                     className="w-full rounded-full gap-2 bg-[#d4af37] hover:bg-[#043427] text-[#064e3b] hover:text-[#F9FAFB] py-5 border border-[#d4af37]/45 font-extrabold uppercase text-xs tracking-wider shadow-md transition-colors duration-300"
                   >
@@ -139,7 +138,7 @@ export function Navbar() {
                       <PhoneCall className="w-4 h-4" />
                       <span>Contact Us</span>
                     </Link>
-                  </Button>
+                  </button>
                 </div>
               </div>
             </div>

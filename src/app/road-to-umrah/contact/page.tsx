@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="bg-[#f5f0eb] min-h-screen pb-24">
+    <div className="bg-slate-50 min-h-screen pb-24">
       {/* Hero Banner */}
       <Hero
         backgroundImage="https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
@@ -46,10 +46,10 @@ export default function ContactPage() {
 
           {/* Contact Info */}
           <div className="space-y-10">
-            <h2 className="text-3xl font-black text-[#2a1a1a] mb-6 font-heading">
+            <h2 className="text-3xl font-black text-[#064e3b] mb-6 font-heading">
               Get in Touch
             </h2>
-            <p className="text-[#064e3b] leading-relaxed text-lg">
+            <p className="text-slate-600 leading-relaxed text-lg">
               Whether you're looking for the perfect family holiday, need
               assistance with your visa, or are planning your sacred Umrah or
               Hajj journey, our dedicated team of travel experts is ready to
@@ -62,10 +62,10 @@ export default function ContactPage() {
                   <MapPin className="w-6 h-6 text-[#064e3b]" />
                 </div>
                 <div>
-                  <h3 className="font-black text-[#2a1a1a] text-lg mb-1 tracking-wide font-heading uppercase">
+                  <h3 className="font-black text-[#064e3b] text-lg mb-1 tracking-wide font-heading uppercase">
                     Office Location
                   </h3>
-                  <p className="text-[#064e3b] font-medium leading-relaxed">
+                  <p className="text-slate-600 font-medium leading-relaxed">
                     <a 
                       target="_blank" 
                       rel="nofollow noreferrer" 
@@ -83,10 +83,10 @@ export default function ContactPage() {
                   <Phone className="w-6 h-6 text-[#064e3b]" />
                 </div>
                 <div>
-                  <h3 className="font-black text-[#2a1a1a] text-lg mb-1 tracking-wide font-heading uppercase">
+                  <h3 className="font-black text-[#064e3b] text-lg mb-1 tracking-wide font-heading uppercase">
                     Phone
                   </h3>
-                  <p className="text-[#064e3b] font-medium leading-relaxed">
+                  <p className="text-slate-600 font-medium leading-relaxed">
                     <a
                       href="tel:+441215291630"
                       className="hover:text-[#064e3b] transition-colors"
@@ -109,10 +109,10 @@ export default function ContactPage() {
                   <Mail className="w-6 h-6 text-[#064e3b]" />
                 </div>
                 <div>
-                  <h3 className="font-black text-[#2a1a1a] text-lg mb-1 tracking-wide font-heading uppercase">
+                  <h3 className="font-black text-[#064e3b] text-lg mb-1 tracking-wide font-heading uppercase">
                     Email
                   </h3>
-                  <p className="text-[#064e3b] font-medium leading-relaxed">
+                  <p className="text-slate-600 font-medium leading-relaxed">
                     <a
                       href="mailto:inquires@roadtoumrah.co.uk"
                       className="hover:text-[#064e3b] transition-colors"
@@ -128,10 +128,10 @@ export default function ContactPage() {
                   <Clock className="w-6 h-6 text-[#064e3b]" />
                 </div>
                 <div>
-                  <h3 className="font-black text-[#2a1a1a] text-lg mb-1 tracking-wide font-heading uppercase">
+                  <h3 className="font-black text-[#064e3b] text-lg mb-1 tracking-wide font-heading uppercase">
                     Working Hours
                   </h3>
-                  <p className="text-[#064e3b] font-medium leading-relaxed">
+                  <p className="text-slate-600 font-medium leading-relaxed">
                     Monday - Friday: 10:00 AM - 07:00 PM
                     <br />
                     Saturday: 10:00 AM - 05:00 PM

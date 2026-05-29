@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BookOpen, Calendar, Clock, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 
 export function UmrahBlogSection({ blogs }: { blogs: any[] }) {
   const [visibleCount, setVisibleCount] = useState(3);
@@ -97,13 +96,13 @@ export function UmrahBlogSection({ blogs }: { blogs: any[] }) {
         {/* Load More Button */}
         {hasMore && (
           <div className="mt-12 text-center">
-            <Button
+            <button
               onClick={handleLoadMore}
               className="rounded-full gap-2 px-8 py-6 bg-[#064e3b] hover:bg-[#064e3b] text-[#F9FAFB] border border-[#d4af37]/45 font-extrabold uppercase text-xs tracking-wider shadow-md hover:shadow-lg transition-all duration-300"
             >
               <BookOpen className="w-4 h-4" />
               <span>Load More Articles</span>
-            </Button>
+            </button>
           </div>
         )}
 

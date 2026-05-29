@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Star, Plane, Bus, FileText, Building2, PhoneCall } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 
 interface PackageCardProps {
   title: string;
@@ -81,16 +80,16 @@ export function PackageCard({ title, image, stars, price, detailsUrl, isSold = f
 
         {/* Parallel Modern Actions (Saves space and looks extremely high-end) */}
         <div className="flex gap-2">
-          <Button variant="outline" className="h-11 w-11 p-0 border-[#d4af37] text-[#064e3b] hover:bg-[#F9FAFB] hover:text-[#064e3b] hover:border-[#064e3b]/40 flex items-center justify-center rounded-2xl shrink-0 transition-all duration-300" asChild>
+          <button variant="outline" className="h-11 w-11 p-0 border-[#d4af37] text-[#064e3b] hover:bg-[#F9FAFB] hover:text-[#064e3b] hover:border-[#064e3b]/40 flex items-center justify-center rounded-2xl shrink-0 transition-all duration-300" asChild>
             <a href="tel:+441215291630" aria-label="Call Now">
               <PhoneCall className="w-4 h-4" />
             </a>
-          </Button>
-          <Button className={`flex-1 h-11 text-xs rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 font-extrabold tracking-widest uppercase border ${isSold ? 'bg-slate-500 hover:bg-slate-600 text-white border-slate-400/40' : 'bg-[#064e3b] hover:bg-[#064e3b] text-[#F9FAFB] border-[#d4af37]/30'}`} asChild>
+          </button>
+          <button className={`flex-1 h-11 text-xs rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 font-extrabold tracking-widest uppercase border ${isSold ? 'bg-slate-500 hover:bg-slate-600 text-white border-slate-400/40' : 'bg-[#064e3b] hover:bg-[#064e3b] text-[#F9FAFB] border-[#d4af37]/30'}`} asChild>
             <Link href={detailsUrl}>
               {isSold ? "Enquire" : "View Details"}
             </Link>
-          </Button>
+          </button>
         </div>
       </div>
     </div>

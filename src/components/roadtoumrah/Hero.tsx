@@ -33,7 +33,7 @@ export function Hero({
 }: HeroProps) {
   return (
     <div
-      className={`relative w-full pt-28 pb-16 md:pt-36 md:pb-24 bg-[#064e3b] overflow-hidden border-b border-[#d4af37]/20 flex items-center ${className}`}
+      className={`relative w-full pt-28 pb-16 md:pt-36 md:pb-24 bg-slate-900 overflow-hidden border-b border-[#d4af37]/20 flex items-center ${className}`}
     >
       {/* Background Image with ultra-sleek dark overlay */}
       <div className="absolute inset-0 z-0">
@@ -45,7 +45,7 @@ export function Hero({
           priority
         />
         {/* Modern dark luxury overlay to ensure perfect text contrast while keeping the whole image visible */}
-        <div className="absolute inset-0 bg-[#064e3b]/70 z-1" />
+        <div className="absolute inset-0 bg-black/60 z-1" />
       </div>
 
       {/* Sleek Content Container */}

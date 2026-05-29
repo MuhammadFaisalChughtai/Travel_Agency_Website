@@ -284,7 +284,7 @@ export function VisaBookingForm({ isHome = false, isModal = false, packageId, pa
               <Button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full md:w-2/5 py-6 text-xs font-bold bg-[#064e3b] hover:bg-[#064e3b] text-white rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 tracking-widest uppercase flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
+                className="w-full md:w-2/5 py-6 text-xs font-bold bg-[#064e3b] hover:bg-[#d4af37] text-white hover:text-[#064e3b] rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 tracking-widest uppercase flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
               >
                 {status === "loading" ? (
                   <>
@@ -314,7 +314,7 @@ export function VisaBookingForm({ isHome = false, isModal = false, packageId, pa
                     Request A Free Quote <ArrowRight className="w-4 h-4" />
                   </>
                 )}
-              </Button>
+              </button>
             </div>
           </div>
         </form>

@@ -34,7 +34,7 @@ export function EssentialServicesSection({ siteConfig }: { siteConfig: any }) {
             <div className="bg-white rounded-3xl overflow-hidden border border-[#d4af37]/20 shadow-lg group hover:shadow-xl hover:border-[#064e3b]/30 transition-all duration-300 flex flex-col sm:flex-row">
               <div className="sm:w-2/5 relative h-56 sm:h-auto overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1581451556948-2b8e39f37c35?auto=format&fit=crop&w=800&q=80"
+                  src="/visa_services.png"
                   alt="Visa Services"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -65,7 +65,7 @@ export function EssentialServicesSection({ siteConfig }: { siteConfig: any }) {
             <div className="bg-white rounded-3xl overflow-hidden border border-[#d4af37]/20 shadow-lg group hover:shadow-xl hover:border-[#064e3b]/30 transition-all duration-300 flex flex-col sm:flex-row">
               <div className="sm:w-2/5 relative h-56 sm:h-auto overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80"
+                  src="/premium_transport.png"
                   alt="Transport Services"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
