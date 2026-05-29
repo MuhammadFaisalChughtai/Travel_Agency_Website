@@ -1159,35 +1159,35 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
             <div className="sticky top-28 space-y-8">
               {/* Sidebar Booking Card */}
               {type !== "blog" && (
-                <div className="bg-[#e91e63] text-white rounded-3xl p-8 border border-[#453d25]/30 shadow-2xl space-y-6 relative overflow-hidden">
+                <div className="bg-white text-[#0d47a1] rounded-3xl p-8 border-2 border-[#453d25]/20 shadow-xl space-y-6 relative overflow-hidden">
                   {/* Subtle top ambient glow */}
-                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#453d25]/50 to-transparent" />
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-[#0d47a1]" />
 
                   <div>
-                    <span className="text-[10px] text-[#453d25] font-extrabold uppercase tracking-[0.2em] block mb-1">
+                    <span className="text-[10px] text-slate-500 font-extrabold uppercase tracking-[0.2em] block mb-1">
                       Rate / Pricing
                     </span>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-4xl md:text-5xl font-heading font-black text-white tracking-tight">
+                      <span className="text-4xl md:text-5xl font-heading font-black text-[#e91e63] tracking-tight">
                         {displayPrice}
                       </span>
                       {type === "package" && (
-                        <span className="text-xs text-[#453d25]/70 font-medium">
+                        <span className="text-xs text-slate-400 font-medium">
                           / person
                         </span>
                       )}
                       {type === "transport" && (
-                        <span className="text-xs text-[#453d25]/70 font-medium">
+                        <span className="text-xs text-slate-400 font-medium">
                           / vehicle
                         </span>
                       )}
                       {type === "flight" && (
-                        <span className="text-xs text-[#453d25]/70 font-medium">
+                        <span className="text-xs text-slate-400 font-medium">
                           / passenger
                         </span>
                       )}
                       {type === "visa" && (
-                        <span className="text-xs text-[#453d25]/70 font-medium">
+                        <span className="text-xs text-slate-400 font-medium">
                           / applicant
                         </span>
                       )}
@@ -1197,11 +1197,11 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                   <div className="space-y-4 border-t border-[#453d25]/20 pt-5">
                     {/* Availability */}
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-slate-300 font-medium">
+                      <span className="text-slate-500 font-medium">
                         Availability
                       </span>
                       {item.isSold ? (
-                        <span className="flex items-center gap-1.5 text-rose-400 font-extrabold uppercase tracking-wider text-[10px]">
+                        <span className="flex items-center gap-1.5 text-rose-500 font-extrabold uppercase tracking-wider text-[10px]">
                           <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
@@ -1209,7 +1209,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                           Sold Out
                         </span>
                       ) : (
-                        <span className="flex items-center gap-1.5 text-emerald-400 font-extrabold uppercase tracking-wider text-[10px]">
+                        <span className="flex items-center gap-1.5 text-emerald-500 font-extrabold uppercase tracking-wider text-[10px]">
                           <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -1221,22 +1221,22 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
 
                     {/* Travel Dates */}
                     {item.travelDates && (
-                      <div className="flex flex-col gap-1.5 border-t border-white/5 pt-3">
-                        <span className="text-slate-300 text-xs font-medium">
+                      <div className="flex flex-col gap-1.5 border-t border-slate-100 pt-3">
+                        <span className="text-slate-500 text-xs font-medium">
                           Travel Dates
                         </span>
-                        <span className="text-[#F9FAFB] text-xs font-bold bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">
+                        <span className="text-[#0d47a1] text-xs font-bold bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
                           {item.travelDates}
                         </span>
                       </div>
                     )}
 
                     {/* Accreditation */}
-                    <div className="flex justify-between items-center text-xs border-t border-white/5 pt-3">
-                      <span className="text-slate-300 font-medium">
+                    <div className="flex justify-between items-center text-xs border-t border-slate-100 pt-3">
+                      <span className="text-slate-500 font-medium">
                         Protection
                       </span>
-                      <span className="text-[#453d25] font-extrabold uppercase tracking-widest text-[10px] bg-[#453d25]/10 px-2.5 py-1 rounded-md border border-[#453d25]/20">
+                      <span className="text-[#0d47a1] font-extrabold uppercase tracking-widest text-[10px] bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">
                         IATA &amp; ATOL
                       </span>
                     </div>

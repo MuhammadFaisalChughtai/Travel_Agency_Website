@@ -36,7 +36,7 @@ export function Footer() {
   );
 
   return (
-    <footer className="relative bg-[#453d25] text-[#0d47a1] border-t border-[#e91e63]/25 overflow-hidden">
+    <footer className="relative bg-[#453d25] text-slate-200 border-t border-[#e91e63]/25 overflow-hidden">
       {/* Decorative Travel Vectors (Mimics the high-end illustrative style of the reference image) */}
       <div className="absolute top-8 left-4 opacity-5 pointer-events-none hidden lg:block">
         <Compass className="w-24 h-24 text-[#e91e63] animate-[spin_60s_linear_infinite]" />
@@ -156,7 +156,7 @@ export function Footer() {
               ))}
             </div>
 
-            <p className="text-xs leading-relaxed text-[#0d47a1]/95 font-medium max-w-xs">
+            <p className="text-xs leading-relaxed text-slate-200 font-medium max-w-xs">
               Terrific Travel Ltd – Committed to making your journeys
               meaningful, safe, and unforgettable.
             </p>
@@ -319,17 +319,17 @@ export function Footer() {
                 <img
                   src="/IATA.svg"
                   alt="IATA Logo"
-                  className="h-8 w-auto object-contain mix-blend-multiply opacity-90"
+                  className="h-8 w-auto object-contain brightness-0 invert opacity-90"
                 />
                 <img
                   src="/ATOL.svg"
                   alt="ATOL Protected"
-                  className="h-10 w-auto object-contain mix-blend-multiply"
+                  className="h-10 w-auto object-contain brightness-0 invert opacity-90"
                 />
                 <img
                   src="/Ministry_Hajj.svg"
                   alt="Ministry of Hajj and Umrah"
-                  className="h-16 w-auto object-contain mix-blend-multiply"
+                  className="h-16 w-auto object-contain brightness-0 invert opacity-90"
                 />
               </li>
             </ul>
@@ -340,7 +340,7 @@ export function Footer() {
       {/* Aligned Copyright Bottom Bar - With Developer Branding Removed */}
       <div className="bg-[#0d47a1] text-[#F9FAFB] py-4 text-center border-t border-[#e91e63]/30">
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs font-semibold">
-          <p className="text-[#453d25]/80">
+          <p className="text-slate-200">
             Copyright &copy; {new Date().getFullYear()} Terrific Travel Ltd |
             All Rights Reserved By Terrific Travel Ltd
           </p>
