@@ -66,10 +66,10 @@ export function FaqAccordion() {
     <div className="py-12 bg-background">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <span className="inline-block px-3 py-0.5 rounded-full bg-[#F9FAFB] border border-[#8c3061]/30 text-[#c63c51] text-[10px] font-bold tracking-widest uppercase mb-3">
+          <span className="inline-block px-3 py-0.5 rounded-full bg-[#F9FAFB] border border-[#f5edce]/30 text-[#89c4e1] text-[10px] font-bold tracking-widest uppercase mb-3">
             Frequently Asked Questions
           </span>
-          <h2 className="text-2xl md:text-3xl font-heading font-black text-[#c63c51]">
+          <h2 className="text-2xl md:text-3xl font-heading font-black text-[#89c4e1]">
             Got Questions? We've Got Answers
           </h2>
         </div>
@@ -83,8 +83,8 @@ export function FaqAccordion() {
                 key={index}
                 className={`border rounded-xl transition-all duration-300 overflow-hidden ${
                   isOpen
-                    ? "border-[#c63c51]/40 shadow-sm bg-card"
-                    : "border-[#8c3061]/30 bg-[#F9FAFB]/40 hover:border-[#c63c51]/35"
+                    ? "border-[#89c4e1]/40 shadow-sm bg-card"
+                    : "border-[#f5edce]/30 bg-[#F9FAFB]/40 hover:border-[#89c4e1]/35"
                 }`}
               >
                 <button
@@ -93,15 +93,15 @@ export function FaqAccordion() {
                   aria-expanded={isOpen}
                 >
                   <span
-                    className={`font-semibold pr-8 text-sm md:text-base ${isOpen ? "text-[#c63c51] font-black" : "text-[#382626] font-medium"}`}
+                    className={`font-semibold pr-8 text-sm md:text-base ${isOpen ? "text-[#89c4e1] font-black" : "text-[#382626] font-medium"}`}
                   >
                     {faq.question}
                   </span>
                   <div
                     className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors ${
                       isOpen
-                        ? "bg-[#c63c51] text-white"
-                        : "bg-[#8c3061]/20 text-[#c63c51]"
+                        ? "bg-[#89c4e1] text-white"
+                        : "bg-[#f5edce]/20 text-[#89c4e1]"
                     }`}
                   >
                     {isOpen ? (
@@ -119,7 +119,7 @@ export function FaqAccordion() {
                       : "max-h-0 opacity-0"
                   }`}
                 >
-                  <div className="pt-1.5 border-t border-[#8c3061]/20">
+                  <div className="pt-1.5 border-t border-[#f5edce]/20">
                     <p className="text-slate-700 text-xs md:text-sm leading-relaxed font-light">
                       {typeof faq.answer === 'function' ? faq.answer(siteConfig) : faq.answer}
                     </p>
@@ -131,11 +131,11 @@ export function FaqAccordion() {
         </div>
 
         <div className="mt-10 text-center">
-          <p className="text-[#c63c51] text-sm mb-4">
+          <p className="text-[#89c4e1] text-sm mb-4">
             Still have questions? Our travel experts are ready to help.
           </p>
           <Link href="/contact">
-            <Button className="rounded-full gap-2 px-6 py-5 bg-[#c63c51] hover:bg-[#522258] text-[#F9FAFB] font-bold text-xs uppercase tracking-widest shadow-md">
+            <Button className="rounded-full gap-2 px-6 py-5 bg-[#89c4e1] hover:bg-[#89c4e1] text-[#F9FAFB] font-bold text-xs uppercase tracking-widest shadow-md">
               <MessageCircleQuestion className="w-4 h-4" />
               Contact Support
             </Button>

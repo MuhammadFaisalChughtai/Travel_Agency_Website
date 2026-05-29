@@ -17,15 +17,15 @@ export function UmrahBlogSection({ blogs }: { blogs: any[] }) {
   const hasMore = visibleCount < umrahBlogs.length;
 
   return (
-    <section className="py-16 bg-white border-t border-[#8c3061]/30" id="blog">
+    <section className="py-16 bg-white border-t border-[#f5edce]/30" id="blog">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center space-y-3 mb-12">
-          <span className="inline-block px-3 py-1 rounded-full bg-[#8c3061]/20 border border-[#8c3061]/40 text-[#c63c51] text-[10px] font-extrabold uppercase tracking-widest">
+          <span className="inline-block px-3 py-1 rounded-full bg-[#f5edce]/20 border border-[#f5edce]/40 text-[#89c4e1] text-[10px] font-extrabold uppercase tracking-widest">
             Spiritual Guides & News
           </span>
-          <h2 className="text-2xl md:text-3xl font-heading font-black text-[#522258] tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-heading font-black text-[#89c4e1] tracking-tight">
             Terrific Umrah & Hajj Journals
           </h2>
           <p className="text-xs md:text-sm text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
@@ -38,7 +38,7 @@ export function UmrahBlogSection({ blogs }: { blogs: any[] }) {
           {umrahBlogs.slice(0, visibleCount).map((post: any) => (
             <article 
               key={post.id} 
-              className="bg-white rounded-3xl overflow-hidden border border-[#8c3061]/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.06)] hover:border-[#c63c51]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1"
+              className="bg-white rounded-3xl overflow-hidden border border-[#f5edce]/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.06)] hover:border-[#89c4e1]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1"
             >
               {/* Image Banner */}
               <div className="relative h-48 sm:h-52 w-full overflow-hidden">
@@ -49,7 +49,7 @@ export function UmrahBlogSection({ blogs }: { blogs: any[] }) {
                   className="object-cover group-hover:scale-105 transition-transform duration-500" 
                 />
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 rounded-full bg-[#c63c51] text-white text-[9px] font-black uppercase tracking-wider shadow-sm">
+                  <span className="px-3 py-1 rounded-full bg-[#89c4e1] text-white text-[9px] font-black uppercase tracking-wider shadow-sm">
                     {post.category}
                   </span>
                 </div>
@@ -60,17 +60,17 @@ export function UmrahBlogSection({ blogs }: { blogs: any[] }) {
                 {/* Meta details */}
                 <div className="flex items-center gap-4 text-[10px] text-slate-400 font-bold uppercase tracking-wider">
                   <span className="flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-[#c63c51]/60" />
+                    <Calendar className="w-3.5 h-3.5 text-[#89c4e1]/60" />
                     {post.date}
                   </span>
                   <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5 text-[#c63c51]/60" />
+                    <Clock className="w-3.5 h-3.5 text-[#89c4e1]/60" />
                     {post.readTime}
                   </span>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-base font-heading font-black text-[#522258] leading-snug group-hover:text-[#c63c51] transition-colors duration-300">
+                <h3 className="text-base font-heading font-black text-[#89c4e1] leading-snug group-hover:text-[#89c4e1] transition-colors duration-300">
                   {post.title}
                 </h3>
 
@@ -80,10 +80,10 @@ export function UmrahBlogSection({ blogs }: { blogs: any[] }) {
                 </p>
 
                 {/* Divider Line */}
-                <div className="border-t border-[#8c3061]/30 pt-4">
+                <div className="border-t border-[#f5edce]/30 pt-4">
                   <Link 
                     href={`/v/${post.slug}`} 
-                    className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#c63c51] group-hover:text-[#522258] transition-colors duration-300 uppercase tracking-widest"
+                    className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#89c4e1] group-hover:text-[#89c4e1] transition-colors duration-300 uppercase tracking-widest"
                   >
                     <span>Read Article</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
@@ -99,7 +99,7 @@ export function UmrahBlogSection({ blogs }: { blogs: any[] }) {
           <div className="mt-12 text-center">
             <Button
               onClick={handleLoadMore}
-              className="rounded-full gap-2 px-8 py-6 bg-[#c63c51] hover:bg-[#522258] text-[#F9FAFB] border border-[#8c3061]/45 font-extrabold uppercase text-xs tracking-wider shadow-md hover:shadow-lg transition-all duration-300"
+              className="rounded-full gap-2 px-8 py-6 bg-[#89c4e1] hover:bg-[#89c4e1] text-[#F9FAFB] border border-[#f5edce]/45 font-extrabold uppercase text-xs tracking-wider shadow-md hover:shadow-lg transition-all duration-300"
             >
               <BookOpen className="w-4 h-4" />
               <span>Load More Articles</span>

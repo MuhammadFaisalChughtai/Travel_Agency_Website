@@ -86,11 +86,11 @@ export default async function UmrahPage() {
       <Hero
         backgroundImage="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
         badgeText="Sacred Journeys 2026"
-        badgeIcon={<Sparkles className="w-3.5 h-3.5 text-[#8c3061]" />}
+        badgeIcon={<Sparkles className="w-3.5 h-3.5 text-[#f5edce]" />}
         title={
           <>
             Elite{" "}
-            <span className="text-[#8c3061] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">
+            <span className="text-[#f5edce] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">
               Umrah
             </span>{" "}
             Packages

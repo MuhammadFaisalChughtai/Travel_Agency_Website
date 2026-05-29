@@ -38,20 +38,20 @@ export function PackageCarousel({
   return (
     <div className="py-6 relative group max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-6">
-        <span className="text-[#522258] font-bold uppercase tracking-[0.2em] text-[11px] bg-[#522258]/10 px-3 py-1 rounded-full mb-2 inline-block">
+        <span className="text-[#89c4e1] font-bold uppercase tracking-[0.2em] text-[11px] bg-[#89c4e1]/10 px-3 py-1 rounded-full mb-2 inline-block">
           {subtitle}
         </span>
-        <h2 className="text-2xl md:text-3xl font-heading font-black text-[#c63c51] flex items-center justify-center gap-3">
-          <span className="h-[2px] w-6 bg-[#8c3061]/40 rounded-full"></span>
+        <h2 className="text-2xl md:text-3xl font-heading font-black text-[#89c4e1] flex items-center justify-center gap-3">
+          <span className="h-[2px] w-6 bg-[#f5edce]/40 rounded-full"></span>
           {title}
-          <span className="h-[2px] w-6 bg-[#8c3061]/40 rounded-full"></span>
+          <span className="h-[2px] w-6 bg-[#f5edce]/40 rounded-full"></span>
         </h2>
       </div>
 
       <div className="relative">
         <button
           onClick={() => scroll("left")}
-          className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white text-[#c63c51] border border-[#8c3061]/50 shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#c63c51] hover:text-[#F9FAFB] hover:border-[#c63c51] disabled:opacity-0 focus:opacity-100"
+          className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white text-[#89c4e1] border border-[#f5edce]/50 shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#89c4e1] hover:text-[#F9FAFB] hover:border-[#89c4e1] disabled:opacity-0 focus:opacity-100"
           aria-label="Previous"
         >
           <ChevronLeft className="w-5 h-5" />
@@ -71,7 +71,7 @@ export function PackageCarousel({
 
         <button
           onClick={() => scroll("right")}
-          className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white text-[#c63c51] border border-[#8c3061]/50 shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#c63c51] hover:text-[#F9FAFB] hover:border-[#c63c51] disabled:opacity-0 focus:opacity-100"
+          className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white text-[#89c4e1] border border-[#f5edce]/50 shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#89c4e1] hover:text-[#F9FAFB] hover:border-[#89c4e1] disabled:opacity-0 focus:opacity-100"
           aria-label="Next"
         >
           <ChevronRight className="w-5 h-5" />
