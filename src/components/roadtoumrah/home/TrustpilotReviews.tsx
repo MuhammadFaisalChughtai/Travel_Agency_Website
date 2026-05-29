@@ -90,7 +90,7 @@ export function TrustpilotReviews() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-[#F9FAFB]/30 to-white border-t border-[#453d25]/45">
+    <section className="py-20 bg-gradient-to-b from-[#F9FAFB]/30 to-white border-t border-[#8c3061]/45">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Trustpilot TrustBox Title */}
         <div className="flex flex-col items-center text-center mb-12">
@@ -101,20 +101,20 @@ export function TrustpilotReviews() {
             </span>
           </div>
 
-          <h2 className="text-3xl md:text-4xl font-heading font-black text-[#0d47a1] tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-heading font-black text-[#522258] tracking-tight">
             Trusted by Thousands of Happy Customers
           </h2>
           <p className="text-slate-500 text-sm font-light mt-1">
             Flights · Holidays · Umrah · Hajj · Visas · Transport
           </p>
-          <div className="h-[2px] w-12 bg-[#e91e63]/30 my-4 rounded-full"></div>
+          <div className="h-[2px] w-12 bg-[#c63c51]/30 my-4 rounded-full"></div>
 
           {/* Dynamic Trustpilot Rating Badge */}
           <a
             href="https://uk.trustpilot.com/review/terrifictravel.co.uk"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex flex-wrap items-center justify-center gap-4 mt-2 bg-white px-5 py-3 rounded-2xl border border-[#453d25]/50 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
+            className="group flex flex-wrap items-center justify-center gap-4 mt-2 bg-white px-5 py-3 rounded-2xl border border-[#8c3061]/50 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
           >
             <div className="flex items-center gap-1.5">
               <span className="text-slate-800 font-extrabold text-sm group-hover:text-[#00b67a] transition-colors">
@@ -142,7 +142,7 @@ export function TrustpilotReviews() {
             {[...Array(3)].map((_, i) => (
               <div
                 key={i}
-                className="w-full sm:w-[350px] shrink-0 bg-white rounded-3xl p-7 border border-[#453d25]/45 shadow-[0_10px_30px_rgba(72,52,52,0.02)] animate-pulse"
+                className="w-full sm:w-[350px] shrink-0 bg-white rounded-3xl p-7 border border-[#8c3061]/45 shadow-[0_10px_30px_rgba(72,52,52,0.02)] animate-pulse"
               >
                 <div className="flex justify-between items-center mb-4">
                   <div className="h-4 w-24 bg-slate-200 rounded animate-pulse"></div>
@@ -182,7 +182,7 @@ export function TrustpilotReviews() {
               {data?.reviews.slice(0, 9).map((review) => (
                 <div
                   key={review.id}
-                  className="w-[85vw] sm:w-[360px] shrink-0 snap-center bg-white rounded-3xl p-7 border border-[#453d25]/45 shadow-[0_10px_30px_rgba(72,52,52,0.02)] hover:shadow-[0_15px_40px_rgba(72,52,52,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+                  className="w-[85vw] sm:w-[360px] shrink-0 snap-center bg-white rounded-3xl p-7 border border-[#8c3061]/45 shadow-[0_10px_30px_rgba(72,52,52,0.02)] hover:shadow-[0_15px_40px_rgba(72,52,52,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
                 >
                 <div>
                   {/* Header: Rating & Tag */}
@@ -199,13 +199,13 @@ export function TrustpilotReviews() {
                         </span>
                       ))}
                     </div>
-                    <span className="text-[9px] font-black uppercase tracking-widest text-[#e91e63] bg-[#453d25]/20 px-2.5 py-1 rounded-md border border-[#453d25]/10">
+                    <span className="text-[9px] font-black uppercase tracking-widest text-[#c63c51] bg-[#8c3061]/20 px-2.5 py-1 rounded-md border border-[#8c3061]/10">
                       {review.tag}
                     </span>
                   </div>
 
                   {/* Title & Text */}
-                  <h3 className="font-heading font-black text-[#0d47a1] text-base mb-2.5 line-clamp-1">
+                  <h3 className="font-heading font-black text-[#522258] text-base mb-2.5 line-clamp-1">
                     {review.title ? `“${review.title}”` : "Verified Review"}
                   </h3>
                   <p className="text-slate-600 text-xs md:text-sm leading-relaxed font-light mb-6 line-clamp-4 min-h-[5rem]">
@@ -216,7 +216,7 @@ export function TrustpilotReviews() {
                 {/* Author & Verification */}
                 <div className="flex items-center justify-between pt-4 border-t border-slate-100 mt-auto">
                   <div>
-                    <p className="text-xs font-black text-[#0d47a1]">
+                    <p className="text-xs font-black text-[#522258]">
                       {review.author}
                     </p>
                     <div className="flex items-center gap-1.5 mt-0.5">

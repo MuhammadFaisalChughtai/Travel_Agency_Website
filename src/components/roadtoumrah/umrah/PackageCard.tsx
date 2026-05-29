@@ -14,16 +14,16 @@ interface PackageCardProps {
 
 export function PackageCard({ title, image, stars, price, detailsUrl, isSold = false }: PackageCardProps) {
   return (
-    <div className="min-w-[280px] md:min-w-[300px] bg-white/95 backdrop-blur-md rounded-3xl shadow-[0_10px_30px_rgba(72,52,52,0.04)] hover:shadow-[0_25px_50px_rgba(72,52,52,0.12)] hover:-translate-y-1.5 transition-all duration-500 border border-[#453d25]/40 hover:border-[#e91e63]/30 flex flex-col group relative overflow-hidden">
+    <div className="min-w-[280px] md:min-w-[300px] bg-white/95 backdrop-blur-md rounded-3xl shadow-[0_10px_30px_rgba(72,52,52,0.04)] hover:shadow-[0_25px_50px_rgba(72,52,52,0.12)] hover:-translate-y-1.5 transition-all duration-500 border border-[#8c3061]/40 hover:border-[#c63c51]/30 flex flex-col group relative overflow-hidden">
       {/* Dynamic Luxury Tag */}
       {isSold ? (
         <div className="absolute top-4 left-4 z-10 bg-red-600/90 text-[#F9FAFB] px-3 py-1 rounded-full border border-red-500/35 shadow-sm flex items-center gap-1 backdrop-blur-sm">
           <span className="text-[8px] uppercase font-black tracking-widest leading-none">Sold Out</span>
         </div>
       ) : (
-        <div className="absolute top-4 left-4 z-10 bg-[#453d25] px-3 py-1 rounded-full border border-white/20 shadow-sm flex items-center gap-1">
-          <Star className="w-2.5 h-2.5 fill-[#e91e63] stroke-none" />
-          <span className="text-[8px] uppercase text-[#e91e63] font-black tracking-widest leading-none">Featured</span>
+        <div className="absolute top-4 left-4 z-10 bg-[#8c3061] px-3 py-1 rounded-full border border-white/20 shadow-sm flex items-center gap-1">
+          <Star className="w-2.5 h-2.5 fill-[#c63c51] stroke-none" />
+          <span className="text-[8px] uppercase text-[#c63c51] font-black tracking-widest leading-none">Featured</span>
         </div>
       )}
 
@@ -36,7 +36,7 @@ export function PackageCard({ title, image, stars, price, detailsUrl, isSold = f
           sizes="(max-width: 768px) 100vw, 33vw"
         />
         {/* Soft luxury shadow filter */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#e91e63]/35 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#c63c51]/35 via-transparent to-transparent" />
       </div>
 
       <div className="p-5 flex flex-col flex-1">
@@ -45,12 +45,12 @@ export function PackageCard({ title, image, stars, price, detailsUrl, isSold = f
           {[...Array(5)].map((_, i) => (
             <Star
               key={i}
-              className={`w-3.5 h-3.5 ${i < stars ? 'text-[#e91e63] fill-[#e91e63]' : 'text-[#453d25]/40 fill-[#453d25]/20'}`}
+              className={`w-3.5 h-3.5 ${i < stars ? 'text-[#c63c51] fill-[#c63c51]' : 'text-[#8c3061]/40 fill-[#8c3061]/20'}`}
             />
           ))}
         </div>
 
-        <h4 className="font-heading font-black text-[#0d47a1] text-base md:text-lg mb-2 text-center group-hover:text-[#e91e63] transition-colors duration-300 line-clamp-1">{title}</h4>
+        <h4 className="font-heading font-black text-[#522258] text-base md:text-lg mb-2 text-center group-hover:text-[#c63c51] transition-colors duration-300 line-clamp-1">{title}</h4>
 
         {/* Inclusion Pill Badges */}
         <div className="mb-4 flex items-center justify-center gap-1.5 flex-wrap">
@@ -62,7 +62,7 @@ export function PackageCard({ title, image, stars, price, detailsUrl, isSold = f
           ].map(({ icon, label }) => (
             <span
               key={label}
-              className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-[#F9FAFB] border border-[#453d25]/60 text-[#e91e63] text-[9px] font-black uppercase tracking-wider shadow-[0_1px_4px_rgba(107,79,79,0.06)]"
+              className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-[#F9FAFB] border border-[#8c3061]/60 text-[#c63c51] text-[9px] font-black uppercase tracking-wider shadow-[0_1px_4px_rgba(107,79,79,0.06)]"
             >
               {icon}
               {label}
@@ -71,22 +71,22 @@ export function PackageCard({ title, image, stars, price, detailsUrl, isSold = f
         </div>
 
         {/* Modern Price Display */}
-        <div className="flex items-center justify-between mt-auto pt-3 mb-4 border-t border-[#453d25]/40">
-          <span className="text-[9px] text-[#e91e63]/70 font-black uppercase tracking-widest">{isSold ? "Fully Booked" : "All-Inclusive Deal"}</span>
+        <div className="flex items-center justify-between mt-auto pt-3 mb-4 border-t border-[#8c3061]/40">
+          <span className="text-[9px] text-[#c63c51]/70 font-black uppercase tracking-widest">{isSold ? "Fully Booked" : "All-Inclusive Deal"}</span>
           <div className="text-right">
             <span className="text-[9px] text-slate-400 block leading-none font-bold">From</span>
-            <span className="text-xl font-black text-[#0d47a1] tracking-tight">{price}</span>
+            <span className="text-xl font-black text-[#522258] tracking-tight">{price}</span>
           </div>
         </div>
 
         {/* Parallel Modern Actions (Saves space and looks extremely high-end) */}
         <div className="flex gap-2">
-          <Button variant="outline" className="h-11 w-11 p-0 border-[#453d25] text-[#e91e63] hover:bg-[#F9FAFB] hover:text-[#e91e63] hover:border-[#e91e63]/40 flex items-center justify-center rounded-2xl shrink-0 transition-all duration-300" asChild>
+          <Button variant="outline" className="h-11 w-11 p-0 border-[#8c3061] text-[#c63c51] hover:bg-[#F9FAFB] hover:text-[#c63c51] hover:border-[#c63c51]/40 flex items-center justify-center rounded-2xl shrink-0 transition-all duration-300" asChild>
             <a href="tel:+441215291630" aria-label="Call Now">
               <PhoneCall className="w-4 h-4" />
             </a>
           </Button>
-          <Button className={`flex-1 h-11 text-xs rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 font-extrabold tracking-widest uppercase border ${isSold ? 'bg-slate-500 hover:bg-slate-600 text-white border-slate-400/40' : 'bg-[#e91e63] hover:bg-[#0d47a1] text-[#F9FAFB] border-[#453d25]/30'}`} asChild>
+          <Button className={`flex-1 h-11 text-xs rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 font-extrabold tracking-widest uppercase border ${isSold ? 'bg-slate-500 hover:bg-slate-600 text-white border-slate-400/40' : 'bg-[#c63c51] hover:bg-[#522258] text-[#F9FAFB] border-[#8c3061]/30'}`} asChild>
             <Link href={detailsUrl}>
               {isSold ? "Enquire" : "View Details"}
             </Link>
