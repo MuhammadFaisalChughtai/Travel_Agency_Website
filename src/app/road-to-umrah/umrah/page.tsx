@@ -1,4 +1,4 @@
-import { Hero } from "@/components/ui/Hero";
+import { Hero } from "@/components/roadtoumrah/Hero";
 import { Sparkles } from "lucide-react";
 import { UmrahBookingForm } from "@/components/roadtoumrah/umrah/UmrahBookingForm";
 import { PackageCarousel } from "@/components/roadtoumrah/umrah/PackageCarousel";
@@ -12,16 +12,16 @@ import { getSiteConfig, formatPrice } from "@/lib/siteConfig";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Umrah Packages | Terrific Travel Ltd",
+  title: "Umrah Packages | Road To Umrah",
   description:
     "Affordable Umrah packages from the UK for families, groups, and individuals. Our all-inclusive deals cover flights, hotels, visas, and transport.",
   openGraph: {
-    title: "Umrah Packages | Terrific Travel Ltd",
+    title: "Umrah Packages | Road To Umrah",
     description: "Affordable Umrah packages from the UK for families, groups, and individuals. Our all-inclusive deals cover flights, hotels, visas, and transport.",
-    url: "https://terrifictravel.co.uk/umrah",
+    url: "https://roadtoumrah.co.uk/umrah",
   },
   twitter: {
-    title: "Umrah Packages | Terrific Travel Ltd",
+    title: "Umrah Packages | Road To Umrah",
     description: "Affordable Umrah packages from the UK for families, groups, and individuals. Our all-inclusive deals cover flights, hotels, visas, and transport.",
   },
 };

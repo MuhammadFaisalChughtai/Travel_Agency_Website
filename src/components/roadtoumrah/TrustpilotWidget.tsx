@@ -3,7 +3,7 @@
 export function TrustpilotWidget() {
   return (
     <a
-      href="https://uk.trustpilot.com/review/terrifictravel.co.uk"
+      href="https://uk.trustpilot.com/review/roadtoumrah.co.uk"
       target="_blank"
       rel="noopener noreferrer"
       className="group flex flex-col items-start justify-center py-2 cursor-pointer"

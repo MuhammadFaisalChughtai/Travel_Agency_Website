@@ -11,23 +11,23 @@ import {
   PhoneCall,
   AlertCircle,
 } from "lucide-react";
-import { Hero } from "@/components/ui/Hero";
+import { Hero } from "@/components/roadtoumrah/Hero";
 import { VisaBookingForm } from "@/components/roadtoumrah/visa/VisaBookingForm";
 
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Visa Services | Terrific Travel Ltd",
+  title: "Visa Services | Road To Umrah",
   description:
     "Fast-track Saudi Arabia Umrah, UAE Dubai, and worldwide visa processing from the UK. Expert handling, rapid turnaround, IATA & ATOL accredited.",
   openGraph: {
-    title: "Visa Services | Terrific Travel Ltd",
+    title: "Visa Services | Road To Umrah",
     description:
       "Fast-track Saudi Arabia Umrah, UAE Dubai, and worldwide visa processing from the UK. Expert handling, rapid turnaround, IATA & ATOL accredited.",
-    url: "https://terrifictravel.co.uk/visa",
+    url: "https://roadtoumrah.co.uk/visa",
   },
   twitter: {
-    title: "Visa Services | Terrific Travel Ltd",
+    title: "Visa Services | Road To Umrah",
     description:
       "Fast-track Saudi Arabia Umrah, UAE Dubai, and worldwide visa processing from the UK. Expert handling, rapid turnaround, IATA & ATOL accredited.",
   },
@@ -300,7 +300,7 @@ export default async function VisaPage() {
       {/* ─── CTA Banner ─── */}
       <section className="py-16 bg-white border-t border-[#d4af37]/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="rounded-3xl bg-[#382626] overflow-hidden relative">
+          <div className="rounded-3xl bg-[#064e3b] overflow-hidden relative">
             <div className="absolute inset-0 opacity-10">
               <Image
                 src="https://images.unsplash.com/photo-1581451556948-2b8e39f37c35?auto=format&fit=crop&w=2000&q=80"

@@ -131,7 +131,7 @@ Passengers: ${formData.travelers}
             <span className="inline-block px-3 py-1 rounded-full bg-[#F9FAFB] text-[#064e3b] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
               Free Quote
             </span>
-            <h2 className="text-[#382626] text-xl md:text-2xl font-heading font-black tracking-tight">
+            <h2 className="text-[#064e3b] text-xl md:text-2xl font-heading font-black tracking-tight">
               Book Your Umrah Journey
             </h2>
             <div className="h-[2px] w-12 bg-[#064e3b]/30 mx-auto mt-2 rounded-full"></div>
@@ -299,7 +299,7 @@ Passengers: ${formData.travelers}
               <Button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full md:w-2/5 py-6 text-xs font-bold bg-[#064e3b] hover:bg-[#382626] text-white rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 tracking-widest uppercase flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
+                className="w-full md:w-2/5 py-6 text-xs font-bold bg-[#064e3b] hover:bg-[#064e3b] text-white rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 tracking-widest uppercase flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
               >
                 {status === "loading" ? (
                   <>

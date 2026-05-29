@@ -33,7 +33,7 @@ export function UmrahInfoSection() {
             {[
               { id: "overview", label: "Overview" },
               { id: "inclusions", label: "What's Included" },
-              { id: "why", label: "Why Terrific Travel Ltd" },
+              { id: "why", label: "Why Road To Umrah" },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -60,7 +60,7 @@ export function UmrahInfoSection() {
                   All-Inclusive Curation
                 </div>
                 <h3 className="text-xl md:text-2xl font-heading font-black text-[#064e3b]">
-                  Fulfill your Umrah dream with Terrific Travel Ltd
+                  Fulfill your Umrah dream with Road To Umrah
                 </h3>
                 <p className="text-slate-700 text-xs md:text-sm leading-relaxed font-light">
                   Performing Umrah is a holy obligation, and as the UK's trusted
@@ -171,7 +171,7 @@ export function UmrahInfoSection() {
             <div className="space-y-6 animate-fade-in">
               <div className="text-center max-w-2xl mx-auto mb-2">
                 <h3 className="text-xl font-heading font-black text-[#064e3b]">
-                  Why Choose Terrific Travel Ltd
+                  Why Choose Road To Umrah
                 </h3>
                 <p className="text-slate-600 text-xs mt-1">
                   Trusted ground support and accredited protection at unbeatable

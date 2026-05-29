@@ -1,4 +1,4 @@
-import { Hero } from "@/components/ui/Hero";
+import { Hero } from "@/components/roadtoumrah/Hero";
 import { Plane } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { HajjBookingForm } from "@/components/hajj/HajjBookingForm";
@@ -11,16 +11,16 @@ import { getSiteConfig, formatPrice } from "@/lib/siteConfig";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Hajj Packages | Terrific Travel Ltd",
+  title: "Hajj Packages | Road To Umrah",
   description:
     "Fulfill your sacred duty with peace of mind. Our luxury Hajj packages are carefully designed to provide comfort, guidance, and unwavering support.",
   openGraph: {
-    title: "Hajj Packages | Terrific Travel Ltd",
+    title: "Hajj Packages | Road To Umrah",
     description: "Fulfill your sacred duty with peace of mind. Our luxury Hajj packages are carefully designed to provide comfort, guidance, and unwavering support.",
-    url: "https://terrifictravel.co.uk/hajj",
+    url: "https://roadtoumrah.co.uk/hajj",
   },
   twitter: {
-    title: "Hajj Packages | Terrific Travel Ltd",
+    title: "Hajj Packages | Road To Umrah",
     description: "Fulfill your sacred duty with peace of mind. Our luxury Hajj packages are carefully designed to provide comfort, guidance, and unwavering support.",
   },
 };

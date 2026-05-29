@@ -70,7 +70,7 @@ export function BookingModal({ type, id, title, isSold }: BookingModalProps) {
       ) : (
         <button
           onClick={() => setOpen(true)}
-          className="flex items-center justify-center w-full h-12 rounded-2xl bg-[#064e3b] hover:bg-[#064e3b] text-[#382626] font-heading font-black text-xs uppercase tracking-[0.15em] transition-all duration-300 shadow-lg hover:shadow-[#d4af37]/15 hover:-translate-y-0.5 cursor-pointer"
+          className="flex items-center justify-center w-full h-12 rounded-2xl bg-[#064e3b] hover:bg-[#064e3b] text-[#064e3b] font-heading font-black text-xs uppercase tracking-[0.15em] transition-all duration-300 shadow-lg hover:shadow-[#d4af37]/15 hover:-translate-y-0.5 cursor-pointer"
         >
           {buttonLabel}
         </button>

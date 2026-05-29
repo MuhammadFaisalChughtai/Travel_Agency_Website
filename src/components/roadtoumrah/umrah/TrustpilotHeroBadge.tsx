@@ -39,7 +39,7 @@ export function TrustpilotHeroBadge({ label = "Pilgrims" }: { label?: string }) 
 
   return (
     <a
-      href="https://uk.trustpilot.com/review/terrifictravel.co.uk"
+      href="https://uk.trustpilot.com/review/roadtoumrah.co.uk"
       target="_blank"
       rel="noopener noreferrer"
       className="inline-flex items-center gap-2 pt-1 text-[11px] text-slate-300 font-medium hover:text-white transition-colors cursor-pointer group"

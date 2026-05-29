@@ -42,9 +42,9 @@ const faqs: FaqItem[] = [
   },
   {
     question:
-      "Are there specific requirements to apply for Umrah through Terrific Travel Ltd?",
+      "Are there specific requirements to apply for Umrah through Road To Umrah?",
     answer:
-      "There are a few specific requirements that need to be met to apply for Umrah through Terrific Travel Ltd or any other agency in UK. You need to have a valid passport with a minimum of six months validity, a valid Umrah visa, and proof of vaccination against meningitis and other required diseases. Terrific Travel Ltd's Umrah experts will guide you through the visa processing and approval process.",
+      "There are a few specific requirements that need to be met to apply for Umrah through Road To Umrah or any other agency in UK. You need to have a valid passport with a minimum of six months validity, a valid Umrah visa, and proof of vaccination against meningitis and other required diseases. Road To Umrah's Umrah experts will guide you through the visa processing and approval process.",
   },
   {
     question:
@@ -93,7 +93,7 @@ export function FaqAccordion() {
                   aria-expanded={isOpen}
                 >
                   <span
-                    className={`font-semibold pr-8 text-sm md:text-base ${isOpen ? "text-[#064e3b] font-black" : "text-[#382626] font-medium"}`}
+                    className={`font-semibold pr-8 text-sm md:text-base ${isOpen ? "text-[#064e3b] font-black" : "text-[#064e3b] font-medium"}`}
                   >
                     {faq.question}
                   </span>

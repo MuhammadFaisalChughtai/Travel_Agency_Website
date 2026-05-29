@@ -1,9 +1,9 @@
-import { Hero } from "@/components/ui/Hero";
+import { Hero } from "@/components/roadtoumrah/Hero";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Terrific Travel Ltd",
-  description: "Privacy Policy and data protection guidelines for Terrific Travel Ltd.",
+  title: "Privacy Policy | Road To Umrah",
+  description: "Privacy Policy and data protection guidelines for Road To Umrah.",
 };
 
 export default function PrivacyPolicyPage() {
@@ -22,7 +22,7 @@ export default function PrivacyPolicyPage() {
           <article className="prose max-w-none">
             <h2 className="font-heading text-2xl text-[#2a1a1a] font-black mb-4 tracking-wide uppercase">1. Introduction</h2>
             <p className="text-[#064e3b] font-medium leading-relaxed mb-6">
-              Terrific Travel Ltd ("we", "our", "us") respects your privacy and is committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website (regardless of where you visit it from) and tell you about your privacy rights and how the law protects you.
+              Road To Umrah ("we", "our", "us") respects your privacy and is committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website (regardless of where you visit it from) and tell you about your privacy rights and how the law protects you.
             </p>
 
             <h2 className="font-heading text-2xl text-[#2a1a1a] font-black mb-4 mt-8 tracking-wide uppercase">2. The Data We Collect About You</h2>
@@ -66,7 +66,7 @@ export default function PrivacyPolicyPage() {
             </ul>
 
             <p className="text-[#2a1a1a] mt-8 font-bold">
-              If you have any questions about this privacy policy, please contact us at inquires@terrifictravel.co.uk.
+              If you have any questions about this privacy policy, please contact us at inquires@roadtoumrah.co.uk.
             </p>
           </article>
         </div>

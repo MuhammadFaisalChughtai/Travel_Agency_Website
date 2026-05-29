@@ -111,7 +111,7 @@ export function TrustpilotReviews() {
 
           {/* Dynamic Trustpilot Rating Badge */}
           <a
-            href="https://uk.trustpilot.com/review/terrifictravel.co.uk"
+            href="https://uk.trustpilot.com/review/roadtoumrah.co.uk"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex flex-wrap items-center justify-center gap-4 mt-2 bg-white px-5 py-3 rounded-2xl border border-[#d4af37]/50 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"

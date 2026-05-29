@@ -4,7 +4,7 @@ import { TrustpilotHeroBadge } from "./TrustpilotHeroBadge";
 
 export function UmrahHero() {
   return (
-    <div className="relative w-full pt-28 pb-16 md:pt-36 md:pb-24 bg-[#382626] overflow-hidden border-b border-[#d4af37]/20 flex items-center">
+    <div className="relative w-full pt-28 pb-16 md:pt-36 md:pb-24 bg-[#064e3b] overflow-hidden border-b border-[#d4af37]/20 flex items-center">
       {/* Background Image with ultra-sleek dark overlay */}
       <div className="absolute inset-0 z-0">
         <Image

@@ -39,7 +39,7 @@ import { prisma } from "@/lib/prisma";
 import { PackageCard } from "@/components/ui/PackageCard";
 import { FaqAccordion } from "@/components/holiday/FaqAccordion";
 import { EnquirySidebar } from "@/components/roadtoumrah/view/EnquirySidebar";
-import { Hero } from "@/components/ui/Hero";
+import { Hero } from "@/components/roadtoumrah/Hero";
 import { BookingModal } from "@/components/roadtoumrah/view/BookingModal";
 
 export const revalidate = 0; // Disable static rendering caching to allow dynamic prisma lookups
@@ -198,7 +198,7 @@ interface ViewPageProps {
 
 export async function generateMetadata({ params }: ViewPageProps) {
   const item = await resolveItem(params.slug);
-  if (!item) return { title: "Item Not Found | Terrific Travel Ltd" };
+  if (!item) return { title: "Item Not Found | Road To Umrah" };
 
   const type = item.itemType;
   
@@ -218,10 +218,10 @@ export async function generateMetadata({ params }: ViewPageProps) {
     item.metaDescription ||
     item.description ||
     item.excerpt ||
-    `Discover ${titleText} with Terrific Travel Ltd. Expert services, great prices, and fully protected bookings.`;
+    `Discover ${titleText} with Road To Umrah. Expert services, great prices, and fully protected bookings.`;
 
   return {
-    title: item.metaTitle ? titleText : `${titleText} | Terrific Travel Ltd`,
+    title: item.metaTitle ? titleText : `${titleText} | Road To Umrah`,
     description: descText,
   };
 }

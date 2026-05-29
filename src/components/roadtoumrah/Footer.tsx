@@ -71,10 +71,10 @@ export function Footer() {
           {/* Column 1: Logo & About (lg:col-span-3) */}
           <div className="lg:col-span-3 space-y-6 flex flex-col">
             <Link href="/" className="flex items-center gap-2 self-start">
-              <span className="sr-only">Terrific Travel Ltd</span>
+              <span className="sr-only">Road To Umrah</span>
               <Image
                 src={siteConfig.logoUrl}
-                alt="Terrific Travel Ltd"
+                alt="Road To Umrah"
                 width={200}
                 height={80}
                 className="w-auto h-16 sm:h-20"
@@ -111,7 +111,7 @@ export function Footer() {
                   ),
                 },
                 {
-                  href: "https://www.instagram.com/terrifictravelltd/",
+                  href: "https://www.instagram.com/roadtoumrahltd/",
                   label: "Instagram",
                   svg: (
                     <svg
@@ -157,7 +157,7 @@ export function Footer() {
             </div>
 
             <p className="text-xs leading-relaxed text-slate-200 font-medium max-w-xs">
-              Terrific Travel Ltd – Committed to making your journeys
+              Road To Umrah – Committed to making your journeys
               meaningful, safe, and unforgettable.
             </p>
             <TrustpilotWidget />
@@ -300,10 +300,10 @@ export function Footer() {
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#064e3b] shrink-0" />
                 <a
-                  href="mailto:inquires@terrifictravel.co.uk"
+                  href="mailto:inquires@roadtoumrah.co.uk"
                   className="text-xs font-semibold hover:underline"
                 >
-                  inquires@terrifictravel.co.uk
+                  inquires@roadtoumrah.co.uk
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
@@ -341,8 +341,8 @@ export function Footer() {
       <div className="bg-[#d4af37] text-[#064e3b] py-4 text-center border-t border-[#064e3b]/30">
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs font-semibold">
           <p className="text-[#064e3b]">
-            Copyright &copy; {new Date().getFullYear()} Terrific Travel Ltd |
-            All Rights Reserved By Terrific Travel Ltd
+            Copyright &copy; {new Date().getFullYear()} Road To Umrah |
+            All Rights Reserved By Road To Umrah
           </p>
         </div>
       </div>

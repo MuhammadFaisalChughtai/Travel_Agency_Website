@@ -1,9 +1,9 @@
-import { Hero } from "@/components/ui/Hero";
+import { Hero } from "@/components/roadtoumrah/Hero";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms and Conditions | Terrific Travel Ltd",
-  description: "Terms and conditions for booking with Terrific Travel Ltd.",
+  title: "Terms and Conditions | Road To Umrah",
+  description: "Terms and conditions for booking with Road To Umrah.",
 };
 
 export default function TermsAndConditionsPage() {
@@ -22,7 +22,7 @@ export default function TermsAndConditionsPage() {
           <article className="prose max-w-none">
             <h2 className="font-heading text-2xl text-[#2a1a1a] font-black mb-4 tracking-wide uppercase">1. Booking Contract</h2>
             <p className="text-[#064e3b] font-medium leading-relaxed mb-6">
-              When you make a booking with Terrific Travel Ltd, you guarantee that you have the authority to accept and do accept on behalf of your party the terms of these booking conditions. A contract will exist as soon as we issue our confirmation invoice. This contract is made on the terms of these booking conditions, which are governed by English Law, and the jurisdiction of the English Courts.
+              When you make a booking with Road To Umrah, you guarantee that you have the authority to accept and do accept on behalf of your party the terms of these booking conditions. A contract will exist as soon as we issue our confirmation invoice. This contract is made on the terms of these booking conditions, which are governed by English Law, and the jurisdiction of the English Courts.
             </p>
 
             <h2 className="font-heading text-2xl text-[#2a1a1a] font-black mb-4 mt-8 tracking-wide uppercase">2. Financial Protection (ATOL)</h2>
@@ -54,7 +54,7 @@ export default function TermsAndConditionsPage() {
             </p>
 
             <p className="text-[#2a1a1a] mt-8 font-bold">
-              If you require further clarification regarding these Terms and Conditions, please contact us at inquires@terrifictravel.co.uk.
+              If you require further clarification regarding these Terms and Conditions, please contact us at inquires@roadtoumrah.co.uk.
             </p>
           </article>
         </div>

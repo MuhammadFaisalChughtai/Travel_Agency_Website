@@ -10,19 +10,19 @@ import { getSiteConfig, formatPrice } from "@/lib/siteConfig";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terrific Travel Ltd | Holidays, Umrah & Flights from the UK",
+  title: "Road To Umrah | Holidays, Umrah & Flights from the UK",
   description:
-    "Book unforgettable holidays, low-cost Umrah and Hajj packages, global flights, and premium transport with Terrific Travel Ltd. ATOL protected.",
+    "Book unforgettable holidays, low-cost Umrah and Hajj packages, global flights, and premium transport with Road To Umrah. ATOL protected.",
   openGraph: {
-    title: "Terrific Travel Ltd | Holidays, Umrah & Flights from the UK",
+    title: "Road To Umrah | Holidays, Umrah & Flights from the UK",
     description:
-      "Book unforgettable holidays, low-cost Umrah and Hajj packages, global flights, and premium transport with Terrific Travel Ltd. ATOL protected.",
-    url: "https://terrifictravel.co.uk",
+      "Book unforgettable holidays, low-cost Umrah and Hajj packages, global flights, and premium transport with Road To Umrah. ATOL protected.",
+    url: "https://roadtoumrah.co.uk",
   },
   twitter: {
-    title: "Terrific Travel Ltd | Holidays, Umrah & Flights from the UK",
+    title: "Road To Umrah | Holidays, Umrah & Flights from the UK",
     description:
-      "Book unforgettable holidays, low-cost Umrah and Hajj packages, global flights, and premium transport with Terrific Travel Ltd. ATOL protected.",
+      "Book unforgettable holidays, low-cost Umrah and Hajj packages, global flights, and premium transport with Road To Umrah. ATOL protected.",
   },
 };
 

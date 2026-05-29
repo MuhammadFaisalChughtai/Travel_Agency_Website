@@ -12,23 +12,23 @@ import {
   MapPin,
   Clock,
 } from "lucide-react";
-import { Hero } from "@/components/ui/Hero";
+import { Hero } from "@/components/roadtoumrah/Hero";
 import { TransportBookingForm } from "@/components/roadtoumrah/transport/TransportBookingForm";
 
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Transport Services | Terrific Travel Ltd",
+  title: "Transport Services | Road To Umrah",
   description:
     "VIP ground transport and airport transfers in Saudi Arabia, Dubai, and the UK. Premium Sedan, SUV, and coach vehicles with professional chauffeurs.",
   openGraph: {
-    title: "Transport Services | Terrific Travel Ltd",
+    title: "Transport Services | Road To Umrah",
     description:
       "VIP ground transport and airport transfers in Saudi Arabia, Dubai, and the UK. Premium Sedan, SUV, and coach vehicles with professional chauffeurs.",
-    url: "https://terrifictravel.co.uk/transport",
+    url: "https://roadtoumrah.co.uk/transport",
   },
   twitter: {
-    title: "Transport Services | Terrific Travel Ltd",
+    title: "Transport Services | Road To Umrah",
     description:
       "VIP ground transport and airport transfers in Saudi Arabia, Dubai, and the UK. Premium Sedan, SUV, and coach vehicles with professional chauffeurs.",
   },
@@ -308,7 +308,7 @@ export default async function TransportPage() {
       {/* ─── CTA Banner ─── */}
       <section className="py-16 bg-white border-t border-[#d4af37]/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="rounded-3xl bg-[#382626] overflow-hidden relative">
+          <div className="rounded-3xl bg-[#064e3b] overflow-hidden relative">
             <div className="absolute inset-0 opacity-10">
               <Image
                 src="https://images.unsplash.com/photo-1549317661-bd32c8ce0be2?auto=format&fit=crop&w=2000&q=80"

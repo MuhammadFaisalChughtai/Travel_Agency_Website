@@ -2,21 +2,21 @@ import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
-import { Hero } from "@/components/ui/Hero";
+import { Hero } from "@/components/roadtoumrah/Hero";
 
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Travel Blogs & Guides | Terrific Travel Ltd",
+  title: "Travel Blogs & Guides | Road To Umrah",
   description:
     "Read our latest insights, travel hacks, destination guides, and spiritual preparation for Umrah & Hajj.",
   openGraph: {
-    title: "Travel Blogs & Guides | Terrific Travel Ltd",
+    title: "Travel Blogs & Guides | Road To Umrah",
     description: "Read our latest insights, travel hacks, destination guides, and spiritual preparation for Umrah & Hajj.",
-    url: "https://terrifictravel.co.uk/blog",
+    url: "https://roadtoumrah.co.uk/blog",
   },
   twitter: {
-    title: "Travel Blogs & Guides | Terrific Travel Ltd",
+    title: "Travel Blogs & Guides | Road To Umrah",
     description: "Read our latest insights, travel hacks, destination guides, and spiritual preparation for Umrah & Hajj.",
   },
 };

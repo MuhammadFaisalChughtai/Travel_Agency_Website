@@ -1,10 +1,10 @@
-import { Hero } from "@/components/ui/Hero";
+import { Hero } from "@/components/roadtoumrah/Hero";
 import { ShieldCheck, HeartHandshake, Globe, Award } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Us | Terrific Travel Ltd",
-  description: "Learn more about Terrific Travel Ltd. We are a premier travel agency dedicated to providing unforgettable holidays, Umrah & Hajj packages.",
+  title: "About Us | Road To Umrah",
+  description: "Learn more about Road To Umrah. We are a premier travel agency dedicated to providing unforgettable holidays, Umrah & Hajj packages.",
 };
 
 export default function AboutPage() {
@@ -13,7 +13,7 @@ export default function AboutPage() {
       <Hero
         backgroundImage="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
         badgeText="Who We Are"
-        title={<>About <span className="text-[#d4af37] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">Terrific Travel</span></>}
+        title={<>About <span className="text-[#d4af37] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">Road To Umrah</span></>}
         description="Your trusted partner in creating unforgettable journeys and sacred pilgrimages across the globe."
         showTrustpilot={true}
       />
@@ -23,7 +23,7 @@ export default function AboutPage() {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-black text-[#2a1a1a] mb-6 font-heading">Our Mission</h2>
             <p className="text-[#064e3b] font-medium text-lg leading-relaxed mb-8">
-              At Terrific Travel Ltd, our mission is to transform the way you experience the world. Whether you are embarking on a sacred Umrah or Hajj journey, planning a luxury family holiday, or arranging seamless business travel, we are dedicated to providing unparalleled service, complete financial protection, and unforgettable memories.
+              At Road To Umrah, our mission is to transform the way you experience the world. Whether you are embarking on a sacred Umrah or Hajj journey, planning a luxury family holiday, or arranging seamless business travel, we are dedicated to providing unparalleled service, complete financial protection, and unforgettable memories.
             </p>
             <p className="text-[#064e3b] font-medium text-lg leading-relaxed">
               We believe that travel is more than just reaching a destination; it's about the journey, the culture, and the peace of mind knowing that every detail is handled by experts.

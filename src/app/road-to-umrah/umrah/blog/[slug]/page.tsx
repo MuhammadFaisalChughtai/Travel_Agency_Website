@@ -16,9 +16,9 @@ export async function generateMetadata({
   params: { slug: string };
 }) {
   const post = getBlogBySlug(params.slug);
-  if (!post) return { title: "Article Not Found | Terrific Travel Ltd" };
+  if (!post) return { title: "Article Not Found | Road To Umrah" };
   return {
-    title: `${post.title} | Terrific Travel Ltd Journals`,
+    title: `${post.title} | Road To Umrah Journals`,
     description: post.excerpt,
   };
 }
@@ -120,7 +120,7 @@ export default function BlogArticlePage({
                   </div>
                   <div>
                     <p className="text-xs font-black text-[#064e3b] uppercase tracking-widest">
-                      Terrific Travel Ltd Journals
+                      Road To Umrah Journals
                     </p>
                     <p className="text-xs text-slate-400 font-light mt-0.5">
                       UK-based IATA & ATOL accredited travel agency specialising
@@ -137,7 +137,7 @@ export default function BlogArticlePage({
                     Ready to Begin Your Journey?
                   </p>
                   <h3 className="text-xl font-heading font-black leading-tight">
-                    Book Your Umrah Package with Terrific Travel Ltd
+                    Book Your Umrah Package with Road To Umrah
                   </h3>
                 </div>
                 <Link

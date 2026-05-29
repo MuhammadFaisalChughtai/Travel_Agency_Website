@@ -1,22 +1,22 @@
 import { MapPin, Phone, Mail, Clock, ShieldCheck } from "lucide-react";
-import { Hero } from "@/components/ui/Hero";
+import { Hero } from "@/components/roadtoumrah/Hero";
 import { ContactForm } from "@/components/contact/ContactForm";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Terrific Travel Ltd",
+  title: "Contact Us | Road To Umrah",
   description:
-    "Get in touch with Terrific Travel Ltd for Umrah, Hajj, holidays, flights, and visa assistance. Call us, WhatsApp us, or visit our London office.",
+    "Get in touch with Road To Umrah for Umrah, Hajj, holidays, flights, and visa assistance. Call us, WhatsApp us, or visit our London office.",
   openGraph: {
-    title: "Contact Us | Terrific Travel Ltd",
+    title: "Contact Us | Road To Umrah",
     description:
-      "Get in touch with Terrific Travel Ltd for Umrah, Hajj, holidays, flights, and visa assistance. Call us, WhatsApp us, or visit our London office.",
-    url: "https://terrifictravel.co.uk/contact",
+      "Get in touch with Road To Umrah for Umrah, Hajj, holidays, flights, and visa assistance. Call us, WhatsApp us, or visit our London office.",
+    url: "https://roadtoumrah.co.uk/contact",
   },
   twitter: {
-    title: "Contact Us | Terrific Travel Ltd",
+    title: "Contact Us | Road To Umrah",
     description:
-      "Get in touch with Terrific Travel Ltd for Umrah, Hajj, holidays, flights, and visa assistance. Call us, WhatsApp us, or visit our London office.",
+      "Get in touch with Road To Umrah for Umrah, Hajj, holidays, flights, and visa assistance. Call us, WhatsApp us, or visit our London office.",
   },
 };
 
@@ -114,10 +114,10 @@ export default function ContactPage() {
                   </h3>
                   <p className="text-[#064e3b] font-medium leading-relaxed">
                     <a
-                      href="mailto:inquires@terrifictravel.co.uk"
+                      href="mailto:inquires@roadtoumrah.co.uk"
                       className="hover:text-[#064e3b] transition-colors"
                     >
-                      inquires@terrifictravel.co.uk
+                      inquires@roadtoumrah.co.uk
                     </a>
                   </p>
                 </div>

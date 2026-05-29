@@ -122,13 +122,13 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
                     <CheckCircle className="w-8 h-8 text-emerald-500" />
                   </div>
                   <div>
-                    <h3 className="font-heading font-black text-[#382626] text-lg">Enquiry Sent!</h3>
+                    <h3 className="font-heading font-black text-[#064e3b] text-lg">Enquiry Sent!</h3>
                     <p className="text-slate-500 text-sm mt-1">Our team will contact you within 24 hours.</p>
                   </div>
                   <button
                     type="button"
                     onClick={() => { setOpen(false); setStatus("idle"); }}
-                    className="px-6 py-2.5 rounded-xl bg-[#064e3b] text-white font-bold text-xs uppercase tracking-widest hover:bg-[#382626] transition-colors"
+                    className="px-6 py-2.5 rounded-xl bg-[#064e3b] text-white font-bold text-xs uppercase tracking-widest hover:bg-[#064e3b] transition-colors"
                   >
                     Close
                   </button>
@@ -218,7 +218,7 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
 
                   <p className="text-center text-[10px] text-slate-400">
                     Sent directly to{" "}
-                    <span className="text-[#064e3b] font-semibold">inquires@terrifictravel.co.uk</span>
+                    <span className="text-[#064e3b] font-semibold">inquires@roadtoumrah.co.uk</span>
                   </p>
                 </>
               )}
