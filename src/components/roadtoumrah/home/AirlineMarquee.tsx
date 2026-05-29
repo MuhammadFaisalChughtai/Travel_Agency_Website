@@ -47,9 +47,9 @@ function AirlineLogo({ partner }: { partner: { name: string; logo: string } }) {
 
 export function AirlineMarquee() {
   return (
-    <div className="bg-[#382626] py-12 border-b border-[#DFDE7D]/20 overflow-hidden relative">
+    <div className="bg-[#382626] py-12 border-b border-[#453d25]/20 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-8 text-center relative z-10">
-        <p className="text-[#DFDE7D] text-[10px] font-bold uppercase tracking-[0.3em]">
+        <p className="text-[#453d25] text-[10px] font-bold uppercase tracking-[0.3em]">
           Partnering With Top Global Airlines
         </p>
       </div>

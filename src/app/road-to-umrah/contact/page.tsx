@@ -30,7 +30,7 @@ export default function ContactPage() {
         title={
           <>
             Contact{" "}
-            <span className="text-[#DFDE7D] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">
+            <span className="text-[#453d25] font-black drop-shadow-[0_2px_10px_rgba(238,214,196,0.2)]">
               Our Experts
             </span>
           </>
@@ -49,7 +49,7 @@ export default function ContactPage() {
             <h2 className="text-3xl font-black text-[#2a1a1a] mb-6 font-heading">
               Get in Touch
             </h2>
-            <p className="text-[#009F75] leading-relaxed text-lg">
+            <p className="text-[#e91e63] leading-relaxed text-lg">
               Whether you're looking for the perfect family holiday, need
               assistance with your visa, or are planning your sacred Umrah or
               Hajj journey, our dedicated team of travel experts is ready to
@@ -58,14 +58,14 @@ export default function ContactPage() {
 
             <div className="space-y-8">
               <div className="flex gap-5">
-                <div className="w-14 h-14 bg-[#DFDE7D] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm border border-[#DFDE7D]">
-                  <MapPin className="w-6 h-6 text-[#454E63]" />
+                <div className="w-14 h-14 bg-[#453d25] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm border border-[#453d25]">
+                  <MapPin className="w-6 h-6 text-[#0d47a1]" />
                 </div>
                 <div>
                   <h3 className="font-black text-[#2a1a1a] text-lg mb-1 tracking-wide font-heading uppercase">
                     Office Location
                   </h3>
-                  <p className="text-[#009F75] font-medium leading-relaxed">
+                  <p className="text-[#e91e63] font-medium leading-relaxed">
                     <a 
                       target="_blank" 
                       rel="nofollow noreferrer" 
@@ -79,24 +79,24 @@ export default function ContactPage() {
               </div>
 
               <div className="flex gap-5">
-                <div className="w-14 h-14 bg-[#DFDE7D] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm border border-[#DFDE7D]">
-                  <Phone className="w-6 h-6 text-[#454E63]" />
+                <div className="w-14 h-14 bg-[#453d25] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm border border-[#453d25]">
+                  <Phone className="w-6 h-6 text-[#0d47a1]" />
                 </div>
                 <div>
                   <h3 className="font-black text-[#2a1a1a] text-lg mb-1 tracking-wide font-heading uppercase">
                     Phone
                   </h3>
-                  <p className="text-[#009F75] font-medium leading-relaxed">
+                  <p className="text-[#e91e63] font-medium leading-relaxed">
                     <a
                       href="tel:+441215291630"
-                      className="hover:text-[#454E63] transition-colors"
+                      className="hover:text-[#0d47a1] transition-colors"
                     >
                       +44 1215 291630
                     </a>
                     <br />
                     <a
                       href="https://wa.me/441215291630"
-                      className="hover:text-[#454E63] transition-colors"
+                      className="hover:text-[#0d47a1] transition-colors"
                     >
                       +44 1215 291630 (WhatsApp)
                     </a>
@@ -105,17 +105,17 @@ export default function ContactPage() {
               </div>
 
               <div className="flex gap-5">
-                <div className="w-14 h-14 bg-[#DFDE7D] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm border border-[#DFDE7D]">
-                  <Mail className="w-6 h-6 text-[#454E63]" />
+                <div className="w-14 h-14 bg-[#453d25] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm border border-[#453d25]">
+                  <Mail className="w-6 h-6 text-[#0d47a1]" />
                 </div>
                 <div>
                   <h3 className="font-black text-[#2a1a1a] text-lg mb-1 tracking-wide font-heading uppercase">
                     Email
                   </h3>
-                  <p className="text-[#009F75] font-medium leading-relaxed">
+                  <p className="text-[#e91e63] font-medium leading-relaxed">
                     <a
                       href="mailto:inquires@terrifictravel.co.uk"
-                      className="hover:text-[#454E63] transition-colors"
+                      className="hover:text-[#0d47a1] transition-colors"
                     >
                       inquires@terrifictravel.co.uk
                     </a>
@@ -124,14 +124,14 @@ export default function ContactPage() {
               </div>
 
               <div className="flex gap-5">
-                <div className="w-14 h-14 bg-[#DFDE7D] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm border border-[#DFDE7D]">
-                  <Clock className="w-6 h-6 text-[#454E63]" />
+                <div className="w-14 h-14 bg-[#453d25] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm border border-[#453d25]">
+                  <Clock className="w-6 h-6 text-[#0d47a1]" />
                 </div>
                 <div>
                   <h3 className="font-black text-[#2a1a1a] text-lg mb-1 tracking-wide font-heading uppercase">
                     Working Hours
                   </h3>
-                  <p className="text-[#009F75] font-medium leading-relaxed">
+                  <p className="text-[#e91e63] font-medium leading-relaxed">
                     Monday - Friday: 10:00 AM - 07:00 PM
                     <br />
                     Saturday: 10:00 AM - 05:00 PM
@@ -140,11 +140,11 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="bg-[#009F75] rounded-3xl p-8 mt-12 flex items-start gap-6 text-white shadow-xl">
-              <ShieldCheck className="w-10 h-10 text-[#DFDE7D] flex-shrink-0" />
+            <div className="bg-[#e91e63] rounded-3xl p-8 mt-12 flex items-start gap-6 text-white shadow-xl">
+              <ShieldCheck className="w-10 h-10 text-[#453d25] flex-shrink-0" />
               <div>
                 <h4 className="font-black text-xl font-heading tracking-wide">ATOL Protected</h4>
-                <p className="text-sm text-[#DFDE7D]/80 mt-2 leading-relaxed">
+                <p className="text-sm text-[#453d25]/80 mt-2 leading-relaxed">
                   Book with confidence. We are ATOL protected, ensuring your
                   financial security.
                 </p>

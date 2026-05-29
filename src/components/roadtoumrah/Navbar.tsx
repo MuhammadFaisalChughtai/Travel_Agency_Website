@@ -27,7 +27,7 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-40 bg-[#454E63] shadow-md transition-all duration-300">
+      <header className="fixed inset-x-0 top-0 z-40 bg-[#0d47a1] shadow-md transition-all duration-300">
         <nav
           className="flex items-center justify-between py-3 px-4 lg:px-6 max-w-7xl mx-auto"
           aria-label="Global"
@@ -50,7 +50,7 @@ export function Navbar() {
           <div className="flex lg:hidden">
             <button
               type="button"
-              className="-m-2.5 inline-flex items-center justify-center rounded-xl p-2.5 text-[#454E63] hover:bg-[#DFDE7D]/30 transition-colors"
+              className="-m-2.5 inline-flex items-center justify-center rounded-xl p-2.5 text-[#0d47a1] hover:bg-[#453d25]/30 transition-colors"
               onClick={() => setMobileMenuOpen(true)}
             >
               <span className="sr-only">Open main menu</span>
@@ -62,18 +62,18 @@ export function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="relative text-sm font-bold leading-6 text-[#F9FAFB] hover:text-[#DFDE7D] transition-colors duration-300 py-1 group"
+                className="relative text-sm font-bold leading-6 text-[#F9FAFB] hover:text-[#453d25] transition-colors duration-300 py-1 group"
               >
                 {item.name}
                 {/* Sleek animated bottom line hover effect */}
-                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#009F75] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#e91e63] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
               </Link>
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <Button
               asChild
-              className="rounded-lg gap-2 px-6 py-5 bg-[#009F75] hover:bg-[#63B76C] text-[#F9FAFB] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 font-extrabold text-xs tracking-wider uppercase"
+              className="rounded-lg gap-2 px-6 py-5 bg-[#e91e63] hover:bg-[#607d8b] text-[#F9FAFB] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 font-extrabold text-xs tracking-wider uppercase"
             >
               <Link className="flex gap-2 items-center" href="/contact">
                 <PhoneCall className="w-3.5 h-3.5" />
@@ -88,10 +88,10 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div className="lg:hidden" role="dialog" aria-modal="true">
           <div
-            className="fixed inset-0 z-[60] bg-[#454E63]/40 backdrop-blur-sm"
+            className="fixed inset-0 z-[60] bg-[#0d47a1]/40 backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
           ></div>
-          <div className="fixed inset-y-0 right-0 z-[60] w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-[#DFDE7D]/40 border-l border-[#DFDE7D]/50 shadow-2xl">
+          <div className="fixed inset-y-0 right-0 z-[60] w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-[#453d25]/40 border-l border-[#453d25]/50 shadow-2xl">
             <div className="flex items-center justify-between">
               <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
                 <span className="sr-only">Terrific Travel Ltd</span>
@@ -105,7 +105,7 @@ export function Navbar() {
               </Link>
               <button
                 type="button"
-                className="-m-2.5 rounded-xl p-2.5 text-[#454E63] hover:bg-[#DFDE7D]/30"
+                className="-m-2.5 rounded-xl p-2.5 text-[#0d47a1] hover:bg-[#453d25]/30"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="sr-only">Close menu</span>
@@ -113,13 +113,13 @@ export function Navbar() {
               </button>
             </div>
             <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-[#DFDE7D]/40">
+              <div className="-my-6 divide-y divide-[#453d25]/40">
                 <div className="space-y-2 py-6">
                   {filteredNavigation.map((item) => (
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="-mx-3 block rounded-xl px-3 py-2 text-base font-bold leading-7 text-[#454E63] hover:bg-[#DFDE7D]/25 hover:text-[#009F75] transition-all duration-200"
+                      className="-mx-3 block rounded-xl px-3 py-2 text-base font-bold leading-7 text-[#0d47a1] hover:bg-[#453d25]/25 hover:text-[#e91e63] transition-all duration-200"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}
@@ -129,7 +129,7 @@ export function Navbar() {
                 <div className="py-6">
                   <Button
                     asChild
-                    className="w-full rounded-full gap-2 bg-[#009F75] hover:bg-[#454E63] text-[#F9FAFB] py-5 border border-[#DFDE7D]/45 font-extrabold uppercase text-xs tracking-wider shadow-md transition-colors duration-300"
+                    className="w-full rounded-full gap-2 bg-[#e91e63] hover:bg-[#0d47a1] text-[#F9FAFB] py-5 border border-[#453d25]/45 font-extrabold uppercase text-xs tracking-wider shadow-md transition-colors duration-300"
                   >
                     <Link
                       className="flex gap-3"
