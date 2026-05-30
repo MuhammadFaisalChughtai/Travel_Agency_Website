@@ -2,7 +2,7 @@ import { Navbar } from "@/components/roadtoumrah/Navbar";
 import { Footer } from "@/components/roadtoumrah/Footer";
 import { TawkToWidget } from "@/components/layout/TawkToWidget";
 import { FloatingActions } from "@/components/layout/FloatingActions";
-import { CookieConsent } from "@/components/layout/CookieConsent";
+import { CookieConsent } from "@/components/roadtoumrah/layout/CookieConsent";
 
 export default function RootLayout({
   children,
