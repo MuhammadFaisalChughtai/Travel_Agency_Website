@@ -11,8 +11,14 @@ export function middleware(request: NextRequest) {
 
   const url = request.nextUrl.clone();
   
-  // Skip rewriting if the path is intended for admin, api, or login
-  if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api') || url.pathname.startsWith('/login')) {
+  // Skip rewriting if the path is intended for admin, api, login, or password recovery
+  if (
+    url.pathname.startsWith('/admin') || 
+    url.pathname.startsWith('/api') || 
+    url.pathname.startsWith('/login') ||
+    url.pathname.startsWith('/forgot-password') ||
+    url.pathname.startsWith('/reset-password')
+  ) {
     return NextResponse.next({
       request: {
         headers: requestHeaders,
