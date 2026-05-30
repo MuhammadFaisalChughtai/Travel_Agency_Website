@@ -31,8 +31,8 @@ export async function POST(req: NextRequest) {
     });
 
     // Build reset link
-    // Use request origin to form the reset link
-    const origin = req.nextUrl.origin;
+    // Use environment variable or default to production URL
+    const origin = process.env.NEXT_PUBLIC_APP_URL || "https://terrifictravel.co.uk";
     const resetLink = `${origin}/reset-password?token=${token}`;
 
     const mailOptions = {
