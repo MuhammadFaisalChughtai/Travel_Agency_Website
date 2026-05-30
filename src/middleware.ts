@@ -11,8 +11,8 @@ export function middleware(request: NextRequest) {
 
   const url = request.nextUrl.clone();
   
-  // Skip rewriting if the path is intended for admin or api
-  if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api')) {
+  // Skip rewriting if the path is intended for admin, api, or login
+  if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api') || url.pathname.startsWith('/login')) {
     return NextResponse.next({
       request: {
         headers: requestHeaders,

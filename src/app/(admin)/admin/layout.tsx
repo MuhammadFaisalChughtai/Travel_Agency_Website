@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { 
   LayoutDashboard, 
   Package, 
@@ -17,7 +17,7 @@ import {
   FileCheck,
   Car
 } from "lucide-react";
-import { SessionProvider, signOut } from "next-auth/react";
+import { SessionProvider, signOut, useSession } from "next-auth/react";
 
 const navigation = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
@@ -113,19 +113,42 @@ function AdminSidebar() {
   );
 }
 
+function AuthGuard({ children }: { children: React.ReactNode }) {
+  const { status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.replace("/login");
+    }
+  }, [status, router]);
+
+  if (status === "loading" || status === "unauthenticated") {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-100">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-slate-900"></div>
+      </div>
+    );
+  }
+
+  return <>{children}</>;
+}
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <SessionProvider>
-      <div className="min-h-screen bg-slate-100 flex">
-        <AdminSidebar />
-        <main className="flex-1 lg:pl-64">
-          <div className="py-6 sm:py-10">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              {children}
+      <AuthGuard>
+        <div className="min-h-screen bg-slate-100 flex">
+          <AdminSidebar />
+          <main className="flex-1 lg:pl-64">
+            <div className="py-6 sm:py-10">
+              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                {children}
+              </div>
             </div>
-          </div>
-        </main>
-      </div>
+          </main>
+        </div>
+      </AuthGuard>
     </SessionProvider>
   );
 }
