@@ -3,8 +3,10 @@
 import React, { useState } from "react";
 import { Plane, Calendar, ArrowRight, RefreshCw } from "lucide-react";
 import { createFlight, updateFlight } from "@/app/(admin)/admin/flights/actions";
+import { useRouter } from "next/navigation";
 
 export function FlightEditorForm({ initialData }: { initialData?: any }) {
+  const router = useRouter();
   const [airline, setAirline] = useState(initialData?.airline || "");
   const [airlineCode, setAirlineCode] = useState(initialData?.airlineCode || "");
   const [departure, setDeparture] = useState(initialData?.departure || "");
@@ -87,9 +89,9 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
       if (initialData) {
         await updateFlight(initialData.id, formData);
         alert("Flight deal updated successfully!");
+        router.push("/admin/flights");
       } else {
-        await updateFlight(initialData?.id || '', formData).catch(async () => await createFlight(formData)); // fallback 
-        if(!initialData) await createFlight(formData);
+        await createFlight(formData);
         
         // Reset form on create
         setAirline("");

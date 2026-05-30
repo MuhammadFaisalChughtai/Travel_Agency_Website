@@ -141,7 +141,7 @@ export default async function AdminFlightsPage({ searchParams }: { searchParams:
         <p className="text-xs text-slate-400 mb-6">
           Fields marked * are required.
         </p>
-        <FlightEditorForm initialData={flightToEdit} />
+        <FlightEditorForm key={flightToEdit?.id || "new"} initialData={flightToEdit} />
       </div>
 
       {/* ── Regular Flight Deals ── */}
