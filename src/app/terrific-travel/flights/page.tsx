@@ -115,7 +115,7 @@ export default async function FlightsPage() {
 
   const flightsData = await prisma.flight.findMany({
     where: { status: "AVAILABLE" },
-    orderBy: { price: "asc" },
+    orderBy: { createdAt: "desc" },
     take: 6,
   });
 

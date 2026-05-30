@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     const flights = await prisma.flight.findMany({
-      orderBy: { price: "asc" },
+      orderBy: { createdAt: "desc" },
     });
     return NextResponse.json(flights);
   } catch (error) {

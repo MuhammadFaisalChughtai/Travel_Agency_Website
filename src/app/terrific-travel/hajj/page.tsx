@@ -34,7 +34,7 @@ export default async function HajjPage() {
 
   let packages = await prisma.package.findMany({
     where: { type: "HAJJ" },
-    orderBy: { price: "asc" },
+    orderBy: { createdAt: "desc" },
   });
 
 

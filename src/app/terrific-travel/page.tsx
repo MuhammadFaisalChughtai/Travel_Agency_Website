@@ -52,7 +52,7 @@ export default async function Home() {
 
   const featuredUmrahPackages = siteConfig.allowedTabs.includes("umrah") ? await prisma.package.findMany({
     where: { type: "UMRAH" },
-    orderBy: { price: "asc" },
+    orderBy: { createdAt: "desc" },
     take: 6,
   }) : [];
 
@@ -78,7 +78,7 @@ export default async function Home() {
 
   const featuredHolidayPackages = siteConfig.allowedTabs.includes("holiday") ? await prisma.package.findMany({
     where: { type: "HOLIDAY" },
-    orderBy: { price: "asc" },
+    orderBy: { createdAt: "desc" },
     take: 6,
   }) : [];
 

@@ -11,7 +11,7 @@ export async function getMoreFlights(skip: number, take: number) {
 
   const flightsData = await prisma.flight.findMany({
     where: { status: "AVAILABLE" },
-    orderBy: { price: "asc" },
+    orderBy: { createdAt: "desc" },
     skip,
     take,
   });

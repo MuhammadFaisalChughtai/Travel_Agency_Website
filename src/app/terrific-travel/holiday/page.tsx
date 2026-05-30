@@ -35,7 +35,7 @@ export default async function PackagesPage() {
 
   let packages = await prisma.package.findMany({
     where: { type: "HOLIDAY" },
-    orderBy: { price: "asc" },
+    orderBy: { createdAt: "desc" },
   });
 
   const formattedPackages = packages.map((pkg) => {

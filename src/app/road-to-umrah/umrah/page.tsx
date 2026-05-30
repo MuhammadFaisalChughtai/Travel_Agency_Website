@@ -33,7 +33,7 @@ export default async function UmrahPage() {
 
   const allPackages = await prisma.package.findMany({
     where: { type: "UMRAH" },
-    orderBy: { price: "asc" },
+    orderBy: { createdAt: "desc" },
   });
 
   const formatPackages = (stars: number) => {
