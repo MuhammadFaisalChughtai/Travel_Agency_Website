@@ -61,7 +61,7 @@ const ALL_CAROUSEL_SLIDES = [
     subtitle:
       "Embark on a life-changing journey to Makkah with our premium and affordable packages.",
     image:
-      "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+      "https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
   },
   {
     id: "umrah-3",
@@ -70,7 +70,7 @@ const ALL_CAROUSEL_SLIDES = [
     subtitle:
       "Find peace at the Prophet's Mosque with our carefully curated spiritual itineraries.",
     image:
-      "https://images.unsplash.com/photo-1564121211835-e88c852648ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+      "https://images.unsplash.com/photo-1581451556948-2b8e39f37c35?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
   },
 ];
 

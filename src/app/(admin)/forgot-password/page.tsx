@@ -6,7 +6,9 @@ import { Button } from "@/components/ui/Button";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,7 +30,9 @@ export default function ForgotPasswordPage() {
       }
 
       setStatus("success");
-      setMessage("If an account exists with this email, a reset link has been sent.");
+      setMessage(
+        "If an account exists with this email, a reset link has been sent.",
+      );
     } catch (err: any) {
       setStatus("error");
       setMessage(err.message);
@@ -54,7 +58,10 @@ export default function ForgotPasswordPage() {
               {message}
             </div>
             <div className="mt-6 text-center">
-              <a href="/login" className="text-primary hover:underline font-medium">
+              <a
+                href="/login"
+                className="text-primary hover:underline font-medium"
+              >
                 Return to Login
               </a>
             </div>
@@ -83,11 +90,16 @@ export default function ForgotPasswordPage() {
               disabled={status === "loading"}
               className="w-full text-md h-12 rounded-xl flex items-center justify-center gap-2"
             >
-              {status === "loading" && <Loader2 className="w-4 h-4 animate-spin" />}
+              {status === "loading" && (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              )}
               {status === "loading" ? "Sending..." : "Send Reset Link"}
             </Button>
             <div className="text-center mt-4">
-              <a href="/login" className="text-sm text-slate-600 hover:text-slate-900">
+              <a
+                href="/login"
+                className="text-sm text-slate-600 hover:text-slate-900"
+              >
                 Back to Login
               </a>
             </div>
