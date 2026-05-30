@@ -27,7 +27,7 @@ export function HolidayBlogSection({ blogs }: { blogs: any[] }) {
           <h2 className="text-2xl md:text-3xl font-heading font-black text-[#483434] tracking-tight">
             Terrific Holiday Journals
           </h2>
-          <p className="text-xs md:text-sm text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
+          <p className="text-xs md:text-sm text-[#f5f0eb]0 font-light max-w-xl mx-auto leading-relaxed">
             Discover hidden gems, luxury resort reviews, and expert travel tips to help you plan your perfect getaway.
           </p>
         </div>
@@ -68,7 +68,7 @@ export function HolidayBlogSection({ blogs }: { blogs: any[] }) {
                   {post.title}
                 </h3>
 
-                <p className="text-xs text-slate-500 font-light leading-relaxed flex-grow">
+                <p className="text-xs text-[#f5f0eb]0 font-light leading-relaxed flex-grow">
                   {post.excerpt}
                 </p>
 

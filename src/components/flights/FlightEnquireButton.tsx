@@ -118,13 +118,13 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
               {status === "success" ? (
                 <div className="py-8 flex flex-col items-center gap-4 text-center">
                   <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center">
-                    <CheckCircle className="w-8 h-8 text-emerald-500" />
+                    <CheckCircle className="w-8 h-8 text-[#fff3e4]0" />
                   </div>
                   <div>
                     <h3 className="font-heading font-black text-[#382626] text-lg">
                       Enquiry Sent!
                     </h3>
-                    <p className="text-slate-500 text-sm mt-1">
+                    <p className="text-[#f5f0eb]0 text-sm mt-1">
                       Our team will contact you within 24 hours.
                     </p>
                   </div>
@@ -160,7 +160,7 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
                         onChange={handleChange}
                         required
                         placeholder="Your Full Name"
-                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#f5f0eb] text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400"
                       />
                     </div>
 
@@ -173,7 +173,7 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
                         onChange={handleChange}
                         required
                         placeholder="Email Address"
-                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#f5f0eb] text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400"
                       />
                     </div>
 
@@ -185,7 +185,7 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
                         value={form.phone}
                         onChange={handleChange}
                         placeholder="Phone Number"
-                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#f5f0eb] text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400"
                       />
                     </div>
 
@@ -195,7 +195,7 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
                       onChange={handleChange}
                       rows={3}
                       placeholder="Any specific requirements or questions…"
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400 resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-[#f5f0eb] text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400 resize-none"
                     />
                   </div>
 

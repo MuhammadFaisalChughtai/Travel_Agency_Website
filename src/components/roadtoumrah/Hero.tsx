@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { ReactNode } from "react";
-import { TrustpilotHeroBadge } from "@/components/umrah/TrustpilotHeroBadge";
+import { TrustpilotHeroBadge } from "@/components/roadtoumrah/umrah/TrustpilotHeroBadge";
 
 interface HeroProps {
   badgeText: string;

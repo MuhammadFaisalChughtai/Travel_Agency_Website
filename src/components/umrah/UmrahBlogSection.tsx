@@ -28,7 +28,7 @@ export function UmrahBlogSection({ blogs }: { blogs: any[] }) {
           <h2 className="text-2xl md:text-3xl font-heading font-black text-[#483434] tracking-tight">
             Terrific Umrah & Hajj Journals
           </h2>
-          <p className="text-xs md:text-sm text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
+          <p className="text-xs md:text-sm text-[#f5f0eb]0 font-light max-w-xl mx-auto leading-relaxed">
             Gain deep insights, tips, and official protocols to prepare mentally, physically, and spiritually for your sacred pilgrimage.
           </p>
         </div>
@@ -75,7 +75,7 @@ export function UmrahBlogSection({ blogs }: { blogs: any[] }) {
                 </h3>
 
                 {/* Excerpt */}
-                <p className="text-xs text-slate-500 font-light leading-relaxed flex-grow">
+                <p className="text-xs text-[#f5f0eb]0 font-light leading-relaxed flex-grow">
                   {post.excerpt}
                 </p>
 

@@ -132,7 +132,7 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
     <form onSubmit={handleSubmit} className="space-y-8 max-w-4xl">
       <div className="border-b border-slate-100 pb-4">
         <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-          <Plane className="w-5 h-5 text-slate-500" />
+          <Plane className="w-5 h-5 text-[#f5f0eb]0" />
           {initialData ? "Edit Flight Deal" : "Add New Flight Deal"}
         </h3>
         <p className="text-xs text-slate-400 mt-1">Provide outbound flight parameters and optional return flight configurations.</p>
@@ -188,7 +188,7 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
       </div>
 
       {/* Outbound Journey Section */}
-      <div className="bg-slate-50/50 p-4.5 rounded-xl border border-slate-200/60 space-y-4">
+      <div className="bg-[#f5f0eb]/50 p-4.5 rounded-xl border border-slate-200/60 space-y-4">
         <h4 className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
           <ArrowRight className="w-4 h-4 text-slate-400" />
           Outbound Flight Info
@@ -331,7 +331,7 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
               className="h-4 w-4 rounded border-slate-300 text-slate-900 focus:ring-slate-400"
             />
             <span className="text-xs font-bold text-slate-700 flex items-center gap-1">
-              <RefreshCw className="w-3.5 h-3.5 text-slate-500" />
+              <RefreshCw className="w-3.5 h-3.5 text-[#f5f0eb]0" />
               Include Return Journey? (Return Flight)
             </span>
           </label>
@@ -443,7 +443,7 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
       </div>
 
       {/* SEO Fields */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-slate-50 border border-slate-200 rounded-lg">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-[#f5f0eb] border border-slate-200 rounded-lg">
         <div>
           <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Title</label>
           <input
@@ -451,7 +451,7 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
             onChange={e => setMetaTitle(e.target.value)}
             type="text"
             placeholder="e.g. Cheap Flights to Dubai | Terrific Travel"
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
           />
         </div>
         <div>
@@ -461,7 +461,7 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
             onChange={e => setMetaDescription(e.target.value)}
             rows={2}
             placeholder="A short description for search engines..."
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
           />
         </div>
       </div>

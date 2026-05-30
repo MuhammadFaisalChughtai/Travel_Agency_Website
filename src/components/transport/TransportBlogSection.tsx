@@ -27,7 +27,7 @@ export function TransportBlogSection({ blogs }: { blogs: any[] }) {
           <h2 className="text-2xl md:text-3xl font-heading font-black text-[#483434] tracking-tight">
             Terrific Transport Journals
           </h2>
-          <p className="text-xs md:text-sm text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
+          <p className="text-xs md:text-sm text-[#f5f0eb]0 font-light max-w-xl mx-auto leading-relaxed">
             Gain deep insights, tips, and guidelines for your local and international transport needs.
           </p>
         </div>
@@ -68,7 +68,7 @@ export function TransportBlogSection({ blogs }: { blogs: any[] }) {
                   {post.title}
                 </h3>
 
-                <p className="text-sm text-slate-500 font-light leading-relaxed line-clamp-3 flex-grow">
+                <p className="text-sm text-[#f5f0eb]0 font-light leading-relaxed line-clamp-3 flex-grow">
                   {post.excerpt}
                 </p>
 

@@ -1,4 +1,4 @@
-import { BookingForm } from "@/components/book/BookingForm";
+import { BookingForm } from "@/components/roadtoumrah/book/BookingForm";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

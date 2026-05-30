@@ -56,18 +56,18 @@ function BookingContent() {
   const label = labels[isHajj ? "hajj" : isHoliday ? "holiday" : type] ?? labels.package;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-50 pt-24 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-[#fff3e4] via-white to-[#fff3e4] pt-24 pb-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 mt-5">
         {/* Page Header */}
         <div className="text-center mb-10">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-emerald-50 text-[#064e3b] text-[10px] font-bold uppercase tracking-[0.25em] mb-3 border border-[#d4af37]/60">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[#fff3e4] text-[#6b4f4f] text-[10px] font-bold uppercase tracking-[0.25em] mb-3 border border-[#eed6c4]/60">
             {label.badge}
           </span>
-          <h1 className="text-3xl md:text-4xl font-heading font-black text-[#064e3b] tracking-tight mb-3">
+          <h1 className="text-3xl md:text-4xl font-heading font-black text-[#6b4f4f] tracking-tight mb-3">
             {label.title}
           </h1>
-          <p className="text-slate-500 text-sm max-w-md mx-auto">{label.desc}</p>
-          <div className="h-[2px] w-12 bg-[#064e3b]/30 mx-auto mt-5 rounded-full" />
+          <p className="text-[#f5f0eb]0 text-sm max-w-md mx-auto">{label.desc}</p>
+          <div className="h-[2px] w-12 bg-[#6b4f4f]/30 mx-auto mt-5 rounded-full" />
         </div>
 
         {/* Render the correct existing form — isHome=false gives the white card style */}
@@ -88,9 +88,9 @@ function BookingContent() {
           ].map((text) => (
             <span
               key={text}
-              className="flex items-center gap-1.5 text-[11px] text-slate-500 font-semibold"
+              className="flex items-center gap-1.5 text-[11px] text-[#f5f0eb]0 font-semibold"
             >
-              <CheckCircle className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+              <CheckCircle className="w-3.5 h-3.5 text-[#fff3e4]0 shrink-0" />
               {text}
             </span>
           ))}
@@ -104,8 +104,8 @@ export function BookingForm() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-emerald-50 flex items-center justify-center">
-          <div className="flex flex-col items-center gap-4 text-[#064e3b]">
+        <div className="min-h-screen bg-[#fff3e4] flex items-center justify-center">
+          <div className="flex flex-col items-center gap-4 text-[#6b4f4f]">
             <svg className="animate-spin w-8 h-8" viewBox="0 0 24 24" fill="none">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />

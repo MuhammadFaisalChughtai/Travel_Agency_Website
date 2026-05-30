@@ -69,7 +69,7 @@ export function PackageCard({
           ].map(({ icon, label }) => (
             <span
               key={label}
-              className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-600 text-[9px] font-bold uppercase tracking-wider"
+              className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-[#f5f0eb] border border-slate-200 text-slate-600 text-[9px] font-bold uppercase tracking-wider"
             >
               {icon}
               {label}
@@ -79,7 +79,7 @@ export function PackageCard({
 
         <div className="mt-auto flex items-center justify-between border-t border-slate-100 pt-4">
           <div>
-            <p className="text-xs text-slate-500 font-medium">From</p>
+            <p className="text-xs text-[#f5f0eb]0 font-medium">From</p>
             <p className="text-2xl font-bold text-primary">{price}</p>
           </div>
           <Button asChild variant={isSold ? "secondary" : "outline"} className="rounded-full">

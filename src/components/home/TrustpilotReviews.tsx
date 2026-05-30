@@ -104,7 +104,7 @@ export function TrustpilotReviews() {
           <h2 className="text-3xl md:text-4xl font-heading font-black text-[#483434] tracking-tight">
             Trusted by Thousands of Happy Customers
           </h2>
-          <p className="text-slate-500 text-sm font-light mt-1">
+          <p className="text-[#f5f0eb]0 text-sm font-light mt-1">
             Flights · Holidays · Umrah · Hajj · Visas · Transport
           </p>
           <div className="h-[2px] w-12 bg-[#6b4f4f]/30 my-4 rounded-full"></div>
@@ -122,7 +122,7 @@ export function TrustpilotReviews() {
               </span>
               {renderStars(loading ? 4.5 : data?.trustScore || 4.5)}
             </div>
-            <p className="text-xs font-semibold text-slate-500">
+            <p className="text-xs font-semibold text-[#f5f0eb]0">
               Based on{" "}
               <span className="text-[#00b67a] font-bold">
                 {loading ? "29" : data?.numberOfReviews} reviews

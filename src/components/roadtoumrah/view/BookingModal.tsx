@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
-import { TransportBookingForm } from "@/components/transport/TransportBookingForm";
-import { VisaBookingForm } from "@/components/visa/VisaBookingForm";
-import { UmrahBookingForm } from "@/components/umrah/UmrahBookingForm";
-import { HolidaysBookingForm } from "@/components/holiday/HolidaysBookingForm";
-import { FlightBookingForm } from "@/components/flights/FlightBookingForm";
+import { TransportBookingForm } from "@/components/roadtoumrah/transport/TransportBookingForm";
+import { VisaBookingForm } from "@/components/roadtoumrah/visa/VisaBookingForm";
+import { UmrahBookingForm } from "@/components/roadtoumrah/umrah/UmrahBookingForm";
+import { HolidaysBookingForm } from "@/components/roadtoumrah/holiday/HolidaysBookingForm";
+import { FlightBookingForm } from "@/components/roadtoumrah/flights/FlightBookingForm";
 
 interface BookingModalProps {
   type: string;

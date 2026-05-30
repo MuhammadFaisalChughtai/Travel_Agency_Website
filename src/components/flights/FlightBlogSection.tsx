@@ -33,7 +33,7 @@ export function FlightBlogSection({ blogs }: { blogs: any[] }) {
           <h2 className="text-2xl md:text-3xl font-heading font-black text-[#483434] tracking-tight">
             Terrific Travel Ltd Journals
           </h2>
-          <p className="text-xs md:text-sm text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
+          <p className="text-xs md:text-sm text-[#f5f0eb]0 font-light max-w-xl mx-auto leading-relaxed">
             Gain deep insights, tips, and official protocols to prepare
             mentally, physically, and spiritually for your next journey.
           </p>
@@ -81,7 +81,7 @@ export function FlightBlogSection({ blogs }: { blogs: any[] }) {
                 </h3>
 
                 {/* Excerpt */}
-                <p className="text-xs text-slate-500 font-light leading-relaxed flex-grow">
+                <p className="text-xs text-[#f5f0eb]0 font-light leading-relaxed flex-grow">
                   {post.excerpt}
                 </p>
 

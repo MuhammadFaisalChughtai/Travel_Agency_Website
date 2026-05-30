@@ -1,6 +1,6 @@
 import { MapPin, Phone, Mail, Clock, ShieldCheck } from "lucide-react";
 import { Hero } from "@/components/roadtoumrah/Hero";
-import { ContactForm } from "@/components/contact/ContactForm";
+import { ContactForm } from "@/components/roadtoumrah/contact/ContactForm";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

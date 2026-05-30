@@ -1,10 +1,10 @@
 import { Hero } from "@/components/roadtoumrah/Hero";
 import { Plane } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { HajjBookingForm } from "@/components/hajj/HajjBookingForm";
-import { HajjInfoSection } from "@/components/hajj/HajjInfoSection";
-import { HajjBlogSection } from "@/components/hajj/HajjBlogSection";
-import { FaqAccordion } from "@/components/hajj/FaqAccordion";
+import { HajjBookingForm } from "@/components/roadtoumrah/hajj/HajjBookingForm";
+import { HajjInfoSection } from "@/components/roadtoumrah/hajj/HajjInfoSection";
+import { HajjBlogSection } from "@/components/roadtoumrah/hajj/HajjBlogSection";
+import { FaqAccordion } from "@/components/roadtoumrah/hajj/FaqAccordion";
 import { PackageCarousel } from "@/components/roadtoumrah/umrah/PackageCarousel";
 import { headers } from "next/headers";
 import { getSiteConfig, formatPrice } from "@/lib/siteConfig";

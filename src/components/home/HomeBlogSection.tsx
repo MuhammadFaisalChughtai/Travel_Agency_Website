@@ -37,7 +37,7 @@ export function HomeBlogSection({
   const hasMore = visibleCount < uniqueBlogs.length;
 
   return (
-    <section className="py-24 bg-slate-50 border-t border-slate-200">
+    <section className="py-24 bg-[#f5f0eb] border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center space-y-4 mb-12 flex flex-col items-center">
@@ -90,7 +90,7 @@ export function HomeBlogSection({
                   {post.title}
                 </h3>
 
-                <p className="text-sm text-slate-500 font-light leading-relaxed flex-grow">
+                <p className="text-sm text-[#f5f0eb]0 font-light leading-relaxed flex-grow">
                   {post.excerpt}
                 </p>
 

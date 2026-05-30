@@ -6,7 +6,7 @@ import { createVisa, updateVisa } from "@/app/(admin)/admin/visa/actions";
 import { CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 
 const inputClass =
-  "block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#064e3b] focus:border-[#064e3b] transition-colors";
+  "block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#6b4f4f] focus:border-[#6b4f4f] transition-colors";
 
 export function VisaEditorForm({ initialData }: { initialData?: any }) {
   const router = useRouter();
@@ -90,7 +90,7 @@ export function VisaEditorForm({ initialData }: { initialData?: any }) {
   return (
     <div ref={formRef}>
       {status === "success" && (
-        <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl px-4 py-3 text-sm font-semibold mb-5">
+        <div className="flex items-center gap-2 bg-[#fff3e4] border border-emerald-200 text-emerald-700 rounded-xl px-4 py-3 text-sm font-semibold mb-5">
           <CheckCircle className="w-4 h-4 shrink-0" />
           {initialData?.id ? "Visa updated! Redirecting…" : "Visa added successfully!"}
         </div>
@@ -117,7 +117,7 @@ export function VisaEditorForm({ initialData }: { initialData?: any }) {
         <div>
           <label className="block text-sm font-semibold text-slate-700 mb-1">URL Slug</label>
           <input value={slug} onChange={e => setSlug(e.target.value)} type="text" className={inputClass} placeholder="e.g. saudi-arabia-umrah-visa (leave blank to auto-generate)" />
-          <p className="text-xs text-slate-500 mt-1">Leave blank to auto-generate from Country and Visa Type.</p>
+          <p className="text-xs text-[#f5f0eb]0 mt-1">Leave blank to auto-generate from Country and Visa Type.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -147,7 +147,7 @@ export function VisaEditorForm({ initialData }: { initialData?: any }) {
         </div>
 
         <div className="flex items-center gap-2">
-          <input id="isPopularVisa" type="checkbox" checked={isPopular} onChange={e => setIsPopular(e.target.checked)} className="h-4 w-4 rounded border-slate-300 text-[#064e3b] focus:ring-[#064e3b] cursor-pointer" />
+          <input id="isPopularVisa" type="checkbox" checked={isPopular} onChange={e => setIsPopular(e.target.checked)} className="h-4 w-4 rounded border-slate-300 text-[#6b4f4f] focus:ring-[#6b4f4f] cursor-pointer" />
           <label htmlFor="isPopularVisa" className="text-sm font-semibold text-slate-700 cursor-pointer select-none">Mark as "Most Popular"</label>
         </div>
 
@@ -161,7 +161,7 @@ export function VisaEditorForm({ initialData }: { initialData?: any }) {
           <textarea value={features} onChange={e => setFeatures(e.target.value)} rows={4} className={inputClass} placeholder={"Electronic e-Visa processing\nHealth insurance included"} />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-slate-50 border border-slate-200 rounded-lg">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-[#f5f0eb] border border-slate-200 rounded-lg">
           <div>
             <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Title</label>
             <input value={metaTitle} onChange={e => setMetaTitle(e.target.value)} type="text" className={inputClass} />
@@ -176,13 +176,13 @@ export function VisaEditorForm({ initialData }: { initialData?: any }) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-8 py-3 text-sm font-bold text-white shadow hover:bg-[#064e3b] transition-colors disabled:opacity-60"
+            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-8 py-3 text-sm font-bold text-white shadow hover:bg-[#6b4f4f] transition-colors disabled:opacity-60"
           >
             {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
             {isSubmitting ? "Saving…" : initialData?.id ? "Update Visa Service" : "Add Visa Service"}
           </button>
           {initialData?.id && (
-            <a href="/admin/visa" className="text-sm text-slate-500 hover:text-slate-700 font-semibold underline">
+            <a href="/admin/visa" className="text-sm text-[#f5f0eb]0 hover:text-slate-700 font-semibold underline">
               Cancel
             </a>
           )}

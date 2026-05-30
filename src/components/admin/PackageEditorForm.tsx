@@ -130,7 +130,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
             onChange={e => setTitle(e.target.value)}
             type="text"
             placeholder="e.g. 7 Nights 5 Star Umrah"
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
           />
         </div>
         <div>
@@ -139,7 +139,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
             required
             value={type}
             onChange={e => setType(e.target.value)}
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
           >
             <option value="UMRAH">Umrah</option>
             <option value="HAJJ">Hajj</option>
@@ -150,8 +150,8 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
 
       <div>
         <label className="block text-sm font-semibold text-slate-700 mb-1">URL Slug</label>
-        <input value={slug} onChange={e => setSlug(e.target.value)} type="text" className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500" placeholder="e.g. 7-nights-5-star-umrah (leave blank to auto-generate)" />
-        <p className="text-xs text-slate-500 mt-1">Leave blank to auto-generate from Package Title.</p>
+        <input value={slug} onChange={e => setSlug(e.target.value)} type="text" className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0" placeholder="e.g. 7-nights-5-star-umrah (leave blank to auto-generate)" />
+        <p className="text-xs text-[#f5f0eb]0 mt-1">Leave blank to auto-generate from Package Title.</p>
       </div>
 
       {/* Row 2: Stars + Price + Duration */}
@@ -162,7 +162,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
             required
             value={stars}
             onChange={e => setStars(e.target.value)}
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
           >
             <option value="3">⭐⭐⭐ 3 Star</option>
             <option value="4">⭐⭐⭐⭐ 4 Star</option>
@@ -179,7 +179,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
             min="0"
             step="0.01"
             placeholder="e.g. 590"
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
           />
         </div>
         <div>
@@ -190,7 +190,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
             onChange={e => setDuration(e.target.value)}
             type="text"
             placeholder="e.g. 7 Nights, 8 Days"
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
           />
         </div>
       </div>
@@ -202,12 +202,12 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
           value={travelDates}
           onChange={e => setTravelDates(e.target.value)}
           type="text"
-          className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+          className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
         />
       </div>
 
       {/* SEO Fields */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-slate-50 border border-slate-200 rounded-lg">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-[#f5f0eb] border border-slate-200 rounded-lg">
         <div>
           <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Title</label>
           <input
@@ -215,7 +215,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
             onChange={e => setMetaTitle(e.target.value)}
             type="text"
             placeholder="e.g. Best 5 Star Umrah Package | Terrific Travel"
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
           />
         </div>
         <div>
@@ -225,7 +225,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
             onChange={e => setMetaDescription(e.target.value)}
             rows={2}
             placeholder="A short description for search engines..."
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
           />
         </div>
       </div>
@@ -237,7 +237,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
           type="checkbox"
           checked={isSold}
           onChange={e => setIsSold(e.target.checked)}
-          className="h-4 w-4 rounded border-slate-300 text-slate-900 focus:ring-slate-500 cursor-pointer"
+          className="h-4 w-4 rounded border-slate-300 text-slate-900 focus:ring-[#f5f0eb]0 cursor-pointer"
         />
         <label htmlFor="isSold" className="text-sm font-semibold text-slate-700 cursor-pointer select-none">
           Mark as Sold Out (Unavailable)

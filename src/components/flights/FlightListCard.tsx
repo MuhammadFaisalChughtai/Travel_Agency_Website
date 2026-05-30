@@ -70,12 +70,12 @@ export function FlightListCard({
             </span>
           )}
           {isReturn ? (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[9px] font-black uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#fff3e4]0/20 text-emerald-300 text-[9px] font-black uppercase tracking-wider">
               <RefreshCw className="w-2.5 h-2.5" />
               Return Included
             </span>
           ) : (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-500/20 text-slate-300 text-[9px] font-black uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#f5f0eb]0/20 text-slate-300 text-[9px] font-black uppercase tracking-wider">
               <ArrowRight className="w-2.5 h-2.5" />
               One Way
             </span>
@@ -84,7 +84,7 @@ export function FlightListCard({
       </div>
 
       {/* Table Header */}
-      <div className="grid grid-cols-12 px-4 py-2 border-b border-slate-100 bg-slate-50/50">
+      <div className="grid grid-cols-12 px-4 py-2 border-b border-slate-100 bg-[#f5f0eb]/50">
         <div className="col-span-5 text-[9px] md:text-[10px] text-[#6b4f4f] font-bold uppercase tracking-widest text-left">Route & Airline</div>
         <div className="col-span-4 text-[9px] md:text-[10px] text-[#6b4f4f] font-bold uppercase tracking-widest text-left">Transit / Connection</div>
         <div className="col-span-3 text-[9px] md:text-[10px] text-[#6b4f4f] font-bold uppercase tracking-widest text-right truncate">Baggage & Fare</div>
@@ -124,7 +124,7 @@ export function FlightListCard({
           </div>
 
           {/* Col 3: Baggage */}
-          <div className="col-span-3 text-right text-[11px] text-slate-500 font-bold flex flex-col">
+          <div className="col-span-3 text-right text-[11px] text-[#f5f0eb]0 font-bold flex flex-col">
             <span className="truncate">{baggage}</span>
             <span className="text-[9px] text-slate-400 font-medium">Outbound</span>
           </div>
@@ -162,7 +162,7 @@ export function FlightListCard({
             </div>
 
             {/* Col 3: Baggage */}
-            <div className="col-span-3 text-right text-[11px] text-slate-500 font-bold flex flex-col">
+            <div className="col-span-3 text-right text-[11px] text-[#f5f0eb]0 font-bold flex flex-col">
               <span className="truncate">{returnBaggage || baggage}</span>
               <span className="text-[9px] text-slate-400 font-medium">Return</span>
             </div>
@@ -191,7 +191,7 @@ export function FlightListCard({
           <div className="w-6 h-6 rounded-full bg-[#eed6c4]/30 flex items-center justify-center">
             <PhoneCall className="w-3 h-3 text-[#6b4f4f]" />
           </div>
-          <span className="text-[11px] text-slate-500 font-medium mr-auto">We are open 24/7</span>
+          <span className="text-[11px] text-[#f5f0eb]0 font-medium mr-auto">We are open 24/7</span>
           <a href="tel:+441215291630" className="text-[11px] md:text-xs font-black text-[#6b4f4f] hover:text-[#382626] transition-colors">
             +44 1215 291630
           </a>

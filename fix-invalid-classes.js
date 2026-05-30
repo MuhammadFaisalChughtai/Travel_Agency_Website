@@ -19,6 +19,9 @@ walkDir(path.join(__dirname, 'src', 'components'), (filePath) => {
 
     content = content.replace(/-\[emerald-50\]/g, '-emerald-50');
     content = content.replace(/\[emerald-50\]/g, 'emerald-50');
+    
+    content = content.replace(/-\[slate-50\]/g, '-slate-50');
+    content = content.replace(/\[slate-50\]/g, 'slate-50');
 
     if (content !== original) {
       fs.writeFileSync(filePath, content, 'utf8');

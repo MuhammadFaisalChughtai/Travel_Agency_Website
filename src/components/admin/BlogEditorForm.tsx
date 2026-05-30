@@ -179,7 +179,7 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
           className="block w-full rounded-md border-slate-300 shadow-sm sm:text-sm px-4 py-2 border" 
           placeholder="e.g. best-places-in-makkah (leave blank to auto-generate)"
         />
-        <p className="mt-1 text-xs text-slate-500">Leave blank to auto-generate from the Title.</p>
+        <p className="mt-1 text-xs text-[#f5f0eb]0">Leave blank to auto-generate from the Title.</p>
       </div>
 
       <div>
@@ -214,7 +214,7 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
                 placeholder="SEO Title (e.g., Best Places to Visit in Makkah)"
               />
             </div>
-            <p className="mt-1 text-xs text-slate-500">Keep it under 60 characters for best results.</p>
+            <p className="mt-1 text-xs text-[#f5f0eb]0">Keep it under 60 characters for best results.</p>
           </div>
 
           <div className="sm:col-span-2">
@@ -229,7 +229,7 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
                 placeholder="Brief summary for search engines..."
               />
             </div>
-            <p className="mt-1 text-xs text-slate-500">Keep it between 150-160 characters.</p>
+            <p className="mt-1 text-xs text-[#f5f0eb]0">Keep it between 150-160 characters.</p>
           </div>
         </div>
       </div>
