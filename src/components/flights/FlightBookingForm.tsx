@@ -190,10 +190,13 @@ Passengers: ${formData.travelers}
             <div className="relative">
               <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
               <input
-                type="date"
+                type={formData.departure ? "date" : "text"}
+                onFocus={(e) => (e.target.type = "date")}
+                onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
                 name="departure"
                 value={formData.departure}
                 onChange={handleChange}
+                placeholder="Departure Date"
                 className={fieldClass}
                 required
                 aria-label="Departure Date"
@@ -205,7 +208,9 @@ Passengers: ${formData.travelers}
               <div className="relative animate-in fade-in zoom-in-95 duration-300">
                 <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
                 <input
-                  type="date"
+                  type={formData.returnDate ? "date" : "text"}
+                  onFocus={(e) => (e.target.type = "date")}
+                  onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
                   name="returnDate"
                   value={formData.returnDate}
                   onChange={handleChange}

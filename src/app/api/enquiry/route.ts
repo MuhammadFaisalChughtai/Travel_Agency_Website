@@ -11,14 +11,10 @@ export async function POST(req: NextRequest) {
       name,
       email,
       phone,
-      airport,
-      date,
-      category,
-      duration,
-      travelers,
       message,
       type,
       packageId,
+      ...tripDetailsObj
     } = body;
 
     if (!name || !email) {
@@ -45,14 +41,23 @@ export async function POST(req: NextRequest) {
     const textAccent = isRoadToUmrah ? "#fff3e4" : "#fff3e4";
     const highlight = isRoadToUmrah ? "#00b37a" : "#6b4f4f";
 
-    const tripDetails = JSON.stringify({
-      airport,
-      date,
-      category,
-      duration,
-      travelers,
-      packageId,
+    const tripDetails = JSON.stringify({ ...tripDetailsObj, packageId });
+
+    const formatLabel = (key: string) => key.replace(/([A-Z])/g, " $1").replace(/^./, str => str.toUpperCase());
+    
+    let companyTripDetailsRows = "";
+    let customerTripDetailsRows = "";
+    
+    Object.entries(tripDetailsObj).forEach(([key, value]) => {
+      if (value) {
+        companyTripDetailsRows += `<tr><td class="email-details-row" style="padding:7px 0;border-bottom:1px solid ${secondaryColor};width:130px;"><span class="email-details-label" style="font-size:11px;color:${primaryColor};font-weight:800;text-transform:uppercase;letter-spacing:0.08em;">${formatLabel(key)}</span></td><td class="email-details-row" style="padding:7px 0;border-bottom:1px solid ${secondaryColor};"><span class="email-details-value" style="font-size:13px;color:#2a1a1a;font-weight:600;">${value}</span></td></tr>`;
+        customerTripDetailsRows += `<tr><td class="email-details-row" style="padding:8px 0;border-bottom:1px solid ${secondaryColor};width:145px;vertical-align:middle;"><span class="email-details-label" style="font-size:11px;color:${primaryColor};font-weight:800;text-transform:uppercase;letter-spacing:0.1em;">${formatLabel(key)}</span></td><td class="email-details-row" style="padding:8px 0;border-bottom:1px solid ${secondaryColor};"><span class="email-details-value" style="font-size:13px;color:#2a1a1a;font-weight:700;">${value}</span></td></tr>`;
+      }
     });
+    
+    if (packageId) {
+      companyTripDetailsRows += `<tr><td style="padding:7px 0;width:130px;"><span class="email-details-label" style="font-size:11px;color:${primaryColor};font-weight:800;text-transform:uppercase;letter-spacing:0.08em;">Package</span></td><td><span class="email-details-value" style="font-size:13px;color:#2a1a1a;font-weight:600;">${packageId}</span></td></tr>`;
+    }
 
     const formattedType = type
       ? type.charAt(0).toUpperCase() + type.slice(1)
@@ -174,7 +179,7 @@ export async function POST(req: NextRequest) {
 
           <!-- Trip Details Card -->
           ${
-            airport || date || category || duration || travelers || packageId
+            Object.keys(tripDetailsObj).length > 0 || packageId
               ? `
           <table width="100%" cellpadding="0" cellspacing="0" class="email-details-card" style="background:#f8fafc;border-radius:14px;border:1px solid ${secondaryColor};overflow:hidden;margin-bottom:24px;">
             <tr>
@@ -185,12 +190,7 @@ export async function POST(req: NextRequest) {
             <tr>
               <td style="padding:16px 18px;">
                 <table width="100%" cellpadding="0" cellspacing="0">
-                  ${airport ? `<tr><td class="email-details-row" style="padding:7px 0;border-bottom:1px solid ${secondaryColor};width:130px;"><span class="email-details-label" style="font-size:11px;color:${primaryColor};font-weight:800;text-transform:uppercase;letter-spacing:0.08em;">Airport</span></td><td class="email-details-row" style="padding:7px 0;border-bottom:1px solid ${secondaryColor};"><span class="email-details-value" style="font-size:13px;color:#2a1a1a;font-weight:600;">${airport}</span></td></tr>` : ""}
-                  ${date ? `<tr><td class="email-details-row" style="padding:7px 0;border-bottom:1px solid ${secondaryColor};width:130px;"><span class="email-details-label" style="font-size:11px;color:${primaryColor};font-weight:800;text-transform:uppercase;letter-spacing:0.08em;">Travel Date</span></td><td class="email-details-row" style="padding:7px 0;border-bottom:1px solid ${secondaryColor};"><span class="email-details-value" style="font-size:13px;color:#2a1a1a;font-weight:600;">${date}</span></td></tr>` : ""}
-                  ${category ? `<tr><td class="email-details-row" style="padding:7px 0;border-bottom:1px solid ${secondaryColor};width:130px;"><span class="email-details-label" style="font-size:11px;color:${primaryColor};font-weight:800;text-transform:uppercase;letter-spacing:0.08em;">Hotel</span></td><td class="email-details-row" style="padding:7px 0;border-bottom:1px solid ${secondaryColor};"><span class="email-details-value" style="font-size:13px;color:#2a1a1a;font-weight:600;">${category}</span></td></tr>` : ""}
-                  ${duration ? `<tr><td class="email-details-row" style="padding:7px 0;border-bottom:1px solid ${secondaryColor};width:130px;"><span class="email-details-label" style="font-size:11px;color:${primaryColor};font-weight:800;text-transform:uppercase;letter-spacing:0.08em;">Duration</span></td><td class="email-details-row" style="padding:7px 0;border-bottom:1px solid ${secondaryColor};"><span class="email-details-value" style="font-size:13px;color:#2a1a1a;font-weight:600;">${duration} Nights</span></td></tr>` : ""}
-                  ${travelers ? `<tr><td class="email-details-row" style="padding:7px 0;border-bottom:${packageId ? "1px solid ${secondaryColor}" : "none"};width:130px;"><span class="email-details-label" style="font-size:11px;color:${primaryColor};font-weight:800;text-transform:uppercase;letter-spacing:0.08em;">Travelers</span></td><td class="email-details-row" style="padding:7px 0;border-bottom:${packageId ? "1px solid ${secondaryColor}" : "none"};"><span class="email-details-value" style="font-size:13px;color:#2a1a1a;font-weight:600;">${travelers}</span></td></tr>` : ""}
-                  ${packageId ? `<tr><td style="padding:7px 0;width:130px;"><span class="email-details-label" style="font-size:11px;color:${primaryColor};font-weight:800;text-transform:uppercase;letter-spacing:0.08em;">Package</span></td><td><span class="email-details-value" style="font-size:13px;color:#2a1a1a;font-weight:600;">${packageId}</span></td></tr>` : ""}
+                  ${companyTripDetailsRows}
                 </table>
               </td>
             </tr>
@@ -286,7 +286,7 @@ export async function POST(req: NextRequest) {
 
       <!-- Enquiry Summary -->
       ${
-        airport || date || category || duration || travelers
+        Object.keys(tripDetailsObj).length > 0 || packageId
           ? `
       <tr>
         <td style="padding:0 32px 24px;">
@@ -299,11 +299,7 @@ export async function POST(req: NextRequest) {
             <tr>
               <td style="padding:16px 20px;">
                 <table width="100%" cellpadding="0" cellspacing="0">
-                  ${airport ? `<tr><td class="email-details-row" style="padding:8px 0;border-bottom:1px solid ${secondaryColor};width:145px;vertical-align:middle;"><span class="email-details-label" style="font-size:11px;color:${primaryColor};font-weight:800;text-transform:uppercase;letter-spacing:0.1em;">Airport</span></td><td class="email-details-row" style="padding:8px 0;border-bottom:1px solid ${secondaryColor};"><span class="email-details-value" style="font-size:13px;color:#2a1a1a;font-weight:700;">${airport}</span></td></tr>` : ""}
-                  ${date ? `<tr><td class="email-details-row" style="padding:8px 0;border-bottom:1px solid ${secondaryColor};width:145px;vertical-align:middle;"><span class="email-details-label" style="font-size:11px;color:${primaryColor};font-weight:800;text-transform:uppercase;letter-spacing:0.1em;">Travel Date</span></td><td class="email-details-row" style="padding:8px 0;border-bottom:1px solid ${secondaryColor};"><span class="email-details-value" style="font-size:13px;color:#2a1a1a;font-weight:700;">${date}</span></td></tr>` : ""}
-                  ${category ? `<tr><td class="email-details-row" style="padding:8px 0;border-bottom:1px solid ${secondaryColor};width:145px;vertical-align:middle;"><span class="email-details-label" style="font-size:11px;color:${primaryColor};font-weight:800;text-transform:uppercase;letter-spacing:0.1em;">Hotel</span></td><td class="email-details-row" style="padding:8px 0;border-bottom:1px solid ${secondaryColor};"><span class="email-details-value" style="font-size:13px;color:#2a1a1a;font-weight:700;">${category}</span></td></tr>` : ""}
-                  ${duration ? `<tr><td class="email-details-row" style="padding:8px 0;border-bottom:1px solid ${secondaryColor};width:145px;vertical-align:middle;"><span class="email-details-label" style="font-size:11px;color:${primaryColor};font-weight:800;text-transform:uppercase;letter-spacing:0.1em;">Duration</span></td><td class="email-details-row" style="padding:8px 0;border-bottom:1px solid ${secondaryColor};"><span class="email-details-value" style="font-size:13px;color:#2a1a1a;font-weight:700;">${duration} Nights</span></td></tr>` : ""}
-                  ${travelers ? `<tr><td style="padding:8px 0;width:145px;vertical-align:middle;"><span class="email-details-label" style="font-size:11px;color:${primaryColor};font-weight:800;text-transform:uppercase;letter-spacing:0.1em;">Travelers</span></td><td><span class="email-details-value" style="font-size:13px;color:#2a1a1a;font-weight:700;">${travelers}</span></td></tr>` : ""}
+                  ${customerTripDetailsRows}
                 </table>
               </td>
             </tr>

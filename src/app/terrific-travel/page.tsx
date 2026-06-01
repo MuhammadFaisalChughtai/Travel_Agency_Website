@@ -40,9 +40,11 @@ export default async function Home() {
   const domain = headersList.get("x-site-domain");
   const siteConfig = getSiteConfig(domain);
 
-  const rawTrendingFlights = siteConfig.allowedTabs.includes("flight") ? await (prisma as any).trendingFlight.findMany({
-    orderBy: { createdAt: "desc" },
-  }) : [];
+  const rawTrendingFlights = siteConfig.allowedTabs.includes("flight")
+    ? await (prisma as any).trendingFlight.findMany({
+        orderBy: { createdAt: "desc" },
+      })
+    : [];
 
   const trendingFlights = rawTrendingFlights.map((flight: any) => ({
     ...flight,
@@ -50,11 +52,13 @@ export default async function Home() {
     originalPrice: formatPrice(flight.price * 1.25, siteConfig),
   }));
 
-  const featuredUmrahPackages = siteConfig.allowedTabs.includes("umrah") ? await prisma.package.findMany({
-    where: { type: "UMRAH" },
-    orderBy: { createdAt: "desc" },
-    take: 6,
-  }) : [];
+  const featuredUmrahPackages = siteConfig.allowedTabs.includes("umrah")
+    ? await prisma.package.findMany({
+        where: { type: "UMRAH" },
+        orderBy: { createdAt: "desc" },
+        take: 6,
+      })
+    : [];
 
   const formattedUmrahPackages = featuredUmrahPackages.map((pkg: any) => {
     let image = "";
@@ -76,11 +80,13 @@ export default async function Home() {
     };
   });
 
-  const featuredHolidayPackages = siteConfig.allowedTabs.includes("holiday") ? await prisma.package.findMany({
-    where: { type: "HOLIDAY" },
-    orderBy: { createdAt: "desc" },
-    take: 6,
-  }) : [];
+  const featuredHolidayPackages = siteConfig.allowedTabs.includes("holiday")
+    ? await prisma.package.findMany({
+        where: { type: "HOLIDAY" },
+        orderBy: { createdAt: "desc" },
+        take: 6,
+      })
+    : [];
 
   const formattedHolidayPackages = featuredHolidayPackages.map((pkg: any) => {
     let image = "";
@@ -124,84 +130,87 @@ export default async function Home() {
       <HeroSection />
 
       {/* Trending Flights Section */}
-      {siteConfig.allowedTabs.includes("flight") && trendingFlights.length > 0 && (
-        <div className="pt-12 bg-white">
-          <TrendingFlightsSection routes={trendingFlights} />
-        </div>
-      )}
+      {siteConfig.allowedTabs.includes("flight") &&
+        trendingFlights.length > 0 && (
+          <div className="pt-12 bg-white">
+            <TrendingFlightsSection routes={trendingFlights} />
+          </div>
+        )}
 
       {/* Featured Holiday Packages Section */}
-      {siteConfig.allowedTabs.includes("holiday") && formattedHolidayPackages.length > 0 && (
-        <section className="py-24 bg-slate-50">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="text-center space-y-4 mb-16 flex flex-col items-center">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#eed6c4]/20 border border-[#eed6c4]/40 text-[#6b4f4f] text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.2em]">
-                Luxury Getaways
-              </span>
-              <h2 className="text-3xl md:text-4xl font-heading font-black text-[#483434] tracking-tight">
-                Featured Holiday Packages
-              </h2>
-              <p className="text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
-                Discover breathtaking destinations and handpicked luxury holiday
-                experiences.
-              </p>
+      {siteConfig.allowedTabs.includes("holiday") &&
+        formattedHolidayPackages.length > 0 && (
+          <section className="py-24 bg-slate-50">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+              <div className="text-center space-y-4 mb-16 flex flex-col items-center">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-[#eed6c4]/20 border border-[#eed6c4]/40 text-[#6b4f4f] text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.2em]">
+                  Luxury Getaways
+                </span>
+                <h2 className="text-3xl md:text-4xl font-heading font-black text-[#483434] tracking-tight">
+                  Featured Holiday Packages
+                </h2>
+                <p className="text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
+                  Discover breathtaking destinations and handpicked luxury
+                  holiday experiences.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {formattedHolidayPackages.map((pkg: any) => (
+                  <PackageCard
+                    key={pkg.id}
+                    title={pkg.title}
+                    image={pkg.image}
+                    stars={pkg.stars}
+                    price={pkg.price}
+                    detailsUrl={pkg.detailsUrl}
+                    isSold={pkg.isSold}
+                  />
+                ))}
+              </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {formattedHolidayPackages.map((pkg: any) => (
-                <PackageCard
-                  key={pkg.id}
-                  title={pkg.title}
-                  image={pkg.image}
-                  stars={pkg.stars}
-                  price={pkg.price}
-                  detailsUrl={pkg.detailsUrl}
-                  isSold={pkg.isSold}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+          </section>
+        )}
 
       {/* Featured Packages Section */}
-      {siteConfig.allowedTabs.includes("umrah") && formattedUmrahPackages.length > 0 && (
-        <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="text-center space-y-4 mb-16 flex flex-col items-center">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#eed6c4]/20 border border-[#eed6c4]/40 text-[#6b4f4f] text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.2em]">
-                Spiritual Journeys
-              </span>
-              <h2 className="text-3xl md:text-4xl font-heading font-black text-[#483434] tracking-tight">
-                Featured Umrah Packages
-              </h2>
-              <p className="text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
-                Explore our handpicked selection of premium spiritual journeys at
-                the lowest prices.
-              </p>
+      {siteConfig.allowedTabs.includes("umrah") &&
+        formattedUmrahPackages.length > 0 && (
+          <section className="py-24 bg-white">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+              <div className="text-center space-y-4 mb-16 flex flex-col items-center">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-[#eed6c4]/20 border border-[#eed6c4]/40 text-[#6b4f4f] text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.2em]">
+                  Spiritual Journeys
+                </span>
+                <h2 className="text-3xl md:text-4xl font-heading font-black text-[#483434] tracking-tight">
+                  Featured Umrah Packages
+                </h2>
+                <p className="text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
+                  Explore our handpicked selection of premium spiritual journeys
+                  at the lowest prices.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {formattedUmrahPackages.map((pkg: any) => (
+                  <PackageCard
+                    key={pkg.id}
+                    title={pkg.title}
+                    image={pkg.image}
+                    stars={pkg.stars}
+                    price={pkg.price}
+                    detailsUrl={pkg.detailsUrl}
+                    isSold={pkg.isSold}
+                  />
+                ))}
+              </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {formattedUmrahPackages.map((pkg: any) => (
-                <PackageCard
-                  key={pkg.id}
-                  title={pkg.title}
-                  image={pkg.image}
-                  stars={pkg.stars}
-                  price={pkg.price}
-                  detailsUrl={pkg.detailsUrl}
-                  isSold={pkg.isSold}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+          </section>
+        )}
 
       {/* Blog Section grouped by Categories */}
       <HomeBlogSection blogsByCategory={blogsByCategory} />
-      
+
       {/* Airline Partners */}
       {siteConfig.allowedTabs.includes("flight") && <AirlineMarquee />}
-      
+
       {/* Trustpilot Reviews Section */}
       <TrustpilotReviews />
     </div>

@@ -163,11 +163,13 @@ Passengers: ${formData.travelers}
             <div className="relative">
               <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
               <input
-                type="date"
+                type={formData.date ? "date" : "text"}
+                onFocus={(e) => (e.target.type = "date")}
+                onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
                 name="date"
                 value={formData.date}
                 onChange={handleChange}
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#f5f0eb] text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] transition-all duration-300 outline-none font-medium"
+                className={fieldClass}
                 placeholder="Departure Date"
                 required
               />

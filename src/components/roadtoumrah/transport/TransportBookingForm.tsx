@@ -164,10 +164,13 @@ export function TransportBookingForm({
             <div className="relative">
               <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <input
-                type="date"
+                type={formData.date ? "date" : "text"}
+                onFocus={(e) => (e.target.type = "date")}
+                onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
                 name="date"
                 value={formData.date}
                 onChange={handleChange}
+                placeholder="Travel Date"
                 className={fieldClass}
                 required
               />
