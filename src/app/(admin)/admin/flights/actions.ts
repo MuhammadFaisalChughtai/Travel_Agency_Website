@@ -3,13 +3,25 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
+async function requireAuth() {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    throw new Error("Unauthorized");
+  }
+}
+
 export async function deleteFlight(id: string) {
+  await requireAuth();
   await prisma.flight.delete({ where: { id } });
   revalidatePath("/admin/flights");
   revalidatePath("/flights");
 }
 
 export async function createFlight(formData: FormData) {
+  await requireAuth();
   const airline = formData.get("airline") as string;
   const airlineCode = formData.get("airlineCode") as string || null;
   const departure = formData.get("departure") as string;
@@ -94,6 +106,7 @@ export async function createFlight(formData: FormData) {
 }
 
 export async function updateFlight(id: string, formData: FormData) {
+  await requireAuth();
   const airline = formData.get("airline") as string;
   const airlineCode = formData.get("airlineCode") as string || null;
   const departure = formData.get("departure") as string;

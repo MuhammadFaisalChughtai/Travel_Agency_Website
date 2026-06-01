@@ -55,7 +55,12 @@ export function HajjBookingForm({ isHome = false }: { isHome?: boolean }) {
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, type: "hajj" }),
+        body: JSON.stringify({
+          ...formData,
+          travelers: parseInt(formData.travelers) || formData.travelers,
+          type: "hajj",
+          category: formData.packageType, // Map packageType to category
+        }),
       });
       if (!res.ok) {
         const data = await res.json();

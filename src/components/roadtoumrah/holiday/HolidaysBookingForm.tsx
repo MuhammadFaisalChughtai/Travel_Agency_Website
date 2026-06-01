@@ -67,6 +67,10 @@ Budget per person: ${formData.budget || "Not specified"}
           message: customMessage,
           type: "Holiday",
           airport: formData.departureAirport,
+          date: formData.date,
+          category: formData.category,
+          duration: formData.duration,
+          travelers: parseInt(formData.travelers) || formData.travelers,
         }),
       });
       if (!res.ok) {

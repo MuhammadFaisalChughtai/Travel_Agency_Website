@@ -67,11 +67,13 @@ export function TransportBookingForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          travelers: parseInt(formData.travelers) || formData.travelers,
           type: "Transport Enquiry",
           packageId,
           packageTitle,
           airport: formData.pickup,
           category: formData.serviceType,
+          date: formData.date,
         }),
       });
       if (!res.ok) {

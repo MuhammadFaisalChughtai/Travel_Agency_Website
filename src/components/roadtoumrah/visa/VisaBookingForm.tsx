@@ -106,7 +106,13 @@ export function VisaBookingForm({ isHome = false, isModal = false, packageId, pa
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, type: "Visa Enquiry", packageId, packageTitle }),
+        body: JSON.stringify({
+          ...formData,
+          travelers: parseInt(formData.travelers) || formData.travelers,
+          type: "Visa Enquiry",
+          packageId,
+          packageTitle,
+        }),
       });
       if (!res.ok) {
         const data = await res.json();

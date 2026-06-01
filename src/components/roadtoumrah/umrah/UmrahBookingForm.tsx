@@ -83,6 +83,10 @@ Passengers: ${formData.travelers}
           message: customMessage,
           type: "Umrah",
           airport: formData.airport,
+          date: formData.date,
+          category: formData.category,
+          duration: formData.duration,
+          travelers: parseInt(formData.travelers) || formData.travelers,
         }),
       });
       if (!res.ok) {

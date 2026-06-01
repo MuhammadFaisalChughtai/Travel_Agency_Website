@@ -3,12 +3,24 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
+async function requireAuth() {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    throw new Error("Unauthorized");
+  }
+}
+
 export async function deleteBlog(id: string) {
+  await requireAuth();
   await prisma.blog.delete({ where: { id } });
   revalidatePath("/admin/blogs");
 }
 
 export async function createBlog(formData: FormData) {
+  await requireAuth();
   const title = formData.get("title") as string;
   const customSlug = formData.get("slug") as string;
   const slug = customSlug ? customSlug.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "") : title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
@@ -40,6 +52,7 @@ export async function createBlog(formData: FormData) {
 }
 
 export async function updateBlog(id: string, formData: FormData) {
+  await requireAuth();
   const title = formData.get("title") as string;
   const customSlug = formData.get("slug") as string;
   const slug = customSlug ? customSlug.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "") : title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");

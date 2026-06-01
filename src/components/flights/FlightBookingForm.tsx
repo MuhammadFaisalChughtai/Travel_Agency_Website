@@ -60,7 +60,7 @@ Passengers: ${formData.travelers}
           phone: formData.phone,
           airport: formData.from,
           date: formData.departure,
-          travelers: parseInt(formData.travelers),
+          travelers: parseInt(formData.travelers) || formData.travelers,
           message: customMessage,
           type: "Flight",
         }),

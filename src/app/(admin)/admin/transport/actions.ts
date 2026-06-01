@@ -3,6 +3,16 @@
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
+async function requireAuth() {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    throw new Error("Unauthorized");
+  }
+}
+
 function generateSlug(text: string) {
   return text
     .toString()
@@ -14,6 +24,7 @@ function generateSlug(text: string) {
 }
 
 export async function createTransport(formData: FormData) {
+  await requireAuth();
   const featuresString = formData.get("features")?.toString() || "";
   const featuresArray = featuresString.split("\n").map((f) => f.trim()).filter((f) => f);
 
@@ -54,6 +65,7 @@ export async function createTransport(formData: FormData) {
 }
 
 export async function updateTransport(id: string, formData: FormData) {
+  await requireAuth();
   const featuresString = formData.get("features")?.toString() || "";
   const featuresArray = featuresString.split("\n").map((f) => f.trim()).filter((f) => f);
 
@@ -95,6 +107,7 @@ export async function updateTransport(id: string, formData: FormData) {
 }
 
 export async function deleteTransport(id: string) {
+  await requireAuth();
   await prisma.transportService.delete({ where: { id } });
   revalidatePath("/admin/transport");
   revalidatePath("/transport");

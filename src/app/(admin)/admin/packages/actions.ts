@@ -2,8 +2,18 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
+async function requireAuth() {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    throw new Error("Unauthorized");
+  }
+}
 
 export async function deletePackage(id: string) {
+  await requireAuth();
   await prisma.package.delete({ where: { id } });
   revalidatePath("/admin/packages");
   revalidatePath("/umrah");
@@ -11,6 +21,7 @@ export async function deletePackage(id: string) {
 }
 
 export async function createPackage(formData: FormData) {
+  await requireAuth();
   const title = formData.get("title") as string;
   const type = (formData.get("type") as string) || "UMRAH";
   const stars = parseInt(formData.get("stars") as string) || 3;
@@ -54,6 +65,7 @@ export async function createPackage(formData: FormData) {
 }
 
 export async function updatePackage(id: string, formData: FormData) {
+  await requireAuth();
   const title = formData.get("title") as string;
   const type = (formData.get("type") as string) || "UMRAH";
   const stars = parseInt(formData.get("stars") as string) || 3;

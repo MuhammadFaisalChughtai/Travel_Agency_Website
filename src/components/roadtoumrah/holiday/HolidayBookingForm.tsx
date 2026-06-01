@@ -62,7 +62,12 @@ export function HolidayBookingForm({ isHome = false }: { isHome?: boolean }) {
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, type: "holiday" }),
+        body: JSON.stringify({
+          ...formData,
+          travelers: parseInt(formData.travelers) || formData.travelers,
+          type: "holiday",
+          airport: formData.destination, // Mapped destination to airport for generic trip details
+        }),
       });
       if (!res.ok) {
         const data = await res.json();
