@@ -11,18 +11,29 @@ interface PackageCardProps {
   isSold?: boolean;
 }
 
-export function PackageCard({ title, image, stars, price, detailsUrl, isSold = false }: PackageCardProps) {
+export function PackageCard({
+  title,
+  image,
+  stars,
+  price,
+  detailsUrl,
+  isSold = false,
+}: PackageCardProps) {
   return (
     <div className="min-w-[280px] md:min-w-[300px] bg-white/95 backdrop-blur-md rounded-3xl shadow-[0_10px_30px_rgba(72,52,52,0.04)] hover:shadow-[0_25px_50px_rgba(72,52,52,0.12)] hover:-translate-y-1.5 transition-all duration-500 border border-[#d4af37]/40 hover:border-[#064e3b]/30 flex flex-col group relative overflow-hidden">
       {/* Dynamic Luxury Tag */}
       {isSold ? (
         <div className="absolute top-4 left-4 z-10 bg-red-600/90 text-[#F9FAFB] px-3 py-1 rounded-full border border-red-500/35 shadow-sm flex items-center gap-1 backdrop-blur-sm">
-          <span className="text-[8px] uppercase font-black tracking-widest leading-none">Sold Out</span>
+          <span className="text-[8px] uppercase font-black tracking-widest leading-none">
+            Sold Out
+          </span>
         </div>
       ) : (
         <div className="absolute top-4 left-4 z-10 bg-[#d4af37] px-3 py-1 rounded-full border border-white/20 shadow-sm flex items-center gap-1">
           <Star className="w-2.5 h-2.5 fill-[#064e3b] stroke-none" />
-          <span className="text-[8px] uppercase text-[#064e3b] font-black tracking-widest leading-none">Featured</span>
+          <span className="text-[8px] uppercase text-[#064e3b] font-black tracking-widest leading-none">
+            Featured
+          </span>
         </div>
       )}
 
@@ -31,7 +42,7 @@ export function PackageCard({ title, image, stars, price, detailsUrl, isSold = f
           src={image}
           alt={title}
           fill
-          className={`object-cover group-hover:scale-110 transition-transform duration-700 ${isSold ? 'grayscale opacity-60' : ''}`}
+          className={`object-cover group-hover:scale-110 transition-transform duration-700 ${isSold ? "grayscale opacity-60" : ""}`}
           sizes="(max-width: 768px) 100vw, 33vw"
         />
         {/* Soft luxury shadow filter */}
@@ -44,12 +55,14 @@ export function PackageCard({ title, image, stars, price, detailsUrl, isSold = f
           {[...Array(5)].map((_, i) => (
             <Star
               key={i}
-              className={`w-3.5 h-3.5 ${i < stars ? 'text-[#064e3b] fill-[#064e3b]' : 'text-[#d4af37]/40 fill-[#d4af37]/20'}`}
+              className={`w-3.5 h-3.5 ${i < stars ? "text-[#064e3b] fill-[#064e3b]" : "text-[#d4af37]/40 fill-[#d4af37]/20"}`}
             />
           ))}
         </div>
 
-        <h4 className="font-heading font-black text-[#064e3b] text-base md:text-lg mb-2 text-center group-hover:text-[#064e3b] transition-colors duration-300 line-clamp-1">{title}</h4>
+        <h4 className="font-heading font-black text-[#064e3b] text-base md:text-lg mb-2 text-center group-hover:text-[#064e3b] transition-colors duration-300 line-clamp-1">
+          {title}
+        </h4>
 
         {/* Inclusion Pill Badges */}
         <div className="mb-4 flex items-center justify-center gap-1.5 flex-wrap">
@@ -71,25 +84,37 @@ export function PackageCard({ title, image, stars, price, detailsUrl, isSold = f
 
         {/* Modern Price Display */}
         <div className="flex items-center justify-between mt-auto pt-3 mb-4 border-t border-[#d4af37]/40">
-          <span className="text-[9px] text-[#064e3b]/70 font-black uppercase tracking-widest">{isSold ? "Fully Booked" : "All-Inclusive Deal"}</span>
+          <span className="text-[9px] text-[#064e3b]/70 font-black uppercase tracking-widest">
+            {isSold ? "Fully Booked" : "All-Inclusive Deal"}
+          </span>
           <div className="text-right">
-            <span className="text-[9px] text-slate-400 block leading-none font-bold">From</span>
-            <span className="text-xl font-black text-[#064e3b] tracking-tight">{price}</span>
+            <span className="text-[9px] text-slate-400 block leading-none font-bold">
+              From
+            </span>
+            <span className="text-xl font-black text-[#064e3b] tracking-tight">
+              {price}
+            </span>
           </div>
         </div>
 
         {/* Parallel Modern Actions (Saves space and looks extremely high-end) */}
         <div className="flex gap-2">
-          <button variant="outline" className="h-11 w-11 p-0 border-[#d4af37] text-[#064e3b] hover:bg-[#F9FAFB] hover:text-[#064e3b] hover:border-[#064e3b]/40 flex items-center justify-center rounded-2xl shrink-0 transition-all duration-300" asChild>
+          <button
+            variant="outline"
+            className="h-11 w-11 p-0 border-[#d4af37] text-[#064e3b] hover:bg-[#F9FAFB] hover:text-[#064e3b] hover:border-[#064e3b]/40 flex items-center justify-center rounded-2xl shrink-0 transition-all duration-300"
+            asChild
+          >
             <a href="tel:+441215291630" aria-label="Call Now">
               <PhoneCall className="w-4 h-4" />
             </a>
           </button>
-          <button className={`flex-1 h-11 text-xs rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 font-extrabold tracking-widest uppercase border ${isSold ? 'bg-slate-500 hover:bg-slate-600 text-white border-slate-400/40' : 'bg-[#064e3b] hover:bg-[#064e3b] text-[#F9FAFB] border-[#d4af37]/30'}`} asChild>
-            <Link href={detailsUrl}>
+          <Link href={detailsUrl} className="flex-1 flex">
+            <button
+              className={`w-full h-11 text-xs rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 font-extrabold tracking-widest uppercase border ${isSold ? "bg-slate-500 hover:bg-slate-600 text-white border-slate-400/40" : "bg-[#064e3b] hover:bg-[#064e3b] text-[#F9FAFB] border-[#d4af37]/30"}`}
+            >
               {isSold ? "Enquire" : "View Details"}
-            </Link>
-          </button>
+            </button>
+          </Link>
         </div>
       </div>
     </div>

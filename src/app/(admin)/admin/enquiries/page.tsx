@@ -40,6 +40,7 @@ export default async function AdminEnquiriesPage({ searchParams }: { searchParam
                     <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-slate-900 sm:pl-6">Date</th>
                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-slate-900">Customer</th>
                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-slate-900">Type</th>
+                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-slate-900">Details</th>
                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-slate-900">Status</th>
                   </tr>
                 </thead>
@@ -56,6 +57,29 @@ export default async function AdminEnquiriesPage({ searchParams }: { searchParam
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-slate-500">
                         {enquiry.type}
+                      </td>
+                      <td className="px-3 py-4 text-sm text-slate-500 max-w-xs">
+                        {enquiry.message && <div className="mb-2 italic text-slate-600">"{enquiry.message}"</div>}
+                        {enquiry.tripDetails && (
+                          <div className="text-xs space-y-1">
+                            {(() => {
+                              try {
+                                const details = JSON.parse(enquiry.tripDetails);
+                                return Object.entries(details).map(([k, v]) => {
+                                  if (!v) return null;
+                                  const label = k.replace(/([A-Z])/g, ' $1').trim();
+                                  return (
+                                    <div key={k} className="leading-tight">
+                                      <span className="font-semibold capitalize text-slate-700">{label}:</span> {String(v)}
+                                    </div>
+                                  );
+                                });
+                              } catch {
+                                return <div className="truncate">{enquiry.tripDetails}</div>;
+                              }
+                            })()}
+                          </div>
+                        )}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-slate-500">
                         <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${enquiry.status === 'PENDING' ? 'bg-yellow-50 text-yellow-800 ring-1 ring-inset ring-yellow-600/20' : 'bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20'}`}>

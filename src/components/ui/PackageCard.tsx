@@ -85,11 +85,11 @@ export function PackageCard({
             <p className="text-xs text-[#f5f0eb]0 font-medium">From</p>
             <p className="text-2xl font-bold text-primary">{price}</p>
           </div>
-          <Button asChild variant={isSold ? "secondary" : "outline"} className="rounded-full relative z-20">
-            <a href={`/v/${slug || id}`}>
+          <a href={`/v/${slug || id}`} className="relative z-20">
+            <Button variant={isSold ? "secondary" : "outline"} className="rounded-full">
               {isSold ? "Enquire" : "View Details"}
-            </a>
-          </Button>
+            </Button>
+          </a>
         </div>
       </div>
     </div>

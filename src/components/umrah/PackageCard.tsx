@@ -86,11 +86,11 @@ export function PackageCard({ title, image, stars, price, detailsUrl, isSold = f
               <PhoneCall className="w-4 h-4" />
             </a>
           </Button>
-          <Button className={`flex-1 h-11 text-xs rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 font-extrabold tracking-widest uppercase border ${isSold ? 'bg-slate-500 hover:bg-slate-600 text-white border-slate-500' : 'bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4] border-[#eed6c4]/30'}`} asChild>
-            <Link href={detailsUrl}>
+          <Link href={detailsUrl} className="flex-1 flex">
+            <Button className={`w-full h-11 text-xs rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 font-extrabold tracking-widest uppercase border ${isSold ? 'bg-slate-500 hover:bg-slate-600 text-white border-slate-500' : 'bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4] border-[#eed6c4]/30'}`}>
               {isSold ? "Enquire" : "View Details"}
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

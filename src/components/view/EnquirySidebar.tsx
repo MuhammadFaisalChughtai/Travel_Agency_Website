@@ -49,7 +49,7 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
         body: JSON.stringify({
           ...form,
           type,
-          packageId: id,
+          packageId: packageTitle ? `${packageTitle} (Ref: ${id})` : id,
         }),
       });
       if (!res.ok) {
