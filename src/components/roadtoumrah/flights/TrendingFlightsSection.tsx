@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Star, ArrowRight, Flame } from "lucide-react";
+import { Star, ArrowRight, Flame, PhoneCall } from "lucide-react";
 
 const PAGE_SIZE = 4;
 
@@ -38,13 +38,12 @@ export function TrendingFlightsSection({ routes }: { routes: any[] }) {
             const price = route.price || 0;
             const originalPrice = route.originalPrice || route.price;
             return (
-              <Link
+              <div
                 key={route.id || idx}
-                href={`/book?type=flight&departure=${encodeURIComponent((route.destination || route.dest).split(",")[0])}`}
-                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col group cursor-pointer block"
+                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col group flex-1"
               >
                 {/* Image Section */}
-                <div className="relative h-60 w-full overflow-hidden">
+                <Link href={`/book?type=flight&destination=${encodeURIComponent((route.destination || route.dest).split(",")[0])}`} className="relative h-60 w-full overflow-hidden block">
                   <Image
                     src={route.image || route.img}
                     alt={route.destination || route.dest}
@@ -55,18 +54,18 @@ export function TrendingFlightsSection({ routes }: { routes: any[] }) {
 
                   {route.tag && (
                     <div className="absolute top-4 left-4 z-20">
-                      <span className="px-3 py-1 bg-[#d4af37] text-[#043427] text-[10px] font-black uppercase tracking-widest rounded-full shadow-sm">
+                      <span className="px-3 py-1 bg-[#d4af37] text-[#043427] text-[10px] font-black uppercase tracking-widest rounded-full shadow-sm pointer-events-none">
                         {route.tag}
                       </span>
                     </div>
                   )}
-                </div>
+                </Link>
 
                 {/* Details Section */}
-                <div className="p-5 flex flex-col bg-white z-20 relative">
-                  <div className="flex justify-between items-start">
+                <div className="p-5 flex flex-col flex-1 bg-white z-20 relative">
+                  <Link href={`/book?type=flight&destination=${encodeURIComponent((route.destination || route.dest).split(",")[0])}`} className="flex justify-between items-start flex-1 mb-4">
                     <div>
-                      <h3 className="text-[#064e3b] font-bold text-lg leading-tight mb-1">
+                      <h3 className="text-[#064e3b] font-bold text-lg leading-tight mb-1 group-hover:text-[#d4af37] transition-colors">
                         {(route.destination || route.dest).split(",")[0]}
                       </h3>
                       <p className="text-[#d4af37] font-black text-2xl leading-none">
@@ -78,15 +77,25 @@ export function TrendingFlightsSection({ routes }: { routes: any[] }) {
                         {originalPrice}
                       </div>
                     )}
-                  </div>
+                  </Link>
                   
-                  <div className="mt-4 pt-4 border-t border-slate-100 flex justify-end">
-                    <span className="inline-flex items-center gap-2 text-xs font-black text-[#d4af37] uppercase tracking-widest group-hover:text-[#064e3b] transition-colors">
+                  <div className="mt-auto pt-4 border-t border-slate-100 flex justify-between items-center gap-2">
+                    <a
+                      href="tel:+441215291630"
+                      className="h-10 w-10 border border-[#d4af37] text-[#064e3b] hover:bg-[#f3eedd] hover:text-[#043427] hover:border-[#064e3b]/40 flex items-center justify-center rounded-2xl shrink-0 transition-all duration-300"
+                      aria-label="Call Now"
+                    >
+                      <PhoneCall className="w-4 h-4" />
+                    </a>
+                    <Link
+                      href={`/book?type=flight&destination=${encodeURIComponent((route.destination || route.dest).split(",")[0])}`}
+                      className="inline-flex items-center gap-2 text-xs font-black text-[#d4af37] uppercase tracking-widest group-hover:text-[#064e3b] transition-colors"
+                    >
                       Inquire Now <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </span>
+                    </Link>
                   </div>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>

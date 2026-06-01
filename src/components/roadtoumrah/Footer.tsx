@@ -190,8 +190,8 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Informative Links (lg:col-span-2.5) */}
-          <div className="lg:col-span-2 md:col-span-1 lg:col-span-2.5 space-y-4">
+          {/* Column 3: Informative Links (lg:col-span-2) */}
+          <div className="lg:col-span-2 md:col-span-1 space-y-4">
             <div className="space-y-1.5">
               <h3 className="text-xs md:text-sm font-black tracking-wider uppercase text-[#d4af37] font-heading">
                 Informative Links
@@ -278,8 +278,8 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 5: Contact Us (lg:col-span-2.5) */}
-          <div className="lg:col-span-2.5 space-y-4">
+          {/* Column 5: Contact Us (lg:col-span-3) */}
+          <div className="lg:col-span-3 space-y-4">
             <div className="space-y-1.5">
               <h3 className="text-xs md:text-sm font-black tracking-wider uppercase text-[#d4af37] font-heading">
                 Contact Us
@@ -315,21 +315,21 @@ export function Footer() {
                   +441215291630
                 </a>
               </li>
-              <li className="flex flex-wrap items-center gap-6 pt-4 border-t border-[#d4af37]/30">
+              <li className="flex items-center gap-4 pt-4 border-t border-[#d4af37]/30 whitespace-nowrap">
                 <img
                   src="/IATA.svg"
                   alt="IATA Logo"
-                  className="h-10 w-auto object-contain brightness-0 invert"
+                  className="h-9 w-auto object-contain"
                 />
                 <img
                   src="/ATOL.svg"
                   alt="ATOL Protected"
-                  className="h-14 w-auto object-contain brightness-0 invert"
+                  className="h-12 w-auto object-contain"
                 />
                 <img
                   src="/Ministry_Hajj.svg"
                   alt="Ministry of Hajj and Umrah"
-                  className="h-20 w-auto object-contain brightness-0 invert"
+                  className="h-16 w-auto object-contain"
                 />
               </li>
             </ul>
