@@ -44,8 +44,10 @@ export function FlightBlogSection({ blogs }: { blogs: any[] }) {
           {flightBlogs.slice(0, visibleCount).map((post) => (
             <article
               key={post.id}
-              className="bg-white rounded-3xl overflow-hidden border border-[#eed6c4]/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.06)] hover:border-[#6b4f4f]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1"
-            >
+              className="bg-white rounded-3xl overflow-hidden border border-[#eed6c4]/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.06)] hover:border-[#6b4f4f]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1 relative">
+              <Link prefetch={true} href={`/v/${post.slug}`} className="absolute inset-0 z-10">
+                <span className="sr-only">Read Article</span>
+              </Link>
               {/* Image Banner */}
               <div className="relative h-48 sm:h-52 w-full overflow-hidden">
                 <Image
@@ -87,9 +89,9 @@ export function FlightBlogSection({ blogs }: { blogs: any[] }) {
 
                 {/* Divider Line */}
                 <div className="border-t border-[#eed6c4]/30 pt-4">
-                  <Link
+                  <Link prefetch={true}
                     href={`/v/${post.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#6b4f4f] group-hover:text-[#483434] transition-colors duration-300 uppercase tracking-widest"
+                    className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#6b4f4f] group-hover:text-[#483434] transition-colors duration-300 uppercase tracking-widest relative z-20"
                   >
                     <span>Read Article</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />

@@ -35,6 +35,9 @@ services:
     depends_on:
       - mysql
     restart: unless-stopped
+    volumes:
+      - web_uploads:/app/public/uploads
 
 volumes:
   mysql_data:
+  web_uploads:

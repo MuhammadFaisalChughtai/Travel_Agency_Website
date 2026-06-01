@@ -36,8 +36,10 @@ export function HajjBlogSection({ blogs }: { blogs: any[] }) {
           {hajjBlogs.slice(0, visibleCount).map((post: any) => (
             <article 
               key={post.id} 
-              className="bg-white rounded-3xl overflow-hidden border border-[#d4af37]/40/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.06)] hover:border-[#064e3b]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1"
-            >
+              className="bg-white rounded-3xl overflow-hidden border border-[#d4af37]/40/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.06)] hover:border-[#064e3b]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1 relative">
+              <Link prefetch={true} href={`/v/${post.slug}`} className="absolute inset-0 z-10">
+                <span className="sr-only">Read Article</span>
+              </Link>
               <div className="relative h-48 sm:h-52 w-full overflow-hidden">
                 <Image 
                   src={post.image} 
@@ -73,9 +75,9 @@ export function HajjBlogSection({ blogs }: { blogs: any[] }) {
                 </p>
 
                 <div className="border-t border-[#d4af37]/40/30 pt-4">
-                  <Link 
+                  <Link prefetch={true} 
                     href={`/v/${post.slug}`} 
-                    className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#064e3b] group-hover:text-[#483434] transition-colors duration-300 uppercase tracking-widest"
+                    className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#064e3b] group-hover:text-[#483434] transition-colors duration-300 uppercase tracking-widest relative z-20"
                   >
                     <span>Read Article</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />

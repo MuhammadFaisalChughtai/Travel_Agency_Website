@@ -147,8 +147,9 @@ Budget per person: ${formData.budget || "Not specified"}
               <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
               <input
                 type={formData.date ? "date" : "text"}
-                onFocus={(e) => (e.target.type = "date")}
+                onFocus={(e) => { e.target.type = "date"; try { (e.target as any).showPicker(); } catch (err) {} }}
                 onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
+                onClick={(e) => { e.target.type = "date"; try { (e.target as any).showPicker(); } catch (err) {} }}
                 name="date"
                 value={formData.date}
                 onChange={handleChange}

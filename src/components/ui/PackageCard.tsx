@@ -27,7 +27,10 @@ export function PackageCard({
   isSold = false,
 }: PackageCardProps) {
   return (
-    <div className="group rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col">
+    <div className="group rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col relative">
+      <Link prefetch={true} href={`/v/${slug || id}`} className="absolute inset-0 z-10">
+        <span className="sr-only">View Package</span>
+      </Link>
       <div className="aspect-[4/3] w-full bg-slate-100 relative overflow-hidden">
         {/* Placeholder image logic, since we don't have actual DB images yet */}
         <div
@@ -82,8 +85,8 @@ export function PackageCard({
             <p className="text-xs text-[#f5f0eb]0 font-medium">From</p>
             <p className="text-2xl font-bold text-primary">{price}</p>
           </div>
-          <Button asChild variant={isSold ? "secondary" : "outline"} className="rounded-full">
-            <Link href={`/v/${slug || id}`}>
+          <Button asChild variant={isSold ? "secondary" : "outline"} className="rounded-full relative z-20">
+            <Link prefetch={true} href={`/v/${slug || id}`}>
               {isSold ? "Enquire" : "View Details"}
             </Link>
           </Button>
