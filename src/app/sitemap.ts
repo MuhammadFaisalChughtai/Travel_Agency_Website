@@ -1,22 +1,22 @@
 import { MetadataRoute } from "next";
+import { headers } from "next/headers";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://roadtoumrah.co.uk";
+  const headersList = headers();
+  const host = headersList.get("x-forwarded-host") || headersList.get("host") || "";
+  
+  const isRoadToUmrah = host.includes("roadtoumrah");
+  const baseUrl = isRoadToUmrah ? "https://roadtoumrah.co.uk" : "https://terrifictravel.co.uk";
 
-  // Static routes
-  const staticRoutes = [
-    "",
-    "/about",
-    "/contact",
-    "/flights",
-    "/hajj",
-    "/umrah",
-    "/transport",
-    "/visa",
-  ].map((route) => ({
+  // Static routes specific to each domain
+  const routePaths = isRoadToUmrah 
+    ? ["", "/about", "/contact", "/flights", "/hajj", "/umrah", "/transport", "/visa"]
+    : ["", "/about", "/contact", "/flights", "/hajj", "/holiday", "/umrah", "/transport", "/visa"];
+
+  const staticRoutes = routePaths.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "daily" as const,
@@ -27,6 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const packages = await prisma.package.findMany({
     select: { slug: true, id: true, createdAt: true },
   });
+  
   const blogs = await prisma.blog.findMany({
     select: { slug: true, id: true, updatedAt: true },
   });

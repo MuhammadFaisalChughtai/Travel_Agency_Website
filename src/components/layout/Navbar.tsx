@@ -70,12 +70,7 @@ export function Navbar() {
               </Link>
             ))}
           </div>
-          <div className="hidden lg:flex items-center gap-4 ml-6 mr-6 border-l border-[#eed6c4]/40 pl-6">
-            <Image src="/ATOL.svg" alt="ATOL Protected" width={40} height={40} className="w-auto h-8 opacity-80 hover:opacity-100 transition-opacity mix-blend-multiply" />
-            <Image src="/IATA.svg" alt="IATA Accredited" width={40} height={40} className="w-auto h-8 opacity-80 hover:opacity-100 transition-opacity mix-blend-multiply" />
-            <Image src="/Ministry_Hajj.svg" alt="Ministry of Hajj" width={40} height={40} className="w-auto h-8 opacity-80 hover:opacity-100 transition-opacity mix-blend-multiply" />
-          </div>
-          <div className="hidden lg:flex lg:justify-end">
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <Button
               asChild
               className="rounded-full gap-2 px-6 py-5 bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4] border border-[#eed6c4]/40 hover:border-[#eed6c4] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 font-extrabold text-xs tracking-wider uppercase"

@@ -42,7 +42,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next) and static files
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    // Skip all internal paths (_next) and static files, plus robots/sitemap
+    '/((?!_next/static|_next/image|favicon.ico|robots\\.txt|sitemap\\.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 };

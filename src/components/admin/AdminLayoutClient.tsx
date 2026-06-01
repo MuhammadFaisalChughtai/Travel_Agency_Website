@@ -35,7 +35,7 @@ function AdminSidebar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleSignOut = () => {
-    signOut({ callbackUrl: '/login' });
+    signOut({ callbackUrl: `${window.location.origin}/login` });
   };
 
   return (
