@@ -60,9 +60,9 @@ export function HomeBlogSection({
               key={post.id}
               className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#064e3b]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1 relative"
             >
-              <Link prefetch={true} href={`/blog/${post.slug}`} className="absolute inset-0 z-10">
+              <a href={`/blog/${post.slug}`} className="absolute inset-0 z-10">
                 <span className="sr-only">View Article</span>
-              </Link>
+              </a>
               <div className="relative h-56 w-full overflow-hidden">
                 <Image
                   src={post.image}
@@ -98,14 +98,13 @@ export function HomeBlogSection({
                 </p>
 
                 <div className="border-t border-slate-100 pt-5">
-                  <Link
-                    prefetch={true}
+                  <a
                     href={`/blog/${post.slug}`}
                     className="inline-flex items-center gap-2 text-xs font-black text-[#064e3b] group-hover:text-slate-900 transition-colors duration-300 uppercase tracking-widest relative z-20"
                   >
                     <span>Read Full Article</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
-                  </Link>
+                  </a>
                 </div>
               </div>
             </article>

@@ -56,9 +56,9 @@ export function FlightListCard({
 }: FlightListCardProps) {
   return (
     <div className="bg-white rounded-xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-md hover:border-[#064e3b]/30 transition-all duration-300 flex flex-col h-full relative">
-      <Link prefetch={true} href={`/v/${id}`} className="absolute inset-0 z-10">
+      <a href={`/v/${id}`} className="absolute inset-0 z-10">
         <span className="sr-only">View Flight</span>
-      </Link>
+      </a>
       
       {/* Top Bar */}
       <div className="bg-[#043427] px-4 py-2.5 flex items-center justify-between">
@@ -202,14 +202,13 @@ export function FlightListCard({
         
         <div className="flex gap-2 relative z-20">
           <FlightEnquireButton flightId={id} flightTitle={`Flight to ${destination} with ${airline}`} />
-          <Link
-            prefetch={true}
+          <a
             href={`/v/${id}`}
             className="flex-1 h-10 flex items-center justify-center gap-1.5 rounded-xl bg-[#064e3b] text-white font-heading font-black text-[10px] uppercase tracking-widest transition-all duration-300 shadow-sm hover:bg-[#022c22] hover:shadow-md"
           >
             View Details
             <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          </a>
         </div>
       </div>
     </div>

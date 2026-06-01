@@ -29,7 +29,6 @@ services:
       - "5173:5173"
     environment:
       - DATABASE_URL=mysql://user:StrongUserPassword2026!@mysql:3306/terrific_travel
-      - NEXTAUTH_URL=http://localhost:5173
     env_file:
       - .env
     depends_on:

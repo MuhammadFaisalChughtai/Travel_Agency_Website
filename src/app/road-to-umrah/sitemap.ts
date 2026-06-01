@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://terrifictravel.co.uk";
+  const baseUrl = "https://roadtoumrah.co.uk";
 
   // Static routes
   const staticRoutes = [
@@ -13,8 +13,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/contact",
     "/flights",
     "/hajj",
-    "/holiday",
     "/umrah",
+    "/transport",
+    "/visa",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
@@ -38,7 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     })),
     ...blogs.map((blog) => ({
-      url: `${baseUrl}/v/${blog.slug || blog.id}`,
+      url: `${baseUrl}/blog/${blog.slug || blog.id}`,
       lastModified: blog.updatedAt,
       changeFrequency: "monthly" as const,
       priority: 0.6,
@@ -47,4 +48,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [...staticRoutes, ...dynamicRoutes];
 }
-

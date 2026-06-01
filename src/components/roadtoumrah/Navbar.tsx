@@ -49,7 +49,7 @@ export function Navbar() {
           <div className="flex lg:hidden">
             <button
               type="button"
-              className="-m-2.5 inline-flex items-center justify-center rounded-xl p-2.5 text-[#064e3b] hover:bg-[#d4af37]/30 transition-colors"
+              className="-m-2.5 inline-flex items-center justify-center rounded-xl p-2.5 text-[#d4af37] hover:bg-[#d4af37]/30 transition-colors"
               onClick={() => setMobileMenuOpen(true)}
             >
               <span className="sr-only">Open main menu</span>
@@ -69,7 +69,12 @@ export function Navbar() {
               </Link>
             ))}
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <div className="hidden lg:flex items-center gap-4 ml-6 mr-6 border-l border-[#d4af37]/30 pl-6">
+            <Image src="/ATOL.svg" alt="ATOL Protected" width={40} height={40} className="w-auto h-8 opacity-90 hover:opacity-100 transition-opacity brightness-0 invert" />
+            <Image src="/IATA.svg" alt="IATA Accredited" width={40} height={40} className="w-auto h-8 opacity-90 hover:opacity-100 transition-opacity brightness-0 invert" />
+            <Image src="/Ministry_Hajj.svg" alt="Ministry of Hajj" width={40} height={40} className="w-auto h-8 opacity-90 hover:opacity-100 transition-opacity brightness-0 invert" />
+          </div>
+          <div className="hidden lg:flex lg:justify-end">
             <button
               asChild
               className="rounded-lg gap-2 px-6 py-5 bg-[#d4af37] hover:bg-[#043427] text-[#064e3b] hover:text-[#F9FAFB] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 font-extrabold text-xs tracking-wider uppercase"
@@ -125,7 +130,12 @@ export function Navbar() {
                     </Link>
                   ))}
                 </div>
-                <div className="py-6">
+                <div className="py-6 space-y-6">
+                  <div className="flex items-center justify-center gap-6 py-4 bg-[#f9fafb] rounded-xl border border-[#d4af37]/20">
+                    <Image src="/ATOL.svg" alt="ATOL Protected" width={40} height={40} className="w-auto h-8" />
+                    <Image src="/IATA.svg" alt="IATA" width={40} height={40} className="w-auto h-8" />
+                    <Image src="/Ministry_Hajj.svg" alt="Hajj" width={40} height={40} className="w-auto h-8" />
+                  </div>
                   <button
                     asChild
                     className="w-full rounded-full gap-2 bg-[#d4af37] hover:bg-[#043427] text-[#064e3b] hover:text-[#F9FAFB] py-5 border border-[#d4af37]/45 font-extrabold uppercase text-xs tracking-wider shadow-md transition-colors duration-300"

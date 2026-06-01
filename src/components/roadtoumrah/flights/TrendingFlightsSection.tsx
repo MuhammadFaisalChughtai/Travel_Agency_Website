@@ -40,7 +40,7 @@ export function TrendingFlightsSection({ routes }: { routes: any[] }) {
             return (
               <Link
                 key={route.id || idx}
-                href={`/book?type=flight&destination=${encodeURIComponent((route.destination || route.dest).split(",")[0])}`}
+                href={`/book?type=flight&departure=${encodeURIComponent((route.destination || route.dest).split(",")[0])}`}
                 className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col group cursor-pointer block"
               >
                 {/* Image Section */}
@@ -63,20 +63,28 @@ export function TrendingFlightsSection({ routes }: { routes: any[] }) {
                 </div>
 
                 {/* Details Section */}
-                <div className="p-5 flex items-end justify-between bg-white z-20 relative">
-                  <div>
-                    <h3 className="text-[#043427] font-bold text-lg leading-tight mb-1">
-                      {(route.destination || route.dest).split(",")[0]}
-                    </h3>
-                    <p className="text-[#064e3b] font-black text-2xl leading-none">
-                      {price}
-                    </p>
-                  </div>
-                  {route.originalPrice && (
-                    <div className="text-slate-400 font-bold text-sm line-through pb-0.5">
-                      {originalPrice}
+                <div className="p-5 flex flex-col bg-white z-20 relative">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="text-[#064e3b] font-bold text-lg leading-tight mb-1">
+                        {(route.destination || route.dest).split(",")[0]}
+                      </h3>
+                      <p className="text-[#d4af37] font-black text-2xl leading-none">
+                        {price}
+                      </p>
                     </div>
-                  )}
+                    {route.originalPrice && (
+                      <div className="text-slate-400 font-bold text-sm line-through pb-0.5">
+                        {originalPrice}
+                      </div>
+                    )}
+                  </div>
+                  
+                  <div className="mt-4 pt-4 border-t border-slate-100 flex justify-end">
+                    <span className="inline-flex items-center gap-2 text-xs font-black text-[#d4af37] uppercase tracking-widest group-hover:text-[#064e3b] transition-colors">
+                      Inquire Now <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
                 </div>
               </Link>
             );

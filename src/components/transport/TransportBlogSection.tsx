@@ -37,9 +37,9 @@ export function TransportBlogSection({ blogs }: { blogs: any[] }) {
             <article 
               key={post.id} 
               className="bg-white rounded-3xl overflow-hidden border border-[#eed6c4]/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.06)] hover:border-[#6b4f4f]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1 relative">
-              <Link prefetch={true} href={`/blog/${post.slug}`} className="absolute inset-0 z-10">
+              <a href={`/blog/${post.slug}`} className="absolute inset-0 z-10">
                 <span className="sr-only">Read Article</span>
-              </Link>
+              </a>
               <div className="relative h-48 sm:h-52 w-full overflow-hidden">
                 <Image 
                   src={post.image} 
@@ -75,13 +75,13 @@ export function TransportBlogSection({ blogs }: { blogs: any[] }) {
                 </p>
 
                 <div className="border-t border-[#eed6c4]/20 pt-4 mt-auto">
-                  <Link prefetch={true} 
+                  <a 
                     href={`/blog/${post.slug}`} 
                     className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-[#6b4f4f] group-hover:text-[#483434] transition-colors duration-300 uppercase tracking-widest relative z-20"
                   >
                     <span>Read Article</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
-                  </Link>
+                  </a>
                 </div>
               </div>
             </article>

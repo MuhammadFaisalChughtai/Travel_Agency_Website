@@ -13,7 +13,15 @@ import {
   User,
 } from "lucide-react";
 
-export function FlightBookingForm({ isHome = false, isModal = false }: { isHome?: boolean; isModal?: boolean }) {
+import { useEffect } from "react";
+
+export function FlightBookingForm({
+  isHome = false,
+  isModal = false,
+}: {
+  isHome?: boolean;
+  isModal?: boolean;
+}) {
   const [formData, setFormData] = useState({
     journeyType: "Round Trip",
     from: "",
@@ -25,6 +33,21 @@ export function FlightBookingForm({ isHome = false, isModal = false }: { isHome?
     email: "",
     phone: "",
   });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const departureQuery = params.get("departure");
+      const destinationQuery = params.get("destination");
+      if (departureQuery || destinationQuery) {
+        setFormData((prev) => ({
+          ...prev,
+          from: departureQuery || prev.from,
+          to: destinationQuery || prev.to,
+        }));
+      }
+    }
+  }, []);
 
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -96,15 +119,15 @@ Passengers: ${formData.travelers}
   return (
     <div
       id="enquiry"
-      className={`w-full max-w-5xl mx-auto ${isModal ? 'px-0' : 'px-4'} relative z-20 ${isModal ? '' : (isHome ? 'mt-2' : '-mt-12 md:-mt-20')}`}
+      className={`w-full max-w-5xl mx-auto ${isModal ? "px-0" : "px-4"} relative z-20 ${isModal ? "" : isHome ? "mt-2" : "-mt-12 md:-mt-20"}`}
     >
       <div
         className={
           isModal
             ? "p-2 sm:p-4"
-            : (isHome
+            : isHome
               ? "bg-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-white/30"
-              : "bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#eed6c4]/60")
+              : "bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(56,38,38,0.12)] border border-[#eed6c4]/60"
         }
       >
         {!isHome && !isModal && (
@@ -191,9 +214,21 @@ Passengers: ${formData.travelers}
               <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
               <input
                 type={formData.departure ? "date" : "text"}
-                onFocus={(e) => { e.target.type = "date"; try { (e.target as any).showPicker(); } catch (err) {} }}
-                onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
-                onClick={(e) => { e.target.type = "date"; try { (e.target as any).showPicker(); } catch (err) {} }}
+                onFocus={(e) => {
+                  e.target.type = "date";
+                  try {
+                    (e.target as any).showPicker();
+                  } catch (err) {}
+                }}
+                onBlur={(e) => {
+                  if (!e.target.value) e.target.type = "text";
+                }}
+                onClick={(e) => {
+                  e.target.type = "date";
+                  try {
+                    (e.target as any).showPicker();
+                  } catch (err) {}
+                }}
                 name="departure"
                 value={formData.departure}
                 onChange={handleChange}
@@ -210,9 +245,21 @@ Passengers: ${formData.travelers}
                 <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
                 <input
                   type={formData.returnDate ? "date" : "text"}
-                  onFocus={(e) => { e.target.type = "date"; try { (e.target as any).showPicker(); } catch (err) {} }}
-                  onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
-                onClick={(e) => { e.target.type = "date"; try { (e.target as any).showPicker(); } catch (err) {} }}
+                  onFocus={(e) => {
+                    e.target.type = "date";
+                    try {
+                      (e.target as any).showPicker();
+                    } catch (err) {}
+                  }}
+                  onBlur={(e) => {
+                    if (!e.target.value) e.target.type = "text";
+                  }}
+                  onClick={(e) => {
+                    e.target.type = "date";
+                    try {
+                      (e.target as any).showPicker();
+                    } catch (err) {}
+                  }}
                   name="returnDate"
                   value={formData.returnDate}
                   onChange={handleChange}

@@ -13,6 +13,8 @@ import {
   User,
 } from "lucide-react";
 
+import { useEffect } from "react";
+
 export function FlightBookingForm({ isHome = false, isModal = false }: { isHome?: boolean; isModal?: boolean }) {
   const [formData, setFormData] = useState({
     journeyType: "Round Trip",
@@ -25,6 +27,21 @@ export function FlightBookingForm({ isHome = false, isModal = false }: { isHome?
     email: "",
     phone: "",
   });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const departureQuery = params.get("departure");
+      const destinationQuery = params.get("destination");
+      if (departureQuery || destinationQuery) {
+        setFormData((prev) => ({
+          ...prev,
+          from: departureQuery || prev.from,
+          to: destinationQuery || prev.to,
+        }));
+      }
+    }
+  }, []);
 
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
