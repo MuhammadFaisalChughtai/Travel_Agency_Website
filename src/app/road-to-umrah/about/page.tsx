@@ -1,6 +1,7 @@
 import { Hero } from "@/components/roadtoumrah/Hero";
 import { ShieldCheck, HeartHandshake, Globe, Award } from "lucide-react";
 import type { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "About Us | Road To Umrah",
@@ -51,10 +52,14 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="relative z-10 w-full md:w-1/3 flex justify-center">
-            <div className="bg-white p-8 rounded-full shadow-2xl flex items-center justify-center border-4 border-[#d4af37] w-48 h-48 transform rotate-3 hover:rotate-0 transition-transform duration-500">
-              <div className="text-center">
-                <span className="block text-[#483434] font-black text-2xl uppercase tracking-widest font-heading mb-1">Terrific</span>
-                <span className="block text-[#6b4f4f] font-bold text-lg uppercase tracking-widest">Travel</span>
+            <div className="bg-white p-6 rounded-full shadow-2xl flex items-center justify-center border-4 border-[#d4af37] w-56 h-56 transform hover:scale-105 transition-transform duration-500">
+              <div className="relative w-full h-full">
+                <Image 
+                  src="/Logo_transparent.svg" 
+                  alt="Terrific Travel Logo" 
+                  fill 
+                  className="object-contain p-2"
+                />
               </div>
             </div>
           </div>
