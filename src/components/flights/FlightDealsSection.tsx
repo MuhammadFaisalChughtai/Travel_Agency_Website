@@ -64,54 +64,54 @@ export function FlightDealsSection({ flights }: { flights: Flight[] }) {
                 <button
                   key={country}
                   onClick={() => setActiveCountry(country)}
-                  className={`w-full flex items-center justify-between px-5 py-3.5 rounded-lg text-sm font-bold transition-all duration-300 ${
+                  className={`w-full flex items-center justify-between px-5 py-3.5 rounded-lg text-sm font-medium transition-all ${
                     isActive
-                      ? "bg-[#483434] text-white shadow-lg shadow-[#483434]/20"
-                      : "bg-transparent text-[#6b4f4f] hover:bg-[#fff3e4]/50"
+                      ? "bg-[#5B5CE1] text-white shadow-md"
+                      : "bg-transparent text-[#5B5CE1] hover:bg-[#5B5CE1]/10"
                   }`}
                 >
                   <span>{country} Flights</span>
-                  {isActive && <ChevronRight className="w-4 h-4 text-[#eed6c4]" />}
+                  {isActive && <ChevronRight className="w-4 h-4 text-white opacity-70" />}
                 </button>
               );
             })}
           </div>
 
           {/* Table Area (Right Side) */}
-          <div className="flex-grow w-full bg-[#fcf9f6] border border-[#eed6c4]/40 rounded-xl p-8 shadow-[0_10px_40px_rgba(72,52,52,0.03)]">
-            <h3 className="text-2xl font-heading font-bold text-[#483434] mb-6">{activeCountry} Flight Deals</h3>
+          <div className="flex-grow w-full bg-[#FAFAFA] rounded-xl p-8">
+            <h3 className="text-2xl font-semibold text-slate-800 mb-6">{activeCountry} Flight Deals</h3>
             
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse min-w-[500px]">
                 <thead>
-                  <tr className="text-[#6b4f4f] text-sm border-b border-[#eed6c4] font-semibold">
-                    <th className="pb-3 font-semibold">Destination</th>
-                    <th className="pb-3 font-semibold">Deal Found</th>
-                    <th className="pb-3 font-semibold text-right">Fare</th>
+                  <tr className="text-slate-700 text-sm border-b-2 border-black">
+                    <th className="pb-3 font-medium text-left w-1/3">Destination</th>
+                    <th className="pb-3 font-medium text-center w-1/3">Deal Found</th>
+                    <th className="pb-3 font-medium text-right w-1/3">Fare</th>
                   </tr>
                 </thead>
                 <tbody>
                   {displayedFlights.map((flight, idx) => (
                     <tr 
                       key={flight.id} 
-                      className={`group transition-colors hover:bg-[#fff3e4]/40 ${
-                        idx !== displayedFlights.length - 1 ? 'border-b border-[#eed6c4]/40' : ''
+                      className={`group transition-colors hover:bg-slate-100 ${
+                        idx !== displayedFlights.length - 1 ? 'border-b border-slate-200' : ''
                       }`}
                     >
                       <td className="py-4">
                         <Link 
                           href={`/v/${flight.slug || flight.id}`}
-                          className="text-[#6b4f4f] font-bold hover:text-[#483434] transition-colors block"
+                          className="text-[#5B5CE1] hover:underline font-medium block"
                         >
                           {flight.destination}
                         </Link>
                       </td>
-                      <td className="py-4 text-slate-500 text-sm font-medium">
+                      <td className="py-4 text-center text-slate-600 text-sm">
                         {new Date(flight.createdAt).toLocaleDateString("en-GB")}
                       </td>
                       <td className="py-4 text-right">
-                        <span className="text-slate-400 text-xs font-bold uppercase tracking-wider mr-1">fr.</span>
-                        <span className="font-heading font-black text-lg text-[#064e3b]">£{flight.price}</span>
+                        <span className="text-slate-500 text-sm font-medium mr-1">fr.</span>
+                        <span className="font-bold text-slate-900">£{flight.price}</span>
                       </td>
                     </tr>
                   ))}
@@ -131,9 +131,9 @@ export function FlightDealsSection({ flights }: { flights: Flight[] }) {
               <div className="mt-8 flex justify-center">
                 <Link 
                   href="/flights" 
-                  className="px-8 py-3 rounded-full bg-[#382626] text-white text-[11px] font-extrabold uppercase tracking-widest hover:bg-[#6b4f4f] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                  className="px-6 py-2.5 rounded-md bg-[#5B5CE1] text-white text-sm font-medium hover:bg-[#4a4bd1] transition-colors shadow-sm"
                 >
-                  View All Flights
+                  View More
                 </Link>
               </div>
             )}
