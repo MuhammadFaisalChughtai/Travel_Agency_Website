@@ -315,21 +315,21 @@ export function Footer() {
                   +441215291630
                 </a>
               </li>
-              <li className="flex items-center gap-4 pt-4 border-t border-[#d4af37]/30 whitespace-nowrap">
+              <li className="flex items-center gap-4 pt-4 border-t border-[#483434]/15">
                 <img
                   src="/IATA.svg"
                   alt="IATA Logo"
-                  // className="h-9 w-auto object-contain"
+                  className="h-8 w-auto object-contain mix-blend-multiply opacity-90"
                 />
                 <img
                   src="/ATOL.svg"
                   alt="ATOL Protected"
-                  // className="h-12 w-auto object-contain"
+                  className="h-10 w-auto mix-blend-multiply opacity-90"
                 />
                 <img
                   src="/Ministry_Hajj.svg"
                   alt="Ministry of Hajj and Umrah"
-                  // className="h-16 w-auto object-contain"
+                  className="h-16 w-auto object-contain mix-blend-multiply"
                 />
               </li>
             </ul>
