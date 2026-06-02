@@ -28,7 +28,7 @@ services:
     ports:
       - "5173:5173"
     environment:
-      - DATABASE_URL=mysql://user:StrongUserPassword2026!@http://84.247.128.101/:3306/terrific_travel
+      - DATABASE_URL=mysql://user:StrongUserPassword2026!@mysql:3306/terrific_travel
     env_file:
       - .env
     depends_on:
