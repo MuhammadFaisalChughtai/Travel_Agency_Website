@@ -41,8 +41,19 @@ export function FlightDealsSection({ flights }: { flights: Flight[] }) {
   if (flights.length === 0) return null;
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        
+        {/* Header Area */}
+        <div className="text-center md:text-left mb-12">
+          <h2 className="text-3xl md:text-4xl font-heading font-black text-slate-900 mb-3 tracking-tight">
+            Flight Deals From Major UK Airport
+          </h2>
+          <p className="text-slate-600 text-sm md:text-base font-medium max-w-2xl">
+            Looking for cheap flights or last minute deals from London?
+          </p>
+        </div>
+
         <div className="flex flex-col lg:flex-row gap-8 items-start">
           
           {/* Sidebar / Filters (Left Side) */}
