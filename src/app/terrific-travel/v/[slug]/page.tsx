@@ -121,6 +121,8 @@ async function resolveItem(slug: string) {
       return {
         id: dbFlight.id,
         itemType: "flight",
+        slug: dbFlight.slug,
+        country: dbFlight.country,
         airline: dbFlight.airline,
         airlineCode:
           dbFlight.airlineCode ||
@@ -274,6 +276,37 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
       orderBy: { createdAt: "desc" },
     });
     relatedArticles = [...relatedArticles, ...fallbackBlogs];
+  }
+
+  let relatedFlights: any[] = [];
+  if (type === "flight") {
+    if (item.country) {
+      relatedFlights = await prisma.flight.findMany({
+        where: { country: item.country, id: { not: item.id } },
+        take: 3,
+        orderBy: { createdAt: "desc" },
+      });
+    }
+    if (relatedFlights.length < 3) {
+      const existingIds = relatedFlights.map((f) => f.id);
+      existingIds.push(item.id);
+      const fallbackFlights = await prisma.flight.findMany({
+        where: { destination: item.destination, id: { notIn: existingIds } },
+        take: 3 - relatedFlights.length,
+        orderBy: { price: "asc" },
+      });
+      relatedFlights = [...relatedFlights, ...fallbackFlights];
+    }
+    if (relatedFlights.length < 3) {
+      const existingIds = relatedFlights.map((f) => f.id);
+      existingIds.push(item.id);
+      const randomFlights = await prisma.flight.findMany({
+        where: { id: { notIn: existingIds } },
+        take: 3 - relatedFlights.length,
+        orderBy: { createdAt: "desc" },
+      });
+      relatedFlights = [...relatedFlights, ...randomFlights];
+    }
   }
 
   // Common properties
@@ -911,6 +944,52 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                     </p>
                   </div>
                 </section>
+
+                {relatedFlights.length > 0 && (
+                  <section className="pt-8 border-t border-[#eed6c4]/30 mt-12">
+                    <h2 className="text-2xl font-heading font-black text-[#483434] mb-6 flex items-center gap-2">
+                      <PlaneTakeoff className="w-6 h-6 text-[#6b4f4f]" /> Related Flights
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                      {relatedFlights.map((flight) => (
+                        <Link 
+                          key={flight.id} 
+                          href={`/v/${flight.slug || flight.id}`}
+                          className="bg-white rounded-2xl p-6 border border-[#eed6c4]/40 hover:border-[#6b4f4f]/50 hover:shadow-lg transition-all duration-300 group flex flex-col"
+                        >
+                          <div className="flex justify-between items-start mb-4">
+                            <div>
+                              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">{flight.country || "Flight Deal"}</p>
+                              <h3 className="text-lg font-heading font-black text-[#483434] group-hover:text-[#6b4f4f] transition-colors line-clamp-1">{flight.destination}</h3>
+                            </div>
+                            <span className="inline-block px-2.5 py-1 bg-[#fff3e4] text-[#6b4f4f] text-[10px] font-black rounded-lg uppercase whitespace-nowrap">
+                              {flight.destinationCode || "DXB"}
+                            </span>
+                          </div>
+                          
+                          <div className="space-y-2 mb-6 flex-grow">
+                            <p className="text-xs text-slate-500 font-medium flex items-center gap-2">
+                              <PlaneTakeoff className="w-3.5 h-3.5 text-[#eed6c4]" /> {flight.airline}
+                            </p>
+                            <p className="text-xs text-slate-500 font-medium flex items-center gap-2">
+                              <Clock className="w-3.5 h-3.5 text-[#eed6c4]" /> {flight.duration} {flight.isTransit ? "(1 Stop)" : "(Direct)"}
+                            </p>
+                          </div>
+
+                          <div className="flex items-end justify-between mt-auto pt-4 border-t border-slate-100">
+                            <div>
+                              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-0.5">Return Fare</p>
+                              <p className="text-xl font-heading font-black text-[#382626]">£{flight.price}</p>
+                            </div>
+                            <div className="w-8 h-8 rounded-full bg-[#6b4f4f] text-white flex items-center justify-center group-hover:scale-110 group-hover:bg-[#483434] transition-all">
+                              <ChevronRight className="w-4 h-4" />
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </section>
+                )}
               </div>
             )}
 
