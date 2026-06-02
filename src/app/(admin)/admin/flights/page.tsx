@@ -103,32 +103,34 @@ export default async function AdminFlightsPage({ searchParams }: { searchParams:
         {trendingFlights.length === 0 ? (
           <div className="py-12 text-center text-sm text-slate-400">No trending destinations yet. Add your first one above.</div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {trendingFlights.map((tf: any) => (
-              <div key={tf.id} className="relative group rounded-2xl overflow-hidden border border-slate-200 shadow-sm h-52">
-                {tf.image && (
-                  <div className="absolute inset-0">
-                    <Image src={tf.image} alt={tf.destination} fill className="object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+          <div className="max-h-[500px] overflow-y-auto pr-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {trendingFlights.map((tf: any) => (
+                <div key={tf.id} className="relative group rounded-2xl overflow-hidden border border-slate-200 shadow-sm h-52 shrink-0">
+                  {tf.image && (
+                    <div className="absolute inset-0">
+                      <Image src={tf.image} alt={tf.destination} fill className="object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                    </div>
+                  )}
+                  {tf.tag && (
+                    <div className="absolute top-3 left-3 z-10">
+                      <span className="px-2 py-0.5 rounded-full bg-amber-400 text-[8px] font-black uppercase tracking-wider text-amber-900">{tf.tag}</span>
+                    </div>
+                  )}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
+                    <p className="text-white font-black text-sm font-heading">{tf.destination}</p>
+                    <p className="text-[#eed6c4] text-xs font-medium">From £{tf.price}</p>
                   </div>
-                )}
-                {tf.tag && (
-                  <div className="absolute top-3 left-3 z-10">
-                    <span className="px-2 py-0.5 rounded-full bg-amber-400 text-[8px] font-black uppercase tracking-wider text-amber-900">{tf.tag}</span>
-                  </div>
-                )}
-                <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
-                  <p className="text-white font-black text-sm font-heading">{tf.destination}</p>
-                  <p className="text-[#eed6c4] text-xs font-medium">From £{tf.price}</p>
+                  <form action={async () => {
+                    "use server";
+                    await deleteTrendingFlight(tf.id);
+                  }} className="absolute top-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button type="submit" className="w-7 h-7 rounded-full bg-red-500 text-white text-xs flex items-center justify-center font-bold hover:bg-red-600">✕</button>
+                  </form>
                 </div>
-                <form action={async () => {
-                  "use server";
-                  await deleteTrendingFlight(tf.id);
-                }} className="absolute top-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button type="submit" className="w-7 h-7 rounded-full bg-red-500 text-white text-xs flex items-center justify-center font-bold hover:bg-red-600">✕</button>
-                </form>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
       </div>
