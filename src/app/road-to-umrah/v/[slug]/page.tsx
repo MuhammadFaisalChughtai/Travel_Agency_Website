@@ -111,9 +111,12 @@ async function resolveItem(slug: string) {
     }
   } catch (e) {}
 
-  // 3. Try Database: Flight (using slug as ID since flights don't have slugs yet)
+  // 3. Try Database: Flight (by slug or ID)
   try {
-    const dbFlight = await prisma.flight.findUnique({ where: { id: slug } });
+    let dbFlight = await prisma.flight.findUnique({ where: { slug } });
+    if (!dbFlight) {
+      dbFlight = await prisma.flight.findUnique({ where: { id: slug } });
+    }
     if (dbFlight) {
       return {
         id: dbFlight.id,

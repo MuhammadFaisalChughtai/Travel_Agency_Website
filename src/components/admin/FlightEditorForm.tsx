@@ -13,6 +13,7 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
   const [departureCode, setDepartureCode] = useState(initialData?.departureCode || "");
   const [destination, setDestination] = useState(initialData?.destination || "");
   const [destinationCode, setDestinationCode] = useState(initialData?.destinationCode || "");
+  const [country, setCountry] = useState(initialData?.country || "");
   const [price, setPrice] = useState(initialData?.price?.toString() || "");
   const [month, setMonth] = useState(initialData?.month || "");
 
@@ -56,6 +57,7 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
       formData.append("departureCode", departureCode);
       formData.append("destination", destination);
       formData.append("destinationCode", destinationCode);
+      formData.append("country", country);
       formData.append("price", price);
       formData.append("month", month);
 
@@ -100,6 +102,7 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
         setDepartureCode("");
         setDestination("");
         setDestinationCode("");
+        setCountry("");
         setPrice("");
         setMonth("");
         setDuration("7h 00m");
@@ -141,7 +144,7 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
       </div>
 
       {/* Row 1: General Airline & Price */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-5">
         <div>
           <label className="block text-xs font-semibold text-slate-600 mb-1">Airline *</label>
           <input
@@ -161,6 +164,17 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
             type="text"
             placeholder="e.g. EK"
             maxLength={2}
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-slate-400"
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-slate-600 mb-1">Country *</label>
+          <input
+            required
+            value={country}
+            onChange={e => setCountry(e.target.value)}
+            type="text"
+            placeholder="e.g. UAE"
             className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-slate-400"
           />
         </div>

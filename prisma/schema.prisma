@@ -100,6 +100,8 @@ model Flight {
   price                 Float
   status                String    @default("AVAILABLE")
   month                 String?
+  country               String?
+  slug                  String?   @unique
 
   // Transit fields (outbound)
   isTransit             Boolean   @default(false)

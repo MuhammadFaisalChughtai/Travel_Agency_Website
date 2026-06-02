@@ -157,8 +157,8 @@ export function Footer() {
             </div>
 
             <p className="text-xs leading-relaxed text-slate-200 font-medium max-w-xs">
-              Road To Umrah – Committed to making your journeys
-              meaningful, safe, and unforgettable.
+              Road To Umrah – Committed to making your journeys meaningful,
+              safe, and unforgettable.
             </p>
             <TrustpilotWidget />
           </div>
@@ -319,17 +319,17 @@ export function Footer() {
                 <img
                   src="/IATA.svg"
                   alt="IATA Logo"
-                  className="h-9 w-auto object-contain"
+                  // className="h-9 w-auto object-contain"
                 />
                 <img
                   src="/ATOL.svg"
                   alt="ATOL Protected"
-                  className="h-12 w-auto object-contain"
+                  // className="h-12 w-auto object-contain"
                 />
                 <img
                   src="/Ministry_Hajj.svg"
                   alt="Ministry of Hajj and Umrah"
-                  className="h-16 w-auto object-contain"
+                  // className="h-16 w-auto object-contain"
                 />
               </li>
             </ul>
@@ -341,8 +341,8 @@ export function Footer() {
       <div className="bg-[#d4af37] text-[#064e3b] py-4 text-center border-t border-[#064e3b]/30">
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs font-semibold">
           <p className="text-[#064e3b]">
-            Copyright &copy; {new Date().getFullYear()} Road To Umrah |
-            All Rights Reserved By Road To Umrah
+            Copyright &copy; {new Date().getFullYear()} Road To Umrah | All
+            Rights Reserved By Road To Umrah
           </p>
         </div>
       </div>

@@ -9,18 +9,21 @@ export const authOptions: NextAuthOptions = {
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email }
+          where: { email: credentials.email },
         });
 
         if (!user || user.role !== "ADMIN") return null;
 
-        const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
+        const isPasswordValid = await bcrypt.compare(
+          credentials.password,
+          user.password,
+        );
 
         if (!isPasswordValid) return null;
 
@@ -30,8 +33,8 @@ export const authOptions: NextAuthOptions = {
           name: user.name,
           role: user.role,
         };
-      }
-    })
+      },
+    }),
   ],
   session: {
     strategy: "jwt",
@@ -48,7 +51,7 @@ export const authOptions: NextAuthOptions = {
         (session.user as any).role = token.role;
       }
       return session;
-    }
+    },
   },
   pages: {
     signIn: "/login",

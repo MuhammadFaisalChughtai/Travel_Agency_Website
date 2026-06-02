@@ -13,6 +13,24 @@ async function requireAuth() {
   }
 }
 
+function generateSlug(destination: string): string {
+  const base = destination.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  return `uk-to-${base}`;
+}
+
+async function getUniqueSlug(baseSlug: string, flightId?: string): Promise<string> {
+  let slug = baseSlug;
+  let counter = 1;
+  while (true) {
+    const existing = await prisma.flight.findUnique({ where: { slug } });
+    if (!existing || existing.id === flightId) {
+      return slug;
+    }
+    slug = `${baseSlug}-${counter}`;
+    counter++;
+  }
+}
+
 export async function deleteFlight(id: string) {
   await requireAuth();
   await prisma.flight.delete({ where: { id } });
@@ -68,6 +86,9 @@ export async function createFlight(formData: FormData) {
     returnAircraft = formData.get("returnAircraft") as string || aircraft;
   }
 
+  const baseSlug = generateSlug(destination);
+  const slug = await getUniqueSlug(baseSlug);
+
   await prisma.flight.create({
     data: {
       airline,
@@ -76,6 +97,8 @@ export async function createFlight(formData: FormData) {
       departureCode,
       destination,
       destinationCode,
+      country,
+      slug,
       price,
       status: "AVAILABLE",
       month,
@@ -153,6 +176,9 @@ export async function updateFlight(id: string, formData: FormData) {
     returnAircraft = formData.get("returnAircraft") as string || aircraft;
   }
 
+  const baseSlug = generateSlug(destination);
+  const slug = await getUniqueSlug(baseSlug, id);
+
   await prisma.flight.update({
     where: { id },
     data: {
@@ -162,6 +188,8 @@ export async function updateFlight(id: string, formData: FormData) {
       departureCode,
       destination,
       destinationCode,
+      country,
+      slug,
       price,
       month,
       

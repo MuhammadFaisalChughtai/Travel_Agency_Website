@@ -2,6 +2,7 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { TrustpilotReviews } from "@/components/home/TrustpilotReviews";
 import { HomeBlogSection } from "@/components/home/HomeBlogSection";
 import { TrendingFlightsSection } from "@/components/flights/TrendingFlightsSection";
+import { FlightDealsSection } from "@/components/flights/FlightDealsSection";
 import { PackageCard } from "@/components/umrah/PackageCard";
 import { prisma } from "@/lib/prisma";
 import { AirlineMarquee } from "@/components/home/AirlineMarquee";
@@ -57,6 +58,12 @@ export default async function Home() {
         where: { type: "UMRAH" },
         orderBy: { createdAt: "desc" },
         take: 6,
+      })
+    : [];
+
+  const allFlights = siteConfig.allowedTabs.includes("flight")
+    ? await prisma.flight.findMany({
+        orderBy: { createdAt: "desc" },
       })
     : [];
 
@@ -132,11 +139,15 @@ export default async function Home() {
       {/* Trending Flights Section */}
       {siteConfig.allowedTabs.includes("flight") &&
         trendingFlights.length > 0 && (
-          <div className="pt-12 bg-white">
+          <div className="bg-white">
             <TrendingFlightsSection routes={trendingFlights} />
           </div>
         )}
 
+      {/* Flight Deals By Country Section */}
+      {siteConfig.allowedTabs.includes("flight") && allFlights.length > 0 && (
+        <FlightDealsSection flights={allFlights} />
+      )}
       {/* Featured Holiday Packages Section */}
       {siteConfig.allowedTabs.includes("holiday") &&
         formattedHolidayPackages.length > 0 && (
