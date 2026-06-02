@@ -131,10 +131,10 @@ export function FlightDealsSection({ flights }: { flights: Flight[] }) {
             </div>
             
             {displayedFlights.length > 0 && (
-              <div className="mt-10 flex justify-center">
+              <div className="mt-8 flex justify-end">
                 <Link 
                   href="/flights" 
-                  className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-[#382626] text-white text-[11px] font-extrabold uppercase tracking-widest hover:bg-[#6b4f4f] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 group"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#382626] text-white text-[10px] font-extrabold uppercase tracking-widest hover:bg-[#6b4f4f] transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 group"
                 >
                   View All Flights
                 </Link>
