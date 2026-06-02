@@ -24,6 +24,7 @@ export const SITE_CONFIGS: Record<string, SiteConfig> = {
     allowedTabs: ["flight", "holiday", "umrah", "hajj", "visa", "transport"],
     logoUrl: "/Logo.svg",
   },
+
   "roadtoumrah.co.uk": {
     domain: "roadtoumrah.co.uk",
     currencySymbol: "£",

@@ -31,6 +31,35 @@ export default function AboutPage() {
           </div>
         </div>
 
+        <div className="bg-[#064e3b] rounded-3xl shadow-2xl shadow-[#064e3b]/20 p-8 md:p-12 mb-16 relative overflow-hidden flex flex-col md:flex-row items-center gap-12">
+          <div className="absolute -top-24 -right-24 text-[#d4af37]/10 pointer-events-none">
+            <Globe className="w-96 h-96" />
+          </div>
+          <div className="relative z-10 flex-1">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/40 text-[#d4af37] text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.2em] mb-6">
+              A Sister Company
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-6 font-heading leading-tight">
+              Proudly part of <br className="hidden md:block" />
+              <span className="text-[#d4af37]">Terrific Travel Ltd</span>
+            </h2>
+            <p className="text-slate-300 font-medium text-lg leading-relaxed mb-6">
+              Road To Umrah operates as a specialized division and sister company of Terrific Travel Ltd, an established and trusted name in the UK travel industry. Leveraging Terrific Travel's extensive global network and deep industry partnerships, we bring you unparalleled reliability, competitive pricing, and a wealth of logistical expertise.
+            </p>
+            <p className="text-slate-300 font-medium text-lg leading-relaxed">
+              When you book with Road To Umrah, you are backed by the robust financial security and 5-star standard that Terrific Travel Ltd is renowned for. Your pilgrimage is our priority, and our shared heritage ensures that every step of your journey is handled with absolute perfection.
+            </p>
+          </div>
+          <div className="relative z-10 w-full md:w-1/3 flex justify-center">
+            <div className="bg-white p-8 rounded-full shadow-2xl flex items-center justify-center border-4 border-[#d4af37] w-48 h-48 transform rotate-3 hover:rotate-0 transition-transform duration-500">
+              <div className="text-center">
+                <span className="block text-[#483434] font-black text-2xl uppercase tracking-widest font-heading mb-1">Terrific</span>
+                <span className="block text-[#6b4f4f] font-bold text-lg uppercase tracking-widest">Travel</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Why Choose Us */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-black text-[#064e3b] font-heading">Why Choose Us?</h2>

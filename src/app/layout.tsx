@@ -51,6 +51,25 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://upload.wikimedia.org" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        {process.env.NEXT_PUBLIC_GOOGLE_ADS_ID && (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ADS_ID}`}
+            ></script>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                 
+                  gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ADS_ID}');
+                `,
+              }}
+            />
+          </>
+        )}
       </head>
       <body className={`${inter.variable} ${outfit.variable} font-sans`}>
         <SiteProvider config={siteConfig}>
