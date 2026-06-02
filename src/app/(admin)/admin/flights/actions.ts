@@ -46,6 +46,7 @@ export async function createFlight(formData: FormData) {
   const departureCode = formData.get("departureCode") as string || null;
   const destination = formData.get("destination") as string;
   const destinationCode = formData.get("destinationCode") as string || null;
+  const country = formData.get("country") as string || null;
   const price = parseFloat(formData.get("price") as string);
   const month = formData.get("month") as string || null;
   const metaTitle = formData.get("metaTitle") as string || null;
@@ -136,6 +137,7 @@ export async function updateFlight(id: string, formData: FormData) {
   const departureCode = formData.get("departureCode") as string || null;
   const destination = formData.get("destination") as string;
   const destinationCode = formData.get("destinationCode") as string || null;
+  const country = formData.get("country") as string || null;
   const price = parseFloat(formData.get("price") as string);
   const month = formData.get("month") as string || null;
   const metaTitle = formData.get("metaTitle") as string || null;
