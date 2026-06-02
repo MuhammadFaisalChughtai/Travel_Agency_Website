@@ -35,7 +35,7 @@ export function FlightDealsSection({ flights }: { flights: Flight[] }) {
 
   // Filter flights by active country
   const displayedFlights = useMemo(() => {
-    return flights.filter(f => (f.country || "Other") === activeCountry).slice(0, 8);
+    return flights.filter(f => (f.country || "Other") === activeCountry).slice(0, 5);
   }, [flights, activeCountry]);
 
   if (flights.length === 0) return null;
