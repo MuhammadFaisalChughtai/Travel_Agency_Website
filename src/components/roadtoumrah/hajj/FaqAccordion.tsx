@@ -44,7 +44,7 @@ export function FaqAccordion() {
           <span className="inline-block px-3 py-1 rounded-full bg-[#d4af37]/40 text-[#064e3b] text-[10px] font-extrabold uppercase tracking-widest border border-[#d4af37]/40">
             Hajj Support
           </span>
-          <h2 className="text-2xl md:text-3xl font-heading font-black text-[#2a1a1a] tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-heading font-black text-[#064e3b] tracking-tight">
             Frequently Asked Questions
           </h2>
           <p className="text-xs md:text-sm text-[#064e3b] font-light max-w-xl mx-auto leading-relaxed">
@@ -68,7 +68,7 @@ export function FaqAccordion() {
                 }
                 className="w-full flex items-center justify-between p-5 md:p-6 text-left focus:outline-none group"
               >
-                <span className="font-bold text-[#2a1a1a] text-sm md:text-base group-hover:text-[#064e3b] transition-colors">
+                <span className="font-bold text-[#064e3b] text-sm md:text-base group-hover:text-[#d4af37] transition-colors">
                   {faq.question}
                 </span>
                 <div
@@ -101,7 +101,7 @@ export function FaqAccordion() {
             Still have questions? Our Hajj experts are ready to help.
           </p>
           <Link href="/contact">
-            <Button className="rounded-full gap-2 px-6 py-5 bg-[#2a1a1a] hover:bg-[#483434] text-emerald-50 font-bold text-xs uppercase tracking-widest shadow-md">
+            <Button className="rounded-full gap-2 px-6 py-5 bg-[#064e3b] hover:bg-[#d4af37] hover:text-[#064e3b] text-emerald-50 font-bold text-xs uppercase tracking-widest shadow-md transition-colors duration-300">
               <MessageCircleQuestion className="w-4 h-4" />
               Contact Support
             </Button>

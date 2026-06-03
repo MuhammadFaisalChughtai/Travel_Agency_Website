@@ -24,7 +24,7 @@ export function HajjBlogSection({ blogs }: { blogs: any[] }) {
           <span className="inline-block px-3 py-1 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/40/40 text-[#064e3b] text-[10px] font-extrabold uppercase tracking-widest">
             Hajj Guides & News
           </span>
-          <h2 className="text-2xl md:text-3xl font-heading font-black text-[#483434] tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-heading font-black text-[#064e3b] tracking-tight">
             Preparation & Spiritual Journals
           </h2>
           <p className="text-xs md:text-sm text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
@@ -66,7 +66,7 @@ export function HajjBlogSection({ blogs }: { blogs: any[] }) {
                   </span>
                 </div>
 
-                <h3 className="text-base font-heading font-black text-[#483434] leading-snug group-hover:text-[#064e3b] transition-colors duration-300">
+                <h3 className="text-base font-heading font-black text-[#064e3b] leading-snug group-hover:text-[#d4af37] transition-colors duration-300">
                   {post.title}
                 </h3>
 
@@ -77,7 +77,7 @@ export function HajjBlogSection({ blogs }: { blogs: any[] }) {
                 <div className="border-t border-[#d4af37]/40/30 pt-4">
                   <a 
                     href={`/v/${post.slug}`} 
-                    className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#064e3b] group-hover:text-[#483434] transition-colors duration-300 uppercase tracking-widest relative z-20"
+                    className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#064e3b] group-hover:text-[#d4af37] transition-colors duration-300 uppercase tracking-widest relative z-20"
                   >
                     <span>Read Article</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, PhoneCall } from "lucide-react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useSiteConfig } from "@/components/SiteProvider";
 
 const navigation = [
@@ -19,6 +20,7 @@ const navigation = [
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const siteConfig = useSiteConfig();
+  const pathname = usePathname();
 
   const filteredNavigation = navigation.filter(
     (item) => item.id === "home" || siteConfig.allowedTabs.includes(item.id),
@@ -57,17 +59,23 @@ export function Navbar() {
             </button>
           </div>
           <div className="hidden lg:flex lg:gap-x-10">
-            {filteredNavigation.map((item) => (
+            {filteredNavigation.map((item) => {
+              const isActive = pathname === item.href || (pathname.startsWith(item.href) && item.href !== "/");
+              return (
               <Link
                 key={item.name}
                 href={item.href}
-                className="relative text-sm font-bold leading-6 text-[#F9FAFB] hover:text-[#d4af37] transition-colors duration-300 py-1 group"
+                className={`relative text-sm font-bold leading-6 transition-colors duration-300 py-1 group outline-none focus:outline-none focus-visible:outline-none ${
+                  isActive ? "text-[#d4af37]" : "text-[#F9FAFB] hover:text-[#d4af37]"
+                }`}
               >
                 {item.name}
                 {/* Sleek animated bottom line hover effect */}
-                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#064e3b] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
+                <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#d4af37] origin-left rounded-full transition-transform duration-300 ${
+                  isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                }`} />
               </Link>
-            ))}
+            )})}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <button
@@ -114,16 +122,20 @@ export function Navbar() {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-[#d4af37]/40">
                 <div className="space-y-2 py-6">
-                  {filteredNavigation.map((item) => (
+                  {filteredNavigation.map((item) => {
+                    const isActive = pathname === item.href || (pathname.startsWith(item.href) && item.href !== "/");
+                    return (
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="-mx-3 block rounded-xl px-3 py-2 text-base font-bold leading-7 text-[#064e3b] hover:bg-[#d4af37]/25 hover:text-[#064e3b] transition-all duration-200"
+                      className={`-mx-3 block rounded-xl px-3 py-2 text-base font-bold leading-7 transition-all duration-200 outline-none focus:outline-none focus-visible:outline-none ${
+                        isActive ? "bg-[#d4af37]/25 text-[#d4af37]" : "text-[#064e3b] hover:bg-[#d4af37]/25 hover:text-[#064e3b]"
+                      }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}
                     </Link>
-                  ))}
+                  )})}
                 </div>
                 <div className="py-6 space-y-6">
                   <div className="flex items-center justify-center gap-6 py-4 bg-[#f9fafb] rounded-xl border border-[#d4af37]/20">
