@@ -8,27 +8,58 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://terrifictravel.co.uk"),
-  title: "Terrific Travel Ltd | Discover the World",
-  description:
-    "Book unforgettable holidays, Umrah, Hajj packages, flights, and premium transport with Terrific Travel Ltd.",
-  openGraph: {
-    title: "Terrific Travel Ltd | Discover the World",
-    description: "Book unforgettable holidays, Umrah, Hajj packages, flights, and premium transport with Terrific Travel Ltd.",
-    url: "https://terrifictravel.co.uk",
-    siteName: "Terrific Travel",
-    locale: "en_GB",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Terrific Travel Ltd | Discover the World",
-    description: "Book unforgettable holidays, Umrah, Hajj packages, flights, and premium transport with Terrific Travel Ltd.",
-  },
-};
-
 import { headers } from "next/headers";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const headersList = headers();
+  const domain = headersList.get("x-site-domain");
+  const isRoadToUmrah = domain?.includes("roadtoumrah");
+
+  if (isRoadToUmrah) {
+    return {
+      metadataBase: new URL("https://roadtoumrah.co.uk"),
+      title: "Road To Umrah | Premium Hajj & Umrah Packages",
+      description:
+        "Book unforgettable premium Umrah and Hajj packages with Road To Umrah. Your trusted partner for spiritual journeys.",
+      icons: "/roadtoumrah.svg",
+      openGraph: {
+        title: "Road To Umrah | Premium Hajj & Umrah Packages",
+        description: "Book unforgettable premium Umrah and Hajj packages with Road To Umrah.",
+        url: "https://roadtoumrah.co.uk",
+        siteName: "Road To Umrah",
+        locale: "en_GB",
+        type: "website",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: "Road To Umrah | Premium Hajj & Umrah Packages",
+        description: "Book unforgettable premium Umrah and Hajj packages with Road To Umrah.",
+      },
+    };
+  }
+
+  return {
+    metadataBase: new URL("https://terrifictravel.co.uk"),
+    title: "Terrific Travel Ltd | Discover the World",
+    description:
+      "Book unforgettable holidays, Umrah, Hajj packages, flights, and premium transport with Terrific Travel Ltd.",
+    icons: "/icon.png",
+    openGraph: {
+      title: "Terrific Travel Ltd | Discover the World",
+      description: "Book unforgettable holidays, Umrah, Hajj packages, flights, and premium transport with Terrific Travel Ltd.",
+      url: "https://terrifictravel.co.uk",
+      siteName: "Terrific Travel",
+      locale: "en_GB",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Terrific Travel Ltd | Discover the World",
+      description: "Book unforgettable holidays, Umrah, Hajj packages, flights, and premium transport with Terrific Travel Ltd.",
+    },
+  };
+}
+
 import { getSiteConfig } from "@/lib/siteConfig";
 import { SiteProvider } from "@/components/SiteProvider";
 
