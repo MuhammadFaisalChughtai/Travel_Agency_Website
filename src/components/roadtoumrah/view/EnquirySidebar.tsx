@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Mail, Phone, User, Send, CheckCircle, AlertCircle, X, MessageSquare } from "lucide-react";
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 
 export function EnquirySidebar({ type, id, packageTitle }: Props) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -21,6 +23,7 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
 
   // Set context for Tawk.to chat if available
   useEffect(() => {
+    setMounted(true);
     if (typeof window !== "undefined") {
       const setTawkContext = () => {
         if ((window as any).Tawk_API && (window as any).Tawk_API.setAttributes) {
@@ -91,15 +94,15 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
       </a>
 
       {/* Modal Overlay */}
-      {open && (
-        <div className="fixed inset-0 z-[999] flex items-center justify-center p-4" onClick={() => setOpen(false)}>
+      {open && mounted && createPortal(
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4" onClick={() => setOpen(false)}>
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           <div
-            className="relative z-10 w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#d4af37]/50"
+            className="relative z-10 w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#064e3b]/50"
             onClick={e => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="bg-[#064e3b] px-6 py-5 flex items-center justify-between">
+            <div className="bg-gradient-to-r from-[#064e3b] to-[#042f2e] px-6 py-5 flex items-center justify-between">
               <div>
                 <h2 className="text-white font-heading font-black text-base tracking-tight">Quick Enquiry</h2>
                 {packageTitle && (
@@ -119,7 +122,7 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
               {status === "success" ? (
                 <div className="py-8 flex flex-col items-center gap-4 text-center">
                   <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center">
-                    <CheckCircle className="w-8 h-8 text-emerald-500" />
+                    <CheckCircle className="w-8 h-8 text-[#064e3b]" />
                   </div>
                   <div>
                     <h3 className="font-heading font-black text-[#064e3b] text-lg">Enquiry Sent!</h3>
@@ -128,7 +131,7 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
                   <button
                     type="button"
                     onClick={() => { setOpen(false); setStatus("idle"); }}
-                    className="px-6 py-2.5 rounded-xl bg-[#064e3b] text-white font-bold text-xs uppercase tracking-widest hover:bg-[#064e3b] transition-colors"
+                    className="px-6 py-2.5 rounded-xl bg-[#064e3b] text-white font-bold text-xs uppercase tracking-widest hover:bg-[#042f2e] transition-colors"
                   >
                     Close
                   </button>
@@ -198,7 +201,7 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-[#064e3b] hover:bg-[#d4af37] hover:text-[#064e3b] text-[#F9FAFB] font-heading font-black text-xs uppercase tracking-widest transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg"
+                    className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-gradient-to-r from-[#064e3b] to-[#042f2e] hover:from-[#042f2e] hover:to-[#022c22] text-white font-heading font-black text-xs uppercase tracking-widest transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg shadow-[#064e3b]/20"
                   >
                     {status === "loading" ? (
                       <>
@@ -224,7 +227,8 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
               )}
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

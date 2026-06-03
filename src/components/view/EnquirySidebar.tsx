@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Mail, Phone, User, Send, CheckCircle, AlertCircle, X, MessageSquare } from "lucide-react";
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 
 export function EnquirySidebar({ type, id, packageTitle }: Props) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -21,6 +23,7 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
 
   // Set context for Tawk.to chat if available
   useEffect(() => {
+    setMounted(true);
     if (typeof window !== "undefined") {
       const setTawkContext = () => {
         if ((window as any).Tawk_API && (window as any).Tawk_API.setAttributes) {
@@ -91,8 +94,8 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
       </a>
 
       {/* Modal Overlay */}
-      {open && (
-        <div className="fixed inset-0 z-[999] flex items-center justify-center p-4" onClick={() => setOpen(false)}>
+      {open && mounted && createPortal(
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4" onClick={() => setOpen(false)}>
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           <div
             className="relative z-10 w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#eed6c4]/50"
@@ -224,7 +227,8 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
               )}
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
