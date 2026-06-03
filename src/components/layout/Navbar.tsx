@@ -128,16 +128,34 @@ export function Navbar() {
                 </div>
                 <div className="py-6 space-y-6">
                   <div className="flex items-center justify-center gap-6 py-4 bg-[#f9fafb] rounded-xl border border-[#eed6c4]/40">
-                    <Image src="/ATOL.svg" alt="ATOL Protected" width={40} height={40} className="w-auto h-8 mix-blend-multiply" />
-                    <Image src="/IATA.svg" alt="IATA" width={40} height={40} className="w-auto h-8 mix-blend-multiply" />
-                    <Image src="/Ministry_Hajj.svg" alt="Hajj" width={40} height={40} className="w-auto h-8 mix-blend-multiply" />
+                    <Image
+                      src="/ATOL.svg"
+                      alt="ATOL Protected"
+                      width={40}
+                      height={40}
+                      className="w-auto h-8 mix-blend-multiply"
+                    />
+                    <Image
+                      src="/IATA.svg"
+                      alt="IATA"
+                      width={40}
+                      height={40}
+                      className="w-auto h-8 mix-blend-multiply"
+                    />
+                    <Image
+                      src="/Ministry_Hajj.svg"
+                      alt="Hajj"
+                      width={40}
+                      height={40}
+                      className="w-auto h-8 mix-blend-multiply"
+                    />
                   </div>
                   <Button
                     asChild
                     className="w-full rounded-full gap-2 bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4] py-5 border border-[#eed6c4]/45 font-extrabold uppercase text-xs tracking-wider shadow-md transition-colors duration-300"
                   >
                     <Link
-                      className="flex gap-3"
+                      className="px-5 flex gap-3"
                       href="/contact"
                       onClick={() => setMobileMenuOpen(false)}
                     >
