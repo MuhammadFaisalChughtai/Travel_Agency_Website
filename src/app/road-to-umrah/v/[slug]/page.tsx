@@ -965,9 +965,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                   </h2>
                   <div className="text-sm text-slate-600 leading-relaxed font-light space-y-4">
                     {item.description ? (
-                      item.description.split('\n').map((paragraph: string, idx: number) => (
-                        <p key={idx}>{paragraph}</p>
-                      ))
+                      <div dangerouslySetInnerHTML={{ __html: item.description }} className="prose prose-sm max-w-none prose-h3:text-lg prose-h3:font-bold prose-h3:text-[#064e3b] prose-p:text-slate-600 prose-a:text-[#d4af37] prose-ul:text-slate-600 prose-li:text-slate-600" />
                     ) : (
                       <p>
                         Navigating international travel requirements can be complex, but our expert visa team 
@@ -1096,9 +1094,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                   </h2>
                   <div className="text-sm text-slate-600 leading-relaxed font-light space-y-4">
                     {item.description ? (
-                      item.description.split('\n').map((paragraph: string, idx: number) => (
-                        <p key={idx}>{paragraph}</p>
-                      ))
+                      <div dangerouslySetInnerHTML={{ __html: item.description }} className="prose prose-sm max-w-none prose-h3:text-lg prose-h3:font-bold prose-h3:text-[#064e3b] prose-p:text-slate-600 prose-a:text-[#d4af37] prose-ul:text-slate-600 prose-li:text-slate-600" />
                     ) : (
                       <p>
                         Experience the pinnacle of ground transportation with our premium fleet. 
