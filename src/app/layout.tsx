@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: "Road To Umrah | Premium Hajj & Umrah Packages",
       description:
         "Book unforgettable premium Umrah and Hajj packages with Road To Umrah. Your trusted partner for spiritual journeys.",
-      icons: "/roadtoumrah.svg",
+      icons: "/umrah_favicon.ico",
       openGraph: {
         title: "Road To Umrah | Premium Hajj & Umrah Packages",
         description: "Book unforgettable premium Umrah and Hajj packages with Road To Umrah.",
