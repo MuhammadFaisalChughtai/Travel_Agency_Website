@@ -43,7 +43,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Terrific Travel Ltd | Discover the World",
     description:
       "Book unforgettable holidays, Umrah, Hajj packages, flights, and premium transport with Terrific Travel Ltd.",
-    icons: "/icon.png",
+    icons: "/terrific_favicon.png",
     openGraph: {
       title: "Terrific Travel Ltd | Discover the World",
       description: "Book unforgettable holidays, Umrah, Hajj packages, flights, and premium transport with Terrific Travel Ltd.",
