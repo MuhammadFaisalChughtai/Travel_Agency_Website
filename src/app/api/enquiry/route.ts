@@ -63,6 +63,23 @@ export async function POST(req: NextRequest) {
       ? type.charAt(0).toUpperCase() + type.slice(1)
       : "General Enquiry";
 
+    // Prevent double-click submissions: Ignore identical inquiries from the same email within 30 seconds
+    const thirtySecondsAgo = new Date(Date.now() - 30000);
+    const recentEnquiry = await prisma.enquiry.findFirst({
+      where: {
+        email,
+        tripDetails,
+        createdAt: {
+          gte: thirtySecondsAgo,
+        },
+      },
+    });
+
+    if (recentEnquiry) {
+      // Return success to the client without creating a duplicate DB entry or sending emails
+      return NextResponse.json({ success: true, duplicate: true }, { status: 200 });
+    }
+
     await prisma.enquiry.create({
       data: {
         name,
