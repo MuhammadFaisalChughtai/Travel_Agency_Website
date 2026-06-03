@@ -5,7 +5,7 @@ import { Plane, Calendar, ArrowRight, RefreshCw } from "lucide-react";
 import { createFlight, updateFlight } from "@/app/(admin)/admin/flights/actions";
 import { useRouter } from "next/navigation";
 
-export function FlightEditorForm({ initialData }: { initialData?: any }) {
+export function FlightEditorForm({ initialData, currentPage = 1 }: { initialData?: any; currentPage?: number }) {
   const router = useRouter();
   const [airline, setAirline] = useState(initialData?.airline || "");
   const [airlineCode, setAirlineCode] = useState(initialData?.airlineCode || "");
@@ -91,7 +91,7 @@ export function FlightEditorForm({ initialData }: { initialData?: any }) {
       if (initialData) {
         await updateFlight(initialData.id, formData);
         alert("Flight deal updated successfully!");
-        router.push("/admin/flights");
+        router.push(`/admin/flights?page=${currentPage}`);
       } else {
         await createFlight(formData);
         

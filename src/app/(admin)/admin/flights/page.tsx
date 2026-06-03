@@ -28,7 +28,9 @@ export default async function AdminFlightsPage({ searchParams }: { searchParams:
     orderBy: { createdAt: "desc" },
   });
 
-  const flightToEdit = searchParams.editId ? flights.find(f => f.id === searchParams.editId) : undefined;
+  const flightToEdit = searchParams.editId 
+    ? await prisma.flight.findUnique({ where: { id: searchParams.editId } }) 
+    : undefined;
 
   return (
     <div>
@@ -143,7 +145,7 @@ export default async function AdminFlightsPage({ searchParams }: { searchParams:
         <p className="text-xs text-slate-400 mb-6">
           Fields marked * are required.
         </p>
-        <FlightEditorForm key={flightToEdit?.id || "new"} initialData={flightToEdit} />
+        <FlightEditorForm key={flightToEdit?.id || "new"} initialData={flightToEdit} currentPage={page} />
       </div>
 
       {/* ── Regular Flight Deals ── */}
@@ -226,7 +228,7 @@ export default async function AdminFlightsPage({ searchParams }: { searchParams:
                   <td className="px-3 py-4 text-sm font-bold text-slate-900">£{flight.price}</td>
                   <td className="px-3 py-4 text-right pr-6">
                     <div className="flex items-center justify-end gap-4">
-                      <Link href={`/admin/flights?editId=${flight.id}`} className="text-blue-500 hover:text-blue-700 text-xs font-semibold flex items-center gap-1">
+                      <Link href={`/admin/flights?editId=${flight.id}&page=${page}`} className="text-blue-500 hover:text-blue-700 text-xs font-semibold flex items-center gap-1">
                         <Edit2 className="w-3.5 h-3.5" />
                         Edit
                       </Link>
