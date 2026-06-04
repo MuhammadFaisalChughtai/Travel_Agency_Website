@@ -40,10 +40,18 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://upload.wikimedia.org" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://upload.wikimedia.org" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         {process.env.NEXT_PUBLIC_GOOGLE_ADS_ID && (
           <>
+            <link rel="preconnect" href="https://www.googletagmanager.com" />
+            <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+            <link rel="preconnect" href="https://region1.google-analytics.com" />
+            <link rel="dns-prefetch" href="https://region1.google-analytics.com" />
+            <link rel="preconnect" href="https://googleads.g.doubleclick.net" />
+            <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
+            <link rel="preconnect" href="https://www.google.com" />
+            <link rel="dns-prefetch" href="https://www.google.com" />
+            <link rel="preconnect" href="https://www.google.co.uk" />
+            <link rel="dns-prefetch" href="https://www.google.co.uk" />
             <script
               async
               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ADS_ID}`}
