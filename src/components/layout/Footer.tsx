@@ -319,16 +319,22 @@ export function Footer() {
                 <img
                   src="/IATA.svg"
                   alt="IATA Logo"
+                  width={60}
+                  height={32}
                   className="h-8 w-auto object-contain mix-blend-multiply opacity-90"
                 />
                 <img
                   src="/ATOL.svg"
                   alt="ATOL Protected"
+                  width={60}
+                  height={40}
                   className="h-10 w-auto object-contain mix-blend-multiply"
                 />
                 <img
                   src="/Ministry_Hajj.svg"
                   alt="Ministry of Hajj and Umrah"
+                  width={60}
+                  height={64}
                   className="h-16 w-auto object-contain mix-blend-multiply"
                 />
               </li>

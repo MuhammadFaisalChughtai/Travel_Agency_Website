@@ -40,6 +40,8 @@ function AirlineLogo({ partner }: { partner: { name: string; logo: string } }) {
       src={partner.logo}
       alt={`${partner.name} Logo`}
       onError={() => setHasError(true)}
+      width={120}
+      height={40}
       className="max-h-8 md:max-h-10 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 [filter:brightness(0)_invert(1)]"
     />
   );
