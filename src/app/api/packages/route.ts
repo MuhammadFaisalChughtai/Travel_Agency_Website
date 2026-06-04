@@ -15,7 +15,10 @@ export async function GET(request: Request) {
 
     return NextResponse.json(packages);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch packages" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch packages" },
+      { status: 500 },
+    );
   }
 }
 
@@ -46,8 +49,11 @@ export async function POST(request: Request) {
 
     if (existingPackage) {
       return NextResponse.json(
-        { error: "A package with this name already exists. Please insert a different name." },
-        { status: 400 }
+        {
+          error:
+            "A package with this name already exists. Please insert a different name.",
+        },
+        { status: 400 },
       );
     }
 
@@ -69,6 +75,9 @@ export async function POST(request: Request) {
     return NextResponse.json(newPackage, { status: 201 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Failed to create package" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to create package" },
+      { status: 500 },
+    );
   }
 }
