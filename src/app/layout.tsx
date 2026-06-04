@@ -42,12 +42,12 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://upload.wikimedia.org" />
         {process.env.NEXT_PUBLIC_GOOGLE_ADS_ID && (
           <>
-            <link rel="preconnect" href="https://www.googletagmanager.com" />
-            <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
             <link rel="preconnect" href="https://region1.google-analytics.com" />
             <link rel="dns-prefetch" href="https://region1.google-analytics.com" />
             <link rel="preconnect" href="https://googleads.g.doubleclick.net" />
             <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
+            <link rel="preconnect" href="https://ad.doubleclick.net" />
+            <link rel="dns-prefetch" href="https://ad.doubleclick.net" />
             <link rel="preconnect" href="https://www.google.com" />
             <link rel="dns-prefetch" href="https://www.google.com" />
             <link rel="preconnect" href="https://www.google.co.uk" />
