@@ -17,21 +17,55 @@ export function TawkToWidget() {
       finalWidgetId = "default";
     }
 
-    if (!finalPropertyId || !finalWidgetId) return;
+    const loadTawkTo = () => {
+      if (!finalPropertyId || !finalWidgetId) return;
+      if (document.getElementById("tawkto-script")) return;
 
-    if (document.getElementById("tawkto-script")) return;
+      (window as any).Tawk_API = (window as any).Tawk_API || {};
+      (window as any).Tawk_LoadStart = new Date();
 
-    (window as any).Tawk_API = (window as any).Tawk_API || {};
-    (window as any).Tawk_LoadStart = new Date();
+      const s1 = document.createElement("script");
+      const s0 = document.getElementsByTagName("script")[0];
+      s1.id = "tawkto-script";
+      s1.async = true;
+      s1.src = `https://embed.tawk.to/${finalPropertyId}/${finalWidgetId}`;
+      s1.charset = "UTF-8";
+      s1.setAttribute("crossorigin", "*");
+      if (s0 && s0.parentNode) {
+        s0.parentNode.insertBefore(s1, s0);
+      } else {
+        document.body.appendChild(s1);
+      }
+    };
 
-    const s1 = document.createElement("script");
-    const s0 = document.getElementsByTagName("script")[0];
-    s1.id = "tawkto-script";
-    s1.async = true;
-    s1.src = `https://embed.tawk.to/${finalPropertyId}/${finalWidgetId}`;
-    s1.charset = "UTF-8";
-    s1.setAttribute("crossorigin", "*");
-    s0.parentNode?.insertBefore(s1, s0);
+    // Defer loading to improve PageSpeed Insights
+    let loaded = false;
+    const timer = setTimeout(() => {
+      if (!loaded) {
+        loaded = true;
+        loadTawkTo();
+        clearEvents();
+      }
+    }, 5000);
+
+    const handleInteraction = () => {
+      if (!loaded) {
+        loaded = true;
+        loadTawkTo();
+        clearTimeout(timer);
+        clearEvents();
+      }
+    };
+
+    const events = ['scroll', 'mousemove', 'touchstart', 'keydown'];
+    const clearEvents = () => events.forEach(e => window.removeEventListener(e, handleInteraction));
+    
+    events.forEach(e => window.addEventListener(e, handleInteraction, { once: true }));
+
+    return () => {
+      clearTimeout(timer);
+      clearEvents();
+    };
   }, []);
 
   return null;
