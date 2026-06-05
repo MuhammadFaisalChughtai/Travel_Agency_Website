@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
+const processingCache = new Set<string>();
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -23,6 +25,13 @@ export async function POST(req: NextRequest) {
         { status: 400 },
       );
     }
+
+    const requestKey = `${email}-${type}-${packageId}-${JSON.stringify(tripDetailsObj).length}`;
+    if (processingCache.has(requestKey)) {
+      return NextResponse.json({ success: true, duplicate: true }, { status: 200 });
+    }
+    processingCache.add(requestKey);
+    setTimeout(() => processingCache.delete(requestKey), 30000);
 
     const referer = req.headers.get("referer") || "";
     const isRoadToUmrah = referer.includes("roadtoumrah");

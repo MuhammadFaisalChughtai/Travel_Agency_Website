@@ -57,6 +57,7 @@ export function FlightBookingForm({ isHome = false, isModal = false }: { isHome?
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (status === "loading") return;
     setStatus("loading");
     setErrorMsg("");
 

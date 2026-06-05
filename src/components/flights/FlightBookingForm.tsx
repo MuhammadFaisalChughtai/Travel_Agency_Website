@@ -63,6 +63,7 @@ export function FlightBookingForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (status === "loading") return;
     setStatus("loading");
     setErrorMsg("");
 
