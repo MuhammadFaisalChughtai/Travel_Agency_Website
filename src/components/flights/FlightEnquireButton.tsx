@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import {
   Mail,
   Phone,
@@ -29,6 +30,12 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [errorMsg, setErrorMsg] = useState("");
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -62,6 +69,178 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
     }
   };
 
+  const modalContent = open && mounted ? createPortal(
+    <div
+      className="fixed inset-0 z-[99999] flex items-center justify-center p-4"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setOpen(false);
+      }}
+    >
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div
+        className="relative z-10 w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#eed6c4]/50"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Modal Header */}
+        <div className="bg-gradient-to-r from-[#382626] to-[#6b4f4f] px-6 py-5 flex items-center justify-between">
+          <div>
+            <h2 className="text-white font-heading font-black text-base tracking-tight">
+              Flight Enquiry
+            </h2>
+            <p className="text-[#eed6c4]/80 text-xs mt-0.5 truncate max-w-[240px]">
+              {flightTitle}
+            </p>
+          </div>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setOpen(false);
+            }}
+            className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Modal Body */}
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          {status === "success" ? (
+            <div className="py-8 flex flex-col items-center gap-4 text-center">
+              <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center">
+                <CheckCircle className="w-8 h-8 text-[#fff3e4]0" />
+              </div>
+              <div>
+                <h3 className="font-heading font-black text-[#382626] text-lg">
+                  Enquiry Sent!
+                </h3>
+                <p className="text-[#f5f0eb]0 text-sm mt-1">
+                  Our team will contact you within 24 hours.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setOpen(false);
+                  setStatus("idle");
+                }}
+                className="px-6 py-2.5 rounded-xl bg-[#6b4f4f] text-white font-bold text-xs uppercase tracking-widest hover:bg-[#382626] transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          ) : (
+            <>
+              {status === "error" && (
+                <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 rounded-xl px-3 py-2.5 text-xs font-semibold">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  {errorMsg}
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 gap-3.5">
+                <div className="relative">
+                  <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+                  <input
+                    name="name"
+                    type="text"
+                    value={form.name}
+                    onChange={handleChange}
+                    required
+                    placeholder="Your Full Name"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#f5f0eb] text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400"
+                  />
+                </div>
+
+                <div className="relative">
+                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+                  <input
+                    name="email"
+                    type="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="Email Address"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#f5f0eb] text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400"
+                  />
+                </div>
+
+                <div className="relative">
+                  <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
+                  <input
+                    name="phone"
+                    type="tel"
+                    value={form.phone}
+                    onChange={handleChange}
+                    placeholder="Phone Number"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#f5f0eb] text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400"
+                  />
+                </div>
+
+                <textarea
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  rows={3}
+                  placeholder="Any specific requirements or questions…"
+                  className="w-full px-4 py-3 rounded-xl bg-[#f5f0eb] text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400 resize-none"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-gradient-to-r from-[#6b4f4f] to-[#382626] hover:from-[#382626] hover:to-[#251717] text-[#fff3e4] font-heading font-black text-xs uppercase tracking-widest transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg"
+              >
+                {status === "loading" ? (
+                  <>
+                    <svg
+                      className="animate-spin w-4 h-4"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                      />
+                    </svg>
+                    Sending…
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    Send Enquiry
+                  </>
+                )}
+              </button>
+
+              <p className="text-center text-[10px] text-slate-400">
+                Sent directly to{" "}
+                <span className="text-[#6b4f4f] font-semibold">
+                  inquiry@terrifictravel.co.uk
+                </span>
+              </p>
+            </>
+          )}
+        </form>
+      </div>
+    </div>,
+    document.body
+  ) : null;
+
   return (
     <>
       <button
@@ -76,177 +255,7 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
         Enquire Now
       </button>
 
-      {/* Modal Overlay */}
-      {open && (
-        <div
-          className="fixed inset-0 z-[999] flex items-center justify-center p-4"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            setOpen(false);
-          }}
-        >
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-          <div
-            className="relative z-10 w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#eed6c4]/50"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="bg-gradient-to-r from-[#382626] to-[#6b4f4f] px-6 py-5 flex items-center justify-between">
-              <div>
-                <h2 className="text-white font-heading font-black text-base tracking-tight">
-                  Flight Enquiry
-                </h2>
-                <p className="text-[#eed6c4]/80 text-xs mt-0.5 truncate max-w-[240px]">
-                  {flightTitle}
-                </p>
-              </div>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setOpen(false);
-                }}
-                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Modal Body */}
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
-              {status === "success" ? (
-                <div className="py-8 flex flex-col items-center gap-4 text-center">
-                  <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center">
-                    <CheckCircle className="w-8 h-8 text-[#fff3e4]0" />
-                  </div>
-                  <div>
-                    <h3 className="font-heading font-black text-[#382626] text-lg">
-                      Enquiry Sent!
-                    </h3>
-                    <p className="text-[#f5f0eb]0 text-sm mt-1">
-                      Our team will contact you within 24 hours.
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setOpen(false);
-                      setStatus("idle");
-                    }}
-                    className="px-6 py-2.5 rounded-xl bg-[#6b4f4f] text-white font-bold text-xs uppercase tracking-widest hover:bg-[#382626] transition-colors"
-                  >
-                    Close
-                  </button>
-                </div>
-              ) : (
-                <>
-                  {status === "error" && (
-                    <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 rounded-xl px-3 py-2.5 text-xs font-semibold">
-                      <AlertCircle className="w-4 h-4 shrink-0" />
-                      {errorMsg}
-                    </div>
-                  )}
-
-                  <div className="grid grid-cols-1 gap-3.5">
-                    <div className="relative">
-                      <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
-                      <input
-                        name="name"
-                        type="text"
-                        value={form.name}
-                        onChange={handleChange}
-                        required
-                        placeholder="Your Full Name"
-                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#f5f0eb] text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400"
-                      />
-                    </div>
-
-                    <div className="relative">
-                      <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
-                      <input
-                        name="email"
-                        type="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        required
-                        placeholder="Email Address"
-                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#f5f0eb] text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400"
-                      />
-                    </div>
-
-                    <div className="relative">
-                      <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
-                      <input
-                        name="phone"
-                        type="tel"
-                        value={form.phone}
-                        onChange={handleChange}
-                        placeholder="Phone Number"
-                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#f5f0eb] text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400"
-                      />
-                    </div>
-
-                    <textarea
-                      name="message"
-                      value={form.message}
-                      onChange={handleChange}
-                      rows={3}
-                      placeholder="Any specific requirements or questions…"
-                      className="w-full px-4 py-3 rounded-xl bg-[#f5f0eb] text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400 resize-none"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={status === "loading"}
-                    className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-gradient-to-r from-[#6b4f4f] to-[#382626] hover:from-[#382626] hover:to-[#251717] text-[#fff3e4] font-heading font-black text-xs uppercase tracking-widest transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg"
-                  >
-                    {status === "loading" ? (
-                      <>
-                        <svg
-                          className="animate-spin w-4 h-4"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          />
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                          />
-                        </svg>
-                        Sending…
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4" />
-                        Send Enquiry
-                      </>
-                    )}
-                  </button>
-
-                  <p className="text-center text-[10px] text-slate-400">
-                    Sent directly to{" "}
-                    <span className="text-[#6b4f4f] font-semibold">
-                      inquiry@terrifictravel.co.uk
-                    </span>
-                  </p>
-                </>
-              )}
-            </form>
-          </div>
-        </div>
-      )}
+      {modalContent}
     </>
   );
 }
