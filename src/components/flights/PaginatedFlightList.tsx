@@ -43,7 +43,7 @@ export function PaginatedFlightList({
           <Button
             onClick={handleLoadMore}
             disabled={loading}
-            className="px-8 py-3 rounded-full bg-[#6b4f4f] hover:bg-[#483434] text-white text-[10px] font-extrabold uppercase tracking-widest transition-all duration-300 shadow-md"
+            className="px-8 h-[50px] rounded-full bg-[#6b4f4f] hover:bg-[#483434] text-white text-[10px] font-extrabold uppercase tracking-widest transition-all duration-300 shadow-md"
           >
             {loading ? "Loading..." : "Load More Flights"}
           </Button>

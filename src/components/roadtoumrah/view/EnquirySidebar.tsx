@@ -205,7 +205,7 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-gradient-to-r from-[#064e3b] to-[#042f2e] hover:from-[#042f2e] hover:to-[#022c22] text-white font-heading font-black text-xs uppercase tracking-widest transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg shadow-[#064e3b]/20"
+                    className="flex items-center justify-center gap-2 w-full h-[50px] rounded-xl bg-gradient-to-r from-[#064e3b] to-[#042f2e] hover:from-[#042f2e] hover:to-[#022c22] text-white font-heading font-black text-xs uppercase tracking-widest transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg shadow-[#064e3b]/20"
                   >
                     {status === "loading" ? (
                       <>

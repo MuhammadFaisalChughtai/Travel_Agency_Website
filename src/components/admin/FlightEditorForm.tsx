@@ -486,7 +486,7 @@ export function FlightEditorForm({ initialData, currentPage = 1 }: { initialData
         <button
           type="submit"
           disabled={isSubmitting}
-          className="rounded-lg bg-slate-900 px-8 py-3 text-xs font-bold text-white shadow hover:bg-slate-700 transition-colors disabled:opacity-60 uppercase tracking-widest"
+          className="rounded-lg bg-slate-900 px-8 h-[50px] text-xs font-bold text-white shadow hover:bg-slate-700 transition-colors disabled:opacity-60 uppercase tracking-widest"
         >
           {isSubmitting ? (initialData ? "Updating..." : "Adding Flight...") : (initialData ? "Update Flight Deal" : "Add Flight Deal")}
         </button>

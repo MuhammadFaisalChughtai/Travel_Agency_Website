@@ -264,7 +264,7 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
         <Button 
           type="submit" 
           disabled={isSubmitting}
-          className="rounded-md bg-slate-900 px-6 py-3 text-sm font-bold text-white shadow-sm hover:bg-slate-700 w-full md:w-auto"
+          className="rounded-md bg-slate-900 px-6 h-[50px] text-sm font-bold text-white shadow-sm hover:bg-slate-700 w-full md:w-auto"
         >
           {isSubmitting ? "Publishing..." : "Publish Blog Post"}
         </Button>

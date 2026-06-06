@@ -199,7 +199,7 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
                   <button
                 type="submit"
                 disabled={status === "loading"}
-                className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-gradient-to-r from-[#064e3b] to-[#043427] hover:from-[#043427] hover:to-[#251717] text-emerald-50 font-heading font-black text-xs uppercase tracking-widest transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg"
+                className="flex items-center justify-center gap-2 w-full h-[50px] rounded-xl bg-gradient-to-r from-[#064e3b] to-[#043427] hover:from-[#043427] hover:to-[#251717] text-emerald-50 font-heading font-black text-xs uppercase tracking-widest transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg"
               >
                 {status === "loading" ? (
                   <>

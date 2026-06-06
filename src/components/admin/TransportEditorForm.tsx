@@ -160,7 +160,7 @@ export function TransportEditorForm({ initialData }: { initialData?: any }) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-8 py-3 text-sm font-bold text-white shadow hover:bg-[#6b4f4f] transition-colors disabled:opacity-60"
+            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-8 h-[50px] text-sm font-bold text-white shadow hover:bg-[#6b4f4f] transition-colors disabled:opacity-60"
           >
             {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
             {isSubmitting ? "Saving…" : initialData?.id ? "Update Transport Service" : "Add Transport Service"}

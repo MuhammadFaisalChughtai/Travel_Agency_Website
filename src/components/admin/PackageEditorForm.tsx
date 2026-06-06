@@ -287,7 +287,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="rounded-lg bg-slate-900 px-8 py-3 text-sm font-bold text-white shadow hover:bg-slate-700 transition-colors disabled:opacity-60"
+          className="rounded-lg bg-slate-900 px-8 h-[50px] text-sm font-bold text-white shadow hover:bg-slate-700 transition-colors disabled:opacity-60"
         >
           {isSubmitting ? "Saving..." : initialData?.id ? "Update Package" : "Add Package"}
         </button>

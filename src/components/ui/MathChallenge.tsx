@@ -63,7 +63,7 @@ export function MathChallenge({ onValidChange, resetKey = 0, brand = "tt", label
         Human Verification *
       </label>
       <div className="flex items-center gap-3">
-        <div className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl border ${borderColor} bg-white shadow-sm font-bold text-slate-700 min-w-[100px] whitespace-nowrap`}>
+        <div className={`flex items-center justify-center gap-2 px-4 h-[50px] rounded-xl border ${borderColor} bg-white shadow-sm font-bold text-slate-700 min-w-[100px] whitespace-nowrap`}>
           <Calculator className={`w-4 h-4 ${textColor} opacity-80`} />
           <span>{num1} {operator} {num2} = ?</span>
         </div>
@@ -73,7 +73,7 @@ export function MathChallenge({ onValidChange, resetKey = 0, brand = "tt", label
           value={userAnswer}
           onChange={(e) => setUserAnswer(e.target.value)}
           placeholder="Answer"
-          className={`w-full px-4 py-3 rounded-xl text-slate-800 border ${borderColor} text-sm focus:bg-white focus:ring-1 outline-none transition-all font-medium placeholder-slate-400 ${bgInput}`}
+          className={`w-full px-4 h-[50px] rounded-xl text-slate-800 border ${borderColor} text-sm focus:bg-white focus:ring-1 outline-none transition-all font-medium placeholder-slate-400 ${bgInput}`}
         />
       </div>
     </div>

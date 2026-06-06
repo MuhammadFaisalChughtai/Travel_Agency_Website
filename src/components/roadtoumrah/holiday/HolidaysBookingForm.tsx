@@ -292,7 +292,7 @@ Budget per person: ${formData.budget || "Not specified"}
               <Button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full md:w-2/5 py-6 text-xs font-bold bg-[#064e3b] hover:bg-[#043427] text-white rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 tracking-widest uppercase flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
+                className="w-full md:w-2/5 h-[50px] text-xs font-bold bg-[#064e3b] hover:bg-[#043427] text-white rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 tracking-widest uppercase flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
               >
                 {status === "loading" ? (
                   <>
