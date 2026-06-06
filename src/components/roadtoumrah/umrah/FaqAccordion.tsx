@@ -136,7 +136,7 @@ export function FaqAccordion() {
             Still have questions? Our travel experts are ready to help.
           </p>
           <Link className="flex justify-center" href="/contact">
-            <button className="flex rounded-full gap-2 px-6 py-5 bg-[#064e3b] hover:bg-[#064e3b] text-[#F9FAFB] font-bold text-xs uppercase tracking-widest shadow-md">
+            <button className="flex rounded-full gap-2 px-6 py-4 bg-[#064e3b] hover:bg-[#064e3b] text-[#F9FAFB] font-bold text-xs uppercase tracking-widest shadow-md">
               <MessageCircleQuestion className="w-4 h-4" />
               Contact Support
             </button>
