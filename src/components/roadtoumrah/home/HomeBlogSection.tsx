@@ -100,7 +100,7 @@ export function HomeBlogSection({
 
                 <div className="border-t border-slate-100 pt-5">
                   <a
-                    href={`/blog/${post.slug}`}
+                    href={`/v/${post.slug}`}
                     className="inline-flex items-center gap-2 text-xs font-black text-[#064e3b] group-hover:text-slate-900 transition-colors duration-300 uppercase tracking-widest relative z-20"
                   >
                     <span>Read Full Article</span>
