@@ -31,7 +31,9 @@ export function BookingModal({ type, id, title, isSold }: BookingModalProps) {
     } else {
       document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   const labels: Record<string, string> = {
@@ -53,7 +55,8 @@ export function BookingModal({ type, id, title, isSold }: BookingModalProps) {
   };
 
   const modalSubtitle: Record<string, string> = {
-    transport: "Fill in your journey details and we'll confirm within 24 hours.",
+    transport:
+      "Fill in your journey details and we'll confirm within 24 hours.",
     visa: "Our visa specialists will get back to you within 24 hours.",
     package: "Our team will prepare a personalised quote for you.",
     flight: "Submit your details and we'll finalise your reservation.",
@@ -77,52 +80,71 @@ export function BookingModal({ type, id, title, isSold }: BookingModalProps) {
       )}
 
       {/* Backdrop */}
-      {open && mounted && createPortal(
-        <div
-          className="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4"
-          onClick={() => setOpen(false)}
-        >
-          {/* Modal Panel */}
+      {open &&
+        mounted &&
+        createPortal(
           <div
-            className="relative bg-white w-full sm:max-w-3xl max-h-[92vh] rounded-t-3xl sm:rounded-3xl overflow-y-auto shadow-2xl animate-in slide-in-from-bottom-8 sm:zoom-in-95 duration-300"
-            onClick={e => e.stopPropagation()}
+            className="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4"
+            onClick={() => setOpen(false)}
           >
-            {/* Modal Header */}
-            <div className="sticky top-0 z-10 bg-[#064e3b] px-6 py-5 flex items-start justify-between rounded-t-3xl">
-              <div>
-                <h2 className="text-white font-heading font-black text-lg tracking-tight">
-                  {modalTitle[type] ?? "Book Now"}
-                </h2>
-                <p className="text-[#d4af37]/80 text-xs mt-0.5">
-                  {modalSubtitle[type] ?? "Our team will get back to you shortly."}
-                </p>
+            {/* Modal Panel */}
+            <div
+              className="relative bg-white w-full sm:max-w-3xl max-h-[92vh] rounded-t-3xl sm:rounded-3xl overflow-y-auto shadow-2xl animate-in slide-in-from-bottom-8 sm:zoom-in-95 duration-300"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="sticky top-0 z-10 bg-[#064e3b] px-6 py-5 flex items-start justify-between rounded-t-3xl">
+                <div>
+                  <h2 className="text-white font-heading font-black text-lg tracking-tight">
+                    {modalTitle[type] ?? "Book Now"}
+                  </h2>
+                  <p className="text-[#d4af37]/80 text-xs mt-0.5">
+                    {modalSubtitle[type] ??
+                      "Our team will get back to you shortly."}
+                  </p>
+                </div>
+                <button
+                  onClick={() => setOpen(false)}
+                  className="ml-4 mt-0.5 shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+                >
+                  <X className="w-4 h-4 text-white" />
+                </button>
               </div>
-              <button
-                onClick={() => setOpen(false)}
-                className="ml-4 mt-0.5 shrink-0 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-              >
-                <X className="w-4 h-4 text-white" />
-              </button>
-            </div>
 
-            {/* Form Body */}
-            <div className="pb-6 px-2 sm:px-4">
-              {type === "transport" && (
-                <TransportBookingForm isHome={false} isModal={true} packageId={id} packageTitle={title} />
-              )}
-              {type === "visa" && (
-                <VisaBookingForm isHome={false} isModal={true} packageId={id} packageTitle={title} />
-              )}
-              {type === "flight" && <FlightBookingForm isHome={false} isModal={true} />}
-              {type === "holiday" && <HolidaysBookingForm isHome={false} isModal={true} />}
-              {(type === "package" || type === "umrah" || type === "hajj") && (
-                <UmrahBookingForm isHome={false} isModal={true} />
-              )}
+              {/* Form Body */}
+              <div className="pb-6 px-2 sm:px-4">
+                {type === "transport" && (
+                  <TransportBookingForm
+                    isHome={false}
+                    isModal={true}
+                    packageId={id}
+                    packageTitle={title}
+                  />
+                )}
+                {type === "visa" && (
+                  <VisaBookingForm
+                    isHome={false}
+                    isModal={true}
+                    packageId={id}
+                    packageTitle={title}
+                  />
+                )}
+                {type === "flight" && (
+                  <FlightBookingForm isHome={false} isModal={true} />
+                )}
+                {type === "holiday" && (
+                  <HolidaysBookingForm isHome={false} isModal={true} />
+                )}
+                {(type === "package" ||
+                  type === "umrah" ||
+                  type === "hajj") && (
+                  <UmrahBookingForm isHome={false} isModal={true} />
+                )}
+              </div>
             </div>
-          </div>
-        </div>,
-        document.body
-      )}
+          </div>,
+          document.body,
+        )}
     </>
   );
 }

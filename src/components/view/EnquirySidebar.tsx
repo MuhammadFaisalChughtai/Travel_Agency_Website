@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Mail, Phone, User, Send, CheckCircle, AlertCircle, X, MessageSquare } from "lucide-react";
+import { MathChallenge } from "@/components/ui/MathChallenge";
+import { PhoneInput } from "@/components/ui/PhoneInput";
 
 interface Props {
   type: string;
@@ -16,6 +18,8 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [isMathValid, setIsMathValid] = useState(false);
+  const [resetMathKey, setResetMathKey] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -45,6 +49,12 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
     e.preventDefault();
     setStatus("loading");
     setErrorMsg("");
+
+    if (!isMathValid) {
+      setErrorMsg("Please solve the math problem correctly.");
+      setStatus("error");
+      return;
+    }
     try {
       const res = await fetch("/api/enquiry", {
         method: "POST",
@@ -60,6 +70,8 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
         throw new Error(data.error ?? "Failed to send enquiry.");
       }
       setStatus("success");
+      setResetMathKey(prev => prev + 1);
+      setIsMathValid(false);
       setForm({ name: "", email: "", phone: "", message: "" });
     } catch (err: any) {
       setStatus("error");
@@ -175,17 +187,7 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
                     </div>
 
                     {/* Phone */}
-                    <div className="relative">
-                      <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
-                      <input
-                        name="phone"
-                        type="tel"
-                        value={form.phone}
-                        onChange={handleChange}
-                        placeholder="Phone Number"
-                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#f5f0eb] text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400"
-                      />
-                    </div>
+                    <PhoneInput value={form.phone} onChange={(val) => setForm((prev: any) => ({ ...prev, phone: val }))} brand="tt" />
 
                     {/* Message */}
                     <textarea
@@ -197,6 +199,8 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
                       className="w-full px-4 py-3 rounded-xl bg-[#f5f0eb] text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#6b4f4f] focus:ring-1 focus:ring-[#6b4f4f] outline-none transition-all font-medium placeholder-slate-400 resize-none"
                     />
                   </div>
+
+                  <MathChallenge onValidChange={setIsMathValid} resetKey={resetMathKey} brand="tt" />
 
                   <button
                     type="submit"

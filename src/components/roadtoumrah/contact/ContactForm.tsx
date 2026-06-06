@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { CheckCircle, AlertCircle } from "lucide-react";
+import { MathChallenge } from "@/components/ui/MathChallenge";
+import { PhoneInput } from "@/components/ui/PhoneInput";
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -14,6 +16,8 @@ export function ContactForm() {
 
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [isMathValid, setIsMathValid] = useState(false);
+  const [resetMathKey, setResetMathKey] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -24,6 +28,12 @@ export function ContactForm() {
     e.preventDefault();
     setStatus("loading");
     setErrorMsg("");
+
+    if (!isMathValid) {
+      setErrorMsg("Please solve the math problem correctly.");
+      setStatus("error");
+      return;
+    }
 
     try {
       const res = await fetch("/api/enquiry", {
@@ -44,6 +54,8 @@ export function ContactForm() {
       }
 
       setStatus("success");
+      setResetMathKey(prev => prev + 1);
+      setIsMathValid(false);
       setFormData({
         firstName: "",
         lastName: "",
@@ -180,7 +192,9 @@ export function ContactForm() {
           </div>
         )}
 
-        <button 
+        <MathChallenge onValidChange={setIsMathValid} resetKey={resetMathKey} brand="rtu" />
+
+                  <button 
           type="submit" 
           disabled={status === "loading"}
           className="w-full h-12 text-md flex justify-center items-center gap-2 bg-[#064e3b] hover:bg-[#d4af37] text-white hover:text-[#064e3b] rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 font-bold tracking-widest uppercase"

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { MathChallenge } from "@/components/ui/MathChallenge";
+import { PhoneInput } from "@/components/ui/PhoneInput";
 import {
   Car,
   Calendar,
@@ -51,6 +53,8 @@ export function TransportBookingForm({
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [isMathValid, setIsMathValid] = useState(false);
+  const [resetMathKey, setResetMathKey] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -61,6 +65,12 @@ export function TransportBookingForm({
     e.preventDefault();
     setStatus("loading");
     setErrorMsg("");
+
+    if (!isMathValid) {
+      setErrorMsg("Please solve the math problem correctly.");
+      setStatus("error");
+      return;
+    }
     try {
       const res = await fetch("/api/enquiry", {
         method: "POST",
@@ -81,6 +91,8 @@ export function TransportBookingForm({
         throw new Error(data.error ?? "Failed to send enquiry.");
       }
       setStatus("success");
+      setResetMathKey(prev => prev + 1);
+      setIsMathValid(false);
       setFormData({
         serviceType: "",
         date: "",
@@ -212,18 +224,7 @@ export function TransportBookingForm({
             </div>
 
             {/* Phone */}
-            <div className="relative">
-              <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className={fieldClass}
-                placeholder="Phone Number"
-                required
-              />
-            </div>
+            <PhoneInput value={formData.phone} onChange={(val) => setFormData((prev: any) => ({ ...prev, phone: val }))} brand="tt" />
 
             {/* Email — spans full width on last row */}
             <div className="relative sm:col-span-2 lg:col-span-3">

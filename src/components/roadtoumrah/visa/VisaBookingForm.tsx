@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { MathChallenge } from "@/components/ui/MathChallenge";
+import { PhoneInput } from "@/components/ui/PhoneInput";
 
 import {
   Plane,
@@ -90,6 +92,8 @@ export function VisaBookingForm({ isHome = false, isModal = false, packageId, pa
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [isMathValid, setIsMathValid] = useState(false);
+  const [resetMathKey, setResetMathKey] = useState(0);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -102,6 +106,12 @@ export function VisaBookingForm({ isHome = false, isModal = false, packageId, pa
     e.preventDefault();
     setStatus("loading");
     setErrorMsg("");
+
+    if (!isMathValid) {
+      setErrorMsg("Please solve the math problem correctly.");
+      setStatus("error");
+      return;
+    }
     try {
       const res = await fetch("/api/enquiry", {
         method: "POST",
@@ -119,6 +129,8 @@ export function VisaBookingForm({ isHome = false, isModal = false, packageId, pa
         throw new Error(data.error ?? "Failed to send enquiry.");
       }
       setStatus("success");
+      setResetMathKey(prev => prev + 1);
+      setIsMathValid(false);
       setFormData({
         airport: "",
         date: "",
@@ -244,18 +256,7 @@ export function VisaBookingForm({ isHome = false, isModal = false, packageId, pa
             </div>
 
             {/* Phone Input */}
-            <div className="relative">
-              <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200/80 text-xs md:text-sm focus:bg-white focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b] transition-all duration-300 outline-none font-medium placeholder-slate-400"
-                placeholder="Phone Number"
-                required
-              />
-            </div>
+            <PhoneInput value={formData.phone} onChange={(val) => setFormData((prev: any) => ({ ...prev, phone: val }))} brand="rtu" />
 
             {/* Email Input */}
             <div className="relative">
@@ -290,7 +291,9 @@ export function VisaBookingForm({ isHome = false, isModal = false, packageId, pa
               </div>
             )}
             <div className="flex justify-center">
-              <button
+              <MathChallenge onValidChange={setIsMathValid} resetKey={resetMathKey} brand="rtu" />
+
+                  <button
                 type="submit"
                 disabled={status === "loading"}
                 className="w-full md:w-2/5 py-6 text-xs font-bold bg-[#064e3b] hover:bg-[#d4af37] text-white hover:text-[#064e3b] rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 tracking-widest uppercase flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"

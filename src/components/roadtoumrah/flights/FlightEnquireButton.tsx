@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { MathChallenge } from "@/components/ui/MathChallenge";
+import { PhoneInput } from "@/components/ui/PhoneInput";
 import {
   Mail,
   Phone,
@@ -30,6 +32,8 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [isMathValid, setIsMathValid] = useState(false);
+  const [resetMathKey, setResetMathKey] = useState(0);
 
   const [mounted, setMounted] = useState(false);
 
@@ -48,6 +52,12 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
     if (status === "loading") return;
     setStatus("loading");
     setErrorMsg("");
+
+    if (!isMathValid) {
+      setErrorMsg("Please solve the math problem correctly.");
+      setStatus("error");
+      return;
+    }
     try {
       const res = await fetch("/api/enquiry", {
         method: "POST",
@@ -63,6 +73,8 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
         throw new Error(data.error ?? "Failed to send enquiry.");
       }
       setStatus("success");
+      setResetMathKey(prev => prev + 1);
+      setIsMathValid(false);
       setForm({ name: "", email: "", phone: "", message: "" });
     } catch (err: any) {
       setStatus("error");
@@ -170,17 +182,7 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
                   />
                 </div>
 
-                <div className="relative">
-                  <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#064e3b] pointer-events-none" />
-                  <input
-                    name="phone"
-                    type="tel"
-                    value={form.phone}
-                    onChange={handleChange}
-                    placeholder="Phone Number"
-                    className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 text-slate-800 border border-slate-200 text-sm focus:bg-white focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b] outline-none transition-all font-medium placeholder-slate-400"
-                  />
-                </div>
+                <PhoneInput value={form.phone} onChange={(val) => setForm((prev: any) => ({ ...prev, phone: val }))} brand="rtu" />
 
                 <textarea
                   name="message"
@@ -192,7 +194,9 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
                 />
               </div>
 
-              <button
+              <MathChallenge onValidChange={setIsMathValid} resetKey={resetMathKey} brand="rtu" />
+
+                  <button
                 type="submit"
                 disabled={status === "loading"}
                 className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-gradient-to-r from-[#064e3b] to-[#043427] hover:from-[#043427] hover:to-[#251717] text-emerald-50 font-heading font-black text-xs uppercase tracking-widest transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg"

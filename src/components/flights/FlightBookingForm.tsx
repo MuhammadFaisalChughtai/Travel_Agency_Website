@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 
 import { useEffect } from "react";
+import { MathChallenge } from "@/components/ui/MathChallenge";
+import { PhoneInput } from "@/components/ui/PhoneInput";
 
 export function FlightBookingForm({
   isHome = false,
@@ -53,6 +55,8 @@ export function FlightBookingForm({
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [isMathValid, setIsMathValid] = useState(false);
+  const [resetMathKey, setResetMathKey] = useState(0);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -66,6 +70,12 @@ export function FlightBookingForm({
     if (status === "loading") return;
     setStatus("loading");
     setErrorMsg("");
+
+    if (!isMathValid) {
+      setErrorMsg("Please solve the math problem correctly.");
+      setStatus("error");
+      return;
+    }
 
     const customMessage = `
 Journey: ${formData.journeyType}
@@ -95,6 +105,8 @@ Passengers: ${formData.travelers}
         throw new Error(data.error ?? "Failed to send enquiry.");
       }
       setStatus("success");
+      setResetMathKey(prev => prev + 1);
+      setIsMathValid(false);
       setFormData({
         journeyType: "Round Trip",
         from: "",
@@ -308,18 +320,7 @@ Passengers: ${formData.travelers}
             </div>
 
             {/* Phone */}
-            <div className="relative">
-              <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="Phone Number"
-                className={fieldClass}
-                required
-              />
-            </div>
+            <PhoneInput value={formData.phone} onChange={(val) => setFormData((prev: any) => ({ ...prev, phone: val }))} brand="tt" />
 
             {/* Name Input */}
             <div className="relative">
@@ -355,7 +356,9 @@ Passengers: ${formData.travelers}
 
             {/* Submit */}
             <div className="flex justify-center">
-              <button
+              <MathChallenge onValidChange={setIsMathValid} resetKey={resetMathKey} brand="tt" />
+
+                  <button
                 type="submit"
                 disabled={status === "loading"}
                 className="w-full sm:w-auto px-12 py-5 text-xs font-bold bg-[#6b4f4f] hover:bg-[#382626] text-white rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 tracking-widest uppercase flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
