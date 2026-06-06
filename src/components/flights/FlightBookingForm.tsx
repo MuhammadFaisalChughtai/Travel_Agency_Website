@@ -355,8 +355,8 @@ Passengers: ${formData.travelers}
             )}
 
             {/* Submit */}
-            <div className="flex justify-center flex-col items-center gap-6 w-full">
-              <MathChallenge onValidChange={setIsMathValid} resetKey={resetMathKey} brand="tt" />
+            <div className="flex justify-center flex-col md:flex-row items-end gap-4 w-full">
+              <MathChallenge labelColor={typeof isHome !== "undefined" && isHome ? "text-white/90" : undefined} onValidChange={setIsMathValid} resetKey={resetMathKey} brand="tt" />
 
                   <button
                 type="submit"

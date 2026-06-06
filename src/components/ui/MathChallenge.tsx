@@ -7,9 +7,10 @@ interface MathChallengeProps {
   onValidChange: (isValid: boolean) => void;
   resetKey?: number;
   brand?: "tt" | "rtu";
+  labelColor?: string;
 }
 
-export function MathChallenge({ onValidChange, resetKey = 0, brand = "tt" }: MathChallengeProps) {
+export function MathChallenge({ onValidChange, resetKey = 0, brand = "tt", labelColor }: MathChallengeProps) {
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
   const [operator, setOperator] = useState<"+" | "-">("+");
@@ -54,9 +55,11 @@ export function MathChallenge({ onValidChange, resetKey = 0, brand = "tt" }: Mat
   const bgInput = isRtu ? "bg-slate-50 focus:border-[#064e3b] focus:ring-[#064e3b]" : "bg-[#f5f0eb] focus:border-[#6b4f4f] focus:ring-[#6b4f4f]";
   const borderColor = "border-slate-200";
 
+  const finalLabelColor = labelColor || textColor;
+
   return (
     <div className="flex flex-col gap-2">
-      <label className={`block text-xs font-black tracking-wide uppercase leading-6 ${textColor}`}>
+      <label className={`block text-xs font-black tracking-wide uppercase leading-6 ${finalLabelColor}`}>
         Human Verification *
       </label>
       <div className="flex items-center gap-3">

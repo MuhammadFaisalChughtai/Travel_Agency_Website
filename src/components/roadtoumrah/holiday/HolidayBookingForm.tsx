@@ -278,9 +278,9 @@ export function HolidayBookingForm({ isHome = false }: { isHome?: boolean }) {
                 <p>{errorMsg}</p>
               </div>
             )}
-            <div className="flex flex-col items-center gap-6 w-full">
+            <div className="flex flex-col md:flex-row items-end gap-4 w-full justify-center">
               
-              <MathChallenge onValidChange={setIsMathValid} resetKey={resetMathKey} brand="rtu" />
+              <MathChallenge labelColor={typeof isHome !== "undefined" && isHome ? "text-white/90" : undefined} onValidChange={setIsMathValid} resetKey={resetMathKey} brand="rtu" />
               <Button
                 type="submit"
                 disabled={status === "loading"}
