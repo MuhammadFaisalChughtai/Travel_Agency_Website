@@ -94,7 +94,7 @@ export function TransportBookingForm({
         throw new Error(data.error ?? "Failed to send enquiry.");
       }
       setStatus("success");
-      setResetMathKey(prev => prev + 1);
+      setResetMathKey((prev) => prev + 1);
       setIsMathValid(false);
       setFormData({
         serviceType: "",
@@ -247,7 +247,13 @@ export function TransportBookingForm({
             </div>
 
             {/* Phone */}
-            <PhoneInput value={formData.phone} onChange={(val) => setFormData((prev: any) => ({ ...prev, phone: val }))} brand="rtu" />
+            <PhoneInput
+              value={formData.phone}
+              onChange={(val) =>
+                setFormData((prev: any) => ({ ...prev, phone: val }))
+              }
+              brand="rtu"
+            />
 
             {/* Email — spans full width on last row */}
             <div className="relative sm:col-span-2 lg:col-span-3">
@@ -280,10 +286,14 @@ export function TransportBookingForm({
                 <p>{errorMsg}</p>
               </div>
             )}
-            <div className="flex justify-center">
-              <MathChallenge onValidChange={setIsMathValid} resetKey={resetMathKey} brand="rtu" />
+            <div className="flex justify-center flex-col items-center gap-6 w-full">
+              <MathChallenge
+                onValidChange={setIsMathValid}
+                resetKey={resetMathKey}
+                brand="rtu"
+              />
 
-                  <button
+              <button
                 type="submit"
                 disabled={status === "loading"}
                 className="w-full md:w-2/5 py-6 text-xs font-bold bg-[#064e3b] hover:bg-[#d4af37] text-white hover:text-[#064e3b] rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 tracking-widest uppercase flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"

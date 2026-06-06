@@ -286,7 +286,9 @@ Budget per person: ${formData.budget || "Not specified"}
                 <p>{errorMsg}</p>
               </div>
             )}
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center gap-6 w-full">
+              
+              <MathChallenge onValidChange={setIsMathValid} resetKey={resetMathKey} brand="tt" />
               <Button
                 type="submit"
                 disabled={status === "loading"}

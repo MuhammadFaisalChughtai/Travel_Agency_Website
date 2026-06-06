@@ -278,7 +278,9 @@ export function HolidayBookingForm({ isHome = false }: { isHome?: boolean }) {
                 <p>{errorMsg}</p>
               </div>
             )}
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center gap-6 w-full">
+              
+              <MathChallenge onValidChange={setIsMathValid} resetKey={resetMathKey} brand="tt" />
               <Button
                 type="submit"
                 disabled={status === "loading"}

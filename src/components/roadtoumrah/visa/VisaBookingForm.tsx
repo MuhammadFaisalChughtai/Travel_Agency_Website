@@ -290,7 +290,7 @@ export function VisaBookingForm({ isHome = false, isModal = false, packageId, pa
                 <p>{errorMsg}</p>
               </div>
             )}
-            <div className="flex justify-center">
+            <div className="flex justify-center flex-col items-center gap-6 w-full">
               <MathChallenge onValidChange={setIsMathValid} resetKey={resetMathKey} brand="rtu" />
 
                   <button

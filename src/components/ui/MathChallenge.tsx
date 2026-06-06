@@ -60,7 +60,7 @@ export function MathChallenge({ onValidChange, resetKey = 0, brand = "tt" }: Mat
         Human Verification *
       </label>
       <div className="flex items-center gap-3">
-        <div className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl border ${borderColor} bg-white shadow-sm font-bold text-slate-700 min-w-[100px]`}>
+        <div className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl border ${borderColor} bg-white shadow-sm font-bold text-slate-700 min-w-[100px] whitespace-nowrap`}>
           <Calculator className={`w-4 h-4 ${textColor} opacity-80`} />
           <span>{num1} {operator} {num2} = ?</span>
         </div>

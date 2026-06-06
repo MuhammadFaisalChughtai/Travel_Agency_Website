@@ -85,7 +85,7 @@ export function PhoneInput({ value, onChange, brand = "tt" }: PhoneInputProps) {
       <select
         value={countryCode}
         onChange={handleCodeChange}
-        className={`pl-10 pr-6 py-3 border-y border-l ${borderColor} border-r-0 text-slate-700 text-sm focus:outline-none focus:ring-1 focus:bg-white font-medium cursor-pointer ${bgInput} appearance-none min-w-[100px] hover:bg-white transition-colors`}
+        className={`pl-10 pr-6 py-3 border-y border-l ${borderColor} border-r-0 text-slate-700 text-sm focus:outline-none focus:ring-1 focus:bg-white font-medium cursor-pointer ${bgInput} appearance-none w-[110px] max-w-[110px] text-ellipsis overflow-hidden whitespace-nowrap hover:bg-white transition-colors`}
         style={{ backgroundImage: 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3e%3cpath stroke=\'%236b7280\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M6 8l4 4 4-4\'/%3e%3c/svg%3e")', backgroundPosition: 'right 0.5rem center', backgroundRepeat: 'no-repeat', backgroundSize: '1.5em 1.5em' }}
       >
         {COUNTRY_CODES.map((country) => (
