@@ -54,6 +54,7 @@ export function TransportBookingForm({
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [isMathValid, setIsMathValid] = useState(false);
+  const [challengeData, setChallengeData] = useState<any>(null);
   const [resetMathKey, setResetMathKey] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -76,6 +77,7 @@ export function TransportBookingForm({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          challenge: challengeData,
           ...formData,
           travelers: parseInt(formData.travelers) || formData.travelers,
           type: "Transport Enquiry",
@@ -256,7 +258,7 @@ export function TransportBookingForm({
             )}
             <div className="flex flex-col md:flex-row items-end gap-4 w-full justify-center">
               
-              <MathChallenge labelColor={typeof isHome !== "undefined" && isHome ? "text-white/90" : undefined} onValidChange={setIsMathValid} resetKey={resetMathKey} brand="tt" />
+              <MathChallenge labelColor={typeof isHome !== "undefined" && isHome ? "text-white/90" : undefined} onValidChange={(valid, data) => { setIsMathValid(valid); setChallengeData(data); }} resetKey={resetMathKey} brand="tt" />
               <Button
                 type="submit"
                 disabled={status === "loading"}

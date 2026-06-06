@@ -37,6 +37,7 @@ export function HolidaysBookingForm({ isHome = false, isModal = false }: { isHom
   >("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [isMathValid, setIsMathValid] = useState(false);
+  const [challengeData, setChallengeData] = useState<any>(null);
   const [resetMathKey, setResetMathKey] = useState(0);
 
   const handleChange = (
@@ -71,6 +72,7 @@ Budget per person: ${formData.budget || "Not specified"}
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          challenge: challengeData,
           name: formData.name || "Holiday Customer",
           email: formData.email,
           phone: formData.phone,
@@ -288,7 +290,7 @@ Budget per person: ${formData.budget || "Not specified"}
             )}
             <div className="flex flex-col md:flex-row items-end gap-4 w-full justify-center">
               
-              <MathChallenge labelColor={typeof isHome !== "undefined" && isHome ? "text-white/90" : undefined} onValidChange={setIsMathValid} resetKey={resetMathKey} brand="tt" />
+              <MathChallenge labelColor={typeof isHome !== "undefined" && isHome ? "text-white/90" : undefined} onValidChange={(valid, data) => { setIsMathValid(valid); setChallengeData(data); }} resetKey={resetMathKey} brand="tt" />
               <Button
                 type="submit"
                 disabled={status === "loading"}

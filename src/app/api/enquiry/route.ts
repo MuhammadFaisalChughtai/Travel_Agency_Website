@@ -16,6 +16,7 @@ export async function POST(req: NextRequest) {
       message,
       type,
       packageId,
+      challenge, // Expect { payload, signature, answer }
       ...tripDetailsObj
     } = body;
 
@@ -25,6 +26,39 @@ export async function POST(req: NextRequest) {
         { status: 400 },
       );
     }
+
+    // ─── Mathematical Anti-Spam Verification ─────────────────────────────────
+    if (!challenge || !challenge.payload || !challenge.signature || typeof challenge.answer === 'undefined') {
+      return NextResponse.json({ error: "Spam verification failed. Missing challenge data." }, { status: 400 });
+    }
+
+    const { payload, signature, answer } = challenge;
+    
+    // Verify the signature
+    const crypto = require("crypto");
+    const secret = process.env.ENQUIRY_SECRET || "terrific-travel-fallback-secret-2024";
+    const expectedSignature = crypto.createHmac("sha256", secret).update(payload).digest("hex");
+    
+    if (signature !== expectedSignature) {
+      return NextResponse.json({ error: "Spam verification failed. Invalid signature." }, { status: 400 });
+    }
+
+    // Parse payload and verify timeout (e.g. valid for 1 hour maximum)
+    const [num1Str, operator, num2Str, timestampStr] = payload.split("|");
+    const timestamp = parseInt(timestampStr, 10);
+    if (Date.now() - timestamp > 60 * 60 * 1000) {
+      return NextResponse.json({ error: "Verification expired. Please refresh the page and try again." }, { status: 400 });
+    }
+
+    // Calculate expected answer
+    const num1 = parseInt(num1Str, 10);
+    const num2 = parseInt(num2Str, 10);
+    const expectedAnswer = operator === "+" ? num1 + num2 : num1 - num2;
+
+    if (parseInt(answer, 10) !== expectedAnswer) {
+      return NextResponse.json({ error: "Incorrect math verification answer." }, { status: 400 });
+    }
+    // ─────────────────────────────────────────────────────────────────────────
 
     const requestKey = `${email}-${type}-${packageId}-${JSON.stringify(tripDetailsObj).length}`;
     if (processingCache.has(requestKey)) {

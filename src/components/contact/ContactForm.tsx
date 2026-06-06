@@ -17,6 +17,7 @@ export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [isMathValid, setIsMathValid] = useState(false);
+  const [challengeData, setChallengeData] = useState<any>(null);
   const [resetMathKey, setResetMathKey] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -40,6 +41,7 @@ export function ContactForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          challenge: challengeData,
           name: `${formData.firstName} ${formData.lastName}`.trim(),
           email: formData.email,
           phone: formData.phone,
@@ -192,7 +194,7 @@ export function ContactForm() {
           </div>
         )}
 
-        <MathChallenge onValidChange={setIsMathValid} resetKey={resetMathKey} brand="tt" />
+        <MathChallenge onValidChange={(valid, data) => { setIsMathValid(valid); setChallengeData(data); }} resetKey={resetMathKey} brand="tt" />
 
                   <button 
           type="submit" 

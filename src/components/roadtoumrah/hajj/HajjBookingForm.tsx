@@ -42,6 +42,7 @@ export function HajjBookingForm({ isHome = false }: { isHome?: boolean }) {
   >("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [isMathValid, setIsMathValid] = useState(false);
+  const [challengeData, setChallengeData] = useState<any>(null);
   const [resetMathKey, setResetMathKey] = useState(0);
 
   const handleChange = (
@@ -66,6 +67,7 @@ export function HajjBookingForm({ isHome = false }: { isHome?: boolean }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          challenge: challengeData,
           ...formData,
           travelers: parseInt(formData.travelers) || formData.travelers,
           type: "hajj",
@@ -244,7 +246,7 @@ export function HajjBookingForm({ isHome = false }: { isHome?: boolean }) {
             )}
             <div className="flex flex-col md:flex-row items-end gap-4 w-full justify-center">
               
-              <MathChallenge labelColor={typeof isHome !== "undefined" && isHome ? "text-white/90" : undefined} onValidChange={setIsMathValid} resetKey={resetMathKey} brand="rtu" />
+              <MathChallenge labelColor={typeof isHome !== "undefined" && isHome ? "text-white/90" : undefined} onValidChange={(valid, data) => { setIsMathValid(valid); setChallengeData(data); }} resetKey={resetMathKey} brand="rtu" />
               <Button
                 type="submit"
                 disabled={status === "loading"}

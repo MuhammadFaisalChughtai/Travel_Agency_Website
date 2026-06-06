@@ -33,6 +33,7 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
   >("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [isMathValid, setIsMathValid] = useState(false);
+  const [challengeData, setChallengeData] = useState<any>(null);
   const [resetMathKey, setResetMathKey] = useState(0);
 
   const [mounted, setMounted] = useState(false);
@@ -63,6 +64,7 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          challenge: challengeData,
           ...form,
           type: "flight",
           packageId: flightId,
@@ -194,7 +196,7 @@ export function FlightEnquireButton({ flightId, flightTitle }: Props) {
                 />
               </div>
 
-              <MathChallenge onValidChange={setIsMathValid} resetKey={resetMathKey} brand="tt" />
+              <MathChallenge onValidChange={(valid, data) => { setIsMathValid(valid); setChallengeData(data); }} resetKey={resetMathKey} brand="tt" />
 
                   <button
                 type="submit"

@@ -19,6 +19,7 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [isMathValid, setIsMathValid] = useState(false);
+  const [challengeData, setChallengeData] = useState<any>(null);
   const [resetMathKey, setResetMathKey] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -60,6 +61,7 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          challenge: challengeData,
           ...form,
           type,
           packageId: packageTitle ? `${packageTitle} (Ref: ${id})` : id,
@@ -200,7 +202,7 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
                     />
                   </div>
 
-                  <MathChallenge onValidChange={setIsMathValid} resetKey={resetMathKey} brand="rtu" />
+                  <MathChallenge onValidChange={(valid, data) => { setIsMathValid(valid); setChallengeData(data); }} resetKey={resetMathKey} brand="rtu" />
 
                   <button
                     type="submit"

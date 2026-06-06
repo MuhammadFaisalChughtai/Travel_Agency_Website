@@ -4,51 +4,54 @@ import { useState, useEffect } from "react";
 import { Calculator } from "lucide-react";
 
 interface MathChallengeProps {
-  onValidChange: (isValid: boolean) => void;
+  onValidChange: (isValid: boolean, challengeData?: any) => void;
   resetKey?: number;
   brand?: "tt" | "rtu";
   labelColor?: string;
 }
 
 export function MathChallenge({ onValidChange, resetKey = 0, brand = "tt", labelColor }: MathChallengeProps) {
-  const [num1, setNum1] = useState(0);
-  const [num2, setNum2] = useState(0);
-  const [operator, setOperator] = useState<"+" | "-">("+");
+  const [challengeData, setChallengeData] = useState<{num1: number, num2: number, operator: string, payload: string, signature: string} | null>(null);
   const [userAnswer, setUserAnswer] = useState("");
 
-  const generateChallenge = () => {
-    const isAddition = Math.random() > 0.5;
-    let n1 = Math.floor(Math.random() * 10) + 1;
-    let n2 = Math.floor(Math.random() * 10) + 1;
-
-    // Ensure no negative answers for simplicity
-    if (!isAddition && n2 > n1) {
-      const temp = n1;
-      n1 = n2;
-      n2 = temp;
+  const fetchChallenge = async () => {
+    try {
+      const res = await fetch('/api/challenge');
+      if (res.ok) {
+        const data = await res.json();
+        setChallengeData(data);
+        setUserAnswer("");
+        onValidChange(false, null);
+      }
+    } catch (err) {
+      console.error("Failed to fetch math challenge", err);
     }
-
-    setNum1(n1);
-    setNum2(n2);
-    setOperator(isAddition ? "+" : "-");
-    setUserAnswer("");
-    onValidChange(false);
   };
 
   useEffect(() => {
-    generateChallenge();
+    fetchChallenge();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetKey]);
 
   useEffect(() => {
-    if (userAnswer === "") {
-      onValidChange(false);
+    if (userAnswer === "" || !challengeData) {
+      onValidChange(false, null);
       return;
     }
 
-    const expected = operator === "+" ? num1 + num2 : num1 - num2;
-    onValidChange(parseInt(userAnswer) === expected);
-  }, [userAnswer, num1, num2, operator, onValidChange]);
+    const expected = challengeData.operator === "+" ? challengeData.num1 + challengeData.num2 : challengeData.num1 - challengeData.num2;
+    const isValid = parseInt(userAnswer) === expected;
+    
+    if (isValid) {
+      onValidChange(true, {
+        payload: challengeData.payload,
+        signature: challengeData.signature,
+        answer: userAnswer
+      });
+    } else {
+      onValidChange(false, null);
+    }
+  }, [userAnswer, challengeData, onValidChange]);
 
   const isRtu = brand === "rtu";
   const textColor = isRtu ? "text-[#064e3b]" : "text-[#6b4f4f]";
@@ -65,7 +68,7 @@ export function MathChallenge({ onValidChange, resetKey = 0, brand = "tt", label
       <div className="flex items-center gap-3">
         <div className={`flex items-center justify-center gap-2 px-4 h-[50px] rounded-xl border ${borderColor} bg-white shadow-sm font-bold text-slate-700 min-w-[100px] whitespace-nowrap`}>
           <Calculator className={`w-4 h-4 ${textColor} opacity-80`} />
-          <span>{num1} {operator} {num2} = ?</span>
+          <span>{challengeData ? `${challengeData.num1} ${challengeData.operator} ${challengeData.num2} = ?` : "Loading..."}</span>
         </div>
         <input
           type="number"

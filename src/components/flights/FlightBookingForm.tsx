@@ -56,6 +56,7 @@ export function FlightBookingForm({
   >("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [isMathValid, setIsMathValid] = useState(false);
+  const [challengeData, setChallengeData] = useState<any>(null);
   const [resetMathKey, setResetMathKey] = useState(0);
 
   const handleChange = (
@@ -89,6 +90,7 @@ Passengers: ${formData.travelers}
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          challenge: challengeData,
           name: formData.name || "Flight Customer",
           email: formData.email,
           phone: formData.phone,
@@ -356,7 +358,7 @@ Passengers: ${formData.travelers}
 
             {/* Submit */}
             <div className="flex justify-center flex-col md:flex-row items-end gap-4 w-full">
-              <MathChallenge labelColor={typeof isHome !== "undefined" && isHome ? "text-white/90" : undefined} onValidChange={setIsMathValid} resetKey={resetMathKey} brand="tt" />
+              <MathChallenge labelColor={typeof isHome !== "undefined" && isHome ? "text-white/90" : undefined} onValidChange={(valid, data) => { setIsMathValid(valid); setChallengeData(data); }} resetKey={resetMathKey} brand="tt" />
 
                   <button
                 type="submit"
