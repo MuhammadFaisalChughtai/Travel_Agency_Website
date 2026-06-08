@@ -197,3 +197,20 @@ model TrendingFlight {
   metaTitle       String?  @db.Text
   metaDescription String?  @db.Text
 }
+
+model Customer {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Newsletter {
+  id             String   @id @default(cuid())
+  subject        String
+  content        String   @db.Text
+  sentAt         DateTime @default(now())
+  recipientCount Int      @default(0)
+}
