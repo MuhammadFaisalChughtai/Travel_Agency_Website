@@ -8,9 +8,65 @@ import "react-quill/dist/quill.snow.css";
 // Dynamically import Quill to avoid SSR issues
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
+const DEFAULT_TEMPLATE = `
+<div style="text-align: center; margin-bottom: 24px;">
+  <img src="https://terrifictravel.co.uk/Logo.svg" alt="Terrific Travel" width="220" style="display: inline-block;" />
+</div>
+
+<p>Dear {{name}},</p>
+
+<p>Are you planning your sacred journey of a lifetime? At Terrific Travel, we understand how important and deeply spiritual the Umrah pilgrimage is. That is why we have put together exclusive, all-inclusive Umrah packages designed to give you peace of mind from start to finish.</p>
+
+<p>Whether you are traveling solo, with your spouse, or bringing the whole family, we have options tailored just for you.</p>
+
+<p><strong>Our Premium Umrah Packages Include:</strong></p>
+<ul>
+  <li><strong>Flights:</strong> Round-trip flights with top-tier airlines.</li>
+  <li><strong>Accommodation:</strong> Luxury and budget-friendly hotel stays located just steps away from the Haram in Makkah and the Prophet's Mosque in Madinah.</li>
+  <li><strong>Ground Transport:</strong> Seamless, air-conditioned transfers between airports, hotels, and holy sites.</li>
+  <li><strong>Visa Processing:</strong> Complete handling of your Umrah visa documentation.</li>
+  <li><strong>Guided Support:</strong> 24/7 on-ground assistance to guide you through your rituals.</li>
+</ul>
+
+<p><strong>Limited-Time Offer</strong></p>
+<p>Book your package this month and enjoy an exclusive discount of up to <strong>10% off</strong> your total booking, plus a complimentary premium Ziyarah tour in both holy cities.</p>
+
+<p><strong><a href="https://terrifictravel.co.uk/umrah" style="color: #6b4f4f; font-size: 15px;">[Click Here to Explore Packages & Book Now]</a></strong></p>
+
+<p>If you have any specific requirements or would like a customized itinerary, simply reply directly to this email or reach out to us at <a href="mailto:inquires@terrifictravel.co.uk">inquires@terrifictravel.co.uk</a>. Our dedicated travel experts are ready to assist you.</p>
+
+<p>May your journey be blessed and accepted.</p>
+
+<br/>
+<p>Warm regards,</p>
+<p><strong>The Terrific Travel Team</strong></p>
+
+<br/>
+<hr style="border: none; border-top: 2px solid #eed6c4; margin: 24px 0;" />
+
+<div style="font-size: 13px; color: #382626; line-height: 2.2;">
+  <p style="margin: 4px 0;">
+    <strong style="color: #6b4f4f; padding-right: 8px;">WhatsApp:</strong> 
+    <a href="https://wa.me/441215291630" style="color: #000000; text-decoration: none;">+44 1215 291630</a>
+  </p>
+  <p style="margin: 4px 0;">
+    <strong style="color: #6b4f4f; padding-right: 8px;">Direct Line:</strong> 
+    <a href="tel:+441215291630" style="color: #000000; text-decoration: none;">+44 1215 291630</a>
+  </p>
+  <p style="margin: 4px 0;">
+    <strong style="color: #6b4f4f; padding-right: 8px;">Email:</strong> 
+    <a href="mailto:inquires@terrifictravel.co.uk" style="color: #000000; text-decoration: underline;">inquires@terrifictravel.co.uk</a>
+  </p>
+  <p style="margin: 4px 0;">
+    <strong style="color: #6b4f4f; padding-right: 8px;">Website:</strong> 
+    <a href="https://terrifictravel.co.uk" style="color: #000000; text-decoration: underline;">www.terrifictravel.co.uk</a>
+  </p>
+</div>
+`;
+
 export function NewsletterComposerClient() {
   const [subject, setSubject] = useState("");
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(DEFAULT_TEMPLATE);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [msg, setMsg] = useState("");

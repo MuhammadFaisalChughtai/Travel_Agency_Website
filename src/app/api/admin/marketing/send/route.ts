@@ -34,12 +34,13 @@ export async function POST(req: Request) {
     // Send emails individually to personalize them
     for (const customer of customers) {
       const personalizedContent = content.replace(/{{name}}/g, customer.name);
+      const personalizedSubject = subject.replace(/{{name}}/g, customer.name);
       
       try {
         await transporter.sendMail({
           from: '"Terrific Travel" <inquires@terrifictravel.co.uk>',
           to: customer.email,
-          subject: subject,
+          subject: personalizedSubject,
           html: personalizedContent,
         });
         successCount++;
