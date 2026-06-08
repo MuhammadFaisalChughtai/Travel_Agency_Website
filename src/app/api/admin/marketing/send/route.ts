@@ -17,15 +17,14 @@ export async function POST(req: Request) {
     }
 
     const transporter = nodemailer.createTransport({
-      host: "terrifictravel.co.uk",
+      host: process.env.SMTP_HOST || "mail.terrifictravel.co.uk",
       port: 465,
       secure: true,
       auth: {
-        user: "inquires@terrifictravel.co.uk",
+        user: process.env.SMTP_USER || "inquires@terrifictravel.co.uk",
         pass: process.env.SMTP_PASSWORD || "", // Using env variable for security
       },
       tls: {
-        // Do not fail on invalid certs if any
         rejectUnauthorized: false
       }
     });
