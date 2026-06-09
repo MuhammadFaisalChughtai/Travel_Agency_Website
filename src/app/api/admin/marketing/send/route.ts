@@ -10,9 +10,16 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Subject and content are required" }, { status: 400 });
     }
 
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
     const customers = await prisma.customer.findMany({
       where: {
-        isSubscribed: true
+        isSubscribed: true,
+        OR: [
+          { lastEmailedAt: null },
+          { lastEmailedAt: { lt: sevenDaysAgo } }
+        ]
       }
     });
     
@@ -125,6 +132,12 @@ export async function POST(req: Request) {
           subject: personalizedSubject,
           html: htmlWrapper,
         });
+        
+        await prisma.customer.update({
+          where: { id: customer.id },
+          data: { lastEmailedAt: new Date() }
+        });
+        
         successCount++;
       } catch (err) {
         console.error(`Failed to send to ${customer.email}:`, err);

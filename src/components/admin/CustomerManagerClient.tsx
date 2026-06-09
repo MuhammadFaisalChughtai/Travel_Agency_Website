@@ -14,6 +14,12 @@ export function CustomerManagerClient({ customers }: { customers: any[] }) {
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const totalPages = Math.ceil(customers.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedCustomers = customers.slice(startIndex, startIndex + itemsPerPage);
+
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -142,7 +148,7 @@ export function CustomerManagerClient({ customers }: { customers: any[] }) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 bg-white">
-                {customers.map((c: any) => (
+                {paginatedCustomers.map((c: any) => (
                   <tr key={c.id} className="hover:bg-slate-50">
                     <td className="py-4 px-6 text-sm font-semibold text-slate-900">{c.name}</td>
                     <td className="py-4 px-6 text-sm text-slate-600">{c.email}</td>
@@ -157,6 +163,30 @@ export function CustomerManagerClient({ customers }: { customers: any[] }) {
                 ))}
               </tbody>
             </table>
+          </div>
+        )}
+
+        {totalPages > 1 && (
+          <div className="px-6 py-4 border-t border-slate-200 flex items-center justify-between bg-slate-50">
+            <span className="text-sm text-slate-500">
+              Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, customers.length)} of {customers.length} entries
+            </span>
+            <div className="flex gap-2">
+              <button 
+                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className="px-3 py-1 text-sm font-semibold rounded border border-slate-300 bg-white hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed text-slate-700"
+              >
+                Previous
+              </button>
+              <button 
+                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                className="px-3 py-1 text-sm font-semibold rounded border border-slate-300 bg-white hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed text-slate-700"
+              >
+                Next
+              </button>
+            </div>
           </div>
         )}
       </div>
