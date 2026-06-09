@@ -16,6 +16,7 @@ export function middleware(request: NextRequest) {
     url.pathname.startsWith('/admin') || 
     url.pathname.startsWith('/api') || 
     url.pathname.startsWith('/login') ||
+    url.pathname.startsWith('/unsubscribe') ||
     url.pathname.startsWith('/forgot-password') ||
     url.pathname.startsWith('/reset-password')
   ) {
