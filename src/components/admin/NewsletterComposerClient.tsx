@@ -59,6 +59,11 @@ export function NewsletterComposerClient() {
   const quillRef = React.useRef<any>(null);
 
   const imageHandler = React.useCallback(() => {
+    const quill = quillRef.current.getEditor();
+    // Get selection BEFORE the file dialog opens and focus is lost
+    const range = quill.getSelection();
+    const insertIndex = range ? range.index : quill.getLength() - 1;
+
     const input = document.createElement("input");
     input.setAttribute("type", "file");
     input.setAttribute("accept", "image/*");
@@ -79,15 +84,15 @@ export function NewsletterComposerClient() {
         const data = await res.json();
         
         if (data.url) {
-          const quill = quillRef.current.getEditor();
-          const range = quill.getSelection(true);
-          quill.insertEmbed(range.index, "image", data.url);
-          quill.setSelection(range.index + 1);
+          quill.insertEmbed(insertIndex, "image", data.url);
+          // Set selection right after the inserted image
+          setTimeout(() => quill.setSelection(insertIndex + 1), 0);
         } else {
           alert("Image upload failed");
         }
       } catch (err) {
-        alert("Upload error");
+        console.error("Editor injection error:", err);
+        alert("Failed to insert image into editor.");
       }
     };
   }, []);
