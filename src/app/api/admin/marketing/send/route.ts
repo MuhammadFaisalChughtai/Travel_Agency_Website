@@ -10,10 +10,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Subject and content are required" }, { status: 400 });
     }
 
-    const customers = await prisma.customer.findMany();
+    const customers = await prisma.customer.findMany({
+      where: {
+        isSubscribed: true
+      }
+    });
     
     if (customers.length === 0) {
-      return NextResponse.json({ error: "No customers found to send email to." }, { status: 400 });
+      return NextResponse.json({ error: "No subscribed customers found to send email to." }, { status: 400 });
     }
 
     const transporter = nodemailer.createTransport({
@@ -104,7 +108,10 @@ export async function POST(req: Request) {
         </td>
       </tr>
     </table>
-    <p style="margin-top:16px;font-size:11px;color:#888;">You are receiving this email because you subscribed to Terrific Travel offers.</p>
+    <p style="margin-top:16px;font-size:11px;color:#888;">
+      You are receiving this email because you subscribed to Terrific Travel offers. <br/>
+      <a href="https://terrifictravel.co.uk/unsubscribe?id=${customer.id}" style="color:#6b4f4f;text-decoration:underline;margin-top:8px;display:inline-block;">Click here to unsubscribe</a>
+    </p>
   </td></tr>
 </table>
 </body>
