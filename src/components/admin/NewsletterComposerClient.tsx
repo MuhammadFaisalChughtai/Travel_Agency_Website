@@ -5,8 +5,16 @@ import dynamic from "next/dynamic";
 import { Send, Loader2, AlertCircle, CheckCircle, Image as ImageIcon } from "lucide-react";
 import "react-quill/dist/quill.snow.css";
 
-// Dynamically import Quill to avoid SSR issues
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+// Dynamically import Quill to avoid SSR issues and correctly forward the ref
+const ReactQuill = dynamic(
+  async () => {
+    const { default: RQ } = await import("react-quill");
+    return function Comp({ forwardedRef, ...props }: any) {
+      return <RQ ref={forwardedRef} {...props} />;
+    };
+  },
+  { ssr: false }
+);
 
 const DEFAULT_TEMPLATE = `
 <h2>Special Offer Just For You!</h2>
@@ -151,7 +159,7 @@ export function NewsletterComposerClient() {
           </div>
           <div className="bg-white rounded-lg overflow-hidden border border-slate-300">
             <ReactQuill 
-              ref={quillRef}
+              forwardedRef={quillRef}
               theme="snow" 
               value={content} 
               onChange={setContent} 
