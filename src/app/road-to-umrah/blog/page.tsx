@@ -12,12 +12,14 @@ export const metadata: Metadata = {
     "Read our latest insights, travel hacks, destination guides, and spiritual preparation for Umrah & Hajj.",
   openGraph: {
     title: "Travel Blogs & Guides | Road To Umrah",
-    description: "Read our latest insights, travel hacks, destination guides, and spiritual preparation for Umrah & Hajj.",
+    description:
+      "Read our latest insights, travel hacks, destination guides, and spiritual preparation for Umrah & Hajj.",
     url: "https://roadtoumrah.co.uk/blog",
   },
   twitter: {
     title: "Travel Blogs & Guides | Road To Umrah",
-    description: "Read our latest insights, travel hacks, destination guides, and spiritual preparation for Umrah & Hajj.",
+    description:
+      "Read our latest insights, travel hacks, destination guides, and spiritual preparation for Umrah & Hajj.",
   },
 };
 
@@ -109,7 +111,7 @@ export default async function BlogIndexPage() {
 
                       <div className="border-t border-slate-100 pt-4">
                         <Link
-                          href={`/blog/${post.slug}`}
+                          href={`/v/${post.slug}`}
                           className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#064e3b] group-hover:text-slate-900 transition-colors duration-300 uppercase tracking-widest"
                         >
                           <span>Read Article</span>

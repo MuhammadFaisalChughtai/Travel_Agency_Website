@@ -60,7 +60,7 @@ export function HomeBlogSection({
               key={post.id}
               className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#064e3b]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1 relative"
             >
-              <a href={`/blog/${post.slug}`} className="absolute inset-0 z-10">
+              <a href={`/v/${post.slug}`} className="absolute inset-0 z-10">
                 <span className="sr-only">View Article</span>
               </a>
               <div className="relative h-56 w-full overflow-hidden">

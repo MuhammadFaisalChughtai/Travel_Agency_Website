@@ -182,7 +182,7 @@ export default function BlogArticlePage({
                     {relatedPosts.map((related) => (
                       <Link
                         key={related.id}
-                        href={`/umrah/blog/${related.slug}`}
+                        href={`/umrah/v/${related.slug}`}
                         className="group flex gap-3 items-start rounded-2xl p-3 border border-[#d4af37]/20 hover:border-[#064e3b]/40 hover:bg-[#d4af37]/10 transition-all duration-300"
                       >
                         <div className="relative w-16 h-14 rounded-xl overflow-hidden shrink-0">

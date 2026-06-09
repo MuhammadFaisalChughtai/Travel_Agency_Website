@@ -7,7 +7,9 @@ import { Calendar, Clock, ArrowRight } from "lucide-react";
 
 export function TransportBlogSection({ blogs }: { blogs: any[] }) {
   const [visibleCount, setVisibleCount] = useState(3);
-  const sectionBlogs = blogs.filter((post: any) => post.category === "Transport");
+  const sectionBlogs = blogs.filter(
+    (post: any) => post.category === "Transport",
+  );
 
   const handleLoadMore = () => {
     setVisibleCount((prev) => Math.min(prev + 3, sectionBlogs.length));
@@ -28,24 +30,26 @@ export function TransportBlogSection({ blogs }: { blogs: any[] }) {
             Terrific Transport Journals
           </h2>
           <p className="text-xs md:text-sm text-[#f5f0eb]0 font-light max-w-xl mx-auto leading-relaxed">
-            Gain deep insights, tips, and guidelines for your local and international transport needs.
+            Gain deep insights, tips, and guidelines for your local and
+            international transport needs.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {sectionBlogs.slice(0, visibleCount).map((post: any) => (
-            <article 
-              key={post.id} 
-              className="bg-white rounded-3xl overflow-hidden border border-[#eed6c4]/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.06)] hover:border-[#6b4f4f]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1 relative">
-              <a href={`/blog/${post.slug}`} className="absolute inset-0 z-10">
+            <article
+              key={post.id}
+              className="bg-white rounded-3xl overflow-hidden border border-[#eed6c4]/25 shadow-[0_10px_35px_rgba(72,52,52,0.03)] hover:shadow-[0_15px_45px_rgba(72,52,52,0.06)] hover:border-[#6b4f4f]/30 transition-all duration-300 flex flex-col group hover:-translate-y-1 relative"
+            >
+              <a href={`/v/${post.slug}`} className="absolute inset-0 z-10">
                 <span className="sr-only">Read Article</span>
               </a>
               <div className="relative h-48 sm:h-52 w-full overflow-hidden">
-                <Image 
-                  src={post.image} 
-                  alt={post.title} 
-                  fill 
-                  className="object-cover group-hover:scale-105 transition-transform duration-500" 
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 rounded-full bg-[#6b4f4f]/95 backdrop-blur-md text-white text-[9px] font-black uppercase tracking-wider shadow-sm">
@@ -75,8 +79,8 @@ export function TransportBlogSection({ blogs }: { blogs: any[] }) {
                 </p>
 
                 <div className="border-t border-[#eed6c4]/20 pt-4 mt-auto">
-                  <a 
-                    href={`/blog/${post.slug}`} 
+                  <a
+                    href={`/v/${post.slug}`}
                     className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-[#6b4f4f] group-hover:text-[#483434] transition-colors duration-300 uppercase tracking-widest relative z-20"
                   >
                     <span>Read Article</span>
@@ -90,11 +94,12 @@ export function TransportBlogSection({ blogs }: { blogs: any[] }) {
 
         {hasMore && (
           <div className="mt-12 text-center">
-            <button 
+            <button
               onClick={handleLoadMore}
               className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-white border border-[#eed6c4] text-[#6b4f4f] font-bold text-xs hover:bg-[#fffcf9] hover:border-[#6b4f4f]/50 hover:shadow-md transition-all duration-300 uppercase tracking-widest group"
             >
-              Load More <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-y-0.5 transition-transform duration-300" />
+              Load More{" "}
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-y-0.5 transition-transform duration-300" />
             </button>
           </div>
         )}
