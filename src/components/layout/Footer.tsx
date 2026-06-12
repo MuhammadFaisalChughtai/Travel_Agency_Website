@@ -341,6 +341,7 @@ export function Footer() {
             </ul>
           </div>
         </div>
+      </div>
         
       {/* Aligned Copyright, Payment Methods, and Stamp Bottom Bar */}
       <div className="bg-[#483434] text-[#fff3e4] py-4 border-t border-[#6b4f4f]/30">

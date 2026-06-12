@@ -7,7 +7,7 @@ const safeHost = (!rawHost || rawHost === "terrifictravel.co.uk") ? "mail.terrif
 export const transporter = nodemailer.createTransport({
   host: safeHost,
   port: Number(process.env.SMTP_PORT) || 465,
-  secure: true, // true for 465
+  secure: Number(process.env.SMTP_PORT) === 465, // true for 465, false for 587 (STARTTLS)
   auth: {
     user: process.env.SMTP_USER || "inquires@terrifictravel.co.uk",
     pass: process.env.SMTP_PASSWORD,
