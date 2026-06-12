@@ -343,13 +343,28 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Aligned Copyright Bottom Bar - With Developer Branding Removed */}
-      <div className="bg-[#d4af37] text-[#064e3b] py-4 text-center border-t border-[#064e3b]/30">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs font-semibold">
-          <p className="text-[#064e3b]">
+      {/* Aligned Copyright & Payment Methods Bottom Bar */}
+      <div className="bg-[#d4af37] text-[#064e3b] py-6 lg:py-8 border-t border-[#064e3b]/30">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-6 text-xs font-semibold">
+          <p className="text-[#064e3b] text-center lg:text-left order-2 lg:order-1">
             Copyright &copy; {new Date().getFullYear()} Road To Umrah | All
             Rights Reserved By Road To Umrah
           </p>
+          
+          <div className="flex flex-col items-center lg:items-end gap-3 order-1 lg:order-2">
+            <div className="flex items-center gap-2">
+              <span className="bg-[#064e3b] text-[#d4af37] px-2 py-1 rounded text-[10px] font-black uppercase tracking-wider">Book Now</span>
+              <span className="text-[#064e3b] font-black uppercase tracking-widest text-[11px]">&</span>
+              <span className="bg-transparent border-2 border-[#064e3b] text-[#064e3b] px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">Pay Later</span>
+            </div>
+            <div className="flex flex-wrap justify-center lg:justify-end gap-2">
+              {["Visa", "Mastercard", "American Express", "PayPal", "Stripe", "Klarna", "Clearpay", "Apple Pay", "Google Pay"].map(method => (
+                <span key={method} className="px-2.5 py-1 bg-[#064e3b]/10 border border-[#064e3b]/20 rounded shadow-sm text-[10px] text-[#064e3b] font-extrabold tracking-wide flex items-center justify-center min-w-[50px]">
+                  {method}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </footer>
