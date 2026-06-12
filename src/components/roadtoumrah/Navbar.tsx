@@ -48,24 +48,8 @@ export function Navbar() {
               />
             </Link>
             <div className="hidden sm:flex items-center">
-              <div className="flex flex-col border-[2.5px] border-[#064e3b] rounded-md overflow-hidden font-black uppercase shadow-sm group hover:-rotate-3 hover:scale-105 transition-all duration-300 shrink-0 w-[95px]">
-                <div className="bg-[#d4af37] text-[#064e3b] py-1 text-[10px] text-center tracking-tight leading-none">
-                  BOOK NOW,
-                </div>
-                <div className="bg-[#064e3b] text-[#fefce8] py-1 text-[11px] text-center tracking-widest leading-none">
-                  PAY LATER
-                </div>
-              </div>
             </div>
             <div className="flex sm:hidden items-center">
-              <div className="flex flex-col border-2 border-[#064e3b] rounded-md overflow-hidden font-black uppercase shadow-sm shrink-0 w-[75px]">
-                <div className="bg-[#d4af37] text-[#064e3b] py-0.5 text-[8px] text-center tracking-tight leading-none">
-                  BOOK NOW,
-                </div>
-                <div className="bg-[#064e3b] text-[#fefce8] py-0.5 text-[9px] text-center tracking-widest leading-none">
-                  PAY LATER
-                </div>
-              </div>
             </div>
           </div>
           <div className="flex lg:hidden">
@@ -141,14 +125,6 @@ export function Navbar() {
                   />
                 </Link>
                 <div className="flex items-center">
-                  <div className="flex flex-col border-2 border-[#064e3b] rounded-md overflow-hidden font-black uppercase shadow-sm shrink-0 w-[75px]">
-                    <div className="bg-[#d4af37] text-[#064e3b] py-0.5 text-[8px] text-center tracking-tight leading-none">
-                      BOOK NOW,
-                    </div>
-                    <div className="bg-[#064e3b] text-[#fefce8] py-0.5 text-[9px] text-center tracking-widest leading-none">
-                      PAY LATER
-                    </div>
-                  </div>
                 </div>
               </div>
               <button

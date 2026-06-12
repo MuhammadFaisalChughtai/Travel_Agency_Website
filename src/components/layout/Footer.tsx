@@ -346,23 +346,29 @@ export function Footer() {
       {/* Aligned Copyright & Payment Methods Bottom Bar */}
       <div className="bg-[#483434] text-[#fff3e4] py-6 lg:py-8 border-t border-[#6b4f4f]/30">
         <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-6 text-xs font-semibold">
-          <p className="text-[#eed6c4]/80 text-center lg:text-left order-2 lg:order-1">
+          <p className="text-[#eed6c4]/80 text-center lg:text-left order-3 lg:order-1">
             Copyright &copy; {new Date().getFullYear()} Terrific Travel Ltd |
             All Rights Reserved By Terrific Travel Ltd
           </p>
           
-          <div className="flex flex-col items-center lg:items-end gap-3 order-1 lg:order-2">
-            <div className="flex items-center gap-2">
-              <span className="bg-[#eed6c4] text-[#483434] px-2 py-1 rounded text-[10px] font-black uppercase tracking-wider">Book Now</span>
-              <span className="text-[#eed6c4] font-black uppercase tracking-widest text-[11px]">&</span>
-              <span className="bg-[#6b4f4f] border border-[#eed6c4]/50 text-[#fff3e4] px-2 py-1 rounded text-[10px] font-black uppercase tracking-wider">Pay Later</span>
+          <div className="flex flex-col lg:flex-row items-center lg:items-end gap-6 order-1 lg:order-2">
+            <div className="flex flex-wrap items-center justify-center gap-2 lg:gap-3 bg-white/5 p-2 rounded-lg border border-white/10">
+               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/visa.svg" alt="Visa" className="h-6 lg:h-7 w-auto object-contain" />
+               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/mastercard.svg" alt="Mastercard" className="h-6 lg:h-7 w-auto object-contain" />
+               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/amex.svg" alt="Amex" className="h-6 lg:h-7 w-auto object-contain" />
+               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/paypal.svg" alt="PayPal" className="h-6 lg:h-7 w-auto object-contain" />
+               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/stripe.svg" alt="Stripe" className="h-6 lg:h-7 w-auto object-contain" />
+               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/klarna.svg" alt="Klarna" className="h-6 lg:h-7 w-auto object-contain" />
+               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/applepay.svg" alt="Apple Pay" className="h-6 lg:h-7 w-auto object-contain" />
+               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/googlepay.svg" alt="Google Pay" className="h-6 lg:h-7 w-auto object-contain" />
             </div>
-            <div className="flex flex-wrap justify-center lg:justify-end gap-2">
-              {["Visa", "Mastercard", "American Express", "PayPal", "Stripe", "Klarna", "Clearpay", "Apple Pay", "Google Pay"].map(method => (
-                <span key={method} className="px-2.5 py-1 bg-white/5 border border-white/10 rounded shadow-sm text-[10px] text-white/90 font-medium tracking-wide flex items-center justify-center min-w-[50px]">
-                  {method}
-                </span>
-              ))}
+            <div className="flex flex-col border-[2.5px] border-[#eed6c4]/80 rounded-md overflow-hidden font-black uppercase shadow-lg group hover:-rotate-3 hover:scale-105 transition-all duration-300 shrink-0 w-[110px]">
+              <div className="bg-[#eed6c4] text-[#483434] py-1 text-[11px] text-center tracking-tight leading-none border-b border-[#483434]">
+                BOOK NOW,
+              </div>
+              <div className="bg-[#6b4f4f] text-[#fff3e4] py-1 text-[12px] text-center tracking-widest leading-none">
+                PAY LATER
+              </div>
             </div>
           </div>
         </div>
