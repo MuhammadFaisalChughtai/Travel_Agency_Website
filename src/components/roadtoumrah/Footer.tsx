@@ -342,53 +342,51 @@ export function Footer() {
           </div>
         </div>
         
-        {/* Payment Methods & Stamp - Positioned above copyright border */}
-        <div className="flex flex-col lg:flex-row items-center justify-between lg:justify-end gap-6 pb-12 pt-4">
-          <div className="flex flex-wrap items-center justify-center gap-2 lg:gap-3">
-             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
-               <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" className="h-5 w-auto object-contain" />
+      {/* Aligned Copyright, Payment Methods, and Stamp Bottom Bar */}
+      <div className="bg-[#d4af37] text-[#064e3b] py-4 border-t border-[#064e3b]/30">
+        <div className="max-w-[1400px] mx-auto px-6 flex flex-col xl:flex-row items-center justify-between gap-4 w-full">
+          
+          <div className="text-[11px] font-semibold text-[#064e3b] text-center xl:text-left shrink-0">
+            Copyright &copy; {new Date().getFullYear()} Road To Umrah |
+            All Rights Reserved
+          </div>
+
+          <div className="flex flex-wrap xl:flex-nowrap items-center justify-center gap-2 md:gap-3 flex-1">
+             <div className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center justify-center border border-[#064e3b]">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" className="h-3.5 w-auto object-contain" />
              </div>
-             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
-               <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="Mastercard" className="h-5 w-auto object-contain" />
+             <div className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center justify-center border border-[#064e3b]">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="Mastercard" className="h-3.5 w-auto object-contain" />
              </div>
-             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
-               <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="Amex" className="h-5 w-auto object-contain" />
+             <div className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center justify-center border border-[#064e3b]">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="Amex" className="h-3.5 w-auto object-contain" />
              </div>
-             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
-               <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-5 w-auto object-contain" />
+             <div className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center justify-center border border-[#064e3b]">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-3.5 w-auto object-contain" />
              </div>
-             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
-               <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" className="h-5 w-auto object-contain" />
+             <div className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center justify-center border border-[#064e3b]">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" className="h-3.5 w-auto object-contain" />
              </div>
-             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
-               <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Klarna_Logo_black.svg" alt="Klarna" className="h-5 w-auto object-contain" />
+             <div className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center justify-center border border-[#064e3b]">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Klarna_Logo_black.svg" alt="Klarna" className="h-3.5 w-auto object-contain" />
              </div>
-             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
-               <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" className="h-5 w-auto object-contain" />
+             <div className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center justify-center border border-[#064e3b]">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" className="h-3.5 w-auto object-contain" />
              </div>
-             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
-               <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" className="h-5 w-auto object-contain" />
+             <div className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center justify-center border border-[#064e3b]">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" className="h-3.5 w-auto object-contain" />
              </div>
           </div>
           
-          <div className="flex flex-col border-[2.5px] border-[#064e3b] rounded-md overflow-hidden font-black uppercase shadow-lg group hover:-rotate-3 hover:scale-105 transition-all duration-300 shrink-0 w-[110px]">
-            <div className="bg-[#d4af37] text-[#064e3b] py-1 text-[11px] text-center tracking-tight leading-none border-b border-[#064e3b]">
+          <div className="flex flex-col border-[2px] border-[#064e3b] rounded overflow-hidden font-black uppercase shadow-lg shrink-0 w-[95px]">
+            <div className="bg-[#d4af37] text-[#064e3b] py-0.5 text-[10px] text-center tracking-tight leading-none border-b border-[#064e3b]">
               BOOK NOW,
             </div>
-            <div className="bg-[#064e3b] text-[#fefce8] py-1 text-[12px] text-center tracking-widest leading-none">
+            <div className="bg-[#064e3b] text-[#fefce8] py-0.5 text-[11px] text-center tracking-widest leading-none">
               PAY LATER
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Aligned Copyright Bottom Bar */}
-      <div className="bg-[#d4af37] text-[#064e3b] py-6 border-t border-[#064e3b]/30">
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-center text-xs font-semibold">
-          <p className="text-[#064e3b] text-center">
-            Copyright &copy; {new Date().getFullYear()} Road To Umrah | All
-            Rights Reserved By Road To Umrah
-          </p>
+          
         </div>
       </div>
     </footer>
