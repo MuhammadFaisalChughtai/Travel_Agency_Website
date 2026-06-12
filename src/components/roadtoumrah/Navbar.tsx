@@ -33,20 +33,38 @@ export function Navbar() {
           className="flex items-center justify-between py-3 px-4 lg:px-6 max-w-7xl mx-auto"
           aria-label="Global"
         >
-          <div className="flex lg:flex-1">
+          <div className="flex lg:flex-1 items-center gap-3">
             <Link
               href="/"
               className="-m-1.5 p-1.5 flex items-center gap-2 group"
             >
-              <span className="sr-only">Road To Umrah</span>
+              <span className="sr-only">Road to Umrah</span>
               <Image
                 src={siteConfig.logoUrl}
-                alt="Road To Umrah"
+                alt="Road to Umrah"
                 width={150}
                 height={50}
                 className="w-auto h-12 sm:h-14 group-hover:scale-105 transition-transform duration-500"
               />
             </Link>
+            <div className="hidden sm:flex items-center">
+              <span className="inline-flex items-center gap-x-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800 border border-emerald-200 shadow-sm whitespace-nowrap">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                Book Now, Pay Later
+              </span>
+            </div>
+            <div className="flex sm:hidden items-center">
+              <span className="inline-flex items-center gap-x-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800 border border-emerald-200 shadow-sm whitespace-nowrap">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                </span>
+                Book Now, Pay Later
+              </span>
+            </div>
           </div>
           <div className="flex lg:hidden">
             <button
@@ -109,16 +127,27 @@ export function Navbar() {
           ></div>
           <div className="fixed inset-y-0 right-0 z-[60] w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-[#d4af37]/40 border-l border-[#d4af37]/50 shadow-2xl">
             <div className="flex items-center justify-between">
-              <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
-                <span className="sr-only">Road To Umrah</span>
-                <Image
-                  src={siteConfig.logoUrl}
-                  alt="Road To Umrah"
-                  width={120}
-                  height={50}
-                  className="w-auto h-12"
-                />
-              </Link>
+              <div className="flex items-center gap-2">
+                <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
+                  <span className="sr-only">Road to Umrah</span>
+                  <Image
+                    src={siteConfig.logoUrl}
+                    alt="Road to Umrah"
+                    width={120}
+                    height={50}
+                    className="w-auto h-12"
+                  />
+                </Link>
+                <div className="flex items-center">
+                  <span className="inline-flex items-center gap-x-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800 border border-emerald-200 shadow-sm whitespace-nowrap">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                    </span>
+                    Book Now, Pay Later
+                  </span>
+                </div>
+              </div>
               <button
                 type="button"
                 className="-m-2.5 rounded-xl p-2.5 text-[#064e3b] hover:bg-[#d4af37]/30"

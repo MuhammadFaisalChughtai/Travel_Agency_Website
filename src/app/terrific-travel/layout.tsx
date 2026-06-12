@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { TawkToWidget } from "@/components/layout/TawkToWidget";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { getSiteConfig } from "@/lib/siteConfig";
@@ -41,7 +40,6 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
-        <TawkToWidget />
         <FloatingActions />
         <CookieConsent />
       </div>
