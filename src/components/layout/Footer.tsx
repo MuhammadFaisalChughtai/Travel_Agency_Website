@@ -341,36 +341,54 @@ export function Footer() {
             </ul>
           </div>
         </div>
+        
+        {/* Payment Methods & Stamp - Positioned above copyright border */}
+        <div className="flex flex-col lg:flex-row items-center justify-between lg:justify-end gap-6 pb-12 pt-4">
+          <div className="flex flex-wrap items-center justify-center gap-2 lg:gap-3">
+             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" className="h-5 w-auto object-contain" />
+             </div>
+             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="Mastercard" className="h-5 w-auto object-contain" />
+             </div>
+             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="Amex" className="h-5 w-auto object-contain" />
+             </div>
+             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-5 w-auto object-contain" />
+             </div>
+             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" className="h-5 w-auto object-contain" />
+             </div>
+             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Klarna_Logo_black.svg" alt="Klarna" className="h-5 w-auto object-contain" />
+             </div>
+             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" className="h-5 w-auto object-contain" />
+             </div>
+             <div className="bg-white px-3 py-1.5 rounded shadow-sm h-9 flex items-center justify-center">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" className="h-5 w-auto object-contain" />
+             </div>
+          </div>
+          
+          <div className="flex flex-col border-[2.5px] border-[#eed6c4]/80 rounded-md overflow-hidden font-black uppercase shadow-lg group hover:-rotate-3 hover:scale-105 transition-all duration-300 shrink-0 w-[110px]">
+            <div className="bg-[#eed6c4] text-[#483434] py-1 text-[11px] text-center tracking-tight leading-none border-b border-[#483434]">
+              BOOK NOW,
+            </div>
+            <div className="bg-[#6b4f4f] text-[#fff3e4] py-1 text-[12px] text-center tracking-widest leading-none">
+              PAY LATER
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Aligned Copyright & Payment Methods Bottom Bar */}
-      <div className="bg-[#483434] text-[#fff3e4] py-6 lg:py-8 border-t border-[#6b4f4f]/30">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-6 text-xs font-semibold">
-          <p className="text-[#eed6c4]/80 text-center lg:text-left order-3 lg:order-1">
+      {/* Aligned Copyright Bottom Bar */}
+      <div className="bg-[#483434] text-[#fff3e4] py-6 border-t border-[#6b4f4f]/30">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-center text-xs font-semibold">
+          <p className="text-[#eed6c4]/80 text-center">
             Copyright &copy; {new Date().getFullYear()} Terrific Travel Ltd |
             All Rights Reserved By Terrific Travel Ltd
           </p>
-          
-          <div className="flex flex-col lg:flex-row items-center lg:items-end gap-6 order-1 lg:order-2">
-            <div className="flex flex-wrap items-center justify-center gap-2 lg:gap-3 bg-white/5 p-2 rounded-lg border border-white/10">
-               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/visa.svg" alt="Visa" className="h-6 lg:h-7 w-auto object-contain" />
-               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/mastercard.svg" alt="Mastercard" className="h-6 lg:h-7 w-auto object-contain" />
-               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/amex.svg" alt="Amex" className="h-6 lg:h-7 w-auto object-contain" />
-               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/paypal.svg" alt="PayPal" className="h-6 lg:h-7 w-auto object-contain" />
-               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/stripe.svg" alt="Stripe" className="h-6 lg:h-7 w-auto object-contain" />
-               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/klarna.svg" alt="Klarna" className="h-6 lg:h-7 w-auto object-contain" />
-               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/applepay.svg" alt="Apple Pay" className="h-6 lg:h-7 w-auto object-contain" />
-               <img src="https://cdn.jsdelivr.net/gh/lukas-h/payment-icons@1.2.0/svg/googlepay.svg" alt="Google Pay" className="h-6 lg:h-7 w-auto object-contain" />
-            </div>
-            <div className="flex flex-col border-[2.5px] border-[#eed6c4]/80 rounded-md overflow-hidden font-black uppercase shadow-lg group hover:-rotate-3 hover:scale-105 transition-all duration-300 shrink-0 w-[110px]">
-              <div className="bg-[#eed6c4] text-[#483434] py-1 text-[11px] text-center tracking-tight leading-none border-b border-[#483434]">
-                BOOK NOW,
-              </div>
-              <div className="bg-[#6b4f4f] text-[#fff3e4] py-1 text-[12px] text-center tracking-widest leading-none">
-                PAY LATER
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </footer>
