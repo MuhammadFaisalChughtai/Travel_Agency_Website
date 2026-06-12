@@ -47,22 +47,23 @@ export function Navbar() {
               />
             </Link>
             <div className="hidden sm:flex items-center">
-              <span className="inline-flex items-center gap-x-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800 border border-emerald-200 shadow-sm whitespace-nowrap">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                Book Now, Pay Later
-              </span>
+              <div className="relative flex items-center justify-center gap-1.5 px-3 py-1 bg-gradient-to-r from-[#fff3e4] to-[#eed6c4]/40 border border-[#eed6c4] rounded-full shadow-sm overflow-hidden group">
+                <div className="absolute inset-0 bg-[#6b4f4f] opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                <div className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6b4f4f] opacity-60"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#6b4f4f]"></span>
+                </div>
+                <span className="text-[#483434] font-bold text-[10px] tracking-widest uppercase">Book Now, Pay Later</span>
+              </div>
             </div>
             <div className="flex sm:hidden items-center">
-              <span className="inline-flex items-center gap-x-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800 border border-emerald-200 shadow-sm whitespace-nowrap">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
-                </span>
-                Book Now, Pay Later
-              </span>
+              <div className="relative flex items-center justify-center gap-1 px-2 py-0.5 bg-gradient-to-r from-[#fff3e4] to-[#eed6c4]/40 border border-[#eed6c4] rounded-full shadow-sm">
+                <div className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6b4f4f] opacity-60"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#6b4f4f]"></span>
+                </div>
+                <span className="text-[#483434] font-bold text-[9px] tracking-wider uppercase">Pay Later</span>
+              </div>
             </div>
           </div>
           <div className="flex lg:hidden">
@@ -123,13 +124,13 @@ export function Navbar() {
                   />
                 </Link>
                 <div className="flex items-center">
-                  <span className="inline-flex items-center gap-x-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800 border border-emerald-200 shadow-sm whitespace-nowrap">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
-                    </span>
-                    Book Now, Pay Later
-                  </span>
+                  <div className="relative flex items-center justify-center gap-1 px-2 py-0.5 bg-gradient-to-r from-[#fff3e4] to-[#eed6c4]/40 border border-[#eed6c4] rounded-full shadow-sm">
+                    <div className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6b4f4f] opacity-60"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#6b4f4f]"></span>
+                    </div>
+                    <span className="text-[#483434] font-bold text-[9px] tracking-wider uppercase">Pay Later</span>
+                  </div>
                 </div>
               </div>
               <button
