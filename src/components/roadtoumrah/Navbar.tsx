@@ -48,22 +48,23 @@ export function Navbar() {
               />
             </Link>
             <div className="hidden sm:flex items-center">
-              <div className="relative flex items-center justify-center gap-1.5 px-3 py-1 bg-gradient-to-r from-[#fefce8] to-[#d4af37]/20 border border-[#d4af37]/40 rounded-full shadow-sm overflow-hidden group">
-                <div className="absolute inset-0 bg-[#064e3b] opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
-                <div className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#064e3b] opacity-60"></span>
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#064e3b]"></span>
+              <div className="flex flex-col border-[2.5px] border-[#064e3b] rounded-md overflow-hidden font-black uppercase shadow-sm group hover:-rotate-3 hover:scale-105 transition-all duration-300 shrink-0 w-[95px]">
+                <div className="bg-[#d4af37] text-[#064e3b] py-1 text-[10px] text-center tracking-tight leading-none">
+                  BOOK NOW,
                 </div>
-                <span className="text-[#064e3b] font-bold text-[10px] tracking-widest uppercase">Book Now, Pay Later</span>
+                <div className="bg-[#064e3b] text-[#fefce8] py-1 text-[11px] text-center tracking-widest leading-none">
+                  PAY LATER
+                </div>
               </div>
             </div>
             <div className="flex sm:hidden items-center">
-              <div className="relative flex items-center justify-center gap-1 px-2 py-0.5 bg-gradient-to-r from-[#fefce8] to-[#d4af37]/20 border border-[#d4af37]/40 rounded-full shadow-sm">
-                <div className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#064e3b] opacity-60"></span>
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#064e3b]"></span>
+              <div className="flex flex-col border-2 border-[#064e3b] rounded-md overflow-hidden font-black uppercase shadow-sm shrink-0 w-[75px]">
+                <div className="bg-[#d4af37] text-[#064e3b] py-0.5 text-[8px] text-center tracking-tight leading-none">
+                  BOOK NOW,
                 </div>
-                <span className="text-[#064e3b] font-bold text-[9px] tracking-wider uppercase">Pay Later</span>
+                <div className="bg-[#064e3b] text-[#fefce8] py-0.5 text-[9px] text-center tracking-widest leading-none">
+                  PAY LATER
+                </div>
               </div>
             </div>
           </div>
@@ -140,12 +141,13 @@ export function Navbar() {
                   />
                 </Link>
                 <div className="flex items-center">
-                  <div className="relative flex items-center justify-center gap-1 px-2 py-0.5 bg-gradient-to-r from-[#fefce8] to-[#d4af37]/20 border border-[#d4af37]/40 rounded-full shadow-sm">
-                    <div className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#064e3b] opacity-60"></span>
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#064e3b]"></span>
+                  <div className="flex flex-col border-2 border-[#064e3b] rounded-md overflow-hidden font-black uppercase shadow-sm shrink-0 w-[75px]">
+                    <div className="bg-[#d4af37] text-[#064e3b] py-0.5 text-[8px] text-center tracking-tight leading-none">
+                      BOOK NOW,
                     </div>
-                    <span className="text-[#064e3b] font-bold text-[9px] tracking-wider uppercase">Pay Later</span>
+                    <div className="bg-[#064e3b] text-[#fefce8] py-0.5 text-[9px] text-center tracking-widest leading-none">
+                      PAY LATER
+                    </div>
                   </div>
                 </div>
               </div>
