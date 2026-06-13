@@ -78,6 +78,7 @@ export default async function Home() {
       price: formatPrice(pkg.price, siteConfig),
       detailsUrl: `/v/${pkg.slug || pkg.id}`,
       isSold: pkg.isSold,
+      travelDates: pkg.travelDates,
     };
   });
 
@@ -106,6 +107,7 @@ export default async function Home() {
       price: formatPrice(pkg.price, siteConfig),
       detailsUrl: `/v/${pkg.slug || pkg.id}`,
       isSold: pkg.isSold,
+      travelDates: pkg.travelDates,
     };
   });
 
@@ -165,6 +167,7 @@ export default async function Home() {
                     price={pkg.price}
                     detailsUrl={pkg.detailsUrl}
                     isSold={pkg.isSold}
+                    travelDates={pkg.travelDates}
                   />
                 ))}
               </div>
@@ -199,6 +202,7 @@ export default async function Home() {
                     price={pkg.price}
                     detailsUrl={pkg.detailsUrl}
                     isSold={pkg.isSold}
+                    travelDates={pkg.travelDates}
                   />
                 ))}
               </div>

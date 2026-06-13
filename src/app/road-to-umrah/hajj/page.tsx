@@ -55,6 +55,7 @@ export default async function HajjPage() {
       price: formatPrice(pkg.price, siteConfig),
       detailsUrl: `/v/${pkg.slug || pkg.id}`,
       isSold: pkg.isSold,
+      travelDates: pkg.travelDates,
     };
   });
 

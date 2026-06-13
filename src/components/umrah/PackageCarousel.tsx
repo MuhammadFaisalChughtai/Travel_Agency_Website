@@ -12,6 +12,7 @@ interface PackageItem {
   price: string;
   detailsUrl: string;
   isSold?: boolean;
+  travelDates?: string;
 }
 
 interface PackageCarouselProps {
