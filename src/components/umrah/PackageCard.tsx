@@ -10,9 +10,10 @@ interface PackageCardProps {
   price: string;
   detailsUrl: string;
   isSold?: boolean;
+  travelDates?: string;
 }
 
-export function PackageCard({ title, image, stars, price, detailsUrl, isSold = false }: PackageCardProps) {
+export function PackageCard({ title, image, stars, price, detailsUrl, isSold = false, travelDates }: PackageCardProps) {
   return (
     <div className="min-w-[280px] md:min-w-[300px] bg-white/95 backdrop-blur-md rounded-3xl shadow-[0_10px_30px_rgba(72,52,52,0.04)] hover:shadow-[0_25px_50px_rgba(72,52,52,0.12)] hover:-translate-y-1.5 transition-all duration-500 border border-[#eed6c4]/40 hover:border-[#6b4f4f]/30 flex flex-col group relative overflow-hidden">
       {/* Dynamic Luxury Tag */}
@@ -52,6 +53,14 @@ export function PackageCard({ title, image, stars, price, detailsUrl, isSold = f
 
         <h4 className="font-heading font-black text-[#483434] text-base md:text-lg mb-2 text-center group-hover:text-[#6b4f4f] transition-colors duration-300 line-clamp-1">{title}</h4>
 
+        {/* Travel Dates */}
+        <div className="mb-3">
+          <div className="bg-[#eed6c4]/15 border border-[#eed6c4]/40 rounded-xl p-2 text-center">
+            <span className="text-[9px] text-[#6b4f4f] font-bold block mb-0.5 uppercase tracking-wider">Travel Dates</span>
+            <span className="text-xs text-[#483434] font-black">{travelDates || "Flexible departures throughout 2026/27"}</span>
+          </div>
+        </div>
+
         {/* Inclusion Pill Badges */}
         <div className="mb-4 flex items-center justify-center gap-1.5 flex-wrap">
           {[
@@ -72,7 +81,13 @@ export function PackageCard({ title, image, stars, price, detailsUrl, isSold = f
 
         {/* Modern Price Display */}
         <div className="flex items-center justify-between mt-auto pt-3 mb-4 border-t border-[#eed6c4]/40">
-          <span className="text-[9px] text-[#6b4f4f]/70 font-black uppercase tracking-widest">{isSold ? "Fully Booked" : "All-Inclusive Deal"}</span>
+          <div className="flex flex-col gap-1">
+            <span className="text-[9px] text-[#6b4f4f]/70 font-black uppercase tracking-widest">{isSold ? "Fully Booked" : "All-Inclusive Deal"}</span>
+            <div className="flex flex-col border border-[#6b4f4f]/20 rounded overflow-hidden font-black uppercase shadow-sm shrink-0 w-max">
+              <div className="bg-[#eed6c4]/80 text-[#483434] px-1.5 py-[2px] text-[8px] text-center tracking-tight leading-none">Book Now,</div>
+              <div className="bg-[#483434]/90 text-[#eed6c4] px-1.5 py-[2px] text-[8px] text-center tracking-wider leading-none">Pay Later</div>
+            </div>
+          </div>
           <div className="text-right">
             <span className="text-[9px] text-slate-400 block leading-none font-bold">From</span>
             <span className="text-xl font-black text-[#483434] tracking-tight">{price}</span>

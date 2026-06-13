@@ -246,6 +246,12 @@ export default async function TransportPage() {
                       ))}
                     </div>
 
+                    {/* Travel Dates */}
+                    <div className="bg-[#eed6c4]/15 border border-[#eed6c4]/40 rounded-xl p-2 text-center">
+                      <span className="text-[9px] text-[#6b4f4f] font-bold block mb-0.5 uppercase tracking-wider">Travel Dates</span>
+                      <span className="text-xs text-[#483434] font-black">Flexible departures throughout 2026/27</span>
+                    </div>
+
                     {/* Features */}
                     <ul className="space-y-2 flex-grow">
                       {parsedFeatures.slice(0, 4).map((feature: string) => (
@@ -261,16 +267,22 @@ export default async function TransportPage() {
 
                     {/* Price + CTA */}
                     <div className="border-t border-[#eed6c4]/30 pt-4 flex items-center justify-between">
-                      <div>
-                        <p className="text-[9px] text-slate-400 uppercase tracking-widest font-bold">
-                          One-Way from
-                        </p>
-                        <p className="text-2xl font-heading font-black text-[#483434]">
-                          {vehicle.price}
-                        </p>
-                        <p className="text-[9px] text-slate-400 font-light">
-                          inclusive of VAT
-                        </p>
+                      <div className="flex flex-col gap-1">
+                        <div>
+                          <p className="text-[9px] text-slate-400 uppercase tracking-widest font-bold">
+                            One-Way from
+                          </p>
+                          <p className="text-2xl font-heading font-black text-[#483434]">
+                            {vehicle.price}
+                          </p>
+                          <p className="text-[9px] text-slate-400 font-light leading-none">
+                            inclusive of VAT
+                          </p>
+                        </div>
+                        <div className="flex flex-col border border-[#6b4f4f]/20 rounded overflow-hidden font-black uppercase shadow-sm shrink-0 w-max mt-1">
+                          <div className="bg-[#eed6c4]/80 text-[#483434] px-1.5 py-[2px] text-[8px] text-center tracking-tight leading-none">Book Now,</div>
+                          <div className="bg-[#483434]/90 text-[#eed6c4] px-1.5 py-[2px] text-[8px] text-center tracking-wider leading-none">Pay Later</div>
+                        </div>
                       </div>
                       <span className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#6b4f4f] hover:bg-[#483434] text-white text-[10px] font-extrabold uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg group/btn">
                         Details
