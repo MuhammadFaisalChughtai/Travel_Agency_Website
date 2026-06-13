@@ -354,7 +354,7 @@ export function Footer() {
 
           <div className="flex flex-wrap xl:flex-nowrap items-center justify-center gap-2 md:gap-3 flex-1">
              <div className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center justify-center border border-[#6b4f4f]">
-               <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" className="h-3.5 w-auto object-contain" />
+               <img src="https://cdn.simpleicons.org/visa/1434CB" alt="Visa" className="h-3.5 w-auto object-contain" />
              </div>
              <div className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center justify-center border border-[#6b4f4f]">
                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="Mastercard" className="h-3.5 w-auto object-contain" />
@@ -363,10 +363,13 @@ export function Footer() {
                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="Amex" className="h-3.5 w-auto object-contain" />
              </div>
              <div className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center justify-center border border-[#6b4f4f]">
+               <img src="https://cdn.simpleicons.org/paypal/00457C" alt="PayPal" className="h-3.5 w-auto object-contain" />
+             </div>
+             <div className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center justify-center border border-[#6b4f4f]">
                <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" className="h-3.5 w-auto object-contain" />
              </div>
              <div className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center justify-center border border-[#6b4f4f]">
-               <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Klarna_Logo_black.svg" alt="Klarna" className="h-3.5 w-auto object-contain" />
+               <img src="https://cdn.simpleicons.org/klarna/000000" alt="Klarna" className="h-3.5 w-auto object-contain" />
              </div>
              <div className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center justify-center border border-[#6b4f4f]">
                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" className="h-3.5 w-auto object-contain" />

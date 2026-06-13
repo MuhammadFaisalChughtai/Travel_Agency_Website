@@ -291,7 +291,7 @@ export default async function FlightsPage() {
       </section>
 
       {/* ─── Flight Listings (Deals) ─── */}
-      <section className="py-12 bg-slate-50/50">
+      <section id="top_deals" className="py-12 bg-slate-50/50">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-center space-y-3 mb-10">
             <h2 className="text-2xl md:text-3xl font-heading font-black text-[#382626] tracking-tight">

@@ -17,7 +17,7 @@ export function TrendingFlightsSection({ routes }: { routes: any[] }) {
   if (routes.length === 0) return null;
 
   return (
-    <section className="py-20 bg-slate-50/50">
+    <section id="trending" className="py-20 bg-slate-50 border-y border-slate-200">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="text-center space-y-4 mb-12 flex flex-col items-center">
