@@ -5,6 +5,7 @@ import { FloatingActions } from "@/components/layout/FloatingActions";
 import { CookieConsent } from "@/components/roadtoumrah/layout/CookieConsent";
 import { getSiteConfig } from "@/lib/siteConfig";
 import { SiteProvider } from "@/components/SiteProvider";
+import { TawkToWidget } from "@/components/layout/TawkToWidget";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://roadtoumrah.co.uk"),
@@ -55,6 +56,7 @@ export default function RootLayout({
         <Footer />
         <FloatingActions />
         <CookieConsent />
+        <TawkToWidget />
       </div>
     </SiteProvider>
   );
