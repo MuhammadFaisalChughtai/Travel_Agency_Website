@@ -91,15 +91,13 @@ export function Navbar() {
             })}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <button
-              asChild
-              className="rounded-lg gap-2 px-6 py-5 bg-[#d4af37] hover:bg-[#043427] text-[#064e3b] hover:text-[#F9FAFB] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 font-extrabold text-xs tracking-wider uppercase"
+            <Link
+              className="inline-flex items-center justify-center rounded-lg gap-2 px-6 py-3 bg-[#d4af37] hover:bg-[#043427] text-[#064e3b] hover:text-[#F9FAFB] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 font-extrabold text-xs tracking-wider uppercase"
+              href="/contact"
             >
-              <Link className="flex gap-2 items-center" href="/contact">
-                <PhoneCall className="w-3.5 h-3.5" />
-                <span>Contact Us</span>
-              </Link>
-            </button>
+              <PhoneCall className="w-3.5 h-3.5" />
+              <span>Contact Us</span>
+            </Link>
           </div>
         </nav>
       </header>
@@ -183,19 +181,14 @@ export function Navbar() {
                       className="w-auto h-8"
                     />
                   </div>
-                  <button
-                    asChild
-                    className="w-full rounded-full gap-2 bg-[#d4af37] hover:bg-[#043427] text-[#064e3b] hover:text-[#F9FAFB] py-5 border border-[#d4af37]/45 font-extrabold uppercase text-xs tracking-wider shadow-md transition-colors duration-300"
+                  <Link
+                    className="w-full inline-flex items-center justify-center rounded-full gap-2 bg-[#d4af37] hover:bg-[#043427] text-[#064e3b] hover:text-[#F9FAFB] py-3.5 border border-[#d4af37]/45 font-extrabold uppercase text-xs tracking-wider shadow-md transition-colors duration-300 px-5"
+                    href="/contact"
+                    onClick={() => setMobileMenuOpen(false)}
                   >
-                    <Link
-                      className="px-5 flex gap-3"
-                      href="/contact"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <PhoneCall className="w-4 h-4" />
-                      <span>Contact Us</span>
-                    </Link>
-                  </button>
+                    <PhoneCall className="w-4 h-4" />
+                    <span>Contact Us</span>
+                  </Link>
                 </div>
               </div>
             </div>

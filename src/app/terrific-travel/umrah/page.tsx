@@ -3,6 +3,15 @@ import { Sparkles } from "lucide-react";
 import { UmrahBookingForm } from "@/components/umrah/UmrahBookingForm";
 import { PackageCarousel } from "@/components/umrah/PackageCarousel";
 import { UmrahInfoSection } from "@/components/umrah/UmrahInfoSection";
+import dynamic from "next/dynamic";
+
+const CruisePackagesGrid = dynamic(
+  () =>
+    import("@/components/umrah/CruisePackagesGrid").then(
+      (mod) => mod.CruisePackagesGrid,
+    ),
+  { ssr: false },
+);
 import { UmrahBlogSection } from "@/components/umrah/UmrahBlogSection";
 import { FaqAccordion } from "@/components/umrah/FaqAccordion";
 import { prisma } from "@/lib/prisma";
@@ -17,12 +26,14 @@ export const metadata: Metadata = {
     "Affordable Umrah packages from the UK for families, groups, and individuals. Our all-inclusive deals cover flights, hotels, visas, and transport.",
   openGraph: {
     title: "Umrah Packages | Terrific Travel Ltd",
-    description: "Affordable Umrah packages from the UK for families, groups, and individuals. Our all-inclusive deals cover flights, hotels, visas, and transport.",
+    description:
+      "Affordable Umrah packages from the UK for families, groups, and individuals. Our all-inclusive deals cover flights, hotels, visas, and transport.",
     url: "https://terrifictravel.co.uk/umrah",
   },
   twitter: {
     title: "Umrah Packages | Terrific Travel Ltd",
-    description: "Affordable Umrah packages from the UK for families, groups, and individuals. Our all-inclusive deals cover flights, hotels, visas, and transport.",
+    description:
+      "Affordable Umrah packages from the UK for families, groups, and individuals. Our all-inclusive deals cover flights, hotels, visas, and transport.",
   },
 };
 
@@ -64,6 +75,32 @@ export default async function UmrahPage() {
   const threeStarPackages = formatPackages(3);
   const fourStarPackages = formatPackages(4);
   const fiveStarPackages = formatPackages(5);
+
+  const rawCruisePackages = await prisma.package.findMany({
+    where: { type: "Cruise_Umrah" },
+    orderBy: { createdAt: "desc" },
+  });
+
+  const cruisePackages = rawCruisePackages.map((pkg) => {
+    let image = "";
+    try {
+      const images = JSON.parse(pkg.images);
+      image = images[0] || "";
+    } catch (e) {
+      image = pkg.images;
+    }
+
+    return {
+      id: pkg.id,
+      title: pkg.title,
+      image,
+      stars: pkg.stars || 5,
+      price: formatPrice(pkg.price, siteConfig),
+      detailsUrl: `/v/${pkg.slug || pkg.id}`,
+      isSold: pkg.isSold,
+      travelDates: pkg.travelDates,
+    };
+  });
 
   let blogs = await prisma.blog.findMany({
     where: { category: { contains: "Umrah" } },
@@ -129,6 +166,22 @@ export default async function UmrahPage() {
             packages={fiveStarPackages}
           />
         </div>
+
+        {/* Cruise Umrah Packages Grid */}
+        {cruisePackages.length > 0 && (
+          <div className="mt-16 py-12 bg-background border-t border-[#eed6c4]/40">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-10 text-center">
+              <span className="inline-block px-3 py-1 rounded-full bg-[#fff3e4] text-[#6b4f4f] text-[10px] font-bold uppercase tracking-[0.2em] mb-3 border border-[#eed6c4]/40">
+                Luxury Cruises
+              </span>
+              <h3 className="text-[#483434] text-3xl font-heading font-black tracking-tight">
+                Cruise Umrah Packages
+              </h3>
+              <div className="h-[2px] w-12 bg-[#6b4f4f]/30 mx-auto mt-3 rounded-full"></div>
+            </div>
+            <CruisePackagesGrid packages={cruisePackages} />
+          </div>
+        )}
       </div>
 
       {/* Information Section */}

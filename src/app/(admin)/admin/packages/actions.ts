@@ -43,7 +43,7 @@ export async function createPackage(formData: FormData) {
     data: {
       title,
       type,
-      destination: (type === "UMRAH" || type === "HAJJ") ? "Makkah & Madinah" : "Various",
+      destination: (type === "UMRAH" || type === "Cruise_Umrah" || type === "HAJJ") ? "Makkah & Madinah" : "Various",
       duration,
       price,
       description: description || "",

@@ -246,7 +246,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
   let blogCategory = "Travel Guide";
   if (type === "package") {
     blogCategory =
-      item.type === "UMRAH" ? "Umrah" : item.type === "HAJJ" ? "Hajj" : "Holiday";
+      (item.type === "UMRAH" || item.type === "Cruise_Umrah") ? "Umrah" : item.type === "HAJJ" ? "Hajj" : "Holiday";
   } else if (type === "visa") {
     blogCategory = "Visa";
   } else if (type === "flight") {
@@ -405,10 +405,30 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
           </Link>
           <ChevronRight className="w-3 h-3 text-slate-400" />
           <Link
-            href={type === "blog" ? "/umrah#blog" : `/${type}s`}
+            href={
+              type === "blog"
+                ? "/umrah#blog"
+                : type === "package"
+                  ? (item.type === "UMRAH" || item.type === "Cruise_Umrah")
+                    ? "/umrah"
+                    : item.type === "HAJJ"
+                      ? "/hajj"
+                      : "/holiday"
+                  : `/${type}s`
+            }
             className="hover:text-[#483434]"
           >
-            {type === "blog" ? "Journals" : `${type}s`}
+            {
+              type === "blog"
+                ? "Journals"
+                : type === "package"
+                  ? (item.type === "UMRAH" || item.type === "Cruise_Umrah")
+                    ? "Umrah"
+                    : item.type === "HAJJ"
+                      ? "Hajj"
+                      : "Holiday"
+                  : `${type.charAt(0).toUpperCase() + type.slice(1)}s`
+            }
           </Link>
           <ChevronRight className="w-3 h-3 text-slate-400" />
           <span className="text-slate-400 truncate max-w-[200px] md:max-w-xs">

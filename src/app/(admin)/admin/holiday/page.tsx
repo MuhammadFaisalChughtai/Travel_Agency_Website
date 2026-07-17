@@ -53,6 +53,7 @@ export default async function AdminPackagesPage() {
                         <span className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ${
                           pkg.type === 'HOLIDAY' ? 'bg-blue-50 text-blue-700 ring-blue-700/10' :
                           pkg.type === 'UMRAH' ? 'bg-emerald-50 text-emerald-700 ring-emerald-600/20' :
+                          pkg.type === 'Cruise_Umrah' ? 'bg-cyan-50 text-cyan-700 ring-cyan-600/20' :
                           'bg-amber-50 text-amber-700 ring-amber-600/20'
                         }`}>
                           {pkg.type}

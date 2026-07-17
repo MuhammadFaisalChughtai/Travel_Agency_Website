@@ -79,6 +79,7 @@ export default function NewPackagePage() {
                 <select id="type" name="type" className="block w-full rounded-md border-0 py-2 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 px-3">
                   <option value="HOLIDAY">Holiday</option>
                   <option value="UMRAH">Umrah</option>
+                  <option value="Cruise_Umrah">Cruise Umrah</option>
                   <option value="HAJJ">Hajj</option>
                 </select>
               </div>

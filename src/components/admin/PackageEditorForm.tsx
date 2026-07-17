@@ -142,6 +142,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
             className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
           >
             <option value="UMRAH">Umrah</option>
+            <option value="Cruise_Umrah">Cruise Umrah</option>
             <option value="HAJJ">Hajj</option>
             <option value="HOLIDAY">Holiday</option>
           </select>

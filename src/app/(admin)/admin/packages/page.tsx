@@ -27,12 +27,14 @@ export default async function AdminPackagesPage({
 
   const typeLabel: Record<string, string> = {
     UMRAH: "Umrah",
+    Cruise_Umrah: "Cruise Umrah",
     HAJJ: "Hajj",
     HOLIDAY: "Holiday",
   };
 
   const typeBadgeColor: Record<string, string> = {
     UMRAH: "bg-emerald-100 text-emerald-700",
+    Cruise_Umrah: "bg-cyan-100 text-cyan-700",
     HAJJ: "bg-purple-100 text-purple-700",
     HOLIDAY: "bg-blue-100 text-blue-700",
   };

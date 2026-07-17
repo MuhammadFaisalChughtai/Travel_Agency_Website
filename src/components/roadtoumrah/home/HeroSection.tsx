@@ -15,6 +15,9 @@ import {
 import { UmrahBookingForm } from "../umrah/UmrahBookingForm";
 import { VisaBookingForm } from "../visa/VisaBookingForm";
 import { TransportBookingForm } from "../transport/TransportBookingForm";
+import { FlightBookingForm } from "../flights/FlightBookingForm";
+import { HolidaysBookingForm } from "../holiday/HolidaysBookingForm";
+import { HajjBookingForm } from "../hajj/HajjBookingForm";
 import { useSiteConfig } from "@/components/SiteProvider";
 
 const ALL_CAROUSEL_SLIDES = [
@@ -241,17 +244,61 @@ export function HeroSection() {
                 Visa Inquiry
               </button>
             )}
+            {siteConfig.allowedTabs.includes("hajj") && (
+              <button
+                onClick={() => setActiveTab("hajj")}
+                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-md text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
+                  activeTab === "hajj"
+                    ? "bg-white text-slate-900 shadow-md"
+                    : "text-white hover:bg-white/20"
+                }`}
+              >
+                Hajj Interest
+              </button>
+            )}
+            {siteConfig.allowedTabs.includes("transport") && (
+              <button
+                onClick={() => setActiveTab("transport")}
+                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-md text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
+                  activeTab === "transport"
+                    ? "bg-white text-slate-900 shadow-md"
+                    : "text-white hover:bg-white/20"
+                }`}
+              >
+                VIP Transfers
+              </button>
+            )}
           </div>
 
           <div className="hero__transparent w-full transition-all duration-500 overflow-hidden">
+            {activeTab === "flight" && (
+              <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 rounded-3xl pb-8">
+                <FlightBookingForm isHome={true} />
+              </div>
+            )}
             {activeTab === "umrah" && (
               <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 rounded-3xl pb-8">
                 <UmrahBookingForm isHome={true} />
               </div>
             )}
+            {activeTab === "holidays" && (
+              <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 rounded-3xl pb-8">
+                <HolidaysBookingForm isHome={true} />
+              </div>
+            )}
             {activeTab === "visa" && (
               <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 rounded-3xl pb-8">
                 <VisaBookingForm isHome={true} />
+              </div>
+            )}
+            {activeTab === "hajj" && (
+              <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 rounded-3xl pb-8">
+                <HajjBookingForm isHome={true} />
+              </div>
+            )}
+            {activeTab === "transport" && (
+              <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 rounded-3xl pb-8">
+                <TransportBookingForm isHome={true} />
               </div>
             )}
           </div>

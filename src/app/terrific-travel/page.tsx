@@ -9,6 +9,14 @@ import { AirlineMarquee } from "@/components/home/AirlineMarquee";
 import { headers } from "next/headers";
 import { getSiteConfig, formatPrice } from "@/lib/siteConfig";
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+const UmrahBanner = dynamic(
+  () => import("@/components/home/UmrahBanner").then((mod) => mod.UmrahBanner),
+  { ssr: false }
+);
 
 export const metadata: Metadata = {
   title: "Terrific Travel Ltd | Holidays, Umrah & Flights from the UK",
@@ -55,7 +63,7 @@ export default async function Home() {
 
   const featuredUmrahPackages = siteConfig.allowedTabs.includes("umrah")
     ? await prisma.package.findMany({
-        where: { type: "UMRAH" },
+        where: { type: { in: ["UMRAH", "Cruise_Umrah"] } },
         orderBy: { createdAt: "desc" },
         take: 6,
       })
@@ -180,6 +188,15 @@ export default async function Home() {
                   />
                 ))}
               </div>
+              <div className="flex justify-center mt-12">
+                <Link
+                  href="/holiday"
+                  className="px-8 py-3.5 bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4] text-xs font-extrabold uppercase tracking-widest transition-all duration-300 rounded-2xl shadow-md hover:shadow-lg border border-[#eed6c4]/30 flex items-center gap-2"
+                >
+                  <span>View All Holiday Packages</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
           </section>
         )}
@@ -187,7 +204,9 @@ export default async function Home() {
       {/* Featured Packages Section */}
       {siteConfig.allowedTabs.includes("umrah") &&
         formattedUmrahPackages.length > 0 && (
-          <section className="py-24 bg-white">
+          <>
+            <UmrahBanner />
+            <section className="py-24 bg-white">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
               <div className="text-center space-y-4 mb-16 flex flex-col items-center">
                 <span className="inline-block px-4 py-1.5 rounded-full bg-[#eed6c4]/20 border border-[#eed6c4]/40 text-[#6b4f4f] text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.2em]">
@@ -214,8 +233,18 @@ export default async function Home() {
                   />
                 ))}
               </div>
+              <div className="flex justify-center mt-12">
+                <Link
+                  href="/umrah"
+                  className="px-8 py-3.5 bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4] text-xs font-extrabold uppercase tracking-widest transition-all duration-300 rounded-2xl shadow-md hover:shadow-lg border border-[#eed6c4]/30 flex items-center gap-2"
+                >
+                  <span>View All Umrah Packages</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
           </section>
+          </>
         )}
 
       {/* Blog Section grouped by Categories */}
