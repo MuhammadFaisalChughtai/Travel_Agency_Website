@@ -16,10 +16,10 @@ export function UmrahBanner() {
             {/* Left Image Section */}
             <div className="relative col-span-1 lg:col-span-4 h-64 lg:h-auto overflow-hidden bg-slate-100">
               <Image
-                src="/uploads/asep-s-pd-WbNSJqtkxhg-unsplash.jpg"
+                src="https://images.unsplash.com/photo-1663572092918-e31425e93121?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Family performing Umrah"
                 fill
-                // unoptimized
+                unoptimized
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#064e3b]/20 lg:to-[#064e3b] lg:from-transparent" />
