@@ -8,7 +8,7 @@ export function UmrahBanner() {
   return (
     <section className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <Link 
+        <Link
           href="/umrah"
           className="group block relative overflow-hidden rounded-3xl bg-[#064e3b] text-white shadow-[0_20px_40px_rgba(4,52,39,0.12)] border border-[#d4af37]/30 hover:border-[#043427]/50 transition-all duration-500 hover:shadow-[0_30px_60px_rgba(4,52,39,0.2)]"
         >
@@ -16,10 +16,10 @@ export function UmrahBanner() {
             {/* Left Image Section */}
             <div className="relative col-span-1 lg:col-span-4 h-64 lg:h-auto overflow-hidden bg-slate-100">
               <Image
-                src="/uploads/family.jpg"
+                src="/uploads/asep-s-pd-WbNSJqtkxhg-unsplash.jpg"
                 alt="Family performing Umrah"
                 fill
-                unoptimized
+                // unoptimized
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#064e3b]/20 lg:to-[#064e3b] lg:from-transparent" />
@@ -35,7 +35,8 @@ export function UmrahBanner() {
                   Book Now, Pay Later
                 </h3>
                 <p className="text-xs text-[#d4af37]/80 font-medium">
-                  Plan your next sacred family journey today with absolute ease and flexibility.
+                  Plan your next sacred family journey today with absolute ease
+                  and flexibility.
                 </p>
               </div>
 
@@ -45,7 +46,10 @@ export function UmrahBanner() {
                   "Pay conveniently—weekly, fortnightly, or monthly",
                   "No hidden fees or extra charges",
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-2.5 text-xs text-[#F9FAFB]/90 font-bold">
+                  <li
+                    key={item}
+                    className="flex items-center gap-2.5 text-xs text-[#F9FAFB]/90 font-bold"
+                  >
                     <CheckCircle2 className="w-4 h-4 text-[#d4af37] shrink-0" />
                     <span>{item}</span>
                   </li>
@@ -57,9 +61,14 @@ export function UmrahBanner() {
             <div className="col-span-1 lg:col-span-3 p-8 lg:p-12 bg-[#043427] flex flex-col justify-center items-center text-center border-t lg:border-t-0 lg:border-l border-[#d4af37]/15 relative">
               <div className="space-y-4">
                 <div className="bg-[#F9FAFB] text-[#064e3b] p-5 rounded-2xl border border-[#d4af37] shadow-sm transform group-hover:scale-105 transition-transform duration-500">
-                  <span className="text-[10px] uppercase font-black tracking-widest text-[#064e3b] block mb-1">Exclusive Offer</span>
+                  <span className="text-[10px] uppercase font-black tracking-widest text-[#064e3b] block mb-1">
+                    Exclusive Offer
+                  </span>
                   <p className="text-sm font-black leading-snug">
-                    Lock in your package with a <span className="text-[#064e3b] underline decoration-2">SMALL DEPOSIT</span>
+                    Lock in your package with a{" "}
+                    <span className="text-[#064e3b] underline decoration-2">
+                      SMALL DEPOSIT
+                    </span>
                   </p>
                 </div>
 
