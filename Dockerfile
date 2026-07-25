@@ -46,7 +46,7 @@ COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 
 USER root
 RUN npm install -g prisma@5.14.0
-RUN npm install sharp@0.33.4
+RUN npm install sharp@0.33.4 --legacy-peer-deps
 USER nextjs
 
 EXPOSE 5173
