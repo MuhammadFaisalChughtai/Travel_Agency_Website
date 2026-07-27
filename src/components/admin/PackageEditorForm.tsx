@@ -22,7 +22,47 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
   const [isSold, setIsSold] = useState(initialData?.isSold || false);
   const [metaTitle, setMetaTitle] = useState(initialData?.metaTitle || "");
   const [metaDescription, setMetaDescription] = useState(initialData?.metaDescription || "");
+  const [metaKeywords, setMetaKeywords] = useState(initialData?.metaKeywords || "");
   const [slug, setSlug] = useState(initialData?.slug || "");
+  const [aiPrompt, setAiPrompt] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const handleAiFill = async () => {
+    if (!aiPrompt) {
+      alert("Please enter a prompt first.");
+      return;
+    }
+    setIsGenerating(true);
+    try {
+      const currentData = {
+        title, type, stars, price, duration, travelDates, metaTitle, metaDescription, metaKeywords
+      };
+      const res = await fetch("/api/admin/generate-content", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "package", prompt: aiPrompt, currentData })
+      });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+
+      const fields = data.result;
+      if (fields.title) setTitle(fields.title);
+      if (fields.price) setPrice(fields.price);
+      if (fields.duration) setDuration(fields.duration);
+      if (fields.travelDates) setTravelDates(fields.travelDates);
+      if (fields.description) setContent(fields.description);
+      if (fields.metaTitle) setMetaTitle(fields.metaTitle);
+      if (fields.metaDescription) setMetaDescription(fields.metaDescription);
+      if (fields.metaKeywords) setMetaKeywords(fields.metaKeywords);
+      
+      alert("Form fields generated successfully!");
+    } catch (err: any) {
+      console.error(err);
+      alert(err.message || "Failed to generate package content.");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   const quillRef = useRef<any>(null);
 
@@ -96,6 +136,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
       formData.append("isSold", isSold.toString());
       formData.append("metaTitle", metaTitle);
       formData.append("metaDescription", metaDescription);
+      formData.append("metaKeywords", metaKeywords);
       formData.append("slug", slug);
 
       if (initialData?.id) {
@@ -107,7 +148,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
         await createPackage(formData);
         setTitle(""); setType("UMRAH"); setStars("3"); setPrice("");
         setDuration(""); setContent(""); setImageFile(null); setImagePreview("");
-        setIsSold(false); setMetaTitle(""); setMetaDescription(""); setSlug("");
+        setIsSold(false); setMetaTitle(""); setMetaDescription(""); setMetaKeywords(""); setSlug("");
         alert("Package added successfully!");
       }
     } catch (err) {
@@ -120,6 +161,39 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
+      {/* AI Form Assistant */}
+      <div className="p-5 bg-gradient-to-r from-slate-50 to-indigo-50/30 border border-indigo-100 rounded-2xl shadow-sm space-y-3">
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-bold text-indigo-950 flex items-center gap-1.5">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 text-xs">✨</span>
+            AI Form Assistant
+          </h3>
+          <span className="text-[10px] uppercase font-black tracking-widest text-indigo-500 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">
+            GPT-4o-mini
+          </span>
+        </div>
+        <p className="text-xs text-slate-500">
+          Describe your travel package (e.g. "10 Nights 5-star Luxury family Umrah package in December") and the AI will auto-fill the details, rich text description, and SEO metadata.
+        </p>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            value={aiPrompt}
+            onChange={(e) => setAiPrompt(e.target.value)}
+            placeholder="Describe the package..."
+            className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none"
+          />
+          <button
+            type="button"
+            disabled={isGenerating}
+            onClick={handleAiFill}
+            className="rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 transition-all disabled:opacity-60 shrink-0"
+          >
+            {isGenerating ? "Generating..." : "Generate All Fields"}
+          </button>
+        </div>
+      </div>
+
       {/* Row 1: Title + Type */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
@@ -130,7 +204,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
             onChange={e => setTitle(e.target.value)}
             type="text"
             placeholder="e.g. 7 Nights 5 Star Umrah"
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
           />
         </div>
         <div>
@@ -139,7 +213,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
             required
             value={type}
             onChange={e => setType(e.target.value)}
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
           >
             <option value="UMRAH">Umrah</option>
             <option value="Cruise_Umrah">Cruise Umrah</option>
@@ -151,8 +225,8 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
 
       <div>
         <label className="block text-sm font-semibold text-slate-700 mb-1">URL Slug</label>
-        <input value={slug} onChange={e => setSlug(e.target.value)} type="text" className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0" placeholder="e.g. 7-nights-5-star-umrah (leave blank to auto-generate)" />
-        <p className="text-xs text-[#f5f0eb]0 mt-1">Leave blank to auto-generate from Package Title.</p>
+        <input value={slug} onChange={e => setSlug(e.target.value)} type="text" className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400" placeholder="e.g. 7-nights-5-star-umrah (leave blank to auto-generate)" />
+        <p className="text-xs text-slate-400 mt-1">Leave blank to auto-generate from Package Title.</p>
       </div>
 
       {/* Row 2: Stars + Price + Duration */}
@@ -163,7 +237,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
             required
             value={stars}
             onChange={e => setStars(e.target.value)}
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
           >
             <option value="3">⭐⭐⭐ 3 Star</option>
             <option value="4">⭐⭐⭐⭐ 4 Star</option>
@@ -180,7 +254,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
             min="0"
             step="0.01"
             placeholder="e.g. 590"
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
           />
         </div>
         <div>
@@ -191,7 +265,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
             onChange={e => setDuration(e.target.value)}
             type="text"
             placeholder="e.g. 7 Nights, 8 Days"
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
           />
         </div>
       </div>
@@ -203,31 +277,45 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
           value={travelDates}
           onChange={e => setTravelDates(e.target.value)}
           type="text"
-          className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
+          className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
         />
       </div>
 
       {/* SEO Fields */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-[#f5f0eb] border border-slate-200 rounded-lg">
-        <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Title</label>
-          <input
-            value={metaTitle}
-            onChange={e => setMetaTitle(e.target.value)}
-            type="text"
-            placeholder="e.g. Best 5 Star Umrah Package | Terrific Travel"
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
-          />
+      <div className="p-5 bg-[#f5f0eb] border border-slate-200 rounded-xl space-y-4">
+        <h4 className="text-sm font-bold text-slate-800 border-b border-slate-300/60 pb-2">SEO & Metadata</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Title</label>
+            <input
+              value={metaTitle}
+              onChange={e => setMetaTitle(e.target.value)}
+              type="text"
+              placeholder="e.g. Best 5 Star Umrah Package | Terrific Travel"
+              className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Description</label>
+            <textarea
+              value={metaDescription}
+              onChange={e => setMetaDescription(e.target.value)}
+              rows={2}
+              placeholder="A short description for search engines..."
+              className="block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
+            />
+          </div>
         </div>
         <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Description</label>
-          <textarea
-            value={metaDescription}
-            onChange={e => setMetaDescription(e.target.value)}
-            rows={2}
-            placeholder="A short description for search engines..."
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
+          <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Keywords</label>
+          <input
+            value={metaKeywords}
+            onChange={e => setMetaKeywords(e.target.value)}
+            type="text"
+            placeholder="e.g. umrah, family packages, luxury travel, 5 star hotel"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
           />
+          <p className="text-[10px] text-slate-500 mt-1">Enter keywords separated by commas.</p>
         </div>
       </div>
 

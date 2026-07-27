@@ -30,6 +30,7 @@ export async function createBlog(formData: FormData) {
   const image = formData.get("image") as string;
   const metaTitle = formData.get("metaTitle") as string;
   const metaDescription = formData.get("metaDescription") as string;
+  const metaKeywords = formData.get("metaKeywords") as string;
   const readTime = formData.get("readTime") as string || "5 min read";
   const date = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 
@@ -44,7 +45,8 @@ export async function createBlog(formData: FormData) {
       readTime,
       date,
       metaTitle,
-      metaDescription
+      metaDescription,
+      metaKeywords
     }
   });
 
@@ -62,6 +64,7 @@ export async function updateBlog(id: string, formData: FormData) {
   const image = formData.get("image") as string;
   const metaTitle = formData.get("metaTitle") as string;
   const metaDescription = formData.get("metaDescription") as string;
+  const metaKeywords = formData.get("metaKeywords") as string;
 
   const updateData: any = {
     title,
@@ -70,7 +73,8 @@ export async function updateBlog(id: string, formData: FormData) {
     content,
     category,
     metaTitle,
-    metaDescription
+    metaDescription,
+    metaKeywords
   };
 
   if (image) {

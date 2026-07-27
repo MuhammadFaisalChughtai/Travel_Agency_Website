@@ -51,6 +51,7 @@ export async function createFlight(formData: FormData) {
   const month = formData.get("month") as string || null;
   const metaTitle = formData.get("metaTitle") as string || null;
   const metaDescription = formData.get("metaDescription") as string || null;
+  const metaKeywords = formData.get("metaKeywords") as string || null;
 
   const isTransit = formData.get("isTransit") === "true";
   const transitAirport = isTransit ? (formData.get("transitAirport") as string || null) : null;
@@ -122,6 +123,7 @@ export async function createFlight(formData: FormData) {
       returnAircraft,
       metaTitle,
       metaDescription,
+      metaKeywords,
     }
   });
 
@@ -142,6 +144,7 @@ export async function updateFlight(id: string, formData: FormData) {
   const month = formData.get("month") as string || null;
   const metaTitle = formData.get("metaTitle") as string || null;
   const metaDescription = formData.get("metaDescription") as string || null;
+  const metaKeywords = formData.get("metaKeywords") as string || null;
 
   const isTransit = formData.get("isTransit") === "true";
   const transitAirport = isTransit ? (formData.get("transitAirport") as string || null) : null;
@@ -213,6 +216,7 @@ export async function updateFlight(id: string, formData: FormData) {
       returnAircraft,
       metaTitle,
       metaDescription,
+      metaKeywords,
     }
   });
 

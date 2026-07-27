@@ -33,6 +33,7 @@ export async function createPackage(formData: FormData) {
   const isSold = formData.get("isSold") === "true";
   const metaTitle = formData.get("metaTitle") as string;
   const metaDescription = formData.get("metaDescription") as string;
+  const metaKeywords = formData.get("metaKeywords") as string;
   const customSlug = formData.get("slug") as string;
 
   let slug = customSlug ? customSlug.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "") : title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
@@ -55,6 +56,7 @@ export async function createPackage(formData: FormData) {
       stars,
       metaTitle,
       metaDescription,
+      metaKeywords,
       slug,
     }
   });
@@ -77,6 +79,7 @@ export async function updatePackage(id: string, formData: FormData) {
   const isSold = formData.get("isSold") === "true";
   const metaTitle = formData.get("metaTitle") as string;
   const metaDescription = formData.get("metaDescription") as string;
+  const metaKeywords = formData.get("metaKeywords") as string;
   const customSlug = formData.get("slug") as string;
 
   let slug = customSlug ? customSlug.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "") : title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
@@ -94,6 +97,7 @@ export async function updatePackage(id: string, formData: FormData) {
     isSold,
     metaTitle,
     metaDescription,
+    metaKeywords,
     slug,
   };
 

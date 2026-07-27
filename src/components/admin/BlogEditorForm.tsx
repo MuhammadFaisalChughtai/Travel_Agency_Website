@@ -16,10 +16,48 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
   const [content, setContent] = useState(initialData?.content || "");
   const [metaTitle, setMetaTitle] = useState(initialData?.metaTitle || "");
   const [metaDescription, setMetaDescription] = useState(initialData?.metaDescription || "");
+  const [metaKeywords, setMetaKeywords] = useState(initialData?.metaKeywords || "");
   const [slug, setSlug] = useState(initialData?.slug || "");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>(initialData?.image || "");
+  const [aiPrompt, setAiPrompt] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const handleAiFill = async () => {
+    if (!aiPrompt) {
+      alert("Please enter a prompt first.");
+      return;
+    }
+    setIsGenerating(true);
+    try {
+      const currentData = {
+        title, category, excerpt, content, metaTitle, metaDescription, metaKeywords
+      };
+      const res = await fetch("/api/admin/generate-content", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "blog", prompt: aiPrompt, currentData })
+      });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+
+      const fields = data.result;
+      if (fields.title) setTitle(fields.title);
+      if (fields.excerpt) setExcerpt(fields.excerpt);
+      if (fields.content) setContent(fields.content);
+      if (fields.metaTitle) setMetaTitle(fields.metaTitle);
+      if (fields.metaDescription) setMetaDescription(fields.metaDescription);
+      if (fields.metaKeywords) setMetaKeywords(fields.metaKeywords);
+
+      alert("Form fields generated successfully!");
+    } catch (err: any) {
+      console.error(err);
+      alert(err.message || "Failed to generate blog content.");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   const quillRef = useRef<any>(null);
 
@@ -113,6 +151,7 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
       blogData.append("content", content);
       blogData.append("metaTitle", metaTitle);
       blogData.append("metaDescription", metaDescription);
+      blogData.append("metaKeywords", metaKeywords);
       blogData.append("slug", slug);
 
       if (initialData?.id) {
@@ -128,6 +167,9 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
         setContent("");
         setImageFile(null);
         setImagePreview("");
+        setMetaTitle("");
+        setMetaDescription("");
+        setMetaKeywords("");
         setSlug("");
         alert("Blog created successfully!");
       }
@@ -141,6 +183,38 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
+      {/* AI Form Assistant */}
+      <div className="p-5 bg-gradient-to-r from-slate-50 to-indigo-50/30 border border-indigo-100 rounded-2xl shadow-sm space-y-3">
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-bold text-indigo-950 flex items-center gap-1.5">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 text-xs">✨</span>
+            AI Form Assistant
+          </h3>
+          <span className="text-[10px] uppercase font-black tracking-widest text-indigo-500 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">
+            GPT-4o-mini
+          </span>
+        </div>
+        <p className="text-xs text-slate-500">
+          Describe the blog post topic (e.g. "Spiritual significance of visiting Mount Uhud") and the AI will auto-fill the title, excerpt, full rich content, and SEO metadata.
+        </p>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            value={aiPrompt}
+            onChange={(e) => setAiPrompt(e.target.value)}
+            placeholder="Describe the blog post topic..."
+            className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none"
+          />
+          <button
+            type="button"
+            disabled={isGenerating}
+            onClick={handleAiFill}
+            className="rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 transition-all disabled:opacity-60 shrink-0"
+          >
+            {isGenerating ? "Generating..." : "Generate All Fields"}
+          </button>
+        </div>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Title</label>
@@ -199,7 +273,7 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
       </div>
 
       {/* SEO FIELDS */}
-      <div className="pt-6 border-t border-slate-200 mt-6">
+      <div className="pt-6 border-t border-slate-200 mt-6 space-y-4">
         <h3 className="text-lg font-medium leading-6 text-slate-900 mb-4">SEO Configuration</h3>
         <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
           <div className="sm:col-span-2">
@@ -214,7 +288,7 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
                 placeholder="SEO Title (e.g., Best Places to Visit in Makkah)"
               />
             </div>
-            <p className="mt-1 text-xs text-[#f5f0eb]0">Keep it under 60 characters for best results.</p>
+            <p className="mt-1 text-xs text-slate-400">Keep it under 60 characters for best results.</p>
           </div>
 
           <div className="sm:col-span-2">
@@ -229,7 +303,22 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
                 placeholder="Brief summary for search engines..."
               />
             </div>
-            <p className="mt-1 text-xs text-[#f5f0eb]0">Keep it between 150-160 characters.</p>
+            <p className="mt-1 text-xs text-slate-400">Keep it between 150-160 characters.</p>
+          </div>
+
+          <div className="sm:col-span-2">
+            <label htmlFor="metaKeywords" className="block text-sm font-medium text-slate-700">Meta Keywords</label>
+            <div className="mt-1">
+              <input
+                type="text"
+                id="metaKeywords"
+                value={metaKeywords}
+                onChange={(e) => setMetaKeywords(e.target.value)}
+                className="block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3 border"
+                placeholder="e.g. makkah, travel guides, umrah 2026"
+              />
+            </div>
+            <p className="mt-1 text-xs text-slate-400">Enter keywords separated by commas.</p>
           </div>
         </div>
       </div>

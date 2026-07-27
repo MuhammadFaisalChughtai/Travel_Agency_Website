@@ -57,6 +57,7 @@ model Package {
   createdAt        DateTime @default(now())
   metaTitle       String?  @db.Text
   metaDescription String?  @db.Text
+  metaKeywords    String?  @db.Text
   bookings        Booking[]
 }
 
@@ -74,6 +75,7 @@ model Blog {
   updatedAt DateTime @updatedAt
   metaTitle       String?  @db.Text
   metaDescription String?  @db.Text
+  metaKeywords    String?  @db.Text
 }
 
 model Enquiry {
@@ -125,6 +127,7 @@ model Flight {
   createdAt             DateTime  @default(now())
   metaTitle             String?  @db.Text
   metaDescription       String?  @db.Text
+  metaKeywords          String?  @db.Text
   bookings              Booking[]
 }
 

@@ -42,8 +42,62 @@ export function FlightEditorForm({ initialData, currentPage = 1 }: { initialData
 
   const [metaTitle, setMetaTitle] = useState(initialData?.metaTitle || "");
   const [metaDescription, setMetaDescription] = useState(initialData?.metaDescription || "");
+  const [metaKeywords, setMetaKeywords] = useState(initialData?.metaKeywords || "");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [aiPrompt, setAiPrompt] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const handleAiFill = async () => {
+    if (!aiPrompt) {
+      alert("Please enter a prompt first.");
+      return;
+    }
+    setIsGenerating(true);
+    try {
+      const currentData = {
+        airline, airlineCode, departure, departureCode, destination, destinationCode, country, price, month, duration, baggage, aircraft, isTransit, transitAirport, transitDuration, metaTitle, metaDescription, metaKeywords
+      };
+      const res = await fetch("/api/admin/generate-content", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "flight", prompt: aiPrompt, currentData })
+      });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+
+      const fields = data.result;
+      if (fields.airline) setAirline(fields.airline);
+      if (fields.airlineCode) setAirlineCode(fields.airlineCode);
+      if (fields.departure) setDeparture(fields.departure);
+      if (fields.departureCode) setDepartureCode(fields.departureCode);
+      if (fields.destination) setDestination(fields.destination);
+      if (fields.destinationCode) setDestinationCode(fields.destinationCode);
+      if (fields.country) setCountry(fields.country);
+      if (fields.price) setPrice(fields.price.toString());
+      if (fields.month) setMonth(fields.month);
+      if (fields.duration) setDuration(fields.duration);
+      if (fields.baggage) setBaggage(fields.baggage);
+      if (fields.aircraft) setAircraft(fields.aircraft);
+      if (typeof fields.isTransit === "boolean") {
+        setIsTransit(fields.isTransit);
+        if (fields.isTransit) {
+          if (fields.transitAirport) setTransitAirport(fields.transitAirport);
+          if (fields.transitDuration) setTransitDuration(fields.transitDuration);
+        }
+      }
+      if (fields.metaTitle) setMetaTitle(fields.metaTitle);
+      if (fields.metaDescription) setMetaDescription(fields.metaDescription);
+      if (fields.metaKeywords) setMetaKeywords(fields.metaKeywords);
+
+      alert("Form fields generated successfully!");
+    } catch (err: any) {
+      console.error(err);
+      alert(err.message || "Failed to generate flight content.");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,6 +141,7 @@ export function FlightEditorForm({ initialData, currentPage = 1 }: { initialData
 
       formData.append("metaTitle", metaTitle);
       formData.append("metaDescription", metaDescription);
+      formData.append("metaKeywords", metaKeywords);
 
       if (initialData) {
         await updateFlight(initialData.id, formData);
@@ -122,6 +177,7 @@ export function FlightEditorForm({ initialData, currentPage = 1 }: { initialData
         setReturnAircraft("Boeing 777");
         setMetaTitle("");
         setMetaDescription("");
+        setMetaKeywords("");
         alert("Flight deal added successfully!");
       }
 
@@ -134,7 +190,39 @@ export function FlightEditorForm({ initialData, currentPage = 1 }: { initialData
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8 max-w-4xl">
+    <form onSubmit={handleSubmit} className="space-y-8 max-w-4xl bg-slate-50 p-6 rounded-xl border border-slate-200">
+      {/* AI Form Assistant */}
+      <div className="p-5 bg-gradient-to-r from-slate-50 to-indigo-50/30 border border-indigo-100 rounded-2xl shadow-sm space-y-3">
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-bold text-indigo-950 flex items-center gap-1.5">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 text-xs">✨</span>
+            AI Form Assistant
+          </h3>
+          <span className="text-[10px] uppercase font-black tracking-widest text-indigo-500 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">
+            GPT-4o-mini
+          </span>
+        </div>
+        <p className="text-xs text-slate-500">
+          Describe the flight deal (e.g. "Direct flight from London Heathrow to Dubai on Emirates in October") and the AI will auto-fill all airports, codes, price, aircraft, duration, transit status, and SEO metadata.
+        </p>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            value={aiPrompt}
+            onChange={(e) => setAiPrompt(e.target.value)}
+            placeholder="Describe the flight deal..."
+            className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none"
+          />
+          <button
+            type="button"
+            disabled={isGenerating}
+            onClick={handleAiFill}
+            className="rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 transition-all disabled:opacity-60 shrink-0"
+          >
+            {isGenerating ? "Generating..." : "Generate All Fields"}
+          </button>
+        </div>
+      </div>
       <div className="border-b border-slate-100 pb-4">
         <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
           <Plane className="w-5 h-5 text-[#f5f0eb]0" />
@@ -459,26 +547,40 @@ export function FlightEditorForm({ initialData, currentPage = 1 }: { initialData
       </div>
 
       {/* SEO Fields */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-[#f5f0eb] border border-slate-200 rounded-lg">
-        <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Title</label>
-          <input
-            value={metaTitle}
-            onChange={e => setMetaTitle(e.target.value)}
-            type="text"
-            placeholder="e.g. Cheap Flights to Dubai | Terrific Travel"
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
-          />
+      <div className="p-5 bg-[#f5f0eb] border border-slate-200 rounded-xl space-y-4">
+        <h4 className="text-sm font-bold text-slate-800 border-b border-slate-300/60 pb-2">SEO & Metadata</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Title</label>
+            <input
+              value={metaTitle}
+              onChange={e => setMetaTitle(e.target.value)}
+              type="text"
+              placeholder="e.g. Cheap Flights to Dubai | Terrific Travel"
+              className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Description</label>
+            <textarea
+              value={metaDescription}
+              onChange={e => setMetaDescription(e.target.value)}
+              rows={2}
+              placeholder="A short description for search engines..."
+              className="block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
+            />
+          </div>
         </div>
         <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Description</label>
-          <textarea
-            value={metaDescription}
-            onChange={e => setMetaDescription(e.target.value)}
-            rows={2}
-            placeholder="A short description for search engines..."
-            className="block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#f5f0eb]0"
+          <label className="block text-sm font-semibold text-slate-700 mb-1">SEO Meta Keywords</label>
+          <input
+            value={metaKeywords}
+            onChange={e => setMetaKeywords(e.target.value)}
+            type="text"
+            placeholder="e.g. cheap flights, london to dubai, airline deals"
+            className="block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
           />
+          <p className="text-[10px] text-slate-500 mt-1">Enter keywords separated by commas.</p>
         </div>
       </div>
 
