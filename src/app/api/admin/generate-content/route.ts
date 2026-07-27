@@ -19,26 +19,40 @@ export async function POST(req: Request) {
       );
     }
 
+    const rulebook = `
+=== WRITING RULEBOOK ===
+1. HUMANIZED STYLE: Write in a natural, premium, and professional tone. It must read as if written by an elite travel consultant or human copywriter, not a machine.
+2. NO AI JARGON/CLICHÉS: Strictly avoid typical AI vocabulary, transition words, and buzzwords. 
+   - DO NOT USE: "embark on a journey", "testament to", "delve", "furthermore", "moreover", "in summary", "discover the magic", "breathtaking", "vibrant", "nestled", "a tapestry of", "look no further".
+   - Keep language direct, active, and sophisticated.
+3. NO HALLUCINATIONS: Do not invent unrealistic data. Ensure airport codes (e.g. LHR, DXB), airline codes, and duration calculations are realistic.
+4. INCORPORATE KEYWORDS & TITLE: Integrate the package/blog/flight title and any initial keywords provided by the user seamlessly and naturally into the content, meta title, meta description, and keywords.
+5. CLEAN HTML: Inside descriptions or blog content, output clean structural HTML tags (e.g. <h3>, <strong>, <ul>, <li>, <p>). Do not include any style attributes or code blocks.
+`;
+
     let systemPrompt = "";
     let userPrompt = "";
 
     if (type === "package") {
       systemPrompt = `You are an expert travel copywriter and SEO specialist. 
 Your goal is to generate package data for a travel agency website in a structured JSON format.
+
+${rulebook}
+
 The output MUST be a valid JSON object matching this schema exactly:
 {
   "title": "Clear and attractive package title",
   "price": "Starting price as a clean number string (e.g. '650')",
   "duration": "Duration in nights/days (e.g. '7 Nights' or '10 Days')",
   "travelDates": "Travel departure details (e.g. 'Departures throughout October 2026')",
-  "description": "Engaging and rich package details formatted in HTML. Use standard HTML tags (<h3>, <strong>, <ul>, <li>, <p>). Do not include any external CSS or classes. Just clean structural tags.",
-  "metaTitle": "SEO meta title (under 60 characters)",
-  "metaDescription": "Compelling SEO meta description (under 160 characters)",
-  "metaKeywords": "5-10 comma-separated keywords optimized for search engines"
+  "description": "Engaging, fully-humanized, and detailed package details formatted in HTML. Use standard HTML tags (<h3>, <strong>, <ul>, <li>, <p>).",
+  "metaTitle": "SEO meta title (under 60 characters, incorporating main keywords naturally)",
+  "metaDescription": "Compelling SEO meta description (under 160 characters, written naturally)",
+  "metaKeywords": "5-10 comma-separated keywords optimized for search engines, incorporating the title and input keywords"
 }
-Ensure the response is strictly JSON and does not contain markdown code blocks (like \`\`\`json).`;
+Ensure the response is strictly JSON and does not contain markdown code blocks.`;
 
-      userPrompt = `Generate a package based on the following instructions:
+      userPrompt = `Generate a travel package based on the following instructions:
 Prompt: ${prompt}
 
 ${currentData ? `Current Form Data (to refine/build upon): ${JSON.stringify(currentData)}` : ""}`;
@@ -46,18 +60,21 @@ ${currentData ? `Current Form Data (to refine/build upon): ${JSON.stringify(curr
     } else if (type === "blog") {
       systemPrompt = `You are an expert travel blogger and SEO writer. 
 Your goal is to generate blog post content for a travel agency website in a structured JSON format.
+
+${rulebook}
+
 The output MUST be a valid JSON object matching this schema exactly:
 {
-  "title": "Catchy and informative blog title",
+  "title": "Catchy, professional blog title",
   "excerpt": "A short, engaging excerpt summarizing the blog post (plain text, under 200 characters)",
-  "content": "A detailed, engaging, and well-researched blog post body formatted in HTML. Use standard HTML tags (<h3>, <strong>, <ul>, <li>, <p>). Make it look professional and clean.",
-  "metaTitle": "SEO meta title (under 60 characters)",
-  "metaDescription": "Compelling SEO meta description (under 160 characters)",
-  "metaKeywords": "5-10 comma-separated keywords optimized for search engines"
+  "content": "A detailed, engaging, fully-humanized blog post body formatted in HTML. Use standard HTML tags (<h3>, <strong>, <ul>, <li>, <p>).",
+  "metaTitle": "SEO meta title (under 60 characters, incorporating title and main keywords naturally)",
+  "metaDescription": "Compelling SEO meta description (under 160 characters, written naturally)",
+  "metaKeywords": "5-10 comma-separated keywords optimized for search engines, incorporating the title and input keywords"
 }
 Ensure the response is strictly JSON and does not contain markdown code blocks.`;
 
-      userPrompt = `Write a blog post based on the following instructions:
+      userPrompt = `Write a travel blog post based on the following instructions:
 Prompt: ${prompt}
 
 ${currentData ? `Current Form Data (to refine/build upon): ${JSON.stringify(currentData)}` : ""}`;
@@ -65,6 +82,9 @@ ${currentData ? `Current Form Data (to refine/build upon): ${JSON.stringify(curr
     } else if (type === "flight") {
       systemPrompt = `You are a travel flight expert and SEO writer.
 Your goal is to generate flight deal details in a structured JSON format.
+
+${rulebook}
+
 The output MUST be a valid JSON object matching this schema exactly:
 {
   "airline": "Name of the airline (e.g. Emirates)",
@@ -82,9 +102,9 @@ The output MUST be a valid JSON object matching this schema exactly:
   "isTransit": false, // boolean representing if there are stops
   "transitAirport": "Transit airport name if isTransit is true, or empty string",
   "transitDuration": "Transit layover duration if isTransit is true, or empty string",
-  "metaTitle": "SEO meta title (under 60 characters)",
-  "metaDescription": "Compelling SEO meta description (under 160 characters)",
-  "metaKeywords": "5-10 comma-separated keywords optimized for search engines"
+  "metaTitle": "SEO meta title (under 60 characters, incorporating main keywords naturally)",
+  "metaDescription": "Compelling SEO meta description (under 160 characters, written naturally)",
+  "metaKeywords": "5-10 comma-separated keywords optimized for search engines, incorporating the title and input keywords"
 }
 Ensure the response is strictly JSON and does not contain markdown code blocks.`;
 
