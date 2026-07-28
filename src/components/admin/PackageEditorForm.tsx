@@ -25,6 +25,8 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
   const [metaKeywords, setMetaKeywords] = useState(initialData?.metaKeywords || "");
   const [slug, setSlug] = useState(initialData?.slug || "");
   const [aiPrompt, setAiPrompt] = useState("");
+  const [aiKeywords, setAiKeywords] = useState("");
+  const [aiLength, setAiLength] = useState("medium");
   const [isGenerating, setIsGenerating] = useState(false);
 
   const handleAiFill = async () => {
@@ -40,7 +42,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
       const res = await fetch("/api/admin/generate-content", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "package", prompt: aiPrompt, currentData })
+        body: JSON.stringify({ type: "package", prompt: aiPrompt, currentData, keywords: aiKeywords, length: aiLength })
       });
       const data = await res.json();
       if (data.error) throw new Error(data.error);
@@ -162,7 +164,7 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
       {/* AI Form Assistant */}
-      <div className="p-5 bg-gradient-to-r from-slate-50 to-indigo-50/30 border border-indigo-100 rounded-2xl shadow-sm space-y-3">
+      <div className="p-5 bg-gradient-to-r from-slate-50 to-indigo-50/30 border border-indigo-100 rounded-2xl shadow-sm space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-bold text-indigo-950 flex items-center gap-1.5">
             <span className="flex h-5 w-5 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 text-xs">✨</span>
@@ -173,21 +175,50 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
           </span>
         </div>
         <p className="text-xs text-slate-500">
-          Describe your travel package (e.g. "10 Nights 5-star Luxury family Umrah package in December") and the AI will auto-fill the details, rich text description, and SEO metadata.
+          Describe your travel package and the AI will auto-fill the details, rich text description, and SEO metadata.
         </p>
-        <div className="flex gap-2">
-          <input
-            type="text"
-            value={aiPrompt}
-            onChange={(e) => setAiPrompt(e.target.value)}
-            placeholder="Describe the package..."
-            className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none"
-          />
+        
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
+          <div className="md:col-span-6">
+            <label className="block text-[10px] font-bold text-indigo-950 uppercase tracking-wider mb-1">Describe the package *</label>
+            <input
+              type="text"
+              value={aiPrompt}
+              onChange={(e) => setAiPrompt(e.target.value)}
+              placeholder="e.g. 10 Nights luxury family Umrah in December"
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none"
+            />
+          </div>
+          <div className="md:col-span-3">
+            <label className="block text-[10px] font-bold text-indigo-950 uppercase tracking-wider mb-1">Focus Keywords</label>
+            <input
+              type="text"
+              value={aiKeywords}
+              onChange={(e) => setAiKeywords(e.target.value)}
+              placeholder="e.g. luxury, 5-star"
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none"
+            />
+          </div>
+          <div className="md:col-span-3">
+            <label className="block text-[10px] font-bold text-indigo-950 uppercase tracking-wider mb-1">Content Length</label>
+            <select
+              value={aiLength}
+              onChange={(e) => setAiLength(e.target.value)}
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none bg-white"
+            >
+              <option value="short">Short (~200 words)</option>
+              <option value="medium">Medium (~400 words)</option>
+              <option value="long">Long (~800 words)</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="flex justify-end">
           <button
             type="button"
             disabled={isGenerating}
             onClick={handleAiFill}
-            className="rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 transition-all disabled:opacity-60 shrink-0"
+            className="rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-5 py-2.5 transition-all disabled:opacity-60 shadow-sm"
           >
             {isGenerating ? "Generating..." : "Generate All Fields"}
           </button>

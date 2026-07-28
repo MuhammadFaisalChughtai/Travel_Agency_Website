@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { type, prompt, currentData } = await req.json();
+    const { type, prompt, currentData, keywords, length } = await req.json();
 
     const apiKey = process.env.GPT_KEY;
     if (!apiKey) {
@@ -30,6 +30,21 @@ export async function POST(req: Request) {
 5. CLEAN HTML: Inside descriptions or blog content, output clean structural HTML tags (e.g. <h3>, <strong>, <ul>, <li>, <p>). Do not include any style attributes or code blocks.
 `;
 
+    // Dynamic length and keyword guidelines
+    let lengthInstruction = "";
+    if (length === "short") {
+      lengthInstruction = "The generated HTML description or content body must be short and concise, approximately 150-300 words.";
+    } else if (length === "long") {
+      lengthInstruction = "The generated HTML description or content body must be detailed, comprehensive, and exhaustive, approximately 600-1000 words.";
+    } else {
+      lengthInstruction = "The generated HTML description or content body must be of medium length, approximately 300-600 words.";
+    }
+
+    let keywordInstruction = "";
+    if (keywords && keywords.trim() !== "") {
+      keywordInstruction = `Target Keywords to integrate naturally and emphasize: "${keywords}". Ensure these keywords are seamlessly woven into the content copy, meta title, and are added to the generated metaKeywords output list.`;
+    }
+
     let systemPrompt = "";
     let userPrompt = "";
 
@@ -38,6 +53,9 @@ export async function POST(req: Request) {
 Your goal is to generate package data for a travel agency website in a structured JSON format.
 
 ${rulebook}
+
+${lengthInstruction}
+${keywordInstruction}
 
 The output MUST be a valid JSON object matching this schema exactly:
 {
@@ -63,6 +81,9 @@ Your goal is to generate blog post content for a travel agency website in a stru
 
 ${rulebook}
 
+${lengthInstruction}
+${keywordInstruction}
+
 The output MUST be a valid JSON object matching this schema exactly:
 {
   "title": "Catchy, professional blog title",
@@ -84,6 +105,9 @@ ${currentData ? `Current Form Data (to refine/build upon): ${JSON.stringify(curr
 Your goal is to generate flight deal details in a structured JSON format.
 
 ${rulebook}
+
+${lengthInstruction}
+${keywordInstruction}
 
 The output MUST be a valid JSON object matching this schema exactly:
 {
