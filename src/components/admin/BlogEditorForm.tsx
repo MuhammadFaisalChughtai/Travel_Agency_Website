@@ -26,7 +26,7 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
   const [aiLength, setAiLength] = useState("medium");
   const [isGenerating, setIsGenerating] = useState(false);
 
-  const handleAiFill = async () => {
+  const handleAiFill = async (mode: "generate" | "improve" = "generate") => {
     if (!aiPrompt) {
       alert("Please enter a prompt first.");
       return;
@@ -39,7 +39,7 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
       const res = await fetch("/api/admin/generate-content", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "blog", prompt: aiPrompt, currentData, keywords: aiKeywords, length: aiLength })
+        body: JSON.stringify({ type: "blog", prompt: aiPrompt, currentData, keywords: aiKeywords, length: aiLength, mode })
       });
       const data = await res.json();
       if (data.error) throw new Error(data.error);
@@ -52,10 +52,10 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
       if (fields.metaDescription) setMetaDescription(fields.metaDescription);
       if (fields.metaKeywords) setMetaKeywords(fields.metaKeywords);
 
-      alert("Form fields generated successfully!");
+      alert(mode === "improve" ? "Form fields improved successfully!" : "Form fields generated successfully!");
     } catch (err: any) {
       console.error(err);
-      alert(err.message || "Failed to generate blog content.");
+      alert(err.message || `Failed to ${mode} blog content.`);
     } finally {
       setIsGenerating(false);
     }
@@ -235,14 +235,22 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
           </div>
         </div>
 
-        <div className="flex justify-end">
+        <div className="flex justify-end gap-2">
           <button
             type="button"
             disabled={isGenerating}
-            onClick={handleAiFill}
+            onClick={() => handleAiFill("generate")}
             className="rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-5 py-2.5 transition-all disabled:opacity-60 shadow-sm"
           >
-            {isGenerating ? "Generating..." : "Generate All Fields"}
+            {isGenerating ? "Processing..." : "Generate All Fields"}
+          </button>
+          <button
+            type="button"
+            disabled={isGenerating}
+            onClick={() => handleAiFill("improve")}
+            className="rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-5 py-2.5 transition-all disabled:opacity-60 shadow-sm"
+          >
+            {isGenerating ? "Processing..." : "Improve Current Content"}
           </button>
         </div>
       </div>
