@@ -69,8 +69,16 @@ export async function POST(req: Request) {
     const refresh_token = process.env.GOOGLE_ADS_REFRESH_TOKEN;
     const openAiApiKey = process.env.GPT_KEY;
 
-    if (!developerToken || !customerId || !client_id || !client_secret || !refresh_token || !openAiApiKey) {
-      const errorMsg = "Missing required environment variables for Google Ads or OpenAI API.";
+    const missingVars: string[] = [];
+    if (!developerToken) missingVars.push("GOOGLE_ADS_DEVELOPER_TOKEN");
+    if (!customerId) missingVars.push("GOOGLE_ADS_CUSTOMER_ID");
+    if (!client_id) missingVars.push("GOOGLE_ADS_CLIENT_ID");
+    if (!client_secret) missingVars.push("GOOGLE_ADS_CLIENT_SECRET");
+    if (!refresh_token) missingVars.push("GOOGLE_ADS_REFRESH_TOKEN");
+    if (!openAiApiKey) missingVars.push("GPT_KEY");
+
+    if (missingVars.length > 0) {
+      const errorMsg = `Missing environment variables in container: ${missingVars.join(", ")}`;
       log(errorMsg);
       return NextResponse.json({ error: errorMsg, logs: executionLogs }, { status: 500 });
     }
