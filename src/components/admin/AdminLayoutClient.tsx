@@ -17,6 +17,7 @@ import {
   FileCheck,
   Car,
   Megaphone,
+  Sparkles,
 } from "lucide-react";
 import { SessionProvider, signOut } from "next-auth/react";
 
@@ -28,6 +29,7 @@ const navigation = [
   { name: "Transport", href: "/admin/transport", icon: Car },
   { name: "Enquiries", href: "/admin/enquiries", icon: Mail },
   { name: "Marketing", href: "/admin/marketing", icon: Megaphone },
+  { name: "SEO Autopilot", href: "/admin/marketing/keyword-generator", icon: Sparkles },
   { name: "Blogs", href: "/admin/blogs", icon: BookOpen },
   { name: "Testimonials", href: "/admin/testimonials", icon: MessageSquare },
 ];

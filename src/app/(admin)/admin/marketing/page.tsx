@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import { Users, Mail, PlusCircle, UploadCloud } from "lucide-react";
+import { Users, Mail, PlusCircle, UploadCloud, Sparkles } from "lucide-react";
 
 export default async function MarketingDashboardPage() {
   const customerCount = await prisma.customer.count();
@@ -16,10 +16,10 @@ export default async function MarketingDashboardPage() {
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold font-heading text-slate-900">
-            Email Marketing
+            Email & SEO Marketing
           </h1>
           <p className="mt-1 text-sm text-slate-500">
-            Manage customers and send personalized newsletters.
+            Manage customers, send newsletters, and configure AI SEO Autopilot.
           </p>
         </div>
         <div className="flex gap-3">
@@ -32,10 +32,17 @@ export default async function MarketingDashboardPage() {
           </Link>
           <Link
             href="/admin/marketing/newsletter"
-            className="flex items-center gap-2 bg-[#6b4f4f] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#5a4242] transition shadow-sm"
+            className="flex items-center gap-2 bg-white border border-slate-300 text-slate-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-50 transition"
           >
             <Mail className="w-4 h-4" />
             Compose Newsletter
+          </Link>
+          <Link
+            href="/admin/marketing/keyword-generator"
+            className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition shadow-sm"
+          >
+            <Sparkles className="w-4 h-4" />
+            SEO Autopilot
           </Link>
         </div>
       </div>

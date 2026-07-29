@@ -219,3 +219,23 @@ model Newsletter {
   sentAt         DateTime @default(now())
   recipientCount Int      @default(0)
 }
+
+model SystemSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String   @db.Text
+  description String?  @db.Text
+  updatedAt   DateTime @updatedAt
+}
+
+model SeoAutopilotLog {
+  id          String   @id @default(cuid())
+  actionType  String   // "OPTIMIZE" or "GENERATE"
+  targetType  String   // "PACKAGE" or "BLOG"
+  targetId    String?  // ID of the package or blog updated/created
+  targetTitle String   // Title of the package or blog
+  keywords    String   // The keywords targeted (comma-separated)
+  status      String   // "SUCCESS" or "FAILED"
+  details     String?  @db.Text // Summary of changes made or error descriptions
+  createdAt   DateTime @default(now())
+}
