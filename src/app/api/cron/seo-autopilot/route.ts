@@ -61,14 +61,15 @@ export async function POST(req: Request) {
     const limitCount = Math.max(1, Math.min(100, Number(config.limit) || 10));
     log(`Autopilot configured: mode=${config.mode}, limit=${limitCount}, seeds='${config.seedKeywords}'`);
 
-    // 3. Setup Google Ads API credentials
-    const developerToken = process.env.GOOGLE_ADS_DEVELOPER_TOKEN;
-    const rawCustomerId = process.env.GOOGLE_ADS_CUSTOMER_ID || "";
+    // 3. Setup Google Ads API credentials - use bracket notation to prevent Next.js from
+    // statically inlining empty values at build time (since .env is excluded from Docker build context)
+    const developerToken = process.env['GOOGLE_ADS_DEVELOPER_TOKEN'];
+    const rawCustomerId = process.env['GOOGLE_ADS_CUSTOMER_ID'] || "";
     const customerId = rawCustomerId.replace(/[^0-9]/g, ""); // Strip any dashes, spaces, or quotes
-    const client_id = process.env.GOOGLE_ADS_CLIENT_ID;
-    const client_secret = process.env.GOOGLE_ADS_CLIENT_SECRET;
-    const refresh_token = process.env.GOOGLE_ADS_REFRESH_TOKEN;
-    const openAiApiKey = process.env.GPT_KEY;
+    const client_id = process.env['GOOGLE_ADS_CLIENT_ID'];
+    const client_secret = process.env['GOOGLE_ADS_CLIENT_SECRET'];
+    const refresh_token = process.env['GOOGLE_ADS_REFRESH_TOKEN'];
+    const openAiApiKey = process.env['GPT_KEY'];
 
     const missingVars: string[] = [];
     if (!developerToken) missingVars.push("GOOGLE_ADS_DEVELOPER_TOKEN");
