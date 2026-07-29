@@ -63,7 +63,8 @@ export async function POST(req: Request) {
 
     // 3. Setup Google Ads API credentials
     const developerToken = process.env.GOOGLE_ADS_DEVELOPER_TOKEN;
-    const customerId = process.env.GOOGLE_ADS_CUSTOMER_ID;
+    const rawCustomerId = process.env.GOOGLE_ADS_CUSTOMER_ID || "";
+    const customerId = rawCustomerId.replace(/[^0-9]/g, ""); // Strip any dashes, spaces, or quotes
     const client_id = process.env.GOOGLE_ADS_CLIENT_ID;
     const client_secret = process.env.GOOGLE_ADS_CLIENT_SECRET;
     const refresh_token = process.env.GOOGLE_ADS_REFRESH_TOKEN;
