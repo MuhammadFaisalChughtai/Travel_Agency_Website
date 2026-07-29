@@ -23,7 +23,15 @@ services:
       - mysql
 
   web:
-    build: .
+    build:
+      context: .
+      args:
+        - GOOGLE_ADS_DEVELOPER_TOKEN=${GOOGLE_ADS_DEVELOPER_TOKEN}
+        - GOOGLE_ADS_CUSTOMER_ID=${GOOGLE_ADS_CUSTOMER_ID}
+        - GOOGLE_ADS_CLIENT_ID=${GOOGLE_ADS_CLIENT_ID}
+        - GOOGLE_ADS_CLIENT_SECRET=${GOOGLE_ADS_CLIENT_SECRET}
+        - GOOGLE_ADS_REFRESH_TOKEN=${GOOGLE_ADS_REFRESH_TOKEN}
+        - GPT_KEY=${GPT_KEY}
     container_name: terrific_travel_web
     ports:
       - "5173:5173"
