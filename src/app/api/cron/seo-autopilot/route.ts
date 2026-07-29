@@ -71,6 +71,8 @@ export async function POST(req: Request) {
     const refresh_token = process.env['GOOGLE_ADS_REFRESH_TOKEN'];
     const openAiApiKey = process.env['GPT_KEY'];
 
+    log(`[DEBUG] rawCustomerId='${rawCustomerId}' | customerId='${customerId}' | client_id='${client_id ? "SET" : "MISSING"}' | refresh_token='${refresh_token ? "SET" : "MISSING"}' | openAiApiKey='${openAiApiKey ? "SET" : "MISSING"}'`);
+
     const missingVars: string[] = [];
     if (!developerToken) missingVars.push("GOOGLE_ADS_DEVELOPER_TOKEN");
     if (!customerId) missingVars.push("GOOGLE_ADS_CUSTOMER_ID");
