@@ -125,7 +125,14 @@ export async function POST(req: Request) {
           keywordIdeas = [...keywordIdeas, ...mapped];
         }
       } catch (err: any) {
-        log(`Failed to fetch keywords for seed '${seed}': ${err.message}`);
+        let errMsg = err.message || err.details;
+        if (!errMsg && err.errors) {
+          errMsg = JSON.stringify(err.errors);
+        }
+        if (!errMsg) {
+          errMsg = JSON.stringify(err);
+        }
+        log(`Failed to fetch keywords for seed '${seed}': ${errMsg}`);
       }
     }
 
