@@ -96,6 +96,7 @@ export async function POST(req: Request) {
 
     const customer = googleAdsClient.Customer({
       customer_id: customerId,
+      login_customer_id: "1886283319", // Manager account 188-628-3319
       refresh_token,
     });
 
@@ -111,9 +112,11 @@ export async function POST(req: Request) {
     for (const seed of seedPhrases.slice(0, 3)) { // Limit to 3 seeds to respect quotas
       try {
         const response = await customer.keywordPlanIdeas.generateKeywordIdeas({
+          customer_id: customerId,           // Pass customer_id inside request too
           keywordSeed: { keywords: [seed] },
           geoTargetConstants: ["geoTargetConstants/2826"], // UK targeting
           keywordPlanNetwork: "GOOGLE_SEARCH",
+          language: "languageConstants/1000", // English
         });
 
         if (Array.isArray(response)) {
