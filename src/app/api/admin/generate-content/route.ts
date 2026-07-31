@@ -28,6 +28,7 @@ export async function POST(req: Request) {
 3. NO HALLUCINATIONS: Do not invent unrealistic data. Ensure airport codes (e.g. LHR, DXB), airline codes, and duration calculations are realistic.
 4. INCORPORATE KEYWORDS & TITLE: Integrate the package/blog/flight title and any initial keywords provided by the user seamlessly and naturally into the content, meta title, meta description, and keywords.
 5. CLEAN HTML: Inside descriptions or blog content, output clean structural HTML tags (e.g. <h3>, <strong>, <ul>, <li>, <p>). Do not include any style attributes or code blocks.
+6. UK DEPARTURES ONLY: Since this travel agency services the UK market, all generated flight departures must originate from a United Kingdom airport (e.g. London Heathrow/LHR, Manchester/MAN, Birmingham/BHX, London Gatwick/LGW) and all return flights must return back to the UK. Never generate flight deals starting from other countries (e.g. USA, Canada, India, Saudi Arabia) to the UK or between non-UK countries.
 `;
 
     // Dynamic length and keyword guidelines

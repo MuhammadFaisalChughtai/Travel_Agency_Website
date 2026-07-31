@@ -233,6 +233,7 @@ export async function POST(req: Request) {
 2. NO AI JARGON/CLICHÉS: Strictly avoid typical AI vocabulary, transition words, and buzzwords (e.g., "embark on a journey", "testament to", "delve", "furthermore", "moreover", "in summary", "discover the magic").
 3. NO HALLUCINATIONS: Do not invent unrealistic data. Ensure airport codes (e.g. LHR, DXB), airline codes, and duration calculations are realistic.
 4. CLEAN HTML: Output clean structural HTML tags (e.g. <h3>, <strong>, <ul>, <li>, <p>). Do not include style attributes.
+5. UK DEPARTURES ONLY: Since this travel agency services the UK market, all generated flight departures must originate from a United Kingdom airport (e.g. London Heathrow/LHR, Manchester/MAN, Birmingham/BHX, London Gatwick/LGW) and all return flights must return back to the UK. Never generate flight deals starting from other countries (e.g. USA, Canada, India, Saudi Arabia) to the UK or between non-UK countries.
 `;
 
     if (config.mode === "optimize_existing" || config.mode === "both") {
@@ -371,7 +372,7 @@ MetaDescription: ${pkg.metaDescription || ""}`
 You are an elite travel planner. Generate a complete new travel package targeting the query keyword: "${kw.text}".
 Output a realistic, high-quality holiday package.
 For the package description field: Output structured, clean HTML containing clear headers/details for:
-1. Flights (airline, route)
+1. Flights (airline, route starting with a UK departure airport like LHR, LGW, MAN, and returning to the UK)
 2. Hotels (highly-rated accommodations in destination)
 3. Transfers/Transport inclusions
 4. Visa assistance info
