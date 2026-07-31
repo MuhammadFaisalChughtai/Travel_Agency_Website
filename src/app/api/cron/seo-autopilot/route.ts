@@ -172,13 +172,40 @@ export async function POST(req: Request) {
       }
     }
 
-    // Filter for low/medium competition and high intent phrases
+    // --- ANTI-CANNIBALISM LOGIC ---
+    // Fetch all existing package slugs and metaKeywords to prevent targeting duplicate search terms
+    const existingPackages = await prisma.package.findMany({
+      select: { slug: true, metaKeywords: true }
+    });
+
+    // Fetch all past successful keyword logs
+    const pastLogs = await prisma.seoAutopilotLog.findMany({
+      where: { status: "SUCCESS" },
+      select: { keywords: true }
+    });
+
+    const usedSlugs = new Set(existingPackages.map(p => p.slug.toLowerCase().trim()));
+    const usedKeywords = new Set([
+      ...pastLogs.flatMap(l => (l.keywords || "").split(",").map(k => k.trim().toLowerCase())),
+      ...existingPackages.flatMap(p => (p.metaKeywords || "").split(",").map(k => k.trim().toLowerCase()))
+    ]);
+
+    // Filter for low/medium competition and high intent phrases, ensuring no duplicate targeting
     const filteredKeywords = keywordIdeas
-      .filter(k => 
-        (k.competition === "LOW" || k.competition === "MEDIUM" || k.competitionIndex < 50) &&
-        k.searches >= 30 &&
-        (k.text.includes("package") || k.text.includes("deal") || k.text.includes("book") || k.text.includes("cheap") || k.text.includes("best") || k.text.includes("umrah") || k.text.includes("holiday"))
-      )
+      .filter(k => {
+        const keywordText = k.text.toLowerCase().trim();
+        const slug = keywordText.replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+        // Exclude if slug matches an existing page or if the keyword was already used/logged
+        if (usedSlugs.has(slug)) return false;
+        if (usedKeywords.has(keywordText)) return false;
+
+        return (
+          (k.competition === "LOW" || k.competition === "MEDIUM" || k.competitionIndex < 50) &&
+          k.searches >= 30 &&
+          (keywordText.includes("package") || keywordText.includes("deal") || keywordText.includes("book") || keywordText.includes("cheap") || keywordText.includes("best") || keywordText.includes("umrah") || keywordText.includes("holiday"))
+        );
+      })
       .sort((a, b) => b.searches - a.searches);
 
     log(`Retrieved ${keywordIdeas.length} ideas from Google, filtered down to ${filteredKeywords.length} high-intent options.`);
