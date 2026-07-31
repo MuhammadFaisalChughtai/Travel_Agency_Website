@@ -104,13 +104,21 @@ export function BookingForm() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#fff3e4] flex items-center justify-center">
-          <div className="flex flex-col items-center gap-4 text-[#6b4f4f]">
-            <svg className="animate-spin w-8 h-8" viewBox="0 0 24 24" fill="none">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-            </svg>
-            <p className="font-heading font-black text-sm uppercase tracking-widest">Loading…</p>
+        <div className="min-h-screen bg-gradient-to-br from-[#fff3e4] via-white to-[#fff3e4] pt-24 pb-20">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 mt-5 text-center">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-[#fff3e4] text-[#6b4f4f] text-[10px] font-bold uppercase tracking-[0.25em] mb-3 border border-[#eed6c4]/60">
+              Worldwide Travel & Pilgrimage
+            </span>
+            <h1 className="text-3xl md:text-4xl font-heading font-black text-[#6b4f4f] tracking-tight mb-3">
+              Book Your Custom Journey
+            </h1>
+            <div className="flex flex-col items-center gap-4 text-[#6b4f4f] mt-10">
+              <svg className="animate-spin w-8 h-8" viewBox="0 0 24 24" fill="none">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+              <p className="font-heading font-black text-sm uppercase tracking-widest">Loading Booking Details…</p>
+            </div>
           </div>
         </div>
       }

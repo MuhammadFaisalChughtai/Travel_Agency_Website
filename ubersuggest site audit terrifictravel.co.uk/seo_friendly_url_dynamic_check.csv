@@ -1,0 +1,5 @@
+Url,seo_friendly_url_dynamic_check
+https://terrifictravel.co.uk/book?type=flight&destination=Accra,False
+https://terrifictravel.co.uk/book?type=flight&destination=Cape%20Town,False
+https://terrifictravel.co.uk/book?type=flight&destination=Harare%20,False
+https://terrifictravel.co.uk/book?type=flight&destination=Manila%20,False

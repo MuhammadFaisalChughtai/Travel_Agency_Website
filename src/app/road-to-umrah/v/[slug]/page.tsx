@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -68,6 +68,7 @@ async function resolveItem(slug: string) {
       const images = parseArr(dbPackage.images);
       return {
         id: dbPackage.id,
+        slug: dbPackage.slug,
         title: dbPackage.title,
         itemType: "package",
         type: dbPackage.type,
@@ -215,7 +216,16 @@ export async function generateMetadata({ params }: ViewPageProps) {
           ? `${item.airline} flight to ${item.destination}`
           : "Detail View";
 
-  const titleText = item.metaTitle || item.title || fallbackTitle;
+  let titleText = item.metaTitle || item.title || fallbackTitle;
+
+  // Make package title tags unique using travel dates or duration to resolve duplicate title warnings
+  if (type === "package" && !item.metaTitle) {
+    if (item.travelDates) {
+      titleText = `${titleText} - ${item.travelDates}`;
+    } else if (item.duration) {
+      titleText = `${titleText} (${item.duration})`;
+    }
+  }
 
   const descText =
     item.metaDescription ||
@@ -235,6 +245,11 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
 
   if (!item) {
     notFound();
+  }
+
+  // 301 Redirect for ID-based URLs (UUIDs) to their friendly slugs to prevent duplicate content
+  if (item.slug && item.slug !== slug) {
+    permanentRedirect(`/v/${item.slug}`);
   }
 
   const type = item.itemType; // "package", "blog", "flight", "visa", "transport"
@@ -381,7 +396,9 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                     : item.type === "HAJJ"
                       ? "/hajj"
                       : "/holiday"
-                  : `/${type}s`
+                  : (type === "visa" || type === "transport")
+                    ? `/${type}`
+                    : `/${type}s`
             }
             className="hover:text-[#064e3b]"
           >
@@ -394,7 +411,9 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                     : item.type === "HAJJ"
                       ? "Hajj"
                       : "Holiday"
-                  : `${type.charAt(0).toUpperCase() + type.slice(1)}s`
+                  : (type === "visa" || type === "transport")
+                    ? type.charAt(0).toUpperCase() + type.slice(1)
+                    : `${type.charAt(0).toUpperCase() + type.slice(1)}s`
             }
           </Link>
           <ChevronRight className="w-3 h-3 text-slate-400" />
@@ -1362,6 +1381,33 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
               </div>
             </div>
           </aside>
+        </div>
+      </div>
+
+      {/* ─── Premium SEO Travel Information Block ─── */}
+      <div className="bg-emerald-50/15 border-t border-emerald-950/10 py-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <h2 className="text-xl md:text-2xl font-heading font-black text-[#064e3b] tracking-tight mb-4">
+              Planning Your Hajj and Umrah Journey with Road To Umrah
+            </h2>
+            <div className="prose prose-sm text-slate-600 leading-relaxed space-y-4">
+              <p>
+                At Road To Umrah, we specialize in offering comprehensive pilgrimage services, custom itineraries, and expert guidance for 
+                your sacred travels. Whether you are searching for high-quality 4-star and 5-star Umrah packages, arranging reliable ground 
+                transportation within Saudi Arabia, or seeking quick electronic visa waivers, our dedicated support team is available 24/7.
+              </p>
+              <p>
+                We collaborate with top-rated hotels in Mecca and Medina and secure fully protected flight tickets to ensure your journey is 
+                safe, comfortable, and spiritually fulfilling. Our flight connections are tailored to UK departures, providing flexible dates 
+                and options for private groups, families, and solo pilgrims alike.
+              </p>
+              <p>
+                Let our pilgrimage specialists manage the logistics of your visa processing, airport transfers, and hotel stays. Get in touch 
+                with Road To Umrah today to request a free personalized quote for your next journey of a lifetime.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
