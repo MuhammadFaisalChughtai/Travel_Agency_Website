@@ -146,29 +146,62 @@ export async function POST(req: Request) {
       }
     }
 
-    // Fallback to mock keywords if Google Ads API fails, is not yet enabled, or is pending approval
+    // Fallback to GPT-generated keywords if Google Ads API fails, is not yet enabled, or is pending approval
     if (keywordIdeas.length === 0) {
-      log("Notice: No keywords retrieved from Google Ads API (token pending/inactive). Falling back to mock high-intent keyword ideas for testing purposes...");
+      log("Notice: No keywords retrieved from Google Ads API (token pending/inactive). Asking GPT to generate relevant high-intent keywords dynamically...");
       
-      const mockPool = [
-        { text: "umrah packages 2026", searches: 2400, competition: "LOW", competitionIndex: 10 },
-        { text: "cheap umrah packages from uk", searches: 1900, competition: "MEDIUM", competitionIndex: 35 },
-        { text: "visa for umrah from uk", searches: 950, competition: "LOW", competitionIndex: 5 },
-        { text: "family umrah package deals", searches: 800, competition: "LOW", competitionIndex: 15 },
-        { text: "cheap flights to saudi arabia", searches: 1200, competition: "MEDIUM", competitionIndex: 40 },
-        { text: "family holidays package deals", searches: 3400, competition: "LOW", competitionIndex: 20 },
-        { text: "best deals on flights", searches: 4200, competition: "MEDIUM", competitionIndex: 45 },
-      ];
+      try {
+        const gptResponse = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${openAiApiKey}`,
+          },
+          body: JSON.stringify({
+            model: "gpt-4o-mini",
+            messages: [
+              {
+                role: "system",
+                content: `You are an expert SEO planner. Generate a list of 15 highly relevant, high-intent travel keyword ideas related to the following seeds: "${seedPhrases.join(", ")}".
+The keywords must target the UK market specifically (flights starting from UK, UK departures, etc.).
+For each keyword, output:
+1. text: The exact keyword phrase (e.g. "cheap umrah packages 2026", "flights to saudi from london")
+2. searches: A realistic monthly search volume (number between 500 and 5000)
+3. competition: "LOW" or "MEDIUM"
+4. competitionIndex: A number between 5 and 45
 
-      // Filter mockPool based on seed phrases to keep it relevant
-      keywordIdeas = mockPool.filter(item => 
-        seedPhrases.some(seed => 
-          item.text.toLowerCase().includes(seed.toLowerCase().split(" ")[0])
-        )
-      );
+The output MUST be a valid JSON object matching this schema exactly:
+{
+  "keywords": [
+    {
+      "text": "keyword phrase",
+      "searches": 1500,
+      "competition": "LOW",
+      "competitionIndex": 15
+    }
+  ]
+}`
+              },
+              {
+                role: "user",
+                content: `Generate travel keyword ideas for seeds: ${seedPhrases.join(", ")}`
+              }
+            ],
+            response_format: { type: "json_object" },
+            temperature: 0.8,
+          }),
+        });
 
-      if (keywordIdeas.length === 0) {
-        keywordIdeas = mockPool; // Fallback to all if no match
+        const resJson = await gptResponse.json();
+        if (resJson.choices?.[0]?.message?.content) {
+          const data = JSON.parse(resJson.choices[0].message.content);
+          if (data.keywords && Array.isArray(data.keywords)) {
+            keywordIdeas = data.keywords;
+            log(`Successfully generated ${keywordIdeas.length} keywords dynamically via GPT.`);
+          }
+        }
+      } catch (err: any) {
+        log(`Failed to generate keywords via GPT fallback: ${err.message}`);
       }
     }
 
