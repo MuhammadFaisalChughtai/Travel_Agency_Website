@@ -111,6 +111,9 @@ export async function POST(req: Request) {
 
     for (const seed of seedPhrases.slice(0, 3)) { // Limit to 3 seeds to respect quotas
       try {
+        // Sleep for 1.5 seconds to avoid Google Ads QPS limits (RESOURCE_EXHAUSTED)
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
         const response = await customer.keywordPlanIdeas.generateKeywordIdeas({
           customer_id: customerId,           // Pass customer_id inside request too
           keywordSeed: { keywords: [seed] },
