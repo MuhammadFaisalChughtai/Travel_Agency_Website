@@ -190,21 +190,30 @@ export async function POST(req: Request) {
       ...existingPackages.flatMap(p => (p.metaKeywords || "").split(",").map(k => k.trim().toLowerCase()))
     ]);
 
+    // Log set sizes for debugging
+    log(`[DEBUG] Anti-Cannibalism: Loaded ${usedSlugs.size} existing slugs and ${usedKeywords.size} unique used keywords.`);
+    if (usedSlugs.size > 0) log(`[DEBUG] Sample existing slugs: ${Array.from(usedSlugs).slice(0, 10).join(', ')}`);
+    if (usedKeywords.size > 0) log(`[DEBUG] Sample used keywords: ${Array.from(usedKeywords).slice(0, 10).join(', ')}`);
+
     // Filter for low/medium competition and high intent phrases, ensuring no duplicate targeting
     const filteredKeywords = keywordIdeas
       .filter(k => {
         const keywordText = k.text.toLowerCase().trim();
         const slug = keywordText.replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
-        // Exclude if slug matches an existing page or if the keyword was already used/logged
-        if (usedSlugs.has(slug)) return false;
-        if (usedKeywords.has(keywordText)) return false;
+        const isSlugTaken = usedSlugs.has(slug);
+        const isKeywordTaken = usedKeywords.has(keywordText);
+        const compCond = (k.competition === "LOW" || k.competition === "MEDIUM" || k.competitionIndex < 50);
+        const searchCond = k.searches >= 30;
+        const intentCond = (keywordText.includes("package") || keywordText.includes("deal") || keywordText.includes("book") || keywordText.includes("cheap") || keywordText.includes("best") || keywordText.includes("umrah") || keywordText.includes("holiday"));
 
-        return (
-          (k.competition === "LOW" || k.competition === "MEDIUM" || k.competitionIndex < 50) &&
-          k.searches >= 30 &&
-          (keywordText.includes("package") || keywordText.includes("deal") || keywordText.includes("book") || keywordText.includes("cheap") || keywordText.includes("best") || keywordText.includes("umrah") || keywordText.includes("holiday"))
-        );
+        log(`[DEBUG] Evaluate: "${k.text}" | slug="${slug}" | slugTaken=${isSlugTaken} | kwTaken=${isKeywordTaken} | compMatch=${compCond} | searchMatch=${searchCond} | intentMatch=${intentCond}`);
+
+        // Exclude if slug matches an existing page or if the keyword was already used/logged
+        if (isSlugTaken) return false;
+        if (isKeywordTaken) return false;
+
+        return compCond && searchCond && intentCond;
       })
       .sort((a, b) => b.searches - a.searches);
 
