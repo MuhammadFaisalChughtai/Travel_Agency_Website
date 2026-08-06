@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   // Get hostname (e.g., 'terrifictravelltd.com', 'roadtoumrah.co.uk')
   const hostname =
     request.headers.get("x-forwarded-host") ||
@@ -13,6 +13,28 @@ export function middleware(request: NextRequest) {
   requestHeaders.set("x-site-domain", hostname);
 
   const url = request.nextUrl.clone();
+
+  // Redirect UUID-based pages to their friendly slugs at the middleware level (to bypass Next.js streaming 200 OK issue)
+  if (url.pathname.startsWith("/v/")) {
+    const slug = url.pathname.substring(3);
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slug);
+    if (isUuid) {
+      try {
+        const resolveUrl = new URL(`/api/resolve-slug?id=${slug}`, request.url);
+        const res = await fetch(resolveUrl);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.slug) {
+            return NextResponse.redirect(new URL(`/v/${data.slug}`, request.url), {
+              status: 308,
+            });
+          }
+        }
+      } catch (e) {
+        console.error("Failed to resolve slug in middleware:", e);
+      }
+    }
+  }
 
   // Skip rewriting if the path is intended for admin, api, login, or password recovery
   if (
