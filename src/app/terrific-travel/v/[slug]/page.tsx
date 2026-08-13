@@ -221,11 +221,15 @@ export async function generateMetadata({ params }: ViewPageProps) {
   let titleText = item.metaTitle || item.title || fallbackTitle;
 
   // Make package title tags unique using travel dates or duration to resolve duplicate title warnings
-  if (type === "package" && !item.metaTitle) {
+  if (type === "package") {
     if (item.travelDates) {
-      titleText = `${titleText} - ${item.travelDates}`;
+      if (!titleText.toLowerCase().includes(item.travelDates.toLowerCase())) {
+        titleText = `${titleText} - ${item.travelDates}`;
+      }
     } else if (item.duration) {
-      titleText = `${titleText} (${item.duration})`;
+      if (!titleText.toLowerCase().includes(item.duration.toLowerCase())) {
+        titleText = `${titleText} (${item.duration})`;
+      }
     }
   }
 

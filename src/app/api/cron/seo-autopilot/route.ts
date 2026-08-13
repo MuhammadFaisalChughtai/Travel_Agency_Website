@@ -416,7 +416,7 @@ The output MUST be a valid JSON object matching this schema exactly:
   "duration": "Duration (e.g. 7 Nights)",
   "price": 999.00, // Price as a number
   "description": "Complete HTML details showing flights, hotels, transport, and visa sections",
-  "travelDates": "Travel season details",
+  "travelDates": "Short, concise travel dates string under 30 characters (e.g. 'Oct 2026 - Nov 2026' or 'Daily Departures 2026/27')",
   "metaTitle": "SEO title under 60 characters",
   "metaDescription": "SEO description under 160 characters",
   "metaKeywords": "comma-separated list of keywords including target ones"

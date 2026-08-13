@@ -57,7 +57,9 @@ export function PackageCard({ title, image, stars, price, detailsUrl, isSold = f
         <div className="mb-3">
           <div className="bg-[#eed6c4]/15 border border-[#eed6c4]/40 rounded-xl p-2 text-center">
             <span className="text-[9px] text-[#6b4f4f] font-bold block mb-0.5 uppercase tracking-wider">Travel Dates</span>
-            <span className="text-xs text-[#483434] font-black">{travelDates || "Flexible departures throughout 2026/27"}</span>
+            <span className="text-xs text-[#483434] font-black line-clamp-1 block text-center" title={travelDates || "Flexible departures throughout 2026/27"}>
+              {travelDates || "Flexible departures throughout 2026/27"}
+            </span>
           </div>
         </div>
 

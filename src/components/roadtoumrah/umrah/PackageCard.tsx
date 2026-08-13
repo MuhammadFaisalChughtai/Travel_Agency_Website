@@ -70,7 +70,9 @@ export function PackageCard({
         <div className="mb-3">
           <div className="bg-[#d4af37]/10 border border-[#d4af37]/30 rounded-xl p-2 text-center">
             <span className="text-[9px] text-[#064e3b]/80 font-bold block mb-0.5 uppercase tracking-wider">Travel Dates</span>
-            <span className="text-xs text-[#064e3b] font-black">{travelDates || "Flexible departures throughout 2026/27"}</span>
+            <span className="text-xs text-[#064e3b] font-black line-clamp-1 block text-center" title={travelDates || "Flexible departures throughout 2026/27"}>
+              {travelDates || "Flexible departures throughout 2026/27"}
+            </span>
           </div>
         </div>
 
