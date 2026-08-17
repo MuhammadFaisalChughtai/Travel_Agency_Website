@@ -65,7 +65,7 @@ export async function getAutopilotLogs() {
   
   const logs = await prisma.seoAutopilotLog.findMany({
     orderBy: { createdAt: "desc" },
-    take: 100
+    take: 500
   });
   
   return logs;

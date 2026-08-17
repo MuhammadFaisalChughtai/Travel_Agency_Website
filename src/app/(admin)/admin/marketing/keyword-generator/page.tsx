@@ -18,7 +18,9 @@ import {
   XCircle,
   HelpCircle,
   Terminal,
-  RefreshCw
+  RefreshCw,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 
 export default function KeywordGeneratorPage() {
@@ -33,7 +35,16 @@ export default function KeywordGeneratorPage() {
 
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
   const [dbLogs, setDbLogs] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const consoleEndRef = useRef<HTMLDivElement>(null);
+
+  const totalLogs = dbLogs.length;
+  const totalPages = Math.ceil(totalLogs / pageSize) || 1;
+  const safeCurrentPage = Math.min(currentPage, totalPages);
+  const startIndex = (safeCurrentPage - 1) * pageSize;
+  const endIndex = Math.min(startIndex + pageSize, totalLogs);
+  const currentLogs = dbLogs.slice(startIndex, endIndex);
 
   useEffect(() => {
     loadData();
@@ -335,14 +346,14 @@ export default function KeywordGeneratorPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200 text-slate-600">
-              {dbLogs.length === 0 ? (
+              {currentLogs.length === 0 ? (
                 <tr>
                   <td colSpan={7} className="px-4 py-8 text-center text-slate-400 italic">
                     No autopilot operations have been logged yet.
                   </td>
                 </tr>
               ) : (
-                dbLogs.map((logItem) => (
+                currentLogs.map((logItem) => (
                   <tr key={logItem.id} className="hover:bg-slate-50 transition-colors">
                     <td className="whitespace-nowrap px-4 py-3 text-slate-400">
                       {new Date(logItem.createdAt).toLocaleString()}
@@ -387,6 +398,82 @@ export default function KeywordGeneratorPage() {
             </tbody>
           </table>
         </div>
+
+        {/* Pagination Bar */}
+        {totalLogs > 0 && (
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-3 border-t border-slate-100 text-xs text-slate-600">
+            <div className="flex flex-wrap items-center gap-3">
+              <span>
+                Showing <strong className="font-semibold text-slate-900">{totalLogs > 0 ? startIndex + 1 : 0}</strong> to{" "}
+                <strong className="font-semibold text-slate-900">{endIndex}</strong> of{" "}
+                <strong className="font-semibold text-slate-900">{totalLogs}</strong> entries
+              </span>
+              <div className="flex items-center gap-1.5 ml-2">
+                <span className="text-slate-400">Per page:</span>
+                <select
+                  value={pageSize}
+                  onChange={(e) => {
+                    setPageSize(Number(e.target.value));
+                    setCurrentPage(1);
+                  }}
+                  className="rounded border border-slate-200 bg-white px-2 py-1 text-xs font-semibold text-slate-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer"
+                >
+                  <option value={10}>10</option>
+                  <option value={20}>20</option>
+                  <option value={50}>50</option>
+                  <option value={100}>100</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={safeCurrentPage === 1}
+                className="flex items-center justify-center rounded border border-slate-200 bg-white p-1.5 text-slate-500 hover:bg-slate-50 hover:text-slate-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                title="Previous Page"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+
+              <div className="flex items-center gap-1 px-1">
+                {Array.from({ length: totalPages }, (_, i) => i + 1)
+                  .filter((p) => {
+                    return p === 1 || p === totalPages || Math.abs(p - safeCurrentPage) <= 1;
+                  })
+                  .map((p, idx, arr) => {
+                    const prevPage = arr[idx - 1];
+                    const showEllipsis = prevPage && p - prevPage > 1;
+
+                    return (
+                      <React.Fragment key={p}>
+                        {showEllipsis && <span className="px-1 text-slate-400">…</span>}
+                        <button
+                          onClick={() => setCurrentPage(p)}
+                          className={`min-w-[28px] h-7 px-2 rounded text-xs font-bold transition-colors ${
+                            safeCurrentPage === p
+                              ? "bg-indigo-600 text-white shadow-sm"
+                              : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50"
+                          }`}
+                        >
+                          {p}
+                        </button>
+                      </React.Fragment>
+                    );
+                  })}
+              </div>
+
+              <button
+                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                disabled={safeCurrentPage >= totalPages}
+                className="flex items-center justify-center rounded border border-slate-200 bg-white p-1.5 text-slate-500 hover:bg-slate-50 hover:text-slate-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                title="Next Page"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
