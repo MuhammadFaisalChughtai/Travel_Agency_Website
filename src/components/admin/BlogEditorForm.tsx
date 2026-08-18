@@ -7,7 +7,7 @@ import { createBlog } from "@/app/(admin)/admin/blogs/actions";
 import { Button } from "@/components/ui/Button";
 
 // Dynamically import react-quill to avoid SSR issues
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+const ReactQuill: any = dynamic(() => import("react-quill"), { ssr: false });
 
 export function BlogEditorForm({ initialData }: { initialData?: any }) {
   const [title, setTitle] = useState(initialData?.title || "");

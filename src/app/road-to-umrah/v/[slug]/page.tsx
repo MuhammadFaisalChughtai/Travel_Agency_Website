@@ -1,6 +1,7 @@
 import { notFound, permanentRedirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { generatePackageSchema, generateFlightSchema, generateBlogSchema } from "@/lib/schemaGenerator";
 import {
   Calendar,
   Clock,
@@ -31,7 +32,6 @@ import {
   CalendarDays,
   List,
 } from "lucide-react";
-import { format } from "date-fns";
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { getSiteConfig, formatPrice } from "@/lib/siteConfig";
@@ -201,7 +201,7 @@ interface ViewPageProps {
 }
 
 export async function generateMetadata({ params }: ViewPageProps) {
-  const item = await resolveItem(params.slug);
+  const item: any = await resolveItem(params.slug);
   if (!item) return { title: "Item Not Found | Road To Umrah" };
 
   const type = item.itemType;
@@ -245,7 +245,7 @@ export async function generateMetadata({ params }: ViewPageProps) {
 
 export default async function UniversalViewPage({ params }: ViewPageProps) {
   const { slug } = params;
-  const item = await resolveItem(slug);
+  const item: any = await resolveItem(slug);
 
   if (!item) {
     notFound();
@@ -319,8 +319,57 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
     ? item.description.replace(/<[^>]*>?/gm, ' ').replace(/\s+/g, ' ').trim() 
     : "";
 
+  let schemaData: any[] = [];
+  if (type === "package") {
+    schemaData = generatePackageSchema({
+      title,
+      description: cleanDescription,
+      slug: item.slug || slug,
+      price: Number(price) || 0,
+      type: item.type || "UMRAH",
+      destination: item.destination || "",
+      duration: item.duration || "",
+      imageUrl: image,
+      meccaHotel: item.meccaHotel,
+      meccaNights: item.meccaNights,
+      medinaHotel: item.medinaHotel,
+      medinaNights: item.medinaNights,
+      domainUrl: siteConfig.baseUrl || "https://roadtoumrah.co.uk",
+    });
+  } else if (type === "flight") {
+    schemaData = generateFlightSchema({
+      airline: item.airline || "Saudia",
+      airlineCode: item.airlineCode,
+      departure: item.departure || "London Heathrow",
+      departureCode: item.departureCode,
+      destination: item.destination || "Jeddah",
+      destinationCode: item.destinationCode,
+      price: Number(price) || 0,
+      duration: item.duration,
+      isTransit: item.isTransit,
+      slug: item.slug || slug,
+      domainUrl: siteConfig.baseUrl || "https://roadtoumrah.co.uk",
+    });
+  } else if (type === "blog") {
+    schemaData = generateBlogSchema({
+      title,
+      excerpt: item.excerpt || cleanDescription.substring(0, 160),
+      slug: item.slug || slug,
+      category: item.category || "Travel Guide",
+      date: item.date || new Date().toISOString(),
+      imageUrl: image,
+      domainUrl: siteConfig.baseUrl || "https://roadtoumrah.co.uk",
+    });
+  }
+
   return (
     <div className="flex flex-col min-h-screen bg-background text-[#064e3b]">
+      {schemaData.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
+      )}
       {/* ─── Hero Header (Umrah Luxury Theme) ─── */}
       <Hero
         backgroundImage={image}
@@ -577,6 +626,56 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                     ))}
                   </div>
                 </section>
+
+                {/* ── Makkah & Madinah Hotel Accommodation Breakdown (if present) ── */}
+                {(item.meccaHotel || item.medinaHotel) && (
+                  <section className="bg-white rounded-3xl p-8 border border-[#d4af37]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
+                    <h2 className="text-xl font-heading font-black text-[#064e3b] flex items-center gap-2">
+                      <Building2 className="w-5 h-5 text-[#064e3b]" /> Hotel Accommodation Breakdown
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {item.meccaHotel && (
+                        <div className="bg-[#F9FAFB] rounded-2xl p-6 border border-[#d4af37]/40 space-y-3">
+                          <div className="flex items-center justify-between">
+                            <span className="px-3 py-1 bg-[#064e3b] text-[#F9FAFB] text-[10px] font-black uppercase tracking-wider rounded-full">
+                              Makkah Stay {item.meccaNights ? `(${item.meccaNights} Nights)` : ""}
+                            </span>
+                            <span className="text-xs font-extrabold text-[#064e3b]">Masjid al-Haram</span>
+                          </div>
+                          <h3 className="text-lg font-heading font-black text-[#064e3b]">{item.meccaHotel}</h3>
+                          <p className="text-xs text-slate-600 leading-relaxed font-light">
+                            Conveniently located in Makkah Mukarramah with direct access to the Haram courtyard. Includes air-conditioned accommodation, private bathroom, and daily housekeeping.
+                          </p>
+                          <div className="flex items-center gap-3 text-xs font-semibold text-[#064e3b] pt-2 border-t border-[#d4af37]/30">
+                            <span>Room: {item.meccaRoomType || "Quad / Family"}</span>
+                            <span>•</span>
+                            <span>Meals: Breakfast included</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {item.medinaHotel && (
+                        <div className="bg-[#F9FAFB] rounded-2xl p-6 border border-[#d4af37]/40 space-y-3">
+                          <div className="flex items-center justify-between">
+                            <span className="px-3 py-1 bg-[#d4af37] text-[#064e3b] text-[10px] font-black uppercase tracking-wider rounded-full">
+                              Madinah Stay {item.medinaNights ? `(${item.medinaNights} Nights)` : ""}
+                            </span>
+                            <span className="text-xs font-extrabold text-[#064e3b]">Masjid an-Nabawi</span>
+                          </div>
+                          <h3 className="text-lg font-heading font-black text-[#064e3b]">{item.medinaHotel}</h3>
+                          <p className="text-xs text-slate-600 leading-relaxed font-light">
+                            Comfortable hotel stay in Madinah Al-Munawwarah in close proximity to the Prophet's Mosque for easy attendance at all five daily prayers.
+                          </p>
+                          <div className="flex items-center gap-3 text-xs font-semibold text-[#064e3b] pt-2 border-t border-[#d4af37]/30">
+                            <span>Room: {item.medinaRoomType || "Quad / Family"}</span>
+                            <span>•</span>
+                            <span>Meals: Breakfast included</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </section>
+                )}
 
                 {/* ── Journey Steps ── */}
                 <section className="bg-white rounded-3xl p-8 border border-[#d4af37]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)]">

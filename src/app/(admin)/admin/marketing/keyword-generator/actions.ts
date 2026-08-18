@@ -20,6 +20,8 @@ export async function getAutopilotSettings() {
     "seo_autopilot_mode",
     "seo_autopilot_limit",
     "seo_autopilot_seed_keywords",
+    "seo_autopilot_package_type",
+    "seo_autopilot_content_type",
     "seo_autopilot_last_run"
   ];
   
@@ -34,6 +36,8 @@ export async function getAutopilotSettings() {
     seo_autopilot_mode: "optimize_existing",
     seo_autopilot_limit: "50",
     seo_autopilot_seed_keywords: "",
+    seo_autopilot_package_type: "ALL",
+    seo_autopilot_content_type: "ALL",
     seo_autopilot_last_run: "Never"
   };
   

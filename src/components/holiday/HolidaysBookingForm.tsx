@@ -27,6 +27,7 @@ export function HolidaysBookingForm({ isHome = false, isModal = false }: { isHom
     date: "",
     duration: "",
     travelers: "",
+    category: "",
     name: "",
     email: "",
     phone: "",
@@ -49,26 +50,19 @@ export function HolidaysBookingForm({ isHome = false, isModal = false }: { isHom
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus("loading");
-    setErrorMsg("");
-
     if (!isMathValid) {
-      setErrorMsg("Please solve the math problem correctly.");
       setStatus("error");
+      setErrorMsg("Please complete the security math question correctly.");
       return;
     }
 
-    const customMessage = `
-Destination: ${formData.destination}
-Flying from: ${formData.departureAirport}
-Date: ${formData.date}
-Duration: ${formData.duration}
-Passengers: ${formData.travelers}
-Budget per person: ${formData.budget || "Not specified"}
-    `.trim();
+    setStatus("loading");
+    setErrorMsg("");
 
     try {
-      const res = await fetch("/api/enquiry", {
+      let customMessage = `Holiday Request: ${formData.destination || "Not specified"}. Preferred Airport: ${formData.departureAirport || "Not specified"}. Dates: ${formData.date || "Not specified"}. Duration: ${formData.duration || "Not specified"}. Travelers: ${formData.travelers || "Not specified"}. Budget: ${formData.budget || "Not specified"}.`;
+      
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -98,6 +92,7 @@ Budget per person: ${formData.budget || "Not specified"}
         date: "",
         duration: "",
         travelers: "",
+        category: "",
         name: "",
         email: "",
         phone: "",
@@ -161,9 +156,9 @@ Budget per person: ${formData.budget || "Not specified"}
               <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6b4f4f] pointer-events-none" />
               <input
                 type={formData.date ? "date" : "text"}
-                onFocus={(e) => { e.target.type = "date"; try { (e.target as any).showPicker(); } catch (err) {} }}
-                onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
-                onClick={(e) => { e.target.type = "date"; try { (e.target as any).showPicker(); } catch (err) {} }}
+                onFocus={(e) => { (e.target as HTMLInputElement).type = "date"; try { (e.target as any).showPicker(); } catch (err) {} }}
+                onBlur={(e) => { if (!(e.target as HTMLInputElement).value) (e.target as HTMLInputElement).type = "text"; }}
+                onClick={(e) => { (e.target as HTMLInputElement).type = "date"; try { (e.target as any).showPicker(); } catch (err) {} }}
                 name="date"
                 value={formData.date}
                 onChange={handleChange}

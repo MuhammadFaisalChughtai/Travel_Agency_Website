@@ -28,6 +28,8 @@ export default function KeywordGeneratorPage() {
   const [mode, setMode] = useState("optimize_existing");
   const [limit, setLimit] = useState("50");
   const [seeds, setSeeds] = useState("");
+  const [packageType, setPackageType] = useState("ALL");
+  const [contentType, setContentType] = useState("ALL");
   const [lastRun, setLastRun] = useState("Never");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -61,9 +63,11 @@ export default function KeywordGeneratorPage() {
       setLoading(true);
       const config = await getAutopilotSettings();
       setEnabled(config.seo_autopilot_enabled === "true");
-      setMode(config.seo_autopilot_mode);
-      setLimit(config.seo_autopilot_limit);
-      setSeeds(config.seo_autopilot_seed_keywords);
+      setMode(config.seo_autopilot_mode || "optimize_existing");
+      setLimit(config.seo_autopilot_limit || "50");
+      setSeeds(config.seo_autopilot_seed_keywords || "");
+      setPackageType(config.seo_autopilot_package_type || "ALL");
+      setContentType(config.seo_autopilot_content_type || "ALL");
       setLastRun(config.seo_autopilot_last_run || "Never");
 
       const logs = await getAutopilotLogs();
@@ -84,6 +88,8 @@ export default function KeywordGeneratorPage() {
         seo_autopilot_mode: mode,
         seo_autopilot_limit: limit,
         seo_autopilot_seed_keywords: seeds,
+        seo_autopilot_package_type: packageType,
+        seo_autopilot_content_type: contentType,
       });
       alert("Settings saved successfully!");
     } catch (err) {
@@ -232,6 +238,42 @@ export default function KeywordGeneratorPage() {
                   <option value="generate_new">Generate New Content (Draft new pages)</option>
                   <option value="both">Hybrid Mode (Optimize current & Write new drafts)</option>
                 </select>
+              </div>
+
+              {/* Target Content Type Select */}
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-indigo-950 uppercase tracking-wider">Target Content Type</label>
+                <select
+                  value={contentType}
+                  onChange={(e) => setContentType(e.target.value)}
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none bg-white font-medium"
+                >
+                  <option value="ALL">ALL Content Types (Packages, Flights, Blogs)</option>
+                  <option value="PACKAGE font-semibold">Packages Only (Travel & Pilgrimage Packages)</option>
+                  <option value="FLIGHT">Flights Only (Airlines & UK Route Deals)</option>
+                  <option value="BLOG">Blogs Only (Travel Guides & Articles)</option>
+                </select>
+              </div>
+
+              {/* Package Type Niche Select */}
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-indigo-950 uppercase tracking-wider">Package Niche / Type</label>
+                <select
+                  value={packageType}
+                  onChange={(e) => setPackageType(e.target.value)}
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none bg-white font-medium"
+                >
+                  <option value="ALL">ALL Categories (Dynamic auto-detection)</option>
+                  <option value="UMRAH">UMRAH (Pilgrimage Packages Only)</option>
+                  <option value="HOLIDAY">HOLIDAY (General Vacations - Excludes Hajj/Umrah)</option>
+                  <option value="Cruise_Umrah">Cruise_Umrah (Red Sea Cruise + Umrah Combo)</option>
+                  <option value="HAJJ">HAJJ (Hajj Pilgrimage Only)</option>
+                </select>
+                {packageType === "HOLIDAY" && (
+                  <p className="text-[10px] text-amber-700 font-semibold bg-amber-50 p-2 rounded border border-amber-200">
+                    ⚠️ Holiday mode selected: The AI strictly isolates general holidays from Hajj & Umrah content to prevent mixing religious pilgrimages into leisure vacations.
+                  </p>
+                )}
               </div>
 
               {/* Daily Limit */}

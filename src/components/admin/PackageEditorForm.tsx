@@ -4,7 +4,7 @@ import React, { useState, useRef, useMemo } from "react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+const ReactQuill: any = dynamic(() => import("react-quill"), { ssr: false });
 
 export function PackageEditorForm({ initialData }: { initialData?: any }) {
   const [title, setTitle] = useState(initialData?.title || "");

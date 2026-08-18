@@ -188,16 +188,16 @@ export function TransportBookingForm({
               <input
                 type={formData.date ? "date" : "text"}
                 onFocus={(e) => {
-                  e.target.type = "date";
+                  (e.target as HTMLInputElement).type = "date";
                   try {
                     (e.target as any).showPicker();
                   } catch (err) {}
                 }}
                 onBlur={(e) => {
-                  if (!e.target.value) e.target.type = "text";
+                  if (!(e.target as HTMLInputElement).value) (e.target as HTMLInputElement).type = "text";
                 }}
                 onClick={(e) => {
-                  e.target.type = "date";
+                  (e.target as HTMLInputElement).type = "date";
                   try {
                     (e.target as any).showPicker();
                   } catch (err) {}

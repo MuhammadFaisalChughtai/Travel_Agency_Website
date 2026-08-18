@@ -1,5 +1,6 @@
 export type SiteConfig = {
   domain: string;
+  baseUrl: string;
   currencySymbol: string;
   currencyCode: string;
   exchangeRate: number; // Multiplier from base database price (GBP) to this currency
@@ -10,6 +11,7 @@ export type SiteConfig = {
 export const SITE_CONFIGS: Record<string, SiteConfig> = {
   "terrifictravelltd.com": {
     domain: "terrifictravelltd.com",
+    baseUrl: "https://terrifictravelltd.com",
     currencySymbol: "$",
     currencyCode: "USD",
     exchangeRate: 1.25, // Base conversion rate to USD
@@ -18,6 +20,7 @@ export const SITE_CONFIGS: Record<string, SiteConfig> = {
   },
   "terrifictravel.co.uk": {
     domain: "terrifictravel.co.uk",
+    baseUrl: "https://terrifictravel.co.uk",
     currencySymbol: "£",
     currencyCode: "GBP",
     exchangeRate: 1.0,
@@ -27,6 +30,7 @@ export const SITE_CONFIGS: Record<string, SiteConfig> = {
 
   "roadtoumrah.co.uk": {
     domain: "roadtoumrah.co.uk",
+    baseUrl: "https://roadtoumrah.co.uk",
     currencySymbol: "£",
     currencyCode: "GBP",
     exchangeRate: 1.0,

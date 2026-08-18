@@ -117,15 +117,13 @@ export function PackageCard({
 
         {/* Parallel Modern Actions (Saves space and looks extremely high-end) */}
         <div className="flex gap-2">
-          <button
-            variant="outline"
-            className="h-11 w-11 p-0 border-[#d4af37] text-[#064e3b] hover:bg-[#F9FAFB] hover:text-[#064e3b] hover:border-[#064e3b]/40 flex items-center justify-center rounded-2xl shrink-0 transition-all duration-300"
-            asChild
+          <a
+            href="tel:+441215291630"
+            aria-label="Call Now"
+            className="h-11 w-11 p-0 border border-[#d4af37] text-[#064e3b] hover:bg-[#F9FAFB] hover:text-[#064e3b] hover:border-[#064e3b]/40 flex items-center justify-center rounded-2xl shrink-0 transition-all duration-300"
           >
-            <a href="tel:+441215291630" aria-label="Call Now">
-              <PhoneCall className="w-4 h-4" />
-            </a>
-          </button>
+            <PhoneCall className="w-4 h-4" />
+          </a>
           <Link href={detailsUrl} className="flex-1 flex">
             <button
               className={`w-full h-11 text-xs rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 font-extrabold tracking-widest uppercase border ${isSold ? "bg-slate-500 hover:bg-slate-600 text-white border-slate-400/40" : "bg-[#064e3b] hover:bg-[#064e3b] text-[#F9FAFB] border-[#d4af37]/30"}`}
