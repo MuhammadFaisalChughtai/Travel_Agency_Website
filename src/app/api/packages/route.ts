@@ -23,7 +23,7 @@ export async function GET(request: Request) {
 }
 
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 
 export async function POST(request: Request) {
   try {

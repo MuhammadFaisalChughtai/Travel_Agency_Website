@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 
 async function requireAuth() {
   const session = await getServerSession(authOptions);
@@ -71,6 +71,54 @@ export async function getAutopilotLogs() {
     orderBy: { createdAt: "desc" },
     take: 500
   });
-  
-  return logs;
+
+  const packages = await prisma.package.findMany({
+    select: { id: true, slug: true, type: true, title: true }
+  });
+  const blogs = await prisma.blog.findMany({
+    select: { id: true, slug: true, title: true }
+  });
+  const flights = await prisma.flight.findMany({
+    select: { id: true, slug: true, airline: true, departure: true, destination: true }
+  });
+
+  const packageMap = new Map(packages.map(p => [p.id, p]));
+  const packageTitleMap = new Map(packages.map(p => [p.title.toLowerCase().trim(), p]));
+  const blogMap = new Map(blogs.map(b => [b.id, b]));
+  const blogTitleMap = new Map(blogs.map(b => [b.title.toLowerCase().trim(), b]));
+  const flightMap = new Map(flights.map(f => [f.id, f]));
+
+  return logs.map(log => {
+    let slug: string | null = null;
+    let packageType: string | null = null;
+
+    if (log.targetType === "PACKAGE") {
+      const p = (log.targetId ? packageMap.get(log.targetId) : null) || packageTitleMap.get(log.targetTitle.toLowerCase().trim());
+      if (p) {
+        slug = p.slug;
+        packageType = p.type;
+      } else {
+        const match = log.details?.match(/\[Type:\s*([A-Za-z_]+)\]/);
+        if (match) packageType = match[1];
+      }
+    } else if (log.targetType === "BLOG") {
+      const b = (log.targetId ? blogMap.get(log.targetId) : null) || blogTitleMap.get(log.targetTitle.toLowerCase().trim());
+      if (b) slug = b.slug;
+    } else if (log.targetType === "FLIGHT") {
+      const f = log.targetId ? flightMap.get(log.targetId) : null;
+      if (f && f.slug) {
+        slug = f.slug;
+      }
+    }
+
+    if (!slug && log.keywords) {
+      slug = log.keywords.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || null;
+    }
+
+    return {
+      ...log,
+      slug,
+      packageType,
+    };
+  });
 }

@@ -20,7 +20,8 @@ import {
   Terminal,
   RefreshCw,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  ExternalLink
 } from "lucide-react";
 
 export default function KeywordGeneratorPage() {
@@ -380,62 +381,102 @@ export default function KeywordGeneratorPage() {
               <tr>
                 <th className="px-4 py-3">Timestamp</th>
                 <th className="px-4 py-3">Operation</th>
-                <th className="px-4 py-3">Type</th>
+                <th className="px-4 py-3">Type & Niche</th>
                 <th className="px-4 py-3">Target Title</th>
                 <th className="px-4 py-3">Keywords Targeted</th>
                 <th className="px-4 py-3">Status</th>
+                <th className="px-4 py-3">View Content</th>
                 <th className="px-4 py-3">Details</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200 text-slate-600">
               {currentLogs.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-4 py-8 text-center text-slate-400 italic">
+                  <td colSpan={8} className="px-4 py-8 text-center text-slate-400 italic">
                     No autopilot operations have been logged yet.
                   </td>
                 </tr>
               ) : (
-                currentLogs.map((logItem) => (
-                  <tr key={logItem.id} className="hover:bg-slate-50 transition-colors">
-                    <td className="whitespace-nowrap px-4 py-3 text-slate-400">
-                      {new Date(logItem.createdAt).toLocaleString()}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3">
-                      <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                        logItem.actionType === "OPTIMIZE" 
-                          ? "bg-blue-50 text-blue-700 border border-blue-200" 
-                          : "bg-purple-50 text-purple-700 border border-purple-200"
-                      }`}>
-                        {logItem.actionType}
-                      </span>
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3 font-semibold text-slate-700">
-                      {logItem.targetType}
-                    </td>
-                    <td className="px-4 py-3 font-medium text-slate-900 max-w-[200px] truncate">
-                      {logItem.targetTitle}
-                    </td>
-                    <td className="px-4 py-3 text-slate-500 max-w-[150px] truncate">
-                      {logItem.keywords}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3">
-                      {logItem.status === "SUCCESS" ? (
-                        <span className="inline-flex items-center gap-1 text-emerald-600 font-bold">
-                          <CheckCircle2 className="h-3.5 w-3.5" />
-                          Success
+                currentLogs.map((logItem) => {
+                  const itemSlug = logItem.slug || logItem.targetTitle.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+                  const viewUrl = `/terrific-travel/v/${itemSlug}`;
+                  const pkgType = logItem.packageType || (logItem.details?.match(/\[Type:\s*([A-Za-z_]+)\]/)?.[1]);
+
+                  return (
+                    <tr key={logItem.id} className="hover:bg-slate-50 transition-colors">
+                      <td className="whitespace-nowrap px-4 py-3 text-slate-400">
+                        {new Date(logItem.createdAt).toLocaleString()}
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-3">
+                        <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                          logItem.actionType === "OPTIMIZE" 
+                            ? "bg-blue-50 text-blue-700 border border-blue-200" 
+                            : "bg-purple-50 text-purple-700 border border-purple-200"
+                        }`}>
+                          {logItem.actionType}
                         </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1 text-red-600 font-bold">
-                          <XCircle className="h-3.5 w-3.5" />
-                          Failed
-                        </span>
-                      )}
-                    </td>
-                    <td className="px-4 py-3 text-slate-400 max-w-[250px] truncate" title={logItem.details}>
-                      {logItem.details}
-                    </td>
-                  </tr>
-                ))
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-3 font-semibold text-slate-700">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="font-bold">{logItem.targetType}</span>
+                          {pkgType && (
+                            <span className={`px-2 py-0.5 rounded text-[10px] font-extrabold uppercase border ${
+                              pkgType === "UMRAH"
+                                ? "bg-emerald-50 text-emerald-800 border-emerald-300"
+                                : pkgType === "HOLIDAY"
+                                ? "bg-amber-50 text-amber-800 border-amber-300"
+                                : pkgType === "HAJJ"
+                                ? "bg-purple-50 text-purple-800 border-purple-300"
+                                : "bg-cyan-50 text-cyan-800 border-cyan-300"
+                            }`}>
+                              {pkgType}
+                            </span>
+                          )}
+                        </div>
+                      </td>
+                      <td className="px-4 py-3 font-medium text-slate-900 max-w-[200px] truncate" title={logItem.targetTitle}>
+                        <a 
+                          href={viewUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="hover:text-indigo-600 hover:underline flex items-center gap-1 group"
+                        >
+                          <span className="truncate">{logItem.targetTitle}</span>
+                        </a>
+                      </td>
+                      <td className="px-4 py-3 text-slate-500 max-w-[150px] truncate" title={logItem.keywords}>
+                        {logItem.keywords}
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-3">
+                        {logItem.status === "SUCCESS" ? (
+                          <span className="inline-flex items-center gap-1 text-emerald-600 font-bold">
+                            <CheckCircle2 className="h-3.5 w-3.5" />
+                            Success
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 text-red-600 font-bold">
+                            <XCircle className="h-3.5 w-3.5" />
+                            Failed
+                          </span>
+                        )}
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-3">
+                        <a
+                          href={viewUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 rounded-lg bg-indigo-50 border border-indigo-200 px-2.5 py-1 text-[11px] font-bold text-indigo-700 hover:bg-indigo-600 hover:text-white transition-all shadow-sm"
+                        >
+                          <ExternalLink className="h-3 w-3" />
+                          View Page
+                        </a>
+                      </td>
+                      <td className="px-4 py-3 text-slate-400 max-w-[200px] truncate" title={logItem.details}>
+                        {logItem.details}
+                      </td>
+                    </tr>
+                  );
+                })
               )}
             </tbody>
           </table>

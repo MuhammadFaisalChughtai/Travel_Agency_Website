@@ -153,13 +153,18 @@ export async function POST(req: Request) {
         let errMsg = err.message || err.details;
         if (!errMsg && err.errors) errMsg = JSON.stringify(err.errors);
         if (!errMsg) errMsg = JSON.stringify(err);
-        log(`Failed to fetch keywords for seed '${seed}': ${errMsg}`);
+        
+        if (errMsg.includes("invalid_grant")) {
+          log(`Google Ads API Auth Notice for seed '${seed}': Refresh token expired/invalid (invalid_grant). Falling back to GPT AI keyword generation.`);
+        } else {
+          log(`Failed to fetch keywords for seed '${seed}': ${errMsg}`);
+        }
       }
     }
 
     // Fallback to GPT-generated keywords if Google Ads API fails or is inactive
     if (keywordIdeas.length === 0) {
-      log("Notice: No keywords retrieved from Google Ads API. Asking GPT to generate relevant high-intent keywords dynamically...");
+      log("Notice: Google Ads API inactive/unreachable. Activating GPT AI Engine to generate 15 high-intent UK keywords...");
       
       try {
         const typeConstraint = config.packageType !== "ALL" ? `Target package type: ${config.packageType}.` : "";
@@ -324,8 +329,25 @@ Output JSON matching this schema exactly:
         for (const pkg of packagesToOptimize) {
           if (processedCount >= limitCount) break;
 
-          const kwMatch = filteredKeywords.find(k => k.text.toLowerCase().includes(pkg.destination.toLowerCase()))?.text || "premium UK travel deals";
-          log(`Optimizing Package: '${pkg.title}' (ID: ${pkg.id}) targeting keyword: [${kwMatch}]`);
+          const pTypeKey = (pkg.type || config.packageType || "").toLowerCase();
+          let kwMatch = filteredKeywords.find(k => {
+            const txt = k.text.toLowerCase();
+            if (pTypeKey === "umrah" || pTypeKey === "cruise_umrah") return txt.includes("umrah") || txt.includes("makkah") || txt.includes("madinah");
+            if (pTypeKey === "hajj") return txt.includes("hajj");
+            if (pTypeKey === "holiday") return !txt.includes("umrah") && !txt.includes("hajj");
+            return txt.includes((pkg.destination || "").toLowerCase());
+          })?.text;
+
+          if (!kwMatch) {
+            kwMatch = filteredKeywords[0]?.text || (
+              pTypeKey === "umrah" ? "cheap umrah packages from uk" :
+              pTypeKey === "hajj" ? "hajj packages 2026 uk" :
+              pTypeKey === "cruise_umrah" ? "red sea umrah cruise deals" :
+              "luxury holiday packages from uk"
+            );
+          }
+
+          log(`Optimizing Package: '${pkg.title}' (ID: ${pkg.id}) [Type: ${pkg.type || config.packageType}] targeting keyword: [${kwMatch}]`);
 
           try {
             const pRules = getPackageRules(pkg.type || config.packageType);
@@ -373,11 +395,19 @@ Return valid JSON matching this schema:
             if (resJson.choices?.[0]?.message?.content) {
               const data = JSON.parse(resJson.choices[0].message.content);
 
+              const imgRes = await fetchRelevantImage({
+                topic: kwMatch,
+                destination: pkg.destination,
+                type: pkg.type || config.packageType,
+                fallbackTitle: data.title || pkg.title
+              });
+
               await prisma.package.update({
                 where: { id: pkg.id },
                 data: {
                   title: data.title || pkg.title,
                   description: data.description || pkg.description,
+                  images: JSON.stringify([imgRes.url]),
                   meccaHotel: data.meccaHotel ?? pkg.meccaHotel,
                   meccaNights: data.meccaNights ?? pkg.meccaNights,
                   medinaHotel: data.medinaHotel ?? pkg.medinaHotel,
@@ -507,7 +537,9 @@ Return JSON matching schema:
         const slug = kw.text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
         // Determine entity type to generate
-        const targetType = targetEntityTypes.includes("FLIGHT") && kw.text.includes("flight")
+        const targetType = config.contentType !== "ALL"
+          ? config.contentType
+          : targetEntityTypes.includes("FLIGHT") && kw.text.includes("flight")
           ? "FLIGHT"
           : targetEntityTypes.includes("BLOG") && (kw.text.includes("guide") || kw.text.includes("how to") || kw.text.includes("tips") || kw.text.includes("requirements"))
           ? "BLOG"

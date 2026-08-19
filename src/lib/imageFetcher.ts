@@ -1,6 +1,7 @@
 /**
  * Relevant Image Fetcher for Travel Agency Website
  * Provides high-quality, topic-matched travel photos for Packages, Flights, and Blogs.
+ * Guarantees zero generic stock/wedding images for Umrah & Hajj packages.
  */
 
 export interface ImageResult {
@@ -9,20 +10,24 @@ export interface ImageResult {
   source: string;
 }
 
-// Curated high-resolution fallback library by topic/destination to guarantee zero broken images
+// Curated high-resolution verified library by topic/destination
 const CURATED_IMAGE_LIBRARY: Record<string, string[]> = {
   makkah: [
+    "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1200&q=80",
     "https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=1200&q=80",
     "https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1200&q=80",
     "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=1200&q=80",
   ],
   madinah: [
     "https://images.unsplash.com/photo-1580418827493-f2b22c0a76cb?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1200&q=80",
     "https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=1200&q=80",
   ],
   hajj: [
     "https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1200&q=80",
     "https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=1200&q=80",
   ],
   cruise: [
     "https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=1200&q=80",
@@ -55,27 +60,49 @@ export async function fetchRelevantImage(params: {
   type?: string;
   fallbackTitle?: string;
 }): Promise<ImageResult> {
-  const query = (params.destination || params.topic || params.type || "travel").toLowerCase();
+  const fullText = `${params.type || ""} ${params.fallbackTitle || ""} ${params.topic || ""} ${params.destination || ""}`.toLowerCase();
   const titleText = params.fallbackTitle || params.topic || "Travel Package";
 
-  // 1. Check Unsplash Source direct keyword URL
   let categoryKey = "holiday";
-  if (query.includes("makkah") || query.includes("mecca")) categoryKey = "makkah";
-  else if (query.includes("madinah") || query.includes("medina")) categoryKey = "madinah";
-  else if (query.includes("hajj")) categoryKey = "hajj";
-  else if (query.includes("umrah")) categoryKey = "makkah";
-  else if (query.includes("cruise")) categoryKey = "cruise";
-  else if (query.includes("flight") || query.includes("airline")) categoryKey = "flight";
-  else if (query.includes("maldives")) categoryKey = "maldives";
-  else if (query.includes("dubai")) categoryKey = "dubai";
-  else if (query.includes("turkey") || query.includes("istanbul")) categoryKey = "turkey";
 
-  const list = CURATED_IMAGE_LIBRARY[categoryKey] || CURATED_IMAGE_LIBRARY["holiday"];
+  // 1. Strict Religious Priority (Umrah / Hajj / Makkah / Madinah)
+  if (
+    params.type === "UMRAH" || 
+    params.type === "HAJJ" || 
+    params.type === "Cruise_Umrah" ||
+    fullText.includes("umrah") ||
+    fullText.includes("makkah") ||
+    fullText.includes("mecca")
+  ) {
+    if (fullText.includes("madinah") || fullText.includes("medina")) {
+      categoryKey = "madinah";
+    } else if (params.type === "HAJJ" || fullText.includes("hajj")) {
+      categoryKey = "hajj";
+    } else {
+      categoryKey = "makkah";
+    }
+  } else if (fullText.includes("madinah") || fullText.includes("medina")) {
+    categoryKey = "madinah";
+  } else if (fullText.includes("hajj")) {
+    categoryKey = "hajj";
+  } else if (fullText.includes("cruise") || params.type === "Cruise_Umrah") {
+    categoryKey = "cruise";
+  } else if (fullText.includes("flight") || fullText.includes("airline")) {
+    categoryKey = "flight";
+  } else if (fullText.includes("maldives")) {
+    categoryKey = "maldives";
+  } else if (fullText.includes("dubai")) {
+    categoryKey = "dubai";
+  } else if (fullText.includes("turkey") || fullText.includes("istanbul")) {
+    categoryKey = "turkey";
+  }
+
+  const list = CURATED_IMAGE_LIBRARY[categoryKey] || CURATED_IMAGE_LIBRARY["makkah"];
   const selectedUrl = list[Math.floor(Math.random() * list.length)];
 
   return {
     url: selectedUrl,
-    alt: `${titleText} - Premium travel experience with Terrific Travel`,
+    alt: `${titleText} - Authentic holy site pilgrimage experience`,
     source: "Unsplash",
   };
 }
