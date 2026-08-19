@@ -140,12 +140,9 @@ When generating the package, you must follow this logical step-by-step planning 
 5. COMBINED PRICE CALCULATION: Calculate a realistic, all-inclusive package price by summing up the estimated costs of the flight, hotels, transport, and visa selected. Return this sum as a clean number string in the "price" field.
 
 === DESCRIPTION HTML STRUCTURE ===
-Your HTML "description" field must contain a fully-humanized, engaging write-up that clearly highlights and breaks down the selected items:
-- <h3>Package Highlights</h3> (A premium summary of the all-inclusive experience)
-- <h3>Flight Details</h3> (Airline, route, cabin baggage)
-- <h3>Premium Accommodation</h3> (For Umrah, list the Makkah hotel and Medina hotel with star ratings; for Holiday, list the destination hotels)
-- <h3>Transportation & Transfers</h3> (Private transfers, Haramain train details)
-- <h3>Visa & Inclusions</h3> (Visa processing details, guided support)
+Your HTML "description" field must contain a fully-humanized, engaging write-up broken down into explicit sequential Day-by-Day HTML sections:
+- EVERY section header MUST start with explicit Day numbers (e.g. <h3>Day 1: UK Departure & Arrival in Makkah</h3>, <h3>Day 2 – Day 7: Makkah Stay & Umrah Rituals</h3>, <h3>Day 8: Transfer to Madinah Al-Munawwarah</h3>, <h3>Day 9 – Day 11: Madinah Stay & Prophet's Mosque Ziyarat</h3>, <h3>Final Day (Day 12): Return Journey to UK</h3>).
+- NEVER output a section header without explicit Day numbers!
 Use structural HTML tags (<h3>, <strong>, <ul>, <li>, <p>). Do not include any inline styles or custom attributes.
 
 The output MUST be a valid JSON object matching this schema exactly:

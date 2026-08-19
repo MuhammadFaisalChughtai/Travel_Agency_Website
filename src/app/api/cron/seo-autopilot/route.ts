@@ -290,19 +290,26 @@ Output JSON matching this schema exactly:
       }
       if (pType === "UMRAH" || pType === "HAJJ" || pType === "Cruise_Umrah") {
         return `
-=== RELIGIOUS PILGRIMAGE & TIMELINE RULES ===
-- Separate Makkah and Madinah stays clearly.
-- Provide explicit night counts (e.g. 6 Nights Makkah, 4 Nights Madinah).
+=== RELIGIOUS PILGRIMAGE & DAY-BY-DAY TIMELINE RULES ===
+- EVERY SINGLE SECTION HEADING inside the HTML description MUST start with explicit, sequential Day numbers covering the total package duration. NEVER output a section header without Day numbers!
+- Separate Makkah and Madinah stays clearly with explicit Day ranges and night counts (e.g. Day 1, Day 2–Day 7, Day 8, Day 9–Day 11, Day 12).
 - Provide TWO DISTINCT HOTELS: One for Makkah (meccaHotel) and a DIFFERENT hotel for Madinah (medinaHotel).
 - Detail distance/proximity to Masjid al-Haram for Makkah and Masjid an-Nabawi for Madinah without making unverified exact walking meter claims.
-- Structure description into clean HTML sections:
-  1. Day 1: UK Departure & Arrival
-  2. Makkah Stay & Umrah/Hajj Guidance
-  3. Madinah Stay & Prophet's Mosque Ziyarat
-  4. Return Journey to UK
+- Structure description into clean sequential HTML sections with explicit Day headings:
+  <h3>Day 1: UK Departure & Arrival in Makkah</h3> (Flight details from UK, transfer to Makkah, hotel check-in)
+  <h3>Day 2 – Day [MakkahNights+1]: Makkah Stay & Performing Umrah</h3> (Hotel details, Haram access, Umrah guidance, Ziyarat in Makkah)
+  <h3>Day [MakkahNights+2]: Transfer to Madinah Al-Munawwarah</h3> (AC Coach or Haramain Train transfer)
+  <h3>Day [MakkahNights+3] – Day [TotalNights]: Madinah Stay & Prophet's Mosque Ziyarat</h3> (Madinah hotel stay, Masjid an-Nabawi prayers, Rawdah visits, Ziyarat)
+  <h3>Final Day (Day [TotalNights+1]): Departure & Return Flight to UK</h3> (Transfer to airport, return flight back to UK)
 `;
       }
-      return "";
+      return `
+=== STRICT HOLIDAY DAY-BY-DAY TIMELINE RULES ===
+- Structure description into clean sequential HTML sections with explicit Day headings:
+  <h3>Day 1: Arrival & Hotel Check-in</h3>
+  <h3>Day 2 – Day [TotalNights]: Destination Stay & Excursions</h3>
+  <h3>Final Day (Day [TotalNights+1]): Departure & Return Journey</h3>
+`;
     };
 
     // Determine target entity types to process
