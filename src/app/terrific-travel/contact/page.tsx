@@ -143,12 +143,49 @@ export default function ContactPage() {
             <div className="bg-gradient-to-r from-[#2a1a1a] to-[#483434] rounded-3xl p-8 mt-12 flex items-start gap-6 text-white shadow-xl">
               <ShieldCheck className="w-10 h-10 text-[#eed6c4] flex-shrink-0" />
               <div>
-                <h4 className="font-black text-xl font-heading tracking-wide">ATOL Protected</h4>
+                <h4 className="font-black text-xl font-heading tracking-wide">ATOL & IATA Protected Travel</h4>
                 <p className="text-sm text-[#eed6c4]/80 mt-2 leading-relaxed">
-                  Book with confidence. We are ATOL protected, ensuring your
-                  financial security.
+                  Book your pilgrimage and holidays with complete peace of mind. Terrific Travel Ltd is fully accredited with ATOL protection and IATA flight licensing, ensuring 100% financial security and 24/7 passenger assistance for all bookings.
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ─── Frequently Asked Questions & Travel Assistance Section ─── */}
+        <div className="mt-20 border-t border-[#eed6c4]/40 pt-16 space-y-12">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="inline-block px-3 py-1 rounded-full bg-[#eed6c4]/30 text-[#483434] text-[10px] font-black uppercase tracking-[0.2em]">
+              Support & Guidelines
+            </span>
+            <h2 className="text-2xl md:text-3xl font-heading font-black text-[#2a1a1a]">
+              Frequently Asked Contact Questions
+            </h2>
+            <p className="text-slate-600 text-sm leading-relaxed">
+              Find instant answers regarding response times, custom itineraries, visa documentation, and emergency support.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-2xl border border-[#eed6c4]/40 shadow-xs space-y-2">
+              <h3 className="font-heading font-black text-[#483434] text-base">How fast do you respond to quotes?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Our travel consultants review online quote requests continuously. You will receive a tailored itinerary with transparent pricing within 24 hours of submission.
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl border border-[#eed6c4]/40 shadow-xs space-y-2">
+              <h3 className="font-heading font-black text-[#483434] text-base">Can I visit your office in person?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Yes! We welcome walk-in customers and scheduled appointments at our Birmingham branch on Walford Road. Meet our team to discuss customized Umrah packages or complex multi-city flights.
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl border border-[#eed6c4]/40 shadow-xs space-y-2">
+              <h3 className="font-heading font-black text-[#483434] text-base">What emergency support is available?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                For travellers currently abroad, our 24/7 WhatsApp hotline (+44 1215 291630) offers instant assistance for flight delays, hotel check-in queries, or transport coordination in Makkah and Madinah.
+              </p>
             </div>
           </div>
         </div>

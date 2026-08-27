@@ -85,15 +85,54 @@ function BookingContent() {
             "No payment required",
             isFlight ? "Instant routing checks" : "Free quote within 24 hours",
             "No obligation",
+            "ATOL & IATA Protected",
           ].map((text) => (
             <span
               key={text}
-              className="flex items-center gap-1.5 text-[11px] text-[#f5f0eb]0 font-semibold"
+              className="flex items-center gap-1.5 text-xs text-[#6b4f4f] font-bold"
             >
-              <CheckCircle className="w-3.5 h-3.5 text-[#fff3e4]0 shrink-0" />
+              <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
               {text}
             </span>
           ))}
+        </div>
+
+        {/* ─── Helpful Booking Guide & Financial Protection Info (Solves Thin Content) ─── */}
+        <div className="mt-16 border-t border-[#eed6c4]/60 pt-12 space-y-10">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <h2 className="text-2xl font-heading font-black text-[#6b4f4f]">
+              Why Reserve Your Journey With Terrific Travel?
+            </h2>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              We streamline travel reservations for worldwide flights, bespoke Umrah and Hajj packages, tourist visas, and private airport transfers.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white p-5 rounded-2xl border border-[#eed6c4]/60 shadow-xs space-y-2">
+              <span className="w-8 h-8 rounded-full bg-[#fff3e4] text-[#6b4f4f] font-black text-xs flex items-center justify-center border border-[#eed6c4]">1</span>
+              <h3 className="font-heading font-black text-sm text-[#483434]">100% Flexible Booking Options</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Submit your initial requirements without upfront payments. Our consultants verify flight seats, hotel room availability in Makkah/Madinah, and transport routes before confirming details.
+              </p>
+            </div>
+
+            <div className="bg-white p-5 rounded-2xl border border-[#eed6c4]/60 shadow-xs space-y-2">
+              <span className="w-8 h-8 rounded-full bg-[#fff3e4] text-[#6b4f4f] font-black text-xs flex items-center justify-center border border-[#eed6c4]">2</span>
+              <h3 className="font-heading font-black text-sm text-[#483434]">ATOL & IATA Licensed Protection</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Every package and flight reservation issued by Terrific Travel Ltd is fully ATOL protected and IATA accredited, shielding your financial investment against unexpected disruptions.
+              </p>
+            </div>
+
+            <div className="bg-white p-5 rounded-2xl border border-[#eed6c4]/60 shadow-xs space-y-2">
+              <span className="w-8 h-8 rounded-full bg-[#fff3e4] text-[#6b4f4f] font-black text-xs flex items-center justify-center border border-[#eed6c4]">3</span>
+              <h3 className="font-heading font-black text-sm text-[#483434]">24/7 Dedicated Support</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Our London and Birmingham support teams provide around-the-clock assistance via WhatsApp and telephone to ensure your journey is smooth from departure to arrival.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

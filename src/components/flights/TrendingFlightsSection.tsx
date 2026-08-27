@@ -43,7 +43,7 @@ export function TrendingFlightsSection({ routes }: { routes: any[] }) {
                 className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col group flex-1"
               >
                 {/* Image Section */}
-                <Link href={`/book?type=flight&destination=${encodeURIComponent((route.destination || route.dest).split(",")[0])}`} className="relative h-60 w-full overflow-hidden block">
+                <Link href={`/book?type=flight&destination=${encodeURIComponent((route.destination || route.dest).split(",")[0].trim())}`} className="relative h-60 w-full overflow-hidden block">
                   <Image
                     src={route.image || route.img}
                     alt={route.destination || route.dest}
@@ -64,10 +64,10 @@ export function TrendingFlightsSection({ routes }: { routes: any[] }) {
 
                 {/* Details Section */}
                 <div className="p-5 flex flex-col flex-1 bg-white z-20 relative">
-                  <Link href={`/book?type=flight&destination=${encodeURIComponent((route.destination || route.dest).split(",")[0])}`} className="flex justify-between items-start flex-1 mb-4">
+                  <Link href={`/book?type=flight&destination=${encodeURIComponent((route.destination || route.dest).split(",")[0].trim())}`} className="flex justify-between items-start flex-1 mb-4">
                     <div>
                       <h3 className="text-[#382626] font-bold text-lg leading-tight mb-1 group-hover:text-[#6b4f4f] transition-colors">
-                        {(route.destination || route.dest).split(",")[0]}
+                        {(route.destination || route.dest).split(",")[0].trim()}
                       </h3>
                       <p className="text-[#6b4f4f] font-black text-2xl leading-none">
                         {price}
@@ -89,7 +89,7 @@ export function TrendingFlightsSection({ routes }: { routes: any[] }) {
                       <PhoneCall className="w-4 h-4" />
                     </a>
                     <Link
-                      href={`/book?type=flight&destination=${encodeURIComponent((route.destination || route.dest).split(",")[0])}`}
+                      href={`/book?type=flight&destination=${encodeURIComponent((route.destination || route.dest).split(",")[0].trim())}`}
                       className="inline-flex items-center gap-2 text-xs font-black text-[#6b4f4f] uppercase tracking-widest group-hover:text-[#382626] transition-colors"
                     >
                       Inquire Now <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

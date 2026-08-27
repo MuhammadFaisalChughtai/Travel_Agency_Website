@@ -40,7 +40,7 @@ export function TrendingFlightsSection({ routes }: { routes: any[] }) {
             return (
               <Link
                 key={route.id || idx}
-                href={`/book?type=flight&departure=${encodeURIComponent((route.destination || route.dest).split(",")[0])}`}
+                href={`/book?type=flight&departure=${encodeURIComponent((route.destination || route.dest).split(",")[0].trim())}`}
                 className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col group cursor-pointer block"
               >
                 {/* Image Section */}

@@ -22,16 +22,19 @@ import { getSiteConfig, formatPrice } from "@/lib/siteConfig";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Flights | Terrific Travel Ltd",
+  title: "Cheap Flights & Airline Tickets | Terrific Travel Ltd",
   description:
     "Book direct and connecting flights from the UK to Jeddah, Madinah, Dubai, and worldwide destinations. Best prices guaranteed with IATA-accredited Terrific Travel Ltd.",
   openGraph: {
-    title: "Flights | Terrific Travel Ltd",
+    title: "Cheap Flights & Airline Tickets | Terrific Travel Ltd",
     description: "Book direct and connecting flights from the UK to Jeddah, Madinah, Dubai, and worldwide destinations. Best prices guaranteed with IATA-accredited Terrific Travel Ltd.",
     url: "https://terrifictravel.co.uk/flights",
   },
+  alternates: {
+    canonical: "https://terrifictravel.co.uk/flights",
+  },
   twitter: {
-    title: "Flights | Terrific Travel Ltd",
+    title: "Cheap Flights & Airline Tickets | Terrific Travel Ltd",
     description: "Book direct and connecting flights from the UK to Jeddah, Madinah, Dubai, and worldwide destinations. Best prices guaranteed with IATA-accredited Terrific Travel Ltd.",
   },
 };

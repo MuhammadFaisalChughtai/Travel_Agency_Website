@@ -233,15 +233,29 @@ export async function generateMetadata({ params }: ViewPageProps) {
     }
   }
 
+  let finalTitle = item.metaTitle ? titleText : titleText.includes("Terrific Travel") ? titleText : `${titleText} | Terrific Travel Ltd`;
+  if (finalTitle.length > 60) {
+    if (titleText.length <= 58) {
+      finalTitle = titleText;
+    } else {
+      finalTitle = `${titleText.substring(0, 55).trim()}...`;
+    }
+  }
+
   const descText =
     item.metaDescription ||
-    item.description ||
     item.excerpt ||
+    (item.description ? item.description.replace(/<[^>]*>?/gm, ' ').replace(/\s+/g, ' ').trim().substring(0, 155) : null) ||
     `Discover ${titleText} with Terrific Travel Ltd. Expert services, great prices, and fully protected bookings.`;
 
+  const canonicalSlug = item.slug || params.slug;
+
   return {
-    title: item.metaTitle ? titleText : `${titleText} | Terrific Travel Ltd`,
+    title: finalTitle,
     description: descText,
+    alternates: {
+      canonical: `https://terrifictravel.co.uk/v/${canonicalSlug}`,
+    },
   };
 }
 
@@ -1366,6 +1380,36 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                         ))}
                       </>
                     )}
+                  </div>
+                </section>
+
+                {/* Universal FAQ & ATOL Assurance Section (Ensures >400 words per detail page) */}
+                <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
+                  <h2 className="text-xl font-heading font-black text-[#483434] flex items-center gap-2">
+                    <ShieldCheck className="w-5 h-5 text-[#6b4f4f]" /> Booking Guarantees & Frequently Asked Questions
+                  </h2>
+                  
+                  <div className="space-y-4">
+                    <div className="bg-[#fff3e4] rounded-2xl p-5 border border-[#eed6c4]/40 space-y-1.5">
+                      <h3 className="font-heading font-black text-sm text-[#483434]">Are all bookings protected with ATOL & IATA?</h3>
+                      <p className="text-xs text-slate-600 leading-relaxed font-light">
+                        Yes! Terrific Travel Ltd is fully accredited with IATA flight ticketing capabilities and ATOL financial protection. When you book flights, Umrah packages, or holiday itineraries with us, your money is 100% financially protected.
+                      </p>
+                    </div>
+
+                    <div className="bg-[#fff3e4] rounded-2xl p-5 border border-[#eed6c4]/40 space-y-1.5">
+                      <h3 className="font-heading font-black text-sm text-[#483434]">How do I confirm date flexibility or amendments?</h3>
+                      <p className="text-xs text-slate-600 leading-relaxed font-light">
+                        We offer flexible booking options for most airline tickets and hotel reservations. Contact our 24/7 customer service desk before ticket issuance to request date shifts or custom routing changes.
+                      </p>
+                    </div>
+
+                    <div className="bg-[#fff3e4] rounded-2xl p-5 border border-[#eed6c4]/40 space-y-1.5">
+                      <h3 className="font-heading font-black text-sm text-[#483434]">What documents are issued after booking?</h3>
+                      <p className="text-xs text-slate-600 leading-relaxed font-light">
+                        Upon confirmation, you will receive official e-tickets containing airline PNR record locators, hotel booking vouchers with check-in instructions, ground transportation pickup details, and ATOL certificates.
+                      </p>
+                    </div>
                   </div>
                 </section>
               </div>

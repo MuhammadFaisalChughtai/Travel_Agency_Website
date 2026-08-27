@@ -80,7 +80,7 @@ export const blogPostsData: BlogPost[] = [
   {
     id: "blog-2",
     slug: "best-places-visit-makkah-madinah-ziyarat",
-    title: "Best Places to Visit in Makkah & Madinah (Ziyarat)",
+    title: "Makkah & Madinah Ziyarat Guide",
     excerpt:
       "Discover the historical significance and spiritual power of Jabal al-Nour, Mount Uhud, Quba Mosque, and other holy sites in the Hijaz.",
     category: "Ziyarat Guide",
@@ -122,7 +122,7 @@ export const blogPostsData: BlogPost[] = [
   {
     id: "blog-3",
     slug: "essential-packing-list-umrah-2026",
-    title: "Essential Packing List for Umrah: 2026 Edition",
+    title: "Essential Umrah Packing List (2026)",
     excerpt:
       "Make sure your journey is comfortable and spiritual with our ultimate checklist covering clothing, travel essentials, and medical tips.",
     category: "Travel Tips",

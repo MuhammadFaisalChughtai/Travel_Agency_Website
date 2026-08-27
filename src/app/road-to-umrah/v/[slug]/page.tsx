@@ -231,15 +231,29 @@ export async function generateMetadata({ params }: ViewPageProps) {
     }
   }
 
+  let finalTitle = item.metaTitle ? titleText : titleText.includes("Road To Umrah") ? titleText : `${titleText} | Road To Umrah`;
+  if (finalTitle.length > 60) {
+    if (titleText.length <= 58) {
+      finalTitle = titleText;
+    } else {
+      finalTitle = `${titleText.substring(0, 55).trim()}...`;
+    }
+  }
+
   const descText =
     item.metaDescription ||
-    item.description ||
     item.excerpt ||
+    (item.description ? item.description.replace(/<[^>]*>?/gm, ' ').replace(/\s+/g, ' ').trim().substring(0, 155) : null) ||
     `Discover ${titleText} with Road To Umrah. Expert services, great prices, and fully protected bookings.`;
 
+  const canonicalSlug = item.slug || params.slug;
+
   return {
-    title: item.metaTitle ? titleText : `${titleText} | Road To Umrah`,
+    title: finalTitle,
     description: descText,
+    alternates: {
+      canonical: `https://roadtoumrah.co.uk/v/${canonicalSlug}`,
+    },
   };
 }
 
