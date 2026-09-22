@@ -43,7 +43,7 @@ export default function RootLayout({
         <Footer />
         <FloatingActions />
         <CookieConsent />
-        <TawkToWidget />
+        <TawkToWidget propertyId="658f9a8d0ff6374032ba772c" widgetId="1hisf7f6b" />
       </div>
     </SiteProvider>
   );

@@ -1,20 +1,33 @@
 "use client";
 
 import { useEffect } from "react";
+import { useSiteConfig } from "@/components/SiteProvider";
 
-export function TawkToWidget() {
+interface TawkToWidgetProps {
+  propertyId?: string;
+  widgetId?: string;
+}
+
+export function TawkToWidget({ propertyId, widgetId }: TawkToWidgetProps = {}) {
+  const siteConfig = useSiteConfig();
+
   useEffect(() => {
-    const propertyId = process.env.NEXT_PUBLIC_TAWKTO_PROPERTY_ID;
-    const widgetId = process.env.NEXT_PUBLIC_TAWKTO_WIDGET_ID;
+    let finalPropertyId = propertyId || process.env.NEXT_PUBLIC_TAWKTO_PROPERTY_ID;
+    let finalWidgetId = widgetId || process.env.NEXT_PUBLIC_TAWKTO_WIDGET_ID;
 
-    let finalPropertyId = propertyId;
-    let finalWidgetId = widgetId;
+    // Multi-tenant automatic fallback if propertyId/widgetId not set
+    if (!finalPropertyId || finalPropertyId === "placeholder_property_id") {
+      const isRoadToUmrah =
+        siteConfig?.domain?.includes("roadtoumrah") ||
+        (typeof window !== "undefined" && window.location.hostname.includes("roadtoumrah"));
 
-    if (!propertyId || propertyId === "placeholder_property_id") {
-      finalPropertyId = "66d1556150c10f7a00a1eb2a";
-    }
-    if (!widgetId || widgetId === "placeholder_widget_id") {
-      finalWidgetId = "default";
+      if (isRoadToUmrah) {
+        finalPropertyId = "66d1556150c10f7a00a1eb2a";
+        finalWidgetId = "default";
+      } else {
+        finalPropertyId = "658f9a8d0ff6374032ba772c";
+        finalWidgetId = "1hisf7f6b";
+      }
     }
 
     const loadTawkTo = () => {
@@ -38,7 +51,7 @@ export function TawkToWidget() {
       }
     };
 
-    // Defer loading to improve PageSpeed Insights
+    // Defer loading to improve PageSpeed Insights performance
     let loaded = false;
     const timer = setTimeout(() => {
       if (!loaded) {
@@ -46,7 +59,7 @@ export function TawkToWidget() {
         loadTawkTo();
         clearEvents();
       }
-    }, 5000);
+    }, 4000);
 
     const handleInteraction = () => {
       if (!loaded) {
@@ -57,16 +70,19 @@ export function TawkToWidget() {
       }
     };
 
-    const events = ['scroll', 'mousemove', 'touchstart', 'keydown'];
-    const clearEvents = () => events.forEach(e => window.removeEventListener(e, handleInteraction));
-    
-    events.forEach(e => window.addEventListener(e, handleInteraction, { once: true }));
+    const events = ["scroll", "mousemove", "touchstart", "keydown"];
+    const clearEvents = () =>
+      events.forEach((e) => window.removeEventListener(e, handleInteraction));
+
+    events.forEach((e) =>
+      window.addEventListener(e, handleInteraction, { once: true })
+    );
 
     return () => {
       clearTimeout(timer);
       clearEvents();
     };
-  }, []);
+  }, [propertyId, widgetId, siteConfig]);
 
   return null;
 }
