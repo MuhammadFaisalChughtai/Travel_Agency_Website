@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Sparkles, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import { TrustpilotHeroBadge } from "./TrustpilotHeroBadge";
 
 export function UmrahHero() {

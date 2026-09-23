@@ -1,5 +1,5 @@
 import { Hero } from "@/components/ui/Hero";
-import { Sparkles } from "lucide-react";
+import { Award } from "lucide-react";
 import { UmrahBookingForm } from "@/components/umrah/UmrahBookingForm";
 import { PackageCarousel } from "@/components/umrah/PackageCarousel";
 import { UmrahInfoSection } from "@/components/umrah/UmrahInfoSection";
@@ -124,7 +124,7 @@ export default async function UmrahPage() {
       <Hero
         backgroundImage="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
         badgeText="Sacred Journeys 2026"
-        badgeIcon={<Sparkles className="w-3.5 h-3.5 text-[#eed6c4]" />}
+        badgeIcon={<Award className="w-3.5 h-3.5 text-[#eed6c4]" />}
         title={
           <>
             Elite{" "}

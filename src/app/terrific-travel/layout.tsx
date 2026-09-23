@@ -5,6 +5,7 @@ import { FloatingActions } from "@/components/layout/FloatingActions";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { getSiteConfig } from "@/lib/siteConfig";
 import { SiteProvider } from "@/components/SiteProvider";
+import { PayLaterBanner } from "@/components/layout/PayLaterBanner";
 import { TawkToWidget } from "@/components/layout/TawkToWidget";
 
 export const metadata: Metadata = {
@@ -39,6 +40,7 @@ export default function RootLayout({
     <SiteProvider config={siteConfig}>
       <div className="flex min-h-screen flex-col">
         <Navbar />
+        <PayLaterBanner />
         <main className="flex-1">{children}</main>
         <Footer />
         <FloatingActions />

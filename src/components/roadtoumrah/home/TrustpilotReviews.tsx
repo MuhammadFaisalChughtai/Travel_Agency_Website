@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { ShieldCheck, CheckCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { TrustpilotTrustBox } from "@/components/ui/TrustpilotTrustBox";
 
 interface Review {
   id: string;
@@ -109,29 +110,35 @@ export function TrustpilotReviews() {
           </p>
           <div className="h-[2px] w-12 bg-[#064e3b]/30 my-4 rounded-full"></div>
 
-          {/* Dynamic Trustpilot Rating Badge */}
+          {/* Live TrustScore Badge directly linked to Trustpilot */}
           <a
-            href="https://uk.trustpilot.com/review/roadtoumrah.co.uk"
+            href="https://uk.trustpilot.com/review/terrifictravel.co.uk"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex flex-wrap items-center justify-center gap-4 mt-2 bg-white px-5 py-3 rounded-2xl border border-[#d4af37]/50 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5"
+            className="group inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3.5 bg-white px-5 py-2.5 rounded-2xl border border-[#d4af37]/60 shadow-sm hover:shadow-md hover:border-[#00b67a]/40 transition-all mt-2"
           >
-            <div className="flex items-center gap-1.5">
-              <span className="text-slate-800 font-extrabold text-sm group-hover:text-[#00b67a] transition-colors">
-                Excellent {loading ? "4.5" : data?.trustScore}
+            <div className="flex items-center gap-2">
+              <span className="font-heading font-black text-[#064e3b] text-lg leading-none">
+                {data?.trustScore ? data.trustScore.toFixed(1) : "4.6"}
               </span>
-              {renderStars(loading ? 4.5 : data?.trustScore || 4.5)}
+              <div className="flex gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="w-5 h-5 bg-[#00b67a] text-white flex items-center justify-center text-[10px] font-black rounded-[2px] shadow-xs select-none"
+                  >
+                    ★
+                  </div>
+                ))}
+              </div>
             </div>
-            <p className="text-xs font-semibold text-slate-500">
-              Based on{" "}
-              <span className="text-[#00b67a] font-bold">
-                {loading ? "29" : data?.numberOfReviews} reviews
+            <span className="text-[#064e3b]/80 text-xs font-semibold group-hover:text-[#00b67a] transition-colors">
+              Rated <span className="font-bold">Excellent</span> based on{" "}
+              <span className="font-bold underline decoration-[#00b67a] underline-offset-4">
+                {data?.numberOfReviews || 43} reviews
               </span>{" "}
-              on{" "}
-              <span className="text-slate-800 font-black group-hover:underline">
-                Trustpilot ★
-              </span>
-            </p>
+              on <span className="font-bold text-[#191919]">Trustpilot</span>
+            </span>
           </a>
         </div>
 
@@ -179,7 +186,7 @@ export function TrustpilotReviews() {
               className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6 pt-2 [&::-webkit-scrollbar]:hidden"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
-              {data?.reviews.slice(0, 9).map((review) => (
+              {data?.reviews.map((review) => (
                 <div
                   key={review.id}
                   className="w-[85vw] sm:w-[360px] shrink-0 snap-center bg-white rounded-3xl p-7 border border-[#d4af37]/45 shadow-[0_10px_30px_rgba(72,52,52,0.02)] hover:shadow-[0_15px_40px_rgba(72,52,52,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"

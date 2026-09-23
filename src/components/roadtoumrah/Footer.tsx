@@ -21,10 +21,12 @@ export function Footer() {
     { label: "Destinations", href: "/holiday", id: "holiday" },
     { label: "Tours", href: "/holiday", id: "holiday" },
     { label: "Flight", href: "/flights", id: "flight" },
+    { label: "Blog", href: "/blog", id: "blog" },
     { label: "About Us", href: "/about", id: "about" },
     { label: "Contact Us", href: "/contact", id: "contact" },
     { label: "Privacy Policy", href: "/privacy-policy", id: "privacy" },
     { label: "Terms & Conditions", href: "/terms-and-conditions", id: "terms" },
+    { label: "Refund Policy", href: "/refund-cancellation", id: "refund" },
   ].filter(
     (link) =>
       link.id === "home" ||
@@ -32,6 +34,7 @@ export function Footer() {
       link.id === "contact" ||
       link.id === "privacy" ||
       link.id === "terms" ||
+      link.id === "refund" ||
       siteConfig.allowedTabs.includes(link.id),
   );
 

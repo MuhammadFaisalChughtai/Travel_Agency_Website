@@ -25,7 +25,6 @@ import {
   Phone,
   Mail,
   ChevronRight,
-  Sparkles,
   Award,
   Star,
   FileText,
@@ -785,7 +784,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                 {item.description && item.description.trim().length > 0 && (
                   <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)]">
                     <h2 className="text-xl font-heading font-black text-[#483434] mb-5 flex items-center gap-2">
-                      <Sparkles className="w-5 h-5 text-[#6b4f4f]" /> Package
+                      <FileText className="w-5 h-5 text-[#6b4f4f]" /> Package
                       Details
                     </h2>
                     <div
@@ -1196,7 +1195,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                 {/* Description or Default Luxury Text */}
                 <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
                   <h2 className="text-xl font-heading font-black text-[#483434] flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 text-[#6b4f4f]" /> Visa Services
+                    <FileCheck className="w-5 h-5 text-[#6b4f4f]" /> Visa Services
                   </h2>
                   <div className="text-sm text-slate-600 leading-relaxed font-light space-y-4">
                     {item.description ? (
@@ -1325,7 +1324,7 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
                 {/* Description or Default Luxury Text */}
                 <section className="bg-white rounded-3xl p-8 border border-[#eed6c4]/30 shadow-[0_10px_35px_rgba(72,52,52,0.03)] space-y-6">
                   <h2 className="text-xl font-heading font-black text-[#483434] flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 text-[#6b4f4f]" /> The Experience
+                    <Award className="w-5 h-5 text-[#6b4f4f]" /> The Experience
                   </h2>
                   <div className="text-sm text-slate-600 leading-relaxed font-light space-y-4">
                     {item.description ? (

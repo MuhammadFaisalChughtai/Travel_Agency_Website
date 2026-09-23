@@ -15,7 +15,7 @@ export const SITE_CONFIGS: Record<string, SiteConfig> = {
     currencySymbol: "$",
     currencyCode: "USD",
     exchangeRate: 1.25, // Base conversion rate to USD
-    allowedTabs: ["flight", "holiday", "umrah", "hajj", "visa", "transport"],
+    allowedTabs: ["flight", "holiday", "umrah", "hajj", "visa", "transport", "blog"],
     logoUrl: "/Logo.svg",
   },
   "terrifictravel.co.uk": {
@@ -24,7 +24,7 @@ export const SITE_CONFIGS: Record<string, SiteConfig> = {
     currencySymbol: "£",
     currencyCode: "GBP",
     exchangeRate: 1.0,
-    allowedTabs: ["flight", "holiday", "umrah", "hajj", "visa", "transport"],
+    allowedTabs: ["flight", "holiday", "umrah", "hajj", "visa", "transport", "blog"],
     logoUrl: "/Logo.svg",
   },
 
@@ -34,7 +34,7 @@ export const SITE_CONFIGS: Record<string, SiteConfig> = {
     currencySymbol: "£",
     currencyCode: "GBP",
     exchangeRate: 1.0,
-    allowedTabs: ["umrah", "hajj", "visa", "transport"],
+    allowedTabs: ["umrah", "hajj", "visa", "transport", "blog"],
     logoUrl: "/logo_road.png",
   },
 };

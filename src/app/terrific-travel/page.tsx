@@ -49,31 +49,51 @@ export default async function Home() {
   const domain = headersList.get("x-site-domain");
   const siteConfig = getSiteConfig(domain);
 
-  const rawTrendingFlights = siteConfig.allowedTabs.includes("flight")
-    ? await (prisma as any).trendingFlight.findMany({
+  let rawTrendingFlights: any[] = [];
+  let featuredUmrahPackages: any[] = [];
+  let allFlights: any[] = [];
+  let featuredHolidayPackages: any[] = [];
+  let featuredHajjPackages: any[] = [];
+  let latestBlogs: any[] = [];
+
+  let allBlogs: any[] = [];
+
+  try {
+    if (siteConfig.allowedTabs.includes("flight")) {
+      rawTrendingFlights = await (prisma as any).trendingFlight.findMany({
         orderBy: { createdAt: "desc" },
-      })
-    : [];
+      });
+      allFlights = await prisma.flight.findMany({
+        orderBy: { createdAt: "desc" },
+      });
+    }
+
+    if (siteConfig.allowedTabs.includes("umrah")) {
+      featuredUmrahPackages = await prisma.package.findMany({
+        where: { type: { in: ["UMRAH", "Cruise_Umrah"] } },
+        orderBy: { createdAt: "desc" },
+        take: 6,
+      });
+    }
+
+    if (siteConfig.allowedTabs.includes("holiday")) {
+      featuredHolidayPackages = await prisma.package.findMany({
+        where: { type: "HOLIDAY" },
+        orderBy: { createdAt: "desc" },
+        take: 6,
+      });
+    }
+
+    allBlogs = await prisma.blog.findMany();
+  } catch (dbError) {
+    console.warn("Database connection warning (falling back to static defaults):", dbError);
+  }
 
   const trendingFlights = rawTrendingFlights.map((flight: any) => ({
     ...flight,
     price: formatPrice(flight.price, siteConfig),
     originalPrice: formatPrice(flight.price * 1.25, siteConfig),
   }));
-
-  const featuredUmrahPackages = siteConfig.allowedTabs.includes("umrah")
-    ? await prisma.package.findMany({
-        where: { type: { in: ["UMRAH", "Cruise_Umrah"] } },
-        orderBy: { createdAt: "desc" },
-        take: 6,
-      })
-    : [];
-
-  const allFlights = siteConfig.allowedTabs.includes("flight")
-    ? await prisma.flight.findMany({
-        orderBy: { createdAt: "desc" },
-      })
-    : [];
 
   const formattedUmrahPackages = featuredUmrahPackages.map((pkg: any) => {
     let image = "";
@@ -96,14 +116,6 @@ export default async function Home() {
     };
   });
 
-  const featuredHolidayPackages = siteConfig.allowedTabs.includes("holiday")
-    ? await prisma.package.findMany({
-        where: { type: "HOLIDAY" },
-        orderBy: { createdAt: "desc" },
-        take: 6,
-      })
-    : [];
-
   const formattedHolidayPackages = featuredHolidayPackages.map((pkg: any) => {
     let image = "";
     try {
@@ -125,9 +137,6 @@ export default async function Home() {
     };
   });
 
-  // Fetch all blogs
-  const allBlogs = await prisma.blog.findMany();
-  //
   // Group by category and take up to 6 random blogs per category
   const blogsByCategory: Record<string, any[]> = {};
   allBlogs.forEach((blog: any) => {

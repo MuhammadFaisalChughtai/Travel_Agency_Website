@@ -45,7 +45,7 @@ export function Hero({
           priority
         />
         {/* Modern dark luxury overlay to ensure perfect text contrast while keeping the whole image visible */}
-        <div className="absolute inset-0 bg-black/60 z-1" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#032a1f] via-[#064e3b]/95 to-[#064e3b]/75 z-1" />
       </div>
 
       {/* Sleek Content Container */}

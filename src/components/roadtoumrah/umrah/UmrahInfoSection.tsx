@@ -16,7 +16,6 @@ import {
   FileText,
   Map,
   PhoneCall,
-  Sparkles,
 } from "lucide-react";
 
 export function UmrahInfoSection() {

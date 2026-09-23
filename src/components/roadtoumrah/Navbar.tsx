@@ -15,6 +15,7 @@ const navigation = [
   { name: "Hajj", href: "/hajj", id: "hajj" },
   { name: "Visa", href: "/visa", id: "visa" },
   { name: "Transport", href: "/transport", id: "transport" },
+  { name: "Blog", href: "/blog", id: "blog" },
 ];
 
 export function Navbar() {
