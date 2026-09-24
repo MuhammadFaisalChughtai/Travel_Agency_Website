@@ -91,14 +91,16 @@ export default function ContactPage() {
                       href="tel:+441215291630"
                       className="hover:text-[#483434] transition-colors"
                     >
-                      +44 1215 291630
+                      +44 1215 291630 (Office)
                     </a>
                     <br />
                     <a
-                      href="https://wa.me/441215291630"
-                      className="hover:text-[#483434] transition-colors"
+                      href="https://wa.me/447888461474"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#483434] transition-colors font-semibold"
                     >
-                      +44 1215 291630 (WhatsApp)
+                      07888 461474 (WhatsApp)
                     </a>
                   </p>
                 </div>
@@ -184,7 +186,7 @@ export default function ContactPage() {
             <div className="bg-white p-6 rounded-2xl border border-[#eed6c4]/40 shadow-xs space-y-2">
               <h3 className="font-heading font-black text-[#483434] text-base">What emergency support is available?</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                For travellers currently abroad, our 24/7 WhatsApp hotline (+44 1215 291630) offers instant assistance for flight delays, hotel check-in queries, or transport coordination in Makkah and Madinah.
+                For travellers currently abroad, our 24/7 WhatsApp hotline (+44 7888 461474 / 07888 461474) offers instant assistance for flight delays, hotel check-in queries, or transport coordination in Makkah and Madinah.
               </p>
             </div>
           </div>

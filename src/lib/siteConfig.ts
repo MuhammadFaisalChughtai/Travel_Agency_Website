@@ -6,6 +6,9 @@ export type SiteConfig = {
   exchangeRate: number; // Multiplier from base database price (GBP) to this currency
   allowedTabs: string[];
   logoUrl: string;
+  phone?: string;
+  whatsapp?: string;
+  whatsappHref?: string;
 };
 
 export const SITE_CONFIGS: Record<string, SiteConfig> = {
@@ -17,6 +20,9 @@ export const SITE_CONFIGS: Record<string, SiteConfig> = {
     exchangeRate: 1.25, // Base conversion rate to USD
     allowedTabs: ["flight", "holiday", "umrah", "hajj", "visa", "transport", "blog"],
     logoUrl: "/Logo.svg",
+    phone: "+44 1215 291630",
+    whatsapp: "07888 461474",
+    whatsappHref: "https://wa.me/447888461474",
   },
   "terrifictravel.co.uk": {
     domain: "terrifictravel.co.uk",
@@ -26,6 +32,9 @@ export const SITE_CONFIGS: Record<string, SiteConfig> = {
     exchangeRate: 1.0,
     allowedTabs: ["flight", "holiday", "umrah", "hajj", "visa", "transport", "blog"],
     logoUrl: "/Logo.svg",
+    phone: "+44 1215 291630",
+    whatsapp: "07888 461474",
+    whatsappHref: "https://wa.me/447888461474",
   },
 
   "roadtoumrah.co.uk": {
@@ -36,6 +45,9 @@ export const SITE_CONFIGS: Record<string, SiteConfig> = {
     exchangeRate: 1.0,
     allowedTabs: ["umrah", "hajj", "visa", "transport", "blog"],
     logoUrl: "/logo_road.png",
+    phone: "+44 1215 291630",
+    whatsapp: "07888 461474",
+    whatsappHref: "https://wa.me/447888461474",
   },
 };
 

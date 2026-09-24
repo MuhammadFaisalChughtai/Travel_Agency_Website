@@ -91,14 +91,16 @@ export default function ContactPage() {
                       href="tel:+441215291630"
                       className="hover:text-[#064e3b] transition-colors"
                     >
-                      +44 1215 291630
+                      +44 1215 291630 (Office)
                     </a>
                     <br />
                     <a
-                      href="https://wa.me/441215291630"
-                      className="hover:text-[#064e3b] transition-colors"
+                      href="https://wa.me/447888461474"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#064e3b] transition-colors font-semibold"
                     >
-                      +44 1215 291630 (WhatsApp)
+                      07888 461474 (WhatsApp)
                     </a>
                   </p>
                 </div>

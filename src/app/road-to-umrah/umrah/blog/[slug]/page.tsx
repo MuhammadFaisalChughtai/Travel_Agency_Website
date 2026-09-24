@@ -219,12 +219,12 @@ export default function BlogArticlePage({
                     tailored packages and guidance.
                   </p>
                   <a
-                    href="https://wa.me/441215291630"
+                    href="https://wa.me/447888461474"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block w-full text-center px-5 py-3 rounded-full bg-white text-[#064e3b] text-xs font-extrabold uppercase tracking-widest hover:bg-[#d4af37] transition-colors duration-300 mt-2"
                   >
-                    WhatsApp Us
+                    WhatsApp Us (07888 461474)
                   </a>
                 </div>
               </div>

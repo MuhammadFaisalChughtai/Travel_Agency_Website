@@ -88,7 +88,7 @@ export async function POST(req: Request) {
               <td>
                 <p style="margin:6px 0;font-size:13px;">
                   <strong style="color:#382626;">WhatsApp:</strong> 
-                  <a href="https://wa.me/441215291630" style="color:#6b4f4f;text-decoration:none;font-weight:600;">+44 1215 291630</a>
+                  <a href="https://wa.me/447888461474" style="color:#6b4f4f;text-decoration:none;font-weight:600;">07888 461474</a>
                 </p>
                 <p style="margin:6px 0;font-size:13px;">
                   <strong style="color:#382626;">Direct Line:</strong> 

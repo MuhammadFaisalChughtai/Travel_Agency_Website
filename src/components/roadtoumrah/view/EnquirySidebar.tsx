@@ -94,7 +94,7 @@ export function EnquirySidebar({ type, id, packageTitle }: Props) {
 
       {/* WhatsApp Button */}
       <a
-        href={`https://wa.me/441215291630?text=${encodeURIComponent(
+        href={`https://wa.me/447888461474?text=${encodeURIComponent(
           `Hello, I am interested in the ${packageTitle ? `"${packageTitle}"` : type} package (ID: ${id}). Could you provide more details?`
         )}`}
         target="_blank"

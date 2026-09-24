@@ -9,6 +9,7 @@ import {
   ArrowDown,
   Tag,
   PhoneCall,
+  MessageCircle,
   ShieldCheck,
   Compass,
   CreditCard,
@@ -488,13 +489,25 @@ export function PayLaterContent({
                   and check availability for your preferred travel dates.
                 </p>
               </div>
-              <div className="pt-2">
+              <div className="pt-2 space-y-2">
                 <a
-                  href={isUmrah ? "tel:+441215291630" : "tel:+441215291630"}
-                  className={`inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-full text-xs font-black uppercase tracking-wider transition-all shadow-sm hover:shadow-md ${
+                  href="https://wa.me/447888461474"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-full text-xs font-black uppercase tracking-wider transition-all shadow-sm hover:shadow-md ${
                     isUmrah
                       ? "bg-[#064e3b] hover:bg-[#043e2f] text-white"
-                      : "bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4]"
+                      : "bg-[#25D366] hover:bg-[#20ba5a] text-white"
+                  }`}
+                >
+                  <MessageCircle className="w-3.5 h-3.5" /> WhatsApp 07888 461474
+                </a>
+                <a
+                  href="tel:+441215291630"
+                  className={`inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-full text-xs font-bold uppercase tracking-wider transition-all border ${
+                    isUmrah
+                      ? "border-[#064e3b]/30 text-[#064e3b] hover:bg-[#064e3b]/5"
+                      : "border-[#6b4f4f]/30 text-[#6b4f4f] hover:bg-[#6b4f4f]/5"
                   }`}
                 >
                   <PhoneCall className="w-3.5 h-3.5" /> Call +44 1215 291630

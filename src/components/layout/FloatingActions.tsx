@@ -22,10 +22,10 @@ export function FloatingActions() {
     >
       {/* WhatsApp Floating Button */}
       <a
-        href="https://wa.me/441215291630?text=Hello%2C%20I%20am%20interested%20in%20your%20travel%20packages.%20Could%20you%20please%20help%20me%3F"
+        href="https://wa.me/447888461474?text=Hello%2C%20I%20am%20interested%20in%20your%20travel%20packages.%20Could%20you%20please%20help%20me%3F"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp"
+        aria-label="Chat on WhatsApp (07888 461474)"
         className="group relative flex items-center gap-3 cursor-pointer"
       >
         {/* Tooltip */}

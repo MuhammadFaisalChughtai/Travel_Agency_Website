@@ -72,9 +72,10 @@ export async function POST(req: NextRequest) {
 
     const brandName = isRoadToUmrah ? "Road To Umrah" : "Terrific Travel Ltd";
     const brandEmail = isRoadToUmrah ? "inquires@roadtoumrah.co.uk" : "info@terrifictravel.co.uk";
-    const brandPhone = isRoadToUmrah ? "+44 1215 291630" : "+44 1234 567890"; // Using dummy phone for Terrific Travel if not specified
-    const brandPhoneHref = isRoadToUmrah ? "tel:+441215291630" : "tel:+441234567890";
-    const brandWaHref = isRoadToUmrah ? "https://wa.me/441215291630" : "https://wa.me/441234567890";
+    const brandPhone = "+44 1215 291630";
+    const brandPhoneHref = "tel:+441215291630";
+    const brandWa = "07888 461474";
+    const brandWaHref = "https://wa.me/447888461474";
     const brandWebsite = isRoadToUmrah ? "roadtoumrah.co.uk" : "terrifictravel.co.uk";
     
     const primaryColor = isRoadToUmrah ? "#064e3b" : "#6b4f4f"; // Emerald / Brown
@@ -387,7 +388,7 @@ export async function POST(req: NextRequest) {
                   <tr>
                     <td style="padding:6px 0;">
                       <a href="${brandWaHref}" style="color:${highlight};font-size:15px;font-weight:800;text-decoration:none;">
-                        WhatsApp: ${brandPhone}
+                        WhatsApp: ${brandWa}
                       </a>
                     </td>
                   </tr>
