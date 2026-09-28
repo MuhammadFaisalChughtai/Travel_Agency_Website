@@ -64,15 +64,20 @@ export async function getTravelportAccessToken(): Promise<string> {
   return cachedToken!;
 }
 
+import { getAirportByCode } from "./airports";
+
 export interface FlightSegmentDetail {
   flightNumber: string;
   carrier: string;
   airline: string;
+  aircraft?: string;
   departureAirport: string;
+  departureAirportName?: string;
   departureTerminal?: string;
   departureDate: string;
   departureTime: string;
   arrivalAirport: string;
+  arrivalAirportName?: string;
   arrivalTerminal?: string;
   arrivalDate: string;
   arrivalTime: string;
@@ -82,7 +87,9 @@ export interface FlightSegmentDetail {
 
 export interface FlightLegDetail {
   departureAirport: string;
+  departureAirportName?: string;
   arrivalAirport: string;
+  arrivalAirportName?: string;
   departureDate: string;
   departureTime: string;
   arrivalDate: string;
@@ -138,6 +145,7 @@ function parseDuration(pt?: string): string {
 }
 
 const AIRLINES_MAP: Record<string, string> = {
+  PC: "Pegasus Airlines",
   TP: "TAP Air Portugal",
   BA: "British Airways",
   EK: "Emirates",
@@ -151,6 +159,10 @@ const AIRLINES_MAP: Record<string, string> = {
   KU: "Kuwait Airways",
   MS: "EgyptAir",
   RJ: "Royal Jordanian",
+  FZ: "flydubai",
+  XY: "Flynas",
+  J9: "Jazeera Airways",
+  G9: "Air Arabia",
   UA: "United Airlines",
   AA: "American Airlines",
   DL: "Delta Air Lines",
@@ -168,11 +180,72 @@ const AIRLINES_MAP: Record<string, string> = {
   OS: "Austrian Airlines",
   IB: "Iberia",
   AZ: "ITA Airways",
+  ET: "Ethiopian Airlines",
+  ME: "Middle East Airlines",
+  AT: "Royal Air Maroc",
+  SN: "Brussels Airlines",
+  AY: "Finnair",
+  SK: "SAS Scandinavian Airlines",
+  EI: "Aer Lingus",
+  W6: "Wizz Air",
+  U2: "easyJet",
+  FR: "Ryanair",
 };
+
+export const AIRCRAFT_MAP: Record<string, string> = {
+  "777": "Boeing 777",
+  "77W": "Boeing 777-300ER",
+  "772": "Boeing 777-200",
+  "788": "Boeing 787-8 Dreamliner",
+  "789": "Boeing 787-9 Dreamliner",
+  "78X": "Boeing 787-10 Dreamliner",
+  "738": "Boeing 737-800",
+  "739": "Boeing 737-900",
+  "73H": "Boeing 737-800 Winglets",
+  "7M8": "Boeing 737 MAX 8",
+  "7M9": "Boeing 737 MAX 9",
+  "320": "Airbus A320",
+  "32A": "Airbus A320 (Sharklets)",
+  "32N": "Airbus A320neo",
+  "321": "Airbus A321",
+  "32B": "Airbus A321 (Sharklets)",
+  "32Q": "Airbus A321neo",
+  "319": "Airbus A319",
+  "330": "Airbus A330",
+  "332": "Airbus A330-200",
+  "333": "Airbus A330-300",
+  "339": "Airbus A330-900neo",
+  "359": "Airbus A350-900",
+  "351": "Airbus A350-1000",
+  "388": "Airbus A380-800",
+  "E90": "Embraer 190",
+  "E95": "Embraer 195",
+};
+
+export function getAircraftName(code?: string): string {
+  if (!code) return "Commercial Jet";
+  return AIRCRAFT_MAP[code.toUpperCase()] || `Aircraft ${code.toUpperCase()}`;
+}
 
 export function getAirlineName(code: string): string {
   if (!code) return "Airline";
   return AIRLINES_MAP[code.toUpperCase()] || `${code.toUpperCase()} Airlines`;
+}
+
+export function formatBaggageAllowance(bags?: number): string {
+  if (bags === 0) {
+    return "Cabin: 1x 8kg (No Checked Bag)";
+  }
+  if (bags === 1) {
+    return "Checked: 1x 23kg, Cabin: 1x 8kg";
+  }
+  if (bags === 2) {
+    return "Checked: 2x 23kg, Cabin: 1x 8kg";
+  }
+  if (bags && bags >= 3) {
+    return `Checked: ${bags}x 23kg, Cabin: 1x 8kg`;
+  }
+  return "Cabin: 1x 8kg (No Checked Bag)";
 }
 
 export async function searchTravelportFlights(
@@ -286,6 +359,27 @@ export async function searchTravelportFlights(
   }
 }
 
+function enrichSegmentsWithLayovers(segments: FlightSegmentDetail[]): FlightSegmentDetail[] {
+  for (let i = 0; i < segments.length - 1; i++) {
+    if (!segments[i].connectionDuration) {
+      try {
+        const arr = new Date(`${segments[i].arrivalDate}T${segments[i].arrivalTime}`).getTime();
+        const dep = new Date(`${segments[i + 1].departureDate}T${segments[i + 1].departureTime}`).getTime();
+        const diffMs = dep - arr;
+        if (!isNaN(diffMs) && diffMs > 0) {
+          const totalMins = Math.floor(diffMs / 60000);
+          const h = Math.floor(totalMins / 60);
+          const m = totalMins % 60;
+          segments[i].connectionDuration = h > 0 ? `${h}h ${m}m` : `${m}m`;
+        }
+      } catch {
+        // ignore
+      }
+    }
+  }
+  return segments;
+}
+
 function parseTravelportOfferings(
   data: any,
   params: SearchFlightsParams
@@ -342,19 +436,28 @@ function parseTravelportOfferings(
           const productRef = brandOffering.Product?.[0]?.productRef;
           const product = productMap.get(productRef);
 
-          const segments: FlightSegmentDetail[] = [];
+          const rawSegments: FlightSegmentDetail[] = [];
           product?.FlightSegment?.forEach((seg: any) => {
             const flight = flightMap.get(seg.Flight?.FlightRef);
             if (flight) {
-              segments.push({
+              const depAirport = getAirportByCode(flight.Departure?.location);
+              const arrAirport = getAirportByCode(flight.Arrival?.location);
+              rawSegments.push({
                 flightNumber: `${flight.carrier} ${flight.number}`,
                 carrier: flight.carrier,
                 airline: getAirlineName(flight.carrier),
+                aircraft: getAircraftName(flight.equipment || flight.Equipment),
                 departureAirport: flight.Departure?.location,
+                departureAirportName: depAirport
+                  ? `${depAirport.city} (${depAirport.name})`
+                  : flight.Departure?.location,
                 departureTerminal: flight.Departure?.terminal,
                 departureDate: flight.Departure?.date,
                 departureTime: flight.Departure?.time,
                 arrivalAirport: flight.Arrival?.location,
+                arrivalAirportName: arrAirport
+                  ? `${arrAirport.city} (${arrAirport.name})`
+                  : flight.Arrival?.location,
                 arrivalTerminal: flight.Arrival?.terminal,
                 arrivalDate: flight.Arrival?.date,
                 arrivalTime: flight.Arrival?.time,
@@ -364,12 +467,16 @@ function parseTravelportOfferings(
             }
           });
 
+          const segments = enrichSegmentsWithLayovers(rawSegments);
+
           if (segments.length > 0) {
             const firstSeg = segments[0];
             const lastSeg = segments[segments.length - 1];
             group.legs.push({
               departureAirport: firstSeg.departureAirport,
+              departureAirportName: firstSeg.departureAirportName,
               arrivalAirport: lastSeg.arrivalAirport,
+              arrivalAirportName: lastSeg.arrivalAirportName,
               departureDate: firstSeg.departureDate,
               departureTime: firstSeg.departureTime,
               arrivalDate: lastSeg.arrivalDate,
@@ -415,9 +522,9 @@ function parseTravelportOfferings(
           carrier: outbound.carrier,
           outbound,
           inbound,
-          baggage: "Checked: 1x 23kg, Cabin: 1x 8kg",
+          baggage: formatBaggageAllowance(params.bags),
           cabin: outbound.cabin,
-          source: "Travelport GDS",
+          source: "Airline Fares",
         });
       }
     });
@@ -429,19 +536,28 @@ function parseTravelportOfferings(
           const productRef = brandOffering.Product?.[0]?.productRef;
           const product = productMap.get(productRef);
 
-          const segments: FlightSegmentDetail[] = [];
+          const rawSegments: FlightSegmentDetail[] = [];
           product?.FlightSegment?.forEach((seg: any) => {
             const flight = flightMap.get(seg.Flight?.FlightRef);
             if (flight) {
-              segments.push({
+              const depAirport = getAirportByCode(flight.Departure?.location);
+              const arrAirport = getAirportByCode(flight.Arrival?.location);
+              rawSegments.push({
                 flightNumber: `${flight.carrier} ${flight.number}`,
                 carrier: flight.carrier,
                 airline: getAirlineName(flight.carrier),
+                aircraft: getAircraftName(flight.equipment || flight.Equipment),
                 departureAirport: flight.Departure?.location,
+                departureAirportName: depAirport
+                  ? `${depAirport.city} (${depAirport.name})`
+                  : flight.Departure?.location,
                 departureTerminal: flight.Departure?.terminal,
                 departureDate: flight.Departure?.date,
                 departureTime: flight.Departure?.time,
                 arrivalAirport: flight.Arrival?.location,
+                arrivalAirportName: arrAirport
+                  ? `${arrAirport.city} (${arrAirport.name})`
+                  : flight.Arrival?.location,
                 arrivalTerminal: flight.Arrival?.terminal,
                 arrivalDate: flight.Arrival?.date,
                 arrivalTime: flight.Arrival?.time,
@@ -451,12 +567,16 @@ function parseTravelportOfferings(
             }
           });
 
+          const segments = enrichSegmentsWithLayovers(rawSegments);
+
           if (segments.length > 0) {
             const firstSeg = segments[0];
             const lastSeg = segments[segments.length - 1];
             const legDetail: FlightLegDetail = {
               departureAirport: firstSeg.departureAirport,
+              departureAirportName: firstSeg.departureAirportName,
               arrivalAirport: lastSeg.arrivalAirport,
+              arrivalAirportName: lastSeg.arrivalAirportName,
               departureDate: firstSeg.departureDate,
               departureTime: firstSeg.departureTime,
               arrivalDate: lastSeg.arrivalDate,
@@ -487,9 +607,9 @@ function parseTravelportOfferings(
               carrier: firstSeg.carrier,
               outbound: legDetail,
               legs: [legDetail],
-              baggage: "Checked: 1x 23kg, Cabin: 1x 8kg",
+              baggage: formatBaggageAllowance(params.bags),
               cabin: legDetail.cabin,
-              source: "Travelport GDS",
+              source: "Airline Fares",
             });
           }
         });
@@ -503,19 +623,28 @@ function parseTravelportOfferings(
           const productRef = brandOffering.Product?.[0]?.productRef;
           const product = productMap.get(productRef);
 
-          const segments: FlightSegmentDetail[] = [];
+          const rawSegments: FlightSegmentDetail[] = [];
           product?.FlightSegment?.forEach((seg: any) => {
             const flight = flightMap.get(seg.Flight?.FlightRef);
             if (flight) {
-              segments.push({
+              const depAirport = getAirportByCode(flight.Departure?.location);
+              const arrAirport = getAirportByCode(flight.Arrival?.location);
+              rawSegments.push({
                 flightNumber: `${flight.carrier} ${flight.number}`,
                 carrier: flight.carrier,
                 airline: getAirlineName(flight.carrier),
+                aircraft: getAircraftName(flight.equipment || flight.Equipment),
                 departureAirport: flight.Departure?.location,
+                departureAirportName: depAirport
+                  ? `${depAirport.city} (${depAirport.name})`
+                  : flight.Departure?.location,
                 departureTerminal: flight.Departure?.terminal,
                 departureDate: flight.Departure?.date,
                 departureTime: flight.Departure?.time,
                 arrivalAirport: flight.Arrival?.location,
+                arrivalAirportName: arrAirport
+                  ? `${arrAirport.city} (${arrAirport.name})`
+                  : flight.Arrival?.location,
                 arrivalTerminal: flight.Arrival?.terminal,
                 arrivalDate: flight.Arrival?.date,
                 arrivalTime: flight.Arrival?.time,
@@ -525,12 +654,16 @@ function parseTravelportOfferings(
             }
           });
 
+          const segments = enrichSegmentsWithLayovers(rawSegments);
+
           if (segments.length > 0) {
             const firstSeg = segments[0];
             const lastSeg = segments[segments.length - 1];
             const outbound: FlightLegDetail = {
               departureAirport: firstSeg.departureAirport,
+              departureAirportName: firstSeg.departureAirportName,
               arrivalAirport: lastSeg.arrivalAirport,
+              arrivalAirportName: lastSeg.arrivalAirportName,
               departureDate: firstSeg.departureDate,
               departureTime: firstSeg.departureTime,
               arrivalDate: lastSeg.arrivalDate,
@@ -560,9 +693,9 @@ function parseTravelportOfferings(
               airline: firstSeg.airline,
               carrier: firstSeg.carrier,
               outbound,
-              baggage: "Checked: 1x 23kg, Cabin: 1x 8kg",
+              baggage: formatBaggageAllowance(params.bags),
               cabin: outbound.cabin,
-              source: "Travelport GDS",
+              source: "Airline Fares",
             });
           }
         });

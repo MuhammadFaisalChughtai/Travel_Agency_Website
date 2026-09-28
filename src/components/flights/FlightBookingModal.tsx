@@ -31,6 +31,7 @@ interface FlightBookingModalProps {
     tripType: string;
     passengers: { adults: number; children?: number; infants?: number };
     cabin?: string;
+    bags?: number;
   };
 }
 
@@ -94,6 +95,22 @@ export function FlightBookingModal({
     }
 
     try {
+      const outboundSegmentsDetail = flight.outbound.segments
+        .map(
+          (s, idx) =>
+            `  * Segment ${idx + 1}: ${s.flightNumber} (${s.airline}, ${s.aircraft || "Aircraft"}) ${s.departureAirport} (${s.departureAirportName || s.departureAirport}${s.departureTerminal ? `, T${s.departureTerminal}` : ""}) ${s.departureTime.slice(0, 5)} -> ${s.arrivalAirport} (${s.arrivalAirportName || s.arrivalAirport}${s.arrivalTerminal ? `, T${s.arrivalTerminal}` : ""}) ${s.arrivalTime.slice(0, 5)}${s.connectionDuration ? ` [Transit / Layover: ${s.connectionDuration}]` : ""}`
+        )
+        .join("\n");
+
+      const inboundSegmentsDetail = flight.inbound
+        ? flight.inbound.segments
+            .map(
+              (s, idx) =>
+                `  * Segment ${idx + 1}: ${s.flightNumber} (${s.airline}, ${s.aircraft || "Aircraft"}) ${s.departureAirport} (${s.departureAirportName || s.departureAirport}${s.departureTerminal ? `, T${s.departureTerminal}` : ""}) ${s.departureTime.slice(0, 5)} -> ${s.arrivalAirport} (${s.arrivalAirportName || s.arrivalAirport}${s.arrivalTerminal ? `, T${s.arrivalTerminal}` : ""}) ${s.arrivalTime.slice(0, 5)}${s.connectionDuration ? ` [Transit / Layover: ${s.connectionDuration}]` : ""}`
+            )
+            .join("\n")
+        : "";
+
       const flightDetailsMessage = `
 Selected Flight: ${flight.airline} (${flight.carrier})
 Trip Type: ${flight.tripType.toUpperCase()}
@@ -102,20 +119,24 @@ Cabin: ${flight.cabin}
 Baggage: ${flight.baggage}
 
 Outbound Flight:
-- Route: ${flight.outbound.departureAirport} to ${flight.outbound.arrivalAirport}
+- Route: ${flight.outbound.departureAirportName || flight.outbound.departureAirport} to ${flight.outbound.arrivalAirportName || flight.outbound.arrivalAirport}
 - Flight(s): ${flight.outbound.flightNumbers}
 - Departure: ${flight.outbound.departureDate} at ${flight.outbound.departureTime}
 - Arrival: ${flight.outbound.arrivalDate} at ${flight.outbound.arrivalTime}
 - Duration: ${flight.outbound.totalDuration} (${flight.outbound.isDirect ? "Direct" : `${flight.outbound.stopsCount} stop(s)`})
+Segments:
+${outboundSegmentsDetail}
 ${
   flight.inbound
     ? `
 Return Flight:
-- Route: ${flight.inbound.departureAirport} to ${flight.inbound.arrivalAirport}
+- Route: ${flight.inbound.departureAirportName || flight.inbound.departureAirport} to ${flight.inbound.arrivalAirportName || flight.inbound.arrivalAirport}
 - Flight(s): ${flight.inbound.flightNumbers}
 - Departure: ${flight.inbound.departureDate} at ${flight.inbound.departureTime}
 - Arrival: ${flight.inbound.arrivalDate} at ${flight.inbound.arrivalTime}
 - Duration: ${flight.inbound.totalDuration} (${flight.inbound.isDirect ? "Direct" : `${flight.inbound.stopsCount} stop(s)`})
+Segments:
+${inboundSegmentsDetail}
 `
     : ""
 }
@@ -240,7 +261,11 @@ ${form.message || "None"}
                   <span>
                     {flight.outbound.isDirect
                       ? "Direct"
-                      : `${flight.outbound.stopsCount} stop`}
+                      : `${flight.outbound.stopsCount} stop (${flight.outbound.segments[0]?.arrivalAirport}${
+                          flight.outbound.segments[0]?.connectionDuration
+                            ? ` • ${flight.outbound.segments[0].connectionDuration}`
+                            : ""
+                        })`}
                   </span>
                 </div>
               </div>
@@ -277,7 +302,11 @@ ${form.message || "None"}
                     <span>
                       {flight.inbound.isDirect
                         ? "Direct"
-                        : `${flight.inbound.stopsCount} stop`}
+                        : `${flight.inbound.stopsCount} stop (${flight.inbound.segments[0]?.arrivalAirport}${
+                            flight.inbound.segments[0]?.connectionDuration
+                              ? ` • ${flight.inbound.segments[0].connectionDuration}`
+                              : ""
+                          })`}
                     </span>
                   </div>
                 </div>
@@ -294,7 +323,13 @@ ${form.message || "None"}
 
             {/* Badges */}
             <div className="flex flex-wrap items-center gap-3 pt-1 text-[11px] text-slate-500 font-medium">
-              <span className="flex items-center gap-1 text-emerald-700 font-semibold">
+              <span
+                className={`flex items-center gap-1 font-semibold ${
+                  flight.baggage.toLowerCase().includes("no checked") || flight.baggage.toLowerCase().includes("0 checked")
+                    ? "text-slate-600"
+                    : "text-emerald-700"
+                }`}
+              >
                 <Briefcase className="w-3.5 h-3.5" />
                 {flight.baggage}
               </span>
@@ -346,8 +381,33 @@ ${form.message || "None"}
                 </div>
               )}
 
+              {/* WhatsApp Fast Booking Option */}
+              <div className="bg-[#25D366]/10 border border-[#25D366]/30 rounded-xl p-3 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.504-5.725-1.465L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.966a9.78 9.78 0 0 0-6.953-2.87C6.009 1.97 1.587 6.34 1.583 11.77c-.001 1.693.454 3.342 1.32 4.775l-.99 3.616 3.734-.972zm11.111-6.113c-.307-.154-1.817-.897-2.099-.999-.281-.103-.487-.154-.691.154-.204.307-.79 1-.968 1.205-.178.205-.357.23-.664.077-.307-.154-1.3-.48-2.477-1.53-.915-.817-1.533-1.826-1.712-2.133-.178-.307-.019-.474.135-.627.138-.138.307-.359.461-.538.154-.18.204-.307.307-.513.103-.205.051-.385-.026-.538-.077-.154-.691-1.667-.947-2.283-.25-.6-.525-.513-.717-.525-.184-.009-.395-.011-.607-.011-.212 0-.557.08-.85.399-.293.318-1.121 1.097-1.121 2.678 0 1.582 1.149 3.11 1.305 3.315.156.205 2.26 3.452 5.474 4.838.764.329 1.36.526 1.824.673.768.244 1.467.21 2.02.127.618-.093 1.817-.743 2.072-1.462.256-.718.256-1.334.18-1.462-.078-.128-.282-.204-.589-.358z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <span className="font-bold text-slate-800 block">Prefer to chat on WhatsApp?</span>
+                    <span className="text-[11px] text-slate-500">Connect directly with our flight booking desk</span>
+                  </div>
+                </div>
+                <a
+                  href={`https://wa.me/447888461474?text=${encodeURIComponent(
+                    `Hello Terrific Travel, I would like to book the ${flight.airline} flight (${flight.outbound.departureAirport} to ${flight.outbound.arrivalAirport}) on ${flight.outbound.departureDate} for £${flight.price.toFixed(2)}. Baggage: ${flight.baggage}. Please assist me with booking.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs flex items-center gap-1.5 transition-colors shadow-xs ml-auto"
+                >
+                  <span>Chat on WhatsApp</span>
+                </a>
+              </div>
+
               <p className="text-xs text-slate-600 font-medium">
-                Please enter your contact details. Our team will verify live availability on the Travelport system, lock this price, and contact you immediately to issue your e-tickets.
+                Or enter your details below. Our team will verify live availability, lock this price, and contact you immediately to issue your e-tickets.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -452,9 +512,19 @@ ${form.message || "None"}
                 </button>
               </div>
 
-              <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-                <span>Direct GDS integration</span>
-                <span>Call support: +44 1215 291630</span>
+              <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-400 pt-1">
+                <span>Official Airline Booking</span>
+                <div className="flex items-center gap-3">
+                  <a
+                    href="https://wa.me/447888461474"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#25D366] font-bold hover:underline inline-flex items-center gap-1"
+                  >
+                    <span>WhatsApp: 07888 461474</span>
+                  </a>
+                  <span>Call: +44 1215 291630</span>
+                </div>
               </div>
             </>
           )}
