@@ -184,7 +184,7 @@ ${form.message || "None"}
                 Flight Booking Enquiry
               </h2>
               <p className="text-[#eed6c4]/80 text-xs">
-                Travelport Live Rate Guarantee &bull; IATA & ATOL Accredited
+                Best Price Guarantee &bull; IATA & ATOL Accredited
               </p>
             </div>
           </div>

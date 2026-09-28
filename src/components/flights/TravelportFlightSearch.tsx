@@ -16,7 +16,6 @@ import {
   PlaneLanding,
   ArrowRight,
   Clock,
-  Sparkles,
   PhoneCall,
   CheckCircle2,
   AlertCircle,
@@ -304,11 +303,6 @@ export function TravelportFlightSearch() {
               </select>
               <ChevronDown className="w-3.5 h-3.5 absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" />
             </div>
-          </div>
-
-          <div className="hidden sm:flex items-center gap-2 text-xs font-bold text-[#6b4f4f]">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Travelport Live GDS Rates</span>
           </div>
         </div>
 
@@ -598,7 +592,10 @@ export function TravelportFlightSearch() {
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                   </svg>
                 ) : (
-                  <span>Search</span>
+                  <>
+                    <Search className="w-4 h-4 shrink-0" />
+                    <span>Search</span>
+                  </>
                 )}
               </button>
             </div>
@@ -766,7 +763,10 @@ export function TravelportFlightSearch() {
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                   </svg>
                 ) : (
-                  <span>Search Flights</span>
+                  <>
+                    <Search className="w-4 h-4 shrink-0" />
+                    <span>Search Flights</span>
+                  </>
                 )}
               </button>
             </div>
