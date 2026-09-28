@@ -10,6 +10,7 @@ import {
   Crown,
 } from "lucide-react";
 import { FlightBookingForm } from "@/components/flights/FlightBookingForm";
+import { TravelportFlightSearch } from "@/components/flights/TravelportFlightSearch";
 import { PaginatedFlightList } from "@/components/flights/PaginatedFlightList";
 import { FlightBlogSection } from "@/components/flights/FlightBlogSection";
 import { TrendingFlightsSection } from "@/components/flights/TrendingFlightsSection";
@@ -188,8 +189,8 @@ export default async function FlightsPage() {
         trustpilotLabel="Travellers"
       />
 
-      {/* ─── Flight Booking Form (Overlaps Hero) ─── */}
-      <FlightBookingForm />
+      {/* ─── Travelport Flight Search Bar (Overlaps Hero) ─── */}
+      <TravelportFlightSearch />
 
       {/* ─── Why Us bar ─── */}
       <div className="bg-[#eed6c4]/10 border-y border-[#eed6c4]/30 py-6 mt-8 md:mt-12">

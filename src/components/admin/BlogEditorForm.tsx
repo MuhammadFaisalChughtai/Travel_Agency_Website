@@ -1,13 +1,9 @@
 "use client";
 
-import React, { useState, useRef, useMemo } from "react";
-import dynamic from "next/dynamic";
-import "react-quill/dist/quill.snow.css";
+import React, { useState } from "react";
 import { createBlog } from "@/app/(admin)/admin/blogs/actions";
 import { Button } from "@/components/ui/Button";
-
-// Dynamically import react-quill to avoid SSR issues
-const ReactQuill: any = dynamic(() => import("react-quill"), { ssr: false });
+import { RichHtmlEditor } from "@/components/admin/RichHtmlEditor";
 
 export function BlogEditorForm({ initialData }: { initialData?: any }) {
   const [title, setTitle] = useState(initialData?.title || "");
@@ -61,57 +57,6 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
     }
   };
 
-  const quillRef = useRef<any>(null);
-
-  const imageHandler = async () => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-    input.click();
-
-    input.onchange = async () => {
-      const file = input.files ? input.files[0] : null;
-      if (!file) return;
-
-      const formData = new FormData();
-      formData.append("file", file);
-
-      try {
-        const res = await fetch("/api/upload", {
-          method: "POST",
-          body: formData,
-        });
-        const data = await res.json();
-
-        if (data.url) {
-          const quill = quillRef.current.getEditor();
-          const range = quill.getSelection();
-          quill.insertEmbed(range ? range.index : 0, "image", data.url);
-        }
-      } catch (err) {
-        console.error("Failed to upload image:", err);
-        alert("Failed to upload image.");
-      }
-    };
-  };
-
-  const modules = useMemo(
-    () => ({
-      toolbar: {
-        container: [
-          [{ header: [1, 2, 3, 4, 5, 6, false] }],
-          ["bold", "italic", "underline", "strike", "blockquote"],
-          [{ list: "ordered" }, { list: "bullet" }],
-          ["link", "image"],
-          ["clean"],
-        ],
-        handlers: {
-          image: imageHandler,
-        },
-      },
-    }),
-    []
-  );
 
   const handleMainImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -375,17 +320,16 @@ export function BlogEditorForm({ initialData }: { initialData?: any }) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">Rich Content (HTML)</label>
-        <div className="bg-white rounded-md">
-          <ReactQuill 
-            ref={quillRef}
-            theme="snow" 
-            value={content} 
-            onChange={setContent} 
-            modules={modules}
-            className="h-64 mb-12"
-          />
-        </div>
+        <label className="block text-sm font-bold text-slate-800 mb-1">Rich Content (HTML)</label>
+        <p className="text-xs text-slate-500 mb-2">
+          Full HTML supported. Tables, styles, classes, and formatting fetched from the database are 100% preserved. Switch between Visual Editor, Raw HTML Source, and Live Preview anytime.
+        </p>
+        <RichHtmlEditor
+          value={content}
+          onChange={setContent}
+          placeholder="Write or paste your article content here..."
+          minHeight="380px"
+        />
       </div>
 
       <div className="pt-8">

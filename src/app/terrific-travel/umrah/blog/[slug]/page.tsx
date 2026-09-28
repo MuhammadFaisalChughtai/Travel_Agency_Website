@@ -277,6 +277,50 @@ export default function BlogArticlePage({
           color: #6b4f4f;
           font-style: italic;
         }
+        .prose-article table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 1.5rem 0;
+          font-size: 0.95rem;
+          border: 1px solid #eed6c4;
+          border-radius: 8px;
+        }
+        .prose-article th {
+          background-color: #eed6c4;
+          color: #483434;
+          font-weight: 700;
+          padding: 0.75rem 1rem;
+          text-align: left;
+          border: 1px solid #eed6c4;
+        }
+        .prose-article td {
+          padding: 0.75rem 1rem;
+          border: 1px solid #eed6c4;
+          color: #374151;
+        }
+        .prose-article tr:nth-child(even) td {
+          background-color: #fffcf9;
+        }
+        .prose-article a {
+          color: #6b4f4f;
+          text-decoration: underline;
+          font-weight: 600;
+        }
+        .prose-article blockquote {
+          border-left: 4px solid #6b4f4f;
+          padding: 0.75rem 1.25rem;
+          margin: 1.5rem 0;
+          background: #fff3e4;
+          border-radius: 0 8px 8px 0;
+          color: #483434;
+          font-style: italic;
+        }
+        .prose-article img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 12px;
+          margin: 1.5rem 0;
+        }
       `}</style>
     </>
   );

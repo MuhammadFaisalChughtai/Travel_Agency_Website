@@ -52,6 +52,11 @@ export async function middleware(request: NextRequest) {
     });
   }
 
+  // Support /flight as alias for /flights
+  if (url.pathname === "/flight") {
+    url.pathname = "/flights";
+  }
+
   // Rewrite based on domain
   if (hostname.includes("roadtoumrah")) {
     url.pathname = `/road-to-umrah${url.pathname === "/" ? "" : url.pathname}`;

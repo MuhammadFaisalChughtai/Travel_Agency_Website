@@ -1,0 +1,6297 @@
+[
+  {
+    "code": "AAL",
+    "city": "Aalborg",
+    "name": "Aalborg Lufthavn Nørresundby Denmark"
+  },
+  {
+    "code": "AAR",
+    "city": "Aarhus",
+    "name": "Aarhus Airport Tirstrup Denmark"
+  },
+  {
+    "code": "ABA",
+    "city": "Abakan International",
+    "name": "Abakan International Airport Russia"
+  },
+  {
+    "code": "ABC",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Albacete Castilla-la Mancha Spain"
+  },
+  {
+    "code": "ABE",
+    "city": "Lehigh Valley International",
+    "name": "Lehigh Valley International Airport Allentown Pennsylvania Pa USA"
+  },
+  {
+    "code": "ABI",
+    "city": "Abilene Regional",
+    "name": "Abilene Regional Airport Texas Tx USA"
+  },
+  {
+    "code": "ABJ",
+    "city": "Aéroport International",
+    "name": "Aéroport International Félix Houphouët-boigny Airport Abidjan Port-bouet Ivory Coast"
+  },
+  {
+    "code": "ABQ",
+    "city": "Albuquerque International",
+    "name": "Albuquerque International Sunport New Mexico Nm USA"
+  },
+  {
+    "code": "ABV",
+    "city": "Nnamdi Azikiwe International",
+    "name": "Nnamdi Azikiwe International Airport Abuja Nigeria"
+  },
+  {
+    "code": "ABZ",
+    "city": "Aberdeen International",
+    "name": "Aberdeen International Airport Dyce Scotland UK"
+  },
+  {
+    "code": "ACA",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional General Juan N. Álvarez International Airport Acapulco Guerrero Gr Mexico"
+  },
+  {
+    "code": "ACC",
+    "city": "Kotoka International",
+    "name": "Kotoka International Airport Accra Ghana"
+  },
+  {
+    "code": "ACE",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Lanzarote Arrecife Canary Islands Spain"
+  },
+  {
+    "code": "ACK",
+    "city": "Nantucket Memorial",
+    "name": "Nantucket Memorial Airport Massachusetts Ma USA"
+  },
+  {
+    "code": "ACY",
+    "city": "Atlantic City International",
+    "name": "Atlantic City International Airport Egg Harbor Township New Jersey Nj USA"
+  },
+  {
+    "code": "ADA",
+    "city": "Adana Havalimanı",
+    "name": "Adana Havalimanı Çukurova Turkey"
+  },
+  {
+    "code": "ADD",
+    "city": "Addis Ababa Bole International",
+    "name": "Addis Ababa Bole International Airport Ethiopia"
+  },
+  {
+    "code": "ADL",
+    "city": "Adelaide",
+    "name": "Adelaide Airport South Australia Sa"
+  },
+  {
+    "code": "AEP",
+    "city": "Aeroparque Jorge",
+    "name": "Aeroparque Jorge Newbery Airfield Buenos Aires Palermo Argentina"
+  },
+  {
+    "code": "AER",
+    "city": "Sochi International",
+    "name": "Sochi International Airport Russia"
+  },
+  {
+    "code": "AES",
+    "city": "Ålesund",
+    "name": "Ålesund Lufthavn, Vigra Alesund Airport, Norway"
+  },
+  {
+    "code": "AEX",
+    "city": "Alexandria International",
+    "name": "Alexandria International Airport Louisiana la USA"
+  },
+  {
+    "code": "AEY",
+    "city": "Akureyrarflugvöllur Akureyri",
+    "name": "Akureyrarflugvöllur Akureyri Iceland"
+  },
+  {
+    "code": "AFW",
+    "city": "Fort Worth Alliance",
+    "name": "Fort Worth Alliance Airport Texas Tx USA"
+  },
+  {
+    "code": "AGA",
+    "city": "Agadir–al Massira",
+    "name": "Agadir–al Massira Airport Agadir Morocco"
+  },
+  {
+    "code": "AGB",
+    "city": "Flughafen Augsburg",
+    "name": "Flughafen Augsburg Affing Germany"
+  },
+  {
+    "code": "AGC",
+    "city": "Allegheny County",
+    "name": "Allegheny County Airport West Mifflin Pittsburgh Pennsylvania Pa USA"
+  },
+  {
+    "code": "AGP",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Málaga-costa del Sol Málaga Costa Spain"
+  },
+  {
+    "code": "AGS",
+    "city": "Augusta Regional",
+    "name": "Augusta Regional Airport Georgia Ga USA"
+  },
+  {
+    "code": "AGU",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Lic. Jesús Terán Peredo International Airport Aguascalientes Ag Mexico"
+  },
+  {
+    "code": "AHB",
+    "city": "Abha Regional",
+    "name": "Abha Regional Airport Asir Province Saudi Arabia"
+  },
+  {
+    "code": "AJA",
+    "city": "Aéroport D’ajaccio-napoléon-bonaparte",
+    "name": "Aéroport D’ajaccio-napoléon-bonaparte Ajaccio Napoleon Bonaparte Airport France"
+  },
+  {
+    "code": "AJF",
+    "city": "Al-jawf Domestic",
+    "name": "Al-jawf Domestic Airport Sakakah al Jawf Province Saudi Arabia"
+  },
+  {
+    "code": "AJL",
+    "city": "Lengpui",
+    "name": "Lengpui Airport Aizawl Aijal Mizoram Mz India"
+  },
+  {
+    "code": "AJU",
+    "city": "Aeroporto Aracaju–santa",
+    "name": "Aeroporto Aracaju–santa Maria Santa Aracaju Sergipe Se Brazil"
+  },
+  {
+    "code": "AKC",
+    "city": "Akron Fulton International",
+    "name": "Akron Fulton International Airport Ohio Oh USA"
+  },
+  {
+    "code": "AKL",
+    "city": "Auckland",
+    "name": "Auckland Airport Mangere New Zealand"
+  },
+  {
+    "code": "AKT",
+    "city": "Royal Air",
+    "name": "Royal Air Force Akrotiri Cyprus"
+  },
+  {
+    "code": "AKX",
+    "city": "Aktobe",
+    "name": "Aktobe Airport Kazakhstan"
+  },
+  {
+    "code": "ALA",
+    "city": "Almaty International",
+    "name": "Almaty International Airport Kazakhstan"
+  },
+  {
+    "code": "ALB",
+    "city": "Albany International",
+    "name": "Albany International Airport Colonie New York Ny USA"
+  },
+  {
+    "code": "ALC",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Alicante-elche Alicante Valencia Spain"
+  },
+  {
+    "code": "ALG",
+    "city": "Houari Boumediene",
+    "name": "Houari Boumediene Airport Algiers Algeria"
+  },
+  {
+    "code": "ALS",
+    "city": "San Luis Valley Regional",
+    "name": "San Luis Valley Regional Airport Alamosa Colorado Co USA"
+  },
+  {
+    "code": "AMA",
+    "city": "Rick Husband Amarillo International",
+    "name": "Rick Husband Amarillo International Airport Texas Tx USA"
+  },
+  {
+    "code": "AMD",
+    "city": "Sardar Vallabhbhai Patel International",
+    "name": "Sardar Vallabhbhai Patel International Airport Ahmedabad Gujarat Gj India"
+  },
+  {
+    "code": "AMM",
+    "city": "Queen Alia International",
+    "name": "Queen Alia International Airport Amman Zizya Jordan"
+  },
+  {
+    "code": "AMQ",
+    "city": "Bandar Udara Pattimura",
+    "name": "Bandar Udara Pattimura Airport Ambon Maluku Indonesia"
+  },
+  {
+    "code": "AMS",
+    "city": "Luchthaven Schiphol",
+    "name": "Luchthaven Schiphol Amsterdam Netherlands"
+  },
+  {
+    "code": "ANC",
+    "city": "Ted Stevens Anchorage International",
+    "name": "Ted Stevens Anchorage International Airport Alaska Ak USA"
+  },
+  {
+    "code": "ANG",
+    "city": "Aéroport International",
+    "name": "Aéroport International D'angoulême-cognac Angoulême Champniers France"
+  },
+  {
+    "code": "ANR",
+    "city": "Internationale",
+    "name": "Internationale Luchthaven Antwerpen Antwerp Deurne Belgium"
+  },
+  {
+    "code": "ANS",
+    "city": "Aeropuerto Andahuaylas",
+    "name": "Aeropuerto Andahuaylas Apurímac Peru"
+  },
+  {
+    "code": "ANU",
+    "city": "V. C. Bird International",
+    "name": "V. C. Bird International Airport Saint John’s Antigua and Barbuda"
+  },
+  {
+    "code": "AOI",
+    "city": "Aeroporto Raffaello",
+    "name": "Aeroporto Raffaello Sanzio di Ancona-falconara Ancona Falconara Marittima Italy"
+  },
+  {
+    "code": "APA",
+    "city": "Centennial",
+    "name": "Centennial Airport Denver Aurora Colorado Co USA"
+  },
+  {
+    "code": "APW",
+    "city": "Faleolo International",
+    "name": "Faleolo International Airport Apia Samoa"
+  },
+  {
+    "code": "AQJ",
+    "city": "King Hussein International",
+    "name": "King Hussein International Airport Aqaba Jordan"
+  },
+  {
+    "code": "AQP",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Alférez Alfredo Rodríguez Ballón International Airport Arequipa Peru"
+  },
+  {
+    "code": "ARN",
+    "city": "Stockholm-arlanda Flygplats",
+    "name": "Stockholm-arlanda Flygplats Stockholm Arlanda Sweden"
+  },
+  {
+    "code": "ART",
+    "city": "Watertown International",
+    "name": "Watertown International Airport New York Ny USA"
+  },
+  {
+    "code": "ASB",
+    "city": "Ashgabat International",
+    "name": "Ashgabat International Airport Turkmenistan"
+  },
+  {
+    "code": "ASE",
+    "city": "Aspen–pitkin County",
+    "name": "Aspen–pitkin County Airport Aspen Colorado Co USA"
+  },
+  {
+    "code": "ASM",
+    "city": "Asmara International",
+    "name": "Asmara International Airport Eritrea"
+  },
+  {
+    "code": "ASU",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Silvio Pettirossi Asunción Luque Paraguay"
+  },
+  {
+    "code": "ATA",
+    "city": "Aeropuerto Comandante",
+    "name": "Aeropuerto Comandante Fap Germán Arias Graziani Airport Huaraz Anta Ancash Peru"
+  },
+  {
+    "code": "ATH",
+    "city": "Athens International",
+    "name": "Athens International Airport, Eleftherios Venizelos Greece"
+  },
+  {
+    "code": "ATL",
+    "city": "Hartsfield–jackson International",
+    "name": "Hartsfield–jackson International Airport Atlanta Georgia Ga USA"
+  },
+  {
+    "code": "ATQ",
+    "city": "Sri Guru Ram Das Jee International",
+    "name": "Sri Guru Ram Das Jee International Airport Amritsar Punjab Pb India"
+  },
+  {
+    "code": "ATW",
+    "city": "Appleton International",
+    "name": "Appleton International Airport Greenville Wisconsin Wi USA"
+  },
+  {
+    "code": "AUA",
+    "city": "Internationale",
+    "name": "Internationale Luchthaven Koningin Beatrix Queen Oranjestad Aruba Netherlands"
+  },
+  {
+    "code": "AUH",
+    "city": "Abu Dhabi International",
+    "name": "Abu Dhabi International Airport United Arab Emirates"
+  },
+  {
+    "code": "AUS",
+    "city": "Austin–bergstrom International",
+    "name": "Austin–bergstrom International Airport Austin Texas Tx USA"
+  },
+  {
+    "code": "AVL",
+    "city": "Asheville Regional",
+    "name": "Asheville Regional Airport North Carolina Nc USA"
+  },
+  {
+    "code": "AVP",
+    "city": "Wilkes-barre/scranton International",
+    "name": "Wilkes-barre/scranton International Airport Avoca Scranton Pennsylvania Pa USA"
+  },
+  {
+    "code": "AWZ",
+    "city": "Ahvaz International",
+    "name": "Ahvaz International Airport Ahwaz Iran"
+  },
+  {
+    "code": "AYP",
+    "city": "Aeropuerto Coronel",
+    "name": "Aeropuerto Coronel Fap Alfredo Mendívil Duarte Airport Ayacucho Peru"
+  },
+  {
+    "code": "AYT",
+    "city": "Antalya Havalimanı",
+    "name": "Antalya Havalimanı Turkey"
+  },
+  {
+    "code": "AZA",
+    "city": "Mesa Gateway",
+    "name": "Mesa Gateway Airport Arizona Az USA"
+  },
+  {
+    "code": "AZO",
+    "city": "Kalamazoo/battle Creek International",
+    "name": "Kalamazoo/battle Creek International Airport Kalamazoo Battle Michigan Mi USA"
+  },
+  {
+    "code": "BAH",
+    "city": "Bahrain International",
+    "name": "Bahrain International Airport Muharraq"
+  },
+  {
+    "code": "BAL",
+    "city": "Batman Havaalanı",
+    "name": "Batman Havaalanı Turkey"
+  },
+  {
+    "code": "BAQ",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Ernesto Cortissoz International Airport Barranquilla Soledad Colombia"
+  },
+  {
+    "code": "BAT",
+    "city": "Aeroporto Chafei",
+    "name": "Aeroporto Chafei Amsei Airport Barretos Sao Paulo São Sp Brazil"
+  },
+  {
+    "code": "BCB",
+    "city": "Virginia Tech Montgomery Executive",
+    "name": "Virginia Tech Montgomery Executive Airport Blacksburg Christiansburg Va USA"
+  },
+  {
+    "code": "BCD",
+    "city": "Paliparan Ng Bacolod–silay",
+    "name": "Paliparan Ng Bacolod–silay Airport Bacolod Philippines"
+  },
+  {
+    "code": "BCN",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Barcelona-el Prat Barcelona El Llobregat Spain"
+  },
+  {
+    "code": "BDA",
+    "city": "L.f. Wade International",
+    "name": "L.f. Wade International Airport Bermuda St. David's Island UK"
+  },
+  {
+    "code": "BDI",
+    "city": "Bird Island",
+    "name": "Bird Island Airport Seychelles"
+  },
+  {
+    "code": "BDL",
+    "city": "Bradley International",
+    "name": "Bradley International Airport Hartford Windsor Locks Connecticut Ct USA"
+  },
+  {
+    "code": "BDO",
+    "city": "Bandar Udara Internasional Husein Sastranegara International",
+    "name": "Bandar Udara Internasional Husein Sastranegara International Airport Bandung West Java Indonesia"
+  },
+  {
+    "code": "BDS",
+    "city": "Brindisi -",
+    "name": "Brindisi - Aeroporto del Salento Italy"
+  },
+  {
+    "code": "BEB",
+    "city": "Port-adhair Beinn",
+    "name": "Port-adhair Beinn Na Faoghla Benbecula Balivanich Scotland UK"
+  },
+  {
+    "code": "BED",
+    "city": "Laurence G.",
+    "name": "Laurence G. Hanscom Field Bedford Massachusetts Ma USA"
+  },
+  {
+    "code": "BEG",
+    "city": "Aerodrom Beograd",
+    "name": "Aerodrom Beograd - Nikola Tesla Belgrade Serbia"
+  },
+  {
+    "code": "BEL",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Júlio Cezar Ribeiro Belém Val de Cans Pará Pa Brazil"
+  },
+  {
+    "code": "BER",
+    "city": "Flughafen Berlin",
+    "name": "Flughafen Berlin Brandenburg Germany"
+  },
+  {
+    "code": "BES",
+    "city": "Brest Bretagne",
+    "name": "Brest Bretagne Airport France"
+  },
+  {
+    "code": "BEY",
+    "city": "Beirut–rafic Hariri International",
+    "name": "Beirut–rafic Hariri International Airport Beirut Lebanon"
+  },
+  {
+    "code": "BFF",
+    "city": "Western Nebraska Regional",
+    "name": "Western Nebraska Regional Airport Scottsbluff Ne USA"
+  },
+  {
+    "code": "BFI",
+    "city": "King County International",
+    "name": "King County International Airport / Boeing Field Seattle Washington Wa USA"
+  },
+  {
+    "code": "BFL",
+    "city": "Meadows Field",
+    "name": "Meadows Field Airport Bakersfield Oildale California Ca USA"
+  },
+  {
+    "code": "BFS",
+    "city": "Belfast International",
+    "name": "Belfast International Airport Aldergrove Northern Ireland UK"
+  },
+  {
+    "code": "BGA",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional de Palonegro International Airport Bucaramanga Lebrija Colombia"
+  },
+  {
+    "code": "BGI",
+    "city": "Grantley Adams International",
+    "name": "Grantley Adams International Airport Bridgetown Seawell Barbados"
+  },
+  {
+    "code": "BGO",
+    "city": "Bergen",
+    "name": "Bergen Lufthavn, Flesland Norway"
+  },
+  {
+    "code": "BGR",
+    "city": "Bangor International",
+    "name": "Bangor International Airport Maine Me USA"
+  },
+  {
+    "code": "BGW",
+    "city": "Baghdad International",
+    "name": "Baghdad International Airport Iraq"
+  },
+  {
+    "code": "BGY",
+    "city": "Aeroporto di",
+    "name": "Aeroporto di Bergamo-orio al Serio Il Caravaggio International Airport Bergamo Milan Italy"
+  },
+  {
+    "code": "BHD",
+    "city": "George Best Belfast City",
+    "name": "George Best Belfast City Airport Northern Ireland UK"
+  },
+  {
+    "code": "BHM",
+    "city": "Birmingham–shuttlesworth International",
+    "name": "Birmingham–shuttlesworth International Airport Birmingham Alabama al USA"
+  },
+  {
+    "code": "BHO",
+    "city": "Raja Bhoj",
+    "name": "Raja Bhoj Airport Bhopal Madhya Pradesh Mp India"
+  },
+  {
+    "code": "BHX",
+    "city": "Birmingham",
+    "name": "Birmingham Airport England UK"
+  },
+  {
+    "code": "BIK",
+    "city": "Bandar Udara Internasional Frans Kaisiepo International",
+    "name": "Bandar Udara Internasional Frans Kaisiepo International Airport Biak Indonesia"
+  },
+  {
+    "code": "BIL",
+    "city": "Billings Logan International",
+    "name": "Billings Logan International Airport Montana Mt USA"
+  },
+  {
+    "code": "BIO",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Bilbao Biscay Spain"
+  },
+  {
+    "code": "BJC",
+    "city": "Rocky Mountain Metropolitan",
+    "name": "Rocky Mountain Metropolitan Airport Denver Colorado Co USA"
+  },
+  {
+    "code": "BJL",
+    "city": "Banjul International",
+    "name": "Banjul International Airport the Gambia"
+  },
+  {
+    "code": "BJM",
+    "city": "Aéroport International",
+    "name": "Aéroport International de Bujumbura Burundi"
+  },
+  {
+    "code": "BJX",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional de Guanajuato Silao Mexico"
+  },
+  {
+    "code": "BKF",
+    "city": "Lake Brooks",
+    "name": "Lake Brooks Seaplane Base Katmai National Park Camp Alaska Ak USA"
+  },
+  {
+    "code": "BKI",
+    "city": "Lapangan Terbang",
+    "name": "Lapangan Terbang Antarabangsa Kota Kinabalu Sabah Malaysia"
+  },
+  {
+    "code": "BKK",
+    "city": "Suvarnabhumi",
+    "name": "Suvarnabhumi Airport Bangkok Thailand"
+  },
+  {
+    "code": "BKL",
+    "city": "Burke Lakefront",
+    "name": "Burke Lakefront Airport Cleveland Ohio Oh USA"
+  },
+  {
+    "code": "BKO",
+    "city": "Aéroport International",
+    "name": "Aéroport International de Bamako–sénou Senou Airport Bamako Mali"
+  },
+  {
+    "code": "BLI",
+    "city": "Bellingham International",
+    "name": "Bellingham International Airport Washington Wa USA"
+  },
+  {
+    "code": "BLK",
+    "city": "Blackpool",
+    "name": "Blackpool Airport England UK"
+  },
+  {
+    "code": "BLL",
+    "city": "Billund",
+    "name": "Billund Lufthavn Denmark"
+  },
+  {
+    "code": "BLQ",
+    "city": "Aeroporto di",
+    "name": "Aeroporto di Bologna-guglielmo Marconi Guglielmo Bologna Italy"
+  },
+  {
+    "code": "BLR",
+    "city": "Kempegowda International",
+    "name": "Kempegowda International Airport Bengaluru Devanahalli Karnataka Ka India"
+  },
+  {
+    "code": "BMA",
+    "city": "Stockholm-bromma Flygplats",
+    "name": "Stockholm-bromma Flygplats Stockholm Bromma Sweden"
+  },
+  {
+    "code": "BMI",
+    "city": "Central Illinois Regional",
+    "name": "Central Illinois Regional Airport Bloomington Il USA"
+  },
+  {
+    "code": "BMV",
+    "city": "Sân Bay",
+    "name": "Sân Bay Buôn Ma Thuột Buon Thuot Vietnam"
+  },
+  {
+    "code": "BNA",
+    "city": "Nashville International",
+    "name": "Nashville International Airport Tennessee Tn USA"
+  },
+  {
+    "code": "BND",
+    "city": "Bandar Abbas International",
+    "name": "Bandar Abbas International Airport Iran"
+  },
+  {
+    "code": "BNE",
+    "city": "Brisbane",
+    "name": "Brisbane Airport Queensland Qld Australia"
+  },
+  {
+    "code": "BNX",
+    "city": "Banja Luka International",
+    "name": "Banja Luka International Airport Mahovljani Bosnia and Herzegovina"
+  },
+  {
+    "code": "BOB",
+    "city": "Bora",
+    "name": "Bora Airport Motu Mute French Polynesia France"
+  },
+  {
+    "code": "BOD",
+    "city": "Aéroport de",
+    "name": "Aéroport de Bordeaux-mérignac Bordeaux Mérignac France"
+  },
+  {
+    "code": "BOG",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional El Dorado International Airport Bogotá Colombia"
+  },
+  {
+    "code": "BOH",
+    "city": "Bournemouth",
+    "name": "Bournemouth Airport Hurn England UK"
+  },
+  {
+    "code": "BOI",
+    "city": "Boise",
+    "name": "Boise Airport Idaho Id USA"
+  },
+  {
+    "code": "BOM",
+    "city": "Mumbai",
+    "name": "Chhatrapati Shivaji International Airport Mumbai Maharashtra Mh India"
+  },
+  {
+    "code": "BON",
+    "city": "Luchthaven Flamingo",
+    "name": "Luchthaven Flamingo International Airport Bonaire Kralendijk Abc Islands Netherlands"
+  },
+  {
+    "code": "BOS",
+    "city": "Logan International",
+    "name": "Logan International Airport Boston Paradise Massachusetts Ma USA"
+  },
+  {
+    "code": "BPN",
+    "city": "Bandar Udara",
+    "name": "Bandar Udara Internasional Sultan Aji Muhammad Sulaiman Balikpapan East Kalimantan Indonesia"
+  },
+  {
+    "code": "BPT",
+    "city": "Jack Brooks Regional",
+    "name": "Jack Brooks Regional Airport Beaumont Port Arthur Texas Tx USA"
+  },
+  {
+    "code": "BQH",
+    "city": "Biggin Hill",
+    "name": "Biggin Hill Airport London Bromley England UK"
+  },
+  {
+    "code": "BRA",
+    "city": "Aeroporto de",
+    "name": "Aeroporto de Barreiras Bahia Ba Brazil"
+  },
+  {
+    "code": "BRC",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de San Carlos Bariloche Airport Argentina"
+  },
+  {
+    "code": "BRE",
+    "city": "Flughafen Bremen",
+    "name": "Flughafen Bremen Germany"
+  },
+  {
+    "code": "BRI",
+    "city": "Aeroporto di",
+    "name": "Aeroporto di Bari-karol Wojtyła Bari Palese Italy"
+  },
+  {
+    "code": "BRO",
+    "city": "Brownsville/south Padre Island International",
+    "name": "Brownsville/south Padre Island International Airport Brownsville South Texas Tx USA"
+  },
+  {
+    "code": "BRQ",
+    "city": "Letiště Brno–tuřany",
+    "name": "Letiště Brno–tuřany Brno Tuřany Czech Republic"
+  },
+  {
+    "code": "BRR",
+    "city": "Port-adhair Bharraigh",
+    "name": "Port-adhair Bharraigh Barra Outer Hebrides Scotland UK"
+  },
+  {
+    "code": "BRS",
+    "city": "Bristol",
+    "name": "Bristol Airport Lulsgate Bottom England UK"
+  },
+  {
+    "code": "BRU",
+    "city": "Luchthaven Brussel-nationaal",
+    "name": "Luchthaven Brussel-nationaal Brussels Belgium"
+  },
+  {
+    "code": "BRW",
+    "city": "Wiley Post–will Rogers Memorial",
+    "name": "Wiley Post–will Rogers Memorial Airport Barrow Alaska Ak USA"
+  },
+  {
+    "code": "BSB",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional de Brasília–pres. Juscelino Kubitschek Presidente International Airport Brasília Brazil"
+  },
+  {
+    "code": "BSL",
+    "city": "Euroairport Basel–mulhouse–freiburg",
+    "name": "Euroairport Basel–mulhouse–freiburg Basel Saint-louis France Switzerland"
+  },
+  {
+    "code": "BTJ",
+    "city": "Bandar Udara Internasional Sultan Iskandar Muda Iskander International",
+    "name": "Bandar Udara Internasional Sultan Iskandar Muda Iskander International Airport Banda Aceh Blang Bintang Indonesia"
+  },
+  {
+    "code": "BTM",
+    "city": "Bert Mooney",
+    "name": "Bert Mooney Airport Butte Montana Mt USA"
+  },
+  {
+    "code": "BTR",
+    "city": "Baton Rouge Metropolitan",
+    "name": "Baton Rouge Metropolitan Airport Louisiana la USA"
+  },
+  {
+    "code": "BTS",
+    "city": "Letisko M. R. Štefánika Štefánik",
+    "name": "Letisko M. R. Štefánika Štefánik Airport Bratislava Slovakia"
+  },
+  {
+    "code": "BTV",
+    "city": "Burlington International",
+    "name": "Burlington International Airport Vermont Vt USA"
+  },
+  {
+    "code": "BUD",
+    "city": "Budapest Liszt",
+    "name": "Budapest Liszt Ferenc Nemzetközi Repülőtér Hungary"
+  },
+  {
+    "code": "BUF",
+    "city": "Buffalo Niagara International",
+    "name": "Buffalo Niagara International Airport Cheektowaga New York Ny USA"
+  },
+  {
+    "code": "BUR",
+    "city": "Bob Hope",
+    "name": "Bob Hope Airport Burbank Los Angeles California Ca USA"
+  },
+  {
+    "code": "BUT",
+    "city": "Bathpalathang",
+    "name": "Bathpalathang Airport Jakar Bhutan"
+  },
+  {
+    "code": "BVA",
+    "city": "Aéroport de",
+    "name": "Aéroport de Beauvais-tillé Beauvais Tillé France"
+  },
+  {
+    "code": "BVB",
+    "city": "Aeroporto International",
+    "name": "Aeroporto International Atlas Brasil Cantanhede Boa Vista Roraima Rr Brazil"
+  },
+  {
+    "code": "BVC",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Aristides Pereira International Airport Sal Rei Boa Vista Cape Verde"
+  },
+  {
+    "code": "BWE",
+    "city": "Flughafen Braunschweig-wolfsburg",
+    "name": "Flughafen Braunschweig-wolfsburg Braunschweig Wolfsburg Germany"
+  },
+  {
+    "code": "BWF",
+    "city": "Barrow/walney Island",
+    "name": "Barrow/walney Island Airport Barrow-in-furness England UK"
+  },
+  {
+    "code": "BWI",
+    "city": "Baltimore/washington International Thurgood Marshall",
+    "name": "Baltimore/washington International Thurgood Marshall Airport Baltimore Washington D.c. Maryland Md USA"
+  },
+  {
+    "code": "BWN",
+    "city": "Brunei International",
+    "name": "Brunei International Airport Bandar Seri Begawan"
+  },
+  {
+    "code": "BYJ",
+    "city": "Aeroporto de",
+    "name": "Aeroporto de Beja Portugal"
+  },
+  {
+    "code": "BZE",
+    "city": "Philip S. W. Goldson International",
+    "name": "Philip S. W. Goldson International Airport Belize City Ladyville"
+  },
+  {
+    "code": "BZN",
+    "city": "Bozeman Yellowstone International",
+    "name": "Bozeman Yellowstone International Airport Belgrade Montana Mt USA"
+  },
+  {
+    "code": "BZV",
+    "city": "Maya-maya",
+    "name": "Maya-maya Airport Brazzaville Congo Republic of the"
+  },
+  {
+    "code": "CAE",
+    "city": "Columbia Metropolitan",
+    "name": "Columbia Metropolitan Airport Cayce South Carolina Sc USA"
+  },
+  {
+    "code": "CAG",
+    "city": "International",
+    "name": "International Aeroporto di Cagliari Elmas Airport Sardinia Italy"
+  },
+  {
+    "code": "CAH",
+    "city": "Sân Bay Cà Mau Ca",
+    "name": "Sân Bay Cà Mau Ca Airport Vietnam"
+  },
+  {
+    "code": "CAI",
+    "city": "Cairo International",
+    "name": "Cairo International Airport Egypt"
+  },
+  {
+    "code": "CAK",
+    "city": "Akron–canton",
+    "name": "Akron–canton Airport Akron Canton Ohio Oh USA"
+  },
+  {
+    "code": "CAN",
+    "city": "Guangzhou Baiyun International",
+    "name": "Guangzhou Baiyun International Airport Canton Guangdong China"
+  },
+  {
+    "code": "CBB",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Jorge Wilstermann Cochabamba Bolivia"
+  },
+  {
+    "code": "CBG",
+    "city": "Cambridge",
+    "name": "Cambridge Airport Teversham England UK"
+  },
+  {
+    "code": "CBQ",
+    "city": "Margaret Ekpo International",
+    "name": "Margaret Ekpo International Airport Calabar Nigeria"
+  },
+  {
+    "code": "CBR",
+    "city": "Canberra International",
+    "name": "Canberra International Airport Queanbeyan Australian Capital Territory Act Australia"
+  },
+  {
+    "code": "CCF",
+    "city": "Aéroport de",
+    "name": "Aéroport de Carcassonne France"
+  },
+  {
+    "code": "CCJ",
+    "city": "Calicut International",
+    "name": "Calicut International Airport Karipur Kozhikode Kerala Kl India"
+  },
+  {
+    "code": "CCK",
+    "city": "Cocos (keeling) Islands",
+    "name": "Cocos (keeling) Islands Airport West Island Australia"
+  },
+  {
+    "code": "CCP",
+    "city": "Aeropuerto Carriel",
+    "name": "Aeropuerto Carriel Sur International Airport Concepción Chile"
+  },
+  {
+    "code": "CCS",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional de Maiquetia “simón Bolívar” Simón Bolívar International Airport Caracas Maiquetía Venezuela"
+  },
+  {
+    "code": "CCU",
+    "city": "Netaji Subhas Chandra Bose International",
+    "name": "Netaji Subhas Chandra Bose International Airport Kolkata Calcutta West Bengal Wb India"
+  },
+  {
+    "code": "CDC",
+    "city": "Cedar City Regional",
+    "name": "Cedar City Regional Airport Utah Ut USA"
+  },
+  {
+    "code": "CDF",
+    "city": "Maes Awyr",
+    "name": "Maes Awyr Caerdydd Cardiff Wales UK"
+  },
+  {
+    "code": "CDG",
+    "city": "Aéroport de",
+    "name": "Aéroport de Paris-charles-de-gaulle Charles Gaulle Airport Paris France"
+  },
+  {
+    "code": "CEB",
+    "city": "Paliparang Pandaigdig Ng Mactan–cebu International",
+    "name": "Paliparang Pandaigdig Ng Mactan–cebu International Airport Cebu Lapu-lapu City Philippines"
+  },
+  {
+    "code": "CEK",
+    "city": "Chelyabinsk",
+    "name": "Chelyabinsk Airport Russia"
+  },
+  {
+    "code": "CFB",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional de Cabo Frio Rio Janeiro Rj Brazil"
+  },
+  {
+    "code": "CFD",
+    "city": "Coulter Field",
+    "name": "Coulter Field Bryan Texas Tx USA"
+  },
+  {
+    "code": "CFN",
+    "city": "Aerfort Dhún",
+    "name": "Aerfort Dhún Na Ngall Carrickfinn Donegal Ireland"
+  },
+  {
+    "code": "CGH",
+    "city": "Aeroporto de",
+    "name": "Aeroporto de São Paulo/congonhas Congonhas Airport Paulo Sao Sp Brazil"
+  },
+  {
+    "code": "CGK",
+    "city": "Bandar Udara Internasional Soekarno–hatta International",
+    "name": "Bandar Udara Internasional Soekarno–hatta International Airport Jakarta Tangerang Banten Indonesia"
+  },
+  {
+    "code": "CGN",
+    "city": "Flughafen Köln/bonn",
+    "name": "Flughafen Köln/bonn Cologne Bonn Germany"
+  },
+  {
+    "code": "CGO",
+    "city": "Zhengzhou Xinzheng International",
+    "name": "Zhengzhou Xinzheng International Airport Henan China"
+  },
+  {
+    "code": "CGP",
+    "city": "Shah Amanat International",
+    "name": "Shah Amanat International Airport Chittagong Patenga Bangladesh"
+  },
+  {
+    "code": "CGR",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional de Campo Grande Mato Grosso Do Sul Ms Brazil"
+  },
+  {
+    "code": "CHA",
+    "city": "Chattanooga Metropolitan",
+    "name": "Chattanooga Metropolitan Airport Tennessee Tn USA"
+  },
+  {
+    "code": "CHC",
+    "city": "Christchurch International",
+    "name": "Christchurch International Airport Harewood New Zealand"
+  },
+  {
+    "code": "CHM",
+    "city": "Aeropuerto Teniente",
+    "name": "Aeropuerto Teniente Fap Jaime Montreuil Morales Airport Chimbote Ancash Peru"
+  },
+  {
+    "code": "CHO",
+    "city": "Charlottesville–albemarle",
+    "name": "Charlottesville–albemarle Airport Charlottesville Virginia Va USA"
+  },
+  {
+    "code": "CHR",
+    "city": "Aéroport de",
+    "name": "Aéroport de Châteauroux-centre Châteauroux France"
+  },
+  {
+    "code": "CHS",
+    "city": "Charleston International",
+    "name": "Charleston International Airport North South Carolina Sc USA"
+  },
+  {
+    "code": "CIA",
+    "city": "Ciampino–aeroporto Internazionale",
+    "name": "Ciampino–aeroporto Internazionale G. B. Pastine Rome Ciampino Italy"
+  },
+  {
+    "code": "CID",
+    "city": "The Eastern Iowa",
+    "name": "The Eastern Iowa Airport Cedar Rapids Ia USA"
+  },
+  {
+    "code": "CIT",
+    "city": "Shymkent International",
+    "name": "Shymkent International Airport Kazakhstan"
+  },
+  {
+    "code": "CIU",
+    "city": "Chippewa County International",
+    "name": "Chippewa County International Airport Sault Ste. Marie Michigan Mi USA"
+  },
+  {
+    "code": "CIX",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Capitán Fap José Abelardo Quiñones Gonzáles Chiclayo Lambayeque Peru"
+  },
+  {
+    "code": "CJA",
+    "city": "Aeropuerto Mayor",
+    "name": "Aeropuerto Mayor General Fap Armando Revoredo Iglesias Airport Cajamarca Peru"
+  },
+  {
+    "code": "CJU",
+    "city": "Jeju International",
+    "name": "Jeju International Airport Cheju Korea South"
+  },
+  {
+    "code": "CKB",
+    "city": "North Central West Virginia",
+    "name": "North Central West Virginia Airport Clarksburg Bridgeport Wv USA"
+  },
+  {
+    "code": "CKG",
+    "city": "Chongqing Jiangbei International",
+    "name": "Chongqing Jiangbei International Airport Yubei District China"
+  },
+  {
+    "code": "CKY",
+    "city": "Conakry International",
+    "name": "Conakry International Airport Guinea"
+  },
+  {
+    "code": "CLD",
+    "city": "Mcclellan-palomar",
+    "name": "Mcclellan-palomar Airport Carlsbad California Ca USA"
+  },
+  {
+    "code": "CLE",
+    "city": "Hopkins International",
+    "name": "Hopkins International Airport Cleveland Ohio Oh USA"
+  },
+  {
+    "code": "CLJ",
+    "city": "Aeroportul International",
+    "name": "Aeroportul International “avram Iancu” Cluj Cluj-napoca Romania"
+  },
+  {
+    "code": "CLL",
+    "city": "Easterwood",
+    "name": "Easterwood Airport College Station Texas Tx USA"
+  },
+  {
+    "code": "CLO",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Alfonso Bonilla Aragón International Airport Santiago de Cali Colombia"
+  },
+  {
+    "code": "CLT",
+    "city": "Douglas International",
+    "name": "Douglas International Airport Charlotte North Carolina Nc USA"
+  },
+  {
+    "code": "CLY",
+    "city": "Aéroport de",
+    "name": "Aéroport de Calvi – Sainte-catherine Airport France"
+  },
+  {
+    "code": "CMB",
+    "city": "Bandaranaike International",
+    "name": "Bandaranaike International Airport Colombo Katunayake Western Province Sri Lanka"
+  },
+  {
+    "code": "CMH",
+    "city": "Port Columbus International",
+    "name": "Port Columbus International Airport Ohio Oh USA"
+  },
+  {
+    "code": "CMI",
+    "city": "University of Illinois Willard",
+    "name": "University of Illinois Willard Airport Champaign-urbana Savoy Il USA"
+  },
+  {
+    "code": "CMN",
+    "city": "Mohammed V International",
+    "name": "Mohammed V International Airport Casablanca Nouasseur Morocco"
+  },
+  {
+    "code": "CMX",
+    "city": "Houghton County Memorial",
+    "name": "Houghton County Memorial Airport Calumet Michigan Mi USA"
+  },
+  {
+    "code": "CNF",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Tancredo Neves - Confins Neves/confins Belo Horizonte Minas Gerais Mg Brazil"
+  },
+  {
+    "code": "CNG",
+    "city": "Base Aérienne",
+    "name": "Base Aérienne 709 Cognac-châteaubernard Cognac Châteaubernard France"
+  },
+  {
+    "code": "CNN",
+    "city": "Kannur International",
+    "name": "Kannur International Airport Thalassery Kerala Kl India"
+  },
+  {
+    "code": "CNS",
+    "city": "Cairns",
+    "name": "Cairns Airport Queensland Qld Australia"
+  },
+  {
+    "code": "CNX",
+    "city": "Chiang Mai International",
+    "name": "Chiang Mai International Airport Lamphun Thailand"
+  },
+  {
+    "code": "COK",
+    "city": "Cochin International",
+    "name": "Cochin International Airport Kochi Kerala Kl India"
+  },
+  {
+    "code": "COO",
+    "city": "Aéroport International",
+    "name": "Aéroport International de Cotonou Benin"
+  },
+  {
+    "code": "COR",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional de Córdoba Ingeniero Aeronáutico Ambrosio L.v. Taravella Cordoba Argentina"
+  },
+  {
+    "code": "COS",
+    "city": "Colorado Springs",
+    "name": "Colorado Springs Airport Co USA"
+  },
+  {
+    "code": "CPH",
+    "city": "Københavns",
+    "name": "Københavns Lufthavn, Kastrup Copenhagen Tårnby Denmark"
+  },
+  {
+    "code": "CPR",
+    "city": "Casper–natrona County International",
+    "name": "Casper–natrona County International Airport Casper Natrona Wyoming Wy USA"
+  },
+  {
+    "code": "CPT",
+    "city": "Cape Town International",
+    "name": "Cape Town International Airport South Africa"
+  },
+  {
+    "code": "CPV",
+    "city": "Aeroporto Presidente",
+    "name": "Aeroporto Presidente João Suassuna Airport Campina Grande Paraíba Pb Brazil"
+  },
+  {
+    "code": "CQM",
+    "city": "Aeropuerto Central",
+    "name": "Aeropuerto Central Ciudad Real Puertollano Spain"
+  },
+  {
+    "code": "CRK",
+    "city": "Paliparang Pandaigdig Ng Clark International",
+    "name": "Paliparang Pandaigdig Ng Clark International Airport Manila Mabalacat City Philippines"
+  },
+  {
+    "code": "CRL",
+    "city": "Aéroport de",
+    "name": "Aéroport de Charleroi Bruxelles Sud Brussels South Airport Gosselies Belgium"
+  },
+  {
+    "code": "CRP",
+    "city": "Corpus Christi International",
+    "name": "Corpus Christi International Airport Texas Tx USA"
+  },
+  {
+    "code": "CRW",
+    "city": "Yeager",
+    "name": "Yeager Airport Charleston West Virginia Wv USA"
+  },
+  {
+    "code": "CTA",
+    "city": "Aeroporto di",
+    "name": "Aeroporto di Catania-fontanarossa Catania Italy"
+  },
+  {
+    "code": "CTG",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Rafael Núñez Cartagena Bolívar Colombia"
+  },
+  {
+    "code": "CTS",
+    "city": "New Chitose",
+    "name": "New Chitose Airport Sapporo Japan"
+  },
+  {
+    "code": "CTU",
+    "city": "Chengdu Shuangliu International",
+    "name": "Chengdu Shuangliu International Airport Sichuan China"
+  },
+  {
+    "code": "CUL",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Federal de Bachigualato International Airport Culiacán Navolato Sinaloa Si Mexico"
+  },
+  {
+    "code": "CUN",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional de Cancún Quintana Roo Qr Mexico"
+  },
+  {
+    "code": "CUR",
+    "city": "Hato Internationale",
+    "name": "Hato Internationale Luchthaven Curaçao International Airport Willemstad Netherlands"
+  },
+  {
+    "code": "CUZ",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Alejandro Velasco Astete International Airport Cusco Peru"
+  },
+  {
+    "code": "CVF",
+    "city": "Altiport de",
+    "name": "Altiport de Courchevel French Alps France"
+  },
+  {
+    "code": "CVG",
+    "city": "Cincinnati/northern Kentucky International",
+    "name": "Cincinnati/northern Kentucky International Airport Hebron Ohio Ky USA"
+  },
+  {
+    "code": "CVU",
+    "city": "Aeródromo de",
+    "name": "Aeródromo de Corvo Vila Do Azores Portugal"
+  },
+  {
+    "code": "CWB",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional de Curitiba - Afonso Pena International Airport São José Dos Pinhais Paraná Pr Brazil"
+  },
+  {
+    "code": "CWL",
+    "city": "Maes Awyr",
+    "name": "Maes Awyr Caerdydd Cardiff Wales UK"
+  },
+  {
+    "code": "CXR",
+    "city": "Sân Bay Quốc Tế Cam Ranh International",
+    "name": "Sân Bay Quốc Tế Cam Ranh International Airport Khanh Hoa Vietnam"
+  },
+  {
+    "code": "CZM",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional de Cozumel International Airport Quintana Roo Qr Mexico"
+  },
+  {
+    "code": "CZS",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional de Cruzeiro Do Sul International Airport Acre Ac Brazil"
+  },
+  {
+    "code": "DAB",
+    "city": "Daytona Beach International",
+    "name": "Daytona Beach International Airport Florida Fl USA"
+  },
+  {
+    "code": "DAC",
+    "city": "Hazrat Shahjalal International",
+    "name": "Hazrat Shahjalal International Airport Dhaka Kurmitola Bangladesh"
+  },
+  {
+    "code": "DAD",
+    "city": "Sân Bay",
+    "name": "Sân Bay Quốc Tế Đà Nẵng Da Nang Vietnam"
+  },
+  {
+    "code": "DAL",
+    "city": "Dallas Love",
+    "name": "Dallas Love Field Fort Worth Texas Tx USA"
+  },
+  {
+    "code": "DAM",
+    "city": "Damascus International",
+    "name": "Damascus International Airport Syria"
+  },
+  {
+    "code": "DAR",
+    "city": "Julius Nyerere International",
+    "name": "Julius Nyerere International Airport Es Salaam Tanzania"
+  },
+  {
+    "code": "DAY",
+    "city": "James M. Cox Dayton International",
+    "name": "James M. Cox Dayton International Airport Ohio Oh USA"
+  },
+  {
+    "code": "DBQ",
+    "city": "Dubuque Regional",
+    "name": "Dubuque Regional Airport Iowa Ia USA"
+  },
+  {
+    "code": "DBV",
+    "city": "Zračna Luka",
+    "name": "Zračna Luka Dubrovnik/čilipi Dubrovnik Čilipi Croatia"
+  },
+  {
+    "code": "DCA",
+    "city": "Ronald Reagan Washington National",
+    "name": "Ronald Reagan Washington National Airport D.c. Arlington County Virginia Va USA"
+  },
+  {
+    "code": "DEB",
+    "city": "Debreceni Nemzetközi",
+    "name": "Debreceni Nemzetközi Repülőtér Debrecen Hungary"
+  },
+  {
+    "code": "DED",
+    "city": "Jolly Grant International",
+    "name": "Jolly Grant International Airport Dehradun Uttarakhand UK India"
+  },
+  {
+    "code": "DEL",
+    "city": "Delhi",
+    "name": "Indira Gandhi International Airport New Delhi Dl India"
+  },
+  {
+    "code": "DEN",
+    "city": "Denver International",
+    "name": "Denver International Airport Colorado Co USA"
+  },
+  {
+    "code": "DET",
+    "city": "Coleman A. Young International",
+    "name": "Coleman A. Young International Airport Detroit Michigan Mi USA"
+  },
+  {
+    "code": "DFW",
+    "city": "Dallas/fort Worth International",
+    "name": "Dallas/fort Worth International Airport Dallas–fort Fort Texas Tx USA"
+  },
+  {
+    "code": "DIL",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Presidente Nicolau Lobato International Airport Dili Timor-leste East Timor"
+  },
+  {
+    "code": "DIN",
+    "city": "Sân Bay",
+    "name": "Sân Bay Điện Biên Phủ Dien Bien Phu Vietnam"
+  },
+  {
+    "code": "DKR",
+    "city": "Léopold Sédar Senghor International",
+    "name": "Léopold Sédar Senghor International Airport Dakar Yoff Senegal"
+  },
+  {
+    "code": "DLA",
+    "city": "Aéroport International",
+    "name": "Aéroport International de Douala Cameroon"
+  },
+  {
+    "code": "DLC",
+    "city": "Dalian Zhoushuizi International",
+    "name": "Dalian Zhoushuizi International Airport Liaoning China"
+  },
+  {
+    "code": "DLH",
+    "city": "Duluth International",
+    "name": "Duluth International Airport Minnesota Mn USA"
+  },
+  {
+    "code": "DLI",
+    "city": "Lien Khuong",
+    "name": "Lien Khuong Airport Dalat Đức Trọng Lâm Đồng Vietnam"
+  },
+  {
+    "code": "DLM",
+    "city": "Dalaman Havalimanı",
+    "name": "Dalaman Havalimanı Turkey"
+  },
+  {
+    "code": "DME",
+    "city": "Domodedovo International",
+    "name": "Domodedovo International Airport Moscow Russia"
+  },
+  {
+    "code": "DMK",
+    "city": "Don Mueang International",
+    "name": "Don Mueang International Airport Bangkok Thailand"
+  },
+  {
+    "code": "DMM",
+    "city": "King Fahd International",
+    "name": "King Fahd International Airport Dammam Eastern Province Saudi Arabia"
+  },
+  {
+    "code": "DND",
+    "city": "Port-adhair Dhùn",
+    "name": "Port-adhair Dhùn Dèagh Dundee Scotland UK"
+  },
+  {
+    "code": "DNK",
+    "city": "Dnipropetrovsk International",
+    "name": "Dnipropetrovsk International Airport Ukraine"
+  },
+  {
+    "code": "DNR",
+    "city": "Aéroport de",
+    "name": "Aéroport de Dinard–pleurtuit–saint-malo Airport Saint-malo Pleurtuit France"
+  },
+  {
+    "code": "DOH",
+    "city": "Doha",
+    "name": "Hamad International Airport Doha Qatar"
+  },
+  {
+    "code": "DOM",
+    "city": "Douglas–charles",
+    "name": "Douglas–charles Airport Melville Hall Marigot Roseau Dominica"
+  },
+  {
+    "code": "DPS",
+    "city": "Bandar Udara Internasional Ngurah Rai International",
+    "name": "Bandar Udara Internasional Ngurah Rai International Airport Denpasar Badung Bali Indonesia"
+  },
+  {
+    "code": "DRO",
+    "city": "Durango–la Plata County",
+    "name": "Durango–la Plata County Airport Durango Colorado Co USA"
+  },
+  {
+    "code": "DRS",
+    "city": "Flughafen Dresden",
+    "name": "Flughafen Dresden Airport Saxony Germany"
+  },
+  {
+    "code": "DRW",
+    "city": "Darwin International",
+    "name": "Darwin International Airport Darwn Marrara Northern Territory Nt Australia"
+  },
+  {
+    "code": "DSA",
+    "city": "Robin Hood",
+    "name": "Robin Hood Airport Doncaster Sheffield Finningley England UK"
+  },
+  {
+    "code": "DSI",
+    "city": "Destin Executive",
+    "name": "Destin Executive Airport Florida Fl USA"
+  },
+  {
+    "code": "DSM",
+    "city": "Des Moines International",
+    "name": "Des Moines International Airport Iowa Ia USA"
+  },
+  {
+    "code": "DSS",
+    "city": "Blaise Diagne International",
+    "name": "Blaise Diagne International Airport Dakar Ndiass Senegal"
+  },
+  {
+    "code": "DTM",
+    "city": "Flughafen Dortmund",
+    "name": "Flughafen Dortmund Germany"
+  },
+  {
+    "code": "DTN",
+    "city": "Shreveport Downtown",
+    "name": "Shreveport Downtown Airport Louisiana la USA"
+  },
+  {
+    "code": "DTW",
+    "city": "Detroit Metropolitan Wayne County",
+    "name": "Detroit Metropolitan Wayne County Airport Michigan Mi USA"
+  },
+  {
+    "code": "DUB",
+    "city": "Aerfort Bhaile",
+    "name": "Aerfort Bhaile Átha Cliath Dublin Collinstown Ireland"
+  },
+  {
+    "code": "DUD",
+    "city": "Dunedin International",
+    "name": "Dunedin International Airport Momona New Zealand"
+  },
+  {
+    "code": "DUS",
+    "city": "Flughafen Düsseldorf",
+    "name": "Flughafen Düsseldorf Dusseldorf Germany"
+  },
+  {
+    "code": "DVO",
+    "city": "Paliparang Pandaigdig Ng Francisco Bangoy International",
+    "name": "Paliparang Pandaigdig Ng Francisco Bangoy International Airport Davao City Catitipan Mindanao Philippines"
+  },
+  {
+    "code": "DWC",
+    "city": "Al Maktoum International",
+    "name": "Al Maktoum International Airport Dubai Jebel Ali United Arab Emirates"
+  },
+  {
+    "code": "DXB",
+    "city": "Dubai",
+    "name": "Dubai International Airport al Garhoud United Arab Emirates"
+  },
+  {
+    "code": "DXR",
+    "city": "Danbury Municipal",
+    "name": "Danbury Municipal Airport Connecticut Ct USA"
+  },
+  {
+    "code": "DYU",
+    "city": "Dushanbe International",
+    "name": "Dushanbe International Airport Tajikistan"
+  },
+  {
+    "code": "DZA",
+    "city": "Aéroport de",
+    "name": "Aéroport de Dzaoudzi-pamandzi Dzaoudzi Pamandzi Mayotte France"
+  },
+  {
+    "code": "EAS",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de San Sebastián Hondarribia Spain"
+  },
+  {
+    "code": "EAT",
+    "city": "Pangborn Memorial",
+    "name": "Pangborn Memorial Airport Wenatchee Washington Wa USA"
+  },
+  {
+    "code": "EBB",
+    "city": "Entebbe International",
+    "name": "Entebbe International Airport Kampala Uganda"
+  },
+  {
+    "code": "EBL",
+    "city": "Erbil International",
+    "name": "Erbil International Airport Iraq"
+  },
+  {
+    "code": "ECP",
+    "city": "Northwest Florida Beaches International",
+    "name": "Northwest Florida Beaches International Airport Panama City Fl USA"
+  },
+  {
+    "code": "EDI",
+    "city": "Edinburgh",
+    "name": "Port-adhair Dhùn Èideann Edinburgh Scotland UK"
+  },
+  {
+    "code": "EGC",
+    "city": "Aéroport de",
+    "name": "Aéroport de Bergerac Dordogne Périgord France"
+  },
+  {
+    "code": "EGE",
+    "city": "Eagle County Regional",
+    "name": "Eagle County Regional Airport Gypsum Colorado Co USA"
+  },
+  {
+    "code": "EIN",
+    "city": "Vliegbasis Eindhoven",
+    "name": "Vliegbasis Eindhoven Netherlands"
+  },
+  {
+    "code": "ELP",
+    "city": "El Paso International",
+    "name": "El Paso International Airport Texas Tx USA"
+  },
+  {
+    "code": "EMA",
+    "city": "East Midlands",
+    "name": "East Midlands Airport Nottingham Castle Donington England UK"
+  },
+  {
+    "code": "ENK",
+    "city": "Enniskillen St. Angelo",
+    "name": "Enniskillen St. Angelo Airport Northern Ireland UK"
+  },
+  {
+    "code": "ENS",
+    "city": "Enschede Vliegbasis",
+    "name": "Enschede Vliegbasis Twente Netherlands"
+  },
+  {
+    "code": "ENU",
+    "city": "Akanu Ibiam International",
+    "name": "Akanu Ibiam International Airport Enugu Nigeria"
+  },
+  {
+    "code": "EOH",
+    "city": "Aeropuerto Olaya",
+    "name": "Aeropuerto Olaya Herrera Airport Medellín Colombia"
+  },
+  {
+    "code": "ERI",
+    "city": "Erie International",
+    "name": "Erie International Airport Pennsylvania Pa USA"
+  },
+  {
+    "code": "ESB",
+    "city": "Esenboğa Uluslararası",
+    "name": "Esenboğa Uluslararası Havalimanı Ankara Esenboga Turkey"
+  },
+  {
+    "code": "EUG",
+    "city": "Eugene",
+    "name": "Eugene Airport Oregon Or USA"
+  },
+  {
+    "code": "EUX",
+    "city": "F. D. Roosevelt",
+    "name": "F. D. Roosevelt Airport Sint Eustatius Oranjestad Netherlands"
+  },
+  {
+    "code": "EVE",
+    "city": "Harstad-narvik",
+    "name": "Harstad-narvik Lufthavn, Evenes Narvik Norway"
+  },
+  {
+    "code": "EVN",
+    "city": "Zvart'nots' Mijazgayin",
+    "name": "Zvart'nots' Mijazgayin Odanavakayan Yerevan Zvartnots Armenia"
+  },
+  {
+    "code": "EWR",
+    "city": "New York Newark",
+    "name": "Liberty International Airport Newark New Jersey Nj USA"
+  },
+  {
+    "code": "EXT",
+    "city": "Exeter International",
+    "name": "Exeter International Airport Devon England UK"
+  },
+  {
+    "code": "EYW",
+    "city": "Key West International",
+    "name": "Key West International Airport Florida Fl USA"
+  },
+  {
+    "code": "EZE",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Ministro Pistarini Buenos Aires Ezeiza Argentina"
+  },
+  {
+    "code": "FAE",
+    "city": "Vága Floghavn Vágar",
+    "name": "Vága Floghavn Vágar Airport Sørvágur Tórshavn Faroe Islands Denmark"
+  },
+  {
+    "code": "FAO",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional de Faro Algarve Portugal"
+  },
+  {
+    "code": "FAR",
+    "city": "Hector International",
+    "name": "Hector International Airport Fargo Moorhead North Dakota Nd USA"
+  },
+  {
+    "code": "FAT",
+    "city": "Fresno Yosemite International",
+    "name": "Fresno Yosemite International Airport California Ca USA"
+  },
+  {
+    "code": "FCA",
+    "city": "Glacier Park International",
+    "name": "Glacier Park International Airport Kalispell Flathead County Montana Mt USA"
+  },
+  {
+    "code": "FCO",
+    "city": "Fiumicino –",
+    "name": "Fiumicino – Aeroporto Internazionale Leonardo Da Vinci Rome Italy"
+  },
+  {
+    "code": "FDF",
+    "city": "Aéroport International",
+    "name": "Aéroport International Martinique Aimé Césaire Fort-de-france Le Lamentin France"
+  },
+  {
+    "code": "FDH",
+    "city": "Flughafen Friedrichshafen",
+    "name": "Flughafen Friedrichshafen Lake Constance Germany"
+  },
+  {
+    "code": "FEZ",
+    "city": "Fes–saïss",
+    "name": "Fes–saïss Airport Fes Saiss Morocco"
+  },
+  {
+    "code": "FFA",
+    "city": "First Flight",
+    "name": "First Flight Airport Kill Devil Hills North Carolina Nc USA"
+  },
+  {
+    "code": "FIE",
+    "city": "Fair Isle",
+    "name": "Fair Isle Airport Shetland Scotland UK"
+  },
+  {
+    "code": "FIH",
+    "city": "N'djili International",
+    "name": "N'djili International Airport Kinshasa Congo Democratic Republic of the"
+  },
+  {
+    "code": "FKB",
+    "city": "Flughafen Karlsruhe/baden-baden",
+    "name": "Flughafen Karlsruhe/baden-baden Baden Airpark Rheinmünster Karlsruhe Germany"
+  },
+  {
+    "code": "FKL",
+    "city": "Venango Regional",
+    "name": "Venango Regional Airport Franklin Oil City Pennsylvania Pa USA"
+  },
+  {
+    "code": "FLG",
+    "city": "Flagstaff Pulliam",
+    "name": "Flagstaff Pulliam Airport Arizona Az USA"
+  },
+  {
+    "code": "FLL",
+    "city": "Fort Lauderdale–hollywood International",
+    "name": "Fort Lauderdale–hollywood International Airport Lauderdale Miami Florida Fl USA"
+  },
+  {
+    "code": "FLN",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional de Florianópolis–hercílio Luz Hercílio Florianópolis Florianopolis Santa Catarina Sc Brazil"
+  },
+  {
+    "code": "FLR",
+    "city": "Aeroporto di",
+    "name": "Aeroporto di Firenze-peretola Florence Peretola Tuscany Italy"
+  },
+  {
+    "code": "FLW",
+    "city": "Aeroporto Das",
+    "name": "Aeroporto Das Flores Santa Cruz Azores Portugal"
+  },
+  {
+    "code": "FMM",
+    "city": "Allgäu-airport Memmingen",
+    "name": "Allgäu-airport Memmingen Germany"
+  },
+  {
+    "code": "FMN",
+    "city": "Four Corners Regional",
+    "name": "Four Corners Regional Airport Farmington New Mexico Nm USA"
+  },
+  {
+    "code": "FMO",
+    "city": "Flughafen Münster/osnabrück",
+    "name": "Flughafen Münster/osnabrück Münster Osnabrück Nrw Germany"
+  },
+  {
+    "code": "FNA",
+    "city": "Lungi International",
+    "name": "Lungi International Airport Freetown Sierra Leone"
+  },
+  {
+    "code": "FNC",
+    "city": "Aeroporto Da",
+    "name": "Aeroporto Da Madeira Cristiano Ronaldo International Airport Funchal Santa Catarina Região Autónoma Portugal"
+  },
+  {
+    "code": "FNJ",
+    "city": "Pyongyang International",
+    "name": "Pyongyang International Airport North Korea"
+  },
+  {
+    "code": "FNT",
+    "city": "Bishop International",
+    "name": "Bishop International Airport Flint Michigan Mi USA"
+  },
+  {
+    "code": "FOC",
+    "city": "Fuzhou Changle International",
+    "name": "Fuzhou Changle International Airport Zhanggang China"
+  },
+  {
+    "code": "FOD",
+    "city": "Fort Dodge Regional",
+    "name": "Fort Dodge Regional Airport Iowa Ia USA"
+  },
+  {
+    "code": "FOR",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Pinto Martins International Airport Fortaleza Ceará Ce Brazil"
+  },
+  {
+    "code": "FPO",
+    "city": "Grand Bahama International",
+    "name": "Grand Bahama International Airport Freeport Bahamas"
+  },
+  {
+    "code": "FRA",
+    "city": "Flughafen Frankfurt",
+    "name": "Flughafen Frankfurt Am Main Germany"
+  },
+  {
+    "code": "FRS",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Mundo Maya International Airport Flores Guatemala"
+  },
+  {
+    "code": "FRU",
+    "city": "Manas International",
+    "name": "Manas International Airport Bishkek Kyrgyzstan"
+  },
+  {
+    "code": "FSC",
+    "city": "Aéroport Figari-sud",
+    "name": "Aéroport Figari-sud Corse Porto-vecchio Figari France"
+  },
+  {
+    "code": "FSD",
+    "city": "Sioux Falls Regional",
+    "name": "Sioux Falls Regional Airport South Dakota Sd USA"
+  },
+  {
+    "code": "FSP",
+    "city": "Aéroport de",
+    "name": "Aéroport de Saint-pierre Saint-pierre, Saint Pierre and Miquelon France"
+  },
+  {
+    "code": "FSZ",
+    "city": "Shizuoka",
+    "name": "Shizuoka Airport Makinohara Japan"
+  },
+  {
+    "code": "FUE",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Fuerteventura El Matorral Canary Islands Spain"
+  },
+  {
+    "code": "FUK",
+    "city": "Fukuoka",
+    "name": "Fukuoka Airport Japan"
+  },
+  {
+    "code": "FUN",
+    "city": "Funafuti International",
+    "name": "Funafuti International Airport Tuvalu"
+  },
+  {
+    "code": "FWA",
+    "city": "Fort Wayne International",
+    "name": "Fort Wayne International Airport Indiana In USA"
+  },
+  {
+    "code": "GAI",
+    "city": "Montgomery County",
+    "name": "Montgomery County Airpark Gaithersburg Maryland Md USA"
+  },
+  {
+    "code": "GAN",
+    "city": "International",
+    "name": "International Airport Addu Atoll Maldives"
+  },
+  {
+    "code": "GAU",
+    "city": "Lokpriya Gopinath Bordoloi International",
+    "name": "Lokpriya Gopinath Bordoloi International Airport Guwahati Gowhatty Assam As India"
+  },
+  {
+    "code": "GBE",
+    "city": "Sir Seretse Khama International",
+    "name": "Sir Seretse Khama International Airport Gaborone Botswana"
+  },
+  {
+    "code": "GCC",
+    "city": "Northeast Wyoming Regional",
+    "name": "Northeast Wyoming Regional Airport Gillette Wy USA"
+  },
+  {
+    "code": "GCI",
+    "city": "Guernsey",
+    "name": "Guernsey Airport Forest Channel Islands UK"
+  },
+  {
+    "code": "GCM",
+    "city": "Owen Roberts International",
+    "name": "Owen Roberts International Airport George Town Grand Cayman England Islands UK"
+  },
+  {
+    "code": "GCW",
+    "city": "Grand Canyon West",
+    "name": "Grand Canyon West Airport Peach Springs Arizona Az USA"
+  },
+  {
+    "code": "GDL",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional de Guadalajara Jalisco Jal Mexico"
+  },
+  {
+    "code": "GDN",
+    "city": "Port Lotniczy",
+    "name": "Port Lotniczy Gdańsk Im. Lecha Wałęsy Poland"
+  },
+  {
+    "code": "GDR",
+    "city": "Aeroporto de",
+    "name": "Aeroporto de Angra Dos Reis - Carmelo Jordão Airport Rio Janeiro Rj Brazil"
+  },
+  {
+    "code": "GEG",
+    "city": "Spokane International",
+    "name": "Spokane International Airport Washington Wa USA"
+  },
+  {
+    "code": "GEO",
+    "city": "Cheddi Jagan International",
+    "name": "Cheddi Jagan International Airport Georgetown Timehri Guyana"
+  },
+  {
+    "code": "GGG",
+    "city": "East Texas Regional",
+    "name": "East Texas Regional Airport Gregg County Tx USA"
+  },
+  {
+    "code": "GGT",
+    "city": "Exuma International",
+    "name": "Exuma International Airport Great Moss Town Bahamas"
+  },
+  {
+    "code": "GIB",
+    "city": "Gibraltar International",
+    "name": "Gibraltar International Airport UK"
+  },
+  {
+    "code": "GIG",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Do Galeão–antonio Carlos Jobim International Airport Rio de Janeiro Rj Brazil"
+  },
+  {
+    "code": "GIZ",
+    "city": "King Abdullah Bin Abdulaziz",
+    "name": "King Abdullah Bin Abdulaziz Airport Jizan Gizan Province Saudi Arabia"
+  },
+  {
+    "code": "GJT",
+    "city": "Grand Junction Regional",
+    "name": "Grand Junction Regional Airport Colorado Co USA"
+  },
+  {
+    "code": "GLA",
+    "city": "Glasgow",
+    "name": "Port-adhair Eadar-nàiseanta Ghlaschu Glasgow Scotland UK"
+  },
+  {
+    "code": "GLO",
+    "city": "Gloucestershire",
+    "name": "Gloucestershire Airport Gloucester Staverton England UK"
+  },
+  {
+    "code": "GLU",
+    "city": "Gelephu",
+    "name": "Gelephu Airport Bhutan"
+  },
+  {
+    "code": "GMP",
+    "city": "Gimpo International",
+    "name": "Gimpo International Airport Seoul Gangseo District Korea South"
+  },
+  {
+    "code": "GMU",
+    "city": "Greenville Downtown",
+    "name": "Greenville Downtown Airport South Carolina Sc USA"
+  },
+  {
+    "code": "GMZ",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de la Gomera Playa Santiago Canary Islands Spain"
+  },
+  {
+    "code": "GND",
+    "city": "Maurice Bishop International",
+    "name": "Maurice Bishop International Airport St. George’s Point Salines Grenada"
+  },
+  {
+    "code": "GNV",
+    "city": "Gainesville Regional",
+    "name": "Gainesville Regional Airport Florida Fl USA"
+  },
+  {
+    "code": "GOA",
+    "city": "Aeroporto di",
+    "name": "Aeroporto di Genova Cristoforo Colombo Airport Genoa Italy"
+  },
+  {
+    "code": "GOH",
+    "city": "Nuuk",
+    "name": "Nuuk Lufthavn Greenland Denmark"
+  },
+  {
+    "code": "GOI",
+    "city": "Goa International",
+    "name": "Goa International Airport Dabolim Ga India"
+  },
+  {
+    "code": "GOJ",
+    "city": "Strigino Nizhny Novgorod International",
+    "name": "Strigino Nizhny Novgorod International Airport Gorky Russia"
+  },
+  {
+    "code": "GOQ",
+    "city": "Golmud",
+    "name": "Golmud Airport Qinghai China"
+  },
+  {
+    "code": "GOT",
+    "city": "Göteborg Landvetter",
+    "name": "Göteborg Landvetter Airport Gothenburg Sweden"
+  },
+  {
+    "code": "GOV",
+    "city": "Gove",
+    "name": "Gove Airport Nhulunbuy Peninsula Northern Territory Nt Australia"
+  },
+  {
+    "code": "GPS",
+    "city": "Seymour",
+    "name": "Seymour Airport Baltra Galápagos Islands Ecuador"
+  },
+  {
+    "code": "GPT",
+    "city": "Gulfport–biloxi International",
+    "name": "Gulfport–biloxi International Airport Biloxi Mississippi Ms USA"
+  },
+  {
+    "code": "GRB",
+    "city": "Austin Straubel International",
+    "name": "Austin Straubel International Airport Green Bay Wisconsin Wi USA"
+  },
+  {
+    "code": "GRK",
+    "city": "Killeen–fort Hood Regional",
+    "name": "Killeen–fort Hood Regional Airport Killeen Fort Texas Tx USA"
+  },
+  {
+    "code": "GRO",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Girona-costa Brava Girona Costa Spain"
+  },
+  {
+    "code": "GRR",
+    "city": "Gerald R. Ford International",
+    "name": "Gerald R. Ford International Airport Grand Rapids Michigan Mi USA"
+  },
+  {
+    "code": "GRU",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Guarulhos–governador André Franco Montoro International Airport São Paulo Sao Sp Brazil"
+  },
+  {
+    "code": "GRW",
+    "city": "Aeroporto de",
+    "name": "Aeroporto de Graciosa Santa Cruz Azores Portugal"
+  },
+  {
+    "code": "GRX",
+    "city": "Aeropuerto Federico",
+    "name": "Aeropuerto Federico García Lorca Granada-jaén Airport Granada Jaén Spain"
+  },
+  {
+    "code": "GRZ",
+    "city": "Flughafen Graz",
+    "name": "Flughafen Graz Austria"
+  },
+  {
+    "code": "GSO",
+    "city": "Piedmont Triad International",
+    "name": "Piedmont Triad International Airport Greensboro North Carolina Nc USA"
+  },
+  {
+    "code": "GSP",
+    "city": "Greenville–spartanburg International",
+    "name": "Greenville–spartanburg International Airport Greenville Spartanburg South Carolina Sc USA"
+  },
+  {
+    "code": "GST",
+    "city": "Gustavus",
+    "name": "Gustavus Airport Alaska Ak USA"
+  },
+  {
+    "code": "GTR",
+    "city": "Golden Triangle Regional",
+    "name": "Golden Triangle Regional Airport Columbus Starkville Mississippi Ms USA"
+  },
+  {
+    "code": "GUA",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional la Aurora International Airport Guatemala City"
+  },
+  {
+    "code": "GUC",
+    "city": "Gunnison–crested Butte Regional",
+    "name": "Gunnison–crested Butte Regional Airport Gunnison Colorado Co USA"
+  },
+  {
+    "code": "GUM",
+    "city": "Antonio B. Won Pat International",
+    "name": "Antonio B. Won Pat International Airport Barrigada and Tamuning Guam USA"
+  },
+  {
+    "code": "GUR",
+    "city": "Gurney",
+    "name": "Gurney Airport Alotau Papua New Guinea"
+  },
+  {
+    "code": "GUW",
+    "city": "Atma Atyrau",
+    "name": "Atma Atyrau Airport Kazakhstan"
+  },
+  {
+    "code": "GVA",
+    "city": "Aéroport International",
+    "name": "Aéroport International de Genève Geneva Meyrin Switzerland"
+  },
+  {
+    "code": "GWY",
+    "city": "Galway",
+    "name": "Galway Airport Carnmore Ireland"
+  },
+  {
+    "code": "GYD",
+    "city": "Heydar Aliyev International",
+    "name": "Heydar Aliyev International Airport Baku Azerbaijan"
+  },
+  {
+    "code": "GYE",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional José Joaquín de Olmedo Guayaquil Guayas Ecuador"
+  },
+  {
+    "code": "GYN",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Santa Genoveva International Airport Goiânia Goiania Goiás Go Brazil"
+  },
+  {
+    "code": "GZA",
+    "city": "Yasser Arafat International",
+    "name": "Yasser Arafat International Airport Gaza Palestine"
+  },
+  {
+    "code": "HAH",
+    "city": "Prince Said Ibrahim International",
+    "name": "Prince Said Ibrahim International Airport Moroni Hahaya Comoros"
+  },
+  {
+    "code": "HAJ",
+    "city": "Flughafen Hannover-langenhagen",
+    "name": "Flughafen Hannover-langenhagen Hannover Langenhagen Germany"
+  },
+  {
+    "code": "HAK",
+    "city": "Haikou Meilan International",
+    "name": "Haikou Meilan International Airport Hainan China"
+  },
+  {
+    "code": "HAM",
+    "city": "Flughafen Hamburg",
+    "name": "Flughafen Hamburg Helmut Schmidt Germany"
+  },
+  {
+    "code": "HAN",
+    "city": "Nội Bài International",
+    "name": "Nội Bài International Airport Hanoi Vietnam"
+  },
+  {
+    "code": "HAQ",
+    "city": "Hanimaadhoo International",
+    "name": "Hanimaadhoo International Airport Haa Dhaalu Atoll Maldives"
+  },
+  {
+    "code": "HAV",
+    "city": "Aeropuerto José",
+    "name": "Aeropuerto José Martí International Airport Havana Cuba"
+  },
+  {
+    "code": "HBA",
+    "city": "Hobart",
+    "name": "Hobart Airport Cambridge Tasmania Tas Australia"
+  },
+  {
+    "code": "HDY",
+    "city": "Hat Yai International",
+    "name": "Hat Yai International Airport Thailand"
+  },
+  {
+    "code": "HEL",
+    "city": "Helsinki-vantaan Lentoasema",
+    "name": "Helsinki-vantaan Lentoasema Helsinki Vantaa Finland"
+  },
+  {
+    "code": "HER",
+    "city": "Heraklion International",
+    "name": "Heraklion International Airport, Nikos Kazantzakis Crete Greece"
+  },
+  {
+    "code": "HFT",
+    "city": "Hammerfest",
+    "name": "Hammerfest Lufthavn Norway"
+  },
+  {
+    "code": "HGA",
+    "city": "Hargeisa Egal International",
+    "name": "Hargeisa Egal International Airport Somalia"
+  },
+  {
+    "code": "HGH",
+    "city": "Hangzhou Xiaoshan International",
+    "name": "Hangzhou Xiaoshan International Airport Zhejiang District China"
+  },
+  {
+    "code": "HGL",
+    "city": "Flughafen Helgoland-düne",
+    "name": "Flughafen Helgoland-düne Heligoland Germany"
+  },
+  {
+    "code": "HHH",
+    "city": "Hilton Head",
+    "name": "Hilton Head Airport Island South Carolina Sc USA"
+  },
+  {
+    "code": "HHN",
+    "city": "Flughafen Frankfurt-hahn",
+    "name": "Flughafen Frankfurt-hahn Frankfurt–hahn Airport Kirchberg Rhineland-palatinate Germany"
+  },
+  {
+    "code": "HIR",
+    "city": "Honiara International",
+    "name": "Honiara International Airport Guadalcanal Solomon Islands"
+  },
+  {
+    "code": "HKD",
+    "city": "Hakodate",
+    "name": "Hakodate Airport Hokkaido Japan"
+  },
+  {
+    "code": "HKG",
+    "city": "Hong Kong International",
+    "name": "Hong Kong International Airport Chek Lap Kok China"
+  },
+  {
+    "code": "HKT",
+    "city": "Phuket International",
+    "name": "Phuket International Airport Thailand"
+  },
+  {
+    "code": "HLP",
+    "city": "Bandar Udara",
+    "name": "Bandar Udara Halim Perdanakusuma Jakarta East Indonesia"
+  },
+  {
+    "code": "HMO",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional General Ignacio Pesqueira García International Airport Hermosillo Sonora So Mexico"
+  },
+  {
+    "code": "HND",
+    "city": "Tokyo International",
+    "name": "Tokyo International Airport Japan"
+  },
+  {
+    "code": "HNL",
+    "city": "Daniel K. Inouye International",
+    "name": "Daniel K. Inouye International Airport Honolulu Oahu Hawaii Hi USA"
+  },
+  {
+    "code": "HNM",
+    "city": "Hana",
+    "name": "Hana Airport Hawaii Hi USA"
+  },
+  {
+    "code": "HOB",
+    "city": "Lea County Regional",
+    "name": "Lea County Regional Airport Hobbes New Mexico Nm USA"
+  },
+  {
+    "code": "HOF",
+    "city": "Al-ahsa International",
+    "name": "Al-ahsa International Airport Hofuf Eastern Province Saudi Arabia"
+  },
+  {
+    "code": "HOG",
+    "city": "Frank País",
+    "name": "Frank País Airport Holguín Holguin Cuba"
+  },
+  {
+    "code": "HOR",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Da Horta Castelo Branco Azores Portugal"
+  },
+  {
+    "code": "HOT",
+    "city": "Memorial Field",
+    "name": "Memorial Field Airport Springs Arkansas Ar USA"
+  },
+  {
+    "code": "HOU",
+    "city": "William P. Hobby",
+    "name": "William P. Hobby Airport Houston Texas Tx USA"
+  },
+  {
+    "code": "HOV",
+    "city": "Ørsta–volda",
+    "name": "Ørsta–volda Lufthavn, Hovden Ørsta Volda Norway"
+  },
+  {
+    "code": "HPH",
+    "city": "Sân Bay",
+    "name": "Sân Bay Quốc Tế Cát Bi Cat Hai Phong Vietnam"
+  },
+  {
+    "code": "HPN",
+    "city": "Westchester County",
+    "name": "Westchester County Airport White Plains New York Ny USA"
+  },
+  {
+    "code": "HQM",
+    "city": "Bowerman",
+    "name": "Bowerman Airport Hoquiam Grays Harbor County Washington Wa USA"
+  },
+  {
+    "code": "HRB",
+    "city": "Harbin Taiping International",
+    "name": "Harbin Taiping International Airport China"
+  },
+  {
+    "code": "HRE",
+    "city": "Harare International",
+    "name": "Harare International Airport Zimbabwe"
+  },
+  {
+    "code": "HRG",
+    "city": "Hurghada International",
+    "name": "Hurghada International Airport Egypt"
+  },
+  {
+    "code": "HRI",
+    "city": "Mattala Rajapaksa International",
+    "name": "Mattala Rajapaksa International Airport Hambantota Sri Lanka"
+  },
+  {
+    "code": "HRL",
+    "city": "Valley International",
+    "name": "Valley International Airport Harlingen Texas Tx USA"
+  },
+  {
+    "code": "HSV",
+    "city": "Huntsville International",
+    "name": "Huntsville International Airport Alabama al USA"
+  },
+  {
+    "code": "HUF",
+    "city": "Terre Haute International",
+    "name": "Terre Haute International Airport Indiana In USA"
+  },
+  {
+    "code": "HUH",
+    "city": "Huahine – Fare",
+    "name": "Huahine – Fare Airport French Polynesia France"
+  },
+  {
+    "code": "HUI",
+    "city": "Phu Bai International",
+    "name": "Phu Bai International Airport Huế Vietnam"
+  },
+  {
+    "code": "HUU",
+    "city": "Aeropuerto Alférez",
+    "name": "Aeropuerto Alférez Fap David Figueroa Fernandini Airport Huánuco Peru"
+  },
+  {
+    "code": "HUY",
+    "city": "Humberside",
+    "name": "Humberside Airport Kirmington North Lincolnshire UK"
+  },
+  {
+    "code": "HVN",
+    "city": "Tweed-new Haven Regional",
+    "name": "Tweed-new Haven Regional Airport New Connecticut Ct USA"
+  },
+  {
+    "code": "HYA",
+    "city": "Barnstable Municipal",
+    "name": "Barnstable Municipal Airport Cape Cod Hyannis Massachusetts Ma USA"
+  },
+  {
+    "code": "HYD",
+    "city": "Rajiv Gandhi International",
+    "name": "Rajiv Gandhi International Airport Hyderabad Telangana Tg India"
+  },
+  {
+    "code": "HZG",
+    "city": "Hanzhong Chenggu",
+    "name": "Hanzhong Chenggu Airport China"
+  },
+  {
+    "code": "IAD",
+    "city": "Dulles International",
+    "name": "Dulles International Airport Washington D.c. Virginia Va USA"
+  },
+  {
+    "code": "IAH",
+    "city": "George Bush Intercontinental",
+    "name": "George Bush Intercontinental Airport Houston Texas Tx USA"
+  },
+  {
+    "code": "IAS",
+    "city": "Aeroportul Internațional Iași Iasi International",
+    "name": "Aeroportul Internațional Iași Iasi International Airport Romania"
+  },
+  {
+    "code": "IBZ",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Ibiza Formentera Spain"
+  },
+  {
+    "code": "ICN",
+    "city": "Incheon International",
+    "name": "Incheon International Airport Seoul Jung District Korea South"
+  },
+  {
+    "code": "ICT",
+    "city": "Dwight D. Eisenhower National",
+    "name": "Dwight D. Eisenhower National Airport Wichita Kansas Ks USA"
+  },
+  {
+    "code": "IDA",
+    "city": "Idaho Falls Regional",
+    "name": "Idaho Falls Regional Airport Bonneville County Id USA"
+  },
+  {
+    "code": "IDR",
+    "city": "Devi Ahilyabai Holkar",
+    "name": "Devi Ahilyabai Holkar Airport Indore Madhya Pradesh Mp India"
+  },
+  {
+    "code": "IEV",
+    "city": "Kyiv International",
+    "name": "Kyiv International Airport Kiev Zhuliany Ukraine"
+  },
+  {
+    "code": "IFP",
+    "city": "Laughlin/bullhead International",
+    "name": "Laughlin/bullhead International Airport Bullhead City Nevada Arizona Az USA"
+  },
+  {
+    "code": "IGU",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional de Foz Do Iguaçu/cataratas Iguaçu Paraná Pr Brazil"
+  },
+  {
+    "code": "IGY",
+    "city": "Wright Brothers",
+    "name": "Wright Brothers Field Jezero Crater Mars"
+  },
+  {
+    "code": "IIA",
+    "city": "Aeradróm Inis",
+    "name": "Aeradróm Inis Meáin Inishmaan Ireland"
+  },
+  {
+    "code": "IKA",
+    "city": "Tehran Imam Khomeini International",
+    "name": "Tehran Imam Khomeini International Airport Ahmadabad Iran"
+  },
+  {
+    "code": "IKT",
+    "city": "Irkutsk International",
+    "name": "Irkutsk International Airport Russia"
+  },
+  {
+    "code": "ILD",
+    "city": "Aeroport Lleida-alguaire",
+    "name": "Aeroport Lleida-alguaire Lleida Alguaire Spain"
+  },
+  {
+    "code": "ILG",
+    "city": "Wilmington",
+    "name": "Wilmington Airport Delaware de USA"
+  },
+  {
+    "code": "IND",
+    "city": "Indianapolis International",
+    "name": "Indianapolis International Airport Indiana In USA"
+  },
+  {
+    "code": "INN",
+    "city": "Flughafen Innsbruck",
+    "name": "Flughafen Innsbruck Austria"
+  },
+  {
+    "code": "INQ",
+    "city": "Aeradróm Inis",
+    "name": "Aeradróm Inis Oírr Inisheer Ireland"
+  },
+  {
+    "code": "INU",
+    "city": "Nauru International",
+    "name": "Nauru International Airport Yaren"
+  },
+  {
+    "code": "INV",
+    "city": "Port-adhair Inbhir",
+    "name": "Port-adhair Inbhir Nis Inverness Dalcross Scotland UK"
+  },
+  {
+    "code": "IOM",
+    "city": "Isle of Man",
+    "name": "Isle of Man Airport Ronaldsway UK"
+  },
+  {
+    "code": "IOR",
+    "city": "Aeradróm Inis",
+    "name": "Aeradróm Inis Mór Inishmore Kilronan Ireland"
+  },
+  {
+    "code": "IPC",
+    "city": "Mataveri International",
+    "name": "Mataveri International Airport Easter Island Rapa Nui Chile"
+  },
+  {
+    "code": "IPH",
+    "city": "Sultan Azlan Shah",
+    "name": "Sultan Azlan Shah Airport Ipoh Malaysia"
+  },
+  {
+    "code": "IPN",
+    "city": "Aeroporto Da",
+    "name": "Aeroporto Da Usiminas Airport Ipatinga Santana Do Paraíso Minas Gerais Mg Brazil"
+  },
+  {
+    "code": "IQQ",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Diego Aracena International Airport Iquique Chile"
+  },
+  {
+    "code": "IQT",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Coronel Fap Francisco Secada Vignetta Iquitos Peru"
+  },
+  {
+    "code": "ISB",
+    "city": "Islamabad",
+    "name": "Islamabad International Airport Islamabad Punjab Pb Pakistan"
+  },
+  {
+    "code": "ISC",
+    "city": "St Mary’s",
+    "name": "St Mary’s Airport Isles of Scilly Cornwall England UK"
+  },
+  {
+    "code": "ISL",
+    "city": "Istanbul Atatürk",
+    "name": "Istanbul Atatürk Havalimanı Yeşilköy Turkey"
+  },
+  {
+    "code": "ISP",
+    "city": "Long Island Macarthur",
+    "name": "Long Island Macarthur Airport Islip New York Ny USA"
+  },
+  {
+    "code": "IST",
+    "city": "Istanbul",
+    "name": "Istanbul Airport Turkey"
+  },
+  {
+    "code": "ITM",
+    "city": "Osaka International",
+    "name": "Osaka International Airport Itami Japan"
+  },
+  {
+    "code": "ITO",
+    "city": "Hilo International",
+    "name": "Hilo International Airport Hawaii Hi USA"
+  },
+  {
+    "code": "ITP",
+    "city": "Aeroporto Ernani",
+    "name": "Aeroporto Ernani Do Amaral Peixoto Itaperuna Airport Rio de Janeiro Rj USA"
+  },
+  {
+    "code": "IWA",
+    "city": "Ivanovo Yuzhny",
+    "name": "Ivanovo Yuzhny Airport Russia"
+  },
+  {
+    "code": "IXA",
+    "city": "Agartala",
+    "name": "Agartala Airport Tripura Tr India"
+  },
+  {
+    "code": "IXB",
+    "city": "Bagdogra",
+    "name": "Bagdogra Airport Siliguri West Bengal Wb India"
+  },
+  {
+    "code": "IXC",
+    "city": "Chandigarh International",
+    "name": "Chandigarh International Airport Ch India"
+  },
+  {
+    "code": "IXM",
+    "city": "Madurai",
+    "name": "Madurai Airport Tamil Nadu Tn India"
+  },
+  {
+    "code": "IXZ",
+    "city": "Veer Savarkar International",
+    "name": "Veer Savarkar International Airport Port Blair Andaman and Nicobar Islands An India"
+  },
+  {
+    "code": "JAC",
+    "city": "Jackson Hole",
+    "name": "Jackson Hole Airport Teton County Wyoming Wy USA"
+  },
+  {
+    "code": "JAI",
+    "city": "Jaipur International",
+    "name": "Jaipur International Airport Rajasthan Rj India"
+  },
+  {
+    "code": "JAN",
+    "city": "Jackson–medgar Wiley Evers International",
+    "name": "Jackson–medgar Wiley Evers International Airport Jackson Mississippi Ms USA"
+  },
+  {
+    "code": "JAU",
+    "city": "Aeropuerto Francisco",
+    "name": "Aeropuerto Francisco Carlé Airport Jauja Junín Peru"
+  },
+  {
+    "code": "JAV",
+    "city": "Ilulissat",
+    "name": "Ilulissat Lufthavn Disko Bay Greenland Denmark"
+  },
+  {
+    "code": "JAX",
+    "city": "Jacksonville International",
+    "name": "Jacksonville International Airport Florida Fl USA"
+  },
+  {
+    "code": "JDF",
+    "city": "Aeroporto Francisco",
+    "name": "Aeroporto Francisco Álvares de Assis Airport Juiz Fora Serrinha Minas Gerais Mg Brazil"
+  },
+  {
+    "code": "JED",
+    "city": "Jeddah",
+    "name": "King Abdulaziz International Airport Jeddah Saudi Arabia"
+  },
+  {
+    "code": "JER",
+    "city": "Jersey",
+    "name": "Jersey Airport Saint Peter Channel Islands"
+  },
+  {
+    "code": "JFK",
+    "city": "New York JFK",
+    "name": "John F. Kennedy International Airport New York City Ny USA"
+  },
+  {
+    "code": "JHM",
+    "city": "Kapalua",
+    "name": "Kapalua Airport Lahaina Hawaii Hi USA"
+  },
+  {
+    "code": "JIB",
+    "city": "Aéroport International",
+    "name": "Aéroport International de Djibouti–ambouli Djibouti City Ambouli"
+  },
+  {
+    "code": "JJG",
+    "city": "Aeroporto Regional",
+    "name": "Aeroporto Regional Sul - Humberto Ghizzo Bortoluzzi Airport Jaguaruna Santa Catarina Sc Brazil"
+  },
+  {
+    "code": "JJN",
+    "city": "Quanzhou Jinjiang International",
+    "name": "Quanzhou Jinjiang International Airport Fujian China"
+  },
+  {
+    "code": "JKH",
+    "city": "Chios Island National",
+    "name": "Chios Island National Airport North Aegean Greece"
+  },
+  {
+    "code": "JNB",
+    "city": "O. R. Tambo International",
+    "name": "O. R. Tambo International Airport Johannesburg Kempton Park South Africa"
+  },
+  {
+    "code": "JOG",
+    "city": "Bandar Udara Internasional Adisucipto International",
+    "name": "Bandar Udara Internasional Adisucipto International Airport Yogyakarta Central Java Indonesia"
+  },
+  {
+    "code": "JOI",
+    "city": "Aeroporto de",
+    "name": "Aeroporto de Joinville-lauro Carneiro Loyola Lauro Joinville Santa Catarina Sc Brazil"
+  },
+  {
+    "code": "JPA",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Presidente Castro Pinto International Airport João Pessoa Bayeux Paraíba Pb Brazil"
+  },
+  {
+    "code": "JRO",
+    "city": "Kilimanjaro International",
+    "name": "Kilimanjaro International Airport Arusha Moshi Hai District Tanzania"
+  },
+  {
+    "code": "JSI",
+    "city": "Skiathos",
+    "name": "Skiathos Airport, Alexandros Papadiamantis Thessaly Greece"
+  },
+  {
+    "code": "JUB",
+    "city": "Juba International",
+    "name": "Juba International Airport South Sudan"
+  },
+  {
+    "code": "JUL",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Inca Manco Cápac International Airport Juliaca Puno Peru"
+  },
+  {
+    "code": "KAN",
+    "city": "Mallam Aminu Kano International",
+    "name": "Mallam Aminu Kano International Airport Nigeria"
+  },
+  {
+    "code": "KBL",
+    "city": "Hamid Karzai International",
+    "name": "Hamid Karzai International Airport Kabul Afghanistan"
+  },
+  {
+    "code": "KBP",
+    "city": "Boryspil International",
+    "name": "Boryspil International Airport Kiev Ukraine"
+  },
+  {
+    "code": "KBR",
+    "city": "Lapangan Terbang Sultan Ismail Petra",
+    "name": "Lapangan Terbang Sultan Ismail Petra Airport Kota Bharu Kelantan Malaysia"
+  },
+  {
+    "code": "KBV",
+    "city": "Krabi International",
+    "name": "Krabi International Airport Thailand"
+  },
+  {
+    "code": "KCH",
+    "city": "Kuching International",
+    "name": "Kuching International Airport Malaysia"
+  },
+  {
+    "code": "KEF",
+    "city": "Keflavíkurflugvöllur Keflavík",
+    "name": "Keflavíkurflugvöllur Keflavík Reykjavík Iceland"
+  },
+  {
+    "code": "KER",
+    "city": "Kerman International",
+    "name": "Kerman International Airport Iran"
+  },
+  {
+    "code": "KFZ",
+    "city": "Kukës International",
+    "name": "Kukës International Airport Zayed-north Wings Albania"
+  },
+  {
+    "code": "KGL",
+    "city": "Kigali International",
+    "name": "Kigali International Airport Rwanda"
+  },
+  {
+    "code": "KHH",
+    "city": "Kaohsiung International",
+    "name": "Kaohsiung International Airport Taiwan"
+  },
+  {
+    "code": "KHI",
+    "city": "Karachi",
+    "name": "Jinnah International Airport Karachi Sindh Sn Pakistan"
+  },
+  {
+    "code": "KIH",
+    "city": "Kish International",
+    "name": "Kish International Airport Island Iran"
+  },
+  {
+    "code": "KIN",
+    "city": "Norman Manley International",
+    "name": "Norman Manley International Airport Kingston Jamaica"
+  },
+  {
+    "code": "KIR",
+    "city": "Kerry",
+    "name": "Kerry Airport Farranfore Ireland"
+  },
+  {
+    "code": "KIV",
+    "city": "Chișinău International",
+    "name": "Chișinău International Airport Chisinau Moldova"
+  },
+  {
+    "code": "KIX",
+    "city": "Kansai International",
+    "name": "Kansai International Airport Osaka Japan"
+  },
+  {
+    "code": "KLO",
+    "city": "Kalibo International",
+    "name": "Kalibo International Airport Philippines"
+  },
+  {
+    "code": "KLU",
+    "city": "Airport Klagenfurt",
+    "name": "Airport Klagenfurt Austria"
+  },
+  {
+    "code": "KMG",
+    "city": "Kunming Changshui International",
+    "name": "Kunming Changshui International Airport Guandu District China"
+  },
+  {
+    "code": "KNO",
+    "city": "Bandar Udara Internasional Kualanamu International",
+    "name": "Bandar Udara Internasional Kualanamu International Airport Medan Deli Serdang Indonesia"
+  },
+  {
+    "code": "KOA",
+    "city": "Kona International",
+    "name": "Kona International Airport Kailua-kona Kalaoa Hawaii Hi USA"
+  },
+  {
+    "code": "KOE",
+    "city": "Bandar Udara Internasional El Tari International",
+    "name": "Bandar Udara Internasional El Tari International Airport Kupang Indonesia"
+  },
+  {
+    "code": "KOV",
+    "city": "Kokshetau",
+    "name": "Kokshetau Airport Kazakhstan"
+  },
+  {
+    "code": "KRK",
+    "city": "Kraków",
+    "name": "Kraków Airport Im. Jana Pawła Ii John Paul International Balice Poland"
+  },
+  {
+    "code": "KRN",
+    "city": "Kiruna Flygplats",
+    "name": "Kiruna Flygplats Norrbotten Sweden"
+  },
+  {
+    "code": "KRR",
+    "city": "Krasnodar International",
+    "name": "Krasnodar International Airport Russia"
+  },
+  {
+    "code": "KRS",
+    "city": "Kristiansand",
+    "name": "Kristiansand Lufthavn, Kjevik Norway"
+  },
+  {
+    "code": "KRT",
+    "city": "Khartoum International",
+    "name": "Khartoum International Airport Sudan"
+  },
+  {
+    "code": "KSA",
+    "city": "Kosrae International",
+    "name": "Kosrae International Airport Micronesia"
+  },
+  {
+    "code": "KSC",
+    "city": "Medzinárodné Letisko Košice Kosice International",
+    "name": "Medzinárodné Letisko Košice Kosice International Airport Barca Slovakia"
+  },
+  {
+    "code": "KSH",
+    "city": "Shahid Ashrafi Esfahani",
+    "name": "Shahid Ashrafi Esfahani Airport Kermanshah Iran"
+  },
+  {
+    "code": "KSN",
+    "city": "Kostanay International",
+    "name": "Kostanay International Airport Kazakhstan"
+  },
+  {
+    "code": "KTI",
+    "city": "Techo International",
+    "name": "Techo International Airport Phnom Penh Kandal Stueng Cambodia"
+  },
+  {
+    "code": "KTM",
+    "city": "Tribhuvan International",
+    "name": "Tribhuvan International Airport Kathmandu Nepal"
+  },
+  {
+    "code": "KTT",
+    "city": "Kittilän Lentoasema",
+    "name": "Kittilän Lentoasema Kittilä Finland"
+  },
+  {
+    "code": "KTW",
+    "city": "Międzynarodowy Port",
+    "name": "Międzynarodowy Port Lotniczy Katowice Pyrzowice Silesian Voivodeship Poland"
+  },
+  {
+    "code": "KUA",
+    "city": "Sultan Haji Ahmad Shah",
+    "name": "Sultan Haji Ahmad Shah Airport Kuantan Malaysia"
+  },
+  {
+    "code": "KUH",
+    "city": "Kushiro",
+    "name": "Kushiro Airport Hokkaido Japan"
+  },
+  {
+    "code": "KUL",
+    "city": "Lapangan Terbang",
+    "name": "Lapangan Terbang Antarabangsa Kuala Lumpur Sepang Malaysia"
+  },
+  {
+    "code": "KUN",
+    "city": "Kauno Tarptautinis",
+    "name": "Kauno Tarptautinis Oro Uostas Kaunas Lithuania"
+  },
+  {
+    "code": "KUO",
+    "city": "Kuopion Lentoasema",
+    "name": "Kuopion Lentoasema Kuopio Siilinjärvi Finland"
+  },
+  {
+    "code": "KWE",
+    "city": "Guiyang Longdongbao International",
+    "name": "Guiyang Longdongbao International Airport Guizhou Province China"
+  },
+  {
+    "code": "KWI",
+    "city": "Kuwait International",
+    "name": "Kuwait International Airport City Farwaniya"
+  },
+  {
+    "code": "KZN",
+    "city": "Kazan International",
+    "name": "Kazan International Airport Tatarstan Russia"
+  },
+  {
+    "code": "KZO",
+    "city": "Kyzylorda",
+    "name": "Kyzylorda Airport Kazakhstan"
+  },
+  {
+    "code": "LAD",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional 4 de Fevereiro Quatro International Airport Luanda Angola"
+  },
+  {
+    "code": "LAF",
+    "city": "Purdue University",
+    "name": "Purdue University Airport Lafayette West Indiana In USA"
+  },
+  {
+    "code": "LAN",
+    "city": "Capital Region International",
+    "name": "Capital Region International Airport Lansing Dewitt Township Michigan Mi USA"
+  },
+  {
+    "code": "LAS",
+    "city": "Harry Reid International",
+    "name": "Harry Reid International Airport Vegas Paradise Nevada Nv USA"
+  },
+  {
+    "code": "LAX",
+    "city": "Los Angeles",
+    "name": "Los Angeles International Airport California Ca USA"
+  },
+  {
+    "code": "LBA",
+    "city": "Leeds Bradford International",
+    "name": "Leeds Bradford International Airport England UK"
+  },
+  {
+    "code": "LBB",
+    "city": "Lubbock Preston Smith International",
+    "name": "Lubbock Preston Smith International Airport Texas Tx USA"
+  },
+  {
+    "code": "LBC",
+    "city": "Flughafen Lübeck",
+    "name": "Flughafen Lübeck Lubeck Germany"
+  },
+  {
+    "code": "LBF",
+    "city": "North Platte Regional",
+    "name": "North Platte Regional Airport Nebraska Ne USA"
+  },
+  {
+    "code": "LBJ",
+    "city": "Bandar Udara Komodo",
+    "name": "Bandar Udara Komodo Airport Labuan Bajo Flores Island Indonesia"
+  },
+  {
+    "code": "LBU",
+    "city": "Lapangan Terbang",
+    "name": "Lapangan Terbang Labuan Malaysia"
+  },
+  {
+    "code": "LBV",
+    "city": "Aéroport de",
+    "name": "Aéroport de Libreville Au Gabon"
+  },
+  {
+    "code": "LCA",
+    "city": "Larnaca International",
+    "name": "Larnaca International Airport Cyprus"
+  },
+  {
+    "code": "LCG",
+    "city": "Aeroporto Da",
+    "name": "Aeroporto Da Coruña-alvedro A Coruña Galicia Spain"
+  },
+  {
+    "code": "LCH",
+    "city": "Lake Charles Regional",
+    "name": "Lake Charles Regional Airport Louisiana la USA"
+  },
+  {
+    "code": "LCK",
+    "city": "Rickenbacker International",
+    "name": "Rickenbacker International Airport Columbus Lockbourne Ohio Oh USA"
+  },
+  {
+    "code": "LCY",
+    "city": "London City",
+    "name": "London City Airport Silvertown England UK"
+  },
+  {
+    "code": "LDY",
+    "city": "City of Derry",
+    "name": "City of Derry Airport Eglinton Northern Ireland UK"
+  },
+  {
+    "code": "LED",
+    "city": "Aeroport Pulkovo",
+    "name": "Aeroport Pulkovo Saint Petersburg Russia"
+  },
+  {
+    "code": "LEI",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Almería Almeria Spain"
+  },
+  {
+    "code": "LEJ",
+    "city": "Flughafen Leipzig/halle",
+    "name": "Flughafen Leipzig/halle Leipzig Halle Germany"
+  },
+  {
+    "code": "LEN",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de León Leon Spain"
+  },
+  {
+    "code": "LEU",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de la Seu D'urgell Andorra Spain"
+  },
+  {
+    "code": "LEX",
+    "city": "Blue Grass",
+    "name": "Blue Grass Airport Lexington Kentucky Ky USA"
+  },
+  {
+    "code": "LFT",
+    "city": "Lafayette Regional",
+    "name": "Lafayette Regional Airport Louisiana la USA"
+  },
+  {
+    "code": "LFW",
+    "city": "Lomé–tokoin",
+    "name": "Lomé–tokoin Airport Lomé Togo"
+  },
+  {
+    "code": "LGA",
+    "city": "Laguardia",
+    "name": "Laguardia Airport New York City Ny USA"
+  },
+  {
+    "code": "LGB",
+    "city": "Long Beach",
+    "name": "Long Beach Airport California Ca USA"
+  },
+  {
+    "code": "LGG",
+    "city": "Liège",
+    "name": "Liège Airport Liege Belgium"
+  },
+  {
+    "code": "LGK",
+    "city": "Lapangan Terbang",
+    "name": "Lapangan Terbang Antarabangsa Langkawi Perlis Malaysia"
+  },
+  {
+    "code": "LGW",
+    "city": "London Gatwick",
+    "name": "Gatwick Airport London Crawley England UK"
+  },
+  {
+    "code": "LHE",
+    "city": "Lahore",
+    "name": "Allama Iqbal International Airport Lahore Punjab Pb Pakistan"
+  },
+  {
+    "code": "LHR",
+    "city": "London Heathrow",
+    "name": "London Heathrow Airport England UK"
+  },
+  {
+    "code": "LIH",
+    "city": "Lihue",
+    "name": "Lihue Airport Kauai Hawaii Hi USA"
+  },
+  {
+    "code": "LIL",
+    "city": "Aéroport de",
+    "name": "Aéroport de Lille France"
+  },
+  {
+    "code": "LIM",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Jorge Chávez International Airport Lima Callao Peru"
+  },
+  {
+    "code": "LIN",
+    "city": "Aeroporto di",
+    "name": "Aeroporto di Milano-linate Milan Linate Italy"
+  },
+  {
+    "code": "LIR",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Daniel Oduber Quirós International Airport Liberia Costa Rica"
+  },
+  {
+    "code": "LIS",
+    "city": "Aeroporto Humberto",
+    "name": "Aeroporto Humberto Delgado Lisbon Portela Portugal"
+  },
+  {
+    "code": "LIT",
+    "city": "Bill and Hillary Clinton National",
+    "name": "Bill and Hillary Clinton National Airport Little Rock Adams Field Arkansas Ar USA"
+  },
+  {
+    "code": "LJU",
+    "city": "Letališče Jožeta",
+    "name": "Letališče Jožeta Pučnika Ljubljana Zgornji Brnik Slovenia"
+  },
+  {
+    "code": "LKO",
+    "city": "Chaudhary Charan Singh International",
+    "name": "Chaudhary Charan Singh International Airport Lucknow Utter Pradesh Up India"
+  },
+  {
+    "code": "LLW",
+    "city": "Lilongwe International",
+    "name": "Lilongwe International Airport Malawi"
+  },
+  {
+    "code": "LMN",
+    "city": "Lapangan Terbang",
+    "name": "Lapangan Terbang Limbang Sarawak Malaysia"
+  },
+  {
+    "code": "LMT",
+    "city": "Crater Lake - Klamath Regional",
+    "name": "Crater Lake - Klamath Regional Airport Falls Oregon Or USA"
+  },
+  {
+    "code": "LNK",
+    "city": "Lincoln",
+    "name": "Lincoln Airport Nebraska Ne USA"
+  },
+  {
+    "code": "LNZ",
+    "city": "Linz",
+    "name": "Linz Airport Austria"
+  },
+  {
+    "code": "LOP",
+    "city": "Lombok International",
+    "name": "Lombok International Airport Mataram West Nusa Tenggara Ntb Indonesia"
+  },
+  {
+    "code": "LOS",
+    "city": "Murtala Muhammed International",
+    "name": "Murtala Muhammed International Airport Lagos Ikeja Nigeria"
+  },
+  {
+    "code": "LPA",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Gran Canaria Las Palmas Canary Islands Spain"
+  },
+  {
+    "code": "LPB",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional El Alto la Paz Bolivia"
+  },
+  {
+    "code": "LPL",
+    "city": "Liverpool John Lennon",
+    "name": "Liverpool John Lennon Airport Speke England UK"
+  },
+  {
+    "code": "LPQ",
+    "city": "Luang Prabang International",
+    "name": "Luang Prabang International Airport Laos"
+  },
+  {
+    "code": "LRD",
+    "city": "Laredo International",
+    "name": "Laredo International Airport Texas Tx USA"
+  },
+  {
+    "code": "LRH",
+    "city": "Aéroport de",
+    "name": "Aéroport de la Rochelle – Ile Ré France"
+  },
+  {
+    "code": "LSE",
+    "city": "La Crosse Regional",
+    "name": "La Crosse Regional Airport Wisconsin Wi USA"
+  },
+  {
+    "code": "LTN",
+    "city": "London Luton",
+    "name": "London Luton Airport England UK"
+  },
+  {
+    "code": "LUK",
+    "city": "Cincinnati Municipal",
+    "name": "Cincinnati Municipal Airport Ohio Oh USA"
+  },
+  {
+    "code": "LUN",
+    "city": "Kenneth Kaunda International",
+    "name": "Kenneth Kaunda International Airport Lusaka Zambia"
+  },
+  {
+    "code": "LUX",
+    "city": "Aéroport de",
+    "name": "Aéroport de Luxembourg City Findel"
+  },
+  {
+    "code": "LVI",
+    "city": "Harry Mwanga Nkumbula International",
+    "name": "Harry Mwanga Nkumbula International Airport Livingstone Victoria Falls Zambia"
+  },
+  {
+    "code": "LWB",
+    "city": "Greenbrier Valley",
+    "name": "Greenbrier Valley Airport Lewisburg West Virginia Wv USA"
+  },
+  {
+    "code": "LWO",
+    "city": "Lviv Danylo Halytskyi International",
+    "name": "Lviv Danylo Halytskyi International Airport Ukraine"
+  },
+  {
+    "code": "LXR",
+    "city": "Luxor International",
+    "name": "Luxor International Airport Egypt"
+  },
+  {
+    "code": "LYR",
+    "city": "Svalbard",
+    "name": "Svalbard Lufthavn, Longyear Longyearbyen Norway"
+  },
+  {
+    "code": "LYS",
+    "city": "Aéroport Lyon-saint-exupéry",
+    "name": "Aéroport Lyon-saint-exupéry Saint Exupéry Lyon Colombier-saugnieu France"
+  },
+  {
+    "code": "MAA",
+    "city": "Chennai International",
+    "name": "Chennai International Airport Tirusulam Tamil Nadu Tn India"
+  },
+  {
+    "code": "MAD",
+    "city": "Aeropuerto Adolfo",
+    "name": "Aeropuerto Adolfo Suárez Madrid-barajas Madrid–barajas Airport Madrid Barajas Spain"
+  },
+  {
+    "code": "MAF",
+    "city": "Midland International",
+    "name": "Midland International Air and Space Port Odessa Texas Tx USA"
+  },
+  {
+    "code": "MAH",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Menorca Mahón Spain"
+  },
+  {
+    "code": "MAJ",
+    "city": "Marshall Islands International",
+    "name": "Marshall Islands International Airport Majuro"
+  },
+  {
+    "code": "MAN",
+    "city": "Manchester",
+    "name": "Manchester Airport Ringway England UK"
+  },
+  {
+    "code": "MAO",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Brigadeiro Eduardo Gomes International Airport Manaus Amazonas Am Brazil"
+  },
+  {
+    "code": "MBA",
+    "city": "Moi International",
+    "name": "Moi International Airport Mombasa Kenya"
+  },
+  {
+    "code": "MBJ",
+    "city": "Sangster International",
+    "name": "Sangster International Airport Montego Bay Jamaica"
+  },
+  {
+    "code": "MBS",
+    "city": "International",
+    "name": "International Airport Freeland Michigan Mi USA"
+  },
+  {
+    "code": "MCE",
+    "city": "Merced Regional",
+    "name": "Merced Regional Airport California Ca USA"
+  },
+  {
+    "code": "MCI",
+    "city": "Kansas City International",
+    "name": "Kansas City International Airport Missouri Mo USA"
+  },
+  {
+    "code": "MCO",
+    "city": "Orlando International",
+    "name": "Orlando International Airport Florida Fl USA"
+  },
+  {
+    "code": "MCP",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional de Macapá-alberto Alcolumbre Macapa International Airport Macapá Amapá Ap Brazil"
+  },
+  {
+    "code": "MCT",
+    "city": "Muscat International",
+    "name": "Muscat International Airport Oman"
+  },
+  {
+    "code": "MCW",
+    "city": "Mason City Municipal",
+    "name": "Mason City Municipal Airport Iowa Ia USA"
+  },
+  {
+    "code": "MCZ",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Maceió/zumbi Dos Palmares Zumbi Maceió Alagoas al Brazil"
+  },
+  {
+    "code": "MDC",
+    "city": "Bandar Udara",
+    "name": "Bandar Udara Internasional Sam Ratulangi Manado East Kalimantan Indonesia"
+  },
+  {
+    "code": "MDE",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional José María Córdova Medellín Rionegro Colombia"
+  },
+  {
+    "code": "MDL",
+    "city": "Mandalay International",
+    "name": "Mandalay International Airport Tada-u Myanmar"
+  },
+  {
+    "code": "MDQ",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional de Mar del Plata “ástor Piazzolla” Astor Piazzolla Argentina"
+  },
+  {
+    "code": "MDT",
+    "city": "Harrisburg International",
+    "name": "Harrisburg International Airport Middletown Pennsylvania Pa USA"
+  },
+  {
+    "code": "MDW",
+    "city": "Midway International",
+    "name": "Midway International Airport Chicago Illinois Il USA"
+  },
+  {
+    "code": "MDZ",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Gobernador Francisco Gabrielli Governor Mendoza Argentina"
+  },
+  {
+    "code": "MED",
+    "city": "Madinah",
+    "name": "Prince Mohammad Bin Abdulaziz International Airport Medina Saudi Arabia"
+  },
+  {
+    "code": "MEL",
+    "city": "Melbourne",
+    "name": "Melbourne Airport Tullamarine Victoria Vic Australia"
+  },
+  {
+    "code": "MEM",
+    "city": "Memphis International",
+    "name": "Memphis International Airport Tennessee Tn USA"
+  },
+  {
+    "code": "MEX",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Benito Juárez International Airport Mexico City Distrito Federal Df"
+  },
+  {
+    "code": "MFD",
+    "city": "Mansfield Lahm Regional",
+    "name": "Mansfield Lahm Regional Airport Ohio Oh USA"
+  },
+  {
+    "code": "MGA",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Augusto C. Sandino César International Airport Managua Nicaragua"
+  },
+  {
+    "code": "MGL",
+    "city": "Flughafen Düsseldorf",
+    "name": "Flughafen Düsseldorf Mönchengladbach Dusseldorf Germany"
+  },
+  {
+    "code": "MGM",
+    "city": "Montgomery Regional",
+    "name": "Montgomery Regional Airport Alabama al USA"
+  },
+  {
+    "code": "MHD",
+    "city": "Shahid Hashemi Nejad",
+    "name": "Shahid Hashemi Nejad Airport Mashhad Iran"
+  },
+  {
+    "code": "MHT",
+    "city": "Manchester–boston Regional",
+    "name": "Manchester–boston Regional Airport Manchester Boston New Hampshire Nh USA"
+  },
+  {
+    "code": "MIA",
+    "city": "Miami International",
+    "name": "Miami International Airport Florida Fl USA"
+  },
+  {
+    "code": "MJV",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Murcia-san Javier Murcia San Spain"
+  },
+  {
+    "code": "MKC",
+    "city": "Charles B. Wheeler Downtown",
+    "name": "Charles B. Wheeler Downtown Airport Kansas City Missouri Mo USA"
+  },
+  {
+    "code": "MKE",
+    "city": "General Mitchell International",
+    "name": "General Mitchell International Airport Milwaukee Wisconsin Wi USA"
+  },
+  {
+    "code": "MKG",
+    "city": "Muskegon County",
+    "name": "Muskegon County Airport Norton Shores Michigan Mi USA"
+  },
+  {
+    "code": "MLA",
+    "city": "Ajruport Internazzjonali",
+    "name": "Ajruport Internazzjonali Ta 'malta Valletta Luqa Malta"
+  },
+  {
+    "code": "MLB",
+    "city": "Melbourne International",
+    "name": "Melbourne International Airport Florida Fl USA"
+  },
+  {
+    "code": "MLE",
+    "city": "Male",
+    "name": "Ibrahim Nasir International Airport Male Kaafu Atoll Maldives"
+  },
+  {
+    "code": "MLH",
+    "city": "Euroairport Basel–mulhouse–freiburg",
+    "name": "Euroairport Basel–mulhouse–freiburg Mulhouse Saint-louis Switzerland France"
+  },
+  {
+    "code": "MLI",
+    "city": "Quad City International",
+    "name": "Quad City International Airport Moline Illinois Il USA"
+  },
+  {
+    "code": "MLN",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Melilla Spain"
+  },
+  {
+    "code": "MLU",
+    "city": "Monroe Regional",
+    "name": "Monroe Regional Airport Louisiana la USA"
+  },
+  {
+    "code": "MME",
+    "city": "Durham Tees Valley",
+    "name": "Durham Tees Valley Airport Darlington Middlesbrough England UK"
+  },
+  {
+    "code": "MMH",
+    "city": "Mammoth Yosemite",
+    "name": "Mammoth Yosemite Airport Lakes California Ca USA"
+  },
+  {
+    "code": "MMK",
+    "city": "Murmansk",
+    "name": "Murmansk Airport Murmashi Russia"
+  },
+  {
+    "code": "MMX",
+    "city": "Malmö Flygplats",
+    "name": "Malmö Flygplats Svedala Sweden"
+  },
+  {
+    "code": "MNL",
+    "city": "Paliparang Pandaigdig",
+    "name": "Paliparang Pandaigdig Ng Ninoy Aquino Manila Pasay Philippines"
+  },
+  {
+    "code": "MOB",
+    "city": "Mobile Regional",
+    "name": "Mobile Regional Airport Alabama al USA"
+  },
+  {
+    "code": "MOO",
+    "city": "Moomba",
+    "name": "Moomba Airport South Australia Sa"
+  },
+  {
+    "code": "MPM",
+    "city": "Maputo International",
+    "name": "Maputo International Airport Mozambique"
+  },
+  {
+    "code": "MQC",
+    "city": "Aéroport de",
+    "name": "Aéroport de Miquelon Saint Pierre and France"
+  },
+  {
+    "code": "MQL",
+    "city": "Mildura",
+    "name": "Mildura Airport Victoria Vic Australia"
+  },
+  {
+    "code": "MRS",
+    "city": "Aéroport de",
+    "name": "Aéroport de Marseille Provence Marignane France"
+  },
+  {
+    "code": "MRU",
+    "city": "Sir Seewoosagur Ramgoolam International",
+    "name": "Sir Seewoosagur Ramgoolam International Airport Plaine Magnien Mauritius"
+  },
+  {
+    "code": "MRY",
+    "city": "Monterey Regional",
+    "name": "Monterey Regional Airport California Ca USA"
+  },
+  {
+    "code": "MSN",
+    "city": "Dane County Regional",
+    "name": "Dane County Regional Airport Madison Wisconsin Wi USA"
+  },
+  {
+    "code": "MSO",
+    "city": "Missoula International",
+    "name": "Missoula International Airport Montana Mt USA"
+  },
+  {
+    "code": "MSP",
+    "city": "Minneapolis–saint Paul International",
+    "name": "Minneapolis–saint Paul International Airport Twin Cities St. Minnesota Mn USA"
+  },
+  {
+    "code": "MSQ",
+    "city": "Minsk National",
+    "name": "Minsk National Airport Kastrychnitski Belarus"
+  },
+  {
+    "code": "MST",
+    "city": "Maastricht Aachen",
+    "name": "Maastricht Aachen Airport Beek Netherlands"
+  },
+  {
+    "code": "MSU",
+    "city": "Moshoeshoe I International",
+    "name": "Moshoeshoe I International Airport Maseru Mazenod Lesotho"
+  },
+  {
+    "code": "MSY",
+    "city": "Louis Armstrong International",
+    "name": "Louis Armstrong International Airport New Orleans Louisiana la USA"
+  },
+  {
+    "code": "MTJ",
+    "city": "Montrose Regional",
+    "name": "Montrose Regional Airport Colorado Co USA"
+  },
+  {
+    "code": "MTS",
+    "city": "Matsapha",
+    "name": "Matsapha Airport Manzini Swaziland"
+  },
+  {
+    "code": "MTY",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Mariano Escobedo Monterrey Apodaca Nuevo León Nl Mexico"
+  },
+  {
+    "code": "MUB",
+    "city": "Maun International",
+    "name": "Maun International Airport Botswana"
+  },
+  {
+    "code": "MUC",
+    "city": "Flughafen München",
+    "name": "Flughafen München Franz Josef Strauß Munich Freising Germany"
+  },
+  {
+    "code": "MUX",
+    "city": "Multan International",
+    "name": "Multan International Airport Punjab Pb Pakistan"
+  },
+  {
+    "code": "MVD",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional de Carrasco/general Cesáreo L. Berisso International Airport Montevideo Canelones Uruguay"
+  },
+  {
+    "code": "MVY",
+    "city": "Martha’s Vineyard",
+    "name": "Martha’s Vineyard Airport Massachusetts Ma USA"
+  },
+  {
+    "code": "MXE",
+    "city": "Laurinburg–maxton",
+    "name": "Laurinburg–maxton Airport Maxton Rockingham North Carolina Nc USA"
+  },
+  {
+    "code": "MXP",
+    "city": "Aeroporto di",
+    "name": "Aeroporto di Milano-malpensa Malpensa Milan Ferno Italy"
+  },
+  {
+    "code": "MYF",
+    "city": "Montgomery Field",
+    "name": "Montgomery Field Airport San Diego California Ca USA"
+  },
+  {
+    "code": "MYR",
+    "city": "Myrtle Beach International",
+    "name": "Myrtle Beach International Airport South Carolina Sc USA"
+  },
+  {
+    "code": "MYT",
+    "city": "Myitkyina",
+    "name": "Myitkyina Airport Myanmar"
+  },
+  {
+    "code": "MZL",
+    "city": "Aeropuerto la",
+    "name": "Aeropuerto la Nubia Manizales Colombia"
+  },
+  {
+    "code": "NAG",
+    "city": "Dr. Babasaheb Ambedkar International",
+    "name": "Dr. Babasaheb Ambedkar International Airport Nagpur Maharashtra Mh India"
+  },
+  {
+    "code": "NAN",
+    "city": "Nadi International",
+    "name": "Nadi International Airport Viti Levu Fiji"
+  },
+  {
+    "code": "NAP",
+    "city": "Aeroporto Internazionale",
+    "name": "Aeroporto Internazionale di Napoli Naples Italy"
+  },
+  {
+    "code": "NAS",
+    "city": "Lynden Pindling International",
+    "name": "Lynden Pindling International Airport Nassau Bahamas"
+  },
+  {
+    "code": "NAT",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Augusto Severo Natal Parnamirim Rio Grande Do Norte Rn Brazil"
+  },
+  {
+    "code": "NBO",
+    "city": "Jomo Kenyatta International",
+    "name": "Jomo Kenyatta International Airport Nairobi Embakasi Kenya"
+  },
+  {
+    "code": "NCE",
+    "city": "Aéroport Nice",
+    "name": "Aéroport Nice Côte D'azur France"
+  },
+  {
+    "code": "NCL",
+    "city": "Newcastle International",
+    "name": "Newcastle International Airport Woolsington England UK"
+  },
+  {
+    "code": "NDJ",
+    "city": "N’djamena International",
+    "name": "N’djamena International Airport N'djamena Chad"
+  },
+  {
+    "code": "NDL",
+    "city": "N’délé",
+    "name": "N’délé Airport Central African Republic"
+  },
+  {
+    "code": "NDR",
+    "city": "Nador International",
+    "name": "Nador International Airport Morocco"
+  },
+  {
+    "code": "NER",
+    "city": "Chulman Neryungri",
+    "name": "Chulman Neryungri Airport Russia"
+  },
+  {
+    "code": "NGB",
+    "city": "Ningbo Lishe International",
+    "name": "Ningbo Lishe International Airport Zhejiang China"
+  },
+  {
+    "code": "NGO",
+    "city": "Chūbu Centrair International",
+    "name": "Chūbu Centrair International Airport Nagoya Tokoname City Japan"
+  },
+  {
+    "code": "NGS",
+    "city": "Nagasaki",
+    "name": "Nagasaki Airport Ōmura Japan"
+  },
+  {
+    "code": "NIC",
+    "city": "Nicosia International",
+    "name": "Nicosia International Airport Cyprus"
+  },
+  {
+    "code": "NIM",
+    "city": "Diori Hamani International",
+    "name": "Diori Hamani International Airport Niamey Niger"
+  },
+  {
+    "code": "NKC",
+    "city": "Nouakchott International",
+    "name": "Nouakchott International Airport Mauritania"
+  },
+  {
+    "code": "NKG",
+    "city": "Nanjing Lukou International",
+    "name": "Nanjing Lukou International Airport Jiangsu China"
+  },
+  {
+    "code": "NLA",
+    "city": "Simon Mwansa Kapwepwe International",
+    "name": "Simon Mwansa Kapwepwe International Airport Ndola Zambia"
+  },
+  {
+    "code": "NLK",
+    "city": "Norfolk Island",
+    "name": "Norfolk Island Airport Australia"
+  },
+  {
+    "code": "NNG",
+    "city": "Nanning Wuxu International",
+    "name": "Nanning Wuxu International Airport Guangxi China"
+  },
+  {
+    "code": "NNR",
+    "city": "Aerfort Chonamara",
+    "name": "Aerfort Chonamara Inverin Connemara Ireland"
+  },
+  {
+    "code": "NOC",
+    "city": "Ireland West",
+    "name": "Ireland West Airport Knock Charlestown"
+  },
+  {
+    "code": "NOS",
+    "city": "Fascene",
+    "name": "Fascene Airport Nosy Be Madagascar"
+  },
+  {
+    "code": "NQY",
+    "city": "Newquay Cornwall",
+    "name": "Newquay Cornwall Airport England UK"
+  },
+  {
+    "code": "NQZ",
+    "city": "Nursultan Nazarbayev International",
+    "name": "Nursultan Nazarbayev International Airport Astana Kazakhstan"
+  },
+  {
+    "code": "NRN",
+    "city": "Flughafen Weeze",
+    "name": "Flughafen Weeze North Rhine-westphalia Germany"
+  },
+  {
+    "code": "NRT",
+    "city": "Narita International",
+    "name": "Narita International Airport Tokyo Japan"
+  },
+  {
+    "code": "NSK",
+    "city": "Alykel",
+    "name": "Alykel Airport Norilsk Krasnoyarsk Krai Russia"
+  },
+  {
+    "code": "NSN",
+    "city": "Nelson",
+    "name": "Nelson Airport Annesbrook New Zealand"
+  },
+  {
+    "code": "NTE",
+    "city": "Aéroport Nantes",
+    "name": "Aéroport Nantes Atlantique Bouguenais France"
+  },
+  {
+    "code": "NTL",
+    "city": "Newcastle",
+    "name": "Newcastle Airport Williamtown New South Wales Nsw Australia"
+  },
+  {
+    "code": "NUE",
+    "city": "Flughafen Nürnberg",
+    "name": "Flughafen Nürnberg Nuremberg Bavaria Germany"
+  },
+  {
+    "code": "NWI",
+    "city": "Norwich International",
+    "name": "Norwich International Airport Norfolk England UK"
+  },
+  {
+    "code": "NYO",
+    "city": "Stockholm Skavsta",
+    "name": "Stockholm Skavsta Flygplats Nyköping Sweden"
+  },
+  {
+    "code": "NZC",
+    "city": "Maria Reiche Neuman",
+    "name": "Maria Reiche Neuman Airport Nazca Ica Peru"
+  },
+  {
+    "code": "OAK",
+    "city": "Oakland International",
+    "name": "Oakland International Airport California Ca USA"
+  },
+  {
+    "code": "OBN",
+    "city": "Oban",
+    "name": "Oban Airport North Connel Scotland UK"
+  },
+  {
+    "code": "ODS",
+    "city": "Odessa International",
+    "name": "Odessa International Airport Ukraine"
+  },
+  {
+    "code": "OGG",
+    "city": "Kahului",
+    "name": "Kahului Airport Maui Hawaii Hi USA"
+  },
+  {
+    "code": "OGS",
+    "city": "Ogdensburg International",
+    "name": "Ogdensburg International Airport Ottawa New York Ny USA"
+  },
+  {
+    "code": "OHD",
+    "city": "Aerodrom Ohrid",
+    "name": "Aerodrom Ohrid “sv. Apostol Pavle” Saint Paul the Apostle Orovnik Macedonia"
+  },
+  {
+    "code": "ORH",
+    "city": "Worcester Regional",
+    "name": "Worcester Regional Airport Massachusetts Ma USA"
+  },
+  {
+    "code": "OKA",
+    "city": "Naha",
+    "name": "Naha Airport Okinawa Japan"
+  },
+  {
+    "code": "OKC",
+    "city": "Will Rogers World",
+    "name": "Will Rogers World Airport Oklahoma City Ok USA"
+  },
+  {
+    "code": "OMA",
+    "city": "Eppley Airfield",
+    "name": "Eppley Airfield Omaha Nebraska Ne USA"
+  },
+  {
+    "code": "OME",
+    "city": "Nome",
+    "name": "Nome Airport Alaska Ak USA"
+  },
+  {
+    "code": "OMO",
+    "city": "Mostar International",
+    "name": "Mostar International Airport Ortiješ Bosnia and Herzegovina"
+  },
+  {
+    "code": "OMS",
+    "city": "Omsk Tsentralny",
+    "name": "Omsk Tsentralny Airport Siberia Russia"
+  },
+  {
+    "code": "ONT",
+    "city": "La/ontario International",
+    "name": "La/ontario International Airport Ontario California Ca USA"
+  },
+  {
+    "code": "OOL",
+    "city": "Gold Coast",
+    "name": "Gold Coast Airport Coolangatta Bilinga Queensland Qld Australia"
+  },
+  {
+    "code": "OPO",
+    "city": "Aeroporto Francisco",
+    "name": "Aeroporto Francisco Sá Carneiro de Airport Porto Oporto Portugal"
+  },
+  {
+    "code": "ORB",
+    "city": "Örebro Flygplats",
+    "name": "Örebro Flygplats Orebro Sweden"
+  },
+  {
+    "code": "ORD",
+    "city": "Chicago",
+    "name": "O’hare International Airport Chicago Illinois Il USA"
+  },
+  {
+    "code": "ORF",
+    "city": "Norfolk International",
+    "name": "Norfolk International Airport Virginia Va USA"
+  },
+  {
+    "code": "ORK",
+    "city": "Cork",
+    "name": "Cork Airport Ballygarvan Ireland"
+  },
+  {
+    "code": "ORY",
+    "city": "Aéroport de",
+    "name": "Aéroport de Paris-orly Paris Orly France"
+  },
+  {
+    "code": "OSH",
+    "city": "Wittman Regional",
+    "name": "Wittman Regional Airport Oshkosh Wisconsin Wi USA"
+  },
+  {
+    "code": "OSL",
+    "city": "Oslo",
+    "name": "Oslo Lufthavn Gardermoen Norway"
+  },
+  {
+    "code": "OST",
+    "city": "Internationale",
+    "name": "Internationale Luchthaven Oostende-brugge Ostend Bruges Belgium"
+  },
+  {
+    "code": "OSU",
+    "city": "Ohio State University",
+    "name": "Ohio State University Airport Columbus Oh USA"
+  },
+  {
+    "code": "OTP",
+    "city": "Aeroportul Internațional",
+    "name": "Aeroportul Internațional Henri Coandă Bucharest Otopeni Romania"
+  },
+  {
+    "code": "OTZ",
+    "city": "Ralph Wien Memorial",
+    "name": "Ralph Wien Memorial Airport Kotzebue Alaska Ak USA"
+  },
+  {
+    "code": "OUA",
+    "city": "Ouagadougou International",
+    "name": "Ouagadougou International Airport Burkina Faso"
+  },
+  {
+    "code": "OUD",
+    "city": "Oujda Angads",
+    "name": "Oujda Angads Airport Morocco"
+  },
+  {
+    "code": "OUL",
+    "city": "Oulun Lentoasema",
+    "name": "Oulun Lentoasema Oulu Finland"
+  },
+  {
+    "code": "OVB",
+    "city": "Novosibirsk Tolmachevo",
+    "name": "Novosibirsk Tolmachevo Airport Russia"
+  },
+  {
+    "code": "OVD",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Asturias Oviedo Spain"
+  },
+  {
+    "code": "OWD",
+    "city": "Norwood Memorial",
+    "name": "Norwood Memorial Airport Massachusetts Ma USA"
+  },
+  {
+    "code": "OXB",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Osvaldo Vieira International Airport Bissau Guinea-bissau"
+  },
+  {
+    "code": "OXF",
+    "city": "London Oxford",
+    "name": "London Oxford Airport Kidlington England UK"
+  },
+  {
+    "code": "PAE",
+    "city": "Snohomish County",
+    "name": "Snohomish County Airport Everett Mukilteo Washington Wa USA"
+  },
+  {
+    "code": "PAP",
+    "city": "Aéroport International",
+    "name": "Aéroport International Toussaint L'ouverture Airport Port-au-prince Tabarre Haiti"
+  },
+  {
+    "code": "PAS",
+    "city": "Paros National",
+    "name": "Paros National Airport Greece"
+  },
+  {
+    "code": "PBG",
+    "city": "Plattsburgh International",
+    "name": "Plattsburgh International Airport New York Ny USA"
+  },
+  {
+    "code": "PBH",
+    "city": "Paro International",
+    "name": "Paro International Airport Bhutan"
+  },
+  {
+    "code": "PBI",
+    "city": "Palm Beach International",
+    "name": "Palm Beach International Airport Miami Florida Fl USA"
+  },
+  {
+    "code": "PBM",
+    "city": "Johan Adolf Pengel International",
+    "name": "Johan Adolf Pengel International Airport Paramaribo Zanderij Suriname"
+  },
+  {
+    "code": "PCL",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Capitán Fap David Abensur Rengifo Pucallpa Ucayalí Peru"
+  },
+  {
+    "code": "PDG",
+    "city": "Bandar Udara Internasional Minangkabau International",
+    "name": "Bandar Udara Internasional Minangkabau International Airport Padang West Sumatra Indonesia"
+  },
+  {
+    "code": "PDK",
+    "city": "Dekalb–peachtree",
+    "name": "Dekalb–peachtree Airport Chamblee Atlanta Georgia Ga USA"
+  },
+  {
+    "code": "PDL",
+    "city": "Aeroporto João",
+    "name": "Aeroporto João Paulo Ii John Paul Airport Ponta Delgada São Miguel Azores Portugal"
+  },
+  {
+    "code": "PDP",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Capitán de Corbeta Carlos A. Curbelo Punta del Este Piriápolis Uruguay"
+  },
+  {
+    "code": "PDV",
+    "city": "Letishte Plovdiv",
+    "name": "Letishte Plovdiv Krumovo Bulgaria"
+  },
+  {
+    "code": "PDX",
+    "city": "Portland International",
+    "name": "Portland International Airport Oregon Or USA"
+  },
+  {
+    "code": "PEE",
+    "city": "Perm International",
+    "name": "Perm International Airport Russia"
+  },
+  {
+    "code": "PEI",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Matecaña Matecana International Airport Pereira Colombia"
+  },
+  {
+    "code": "PEK",
+    "city": "Beijing Capital International",
+    "name": "Beijing Capital International Airport Chaoyang District China"
+  },
+  {
+    "code": "PEM",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Padre Aldamiz International Airport Puerto Maldonado Madre de Dios Peru"
+  },
+  {
+    "code": "PEN",
+    "city": "Lapangan Terbang Antarabangsa Pulau Pinang Penang International",
+    "name": "Lapangan Terbang Antarabangsa Pulau Pinang Penang International Airport Bayan Lepas Malaysia"
+  },
+  {
+    "code": "PER",
+    "city": "Perth",
+    "name": "Perth Airport Western Australia Wa"
+  },
+  {
+    "code": "PET",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional João Simões Lopes Neto International Airport Pelotas Rio Grande Do Sul Rs Brazil"
+  },
+  {
+    "code": "PEW",
+    "city": "Bacha Khan International",
+    "name": "Bacha Khan International Airport Peshawar Khyber Pakhtunkhwa Kpk Pakistan"
+  },
+  {
+    "code": "PFB",
+    "city": "Aeroporto Lauro",
+    "name": "Aeroporto Lauro Kurtz Airport Passo Fundo Rio Grande Do Sul Rs Brazil"
+  },
+  {
+    "code": "PFO",
+    "city": "Paphos International",
+    "name": "Paphos International Airport Cyprus"
+  },
+  {
+    "code": "PHC",
+    "city": "Port Harcourt International",
+    "name": "Port Harcourt International Airport Omagwa Nigeria"
+  },
+  {
+    "code": "PHF",
+    "city": "Newport News/williamsburg International",
+    "name": "Newport News/williamsburg International Airport News Williamsburg Virginia Va USA"
+  },
+  {
+    "code": "PHK",
+    "city": "Palm Beach County Glades",
+    "name": "Palm Beach County Glades Airport Pahokee Florida Fl USA"
+  },
+  {
+    "code": "PHL",
+    "city": "Philadelphia International",
+    "name": "Philadelphia International Airport Pennsylvania Pa USA"
+  },
+  {
+    "code": "PHX",
+    "city": "Sky Harbor International",
+    "name": "Sky Harbor International Airport Phoenix Arizona Az USA"
+  },
+  {
+    "code": "PIE",
+    "city": "St. Pete–clearwater International",
+    "name": "St. Pete–clearwater International Airport Clearwater Pinellas County Florida Fl USA"
+  },
+  {
+    "code": "PIK",
+    "city": "Glasgow Prestwick",
+    "name": "Glasgow Prestwick Airport Scotland UK"
+  },
+  {
+    "code": "PIO",
+    "city": "Aeropuerto Capitán",
+    "name": "Aeropuerto Capitán Fap Renán Elías Olivera Pisco Ica Peru"
+  },
+  {
+    "code": "PIT",
+    "city": "Pittsburgh International",
+    "name": "Pittsburgh International Airport Pennsylvania Pa USA"
+  },
+  {
+    "code": "PIU",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Capitán Fap Guillermo Concha Iberico International Airport Piura Peru"
+  },
+  {
+    "code": "PIX",
+    "city": "Aeroporto Do",
+    "name": "Aeroporto Do Pico Madalena Azores Portugal"
+  },
+  {
+    "code": "PKU",
+    "city": "Sultan Syarif Kasim Ii International",
+    "name": "Sultan Syarif Kasim Ii International Airport Pekanbaru Indonesia"
+  },
+  {
+    "code": "PKX",
+    "city": "Beijing Daxing International",
+    "name": "Beijing Daxing International Airport Chaoyang District China"
+  },
+  {
+    "code": "PLM",
+    "city": "Sultan Mahmud Badaruddin Ii International",
+    "name": "Sultan Mahmud Badaruddin Ii International Airport Palembang Indonesia"
+  },
+  {
+    "code": "PLQ",
+    "city": "Tarptautinis Palangos",
+    "name": "Tarptautinis Palangos Oro Uostas Palanga Klaipėda Lithuania"
+  },
+  {
+    "code": "PLS",
+    "city": "Providenciales International",
+    "name": "Providenciales International Airport Caicos Islands UK"
+  },
+  {
+    "code": "PLU",
+    "city": "Aeroporto Carlos",
+    "name": "Aeroporto Carlos Drummond de Andrade Airport Belo Horizonte Pampulha Minas Gerais Mg Brazil"
+  },
+  {
+    "code": "PLZ",
+    "city": "Chief Dawid Stuurman International",
+    "name": "Chief Dawid Stuurman International Airport Gqeberha Port Elizabeth South Africa"
+  },
+  {
+    "code": "PMI",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Palma Mallorca Spain"
+  },
+  {
+    "code": "PMO",
+    "city": "Aeroporto Falcone",
+    "name": "Aeroporto Falcone Borsellino Airport Palermo Sicily Italy"
+  },
+  {
+    "code": "PMW",
+    "city": "Aeroporto de",
+    "name": "Aeroporto de Palmas-brigadeiro Lysias Rodrigues Palmas Tocantins To Brazil"
+  },
+  {
+    "code": "PNA",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Pamplona Spain"
+  },
+  {
+    "code": "PNH",
+    "city": "Phnom Penh International",
+    "name": "Phnom Penh International Airport Cambodia"
+  },
+  {
+    "code": "PNI",
+    "city": "Pohnpei International",
+    "name": "Pohnpei International Airport Island Micronesia"
+  },
+  {
+    "code": "PNK",
+    "city": "Bandar Udara Internasional Supadio International",
+    "name": "Bandar Udara Internasional Supadio International Airport Pontianak West Kalimantan Indonesia"
+  },
+  {
+    "code": "PNQ",
+    "city": "Pune",
+    "name": "Pune Airport Poona Maharashtra Mh India"
+  },
+  {
+    "code": "PNS",
+    "city": "Pensacola International",
+    "name": "Pensacola International Airport Florida Fl USA"
+  },
+  {
+    "code": "PNT",
+    "city": "Aeródromo Teniente Julio Gallardo",
+    "name": "Aeródromo Teniente Julio Gallardo Airport Puerto Natales Chile"
+  },
+  {
+    "code": "PNY",
+    "city": "Puducherry",
+    "name": "Puducherry Airport Pondicherry India"
+  },
+  {
+    "code": "PNZ",
+    "city": "Aeroporto de",
+    "name": "Aeroporto de Petrolina–senador Nilo Coelho Petrolina Juazeiro Pernambuco Pe Brazil"
+  },
+  {
+    "code": "POA",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Salgado Filho International Airport Porto Alegre São João Rio Grande Do Sul Rs Brazil"
+  },
+  {
+    "code": "POM",
+    "city": "Jacksons International",
+    "name": "Jacksons International Airport Port Moresby Papua New Guinea"
+  },
+  {
+    "code": "POO",
+    "city": "Aeroporto Poços",
+    "name": "Aeroporto Poços de Caldas Pocos Minas Gerais Mg Brazil"
+  },
+  {
+    "code": "POP",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Gregorio Luperón International Airport Puerto Plata Dominican Republic"
+  },
+  {
+    "code": "POS",
+    "city": "Piarco International",
+    "name": "Piarco International Airport Port of Spain Trinidad and Tobago"
+  },
+  {
+    "code": "POZ",
+    "city": "Port Lotniczy Poznań–ławica Im. Henryka Wieniawskiego Henryk Wieniawski",
+    "name": "Port Lotniczy Poznań–ławica Im. Henryka Wieniawskiego Henryk Wieniawski Airport Poznań Poland"
+  },
+  {
+    "code": "PPG",
+    "city": "Pago International",
+    "name": "Pago International Airport Tafuna American Samoa USA"
+  },
+  {
+    "code": "PPT",
+    "city": "Fa'a'ā International",
+    "name": "Fa'a'ā International Airport Tahiti Pape'ete French Polynesia France"
+  },
+  {
+    "code": "PQC",
+    "city": "Sân Bay",
+    "name": "Sân Bay Quốc Tế Phú Quôc Phu Quoc Vietnam"
+  },
+  {
+    "code": "PRG",
+    "city": "Letiště Václava Havla Praha Vaclav Havel",
+    "name": "Letiště Václava Havla Praha Vaclav Havel Airport Prague Ruzyně Czech Republic"
+  },
+  {
+    "code": "PRN",
+    "city": "Pristina International",
+    "name": "Pristina International Airport Adem Jashari Kosovo"
+  },
+  {
+    "code": "PSA",
+    "city": "Aeroporto Internazionale",
+    "name": "Aeroporto Internazionale di Pisa Italy"
+  },
+  {
+    "code": "PSC",
+    "city": "Tri-cities",
+    "name": "Tri-cities Airport Pasco Washington Wa USA"
+  },
+  {
+    "code": "PSE",
+    "city": "Aeropuerto Mercedita",
+    "name": "Aeropuerto Mercedita Airport Ponce Puerto Rico USA"
+  },
+  {
+    "code": "PSM",
+    "city": "Portsmouth International",
+    "name": "Portsmouth International Airport At Pease New Hampshire Nh USA"
+  },
+  {
+    "code": "PSP",
+    "city": "Palm Springs International",
+    "name": "Palm Springs International Airport California Ca USA"
+  },
+  {
+    "code": "PTK",
+    "city": "Oakland County International",
+    "name": "Oakland County International Airport Waterford Township Michigan Mi USA"
+  },
+  {
+    "code": "PTP",
+    "city": "Aérodrome de",
+    "name": "Aérodrome de Pointe-à-pitre Le Raizet Grande-terre Guadeloupe France"
+  },
+  {
+    "code": "PTY",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional de Tocumen International Airport Panama City"
+  },
+  {
+    "code": "PUB",
+    "city": "Pueblo Memorial",
+    "name": "Pueblo Memorial Airport Colorado Co USA"
+  },
+  {
+    "code": "PUF",
+    "city": "Aéroport Pau",
+    "name": "Aéroport Pau Pyrénées Airport Uzein France"
+  },
+  {
+    "code": "PUQ",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Presidente Carlos Ibáñez Punta Arenas Chile"
+  },
+  {
+    "code": "PUS",
+    "city": "Gimhae International",
+    "name": "Gimhae International Airport Busan Pusan Korea South"
+  },
+  {
+    "code": "PVD",
+    "city": "Theodore Francis Green Memorial State",
+    "name": "Theodore Francis Green Memorial State Airport Providence Warwick Rhode Island Ri USA"
+  },
+  {
+    "code": "PVG",
+    "city": "Shanghai Pudong International",
+    "name": "Shanghai Pudong International Airport China"
+  },
+  {
+    "code": "PVR",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Lic. Gustavo Díaz Ordaz International Airport Puerto Vallarta Jalisco Ja Mexico"
+  },
+  {
+    "code": "PVU",
+    "city": "Provo Municipal",
+    "name": "Provo Municipal Airport Utah Ut USA"
+  },
+  {
+    "code": "PWK",
+    "city": "Chicago Executive",
+    "name": "Chicago Executive Airport Wheeling Prospect Heights Illinois Il USA"
+  },
+  {
+    "code": "PWM",
+    "city": "Portland International",
+    "name": "Portland International Jetport Westbrook Maine Me USA"
+  },
+  {
+    "code": "PXO",
+    "city": "Aeroporto de",
+    "name": "Aeroporto de Porto Santo Madeira Portugal"
+  },
+  {
+    "code": "PXU",
+    "city": "Sân Bay",
+    "name": "Sân Bay Pleiku Vietnam"
+  },
+  {
+    "code": "PZO",
+    "city": "Manuel Carlos Piar Guayana International",
+    "name": "Manuel Carlos Piar Guayana International Airport Ciudad Puerto Ordaz Bolívar Venezuela"
+  },
+  {
+    "code": "QBS",
+    "city": "Aeroporto di",
+    "name": "Aeroporto di Verona-boscomantico Airport Verona Italy"
+  },
+  {
+    "code": "QRO",
+    "city": "Aeropuerto Intercontinental",
+    "name": "Aeropuerto Intercontinental de Querétaro Qe Mexico"
+  },
+  {
+    "code": "RAI",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Nelson Mandela International Airport Praia Santiago Island Cape Verde"
+  },
+  {
+    "code": "RAK",
+    "city": "Marrakesh Menara",
+    "name": "Marrakesh Menara Airport Morocco"
+  },
+  {
+    "code": "RAO",
+    "city": "Aeroporto Estadual",
+    "name": "Aeroporto Estadual de Ribeirão Preto - Doutor Leite Lopes State Airport Dr. Ribeirao São Paulo Sp Brazil"
+  },
+  {
+    "code": "RAR",
+    "city": "Papa Rererangi O Rarotonga International",
+    "name": "Papa Rererangi O Rarotonga International Airport Avarua Cook Islands"
+  },
+  {
+    "code": "RBA",
+    "city": "Rabat–salé",
+    "name": "Rabat–salé Airport Rabat Salé Morocco"
+  },
+  {
+    "code": "RBD",
+    "city": "Dallas Executive",
+    "name": "Dallas Executive Airport Texas Tx USA"
+  },
+  {
+    "code": "RBO",
+    "city": "Aeropuerto Roboré",
+    "name": "Aeropuerto Roboré Airport Bolivia"
+  },
+  {
+    "code": "RDD",
+    "city": "Redding Municipal",
+    "name": "Redding Municipal Airport California Ca USA"
+  },
+  {
+    "code": "RDU",
+    "city": "Raleigh–durham International",
+    "name": "Raleigh–durham International Airport Raleigh Durham North Carolina Nc USA"
+  },
+  {
+    "code": "REC",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Do Recife/guararapes–gilberto Freyre Recife Pernambuco Pe Brazil"
+  },
+  {
+    "code": "REP",
+    "city": "Siem Reap International",
+    "name": "Siem Reap International Airport Cambodia"
+  },
+  {
+    "code": "RFD",
+    "city": "Chicago Rockford International",
+    "name": "Chicago Rockford International Airport Illinois Il USA"
+  },
+  {
+    "code": "RGI",
+    "city": "Rangiroa",
+    "name": "Rangiroa Airport French Polynesia France"
+  },
+  {
+    "code": "RGN",
+    "city": "Yangon International",
+    "name": "Yangon International Airport Rangoon Myanmar"
+  },
+  {
+    "code": "RHO",
+    "city": "Rhodes International",
+    "name": "Rhodes International Airport “diagoras” Greece"
+  },
+  {
+    "code": "RIC",
+    "city": "Richmond International",
+    "name": "Richmond International Airport Sandston Virginia Va USA"
+  },
+  {
+    "code": "RIV",
+    "city": "March Air",
+    "name": "March Air Reserve Base Riverside California Ca USA"
+  },
+  {
+    "code": "RIW",
+    "city": "Riverton Regional",
+    "name": "Riverton Regional Airport Wyoming Wy USA"
+  },
+  {
+    "code": "RIX",
+    "city": "Starptautiskā Lidosta",
+    "name": "Starptautiskā Lidosta “rīga” Riga Latvia"
+  },
+  {
+    "code": "RJL",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Logroño-agoncillo Logroño Agoncillo Spain"
+  },
+  {
+    "code": "RKV",
+    "city": "Reykjavík",
+    "name": "Reykjavík Airport Iceland"
+  },
+  {
+    "code": "RLG",
+    "city": "Flughafen Rostock–laage",
+    "name": "Flughafen Rostock–laage Rostock Laage Germany"
+  },
+  {
+    "code": "RMI",
+    "city": "Aeroporto Internazionale",
+    "name": "Aeroporto Internazionale Federico Fellini International Airport Rimini San Marino Italy"
+  },
+  {
+    "code": "RMS",
+    "city": "Ramstein Air",
+    "name": "Ramstein Air Base Ramstein-miesenbach Kaiserslautern Germany"
+  },
+  {
+    "code": "RNO",
+    "city": "Reno–tahoe International",
+    "name": "Reno–tahoe International Airport Reno Tahoe Nevada Nv USA"
+  },
+  {
+    "code": "RNS",
+    "city": "Aéroport de",
+    "name": "Aéroport de Rennes - Saint-jacques France"
+  },
+  {
+    "code": "RNT",
+    "city": "Renton Municipal",
+    "name": "Renton Municipal Airport Washington Wa USA"
+  },
+  {
+    "code": "ROA",
+    "city": "Roanoke–blacksburg Regional",
+    "name": "Roanoke–blacksburg Regional Airport Roanoke Virginia Va USA"
+  },
+  {
+    "code": "ROB",
+    "city": "Roberts International",
+    "name": "Roberts International Airport Monrovia Liberia"
+  },
+  {
+    "code": "ROC",
+    "city": "Frederick Douglass Greater Rochester International",
+    "name": "Frederick Douglass Greater Rochester International Airport New York Ny USA"
+  },
+  {
+    "code": "ROR",
+    "city": "Roman Tmetuchl International",
+    "name": "Roman Tmetuchl International Airport Melekeok Airai Palau"
+  },
+  {
+    "code": "ROS",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Rosario Islas Malvinas Funes Santa Fe Argentina"
+  },
+  {
+    "code": "ROV",
+    "city": "Aeroport Rostov-na-donu",
+    "name": "Aeroport Rostov-na-donu Rostov-on-don Russia"
+  },
+  {
+    "code": "ROW",
+    "city": "Roswell International",
+    "name": "Roswell International Air Center New Mexico Nm USA"
+  },
+  {
+    "code": "RPR",
+    "city": "Swami Vivekananda International",
+    "name": "Swami Vivekananda International Airport Raipur Mana Chhattisgarh Ct India"
+  },
+  {
+    "code": "RRG",
+    "city": "Sir Gaëtan Duval",
+    "name": "Sir Gaëtan Duval Airport Plaine Corail Rodrigues Mauritius"
+  },
+  {
+    "code": "RST",
+    "city": "Rochester International",
+    "name": "Rochester International Airport Minnesota Mn USA"
+  },
+  {
+    "code": "RSW",
+    "city": "Southwest Florida International",
+    "name": "Southwest Florida International Airport Fort Myers Fl USA"
+  },
+  {
+    "code": "RTM",
+    "city": "Rotterdam the Hague",
+    "name": "Rotterdam the Hague Airport Netherlands"
+  },
+  {
+    "code": "RUH",
+    "city": "Riyadh",
+    "name": "King Khalid International Airport Riyadh Saudi Arabia"
+  },
+  {
+    "code": "RUN",
+    "city": "Aéroport de",
+    "name": "Aéroport de la Réunion Roland Garros Saint-denis France"
+  },
+  {
+    "code": "RVN",
+    "city": "Rovaniemen Lentoasema",
+    "name": "Rovaniemen Lentoasema Rovaniemi Finland"
+  },
+  {
+    "code": "RYG",
+    "city": "Moss",
+    "name": "Moss Lufthavn, Rygge Norway"
+  },
+  {
+    "code": "RYK",
+    "city": "Shaikh Zayed International",
+    "name": "Shaikh Zayed International Airport Rahim Yar Khan Punjab Pb Pakistan"
+  },
+  {
+    "code": "RZE",
+    "city": "Port Lotniczy",
+    "name": "Port Lotniczy Rzeszów-jasionka Rzeszów Jasionka Poland"
+  },
+  {
+    "code": "SAB",
+    "city": "Juancho E. Yrausquin",
+    "name": "Juancho E. Yrausquin Airport Saba Netherlands"
+  },
+  {
+    "code": "SAF",
+    "city": "Santa Fe Municipal",
+    "name": "Santa Fe Municipal Airport New Mexico Nm USA"
+  },
+  {
+    "code": "SAH",
+    "city": "Sana'a International",
+    "name": "Sana'a International Airport Yemen"
+  },
+  {
+    "code": "SAL",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Monseñor Óscar Arnulfo Romero International Airport San Salvador la Paz El"
+  },
+  {
+    "code": "SAN",
+    "city": "Lindbergh Field",
+    "name": "Lindbergh Field Diego California Ca USA"
+  },
+  {
+    "code": "SAT",
+    "city": "San Antonio International",
+    "name": "San Antonio International Airport Texas Tx USA"
+  },
+  {
+    "code": "SAV",
+    "city": "Savannah/hilton Head International",
+    "name": "Savannah/hilton Head International Airport Savannah Hilton Island Georgia Ga USA"
+  },
+  {
+    "code": "SAW",
+    "city": "Istanbul Sabiha",
+    "name": "Sabiha Gökçen Uluslararası Havalimanı Istanbul Turkey"
+  },
+  {
+    "code": "SBA",
+    "city": "Santa Barbara Municipal",
+    "name": "Santa Barbara Municipal Airport California Ca USA"
+  },
+  {
+    "code": "SBD",
+    "city": "San Bernardino International",
+    "name": "San Bernardino International Airport California Ca USA"
+  },
+  {
+    "code": "SBN",
+    "city": "South Bend International",
+    "name": "South Bend International Airport Indiana In USA"
+  },
+  {
+    "code": "SBP",
+    "city": "San Luis Obispo County Regional",
+    "name": "San Luis Obispo County Regional Airport California Ca USA"
+  },
+  {
+    "code": "SCE",
+    "city": "University Park",
+    "name": "University Park Airport State College Bellefonte Pennsylvania Pa USA"
+  },
+  {
+    "code": "SCK",
+    "city": "Stockton Metropolitan",
+    "name": "Stockton Metropolitan Airport California Ca USA"
+  },
+  {
+    "code": "SCL",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Comodoro Arturo Merino Benítez International Airport Santiago Pudahuel Chile"
+  },
+  {
+    "code": "SCO",
+    "city": "International",
+    "name": "International Airport Aktau Kazakhstan"
+  },
+  {
+    "code": "SCQ",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional de Santiago Compostela Galicia Spain"
+  },
+  {
+    "code": "SCT",
+    "city": "Socotra",
+    "name": "Socotra Airport Hadibu Yemen"
+  },
+  {
+    "code": "SDF",
+    "city": "Louisville Muhammad Ali International",
+    "name": "Louisville Muhammad Ali International Airport Kentucky Ky USA"
+  },
+  {
+    "code": "SDQ",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Las Américas International Airport Santo Domingo Punta Caucedo Dominican Republic"
+  },
+  {
+    "code": "SDR",
+    "city": "Aeropuerto Seve",
+    "name": "Aeropuerto Seve Ballesteros - Santander Airport Maliaño Spain"
+  },
+  {
+    "code": "SDU",
+    "city": "Aeroporto Santos",
+    "name": "Aeroporto Santos Dumont Airport Rio de Janeiro Rj Brazil"
+  },
+  {
+    "code": "SEA",
+    "city": "Seattle–tacoma International",
+    "name": "Seattle–tacoma International Airport Seattle Tacoma Washington Wa USA"
+  },
+  {
+    "code": "SEN",
+    "city": "London Southend",
+    "name": "London Southend Airport England UK"
+  },
+  {
+    "code": "SEX",
+    "city": "Sembach Kaserne",
+    "name": "Sembach Kaserne Germany"
+  },
+  {
+    "code": "SFA",
+    "city": "Aéroport International",
+    "name": "Aéroport International de Sfax-thyna Sfax Thyna Tunisia"
+  },
+  {
+    "code": "SFJ",
+    "city": "Søndre Strømfjord",
+    "name": "Søndre Strømfjord Lufthavn Kangerlussuaq Qeqqata Greenland Denmark"
+  },
+  {
+    "code": "SFN",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Santa Fe - Sauce Viejo Airport Argentina"
+  },
+  {
+    "code": "SFO",
+    "city": "San Francisco International",
+    "name": "San Francisco International Airport California Ca USA"
+  },
+  {
+    "code": "SGC",
+    "city": "Surgut International",
+    "name": "Surgut International Airport Russia"
+  },
+  {
+    "code": "SGF",
+    "city": "Springfield–branson National",
+    "name": "Springfield–branson National Airport Springfield Missouri Mo USA"
+  },
+  {
+    "code": "SGN",
+    "city": "Sân Bay",
+    "name": "Sân Bay Quốc Tế Tân Sơn Nhất Ho Chi Minh City Saigon Vietnam"
+  },
+  {
+    "code": "SGU",
+    "city": "St. George Regional",
+    "name": "St. George Regional Airport Utah Ut USA"
+  },
+  {
+    "code": "SGY",
+    "city": "Skagway",
+    "name": "Skagway Airport Alaska Ak USA"
+  },
+  {
+    "code": "SHA",
+    "city": "Shanghai Hongqiao International",
+    "name": "Shanghai Hongqiao International Airport China"
+  },
+  {
+    "code": "SHD",
+    "city": "Shenandoah Valley Regional",
+    "name": "Shenandoah Valley Regional Airport Staunton Weyers Cave Virginia Va USA"
+  },
+  {
+    "code": "SHE",
+    "city": "Shenyang Taoxian International",
+    "name": "Shenyang Taoxian International Airport Liaoning China"
+  },
+  {
+    "code": "SHV",
+    "city": "Shreveport Regional",
+    "name": "Shreveport Regional Airport Louisiana la USA"
+  },
+  {
+    "code": "SID",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Amílcar Cabral International Airport Espargos Sal Island Cape Verde"
+  },
+  {
+    "code": "SIN",
+    "city": "Singapore Changi",
+    "name": "Singapore Changi Airport"
+  },
+  {
+    "code": "SIP",
+    "city": "Simferopol International",
+    "name": "Simferopol International Airport Russia"
+  },
+  {
+    "code": "SIR",
+    "city": "Aéroport de",
+    "name": "Aéroport de Sion Rhone Valley Switzerland"
+  },
+  {
+    "code": "SJC",
+    "city": "Norman Y. Mineta San Jose International",
+    "name": "Norman Y. Mineta San Jose International Airport California Ca USA"
+  },
+  {
+    "code": "SJD",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional de Los Cabos International Airport San José del Cabo Lucas Baja California Sur Bs Mexico"
+  },
+  {
+    "code": "SJJ",
+    "city": "Sarajevo International",
+    "name": "Sarajevo International Airport Butmir Bosnia and Herzegovina"
+  },
+  {
+    "code": "SJK",
+    "city": "Aeroporto de",
+    "name": "Aeroporto de São José Dos Campos-professor Urbano Ernesto Stumpf Airport Campos Sao Paulo Sp Brazil"
+  },
+  {
+    "code": "SJO",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Juan Santamaría San José Alajuela Costa Rica"
+  },
+  {
+    "code": "SJU",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Luis Muñoz Marín San Juan Carolina Puerto Rico USA"
+  },
+  {
+    "code": "SJZ",
+    "city": "Aérodromo de",
+    "name": "Aérodromo de São Jorge Velas Azores Portugal"
+  },
+  {
+    "code": "SKB",
+    "city": "Robert L. Bradshaw International",
+    "name": "Robert L. Bradshaw International Airport Basseterre Saint Kitts and Nevis"
+  },
+  {
+    "code": "SKG",
+    "city": "Thessaloniki International",
+    "name": "Thessaloniki International Airport, Macedonia Mikra Greece"
+  },
+  {
+    "code": "SKP",
+    "city": "Aerodrom Skopje",
+    "name": "Aerodrom Skopje Petrovec Macedonia"
+  },
+  {
+    "code": "SKT",
+    "city": "Sialkot International",
+    "name": "Sialkot International Airport Punjab Pakistan"
+  },
+  {
+    "code": "SKZ",
+    "city": "Sukkur",
+    "name": "Sukkur Airport Sindh Sn Pakistan"
+  },
+  {
+    "code": "SLC",
+    "city": "Salt Lake City International",
+    "name": "Salt Lake City International Airport Utah Ut USA"
+  },
+  {
+    "code": "SLE",
+    "city": "Salem Municipal",
+    "name": "Salem Municipal Airport - Mcnary Field Oregon Or USA"
+  },
+  {
+    "code": "SLK",
+    "city": "Adirondack Regional",
+    "name": "Adirondack Regional Airport Saranac Lake Placid New York Ny USA"
+  },
+  {
+    "code": "SLM",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Salamanca-matacán Salamanca Matacán Castile and León Spain"
+  },
+  {
+    "code": "SLN",
+    "city": "Salina Regional",
+    "name": "Salina Regional Airport Kansas Ks USA"
+  },
+  {
+    "code": "SLU",
+    "city": "George F. L. Charles",
+    "name": "George F. L. Charles Airport Castries Saint Lucia"
+  },
+  {
+    "code": "SLZ",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional Marechal Cunha Machado International Airport São Luís Maranhão Ma Brazil"
+  },
+  {
+    "code": "SMA",
+    "city": "Aeroporto de",
+    "name": "Aeroporto de Santa Maria Vila Do Porto Azores Portugal"
+  },
+  {
+    "code": "SMF",
+    "city": "Sacramento International",
+    "name": "Sacramento International Airport California Ca USA"
+  },
+  {
+    "code": "SMI",
+    "city": "Samos International",
+    "name": "Samos International Airport, Aristarchos of Island Greece"
+  },
+  {
+    "code": "SNA",
+    "city": "John Wayne International",
+    "name": "John Wayne International Airport Orange County Santa Ana California Ca USA"
+  },
+  {
+    "code": "SNN",
+    "city": "Shannon",
+    "name": "Shannon Airport Ireland"
+  },
+  {
+    "code": "SNR",
+    "city": "Aéroport de",
+    "name": "Aéroport de Saint-nazaire - Montoir Airport France"
+  },
+  {
+    "code": "SOB",
+    "city": "Hévíz-balaton Repülőtér Heviz-balaton",
+    "name": "Hévíz-balaton Repülőtér Heviz-balaton Airport Balaton Sarmellek Hungary"
+  },
+  {
+    "code": "SOC",
+    "city": "Bandar Udara Internasional Adisumarmo International",
+    "name": "Bandar Udara Internasional Adisumarmo International Airport Surakarta Ngemplak Indonesia"
+  },
+  {
+    "code": "SOF",
+    "city": "Letishte Sofiya",
+    "name": "Letishte Sofiya Sofia Vrazhdebna Bulgaria"
+  },
+  {
+    "code": "SOQ",
+    "city": "Bandar Udara Domine Edward Osok",
+    "name": "Bandar Udara Domine Edward Osok Airport Sorong West Papua Indonesia"
+  },
+  {
+    "code": "SOU",
+    "city": "Southampton",
+    "name": "Southampton Airport Eastleigh England UK"
+  },
+  {
+    "code": "SOY",
+    "city": "Stronsay",
+    "name": "Stronsay Airport Orkney Islands Scotland UK"
+  },
+  {
+    "code": "SPC",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de la Palma Airport Canary Islands Spain"
+  },
+  {
+    "code": "SPG",
+    "city": "Albert Whitted",
+    "name": "Albert Whitted Airport Saint Petersburg Tampa Bay Florida Fl USA"
+  },
+  {
+    "code": "SPN",
+    "city": "Saipan International",
+    "name": "Saipan International Airport Northern Mariana Islands USA"
+  },
+  {
+    "code": "SPU",
+    "city": "Zračna Luka",
+    "name": "Zračna Luka Split Kastela Croatia"
+  },
+  {
+    "code": "SQL",
+    "city": "San Carlos",
+    "name": "San Carlos Airport California Ca USA"
+  },
+  {
+    "code": "SRE",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Juana Azurduy de Padilla International Airport Sucre Bolivia"
+  },
+  {
+    "code": "SRG",
+    "city": "Bandar Udara",
+    "name": "Bandar Udara Internasional Ahmad Yani Semarang East Java Indonesia"
+  },
+  {
+    "code": "SRQ",
+    "city": "Sarasota–bradenton International",
+    "name": "Sarasota–bradenton International Airport Sarasota Bradenton Florida Fl USA"
+  },
+  {
+    "code": "SSA",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional de Salvador-deputado Luís Eduardo Magalhães Deputado Salvador Bahia Ba Brazil"
+  },
+  {
+    "code": "SSF",
+    "city": "Stinson Municipal",
+    "name": "Stinson Municipal Airport San Antonio Texas Tx USA"
+  },
+  {
+    "code": "SSG",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Malabo Bioko Equatorial Guinea"
+  },
+  {
+    "code": "SSH",
+    "city": "Sharm El-sheikh International",
+    "name": "Sharm El-sheikh International Airport Egypt"
+  },
+  {
+    "code": "STI",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional del Cibao Santiago de Los Caballeros Dominican Republic"
+  },
+  {
+    "code": "STL",
+    "city": "Lambert–st. Louis International",
+    "name": "Lambert–st. Louis International Airport St. Missouri Mo USA"
+  },
+  {
+    "code": "STM",
+    "city": "Aeroporto de",
+    "name": "Aeroporto de Santarém–maestro Wilson Fonseca Santarem-maestro Airport Santarém Pará Pa Brazil"
+  },
+  {
+    "code": "STN",
+    "city": "London Stansted",
+    "name": "London Stansted Airport Mountfitchet England UK"
+  },
+  {
+    "code": "STP",
+    "city": "St. Paul Downtown",
+    "name": "St. Paul Downtown Airport Saint Twin Cities Minnesota Mn USA"
+  },
+  {
+    "code": "STR",
+    "city": "Flughafen Stuttgart",
+    "name": "Flughafen Stuttgart - Manfred Rommel Germany"
+  },
+  {
+    "code": "STS",
+    "city": "Charles M. Schulz - Sonoma County",
+    "name": "Charles M. Schulz - Sonoma County Airport Santa Rosa California Ca USA"
+  },
+  {
+    "code": "STT",
+    "city": "Cyril E. King",
+    "name": "Cyril E. King Airport Saint Thomas St. Virgin Islands USA"
+  },
+  {
+    "code": "STX",
+    "city": "Henry E. Rohlsen",
+    "name": "Henry E. Rohlsen Airport Saint Croix St. Virgin Islands USA"
+  },
+  {
+    "code": "SUB",
+    "city": "Bandar Udara Internasional Juanda International",
+    "name": "Bandar Udara Internasional Juanda International Airport Surabaya Sidoarjo East Java Indonesia"
+  },
+  {
+    "code": "SUN",
+    "city": "Friedman Memorial",
+    "name": "Friedman Memorial Airport Hailey Valley Idaho Id USA"
+  },
+  {
+    "code": "SUV",
+    "city": "Nausori International",
+    "name": "Nausori International Airport Suva Viti Levu Fiji"
+  },
+  {
+    "code": "SUX",
+    "city": "Sioux Gateway",
+    "name": "Sioux Gateway Airport City Iowa Ia USA"
+  },
+  {
+    "code": "SVD",
+    "city": "E. T. Joshua",
+    "name": "E. T. Joshua Airport Kingstown Arnos Vale Saint Vincent and the Grenadines"
+  },
+  {
+    "code": "SVG",
+    "city": "Stavanger",
+    "name": "Stavanger Lufthavn, Sola Norway"
+  },
+  {
+    "code": "SVO",
+    "city": "Sheremetyevo International",
+    "name": "Sheremetyevo International Airport Moscow Khimki Russia"
+  },
+  {
+    "code": "SVQ",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Sevilla Seville Spain"
+  },
+  {
+    "code": "SVX",
+    "city": "Koltsovo International",
+    "name": "Koltsovo International Airport Yekaterinburg Sverdlovsk Russia"
+  },
+  {
+    "code": "SWF",
+    "city": "Stewart International",
+    "name": "Stewart International Airport Newburgh Hudson Valley New York Ny USA"
+  },
+  {
+    "code": "SXB",
+    "city": "Aéroport International",
+    "name": "Aéroport International de Strasbourg Entzheim France"
+  },
+  {
+    "code": "SXF",
+    "city": "Flughafen Berlin-schönefeld",
+    "name": "Flughafen Berlin-schönefeld Berlin Schönefeld Germany"
+  },
+  {
+    "code": "SXL",
+    "city": "Sligo",
+    "name": "Sligo Airport Strandhill Ireland"
+  },
+  {
+    "code": "SXM",
+    "city": "Princess Juliana International",
+    "name": "Princess Juliana International Airport Simpson Bay Sint Maarten Saint Martin Netherlands"
+  },
+  {
+    "code": "SXR",
+    "city": "Srinagar International",
+    "name": "Srinagar International Airport Jammu and Kashmir Jk India"
+  },
+  {
+    "code": "SYD",
+    "city": "Sydney (kingsford Smith)",
+    "name": "Sydney (kingsford Smith) Airport New South Wales Nsw Australia"
+  },
+  {
+    "code": "SYR",
+    "city": "Syracuse Hancock International",
+    "name": "Syracuse Hancock International Airport New York Ny USA"
+  },
+  {
+    "code": "SYX",
+    "city": "Sanya Phoenix International",
+    "name": "Sanya Phoenix International Airport Hainan China"
+  },
+  {
+    "code": "SYZ",
+    "city": "Shiraz International",
+    "name": "Shiraz International Airport Iran"
+  },
+  {
+    "code": "SZB",
+    "city": "Lapangan Terbang Sultan Abdul Aziz Shah",
+    "name": "Lapangan Terbang Sultan Abdul Aziz Shah Airport Subang Kuala Lumpur Selangor Malaysia"
+  },
+  {
+    "code": "SZG",
+    "city": "Salzburg",
+    "name": "Salzburg Airport W. A. Mozart Austria"
+  },
+  {
+    "code": "SZX",
+    "city": "Shenzhen Bao'an International",
+    "name": "Shenzhen Bao'an International Airport Guangdong China"
+  },
+  {
+    "code": "TAB",
+    "city": "A.n.r. Robinson International",
+    "name": "A.n.r. Robinson International Airport Scarborough Crown Point Trinidad and Tobago"
+  },
+  {
+    "code": "TAK",
+    "city": "Takamatsu",
+    "name": "Takamatsu Airport Japan"
+  },
+  {
+    "code": "TAO",
+    "city": "Qingdao Liuting International",
+    "name": "Qingdao Liuting International Airport Shandong Chengyang District China"
+  },
+  {
+    "code": "TAS",
+    "city": "Toshkent Xalqaro",
+    "name": "Toshkent Xalqaro Aeroporti Tashkent Uzbekistan"
+  },
+  {
+    "code": "TBB",
+    "city": "Sân Bay Đông Tác Dong Tac",
+    "name": "Sân Bay Đông Tác Dong Tac Airport Tuy Hoa Vietnam"
+  },
+  {
+    "code": "TBP",
+    "city": "Aeropuerto Capitán",
+    "name": "Aeropuerto Capitán Fap Pedro Canga Rodríguez Airport Tumbes Peru"
+  },
+  {
+    "code": "TBS",
+    "city": "Tbilisi International",
+    "name": "Tbilisi International Airport Georgia"
+  },
+  {
+    "code": "TBZ",
+    "city": "Tabriz International",
+    "name": "Tabriz International Airport Iran"
+  },
+  {
+    "code": "TCQ",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Coronel Fap Carlos Ciriani Santa Rosa International Airport Tacna Peru"
+  },
+  {
+    "code": "TER",
+    "city": "Base Aérea",
+    "name": "Base Aérea Das Lajes Field Terceira Azores Portugal"
+  },
+  {
+    "code": "TEX",
+    "city": "Telluride Regional",
+    "name": "Telluride Regional Airport Colorado Co USA"
+  },
+  {
+    "code": "TFN",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Tenerife Norte Santa Cruz Canary Islands Spain"
+  },
+  {
+    "code": "TFS",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Tenerife Sur Reina Sofía Playa Las Américas Canary Islands Spain"
+  },
+  {
+    "code": "TGD",
+    "city": "Podgorica",
+    "name": "Podgorica Airport Golubovci Montenegro"
+  },
+  {
+    "code": "TGI",
+    "city": "Aeropuerto Tingo",
+    "name": "Aeropuerto Tingo María Huánuco Peru"
+  },
+  {
+    "code": "TGM",
+    "city": "Aeroportul Transilvania Târgu Mureș",
+    "name": "Aeroportul Transilvania Târgu Mureș Airport Vidrasău Romania"
+  },
+  {
+    "code": "TGU",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Toncontín International Airport Tegucigalpa Honduras"
+  },
+  {
+    "code": "THE",
+    "city": "Aeroporto de",
+    "name": "Aeroporto de Teresina–senador Petrônio Portella Teresina Airport Piauí Pi Brazil"
+  },
+  {
+    "code": "THR",
+    "city": "Mehrabad International",
+    "name": "Mehrabad International Airport Tehran Iran"
+  },
+  {
+    "code": "TIA",
+    "city": "Tirana International",
+    "name": "Tirana International Airport Nënë Tereza Rinas Albania"
+  },
+  {
+    "code": "TIF",
+    "city": "Ta'if Regional",
+    "name": "Ta'if Regional Airport Mecca Province Saudi Arabia"
+  },
+  {
+    "code": "TIJ",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional de Tijuana Baja California Mexico"
+  },
+  {
+    "code": "TIP",
+    "city": "Tripoli International",
+    "name": "Tripoli International Airport Qasr Bin Ghashir Libya"
+  },
+  {
+    "code": "TIV",
+    "city": "Aerodrom Tivat",
+    "name": "Aerodrom Tivat Airport Montenegro"
+  },
+  {
+    "code": "TJM",
+    "city": "Roshchino International",
+    "name": "Roshchino International Airport Tyumen Russia"
+  },
+  {
+    "code": "TKK",
+    "city": "Chuuk International",
+    "name": "Chuuk International Airport Weno Truk Micronesia"
+  },
+  {
+    "code": "TLL",
+    "city": "Lennart Meri",
+    "name": "Lennart Meri Tallinna Lennujaam Tallinn Estonia"
+  },
+  {
+    "code": "TLS",
+    "city": "Aéroport de",
+    "name": "Aéroport de Toulouse–blagnac Toulouse Blagnac France"
+  },
+  {
+    "code": "TLV",
+    "city": "Ben Gurion",
+    "name": "Ben Gurion Airport Tel Aviv Israel"
+  },
+  {
+    "code": "TMC",
+    "city": "Bandar Udara Tambolaka",
+    "name": "Bandar Udara Tambolaka Airport Indonesia"
+  },
+  {
+    "code": "TMS",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional de São Tomé Sao Tome and Príncipe"
+  },
+  {
+    "code": "TNA",
+    "city": "Jinan Yaoqiang International",
+    "name": "Jinan Yaoqiang International Airport Shandong China"
+  },
+  {
+    "code": "TNG",
+    "city": "Tangier Ibn Battouta",
+    "name": "Tangier Ibn Battouta Airport Morocco"
+  },
+  {
+    "code": "TNM",
+    "city": "Aeropuerto Teniente",
+    "name": "Aeropuerto Teniente Rodolfo Marsh Airport King George Island Villa Las Estrellas Antarctica"
+  },
+  {
+    "code": "TNR",
+    "city": "Ivato International",
+    "name": "Ivato International Airport Antananarivo Madagascar"
+  },
+  {
+    "code": "TNT",
+    "city": "Dade-collier Training and Transition",
+    "name": "Dade-collier Training and Transition Airport Miami Fort Lauderdale Florida Fl USA"
+  },
+  {
+    "code": "TOL",
+    "city": "Toledo Express",
+    "name": "Toledo Express Airport Ohio Oh USA"
+  },
+  {
+    "code": "TOS",
+    "city": "Tromsø",
+    "name": "Tromsø Lufthavn, Langnes Langes Norway"
+  },
+  {
+    "code": "TPA",
+    "city": "Tampa International",
+    "name": "Tampa International Airport Florida Fl USA"
+  },
+  {
+    "code": "TPE",
+    "city": "Taiwan Taoyuan International",
+    "name": "Taiwan Taoyuan International Airport Taipei City"
+  },
+  {
+    "code": "TPP",
+    "city": "Aeropuerto Cadete",
+    "name": "Aeropuerto Cadete Fap Guillermo del Castillo Paredes Airport Tarapoto San Martín Peru"
+  },
+  {
+    "code": "TRD",
+    "city": "Trondheim",
+    "name": "Trondheim Lufthavn, Værnes Norway"
+  },
+  {
+    "code": "TRE",
+    "city": "Port-adhair Thirioah",
+    "name": "Port-adhair Thirioah Tiree Balemartine Scotland UK"
+  },
+  {
+    "code": "TRF",
+    "city": "Sandefjord",
+    "name": "Sandefjord Lufthavn, Torp Norway"
+  },
+  {
+    "code": "TRI",
+    "city": "Tri-cities Regional",
+    "name": "Tri-cities Regional Airport Blountville Bristol Tennessee Tn USA"
+  },
+  {
+    "code": "TRN",
+    "city": "Aeroporto di",
+    "name": "Aeroporto di Torino Sandro Pertini Turin Italy"
+  },
+  {
+    "code": "TRS",
+    "city": "Aeroporto di",
+    "name": "Aeroporto di Trieste–friuli Venezia Giulia Trieste Ronchi Dei Legionari Italy"
+  },
+  {
+    "code": "TRU",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Capitán Fap Carlos Martínez de Pinillos International Airport Trujillo la Libertad Peru"
+  },
+  {
+    "code": "TRV",
+    "city": "Trivandrum International",
+    "name": "Trivandrum International Airport Thiruvananthapuram Kerala Kl India"
+  },
+  {
+    "code": "TRW",
+    "city": "Bonriki International",
+    "name": "Bonriki International Airport South Tarawa Kiribati"
+  },
+  {
+    "code": "TSA",
+    "city": "Taipei Songshan",
+    "name": "Taipei Songshan Airport District Taiwan"
+  },
+  {
+    "code": "TSN",
+    "city": "Tianjin Binhai International",
+    "name": "Tianjin Binhai International Airport China"
+  },
+  {
+    "code": "TSR",
+    "city": "Aeroportul Internațional",
+    "name": "Aeroportul Internațional „traian Vuia” Timișoara Romania"
+  },
+  {
+    "code": "TTN",
+    "city": "Trenton–mercer",
+    "name": "Trenton–mercer Airport Trenton Ewing Township New Jersey Nj USA"
+  },
+  {
+    "code": "TUL",
+    "city": "Tulsa International",
+    "name": "Tulsa International Airport Oklahoma Ok USA"
+  },
+  {
+    "code": "TUN",
+    "city": "Tunis–carthage International",
+    "name": "Tunis–carthage International Airport Tunis Carthage Tunisia"
+  },
+  {
+    "code": "TUS",
+    "city": "Tucson International",
+    "name": "Tucson International Airport Arizona Az USA"
+  },
+  {
+    "code": "TVC",
+    "city": "Cherry Capital",
+    "name": "Cherry Capital Airport Traverse City Michigan Mi USA"
+  },
+  {
+    "code": "TXL",
+    "city": "Flughafen Berlin-tegel",
+    "name": "Flughafen Berlin-tegel “otto Lilienthal” Berlin Tegel Germany"
+  },
+  {
+    "code": "TYL",
+    "city": "Aeropuerto Capitán",
+    "name": "Aeropuerto Capitán Fap Víctor Montes Arias Talara Piura Peru"
+  },
+  {
+    "code": "TYS",
+    "city": "Mcghee Tyson",
+    "name": "Mcghee Tyson Airport Knoxville Alcoa Tennessee Tn USA"
+  },
+  {
+    "code": "TZL",
+    "city": "Tuzla International",
+    "name": "Tuzla International Airport Zivinice Bosnia and Herzegovina"
+  },
+  {
+    "code": "UFA",
+    "city": "International",
+    "name": "International Airport Bashkortostan Russia"
+  },
+  {
+    "code": "UIH",
+    "city": "Sân Bay Phù Cát Phu Cat",
+    "name": "Sân Bay Phù Cát Phu Cat Airport Qui Nhon Vietnam"
+  },
+  {
+    "code": "UIO",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Mariscal Sucre International Airport Quito Tababela Pichincha Ecuador"
+  },
+  {
+    "code": "UKK",
+    "city": "Oskemen International",
+    "name": "Oskemen International Airport Ust-kamenogorsk Kazakhstan"
+  },
+  {
+    "code": "ULN",
+    "city": "Chinggis Khaan International",
+    "name": "Chinggis Khaan International Airport Ulaanbaatar Mongolia"
+  },
+  {
+    "code": "UPG",
+    "city": "Bandar Udara",
+    "name": "Bandar Udara Internasional Sultan Hasanuddin Makassar South Sulawesi Indonesia"
+  },
+  {
+    "code": "URA",
+    "city": "Oral Ak Zhol",
+    "name": "Oral Ak Zhol Airport Uralsk Kazakhstan"
+  },
+  {
+    "code": "USH",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional de Ushuaia Malvinas Argentinas Argentina"
+  },
+  {
+    "code": "USM",
+    "city": "Samui International",
+    "name": "Samui International Airport Ko Thailand"
+  },
+  {
+    "code": "UTH",
+    "city": "Udon Thani International",
+    "name": "Udon Thani International Airport Thailand"
+  },
+  {
+    "code": "UUD",
+    "city": "Baikal International",
+    "name": "Baikal International Airport Ulan-ude Russia"
+  },
+  {
+    "code": "UUS",
+    "city": "Yuzhno-sakhalinsk",
+    "name": "Yuzhno-sakhalinsk Airport Russia"
+  },
+  {
+    "code": "UVF",
+    "city": "Hewanorra International",
+    "name": "Hewanorra International Airport Vieux Fort Saint Lucia"
+  },
+  {
+    "code": "VAM",
+    "city": "Villa International",
+    "name": "Villa International Airport Maamigili Alif Dhaal Atoll Maldives"
+  },
+  {
+    "code": "VAR",
+    "city": "Letishte Varna",
+    "name": "Letishte Varna Aksakovo Bulgaria"
+  },
+  {
+    "code": "VAV",
+    "city": "Vava’u International",
+    "name": "Vava’u International Airport Vava'u Tonga"
+  },
+  {
+    "code": "VCA",
+    "city": "Sân Bay",
+    "name": "Sân Bay Quốc Tế Cần Thơ Can Tho Vietnam"
+  },
+  {
+    "code": "VCE",
+    "city": "Aeroporto di",
+    "name": "Aeroporto di Venezia Marco Polo Venice Tessera Italy"
+  },
+  {
+    "code": "VCL",
+    "city": "Sân Bay Chu Lai",
+    "name": "Sân Bay Chu Lai Airport Tam Ky Vietnam"
+  },
+  {
+    "code": "VCP",
+    "city": "Aeroporto Internacional",
+    "name": "Aeroporto Internacional de Viracopos/campinas Viracopos International Airport Campinas São Paulo Sp Brazil"
+  },
+  {
+    "code": "VCS",
+    "city": "Sân Bay",
+    "name": "Sân Bay Côn Đảo Con Dao Son Island Vietnam"
+  },
+  {
+    "code": "VCV",
+    "city": "Southern California Logistics",
+    "name": "Southern California Logistics Airport Victorville Ca USA"
+  },
+  {
+    "code": "VDE",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de El Hierro Valverde Canary Islands Spain"
+  },
+  {
+    "code": "VDH",
+    "city": "Sân Bay",
+    "name": "Sân Bay Đồng Hới Dong Hoi Vietnam"
+  },
+  {
+    "code": "VER",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional de Veracruz International Airport Ve Mexico"
+  },
+  {
+    "code": "VGO",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Vigo Peinador Spain"
+  },
+  {
+    "code": "VGT",
+    "city": "North Las Vegas",
+    "name": "North Las Vegas Airport Nevada Nv USA"
+  },
+  {
+    "code": "VIE",
+    "city": "Flughafen Wien-schwechat",
+    "name": "Flughafen Wien-schwechat Vienna Schwechat Austria"
+  },
+  {
+    "code": "VII",
+    "city": "Sân Bay",
+    "name": "Sân Bay Vinh Vietnam"
+  },
+  {
+    "code": "VIX",
+    "city": "Aeroporto de",
+    "name": "Aeroporto de Vitória-eurico Aguiar Salles Vitória Espírito Santo Es Brazil"
+  },
+  {
+    "code": "VKG",
+    "city": "Sân Bay",
+    "name": "Sân Bay Rạch Giá Rach Gia Vietnam"
+  },
+  {
+    "code": "VKO",
+    "city": "Vnukovo International",
+    "name": "Vnukovo International Airport Moscow Russia"
+  },
+  {
+    "code": "VLC",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Valencia Manises Spain"
+  },
+  {
+    "code": "VLI",
+    "city": "Bauerfield International",
+    "name": "Bauerfield International Airport Port Vila Vanuatu"
+  },
+  {
+    "code": "VLL",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Valladolid Villanubla Castile and Leon Spain"
+  },
+  {
+    "code": "VLN",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Arturo Michelena Valencia Venezuela"
+  },
+  {
+    "code": "VNO",
+    "city": "Tarptautinis Vilniaus",
+    "name": "Tarptautinis Vilniaus Oro Uostas Vilnius Lithuania"
+  },
+  {
+    "code": "VNS",
+    "city": "Lal Bahadur Shastri International",
+    "name": "Lal Bahadur Shastri International Airport Varanasi Benares Utter Pradesh Up India"
+  },
+  {
+    "code": "VNY",
+    "city": "Van Nuys",
+    "name": "Van Nuys Airport Los Angeles California Ca USA"
+  },
+  {
+    "code": "VOG",
+    "city": "Volgograd International",
+    "name": "Volgograd International Airport Russia"
+  },
+  {
+    "code": "VOZ",
+    "city": "Voronezh-chertovitskoye International",
+    "name": "Voronezh-chertovitskoye International Airport Voronezh Lipetsk Russia"
+  },
+  {
+    "code": "VPS",
+    "city": "Destin–fort Walton Beach",
+    "name": "Destin–fort Walton Beach Airport Fort Destin Florida Fl USA"
+  },
+  {
+    "code": "VRA",
+    "city": "Juan Gualberto Gómez",
+    "name": "Juan Gualberto Gómez Airport Varadero Matanzas Cuba"
+  },
+  {
+    "code": "VRN",
+    "city": "Aeroporto di",
+    "name": "Aeroporto di Verona-villafranca Airport Verona Villafranca Italy"
+  },
+  {
+    "code": "VTE",
+    "city": "Wattay International",
+    "name": "Wattay International Airport Vientiane Laos"
+  },
+  {
+    "code": "VTZ",
+    "city": "Visakhapatnam International",
+    "name": "Visakhapatnam International Airport Andhra Pradesh Ap India"
+  },
+  {
+    "code": "VVI",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Viru International Airport Santa Cruz de la Sierra Bolivia"
+  },
+  {
+    "code": "WAT",
+    "city": "Waterford",
+    "name": "Waterford Airport Ireland"
+  },
+  {
+    "code": "WAW",
+    "city": "Lotnisko Chopina",
+    "name": "Lotnisko Chopina W Warszawie Warsaw Chopin Poland"
+  },
+  {
+    "code": "WDH",
+    "city": "Hosea Kutako International",
+    "name": "Hosea Kutako International Airport Windhoek Namibia"
+  },
+  {
+    "code": "WGP",
+    "city": "Bandar Udara Umbu Mehang Kunda",
+    "name": "Bandar Udara Umbu Mehang Kunda Airport Waingapu Sumba East Nusa Tenggara Indonesia"
+  },
+  {
+    "code": "WLG",
+    "city": "Wellington International",
+    "name": "Wellington International Airport Rongotai New Zealand"
+  },
+  {
+    "code": "WMI",
+    "city": "Mazowiecki Port",
+    "name": "Mazowiecki Port Lotniczy Warsaw Nowy Dwór Poland"
+  },
+  {
+    "code": "WRO",
+    "city": "Port Lotniczy",
+    "name": "Port Lotniczy Wrocław Im. Mikołaja Kopernika Wroclaw Lower Silesian Voivodeship Poland"
+  },
+  {
+    "code": "WUH",
+    "city": "Wuhan Tianhe International",
+    "name": "Wuhan Tianhe International Airport China"
+  },
+  {
+    "code": "WUX",
+    "city": "Sunan Shuofang International",
+    "name": "Sunan Shuofang International Airport Wuxi Suzhou China"
+  },
+  {
+    "code": "XCH",
+    "city": "Christmas Island",
+    "name": "Christmas Island Airport Australia"
+  },
+  {
+    "code": "XFW",
+    "city": "Airbus-werk Hamburg-finkenwerder",
+    "name": "Airbus-werk Hamburg-finkenwerder Hamburg Finkenwerder Germany"
+  },
+  {
+    "code": "XIY",
+    "city": "Xi'an Xianyang International",
+    "name": "Xi'an Xianyang International Airport Shaanxi China"
+  },
+  {
+    "code": "XMN",
+    "city": "Xiamen Gaoqi International",
+    "name": "Xiamen Gaoqi International Airport Huli District China"
+  },
+  {
+    "code": "XNA",
+    "city": "Northwest Arkansas Regional",
+    "name": "Northwest Arkansas Regional Airport Fayetteville Springdale Ar USA"
+  },
+  {
+    "code": "XNN",
+    "city": "Xining Caojiabao",
+    "name": "Xining Caojiabao Airport Huzhu Qinghai China"
+  },
+  {
+    "code": "XRY",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Jerez la Frontera Spain"
+  },
+  {
+    "code": "YAM",
+    "city": "Sault Ste. Marie",
+    "name": "Sault Ste. Marie Airport Ontario On Canada"
+  },
+  {
+    "code": "YAP",
+    "city": "International",
+    "name": "International Airport Micronesia"
+  },
+  {
+    "code": "YAZ",
+    "city": "Tofino/long Beach",
+    "name": "Tofino/long Beach Airport Tofino Long British Columbia Bc Canada"
+  },
+  {
+    "code": "YCD",
+    "city": "Nanaimo",
+    "name": "Nanaimo Airport Cassidy British Columbia Bc Canada"
+  },
+  {
+    "code": "YDT",
+    "city": "Boundary Bay",
+    "name": "Boundary Bay Airport Vancouver Delta British Columbia Bc Canada"
+  },
+  {
+    "code": "YEG",
+    "city": "Edmonton International",
+    "name": "Edmonton International Airport Alberta Ab Canada"
+  },
+  {
+    "code": "YFB",
+    "city": "Iqaluit",
+    "name": "Iqaluit Airport Nunavut Nu Canada"
+  },
+  {
+    "code": "YGO",
+    "city": "Gods Lake Narrows",
+    "name": "Gods Lake Narrows Airport Manitoba Mb Canada"
+  },
+  {
+    "code": "YHK",
+    "city": "Gjoa Haven",
+    "name": "Gjoa Haven Airport Nunavut Nu Canada"
+  },
+  {
+    "code": "YHM",
+    "city": "John C. Munro Hamilton International",
+    "name": "John C. Munro Hamilton International Airport Toronto Ontario On Canada"
+  },
+  {
+    "code": "YHZ",
+    "city": "Halifax Stanfield International",
+    "name": "Halifax Stanfield International Airport Enfield Nova Scotia Ns Canada"
+  },
+  {
+    "code": "YIP",
+    "city": "Willow Run",
+    "name": "Willow Run Airport Ypsilanti Michigan Mi USA"
+  },
+  {
+    "code": "YJS",
+    "city": "Samjiyŏn",
+    "name": "Samjiyŏn Airport Ryanggang Korea North"
+  },
+  {
+    "code": "YLT",
+    "city": "Alert",
+    "name": "Alert Airport Nunavut Nu Canada"
+  },
+  {
+    "code": "YLW",
+    "city": "Kelowna International",
+    "name": "Kelowna International Airport British Columbia Bc Canada"
+  },
+  {
+    "code": "YMM",
+    "city": "Fort Mcmurray International",
+    "name": "Fort Mcmurray International Airport Alberta Ab Canada"
+  },
+  {
+    "code": "YMX",
+    "city": "Aéroport International",
+    "name": "Aéroport International Montréal–mirabel Montreal Mirabel Quebec Qc Canada"
+  },
+  {
+    "code": "YNB",
+    "city": "Prince Abdul Mohsin Bin Abdulaziz",
+    "name": "Prince Abdul Mohsin Bin Abdulaziz Airport Yanbu' al Bahr Madinah Province Saudi Arabia"
+  },
+  {
+    "code": "YNG",
+    "city": "Youngstown–warren Regional",
+    "name": "Youngstown–warren Regional Airport Youngstown Warren Ohio Oh USA"
+  },
+  {
+    "code": "YON",
+    "city": "Yongphulla",
+    "name": "Yongphulla Airport Trashigang Bhutan"
+  },
+  {
+    "code": "YOO",
+    "city": "Oshawa Executive",
+    "name": "Oshawa Executive Airport Toronto Ontario On Canada"
+  },
+  {
+    "code": "YOW",
+    "city": "Ottawa Macdonald–cartier International",
+    "name": "Ottawa Macdonald–cartier International Airport Ontario On Canada"
+  },
+  {
+    "code": "YQB",
+    "city": "Aéroport International",
+    "name": "Aéroport International Jean-lesage de Québec City Quebec Qc Canada"
+  },
+  {
+    "code": "YQM",
+    "city": "Greater Moncton International",
+    "name": "Greater Moncton International Airport Dieppe New Brunswick Nb Canada"
+  },
+  {
+    "code": "YQR",
+    "city": "Regina International",
+    "name": "Regina International Airport Saskatchewan Sk Canada"
+  },
+  {
+    "code": "YQT",
+    "city": "Thunder Bay International",
+    "name": "Thunder Bay International Airport Ontario On Canada"
+  },
+  {
+    "code": "YQX",
+    "city": "Gander International",
+    "name": "Gander International Airport Newfoundland and Labrador Nl Canada"
+  },
+  {
+    "code": "YQY",
+    "city": "Sydney/j.a. Douglas Mccurdy",
+    "name": "Sydney/j.a. Douglas Mccurdy Airport Sydney Nova Scotia Ns Canada"
+  },
+  {
+    "code": "YSB",
+    "city": "Sudbury",
+    "name": "Sudbury Airport Ontario On Canada"
+  },
+  {
+    "code": "YSJ",
+    "city": "Aéroport de",
+    "name": "Aéroport de Saint John New Brunswick Nb Canada"
+  },
+  {
+    "code": "YTZ",
+    "city": "Billy Bishop Toronto City",
+    "name": "Billy Bishop Toronto City Airport Division Ontario On Canada"
+  },
+  {
+    "code": "YUL",
+    "city": "Aéroport International",
+    "name": "Aéroport International Pierre-elliott-trudeau de Montréal Montréal–pierre Elliott Trudeau Montreal Dorval Quebec Qc Canada"
+  },
+  {
+    "code": "YUM",
+    "city": "Yuma International",
+    "name": "Yuma International Airport Arizona Az USA"
+  },
+  {
+    "code": "YVR",
+    "city": "Vancouver International",
+    "name": "Vancouver International Airport Richmond British Columbia Bc Canada"
+  },
+  {
+    "code": "YWG",
+    "city": "James Armstrong Richardson International",
+    "name": "James Armstrong Richardson International Airport Winnipeg Manitoba Mb Canada"
+  },
+  {
+    "code": "YXE",
+    "city": "Saskatoon John G. Diefenbaker International",
+    "name": "Saskatoon John G. Diefenbaker International Airport Saskatchewan Sk Canada"
+  },
+  {
+    "code": "YXH",
+    "city": "Medicine Hat",
+    "name": "Medicine Hat Airport Alberta Ab Canada"
+  },
+  {
+    "code": "YXU",
+    "city": "London International",
+    "name": "London International Airport Ontario On Canada"
+  },
+  {
+    "code": "YXX",
+    "city": "Abbotsford International",
+    "name": "Abbotsford International Airport British Columbia Bc Canada"
+  },
+  {
+    "code": "YXY",
+    "city": "Erik Nielsen Whitehorse International",
+    "name": "Erik Nielsen Whitehorse International Airport Yukon Yt Canada"
+  },
+  {
+    "code": "YYC",
+    "city": "Calgary International",
+    "name": "Calgary International Airport Alberta Ab Canada"
+  },
+  {
+    "code": "YYD",
+    "city": "Smithers Regional",
+    "name": "Smithers Regional Airport British Columbia Bc Canada"
+  },
+  {
+    "code": "YYJ",
+    "city": "Victoria International",
+    "name": "Victoria International Airport British Columbia Bc Canada"
+  },
+  {
+    "code": "YYT",
+    "city": "St. John’s International",
+    "name": "St. John’s International Airport Newfoundland and Labrador Nl Canada"
+  },
+  {
+    "code": "YYZ",
+    "city": "Toronto",
+    "name": "Pearson International Airport Toronto Malton Ontario On Canada"
+  },
+  {
+    "code": "YZF",
+    "city": "Yellowknife",
+    "name": "Yellowknife Airport Northwest Territories Nt Canada"
+  },
+  {
+    "code": "ZAD",
+    "city": "Zračna Luka",
+    "name": "Zračna Luka Zadar/zemunik Zadar Croatia"
+  },
+  {
+    "code": "ZAG",
+    "city": "Međunarodna Zračna",
+    "name": "Međunarodna Zračna Luka Zagreb Pleso Croatia"
+  },
+  {
+    "code": "ZAZ",
+    "city": "Aeropuerto de",
+    "name": "Aeropuerto de Zaragoza Spain"
+  },
+  {
+    "code": "ZCL",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional General Leobardo C. Ruiz Zacatecas Fresnillo Mexico"
+  },
+  {
+    "code": "ZIA",
+    "city": "Zhukovsky International",
+    "name": "Zhukovsky International Airport Moscow Russia"
+  },
+  {
+    "code": "ZIH",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional de Ixtapa-zihuatanejo Zihuatanejo Ixtapa Guerrero Gr Mexico"
+  },
+  {
+    "code": "ZLO",
+    "city": "Aeropuerto Internacional",
+    "name": "Aeropuerto Internacional Playa de Oro International Airport Manzanillo Colima Cl Mexico"
+  },
+  {
+    "code": "ZQN",
+    "city": "Queenstown",
+    "name": "Queenstown Airport Frankton New Zealand"
+  },
+  {
+    "code": "ZRH",
+    "city": "Flughafen Zürich",
+    "name": "Flughafen Zürich Zurich Switzerland"
+  }
+]

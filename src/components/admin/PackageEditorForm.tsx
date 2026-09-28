@@ -1,10 +1,7 @@
 "use client";
 
-import React, { useState, useRef, useMemo } from "react";
-import dynamic from "next/dynamic";
-import "react-quill/dist/quill.snow.css";
-
-const ReactQuill: any = dynamic(() => import("react-quill"), { ssr: false });
+import React, { useState } from "react";
+import { RichHtmlEditor } from "@/components/admin/RichHtmlEditor";
 
 export function PackageEditorForm({ initialData }: { initialData?: any }) {
   const [title, setTitle] = useState(initialData?.title || "");
@@ -66,42 +63,6 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
     }
   };
 
-  const quillRef = useRef<any>(null);
-
-  // Inline image upload handler for Quill
-  const imageHandler = async () => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-    input.click();
-    input.onchange = async () => {
-      const file = input.files?.[0];
-      if (!file) return;
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await fetch("/api/upload", { method: "POST", body: formData });
-      const data = await res.json();
-      if (data.url) {
-        const quill = quillRef.current.getEditor();
-        const range = quill.getSelection();
-        quill.insertEmbed(range ? range.index : 0, "image", data.url);
-      }
-    };
-  };
-
-  const modules = useMemo(() => ({
-    toolbar: {
-      container: [
-        [{ header: [1, 2, 3, false] }],
-        ["bold", "italic", "underline", "strike", "blockquote"],
-        [{ list: "ordered" }, { list: "bullet" }],
-        [{ color: [] }, { background: [] }],
-        ["link", "image"],
-        ["clean"],
-      ],
-      handlers: { image: imageHandler },
-    },
-  }), []);
 
   const handleCoverImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -399,16 +360,12 @@ export function PackageEditorForm({ initialData }: { initialData?: any }) {
         <p className="text-xs text-slate-400 mb-2">
           Add all package details here — pricing, accommodation, inclusions, itinerary, features etc. Use headings, bullet points, and bold text to structure your content.
         </p>
-        <div className="bg-white rounded-lg border border-slate-300">
-          <ReactQuill
-            ref={quillRef}
-            theme="snow"
-            value={content}
-            onChange={setContent}
-            modules={modules}
-            className="h-72 mb-12"
-          />
-        </div>
+        <RichHtmlEditor
+          value={content}
+          onChange={setContent}
+          placeholder="Add package details, itineraries, inclusions, hotel comparisons, etc..."
+          minHeight="350px"
+        />
       </div>
 
       <div className="pt-2">
