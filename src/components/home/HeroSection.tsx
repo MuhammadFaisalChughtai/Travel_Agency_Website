@@ -172,7 +172,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="w-full max-w-5xl relative z-30 flex flex-col items-center mt-2"
+          className="w-full max-w-6xl relative z-30 flex flex-col items-center mt-2"
         >
           {/* Tab Navigation following website theme */}
           <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-1.5 sm:gap-2 bg-[#382626]/85 backdrop-blur-md p-1.5 sm:p-2 rounded-2xl sm:rounded-full mb-4 border border-[#eed6c4]/40 shadow-2xl w-full max-w-3xl">

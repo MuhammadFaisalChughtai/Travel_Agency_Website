@@ -275,7 +275,7 @@ export function TravelportFlightSearch({
 
   return (
     <div
-      className={`w-full max-w-5xl mx-auto ${
+      className={`w-full max-w-6xl mx-auto ${
         isHome ? "px-0 mt-2" : "px-4 -mt-10 md:-mt-16"
       } relative z-30`}
     >
@@ -345,7 +345,13 @@ export function TravelportFlightSearch({
             }`}
           >
             {/* Origin & Destination with Swap Button */}
-            <div className="lg:col-span-4 xl:col-span-5 grid grid-cols-1 sm:grid-cols-11 gap-1 items-center bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2 py-1 relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all duration-300">
+            <div
+              className={`${
+                tripType === "return"
+                  ? "lg:col-span-4 xl:col-span-4"
+                  : "lg:col-span-5 xl:col-span-5"
+              } grid grid-cols-1 sm:grid-cols-11 gap-1 items-center bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2 py-1 relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all duration-300 min-h-[50px]`}
+            >
               {/* Origin */}
               <div className="sm:col-span-5 relative flex items-center">
                 <Plane className="w-4 h-4 text-[#6b4f4f] shrink-0 mr-1 pointer-events-none ml-1" />
@@ -449,42 +455,55 @@ export function TravelportFlightSearch({
               )}
             </div>
 
-            {/* Dates (Departure & Return) */}
-            <div className="lg:col-span-4 xl:col-span-3 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-1 flex items-center justify-between relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all duration-300">
-              <div className="flex-1 flex items-center gap-2">
+            {/* Departure Date */}
+            <div
+              className={`${
+                tripType === "return"
+                  ? "lg:col-span-2 xl:col-span-2"
+                  : "lg:col-span-3 xl:col-span-3"
+              } bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-1.5 flex items-center gap-2 relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all duration-300 min-h-[50px]`}
+            >
+              <Calendar className="w-4 h-4 text-[#6b4f4f] shrink-0" />
+              <div className="w-full min-w-0">
+                <span className="text-[10px] font-bold text-slate-400 uppercase block leading-tight">
+                  Departure
+                </span>
+                <input
+                  type="date"
+                  value={departureDate}
+                  onChange={(e) => setDepartureDate(e.target.value)}
+                  onClick={(e) => {
+                    try {
+                      (e.target as any).showPicker();
+                    } catch (err) {}
+                  }}
+                  className="w-full text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none bg-transparent cursor-pointer"
+                />
+              </div>
+            </div>
+
+            {/* Return Date */}
+            {tripType === "return" && (
+              <div className="lg:col-span-2 xl:col-span-2 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-1.5 flex items-center gap-2 relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all duration-300 min-h-[50px]">
                 <Calendar className="w-4 h-4 text-[#6b4f4f] shrink-0" />
-                <div className="w-full">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase block">
-                    Departure
+                <div className="w-full min-w-0">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase block leading-tight">
+                    Return
                   </span>
                   <input
                     type="date"
-                    value={departureDate}
-                    onChange={(e) => setDepartureDate(e.target.value)}
+                    value={returnDate}
+                    onChange={(e) => setReturnDate(e.target.value)}
+                    onClick={(e) => {
+                      try {
+                        (e.target as any).showPicker();
+                      } catch (err) {}
+                    }}
                     className="w-full text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none bg-transparent cursor-pointer"
                   />
                 </div>
               </div>
-
-              {tripType === "return" && (
-                <>
-                  <div className="w-px h-8 bg-slate-300 mx-2" />
-                  <div className="flex-1 flex items-center gap-2">
-                    <div className="w-full">
-                      <span className="text-[10px] font-bold text-slate-400 uppercase block">
-                        Return
-                      </span>
-                      <input
-                        type="date"
-                        value={returnDate}
-                        onChange={(e) => setReturnDate(e.target.value)}
-                        className="w-full text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none bg-transparent cursor-pointer"
-                      />
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
+            )}
 
             {/* Passenger & Cabin Dropdown */}
             <div className="lg:col-span-2 relative" ref={passengerDropdownRef}>
