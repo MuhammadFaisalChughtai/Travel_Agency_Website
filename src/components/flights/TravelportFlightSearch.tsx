@@ -27,9 +27,13 @@ import { POPULAR_AIRPORTS, searchAirports, Airport } from "@/lib/airports";
 import { FlightSearchResultItem, formatBaggageAllowance } from "@/lib/travelport";
 import { FlightBookingModal } from "./FlightBookingModal";
 
-export function TravelportFlightSearch() {
+export function TravelportFlightSearch({
+  isHome = false,
+}: {
+  isHome?: boolean;
+} = {}) {
   const [tripType, setTripType] = useState<"return" | "one-way" | "multi-city">("return");
-  const [bags, setBags] = useState<number>(0);
+  const [bags, setBags] = useState<number>(1);
 
   // Return / One-way fields
   const [origin, setOrigin] = useState<string>("Manchester (MAN)");
@@ -270,7 +274,11 @@ export function TravelportFlightSearch() {
   }, ${cabin}`;
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 -mt-10 md:-mt-16 relative z-30">
+    <div
+      className={`w-full max-w-6xl mx-auto px-2 sm:px-4 ${
+        isHome ? "mt-0" : "-mt-10 md:-mt-16"
+      } relative z-30`}
+    >
       {/* ─── Search Bar Container ─── */}
       <div className="bg-white/95 backdrop-blur-md p-4 sm:p-6 rounded-3xl shadow-[0_20px_50px_rgba(56,38,38,0.12)] border border-[#eed6c4]/80">
         
@@ -298,17 +306,11 @@ export function TravelportFlightSearch() {
                 onChange={(e) => {
                   const val = parseInt(e.target.value, 10);
                   setBags(val);
-                  if (searchResults.length > 0) {
-                    const newBaggage = formatBaggageAllowance(val);
-                    setSearchResults((prev) =>
-                      prev.map((f) => ({ ...f, baggage: newBaggage }))
-                    );
-                  }
                 }}
                 className="appearance-none bg-transparent hover:text-[#6b4f4f] pr-6 py-1 cursor-pointer font-bold focus:outline-none transition-colors"
               >
-                <option value={0}>0 bags</option>
                 <option value={1}>1 bag</option>
+                <option value={0}>0 bags</option>
                 <option value={2}>2 bags</option>
                 <option value={3}>3+ bags</option>
               </select>
@@ -320,9 +322,9 @@ export function TravelportFlightSearch() {
         {/* ─── Search Form Body ─── */}
         {tripType !== "multi-city" ? (
           /* RETURN & ONE-WAY LAYOUT */
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 p-2 bg-[#f5f0eb]/60 rounded-2xl border border-slate-200/80">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 p-2 bg-[#f5f0eb]/60 rounded-2xl border border-slate-200/80 items-stretch">
             {/* Origin & Destination with Swap Button */}
-            <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-11 gap-1 items-center bg-white rounded-xl border border-slate-200/90 p-1 relative">
+            <div className="lg:col-span-4 xl:col-span-5 grid grid-cols-1 sm:grid-cols-11 gap-1 items-center bg-white rounded-xl border border-slate-200/90 p-1 relative">
               {/* Origin */}
               <div className="sm:col-span-5 relative">
                 <input
@@ -425,7 +427,7 @@ export function TravelportFlightSearch() {
             </div>
 
             {/* Dates (Departure & Return) */}
-            <div className="lg:col-span-4 bg-white rounded-xl border border-slate-200/90 px-3 py-1 flex items-center justify-between relative">
+            <div className="lg:col-span-4 xl:col-span-3 bg-white rounded-xl border border-slate-200/90 px-3 py-1 flex items-center justify-between relative">
               <div className="flex-1 flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-slate-400 shrink-0" />
                 <div className="w-full">
@@ -590,21 +592,21 @@ export function TravelportFlightSearch() {
             </div>
 
             {/* Search Button */}
-            <div className="lg:col-span-1 flex items-center">
+            <div className="lg:col-span-2 xl:col-span-2 flex items-center">
               <button
                 type="button"
                 onClick={() => handleSearch()}
                 disabled={isSearching}
-                className="w-full h-full min-h-[50px] bg-[#6b4f4f] hover:bg-[#382626] text-[#fff3e4] font-heading font-black text-sm uppercase tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-xl hover:-translate-y-0.5 disabled:opacity-60"
+                className="w-full h-full min-h-[50px] bg-[#6b4f4f] hover:bg-[#382626] text-[#fff3e4] font-heading font-black text-xs sm:text-sm uppercase tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center gap-2 px-4 shadow-md hover:shadow-xl hover:-translate-y-0.5 disabled:opacity-60 whitespace-nowrap"
               >
                 {isSearching ? (
-                  <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none">
+                  <svg className="animate-spin w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                   </svg>
                 ) : (
                   <>
-                    <Search className="w-4 h-4 shrink-0" />
+                    <Search className="w-4 h-4 shrink-0 text-[#eed6c4]" />
                     <span>Search</span>
                   </>
                 )}
@@ -775,7 +777,7 @@ export function TravelportFlightSearch() {
                   </svg>
                 ) : (
                   <>
-                    <Search className="w-4 h-4 shrink-0" />
+                    <Search className="w-4 h-4 shrink-0 text-[#eed6c4]" />
                     <span>Search Flights</span>
                   </>
                 )}

@@ -10,9 +10,12 @@ import {
   Search,
   ChevronLeft,
   ChevronRight,
+  Globe,
 } from "lucide-react";
 import { UmrahBookingForm } from "../umrah/UmrahBookingForm";
 import { FlightBookingForm } from "../flights/FlightBookingForm";
+import { TravelportFlightSearch } from "../flights/TravelportFlightSearch";
+import { TrustpilotHeroBadge } from "@/components/umrah/TrustpilotHeroBadge";
 import { VisaBookingForm } from "../visa/VisaBookingForm";
 import { HolidaysBookingForm } from "../holiday/HolidaysBookingForm";
 import { TransportBookingForm } from "../transport/TransportBookingForm";
@@ -100,7 +103,7 @@ export function HeroSection() {
   if (!currentSlide) return null;
 
   return (
-    <div className="relative min-h-[90vh] sm:min-h-[95vh] flex flex-col items-center justify-start overflow-hidden bg-slate-100 group pt-32 pb-16">
+    <div className="relative min-h-[90vh] sm:min-h-[95vh] flex flex-col items-center justify-start overflow-x-clip bg-slate-100 group pt-32 pb-16">
       {/* Background Image Carousel */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -135,8 +138,14 @@ export function HeroSection() {
       )}
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 flex flex-col items-center text-center">
+        {/* Elegant Micro-Tag */}
+        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#eed6c4]/15 border border-[#eed6c4]/30 text-[#eed6c4] text-[10px] font-bold uppercase tracking-[0.2em] backdrop-blur-md mb-3 shadow-sm">
+          <Globe className="w-3.5 h-3.5 text-[#eed6c4]" />
+          <span>Luxury Travel & Worldwide Flights 2026 / 27</span>
+        </div>
+
         {/* Dynamic Text Content */}
-        <div className="min-h-[120px] sm:min-h-[140px] flex flex-col items-center justify-center">
+        <div className="min-h-[110px] sm:min-h-[130px] flex flex-col items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.h1
               key={`title-${currentSlide.id}`}
@@ -144,7 +153,7 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4 font-heading"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-3 font-heading"
             >
               <span className="text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]">
                 {currentSlide.title}
@@ -159,11 +168,16 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-base sm:text-lg text-white font-medium mb-8 max-w-2xl text-balance drop-shadow-md"
+              className="text-xs sm:text-sm md:text-base text-slate-200/90 font-medium mb-3 max-w-2xl text-balance drop-shadow-md"
             >
               {currentSlide.subtitle}
             </motion.p>
           </AnimatePresence>
+
+          {/* Trustpilot Rating */}
+          <div className="mb-2">
+            <TrustpilotHeroBadge label="Travellers" />
+          </div>
         </div>
 
         {/* Dynamic Forms with Tabs */}
@@ -171,17 +185,17 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="w-full max-w-5xl relative z-30 flex flex-col items-center mt-4"
+          className="w-full max-w-6xl relative z-30 flex flex-col items-center mt-2"
         >
-          {/* Tab Navigation */}
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-2 bg-slate-900/50 backdrop-blur-md p-2 rounded-2xl sm:rounded-full mb-4 border border-white/20 shadow-lg w-full max-w-3xl">
+          {/* Tab Navigation following website theme */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-1.5 sm:gap-2 bg-[#382626]/85 backdrop-blur-md p-1.5 sm:p-2 rounded-2xl sm:rounded-full mb-4 border border-[#eed6c4]/40 shadow-2xl w-full max-w-3xl">
             {siteConfig.allowedTabs.includes("flight") && (
               <button
                 onClick={() => setActiveTab("flight")}
-                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
+                className={`px-3 py-2 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
                   activeTab === "flight"
-                    ? "bg-white text-slate-900 shadow-md"
-                    : "text-white hover:bg-white/20"
+                    ? "bg-[#6b4f4f] text-[#fff3e4] border border-[#eed6c4]/50 shadow-md"
+                    : "text-[#eed6c4] hover:bg-[#eed6c4]/15 hover:text-white"
                 }`}
               >
                 Find Flight
@@ -190,10 +204,10 @@ export function HeroSection() {
             {siteConfig.allowedTabs.includes("umrah") && (
               <button
                 onClick={() => setActiveTab("umrah")}
-                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
+                className={`px-3 py-2 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
                   activeTab === "umrah"
-                    ? "bg-white text-slate-900 shadow-md"
-                    : "text-white hover:bg-white/20"
+                    ? "bg-[#6b4f4f] text-[#fff3e4] border border-[#eed6c4]/50 shadow-md"
+                    : "text-[#eed6c4] hover:bg-[#eed6c4]/15 hover:text-white"
                 }`}
               >
                 Umrah Packages
@@ -202,10 +216,10 @@ export function HeroSection() {
             {siteConfig.allowedTabs.includes("holiday") && (
               <button
                 onClick={() => setActiveTab("holidays")}
-                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
+                className={`px-3 py-2 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
                   activeTab === "holidays"
-                    ? "bg-white text-slate-900 shadow-md"
-                    : "text-white hover:bg-white/20"
+                    ? "bg-[#6b4f4f] text-[#fff3e4] border border-[#eed6c4]/50 shadow-md"
+                    : "text-[#eed6c4] hover:bg-[#eed6c4]/15 hover:text-white"
                 }`}
               >
                 Holiday Packages
@@ -214,45 +228,21 @@ export function HeroSection() {
             {siteConfig.allowedTabs.includes("visa") && (
               <button
                 onClick={() => setActiveTab("visa")}
-                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
+                className={`px-3 py-2 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
                   activeTab === "visa"
-                    ? "bg-white text-slate-900 shadow-md"
-                    : "text-white hover:bg-white/20"
+                    ? "bg-[#6b4f4f] text-[#fff3e4] border border-[#eed6c4]/50 shadow-md"
+                    : "text-[#eed6c4] hover:bg-[#eed6c4]/15 hover:text-white"
                 }`}
               >
                 Visa Inquiry
               </button>
             )}
-            {/* {siteConfig.allowedTabs.includes("hajj") && (
-              <button
-                onClick={() => setActiveTab("hajj")}
-                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
-                  activeTab === "hajj"
-                    ? "bg-white text-slate-900 shadow-md"
-                    : "text-white hover:bg-white/20"
-                }`}
-              >
-                Hajj Interest
-              </button>
-            )}
-            {siteConfig.allowedTabs.includes("transport") && (
-              <button
-                onClick={() => setActiveTab("transport")}
-                className={`px-1 py-2.5 sm:px-8 sm:py-2.5 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 w-full sm:w-auto ${
-                  activeTab === "transport"
-                    ? "bg-white text-slate-900 shadow-md"
-                    : "text-white hover:bg-white/20"
-                }`}
-              >
-                VIP Transfers
-              </button>
-            )} */}
           </div>
 
-          <div className="hero__transparent w-full transition-all duration-500 overflow-hidden">
+          <div className="hero__transparent w-full transition-all duration-500">
             {activeTab === "flight" && (
-              <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 rounded-3xl pb-8">
-                <FlightBookingForm isHome={true} />
+              <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 pb-4">
+                <TravelportFlightSearch isHome={true} />
               </div>
             )}
 

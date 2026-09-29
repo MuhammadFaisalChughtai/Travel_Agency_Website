@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
         infants: passengers?.infants ? parseInt(passengers.infants, 10) : 0,
       },
       cabin: cabin || "Economy",
-      bags: bags !== undefined && bags !== null ? parseInt(bags, 10) : 0,
+      bags: bags !== undefined && bags !== null ? parseInt(bags, 10) : 1,
     };
 
     const result = await searchTravelportFlights(searchParams);
