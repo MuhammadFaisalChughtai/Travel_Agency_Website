@@ -275,46 +275,63 @@ export function TravelportFlightSearch({
 
   return (
     <div
-      className={`w-full max-w-6xl mx-auto px-2 sm:px-4 ${
-        isHome ? "mt-0" : "-mt-10 md:-mt-16"
+      className={`w-full max-w-5xl mx-auto ${
+        isHome ? "px-0 mt-2" : "px-4 -mt-10 md:-mt-16"
       } relative z-30`}
     >
       {/* ─── Search Bar Container ─── */}
-      <div className="bg-white/95 backdrop-blur-md p-4 sm:p-6 rounded-3xl shadow-[0_20px_50px_rgba(56,38,38,0.12)] border border-[#eed6c4]/80">
-        
+      <div
+        className={
+          isHome
+            ? "bg-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-white/30"
+            : "bg-white/95 backdrop-blur-md p-4 sm:p-6 rounded-3xl shadow-[0_20px_50px_rgba(56,38,38,0.12)] border border-[#eed6c4]/80"
+        }
+      >
         {/* Top Selectors (Trip Type & Bags) */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-4 text-xs sm:text-sm font-semibold text-slate-700">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-4 text-xs sm:text-sm font-semibold">
+          <div className="flex items-center gap-3">
             {/* Trip Type Dropdown */}
-            <div className="relative">
+            <div
+              className={`relative px-3 py-1.5 rounded-xl border transition-all ${
+                isHome
+                  ? "bg-[#f5f0eb] text-slate-800 border-slate-200/80 shadow-xs hover:border-[#6b4f4f]/50"
+                  : "bg-[#f5f0eb] text-slate-800 border-slate-200/80 hover:border-[#6b4f4f]"
+              }`}
+            >
               <select
                 value={tripType}
                 onChange={(e) => setTripType(e.target.value as any)}
-                className="appearance-none bg-transparent hover:text-[#6b4f4f] pr-6 py-1 cursor-pointer font-bold focus:outline-none transition-colors"
+                className="appearance-none bg-transparent hover:text-[#6b4f4f] pr-6 py-0.5 cursor-pointer font-bold focus:outline-none transition-colors"
               >
-                <option value="return">Return</option>
-                <option value="one-way">One-way</option>
-                <option value="multi-city">Multi-city</option>
+                <option value="return" className="text-slate-800 bg-white">Return</option>
+                <option value="one-way" className="text-slate-800 bg-white">One-way</option>
+                <option value="multi-city" className="text-slate-800 bg-white">Multi-city</option>
               </select>
-              <ChevronDown className="w-3.5 h-3.5 absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" />
+              <ChevronDown className="w-3.5 h-3.5 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500" />
             </div>
 
             {/* Bags Dropdown */}
-            <div className="relative">
+            <div
+              className={`relative px-3 py-1.5 rounded-xl border transition-all ${
+                isHome
+                  ? "bg-[#f5f0eb] text-slate-800 border-slate-200/80 shadow-xs hover:border-[#6b4f4f]/50"
+                  : "bg-[#f5f0eb] text-slate-800 border-slate-200/80 hover:border-[#6b4f4f]"
+              }`}
+            >
               <select
                 value={bags}
                 onChange={(e) => {
                   const val = parseInt(e.target.value, 10);
                   setBags(val);
                 }}
-                className="appearance-none bg-transparent hover:text-[#6b4f4f] pr-6 py-1 cursor-pointer font-bold focus:outline-none transition-colors"
+                className="appearance-none bg-transparent hover:text-[#6b4f4f] pr-6 py-0.5 cursor-pointer font-bold focus:outline-none transition-colors"
               >
-                <option value={1}>1 bag</option>
-                <option value={0}>0 bags</option>
-                <option value={2}>2 bags</option>
-                <option value={3}>3+ bags</option>
+                <option value={1} className="text-slate-800 bg-white">1 bag</option>
+                <option value={0} className="text-slate-800 bg-white">0 bags</option>
+                <option value={2} className="text-slate-800 bg-white">2 bags</option>
+                <option value={3} className="text-slate-800 bg-white">3+ bags</option>
               </select>
-              <ChevronDown className="w-3.5 h-3.5 absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" />
+              <ChevronDown className="w-3.5 h-3.5 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500" />
             </div>
           </div>
         </div>
@@ -322,11 +339,16 @@ export function TravelportFlightSearch({
         {/* ─── Search Form Body ─── */}
         {tripType !== "multi-city" ? (
           /* RETURN & ONE-WAY LAYOUT */
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 p-2 bg-[#f5f0eb]/60 rounded-2xl border border-slate-200/80 items-stretch">
+          <div
+            className={`grid grid-cols-1 lg:grid-cols-12 gap-3 items-stretch ${
+              isHome ? "" : "p-2 bg-[#f5f0eb]/60 rounded-2xl border border-slate-200/80"
+            }`}
+          >
             {/* Origin & Destination with Swap Button */}
-            <div className="lg:col-span-4 xl:col-span-5 grid grid-cols-1 sm:grid-cols-11 gap-1 items-center bg-white rounded-xl border border-slate-200/90 p-1 relative">
+            <div className="lg:col-span-4 xl:col-span-5 grid grid-cols-1 sm:grid-cols-11 gap-1 items-center bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2 py-1 relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all duration-300">
               {/* Origin */}
-              <div className="sm:col-span-5 relative">
+              <div className="sm:col-span-5 relative flex items-center">
+                <Plane className="w-4 h-4 text-[#6b4f4f] shrink-0 mr-1 pointer-events-none ml-1" />
                 <input
                   type="text"
                   value={activeAirportField === "origin" ? airportQuery : origin}
@@ -336,7 +358,7 @@ export function TravelportFlightSearch({
                   }}
                   onChange={(e) => setAirportQuery(e.target.value)}
                   placeholder="From?"
-                  className="w-full px-3 py-2.5 text-xs sm:text-sm font-semibold text-slate-800 placeholder-slate-400 focus:outline-none bg-transparent"
+                  className="w-full px-1 py-2 text-xs sm:text-sm font-semibold text-slate-800 placeholder-slate-400 focus:outline-none bg-transparent"
                 />
                 {origin && (
                   <button
@@ -346,7 +368,7 @@ export function TravelportFlightSearch({
                       setOrigin("");
                       setOriginCode("");
                     }}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-0.5"
+                    className="text-slate-400 hover:text-slate-600 p-0.5 shrink-0"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -359,14 +381,15 @@ export function TravelportFlightSearch({
                   type="button"
                   onClick={handleSwapAirports}
                   title="Swap Departure and Destination"
-                  className="w-7 h-7 rounded-full bg-slate-100 hover:bg-[#eed6c4]/40 flex items-center justify-center text-slate-600 hover:text-[#6b4f4f] transition-colors"
+                  className="w-6 h-6 rounded-full bg-white hover:bg-[#eed6c4]/40 border border-slate-200/80 flex items-center justify-center text-[#6b4f4f] transition-colors shadow-xs"
                 >
-                  <ArrowRightLeft className="w-3.5 h-3.5" />
+                  <ArrowRightLeft className="w-3 h-3" />
                 </button>
               </div>
 
               {/* Destination */}
-              <div className="sm:col-span-5 relative">
+              <div className="sm:col-span-5 relative flex items-center">
+                <Plane className="w-4 h-4 text-[#6b4f4f] shrink-0 mr-1 pointer-events-none rotate-90 ml-1" />
                 <input
                   type="text"
                   value={activeAirportField === "destination" ? airportQuery : destination}
@@ -376,7 +399,7 @@ export function TravelportFlightSearch({
                   }}
                   onChange={(e) => setAirportQuery(e.target.value)}
                   placeholder="To?"
-                  className="w-full px-3 py-2.5 text-xs sm:text-sm font-semibold text-slate-800 placeholder-slate-400 focus:outline-none bg-transparent"
+                  className="w-full px-1 py-2 text-xs sm:text-sm font-semibold text-slate-800 placeholder-slate-400 focus:outline-none bg-transparent"
                 />
                 {destination && (
                   <button
@@ -386,7 +409,7 @@ export function TravelportFlightSearch({
                       setDestination("");
                       setDestinationCode("");
                     }}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-0.5"
+                    className="text-slate-400 hover:text-slate-600 p-0.5 shrink-0"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -427,9 +450,9 @@ export function TravelportFlightSearch({
             </div>
 
             {/* Dates (Departure & Return) */}
-            <div className="lg:col-span-4 xl:col-span-3 bg-white rounded-xl border border-slate-200/90 px-3 py-1 flex items-center justify-between relative">
+            <div className="lg:col-span-4 xl:col-span-3 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-1 flex items-center justify-between relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all duration-300">
               <div className="flex-1 flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-slate-400 shrink-0" />
+                <Calendar className="w-4 h-4 text-[#6b4f4f] shrink-0" />
                 <div className="w-full">
                   <span className="text-[10px] font-bold text-slate-400 uppercase block">
                     Departure
@@ -445,7 +468,7 @@ export function TravelportFlightSearch({
 
               {tripType === "return" && (
                 <>
-                  <div className="w-px h-8 bg-slate-200 mx-2" />
+                  <div className="w-px h-8 bg-slate-300 mx-2" />
                   <div className="flex-1 flex items-center gap-2">
                     <div className="w-full">
                       <span className="text-[10px] font-bold text-slate-400 uppercase block">
@@ -468,15 +491,18 @@ export function TravelportFlightSearch({
               <button
                 type="button"
                 onClick={() => setShowPassengerDropdown(!showPassengerDropdown)}
-                className="w-full h-full min-h-[50px] bg-white rounded-xl border border-slate-200/90 px-3 py-2 flex items-center justify-between text-left hover:border-[#6b4f4f]/50 transition-colors"
+                className="w-full h-full min-h-[50px] bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-2 flex items-center justify-between text-left hover:border-[#6b4f4f] hover:bg-white transition-all duration-300"
               >
-                <div className="truncate pr-1">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase block">
-                    Travelers
-                  </span>
-                  <span className="text-xs sm:text-sm font-semibold text-slate-800 truncate">
-                    {passengerSummaryText}
-                  </span>
+                <div className="flex items-center gap-2 truncate pr-1">
+                  <Users className="w-4 h-4 text-[#6b4f4f] shrink-0" />
+                  <div className="truncate">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase block">
+                      Travelers
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-slate-800 truncate block">
+                      {passengerSummaryText}
+                    </span>
+                  </div>
                 </div>
                 <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
               </button>
@@ -619,13 +645,16 @@ export function TravelportFlightSearch({
             {multiCityLegs.map((leg, index) => (
               <div
                 key={index}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-2 p-2 bg-[#f5f0eb]/60 rounded-2xl border border-slate-200/80 items-center"
+                className="grid grid-cols-1 lg:grid-cols-12 gap-2.5 p-2 bg-white/40 backdrop-blur-md rounded-2xl border border-white/40 items-center"
               >
                 {/* Leg From */}
-                <div className="lg:col-span-4 bg-white rounded-xl border border-slate-200/90 px-3 py-2 relative">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase block">
-                    From (Flight {index + 1})
-                  </span>
+                <div className="lg:col-span-4 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-2 relative focus-within:bg-white focus-within:border-[#6b4f4f] transition-all">
+                  <div className="flex items-center gap-1.5 mb-0.5">
+                    <Plane className="w-3.5 h-3.5 text-[#6b4f4f]" />
+                    <span className="text-[10px] font-bold text-slate-400 uppercase block">
+                      From (Flight {index + 1})
+                    </span>
+                  </div>
                   <input
                     type="text"
                     value={activeAirportField === `multi-from-${index}` ? airportQuery : leg.from}
@@ -662,10 +691,13 @@ export function TravelportFlightSearch({
                 </div>
 
                 {/* Leg To */}
-                <div className="lg:col-span-4 bg-white rounded-xl border border-slate-200/90 px-3 py-2 relative">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase block">
-                    To
-                  </span>
+                <div className="lg:col-span-4 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-2 relative focus-within:bg-white focus-within:border-[#6b4f4f] transition-all">
+                  <div className="flex items-center gap-1.5 mb-0.5">
+                    <Plane className="w-3.5 h-3.5 text-[#6b4f4f] rotate-90" />
+                    <span className="text-[10px] font-bold text-slate-400 uppercase block">
+                      To
+                    </span>
+                  </div>
                   <input
                     type="text"
                     value={activeAirportField === `multi-to-${index}` ? airportQuery : leg.to}
@@ -702,10 +734,13 @@ export function TravelportFlightSearch({
                 </div>
 
                 {/* Leg Departure Date */}
-                <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200/90 px-3 py-2">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase block">
-                    Departure
-                  </span>
+                <div className="lg:col-span-2 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-2 focus-within:bg-white focus-within:border-[#6b4f4f] transition-all">
+                  <div className="flex items-center gap-1.5 mb-0.5">
+                    <Calendar className="w-3.5 h-3.5 text-[#6b4f4f]" />
+                    <span className="text-[10px] font-bold text-slate-400 uppercase block">
+                      Departure
+                    </span>
+                  </div>
                   <input
                     type="date"
                     value={leg.date}
@@ -722,7 +757,7 @@ export function TravelportFlightSearch({
                 </div>
 
                 {/* Cabin */}
-                <div className="lg:col-span-1 bg-white rounded-xl border border-slate-200/90 px-2 py-2 text-center text-xs font-bold text-slate-700">
+                <div className="lg:col-span-1 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2 py-2.5 text-center text-xs font-bold text-slate-700">
                   {leg.cabin}
                 </div>
 

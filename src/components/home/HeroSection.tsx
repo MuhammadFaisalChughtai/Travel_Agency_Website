@@ -10,12 +10,10 @@ import {
   Search,
   ChevronLeft,
   ChevronRight,
-  Globe,
 } from "lucide-react";
 import { UmrahBookingForm } from "../umrah/UmrahBookingForm";
 import { FlightBookingForm } from "../flights/FlightBookingForm";
 import { TravelportFlightSearch } from "../flights/TravelportFlightSearch";
-import { TrustpilotHeroBadge } from "@/components/umrah/TrustpilotHeroBadge";
 import { VisaBookingForm } from "../visa/VisaBookingForm";
 import { HolidaysBookingForm } from "../holiday/HolidaysBookingForm";
 import { TransportBookingForm } from "../transport/TransportBookingForm";
@@ -138,12 +136,6 @@ export function HeroSection() {
       )}
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 flex flex-col items-center text-center">
-        {/* Elegant Micro-Tag */}
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#eed6c4]/15 border border-[#eed6c4]/30 text-[#eed6c4] text-[10px] font-bold uppercase tracking-[0.2em] backdrop-blur-md mb-3 shadow-sm">
-          <Globe className="w-3.5 h-3.5 text-[#eed6c4]" />
-          <span>Luxury Travel & Worldwide Flights 2026 / 27</span>
-        </div>
-
         {/* Dynamic Text Content */}
         <div className="min-h-[110px] sm:min-h-[130px] flex flex-col items-center justify-center">
           <AnimatePresence mode="wait">
@@ -168,16 +160,11 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-xs sm:text-sm md:text-base text-slate-200/90 font-medium mb-3 max-w-2xl text-balance drop-shadow-md"
+              className="text-xs sm:text-sm md:text-base text-slate-200/90 font-medium mb-4 max-w-2xl text-balance drop-shadow-md"
             >
               {currentSlide.subtitle}
             </motion.p>
           </AnimatePresence>
-
-          {/* Trustpilot Rating */}
-          <div className="mb-2">
-            <TrustpilotHeroBadge label="Travellers" />
-          </div>
         </div>
 
         {/* Dynamic Forms with Tabs */}
@@ -185,7 +172,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="w-full max-w-6xl relative z-30 flex flex-col items-center mt-2"
+          className="w-full max-w-5xl relative z-30 flex flex-col items-center mt-2"
         >
           {/* Tab Navigation following website theme */}
           <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-1.5 sm:gap-2 bg-[#382626]/85 backdrop-blur-md p-1.5 sm:p-2 rounded-2xl sm:rounded-full mb-4 border border-[#eed6c4]/40 shadow-2xl w-full max-w-3xl">
