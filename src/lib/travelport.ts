@@ -409,7 +409,7 @@ function parseTravelportOfferings(
 
   const offerings =
     resp.CatalogProductOfferings.CatalogProductOffering || [];
-  const results: FlightSearchResultItem[] = [];
+  let results: FlightSearchResultItem[] = [];
 
   const originCode = params.legs[0]?.from?.toUpperCase().trim();
 
@@ -529,91 +529,145 @@ function parseTravelportOfferings(
       }
     });
   } else if (params.tripType === "multi-city") {
-    // Multi-city
-    offerings.forEach((offering: any, idx: number) => {
+    // Multi-city: group combinable flight legs by CombinabilityCode
+    const combinableGroups = new Map<string, any>();
+
+    offerings.forEach((offering: any) => {
       offering.ProductBrandOptions?.forEach((pbo: any) => {
         pbo.ProductBrandOffering?.forEach((brandOffering: any) => {
-          const productRef = brandOffering.Product?.[0]?.productRef;
-          const product = productMap.get(productRef);
-
-          const rawSegments: FlightSegmentDetail[] = [];
-          product?.FlightSegment?.forEach((seg: any) => {
-            const flight = flightMap.get(seg.Flight?.FlightRef);
-            if (flight) {
-              const depAirport = getAirportByCode(flight.Departure?.location);
-              const arrAirport = getAirportByCode(flight.Arrival?.location);
-              rawSegments.push({
-                flightNumber: `${flight.carrier} ${flight.number}`,
-                carrier: flight.carrier,
-                airline: getAirlineName(flight.carrier),
-                aircraft: getAircraftName(flight.equipment || flight.Equipment),
-                departureAirport: flight.Departure?.location,
-                departureAirportName: depAirport
-                  ? `${depAirport.city} (${depAirport.name})`
-                  : flight.Departure?.location,
-                departureTerminal: flight.Departure?.terminal,
-                departureDate: flight.Departure?.date,
-                departureTime: flight.Departure?.time,
-                arrivalAirport: flight.Arrival?.location,
-                arrivalAirportName: arrAirport
-                  ? `${arrAirport.city} (${arrAirport.name})`
-                  : flight.Arrival?.location,
-                arrivalTerminal: flight.Arrival?.terminal,
-                arrivalDate: flight.Arrival?.date,
-                arrivalTime: flight.Arrival?.time,
-                duration: parseDuration(flight.duration),
-                connectionDuration: parseDuration(seg.connectionDuration),
-              });
-            }
-          });
-
-          const segments = enrichSegmentsWithLayovers(rawSegments);
-
-          if (segments.length > 0) {
-            const firstSeg = segments[0];
-            const lastSeg = segments[segments.length - 1];
-            const legDetail: FlightLegDetail = {
-              departureAirport: firstSeg.departureAirport,
-              departureAirportName: firstSeg.departureAirportName,
-              arrivalAirport: lastSeg.arrivalAirport,
-              arrivalAirportName: lastSeg.arrivalAirportName,
-              departureDate: firstSeg.departureDate,
-              departureTime: firstSeg.departureTime,
-              arrivalDate: lastSeg.arrivalDate,
-              arrivalTime: lastSeg.arrivalTime,
-              airline: firstSeg.airline,
-              carrier: firstSeg.carrier,
-              flightNumbers: segments.map((s) => s.flightNumber).join(", "),
-              totalDuration: parseDuration(product?.totalDuration),
-              stopsCount: segments.length - 1,
-              isDirect: segments.length === 1,
-              segments,
-              cabin:
-                product?.PassengerFlight?.[0]?.FlightProduct?.[0]?.cabin ||
-                params.cabin ||
-                "Economy",
-            };
-
-            results.push({
-              id: `tp-multi-${offering.id}-${idx}`,
-              tripType: "multi-city",
-              price:
-                Math.round(
-                  (brandOffering.BestCombinablePrice?.TotalPrice || 0) * 100
-                ) / 100,
+          const comboCode =
+            brandOffering.CombinabilityCode?.[0] || offering.id;
+          if (!combinableGroups.has(comboCode)) {
+            combinableGroups.set(comboCode, {
+              comboCode,
+              price: brandOffering.BestCombinablePrice?.TotalPrice || 0,
               currency:
                 brandOffering.BestCombinablePrice?.CurrencyCode?.value || "GBP",
-              airline: firstSeg.airline,
-              carrier: firstSeg.carrier,
-              outbound: legDetail,
-              legs: [legDetail],
-              baggage: formatBaggageAllowance(params.bags),
-              cabin: legDetail.cabin,
-              source: "Airline Fares",
+              legs: [] as FlightLegDetail[],
             });
           }
+          const group = combinableGroups.get(comboCode);
+
+          // Support 1 or more products in brandOffering.Product
+          const productsList = brandOffering.Product || [];
+          productsList.forEach((prodObj: any) => {
+            const product = productMap.get(prodObj.productRef);
+            if (!product) return;
+
+            const rawSegments: FlightSegmentDetail[] = [];
+            product?.FlightSegment?.forEach((seg: any) => {
+              const flight = flightMap.get(seg.Flight?.FlightRef);
+              if (flight) {
+                const depAirport = getAirportByCode(flight.Departure?.location);
+                const arrAirport = getAirportByCode(flight.Arrival?.location);
+                rawSegments.push({
+                  flightNumber: `${flight.carrier} ${flight.number}`,
+                  carrier: flight.carrier,
+                  airline: getAirlineName(flight.carrier),
+                  aircraft: getAircraftName(flight.equipment || flight.Equipment),
+                  departureAirport: flight.Departure?.location,
+                  departureAirportName: depAirport
+                    ? `${depAirport.city} (${depAirport.name})`
+                    : flight.Departure?.location,
+                  departureTerminal: flight.Departure?.terminal,
+                  departureDate: flight.Departure?.date,
+                  departureTime: flight.Departure?.time,
+                  arrivalAirport: flight.Arrival?.location,
+                  arrivalAirportName: arrAirport
+                    ? `${arrAirport.city} (${arrAirport.name})`
+                    : flight.Arrival?.location,
+                  arrivalTerminal: flight.Arrival?.terminal,
+                  arrivalDate: flight.Arrival?.date,
+                  arrivalTime: flight.Arrival?.time,
+                  duration: parseDuration(flight.duration),
+                  connectionDuration: parseDuration(seg.connectionDuration),
+                });
+              }
+            });
+
+            const segments = enrichSegmentsWithLayovers(rawSegments);
+
+            if (segments.length > 0) {
+              const firstSeg = segments[0];
+              const lastSeg = segments[segments.length - 1];
+
+              // Avoid duplicate legs within the same group
+              const alreadyExists = group.legs.some(
+                (l: FlightLegDetail) =>
+                  l.departureAirport === firstSeg.departureAirport &&
+                  l.arrivalAirport === lastSeg.arrivalAirport &&
+                  l.departureDate === firstSeg.departureDate &&
+                  l.departureTime === firstSeg.departureTime
+              );
+
+              if (!alreadyExists) {
+                group.legs.push({
+                  departureAirport: firstSeg.departureAirport,
+                  departureAirportName: firstSeg.departureAirportName,
+                  arrivalAirport: lastSeg.arrivalAirport,
+                  arrivalAirportName: lastSeg.arrivalAirportName,
+                  departureDate: firstSeg.departureDate,
+                  departureTime: firstSeg.departureTime,
+                  arrivalDate: lastSeg.arrivalDate,
+                  arrivalTime: lastSeg.arrivalTime,
+                  airline: firstSeg.airline,
+                  carrier: firstSeg.carrier,
+                  flightNumbers: segments.map((s) => s.flightNumber).join(", "),
+                  totalDuration: parseDuration(product?.totalDuration),
+                  stopsCount: segments.length - 1,
+                  isDirect: segments.length === 1,
+                  segments,
+                  cabin:
+                    product?.PassengerFlight?.[0]?.FlightProduct?.[0]?.cabin ||
+                    params.cabin ||
+                    "Economy",
+                });
+              }
+            }
+          });
         });
       });
+    });
+
+    combinableGroups.forEach((group, id) => {
+      // Order legs in the sequence of params.legs
+      const orderedLegs: FlightLegDetail[] = [];
+      const remaining = [...group.legs];
+
+      params.legs.forEach((reqLeg) => {
+        const reqFrom = reqLeg.from.toUpperCase().trim();
+        const reqTo = reqLeg.to.toUpperCase().trim();
+        const foundIdx = remaining.findIndex(
+          (l) =>
+            l.departureAirport === reqFrom &&
+            (!reqTo || l.arrivalAirport === reqTo)
+        );
+        if (foundIdx !== -1) {
+          orderedLegs.push(remaining.splice(foundIdx, 1)[0]);
+        }
+      });
+
+      const finalLegs = orderedLegs.concat(remaining);
+
+      if (finalLegs.length > 0) {
+        const firstLeg = finalLegs[0];
+        const lastLeg = finalLegs[finalLegs.length - 1];
+
+        results.push({
+          id: `tp-multi-${id}`,
+          tripType: "multi-city",
+          price: Math.round(group.price * 100) / 100,
+          currency: group.currency,
+          airline: firstLeg.airline,
+          carrier: firstLeg.carrier,
+          outbound: firstLeg,
+          inbound: finalLegs.length > 1 ? lastLeg : undefined,
+          legs: finalLegs,
+          baggage: formatBaggageAllowance(params.bags),
+          cabin: firstLeg.cabin,
+          source: "Airline Fares",
+        });
+      }
     });
   } else {
     // One-way
@@ -703,13 +757,30 @@ function parseTravelportOfferings(
     });
   }
 
+  // For multi-city, prioritize results that have all requested legs
+  if (params.tripType === "multi-city" && params.legs.length > 1) {
+    const completeJourneys = results.filter(
+      (r) => (r.legs?.length || 0) >= params.legs.length
+    );
+    if (completeJourneys.length > 0) {
+      results = completeJourneys;
+    }
+  }
+
   // Sort by price ascending
   results.sort((a, b) => a.price - b.price);
 
-  // Deduplicate by airline and flight numbers to show distinct flight options
+  // Deduplicate by airline and flight numbers across all legs to show distinct options
   const uniqueKeys = new Set<string>();
   const deduplicated = results.filter((item) => {
-    const key = `${item.airline}-${item.outbound?.flightNumbers}-${item.inbound?.flightNumbers || ""}-${item.price}`;
+    const legsKey = item.legs
+      ? item.legs
+          .map(
+            (l) => `${l.departureAirport}-${l.arrivalAirport}-${l.flightNumbers}`
+          )
+          .join("|")
+      : "";
+    const key = `${item.airline}-${item.outbound?.flightNumbers}-${item.inbound?.flightNumbers || ""}-${legsKey}-${item.price}`;
     if (uniqueKeys.has(key)) return false;
     uniqueKeys.add(key);
     return true;

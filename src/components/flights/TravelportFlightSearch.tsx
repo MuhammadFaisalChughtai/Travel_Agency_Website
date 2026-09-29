@@ -851,7 +851,9 @@ export function TravelportFlightSearch() {
                                 {flight.airline}
                               </span>
                               <span className="text-[11px] text-slate-400 block">
-                                {flight.outbound.flightNumbers}
+                                {flight.tripType === "multi-city" && flight.legs && flight.legs.length > 0
+                                  ? flight.legs.map((l, i) => `Flight ${i + 1}: ${l.flightNumbers}`).join(" • ")
+                                  : flight.outbound.flightNumbers}
                               </span>
                             </div>
                           </div>
@@ -872,92 +874,160 @@ export function TravelportFlightSearch() {
                           </div>
                         </div>
 
-                        {/* Outbound Leg Summary */}
-                        <div className="flex items-center justify-between gap-4 text-xs sm:text-sm">
-                          <div className="w-28 sm:w-36">
-                            <span className="text-base sm:text-lg font-black text-slate-800 block">
-                              {flight.outbound.departureTime.slice(0, 5)}
-                            </span>
-                            <span className="font-bold text-slate-600 block">
-                              {flight.outbound.departureAirport}
-                            </span>
-                            <span className="text-[10px] text-slate-400 block truncate">
-                              {flight.outbound.departureDate}
-                            </span>
-                          </div>
+                        {/* Multi-City Journey or Outbound/Inbound Summary */}
+                        {flight.tripType === "multi-city" && flight.legs && flight.legs.length > 0 ? (
+                          <div className="space-y-3">
+                            {flight.legs.map((leg, legIdx) => (
+                              <div
+                                key={legIdx}
+                                className={legIdx > 0 ? "pt-3 border-t border-dashed border-slate-200" : ""}
+                              >
+                                <div className="flex items-center gap-2 mb-1.5">
+                                  <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-[#eed6c4]/40 text-[#6b4f4f]">
+                                    Flight {legIdx + 1}
+                                  </span>
+                                  <span className="text-[11px] font-bold text-slate-600">
+                                    {leg.departureAirport} → {leg.arrivalAirport}
+                                  </span>
+                                  <span className="text-[10px] text-slate-400">
+                                    • {leg.departureDate}
+                                  </span>
+                                </div>
 
-                          <div className="flex-1 flex flex-col items-center max-w-[180px]">
-                            <span className="text-[11px] font-semibold text-slate-500">
-                              {flight.outbound.totalDuration}
-                            </span>
-                            <div className="w-full flex items-center gap-1 my-1">
-                              <div className="h-0.5 flex-1 bg-slate-200" />
-                              <Plane className="w-3.5 h-3.5 text-[#6b4f4f] shrink-0 rotate-90" />
-                              <div className="h-0.5 flex-1 bg-slate-200" />
-                            </div>
-                            <span className="text-[10px] font-bold text-[#6b4f4f]">
-                              {flight.outbound.isDirect
-                                ? "Direct Flight"
-                                : `${flight.outbound.stopsCount} stop (${flight.outbound.segments[0]?.arrivalAirport})`}
-                            </span>
-                          </div>
+                                <div className="flex items-center justify-between gap-4 text-xs sm:text-sm">
+                                  <div className="w-28 sm:w-36">
+                                    <span className="text-base sm:text-lg font-black text-slate-800 block">
+                                      {leg.departureTime.slice(0, 5)}
+                                    </span>
+                                    <span className="font-bold text-slate-600 block">
+                                      {leg.departureAirport}
+                                    </span>
+                                    <span className="text-[10px] text-slate-400 block truncate">
+                                      {leg.departureAirportName || leg.departureAirport}
+                                    </span>
+                                  </div>
 
-                          <div className="w-28 sm:w-36 text-right">
-                            <span className="text-base sm:text-lg font-black text-slate-800 block">
-                              {flight.outbound.arrivalTime.slice(0, 5)}
-                            </span>
-                            <span className="font-bold text-slate-600 block">
-                              {flight.outbound.arrivalAirport}
-                            </span>
-                            <span className="text-[10px] text-slate-400 block truncate">
-                              {flight.outbound.arrivalDate}
-                            </span>
-                          </div>
-                        </div>
+                                  <div className="flex-1 flex flex-col items-center max-w-[180px]">
+                                    <span className="text-[11px] font-semibold text-slate-500">
+                                      {leg.totalDuration}
+                                    </span>
+                                    <div className="w-full flex items-center gap-1 my-1">
+                                      <div className="h-0.5 flex-1 bg-slate-200" />
+                                      <Plane className="w-3.5 h-3.5 text-[#6b4f4f] shrink-0 rotate-90" />
+                                      <div className="h-0.5 flex-1 bg-slate-200" />
+                                    </div>
+                                    <span className="text-[10px] font-bold text-[#6b4f4f]">
+                                      {leg.isDirect
+                                        ? "Direct Flight"
+                                        : `${leg.stopsCount} stop (${leg.segments[0]?.arrivalAirport})`}
+                                    </span>
+                                  </div>
 
-                        {/* Inbound Leg Summary (if Return) */}
-                        {flight.inbound && (
-                          <div className="flex items-center justify-between gap-4 text-xs sm:text-sm pt-3 border-t border-dashed border-slate-100">
-                            <div className="w-28 sm:w-36">
-                              <span className="text-base sm:text-lg font-black text-slate-800 block">
-                                {flight.inbound.departureTime.slice(0, 5)}
-                              </span>
-                              <span className="font-bold text-slate-600 block">
-                                {flight.inbound.departureAirport}
-                              </span>
-                              <span className="text-[10px] text-slate-400 block truncate">
-                                {flight.inbound.departureDate}
-                              </span>
-                            </div>
-
-                            <div className="flex-1 flex flex-col items-center max-w-[180px]">
-                              <span className="text-[11px] font-semibold text-slate-500">
-                                {flight.inbound.totalDuration}
-                              </span>
-                              <div className="w-full flex items-center gap-1 my-1">
-                                <div className="h-0.5 flex-1 bg-slate-200" />
-                                <Plane className="w-3.5 h-3.5 text-[#6b4f4f] shrink-0 -rotate-90" />
-                                <div className="h-0.5 flex-1 bg-slate-200" />
+                                  <div className="w-28 sm:w-36 text-right">
+                                    <span className="text-base sm:text-lg font-black text-slate-800 block">
+                                      {leg.arrivalTime.slice(0, 5)}
+                                    </span>
+                                    <span className="font-bold text-slate-600 block">
+                                      {leg.arrivalAirport}
+                                    </span>
+                                    <span className="text-[10px] text-slate-400 block truncate">
+                                      {leg.arrivalAirportName || leg.arrivalAirport}
+                                    </span>
+                                  </div>
+                                </div>
                               </div>
-                              <span className="text-[10px] font-bold text-[#6b4f4f]">
-                                {flight.inbound.isDirect
-                                  ? "Direct Flight"
-                                  : `${flight.inbound.stopsCount} stop (${flight.inbound.segments[0]?.arrivalAirport})`}
-                              </span>
+                            ))}
+                          </div>
+                        ) : (
+                          <>
+                            {/* Outbound Leg Summary */}
+                            <div className="flex items-center justify-between gap-4 text-xs sm:text-sm">
+                              <div className="w-28 sm:w-36">
+                                <span className="text-base sm:text-lg font-black text-slate-800 block">
+                                  {flight.outbound.departureTime.slice(0, 5)}
+                                </span>
+                                <span className="font-bold text-slate-600 block">
+                                  {flight.outbound.departureAirport}
+                                </span>
+                                <span className="text-[10px] text-slate-400 block truncate">
+                                  {flight.outbound.departureDate}
+                                </span>
+                              </div>
+
+                              <div className="flex-1 flex flex-col items-center max-w-[180px]">
+                                <span className="text-[11px] font-semibold text-slate-500">
+                                  {flight.outbound.totalDuration}
+                                </span>
+                                <div className="w-full flex items-center gap-1 my-1">
+                                  <div className="h-0.5 flex-1 bg-slate-200" />
+                                  <Plane className="w-3.5 h-3.5 text-[#6b4f4f] shrink-0 rotate-90" />
+                                  <div className="h-0.5 flex-1 bg-slate-200" />
+                                </div>
+                                <span className="text-[10px] font-bold text-[#6b4f4f]">
+                                  {flight.outbound.isDirect
+                                    ? "Direct Flight"
+                                    : `${flight.outbound.stopsCount} stop (${flight.outbound.segments[0]?.arrivalAirport})`}
+                                </span>
+                              </div>
+
+                              <div className="w-28 sm:w-36 text-right">
+                                <span className="text-base sm:text-lg font-black text-slate-800 block">
+                                  {flight.outbound.arrivalTime.slice(0, 5)}
+                                </span>
+                                <span className="font-bold text-slate-600 block">
+                                  {flight.outbound.arrivalAirport}
+                                </span>
+                                <span className="text-[10px] text-slate-400 block truncate">
+                                  {flight.outbound.arrivalDate}
+                                </span>
+                              </div>
                             </div>
 
-                            <div className="w-28 sm:w-36 text-right">
-                              <span className="text-base sm:text-lg font-black text-slate-800 block">
-                                {flight.inbound.arrivalTime.slice(0, 5)}
-                              </span>
-                              <span className="font-bold text-slate-600 block">
-                                {flight.inbound.arrivalAirport}
-                              </span>
-                              <span className="text-[10px] text-slate-400 block truncate">
-                                {flight.inbound.arrivalDate}
-                              </span>
-                            </div>
-                          </div>
+                            {/* Inbound Leg Summary (if Return) */}
+                            {flight.inbound && (
+                              <div className="flex items-center justify-between gap-4 text-xs sm:text-sm pt-3 border-t border-dashed border-slate-100">
+                                <div className="w-28 sm:w-36">
+                                  <span className="text-base sm:text-lg font-black text-slate-800 block">
+                                    {flight.inbound.departureTime.slice(0, 5)}
+                                  </span>
+                                  <span className="font-bold text-slate-600 block">
+                                    {flight.inbound.departureAirport}
+                                  </span>
+                                  <span className="text-[10px] text-slate-400 block truncate">
+                                    {flight.inbound.departureDate}
+                                  </span>
+                                </div>
+
+                                <div className="flex-1 flex flex-col items-center max-w-[180px]">
+                                  <span className="text-[11px] font-semibold text-slate-500">
+                                    {flight.inbound.totalDuration}
+                                  </span>
+                                  <div className="w-full flex items-center gap-1 my-1">
+                                    <div className="h-0.5 flex-1 bg-slate-200" />
+                                    <Plane className="w-3.5 h-3.5 text-[#6b4f4f] shrink-0 -rotate-90" />
+                                    <div className="h-0.5 flex-1 bg-slate-200" />
+                                  </div>
+                                  <span className="text-[10px] font-bold text-[#6b4f4f]">
+                                    {flight.inbound.isDirect
+                                      ? "Direct Flight"
+                                      : `${flight.inbound.stopsCount} stop (${flight.inbound.segments[0]?.arrivalAirport})`}
+                                  </span>
+                                </div>
+
+                                <div className="w-28 sm:w-36 text-right">
+                                  <span className="text-base sm:text-lg font-black text-slate-800 block">
+                                    {flight.inbound.arrivalTime.slice(0, 5)}
+                                  </span>
+                                  <span className="font-bold text-slate-600 block">
+                                    {flight.inbound.arrivalAirport}
+                                  </span>
+                                  <span className="text-[10px] text-slate-400 block truncate">
+                                    {flight.inbound.arrivalDate}
+                                  </span>
+                                </div>
+                              </div>
+                            )}
+                          </>
                         )}
 
                         {/* Flight Details Toggle Bar */}
@@ -980,11 +1050,20 @@ export function TravelportFlightSearch() {
                           </button>
 
                           <div className="flex items-center gap-2 text-[11px] text-slate-400">
-                            {flight.outbound.segments.some((s) => s.connectionDuration) && (
-                              <span className="inline-flex items-center gap-1 text-amber-700 font-medium">
-                                <Clock className="w-3 h-3 text-amber-600" />
-                                {flight.outbound.segments[0]?.connectionDuration} Layover
-                              </span>
+                            {flight.tripType === "multi-city" && flight.legs ? (
+                              flight.legs.some((l) => l.segments.some((s) => s.connectionDuration)) && (
+                                <span className="inline-flex items-center gap-1 text-amber-700 font-medium">
+                                  <Clock className="w-3 h-3 text-amber-600" />
+                                  Transit Connections
+                                </span>
+                              )
+                            ) : (
+                              flight.outbound.segments.some((s) => s.connectionDuration) && (
+                                <span className="inline-flex items-center gap-1 text-amber-700 font-medium">
+                                  <Clock className="w-3 h-3 text-amber-600" />
+                                  {flight.outbound.segments[0]?.connectionDuration} Layover
+                                </span>
+                              )
                             )}
                           </div>
                         </div>
@@ -1017,7 +1096,11 @@ export function TravelportFlightSearch() {
                           {/* WhatsApp Inquiry Button */}
                           <a
                             href={`https://wa.me/447888461474?text=${encodeURIComponent(
-                              `Hello Terrific Travel, I would like to book the ${flight.airline} flight (${flight.outbound.departureAirport} to ${flight.outbound.arrivalAirport}) on ${flight.outbound.departureDate} for £${flight.price.toFixed(2)}. Baggage: ${flight.baggage}. Please assist me with booking.`
+                              flight.tripType === "multi-city" && flight.legs && flight.legs.length > 0
+                                ? `Hello Terrific Travel, I would like to book the multi-city flight with ${flight.airline} (${flight.legs.map((l, i) => `Flight ${i + 1}: ${l.departureAirport} to ${l.arrivalAirport} on ${l.departureDate}`).join(", ")}) for £${flight.price.toFixed(2)}. Baggage: ${flight.baggage}. Please assist me with booking.`
+                                : flight.inbound
+                                ? `Hello Terrific Travel, I would like to book the return flight with ${flight.airline} (${flight.outbound.departureAirport} to ${flight.outbound.arrivalAirport} on ${flight.outbound.departureDate}, returning ${flight.inbound.departureDate}) for £${flight.price.toFixed(2)}. Baggage: ${flight.baggage}. Please assist me with booking.`
+                                : `Hello Terrific Travel, I would like to book the ${flight.airline} flight (${flight.outbound.departureAirport} to ${flight.outbound.arrivalAirport}) on ${flight.outbound.departureDate} for £${flight.price.toFixed(2)}. Baggage: ${flight.baggage}. Please assist me with booking.`
                             )}`}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -1043,294 +1126,453 @@ export function TravelportFlightSearch() {
                     {/* ─── Expandable Flight Details Drawer ─── */}
                     {isExpanded && (
                       <div className="w-full bg-[#fcfaf8] border-t border-[#eed6c4]/60 p-4 sm:p-6 space-y-6">
-                        {/* Outbound Leg Detailed Breakdown */}
-                        <div className="space-y-3">
-                          <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#eed6c4]/50">
-                            <div className="flex items-center gap-2">
-                              <div className="w-7 h-7 rounded-lg bg-[#6b4f4f] text-[#fff3e4] flex items-center justify-center font-bold text-xs">
-                                <PlaneTakeoff className="w-4 h-4" />
+                        {flight.tripType === "multi-city" && flight.legs && flight.legs.length > 0 ? (
+                          /* Multi-City Legs Detailed Breakdown */
+                          flight.legs.map((leg, legIdx) => (
+                            <div
+                              key={legIdx}
+                              className={`space-y-3 ${legIdx > 0 ? "pt-5 border-t border-[#eed6c4]/60" : ""}`}
+                            >
+                              <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#eed6c4]/50">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-7 h-7 rounded-lg bg-[#6b4f4f] text-[#fff3e4] flex items-center justify-center font-bold text-xs">
+                                    {legIdx === 0 ? (
+                                      <PlaneTakeoff className="w-4 h-4" />
+                                    ) : legIdx === flight.legs!.length - 1 ? (
+                                      <PlaneLanding className="w-4 h-4" />
+                                    ) : (
+                                      <Plane className="w-4 h-4" />
+                                    )}
+                                  </div>
+                                  <div>
+                                    <h4 className="font-heading font-black text-sm text-[#382626]">
+                                      Flight {legIdx + 1} • {leg.departureAirportName || leg.departureAirport} to{" "}
+                                      {leg.arrivalAirportName || leg.arrivalAirport}
+                                    </h4>
+                                    <p className="text-[11px] text-slate-500">
+                                      {leg.departureDate} • Total Travel Time:{" "}
+                                      <strong className="text-slate-700">{leg.totalDuration}</strong>
+                                    </p>
+                                  </div>
+                                </div>
+                                <span className="text-xs font-bold text-[#6b4f4f] bg-[#eed6c4]/30 px-2.5 py-0.5 rounded-full border border-[#eed6c4]/50">
+                                  {leg.isDirect
+                                    ? "Non-stop"
+                                    : `${leg.stopsCount} Connection(s)`}
+                                </span>
                               </div>
-                              <div>
-                                <h4 className="font-heading font-black text-sm text-[#382626]">
-                                  Outbound • {flight.outbound.departureAirportName || flight.outbound.departureAirport} to{" "}
-                                  {flight.outbound.arrivalAirportName || flight.outbound.arrivalAirport}
-                                </h4>
-                                <p className="text-[11px] text-slate-500">
-                                  {flight.outbound.departureDate} • Total Travel Time:{" "}
-                                  <strong className="text-slate-700">{flight.outbound.totalDuration}</strong>
-                                </p>
+
+                              {/* Multi-city Segments Loop */}
+                              <div className="space-y-3">
+                                {leg.segments.map((seg, sIdx) => (
+                                  <React.Fragment key={sIdx}>
+                                    <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-sm hover:border-[#eed6c4] transition-colors">
+                                      {/* Segment Header */}
+                                      <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-3 border-b border-slate-100 text-xs">
+                                        <div className="flex items-center gap-2">
+                                          <span className="font-heading font-black text-sm text-[#382626]">
+                                            {seg.airline}
+                                          </span>
+                                          <span className="bg-[#eed6c4]/30 text-[#6b4f4f] font-mono font-bold px-2 py-0.5 rounded text-[11px]">
+                                            {seg.flightNumber}
+                                          </span>
+                                          <span className="text-slate-300">•</span>
+                                          <span className="text-slate-600 font-medium text-[11px]">
+                                            {seg.aircraft || "Commercial Jet"}
+                                          </span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                          <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">
+                                            {flight.cabin}
+                                          </span>
+                                          <span className="text-slate-600 text-[11px] font-semibold flex items-center gap-1">
+                                            <Clock className="w-3.5 h-3.5 text-[#6b4f4f]" />
+                                            Flight duration: {seg.duration}
+                                          </span>
+                                        </div>
+                                      </div>
+
+                                      {/* Departure & Arrival Details */}
+                                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+                                        {/* Departure */}
+                                        <div className="flex items-start gap-3">
+                                          <div className="w-3 h-3 rounded-full bg-[#6b4f4f] mt-1 shrink-0 ring-4 ring-[#eed6c4]/40" />
+                                          <div>
+                                            <div className="flex items-baseline gap-2">
+                                              <span className="font-heading font-black text-slate-900 text-lg">
+                                                {seg.departureTime.slice(0, 5)}
+                                              </span>
+                                              <span className="font-bold text-slate-800">
+                                                {seg.departureAirport}
+                                              </span>
+                                              {seg.departureTerminal && (
+                                                <span className="text-[10px] font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">
+                                                  Terminal {seg.departureTerminal}
+                                                </span>
+                                              )}
+                                            </div>
+                                            <p className="text-xs text-slate-700 font-semibold mt-0.5">
+                                              {seg.departureAirportName || seg.departureAirport}
+                                            </p>
+                                            <p className="text-[11px] text-slate-400">
+                                              Date: {seg.departureDate}
+                                            </p>
+                                          </div>
+                                        </div>
+
+                                        {/* Arrival */}
+                                        <div className="flex items-start gap-3">
+                                          <div className="w-3 h-3 rounded-full border-2 border-[#6b4f4f] bg-white mt-1 shrink-0 ring-4 ring-[#eed6c4]/40" />
+                                          <div>
+                                            <div className="flex items-baseline gap-2">
+                                              <span className="font-heading font-black text-slate-900 text-lg">
+                                                {seg.arrivalTime.slice(0, 5)}
+                                              </span>
+                                              <span className="font-bold text-slate-800">
+                                                {seg.arrivalAirport}
+                                              </span>
+                                              {seg.arrivalTerminal && (
+                                                <span className="text-[10px] font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">
+                                                  Terminal {seg.arrivalTerminal}
+                                                </span>
+                                              )}
+                                            </div>
+                                            <p className="text-xs text-slate-700 font-semibold mt-0.5">
+                                              {seg.arrivalAirportName || seg.arrivalAirport}
+                                            </p>
+                                            <p className="text-[11px] text-slate-400">
+                                              Date: {seg.arrivalDate}
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    {/* Transit / Layover Banner */}
+                                    {sIdx < leg.segments.length - 1 && (
+                                      <div className="bg-gradient-to-r from-amber-50 to-[#fff8f0] border border-amber-200/90 rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-3 shadow-xs">
+                                        <div className="flex items-center gap-3">
+                                          <div className="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
+                                            <Clock className="w-4 h-4 text-amber-700" />
+                                          </div>
+                                          <div>
+                                            <div className="text-xs sm:text-sm font-bold text-amber-950 flex items-center gap-1.5">
+                                              <span>Layover / Transit at {seg.arrivalAirportName || seg.arrivalAirport}:</span>
+                                              <span className="font-black text-amber-900 bg-amber-100/80 px-2 py-0.5 rounded">
+                                                {seg.connectionDuration || "Connection"}
+                                              </span>
+                                            </div>
+                                            <p className="text-[11px] text-amber-800 mt-0.5">
+                                              Baggage checked through to final destination • Connect to{" "}
+                                              <strong className="text-amber-950">
+                                                {leg.segments[sIdx + 1]?.airline} (
+                                                {leg.segments[sIdx + 1]?.flightNumber})
+                                              </strong>
+                                            </p>
+                                          </div>
+                                        </div>
+                                        <span className="bg-amber-200/70 text-amber-900 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md">
+                                          Plane Change
+                                        </span>
+                                      </div>
+                                    )}
+                                  </React.Fragment>
+                                ))}
                               </div>
                             </div>
-                            <span className="text-xs font-bold text-[#6b4f4f] bg-[#eed6c4]/30 px-2.5 py-0.5 rounded-full border border-[#eed6c4]/50">
-                              {flight.outbound.isDirect
-                                ? "Non-stop"
-                                : `${flight.outbound.stopsCount} Connection(s)`}
-                            </span>
-                          </div>
-
-                          {/* Segments Loop */}
-                          <div className="space-y-3">
-                            {flight.outbound.segments.map((seg, sIdx) => (
-                              <React.Fragment key={sIdx}>
-                                <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-sm hover:border-[#eed6c4] transition-colors">
-                                  {/* Segment Header */}
-                                  <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-3 border-b border-slate-100 text-xs">
-                                    <div className="flex items-center gap-2">
-                                      <span className="font-heading font-black text-sm text-[#382626]">
-                                        {seg.airline}
-                                      </span>
-                                      <span className="bg-[#eed6c4]/30 text-[#6b4f4f] font-mono font-bold px-2 py-0.5 rounded text-[11px]">
-                                        {seg.flightNumber}
-                                      </span>
-                                      <span className="text-slate-300">•</span>
-                                      <span className="text-slate-600 font-medium text-[11px]">
-                                        {seg.aircraft || "Commercial Jet"}
-                                      </span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                      <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">
-                                        {flight.cabin}
-                                      </span>
-                                      <span className="text-slate-600 text-[11px] font-semibold flex items-center gap-1">
-                                        <Clock className="w-3.5 h-3.5 text-[#6b4f4f]" />
-                                        Flight duration: {seg.duration}
-                                      </span>
-                                    </div>
-                                  </div>
-
-                                  {/* Departure & Arrival Details */}
-                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
-                                    {/* Departure */}
-                                    <div className="flex items-start gap-3">
-                                      <div className="w-3 h-3 rounded-full bg-[#6b4f4f] mt-1 shrink-0 ring-4 ring-[#eed6c4]/40" />
-                                      <div>
-                                        <div className="flex items-baseline gap-2">
-                                          <span className="font-heading font-black text-slate-900 text-lg">
-                                            {seg.departureTime.slice(0, 5)}
-                                          </span>
-                                          <span className="font-bold text-slate-800">
-                                            {seg.departureAirport}
-                                          </span>
-                                          {seg.departureTerminal && (
-                                            <span className="text-[10px] font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">
-                                              Terminal {seg.departureTerminal}
-                                            </span>
-                                          )}
-                                        </div>
-                                        <p className="text-xs text-slate-700 font-semibold mt-0.5">
-                                          {seg.departureAirportName || seg.departureAirport}
-                                        </p>
-                                        <p className="text-[11px] text-slate-400">
-                                          Date: {seg.departureDate}
-                                        </p>
-                                      </div>
-                                    </div>
-
-                                    {/* Arrival */}
-                                    <div className="flex items-start gap-3">
-                                      <div className="w-3 h-3 rounded-full border-2 border-[#6b4f4f] bg-white mt-1 shrink-0 ring-4 ring-[#eed6c4]/40" />
-                                      <div>
-                                        <div className="flex items-baseline gap-2">
-                                          <span className="font-heading font-black text-slate-900 text-lg">
-                                            {seg.arrivalTime.slice(0, 5)}
-                                          </span>
-                                          <span className="font-bold text-slate-800">
-                                            {seg.arrivalAirport}
-                                          </span>
-                                          {seg.arrivalTerminal && (
-                                            <span className="text-[10px] font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">
-                                              Terminal {seg.arrivalTerminal}
-                                            </span>
-                                          )}
-                                        </div>
-                                        <p className="text-xs text-slate-700 font-semibold mt-0.5">
-                                          {seg.arrivalAirportName || seg.arrivalAirport}
-                                        </p>
-                                        <p className="text-[11px] text-slate-400">
-                                          Date: {seg.arrivalDate}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                {/* Transit / Layover Banner */}
-                                {sIdx < flight.outbound.segments.length - 1 && (
-                                  <div className="bg-gradient-to-r from-amber-50 to-[#fff8f0] border border-amber-200/90 rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-3 shadow-xs">
-                                    <div className="flex items-center gap-3">
-                                      <div className="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
-                                        <Clock className="w-4 h-4 text-amber-700" />
-                                      </div>
-                                      <div>
-                                        <div className="text-xs sm:text-sm font-bold text-amber-950 flex items-center gap-1.5">
-                                          <span>Layover / Transit at {seg.arrivalAirportName || seg.arrivalAirport}:</span>
-                                          <span className="font-black text-amber-900 bg-amber-100/80 px-2 py-0.5 rounded">
-                                            {seg.connectionDuration || "Connection"}
-                                          </span>
-                                        </div>
-                                        <p className="text-[11px] text-amber-800 mt-0.5">
-                                          Baggage checked through to final destination • Connect to{" "}
-                                          <strong className="text-amber-950">
-                                            {flight.outbound.segments[sIdx + 1]?.airline} (
-                                            {flight.outbound.segments[sIdx + 1]?.flightNumber})
-                                          </strong>
-                                        </p>
-                                      </div>
-                                    </div>
-                                    <span className="bg-amber-200/70 text-amber-900 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md">
-                                      Plane Change
-                                    </span>
-                                  </div>
-                                )}
-                              </React.Fragment>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Inbound Leg Detailed Breakdown (if Return Trip) */}
-                        {flight.inbound && (
-                          <div className="space-y-3 pt-4 border-t border-[#eed6c4]/50">
-                            <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#eed6c4]/50">
-                              <div className="flex items-center gap-2">
-                                <div className="w-7 h-7 rounded-lg bg-[#6b4f4f] text-[#fff3e4] flex items-center justify-center font-bold text-xs">
-                                  <PlaneLanding className="w-4 h-4" />
-                                </div>
-                                <div>
-                                  <h4 className="font-heading font-black text-sm text-[#382626]">
-                                    Return • {flight.inbound.departureAirportName || flight.inbound.departureAirport} to{" "}
-                                    {flight.inbound.arrivalAirportName || flight.inbound.arrivalAirport}
-                                  </h4>
-                                  <p className="text-[11px] text-slate-500">
-                                    {flight.inbound.departureDate} • Total Travel Time:{" "}
-                                    <strong className="text-slate-700">{flight.inbound.totalDuration}</strong>
-                                  </p>
-                                </div>
-                              </div>
-                              <span className="text-xs font-bold text-[#6b4f4f] bg-[#eed6c4]/30 px-2.5 py-0.5 rounded-full border border-[#eed6c4]/50">
-                                {flight.inbound.isDirect
-                                  ? "Non-stop"
-                                  : `${flight.inbound.stopsCount} Connection(s)`}
-                              </span>
-                            </div>
-
-                            {/* Inbound Segments Loop */}
+                          ))
+                        ) : (
+                          <>
+                            {/* Outbound Leg Detailed Breakdown */}
                             <div className="space-y-3">
-                              {flight.inbound.segments.map((seg, sIdx) => (
-                                <React.Fragment key={sIdx}>
-                                  <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-sm hover:border-[#eed6c4] transition-colors">
-                                    {/* Segment Header */}
-                                    <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-3 border-b border-slate-100 text-xs">
-                                      <div className="flex items-center gap-2">
-                                        <span className="font-heading font-black text-sm text-[#382626]">
-                                          {seg.airline}
-                                        </span>
-                                        <span className="bg-[#eed6c4]/30 text-[#6b4f4f] font-mono font-bold px-2 py-0.5 rounded text-[11px]">
-                                          {seg.flightNumber}
-                                        </span>
-                                        <span className="text-slate-300">•</span>
-                                        <span className="text-slate-600 font-medium text-[11px]">
-                                          {seg.aircraft || "Commercial Jet"}
-                                        </span>
+                              <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#eed6c4]/50">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-7 h-7 rounded-lg bg-[#6b4f4f] text-[#fff3e4] flex items-center justify-center font-bold text-xs">
+                                    <PlaneTakeoff className="w-4 h-4" />
+                                  </div>
+                                  <div>
+                                    <h4 className="font-heading font-black text-sm text-[#382626]">
+                                      Outbound • {flight.outbound.departureAirportName || flight.outbound.departureAirport} to{" "}
+                                      {flight.outbound.arrivalAirportName || flight.outbound.arrivalAirport}
+                                    </h4>
+                                    <p className="text-[11px] text-slate-500">
+                                      {flight.outbound.departureDate} • Total Travel Time:{" "}
+                                      <strong className="text-slate-700">{flight.outbound.totalDuration}</strong>
+                                    </p>
+                                  </div>
+                                </div>
+                                <span className="text-xs font-bold text-[#6b4f4f] bg-[#eed6c4]/30 px-2.5 py-0.5 rounded-full border border-[#eed6c4]/50">
+                                  {flight.outbound.isDirect
+                                    ? "Non-stop"
+                                    : `${flight.outbound.stopsCount} Connection(s)`}
+                                </span>
+                              </div>
+
+                              {/* Segments Loop */}
+                              <div className="space-y-3">
+                                {flight.outbound.segments.map((seg, sIdx) => (
+                                  <React.Fragment key={sIdx}>
+                                    <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-sm hover:border-[#eed6c4] transition-colors">
+                                      {/* Segment Header */}
+                                      <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-3 border-b border-slate-100 text-xs">
+                                        <div className="flex items-center gap-2">
+                                          <span className="font-heading font-black text-sm text-[#382626]">
+                                            {seg.airline}
+                                          </span>
+                                          <span className="bg-[#eed6c4]/30 text-[#6b4f4f] font-mono font-bold px-2 py-0.5 rounded text-[11px]">
+                                            {seg.flightNumber}
+                                          </span>
+                                          <span className="text-slate-300">•</span>
+                                          <span className="text-slate-600 font-medium text-[11px]">
+                                            {seg.aircraft || "Commercial Jet"}
+                                          </span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                          <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">
+                                            {flight.cabin}
+                                          </span>
+                                          <span className="text-slate-600 text-[11px] font-semibold flex items-center gap-1">
+                                            <Clock className="w-3.5 h-3.5 text-[#6b4f4f]" />
+                                            Flight duration: {seg.duration}
+                                          </span>
+                                        </div>
                                       </div>
-                                      <div className="flex items-center gap-2">
-                                        <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">
-                                          {flight.cabin}
-                                        </span>
-                                        <span className="text-slate-600 text-[11px] font-semibold flex items-center gap-1">
-                                          <Clock className="w-3.5 h-3.5 text-[#6b4f4f]" />
-                                          Flight duration: {seg.duration}
-                                        </span>
+
+                                      {/* Departure & Arrival Details */}
+                                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+                                        {/* Departure */}
+                                        <div className="flex items-start gap-3">
+                                          <div className="w-3 h-3 rounded-full bg-[#6b4f4f] mt-1 shrink-0 ring-4 ring-[#eed6c4]/40" />
+                                          <div>
+                                            <div className="flex items-baseline gap-2">
+                                              <span className="font-heading font-black text-slate-900 text-lg">
+                                                {seg.departureTime.slice(0, 5)}
+                                              </span>
+                                              <span className="font-bold text-slate-800">
+                                                {seg.departureAirport}
+                                              </span>
+                                              {seg.departureTerminal && (
+                                                <span className="text-[10px] font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">
+                                                  Terminal {seg.departureTerminal}
+                                                </span>
+                                              )}
+                                            </div>
+                                            <p className="text-xs text-slate-700 font-semibold mt-0.5">
+                                              {seg.departureAirportName || seg.departureAirport}
+                                            </p>
+                                            <p className="text-[11px] text-slate-400">
+                                              Date: {seg.departureDate}
+                                            </p>
+                                          </div>
+                                        </div>
+
+                                        {/* Arrival */}
+                                        <div className="flex items-start gap-3">
+                                          <div className="w-3 h-3 rounded-full border-2 border-[#6b4f4f] bg-white mt-1 shrink-0 ring-4 ring-[#eed6c4]/40" />
+                                          <div>
+                                            <div className="flex items-baseline gap-2">
+                                              <span className="font-heading font-black text-slate-900 text-lg">
+                                                {seg.arrivalTime.slice(0, 5)}
+                                              </span>
+                                              <span className="font-bold text-slate-800">
+                                                {seg.arrivalAirport}
+                                              </span>
+                                              {seg.arrivalTerminal && (
+                                                <span className="text-[10px] font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">
+                                                  Terminal {seg.arrivalTerminal}
+                                                </span>
+                                              )}
+                                            </div>
+                                            <p className="text-xs text-slate-700 font-semibold mt-0.5">
+                                              {seg.arrivalAirportName || seg.arrivalAirport}
+                                            </p>
+                                            <p className="text-[11px] text-slate-400">
+                                              Date: {seg.arrivalDate}
+                                            </p>
+                                          </div>
+                                        </div>
                                       </div>
                                     </div>
 
-                                    {/* Departure & Arrival Details */}
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
-                                      {/* Departure */}
-                                      <div className="flex items-start gap-3">
-                                        <div className="w-3 h-3 rounded-full bg-[#6b4f4f] mt-1 shrink-0 ring-4 ring-[#eed6c4]/40" />
-                                        <div>
-                                          <div className="flex items-baseline gap-2">
-                                            <span className="font-heading font-black text-slate-900 text-lg">
-                                              {seg.departureTime.slice(0, 5)}
-                                            </span>
-                                            <span className="font-bold text-slate-800">
-                                              {seg.departureAirport}
-                                            </span>
-                                            {seg.departureTerminal && (
-                                              <span className="text-[10px] font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">
-                                                Terminal {seg.departureTerminal}
-                                              </span>
-                                            )}
+                                    {/* Transit / Layover Banner */}
+                                    {sIdx < flight.outbound.segments.length - 1 && (
+                                      <div className="bg-gradient-to-r from-amber-50 to-[#fff8f0] border border-amber-200/90 rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-3 shadow-xs">
+                                        <div className="flex items-center gap-3">
+                                          <div className="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
+                                            <Clock className="w-4 h-4 text-amber-700" />
                                           </div>
-                                          <p className="text-xs text-slate-700 font-semibold mt-0.5">
-                                            {seg.departureAirportName || seg.departureAirport}
-                                          </p>
-                                          <p className="text-[11px] text-slate-400">
-                                            Date: {seg.departureDate}
-                                          </p>
+                                          <div>
+                                            <div className="text-xs sm:text-sm font-bold text-amber-950 flex items-center gap-1.5">
+                                              <span>Layover / Transit at {seg.arrivalAirportName || seg.arrivalAirport}:</span>
+                                              <span className="font-black text-amber-900 bg-amber-100/80 px-2 py-0.5 rounded">
+                                                {seg.connectionDuration || "Connection"}
+                                              </span>
+                                            </div>
+                                            <p className="text-[11px] text-amber-800 mt-0.5">
+                                              Baggage checked through to final destination • Connect to{" "}
+                                              <strong className="text-amber-950">
+                                                {flight.outbound.segments[sIdx + 1]?.airline} (
+                                                {flight.outbound.segments[sIdx + 1]?.flightNumber})
+                                              </strong>
+                                            </p>
+                                          </div>
                                         </div>
+                                        <span className="bg-amber-200/70 text-amber-900 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md">
+                                          Plane Change
+                                        </span>
                                       </div>
+                                    )}
+                                  </React.Fragment>
+                                ))}
+                              </div>
+                            </div>
 
-                                      {/* Arrival */}
-                                      <div className="flex items-start gap-3">
-                                        <div className="w-3 h-3 rounded-full border-2 border-[#6b4f4f] bg-white mt-1 shrink-0 ring-4 ring-[#eed6c4]/40" />
-                                        <div>
-                                          <div className="flex items-baseline gap-2">
-                                            <span className="font-heading font-black text-slate-900 text-lg">
-                                              {seg.arrivalTime.slice(0, 5)}
-                                            </span>
-                                            <span className="font-bold text-slate-800">
-                                              {seg.arrivalAirport}
-                                            </span>
-                                            {seg.arrivalTerminal && (
-                                              <span className="text-[10px] font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">
-                                                Terminal {seg.arrivalTerminal}
-                                              </span>
-                                            )}
-                                          </div>
-                                          <p className="text-xs text-slate-700 font-semibold mt-0.5">
-                                            {seg.arrivalAirportName || seg.arrivalAirport}
-                                          </p>
-                                          <p className="text-[11px] text-slate-400">
-                                            Date: {seg.arrivalDate}
-                                          </p>
-                                        </div>
-                                      </div>
+                            {/* Inbound Leg Detailed Breakdown (if Return Trip) */}
+                            {flight.inbound && (
+                              <div className="space-y-3 pt-4 border-t border-[#eed6c4]/50">
+                                <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#eed6c4]/50">
+                                  <div className="flex items-center gap-2">
+                                    <div className="w-7 h-7 rounded-lg bg-[#6b4f4f] text-[#fff3e4] flex items-center justify-center font-bold text-xs">
+                                      <PlaneLanding className="w-4 h-4" />
+                                    </div>
+                                    <div>
+                                      <h4 className="font-heading font-black text-sm text-[#382626]">
+                                        Return • {flight.inbound.departureAirportName || flight.inbound.departureAirport} to{" "}
+                                        {flight.inbound.arrivalAirportName || flight.inbound.arrivalAirport}
+                                      </h4>
+                                      <p className="text-[11px] text-slate-500">
+                                        {flight.inbound.departureDate} • Total Travel Time:{" "}
+                                        <strong className="text-slate-700">{flight.inbound.totalDuration}</strong>
+                                      </p>
                                     </div>
                                   </div>
+                                  <span className="text-xs font-bold text-[#6b4f4f] bg-[#eed6c4]/30 px-2.5 py-0.5 rounded-full border border-[#eed6c4]/50">
+                                    {flight.inbound.isDirect
+                                      ? "Non-stop"
+                                      : `${flight.inbound.stopsCount} Connection(s)`}
+                                  </span>
+                                </div>
 
-                                  {/* Transit / Layover Banner */}
-                                  {sIdx < flight.inbound!.segments.length - 1 && (
-                                    <div className="bg-gradient-to-r from-amber-50 to-[#fff8f0] border border-amber-200/90 rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-3 shadow-xs">
-                                      <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
-                                          <Clock className="w-4 h-4 text-amber-700" />
-                                        </div>
-                                        <div>
-                                          <div className="text-xs sm:text-sm font-bold text-amber-950 flex items-center gap-1.5">
-                                            <span>Layover / Transit at {seg.arrivalAirportName || seg.arrivalAirport}:</span>
-                                            <span className="font-black text-amber-900 bg-amber-100/80 px-2 py-0.5 rounded">
-                                              {seg.connectionDuration || "Connection"}
+                                {/* Inbound Segments Loop */}
+                                <div className="space-y-3">
+                                  {flight.inbound.segments.map((seg, sIdx) => (
+                                    <React.Fragment key={sIdx}>
+                                      <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-sm hover:border-[#eed6c4] transition-colors">
+                                        {/* Segment Header */}
+                                        <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-3 border-b border-slate-100 text-xs">
+                                          <div className="flex items-center gap-2">
+                                            <span className="font-heading font-black text-sm text-[#382626]">
+                                              {seg.airline}
+                                            </span>
+                                            <span className="bg-[#eed6c4]/30 text-[#6b4f4f] font-mono font-bold px-2 py-0.5 rounded text-[11px]">
+                                              {seg.flightNumber}
+                                            </span>
+                                            <span className="text-slate-300">•</span>
+                                            <span className="text-slate-600 font-medium text-[11px]">
+                                              {seg.aircraft || "Commercial Jet"}
                                             </span>
                                           </div>
-                                          <p className="text-[11px] text-amber-800 mt-0.5">
-                                            Baggage checked through to final destination • Connect to{" "}
-                                            <strong className="text-amber-950">
-                                              {flight.inbound!.segments[sIdx + 1]?.airline} (
-                                              {flight.inbound!.segments[sIdx + 1]?.flightNumber})
-                                            </strong>
-                                          </p>
+                                          <div className="flex items-center gap-2">
+                                            <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">
+                                              {flight.cabin}
+                                            </span>
+                                            <span className="text-slate-600 text-[11px] font-semibold flex items-center gap-1">
+                                              <Clock className="w-3.5 h-3.5 text-[#6b4f4f]" />
+                                              Flight duration: {seg.duration}
+                                            </span>
+                                          </div>
+                                        </div>
+
+                                        {/* Departure & Arrival Details */}
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+                                          {/* Departure */}
+                                          <div className="flex items-start gap-3">
+                                            <div className="w-3 h-3 rounded-full bg-[#6b4f4f] mt-1 shrink-0 ring-4 ring-[#eed6c4]/40" />
+                                            <div>
+                                              <div className="flex items-baseline gap-2">
+                                                <span className="font-heading font-black text-slate-900 text-lg">
+                                                  {seg.departureTime.slice(0, 5)}
+                                                </span>
+                                                <span className="font-bold text-slate-800">
+                                                  {seg.departureAirport}
+                                                </span>
+                                                {seg.departureTerminal && (
+                                                  <span className="text-[10px] font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">
+                                                    Terminal {seg.departureTerminal}
+                                                  </span>
+                                                )}
+                                              </div>
+                                              <p className="text-xs text-slate-700 font-semibold mt-0.5">
+                                                {seg.departureAirportName || seg.departureAirport}
+                                              </p>
+                                              <p className="text-[11px] text-slate-400">
+                                                Date: {seg.departureDate}
+                                              </p>
+                                            </div>
+                                          </div>
+
+                                          {/* Arrival */}
+                                          <div className="flex items-start gap-3">
+                                            <div className="w-3 h-3 rounded-full border-2 border-[#6b4f4f] bg-white mt-1 shrink-0 ring-4 ring-[#eed6c4]/40" />
+                                            <div>
+                                              <div className="flex items-baseline gap-2">
+                                                <span className="font-heading font-black text-slate-900 text-lg">
+                                                  {seg.arrivalTime.slice(0, 5)}
+                                                </span>
+                                                <span className="font-bold text-slate-800">
+                                                  {seg.arrivalAirport}
+                                                </span>
+                                                {seg.arrivalTerminal && (
+                                                  <span className="text-[10px] font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">
+                                                    Terminal {seg.arrivalTerminal}
+                                                  </span>
+                                                )}
+                                              </div>
+                                              <p className="text-xs text-slate-700 font-semibold mt-0.5">
+                                                {seg.arrivalAirportName || seg.arrivalAirport}
+                                              </p>
+                                              <p className="text-[11px] text-slate-400">
+                                                Date: {seg.arrivalDate}
+                                              </p>
+                                            </div>
+                                          </div>
                                         </div>
                                       </div>
-                                      <span className="bg-amber-200/70 text-amber-900 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md">
-                                        Plane Change
-                                      </span>
-                                    </div>
-                                  )}
-                                </React.Fragment>
-                              ))}
-                            </div>
-                          </div>
+
+                                      {/* Transit / Layover Banner */}
+                                      {sIdx < flight.inbound!.segments.length - 1 && (
+                                        <div className="bg-gradient-to-r from-amber-50 to-[#fff8f0] border border-amber-200/90 rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-3 shadow-xs">
+                                          <div className="flex items-center gap-3">
+                                            <div className="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
+                                              <Clock className="w-4 h-4 text-amber-700" />
+                                            </div>
+                                            <div>
+                                              <div className="text-xs sm:text-sm font-bold text-amber-950 flex items-center gap-1.5">
+                                                <span>Layover / Transit at {seg.arrivalAirportName || seg.arrivalAirport}:</span>
+                                                <span className="font-black text-amber-900 bg-amber-100/80 px-2 py-0.5 rounded">
+                                                  {seg.connectionDuration || "Connection"}
+                                                </span>
+                                              </div>
+                                              <p className="text-[11px] text-amber-800 mt-0.5">
+                                                Baggage checked through to final destination • Connect to{" "}
+                                                <strong className="text-amber-950">
+                                                  {flight.inbound!.segments[sIdx + 1]?.airline} (
+                                                  {flight.inbound!.segments[sIdx + 1]?.flightNumber})
+                                                </strong>
+                                              </p>
+                                            </div>
+                                          </div>
+                                          <span className="bg-amber-200/70 text-amber-900 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md">
+                                            Plane Change
+                                          </span>
+                                        </div>
+                                      )}
+                                    </React.Fragment>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </>
                         )}
 
                         {/* Drawer Bottom Bar: Baggage & Book Button */}
@@ -1358,7 +1600,11 @@ export function TravelportFlightSearch() {
                             <div className="flex items-center gap-2.5">
                               <a
                                 href={`https://wa.me/447888461474?text=${encodeURIComponent(
-                                  `Hello Terrific Travel, I would like to book the ${flight.airline} flight (${flight.outbound.departureAirport} to ${flight.outbound.arrivalAirport}) on ${flight.outbound.departureDate} for £${flight.price.toFixed(2)}. Baggage: ${flight.baggage}. Please assist me with booking.`
+                                  flight.tripType === "multi-city" && flight.legs && flight.legs.length > 0
+                                    ? `Hello Terrific Travel, I would like to book the multi-city flight with ${flight.airline} (${flight.legs.map((l, i) => `Flight ${i + 1}: ${l.departureAirport} to ${l.arrivalAirport} on ${l.departureDate}`).join(", ")}) for £${flight.price.toFixed(2)}. Baggage: ${flight.baggage}. Please assist me with booking.`
+                                    : flight.inbound
+                                    ? `Hello Terrific Travel, I would like to book the return flight with ${flight.airline} (${flight.outbound.departureAirport} to ${flight.outbound.arrivalAirport} on ${flight.outbound.departureDate}, returning ${flight.inbound.departureDate}) for £${flight.price.toFixed(2)}. Baggage: ${flight.baggage}. Please assist me with booking.`
+                                    : `Hello Terrific Travel, I would like to book the ${flight.airline} flight (${flight.outbound.departureAirport} to ${flight.outbound.arrivalAirport}) on ${flight.outbound.departureDate} for £${flight.price.toFixed(2)}. Baggage: ${flight.baggage}. Please assist me with booking.`
                                 )}`}
                                 target="_blank"
                                 rel="noopener noreferrer"

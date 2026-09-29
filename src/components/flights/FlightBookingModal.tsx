@@ -111,6 +111,28 @@ export function FlightBookingModal({
             .join("\n")
         : "";
 
+      const multiCityLegsDetail =
+        flight.tripType === "multi-city" && flight.legs && flight.legs.length > 0
+          ? flight.legs
+              .map((leg, lIdx) => {
+                const segs = leg.segments
+                  .map(
+                    (s, idx) =>
+                      `    * Segment ${idx + 1}: ${s.flightNumber} (${s.airline}, ${s.aircraft || "Aircraft"}) ${s.departureAirport} (${s.departureAirportName || s.departureAirport}${s.departureTerminal ? `, T${s.departureTerminal}` : ""}) ${s.departureTime.slice(0, 5)} -> ${s.arrivalAirport} (${s.arrivalAirportName || s.arrivalAirport}${s.arrivalTerminal ? `, T${s.arrivalTerminal}` : ""}) ${s.arrivalTime.slice(0, 5)}${s.connectionDuration ? ` [Transit / Layover: ${s.connectionDuration}]` : ""}`
+                  )
+                  .join("\n");
+                return `Flight ${lIdx + 1}:
+- Route: ${leg.departureAirportName || leg.departureAirport} to ${leg.arrivalAirportName || leg.arrivalAirport}
+- Flight(s): ${leg.flightNumbers}
+- Departure: ${leg.departureDate} at ${leg.departureTime}
+- Arrival: ${leg.arrivalDate} at ${leg.arrivalTime}
+- Duration: ${leg.totalDuration} (${leg.isDirect ? "Direct" : `${leg.stopsCount} stop(s)`})
+Segments:
+${segs}`;
+              })
+              .join("\n\n")
+          : "";
+
       const flightDetailsMessage = `
 Selected Flight: ${flight.airline} (${flight.carrier})
 Trip Type: ${flight.tripType.toUpperCase()}
@@ -118,7 +140,10 @@ Total Rate: £${flight.price.toFixed(2)} ${flight.currency}
 Cabin: ${flight.cabin}
 Baggage: ${flight.baggage}
 
-Outbound Flight:
+${
+  flight.tripType === "multi-city" && flight.legs && flight.legs.length > 0
+    ? multiCityLegsDetail
+    : `Outbound Flight:
 - Route: ${flight.outbound.departureAirportName || flight.outbound.departureAirport} to ${flight.outbound.arrivalAirportName || flight.outbound.arrivalAirport}
 - Flight(s): ${flight.outbound.flightNumbers}
 - Departure: ${flight.outbound.departureDate} at ${flight.outbound.departureTime}
@@ -139,6 +164,7 @@ Segments:
 ${inboundSegmentsDetail}
 `
     : ""
+}`
 }
 Passengers: ${totalPassengers} (${searchCriteria?.passengers?.adults || 1} Adult(s)${searchCriteria?.passengers?.children ? `, ${searchCriteria.passengers.children} Child(ren)` : ""}${searchCriteria?.passengers?.infants ? `, ${searchCriteria.passengers.infants} Infant(s)` : ""})
 
@@ -155,11 +181,20 @@ ${form.message || "None"}
           email: form.email,
           phone: form.phone,
           type: "Flight Booking",
-          airport: `${flight.outbound.departureAirport} to ${flight.outbound.arrivalAirport}`,
+          airport:
+            flight.tripType === "multi-city" && flight.legs && flight.legs.length > 0
+              ? flight.legs.map((l) => `${l.departureAirport} to ${l.arrivalAirport}`).join(" | ")
+              : `${flight.outbound.departureAirport} to ${flight.outbound.arrivalAirport}`,
           date: flight.outbound.departureDate,
-          returnDate: flight.inbound?.departureDate || "N/A",
+          returnDate:
+            flight.tripType === "multi-city" && flight.legs && flight.legs.length > 1
+              ? flight.legs[flight.legs.length - 1].departureDate
+              : flight.inbound?.departureDate || "N/A",
           airline: flight.airline,
-          flightNumber: flight.outbound.flightNumbers,
+          flightNumber:
+            flight.tripType === "multi-city" && flight.legs && flight.legs.length > 0
+              ? flight.legs.map((l) => l.flightNumbers).filter(Boolean).join(" | ")
+              : flight.outbound.flightNumbers,
           quotedRate: `£${flight.price.toFixed(2)}`,
           travelers: totalPassengers,
           cabin: flight.cabin,
@@ -239,86 +274,159 @@ ${form.message || "None"}
               </div>
             </div>
 
-            {/* Outbound Row */}
-            <div className="flex items-center justify-between gap-4 text-xs sm:text-sm">
-              <div className="flex items-center gap-2">
-                <PlaneTakeoff className="w-4 h-4 text-[#6b4f4f] shrink-0" />
-                <div>
-                  <span className="font-bold text-slate-800">
-                    {flight.outbound.departureTime.slice(0, 5)} {flight.outbound.departureAirport}
-                  </span>
-                  <p className="text-[11px] text-slate-400">
-                    {flight.outbound.departureDate}
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="text-[10px] text-slate-400 font-medium">
-                  {flight.outbound.totalDuration}
-                </span>
-                <div className="flex items-center gap-1 text-[10px] text-slate-500">
-                  <ArrowRight className="w-3 h-3 text-[#6b4f4f]" />
-                  <span>
-                    {flight.outbound.isDirect
-                      ? "Direct"
-                      : `${flight.outbound.stopsCount} stop (${flight.outbound.segments[0]?.arrivalAirport}${
-                          flight.outbound.segments[0]?.connectionDuration
-                            ? ` • ${flight.outbound.segments[0].connectionDuration}`
-                            : ""
-                        })`}
-                  </span>
-                </div>
-              </div>
-              <div className="text-right">
-                <span className="font-bold text-slate-800">
-                  {flight.outbound.arrivalTime.slice(0, 5)} {flight.outbound.arrivalAirport}
-                </span>
-                <p className="text-[11px] text-slate-400">
-                  {flight.outbound.arrivalDate}
-                </p>
-              </div>
-            </div>
+            {/* Multi-City or Outbound/Inbound Flight Rows */}
+            {flight.tripType === "multi-city" && flight.legs && flight.legs.length > 0 ? (
+              <div className="space-y-3">
+                {flight.legs.map((leg, legIdx) => (
+                  <div
+                    key={legIdx}
+                    className={legIdx > 0 ? "pt-2.5 border-t border-dashed border-slate-200" : ""}
+                  >
+                    <div className="flex items-center gap-1.5 mb-1.5">
+                      <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-[#eed6c4]/40 text-[#6b4f4f]">
+                        Flight {legIdx + 1}
+                      </span>
+                      <span className="text-[11px] font-bold text-slate-700">
+                        {leg.departureAirport} → {leg.arrivalAirport}
+                      </span>
+                      <span className="text-[10px] text-slate-400">
+                        • {leg.departureDate}
+                      </span>
+                    </div>
 
-            {/* Inbound Row (if return) */}
-            {flight.inbound && (
-              <div className="flex items-center justify-between gap-4 text-xs sm:text-sm pt-2 border-t border-dashed border-slate-100">
-                <div className="flex items-center gap-2">
-                  <PlaneLanding className="w-4 h-4 text-[#6b4f4f] shrink-0" />
-                  <div>
+                    <div className="flex items-center justify-between gap-4 text-xs sm:text-sm">
+                      <div className="flex items-center gap-2">
+                        {legIdx === 0 ? (
+                          <PlaneTakeoff className="w-4 h-4 text-[#6b4f4f] shrink-0" />
+                        ) : legIdx === flight.legs!.length - 1 ? (
+                          <PlaneLanding className="w-4 h-4 text-[#6b4f4f] shrink-0" />
+                        ) : (
+                          <Plane className="w-4 h-4 text-[#6b4f4f] shrink-0" />
+                        )}
+                        <div>
+                          <span className="font-bold text-slate-800">
+                            {leg.departureTime.slice(0, 5)} {leg.departureAirport}
+                          </span>
+                          <p className="text-[10px] text-slate-400">
+                            {leg.departureAirportName || leg.departureAirport}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col items-center">
+                        <span className="text-[10px] text-slate-400 font-medium">
+                          {leg.totalDuration}
+                        </span>
+                        <div className="flex items-center gap-1 text-[10px] text-slate-500">
+                          <ArrowRight className="w-3 h-3 text-[#6b4f4f]" />
+                          <span>
+                            {leg.isDirect
+                              ? "Direct"
+                              : `${leg.stopsCount} stop (${leg.segments[0]?.arrivalAirport}${
+                                  leg.segments[0]?.connectionDuration
+                                    ? ` • ${leg.segments[0].connectionDuration}`
+                                    : ""
+                                })`}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="text-right">
+                        <span className="font-bold text-slate-800">
+                          {leg.arrivalTime.slice(0, 5)} {leg.arrivalAirport}
+                        </span>
+                        <p className="text-[10px] text-slate-400">
+                          {leg.arrivalAirportName || leg.arrivalAirport}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <>
+                {/* Outbound Row */}
+                <div className="flex items-center justify-between gap-4 text-xs sm:text-sm">
+                  <div className="flex items-center gap-2">
+                    <PlaneTakeoff className="w-4 h-4 text-[#6b4f4f] shrink-0" />
+                    <div>
+                      <span className="font-bold text-slate-800">
+                        {flight.outbound.departureTime.slice(0, 5)} {flight.outbound.departureAirport}
+                      </span>
+                      <p className="text-[11px] text-slate-400">
+                        {flight.outbound.departureDate}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <span className="text-[10px] text-slate-400 font-medium">
+                      {flight.outbound.totalDuration}
+                    </span>
+                    <div className="flex items-center gap-1 text-[10px] text-slate-500">
+                      <ArrowRight className="w-3 h-3 text-[#6b4f4f]" />
+                      <span>
+                        {flight.outbound.isDirect
+                          ? "Direct"
+                          : `${flight.outbound.stopsCount} stop (${flight.outbound.segments[0]?.arrivalAirport}${
+                              flight.outbound.segments[0]?.connectionDuration
+                                ? ` • ${flight.outbound.segments[0].connectionDuration}`
+                                : ""
+                            })`}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-right">
                     <span className="font-bold text-slate-800">
-                      {flight.inbound.departureTime.slice(0, 5)} {flight.inbound.departureAirport}
+                      {flight.outbound.arrivalTime.slice(0, 5)} {flight.outbound.arrivalAirport}
                     </span>
                     <p className="text-[11px] text-slate-400">
-                      {flight.inbound.departureDate}
+                      {flight.outbound.arrivalDate}
                     </p>
                   </div>
                 </div>
-                <div className="flex flex-col items-center">
-                  <span className="text-[10px] text-slate-400 font-medium">
-                    {flight.inbound.totalDuration}
-                  </span>
-                  <div className="flex items-center gap-1 text-[10px] text-slate-500">
-                    <ArrowRight className="w-3 h-3 text-[#6b4f4f]" />
-                    <span>
-                      {flight.inbound.isDirect
-                        ? "Direct"
-                        : `${flight.inbound.stopsCount} stop (${flight.inbound.segments[0]?.arrivalAirport}${
-                            flight.inbound.segments[0]?.connectionDuration
-                              ? ` • ${flight.inbound.segments[0].connectionDuration}`
-                              : ""
-                          })`}
-                    </span>
+
+                {/* Inbound Row (if return) */}
+                {flight.inbound && (
+                  <div className="flex items-center justify-between gap-4 text-xs sm:text-sm pt-2 border-t border-dashed border-slate-100">
+                    <div className="flex items-center gap-2">
+                      <PlaneLanding className="w-4 h-4 text-[#6b4f4f] shrink-0" />
+                      <div>
+                        <span className="font-bold text-slate-800">
+                          {flight.inbound.departureTime.slice(0, 5)} {flight.inbound.departureAirport}
+                        </span>
+                        <p className="text-[11px] text-slate-400">
+                          {flight.inbound.departureDate}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <span className="text-[10px] text-slate-400 font-medium">
+                        {flight.inbound.totalDuration}
+                      </span>
+                      <div className="flex items-center gap-1 text-[10px] text-slate-500">
+                        <ArrowRight className="w-3 h-3 text-[#6b4f4f]" />
+                        <span>
+                          {flight.inbound.isDirect
+                            ? "Direct"
+                            : `${flight.inbound.stopsCount} stop (${flight.inbound.segments[0]?.arrivalAirport}${
+                                flight.inbound.segments[0]?.connectionDuration
+                                  ? ` • ${flight.inbound.segments[0].connectionDuration}`
+                                  : ""
+                              })`}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <span className="font-bold text-slate-800">
+                        {flight.inbound.arrivalTime.slice(0, 5)} {flight.inbound.arrivalAirport}
+                      </span>
+                      <p className="text-[11px] text-slate-400">
+                        {flight.inbound.arrivalDate}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="text-right">
-                  <span className="font-bold text-slate-800">
-                    {flight.inbound.arrivalTime.slice(0, 5)} {flight.inbound.arrivalAirport}
-                  </span>
-                  <p className="text-[11px] text-slate-400">
-                    {flight.inbound.arrivalDate}
-                  </p>
-                </div>
-              </div>
+                )}
+              </>
             )}
 
             {/* Badges */}
@@ -516,7 +624,13 @@ ${form.message || "None"}
                 <span>Official Airline Booking</span>
                 <div className="flex items-center gap-3">
                   <a
-                    href="https://wa.me/447888461474"
+                    href={`https://wa.me/447888461474?text=${encodeURIComponent(
+                      flight.tripType === "multi-city" && flight.legs && flight.legs.length > 0
+                        ? `Hello Terrific Travel, I would like to book the multi-city flight with ${flight.airline} (${flight.legs.map((l, i) => `Flight ${i + 1}: ${l.departureAirport} to ${l.arrivalAirport} on ${l.departureDate}`).join(", ")}) for £${flight.price.toFixed(2)}. Baggage: ${flight.baggage}. Please assist me with booking.`
+                        : flight.inbound
+                        ? `Hello Terrific Travel, I would like to book the return flight with ${flight.airline} (${flight.outbound.departureAirport} to ${flight.outbound.arrivalAirport} on ${flight.outbound.departureDate}, returning ${flight.inbound.departureDate}) for £${flight.price.toFixed(2)}. Baggage: ${flight.baggage}. Please assist me with booking.`
+                        : `Hello Terrific Travel, I would like to book the ${flight.airline} flight (${flight.outbound.departureAirport} to ${flight.outbound.arrivalAirport}) on ${flight.outbound.departureDate} for £${flight.price.toFixed(2)}. Baggage: ${flight.baggage}. Please assist me with booking.`
+                    )}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[#25D366] font-bold hover:underline inline-flex items-center gap-1"
