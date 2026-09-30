@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import {
   Star,
   CheckCircle,
@@ -190,7 +191,9 @@ export default async function FlightsPage() {
       />
 
       {/* ─── Travelport Flight Search Bar (Overlaps Hero) ─── */}
-      <TravelportFlightSearch />
+      <Suspense fallback={<div className="w-full max-w-6xl mx-auto h-32 bg-white/60 rounded-3xl animate-pulse" />}>
+        <TravelportFlightSearch />
+      </Suspense>
 
       {/* ─── Why Us bar ─── */}
       <div className="bg-[#eed6c4]/10 border-y border-[#eed6c4]/30 py-6 mt-8 md:mt-12">

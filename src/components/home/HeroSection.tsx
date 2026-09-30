@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import {
@@ -229,7 +229,9 @@ export function HeroSection() {
           <div className="hero__transparent w-full transition-all duration-500">
             {activeTab === "flight" && (
               <div className="w-full animate-in fade-in zoom-in-95 duration-300 relative z-30 pb-4">
-                <TravelportFlightSearch isHome={true} />
+                <Suspense fallback={<div className="w-full h-32 bg-white/20 rounded-3xl animate-pulse" />}>
+                  <TravelportFlightSearch isHome={true} />
+                </Suspense>
               </div>
             )}
 
