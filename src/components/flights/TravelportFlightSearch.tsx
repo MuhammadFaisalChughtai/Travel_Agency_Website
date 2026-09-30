@@ -425,15 +425,15 @@ export function TravelportFlightSearch({
     <div
       className={`w-full max-w-6xl mx-auto ${
         isHome ? "px-0 mt-2" : "px-4 -mt-10 md:-mt-16"
-      } relative z-30`}
+      } relative z-40`}
     >
       {/* ─── Search Bar Container ─── */}
       <div
-        className={
+        className={`relative z-40 ${
           isHome
             ? "bg-white/20 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-white/30"
             : "bg-white/95 backdrop-blur-md p-4 sm:p-6 rounded-3xl shadow-[0_20px_50px_rgba(56,38,38,0.12)] border border-[#eed6c4]/80"
-        }
+        }`}
       >
         {/* Top Selectors (Trip Type & Bags) */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-4 text-xs sm:text-sm font-semibold">
@@ -498,7 +498,9 @@ export function TravelportFlightSearch({
                 tripType === "return"
                   ? "lg:col-span-4 xl:col-span-4"
                   : "lg:col-span-5 xl:col-span-5"
-              } grid grid-cols-1 sm:grid-cols-11 gap-1 items-center bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2 py-1 relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all duration-300 min-h-[50px]`}
+              } grid grid-cols-1 sm:grid-cols-11 gap-1 items-center bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2 py-1 relative ${
+                activeAirportField ? "z-50" : "z-10"
+              } focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all duration-300 min-h-[50px]`}
             >
               {/* Origin */}
               <div className="sm:col-span-5 relative flex items-center">
@@ -607,12 +609,12 @@ export function TravelportFlightSearch({
             <div
               className={`${
                 tripType === "return"
-                  ? "lg:col-span-3 xl:col-span-3"
+                  ? "lg:col-span-4 xl:col-span-4"
                   : "lg:col-span-2 xl:col-span-2"
-              } grid grid-cols-1 sm:grid-cols-2 gap-2`}
+              } grid grid-cols-1 sm:grid-cols-2 gap-2 relative z-10`}
             >
               {/* Departure Date */}
-              <div className="bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-1.5 relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all min-h-[50px] flex flex-col justify-center">
+              <div className="bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2.5 sm:px-3 py-1.5 relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all min-h-[50px] flex flex-col justify-center">
                 <div className="flex items-center gap-1 text-[10px] font-bold text-slate-600 uppercase tracking-wider">
                   <Calendar className="w-3 h-3 text-[#6b4f4f]" />
                   <span>Departure Date</span>
@@ -622,13 +624,13 @@ export function TravelportFlightSearch({
                   value={departureDate}
                   min={new Date().toISOString().split("T")[0]}
                   onChange={(e) => setDepartureDate(e.target.value)}
-                  className="w-full text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none bg-transparent cursor-pointer"
+                  className="w-full text-xs xl:text-sm font-semibold text-slate-800 focus:outline-none bg-transparent cursor-pointer p-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-70 hover:[&::-webkit-calendar-picker-indicator]:opacity-100"
                 />
               </div>
 
               {/* Return Date (if return trip) */}
               {tripType === "return" && (
-                <div className="bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-1.5 relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all min-h-[50px] flex flex-col justify-center">
+                <div className="bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2.5 sm:px-3 py-1.5 relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all min-h-[50px] flex flex-col justify-center">
                   <div className="flex items-center gap-1 text-[10px] font-bold text-slate-600 uppercase tracking-wider">
                     <Calendar className="w-3 h-3 text-[#6b4f4f]" />
                     <span>Return Date</span>
@@ -638,7 +640,7 @@ export function TravelportFlightSearch({
                     value={returnDate}
                     min={departureDate || new Date().toISOString().split("T")[0]}
                     onChange={(e) => setReturnDate(e.target.value)}
-                    className="w-full text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none bg-transparent cursor-pointer"
+                    className="w-full text-xs xl:text-sm font-semibold text-slate-800 focus:outline-none bg-transparent cursor-pointer p-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-70 hover:[&::-webkit-calendar-picker-indicator]:opacity-100"
                   />
                 </div>
               )}
@@ -648,21 +650,26 @@ export function TravelportFlightSearch({
             <div
               className={`${
                 tripType === "return"
-                  ? "lg:col-span-3 xl:col-span-3"
+                  ? "lg:col-span-2 xl:col-span-2"
                   : "lg:col-span-3 xl:col-span-3"
-              } relative`}
+              } relative ${showPassengerDropdown ? "z-50" : "z-20"}`}
             >
               <div
                 onClick={() => setShowPassengerDropdown(!showPassengerDropdown)}
-                className="w-full h-full min-h-[50px] bg-[#f5f0eb] hover:bg-slate-100 rounded-xl border border-slate-200/80 px-3 py-2 flex items-center justify-between cursor-pointer transition-colors"
+                className="w-full h-full min-h-[50px] bg-[#f5f0eb] hover:bg-slate-100 rounded-xl border border-slate-200/80 px-2.5 sm:px-3 py-1.5 flex items-center justify-between cursor-pointer transition-colors"
               >
                 <div className="flex items-center gap-2 min-w-0">
                   <Users className="w-4 h-4 text-[#6b4f4f] shrink-0" />
-                  <span className="text-xs sm:text-sm font-semibold text-slate-800 truncate">
-                    {passengerSummaryText}
-                  </span>
+                  <div className="flex flex-col min-w-0 text-left">
+                    <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider leading-none">
+                      Travelers
+                    </span>
+                    <span className="text-xs sm:text-xs xl:text-sm font-semibold text-slate-800 truncate mt-0.5">
+                      {passengerSummaryText}
+                    </span>
+                  </div>
                 </div>
-                <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
+                <ChevronDown className={`w-3.5 h-3.5 text-slate-400 shrink-0 transition-transform ${showPassengerDropdown ? "rotate-180" : ""}`} />
               </div>
 
               {/* Passenger Dropdown Popover */}
@@ -779,7 +786,7 @@ export function TravelportFlightSearch({
             </div>
 
             {/* Search Button */}
-            <div className="lg:col-span-2 xl:col-span-2 flex items-center">
+            <div className="lg:col-span-2 xl:col-span-2 flex items-center relative z-10">
               <button
                 type="button"
                 onClick={() => handleSearch()}
@@ -809,7 +816,11 @@ export function TravelportFlightSearch({
                 className="grid grid-cols-1 lg:grid-cols-12 gap-2.5 p-2 bg-white/40 backdrop-blur-md rounded-2xl border border-white/40 items-center"
               >
                 {/* Leg From */}
-                <div className="lg:col-span-4 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-2 relative focus-within:bg-white focus-within:border-[#6b4f4f] transition-all">
+                <div
+                  className={`lg:col-span-4 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-2 relative ${
+                    activeAirportField === `multi-from-${index}` ? "z-50" : "z-10"
+                  } focus-within:bg-white focus-within:border-[#6b4f4f] transition-all`}
+                >
                   <div className="flex items-center gap-1.5 mb-0.5">
                     <Plane className="w-3.5 h-3.5 text-[#6b4f4f]" />
                     <span className="text-[10px] font-bold text-slate-400 uppercase block">
@@ -852,7 +863,11 @@ export function TravelportFlightSearch({
                 </div>
 
                 {/* Leg To */}
-                <div className="lg:col-span-4 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-2 relative focus-within:bg-white focus-within:border-[#6b4f4f] transition-all">
+                <div
+                  className={`lg:col-span-4 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-2 relative ${
+                    activeAirportField === `multi-to-${index}` ? "z-50" : "z-10"
+                  } focus-within:bg-white focus-within:border-[#6b4f4f] transition-all`}
+                >
                   <div className="flex items-center gap-1.5 mb-0.5">
                     <Plane className="w-3.5 h-3.5 text-[#6b4f4f] rotate-90" />
                     <span className="text-[10px] font-bold text-slate-400 uppercase block">
@@ -993,7 +1008,7 @@ export function TravelportFlightSearch({
 
       {/* ─── Search Results Section (Only rendered on dedicated flight view page) ─── */}
       {!isHome && (
-        <div id="travelport-results-section" className="mt-8">
+        <div id="travelport-results-section" className="mt-8 relative z-10">
           {isSearching && (
             <div className="py-20 flex flex-col items-center justify-center text-center">
               <div className="w-16 h-16 rounded-full bg-[#eed6c4]/40 flex items-center justify-center text-[#6b4f4f] animate-bounce mb-4">

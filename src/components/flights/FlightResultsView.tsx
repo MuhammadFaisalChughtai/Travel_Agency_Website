@@ -349,9 +349,9 @@ export function FlightResultsView({
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6">
+    <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 relative z-0">
       {/* ─── Top Header: Search Results Bar ─── */}
-      <div className="flex flex-wrap items-center justify-between gap-3 mb-6 bg-white p-4 rounded-2xl border border-slate-200/90 shadow-xs">
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6 bg-white p-4 rounded-2xl border border-slate-200/90 shadow-xs relative z-0">
         <div>
           <h2 className="text-xl sm:text-2xl font-black font-heading text-[#382626]">
             Flight Offers ({sortedFlights.length} of {flights.length})
@@ -383,12 +383,12 @@ export function FlightResultsView({
       </div>
 
       {/* ─── Top Sort Bar (Cheapest / Best / Quickest Tabs) ─── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 mb-6 relative z-0">
         {/* Cheapest Tab */}
         <button
           type="button"
           onClick={() => setSortBy("cheapest")}
-          className={`p-3.5 sm:p-4 rounded-2xl border text-left transition-all relative overflow-hidden ${
+          className={`p-3.5 sm:p-4 rounded-2xl border text-left transition-all relative z-0 overflow-hidden ${
             sortBy === "cheapest"
               ? "bg-[#6b4f4f] text-[#fff3e4] border-[#eed6c4] shadow-md ring-2 ring-[#eed6c4]/60"
               : "bg-white text-slate-800 border-slate-200 hover:border-[#6b4f4f]/50 hover:bg-[#f5f0eb]/40 shadow-xs"
@@ -423,7 +423,7 @@ export function FlightResultsView({
         <button
           type="button"
           onClick={() => setSortBy("best")}
-          className={`p-3.5 sm:p-4 rounded-2xl border text-left transition-all relative overflow-hidden ${
+          className={`p-3.5 sm:p-4 rounded-2xl border text-left transition-all relative z-0 overflow-hidden ${
             sortBy === "best"
               ? "bg-[#6b4f4f] text-[#fff3e4] border-[#eed6c4] shadow-md ring-2 ring-[#eed6c4]/60"
               : "bg-white text-slate-800 border-slate-200 hover:border-[#6b4f4f]/50 hover:bg-[#f5f0eb]/40 shadow-xs"
@@ -458,7 +458,7 @@ export function FlightResultsView({
         <button
           type="button"
           onClick={() => setSortBy("quickest")}
-          className={`p-3.5 sm:p-4 rounded-2xl border text-left transition-all relative overflow-hidden ${
+          className={`p-3.5 sm:p-4 rounded-2xl border text-left transition-all relative z-0 overflow-hidden ${
             sortBy === "quickest"
               ? "bg-[#6b4f4f] text-[#fff3e4] border-[#eed6c4] shadow-md ring-2 ring-[#eed6c4]/60"
               : "bg-white text-slate-800 border-slate-200 hover:border-[#6b4f4f]/50 hover:bg-[#f5f0eb]/40 shadow-xs"
@@ -490,7 +490,7 @@ export function FlightResultsView({
         </button>
 
         {/* Other Sort Options Dropdown */}
-        <div className="relative flex items-center">
+        <div className="relative z-0 flex items-center">
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
