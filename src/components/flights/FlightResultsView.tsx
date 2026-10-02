@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { FlightSearchResultItem } from "@/lib/travelport";
 import { FlightBookingModal } from "./FlightBookingModal";
+import { AirlineLogo } from "./AirlineLogo";
 
 // Helper to convert "13h 35m" to total minutes
 function durationStringToMinutes(dur?: string): number {
@@ -651,10 +652,11 @@ export function FlightResultsView({
               {metrics.allAirlines.map((airline) => {
                 const isChecked = selectedAirlines.includes(airline);
                 const minP = metrics.airlineMinPrices[airline];
+                const carrier = flights.find((f) => f.airline === airline)?.carrier;
                 return (
                   <label
                     key={airline}
-                    className="flex items-center justify-between text-xs py-1 px-1.5 rounded-lg cursor-pointer hover:bg-[#f5f0eb]/70 text-slate-700"
+                    className="flex items-center justify-between text-xs py-1 px-1.5 rounded-lg cursor-pointer hover:bg-[#f5f0eb]/70 text-slate-700 transition-colors"
                   >
                     <div className="flex items-center gap-2 min-w-0">
                       <input
@@ -663,7 +665,8 @@ export function FlightResultsView({
                         onChange={() => toggleAirline(airline)}
                         className="rounded border-slate-300 text-[#6b4f4f] focus:ring-[#6b4f4f] cursor-pointer"
                       />
-                      <span className="font-semibold truncate max-w-[130px]" title={airline}>
+                      <AirlineLogo carrier={carrier} name={airline} className="w-5 h-5 rounded-md" />
+                      <span className="font-semibold truncate max-w-[110px]" title={airline}>
                         {airline}
                       </span>
                     </div>
@@ -789,9 +792,11 @@ export function FlightResultsView({
                       {/* Airline Header */}
                       <div className="flex items-center justify-between pb-2.5 border-b border-slate-100">
                         <div className="flex items-center gap-2.5">
-                          <div className="w-9 h-9 rounded-xl bg-slate-100 border border-slate-200/80 flex items-center justify-center font-black text-xs text-[#6b4f4f]">
-                            {flight.carrier}
-                          </div>
+                          <AirlineLogo
+                            carrier={flight.carrier}
+                            name={flight.airline}
+                            className="w-10 h-10"
+                          />
                           <div>
                             <span className="font-heading font-black text-sm text-[#382626] block">
                               {flight.airline}
@@ -1128,6 +1133,12 @@ export function FlightResultsView({
                                   <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-sm">
                                     <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-3 border-b border-slate-100 text-xs">
                                       <div className="flex items-center gap-2">
+                                        <AirlineLogo
+                                          carrier={seg.carrier || flight.carrier}
+                                          name={seg.airline}
+                                          size="xs"
+                                          className="w-6 h-6"
+                                        />
                                         <span className="font-heading font-black text-sm text-[#382626]">
                                           {seg.airline}
                                         </span>
@@ -1244,6 +1255,12 @@ export function FlightResultsView({
                                   <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-sm">
                                     <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-3 border-b border-slate-100 text-xs">
                                       <div className="flex items-center gap-2">
+                                        <AirlineLogo
+                                          carrier={seg.carrier || flight.carrier}
+                                          name={seg.airline}
+                                          size="xs"
+                                          className="w-6 h-6"
+                                        />
                                         <span className="font-heading font-black text-sm text-[#382626]">
                                           {seg.airline}
                                         </span>
@@ -1358,6 +1375,12 @@ export function FlightResultsView({
                                     <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-sm">
                                       <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-3 border-b border-slate-100 text-xs">
                                         <div className="flex items-center gap-2">
+                                          <AirlineLogo
+                                            carrier={seg.carrier || flight.carrier}
+                                            name={seg.airline}
+                                            size="xs"
+                                            className="w-6 h-6"
+                                          />
                                           <span className="font-heading font-black text-sm text-[#382626]">
                                             {seg.airline}
                                           </span>
@@ -1553,25 +1576,29 @@ export function FlightResultsView({
               <div className="space-y-2 pb-4 border-b border-slate-100">
                 <h4 className="text-xs font-bold text-[#382626] uppercase">Airlines</h4>
                 <div className="space-y-1.5 max-h-40 overflow-y-auto">
-                  {metrics.allAirlines.map((airline) => (
-                    <label
-                      key={airline}
-                      className="flex items-center justify-between text-xs py-1 text-slate-700"
-                    >
-                      <div className="flex items-center gap-2 truncate">
-                        <input
-                          type="checkbox"
-                          checked={selectedAirlines.includes(airline)}
-                          onChange={() => toggleAirline(airline)}
-                          className="rounded text-[#6b4f4f]"
-                        />
-                        <span className="truncate">{airline}</span>
-                      </div>
-                      <span className="font-bold text-slate-500 shrink-0">
-                        £{metrics.airlineMinPrices[airline]?.toFixed(0)}
-                      </span>
-                    </label>
-                  ))}
+                  {metrics.allAirlines.map((airline) => {
+                    const carrier = flights.find((f) => f.airline === airline)?.carrier;
+                    return (
+                      <label
+                        key={airline}
+                        className="flex items-center justify-between text-xs py-1.5 text-slate-700"
+                      >
+                        <div className="flex items-center gap-2 truncate">
+                          <input
+                            type="checkbox"
+                            checked={selectedAirlines.includes(airline)}
+                            onChange={() => toggleAirline(airline)}
+                            className="rounded text-[#6b4f4f]"
+                          />
+                          <AirlineLogo carrier={carrier} name={airline} className="w-5 h-5 rounded-md" />
+                          <span className="truncate">{airline}</span>
+                        </div>
+                        <span className="font-bold text-slate-500 shrink-0">
+                          £{metrics.airlineMinPrices[airline]?.toFixed(0)}
+                        </span>
+                      </label>
+                    );
+                  })}
                 </div>
               </div>
 

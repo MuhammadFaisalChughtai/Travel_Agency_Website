@@ -26,6 +26,16 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'upload.wikimedia.org',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'pics.avs.io',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.kiwi.com',
+        pathname: '/**',
       }
     ],
   },

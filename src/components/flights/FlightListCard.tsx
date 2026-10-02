@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PhoneCall, ArrowRight, RefreshCw, PlaneTakeoff, PlaneLanding, Briefcase, Calendar } from "lucide-react";
 import { FlightEnquireButton } from "./FlightEnquireButton";
+import { AirlineLogo } from "./AirlineLogo";
 
 interface FlightListCardProps {
   id: string;
@@ -99,8 +100,8 @@ export function FlightListCard({
         {/* Outbound Row */}
         <div className="grid grid-cols-12 items-center gap-2">
           {/* Col 1: Route & Airline */}
-          <div className="col-span-5 flex items-start gap-2">
-            <PlaneTakeoff className="w-4 h-4 text-[#6b4f4f] shrink-0 mt-0.5" />
+          <div className="col-span-5 flex items-center gap-2.5">
+            <AirlineLogo carrier={airlineCode} name={airline} className="w-8 h-8 rounded-lg shrink-0" />
             <div className="min-w-0">
               <div className="flex items-center gap-1">
                 <span className="text-xs font-bold text-[#382626]">{departureCode}</span>
@@ -137,8 +138,8 @@ export function FlightListCard({
         {isReturn && (
           <div className="grid grid-cols-12 items-center gap-2 pt-3 border-t border-dashed border-slate-100">
             {/* Col 1: Route & Airline */}
-            <div className="col-span-5 flex items-start gap-2">
-              <PlaneLanding className="w-4 h-4 text-[#6b4f4f] shrink-0 mt-0.5" />
+            <div className="col-span-5 flex items-center gap-2.5">
+              <AirlineLogo carrier={returnAirlineCode || airlineCode} name={returnAirline || airline} className="w-8 h-8 rounded-lg shrink-0" />
               <div className="min-w-0">
                 <div className="flex items-center gap-1">
                   <span className="text-xs font-bold text-[#382626]">{destinationCode}</span>

@@ -22,6 +22,7 @@ import {
   PlaneLanding,
 } from "lucide-react";
 import { FlightSearchResultItem } from "@/lib/travelport";
+import { AirlineLogo } from "./AirlineLogo";
 
 interface FlightBookingModalProps {
   flight: FlightSearchResultItem | null;
@@ -256,13 +257,20 @@ ${form.message || "None"}
         <div className="bg-[#f5f0eb]/70 p-4 sm:p-5 border-b border-[#eed6c4]/40">
           <div className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-              <div className="flex items-center gap-2">
-                <span className="font-black text-sm text-[#382626]">
-                  {flight.airline}
-                </span>
-                <span className="text-[11px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">
-                  {flight.cabin}
-                </span>
+              <div className="flex items-center gap-2.5">
+                <AirlineLogo
+                  carrier={flight.carrier}
+                  name={flight.airline}
+                  className="w-10 h-10"
+                />
+                <div>
+                  <span className="font-black text-sm text-[#382626] block">
+                    {flight.airline}
+                  </span>
+                  <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full inline-block mt-0.5">
+                    {flight.cabin}
+                  </span>
+                </div>
               </div>
               <div className="text-right">
                 <span className="text-xs text-slate-400 font-bold uppercase tracking-wider block">
