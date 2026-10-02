@@ -119,7 +119,8 @@ export function TravelportFlightSearch({
 
   // Select airport from dropdown
   const handleSelectAirport = (field: string, airport: Airport) => {
-    const label = `${airport.city} (${airport.code})`;
+    const cleanCity = airport.city.split("(")[0].trim();
+    const label = `${cleanCity} (${airport.code})`;
     if (field === "origin") {
       setOrigin(label);
       setOriginCode(airport.code);
@@ -500,7 +501,7 @@ export function TravelportFlightSearch({
                   : "lg:col-span-5 xl:col-span-5"
               } grid grid-cols-1 sm:grid-cols-11 gap-1 items-center bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2 py-1 relative ${
                 activeAirportField ? "z-50" : "z-10"
-              } focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all duration-300 min-h-[50px]`}
+              } focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all duration-300 min-h-[52px] h-[52px]`}
             >
               {/* Origin */}
               <div className="sm:col-span-5 relative flex items-center">
@@ -514,7 +515,7 @@ export function TravelportFlightSearch({
                   }}
                   onChange={(e) => setAirportQuery(e.target.value)}
                   placeholder="From?"
-                  className="w-full px-1 py-2 text-xs sm:text-sm font-semibold text-slate-800 placeholder-slate-400 focus:outline-none bg-transparent"
+                  className="w-full px-1 py-2 text-xs sm:text-sm font-semibold text-slate-800 placeholder-slate-400 focus:outline-none bg-transparent truncate"
                 />
                 {origin && (
                   <button
@@ -555,7 +556,7 @@ export function TravelportFlightSearch({
                   }}
                   onChange={(e) => setAirportQuery(e.target.value)}
                   placeholder="To?"
-                  className="w-full px-1 py-2 text-xs sm:text-sm font-semibold text-slate-800 placeholder-slate-400 focus:outline-none bg-transparent"
+                  className="w-full px-1 py-2 text-xs sm:text-sm font-semibold text-slate-800 placeholder-slate-400 focus:outline-none bg-transparent truncate"
                 />
                 {destination && (
                   <button
@@ -572,11 +573,15 @@ export function TravelportFlightSearch({
                 )}
               </div>
 
-              {/* Airport Autocomplete Popover */}
+              {/* Airport Autocomplete Popover (opens right below active field) */}
               {activeAirportField && (
                 <div
                   ref={airportDropdownRef}
-                  className="absolute left-0 top-full mt-2 w-full sm:w-[380px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 p-2 max-h-72 overflow-y-auto"
+                  className={`absolute top-full mt-2 w-full sm:w-[380px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 p-2 max-h-72 overflow-y-auto ${
+                    activeAirportField === "destination"
+                      ? "left-0 sm:left-auto sm:right-0"
+                      : "left-0"
+                  }`}
                 >
                   <p className="px-3 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                     {airportQuery ? "Matching Airports" : "Popular Airports"}
@@ -611,36 +616,43 @@ export function TravelportFlightSearch({
                 tripType === "return"
                   ? "lg:col-span-4 xl:col-span-4"
                   : "lg:col-span-2 xl:col-span-2"
-              } grid grid-cols-1 sm:grid-cols-2 gap-2 relative z-10`}
+              } ${
+                tripType === "return" ? "grid grid-cols-1 sm:grid-cols-2 gap-2" : ""
+              } relative z-10`}
             >
               {/* Departure Date */}
-              <div className="bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2.5 sm:px-3 py-1.5 relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all min-h-[50px] flex flex-col justify-center">
-                <div className="flex items-center gap-1 text-[10px] font-bold text-slate-600 uppercase tracking-wider">
-                  <Calendar className="w-3 h-3 text-[#6b4f4f]" />
-                  <span>Departure Date</span>
+              <div className="bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2.5 sm:px-3 py-1 relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all h-[52px] min-h-[52px] flex flex-col justify-center">
+                <div className="flex items-center gap-1 text-[10px] font-bold text-slate-600 uppercase tracking-wider whitespace-nowrap">
+                  <Calendar className="w-3 h-3 text-[#6b4f4f] shrink-0" />
+                  <span className="truncate">Departure</span>
                 </div>
                 <input
                   type="date"
                   value={departureDate}
                   min={new Date().toISOString().split("T")[0]}
-                  onChange={(e) => setDepartureDate(e.target.value)}
-                  className="w-full text-xs xl:text-sm font-semibold text-slate-800 focus:outline-none bg-transparent cursor-pointer p-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-70 hover:[&::-webkit-calendar-picker-indicator]:opacity-100"
+                  onChange={(e) => {
+                    setDepartureDate(e.target.value);
+                    if (returnDate && returnDate < e.target.value) {
+                      setReturnDate(e.target.value);
+                    }
+                  }}
+                  className="w-full text-xs xl:text-sm font-semibold text-slate-800 focus:outline-none bg-transparent cursor-pointer p-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-70 hover:[&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:ml-auto"
                 />
               </div>
 
               {/* Return Date (if return trip) */}
               {tripType === "return" && (
-                <div className="bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2.5 sm:px-3 py-1.5 relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all min-h-[50px] flex flex-col justify-center">
-                  <div className="flex items-center gap-1 text-[10px] font-bold text-slate-600 uppercase tracking-wider">
+                <div className="bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2.5 sm:px-3 py-1 relative focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all h-[52px] min-h-[52px] flex flex-col justify-center">
+                  <div className="flex items-center gap-1 text-[10px] font-bold text-slate-600 uppercase tracking-wider whitespace-nowrap">
                     <Calendar className="w-3 h-3 text-[#6b4f4f]" />
-                    <span>Return Date</span>
+                    <span className="truncate">Return</span>
                   </div>
                   <input
                     type="date"
                     value={returnDate}
                     min={departureDate || new Date().toISOString().split("T")[0]}
                     onChange={(e) => setReturnDate(e.target.value)}
-                    className="w-full text-xs xl:text-sm font-semibold text-slate-800 focus:outline-none bg-transparent cursor-pointer p-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-70 hover:[&::-webkit-calendar-picker-indicator]:opacity-100"
+                    className="w-full text-xs xl:text-sm font-semibold text-slate-800 focus:outline-none bg-transparent cursor-pointer p-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-70 hover:[&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-calendar-picker-indicator]:ml-auto"
                   />
                 </div>
               )}
@@ -656,12 +668,12 @@ export function TravelportFlightSearch({
             >
               <div
                 onClick={() => setShowPassengerDropdown(!showPassengerDropdown)}
-                className="w-full h-full min-h-[50px] bg-[#f5f0eb] hover:bg-slate-100 rounded-xl border border-slate-200/80 px-2.5 sm:px-3 py-1.5 flex items-center justify-between cursor-pointer transition-colors"
+                className="w-full h-[52px] min-h-[52px] bg-[#f5f0eb] hover:bg-slate-100 rounded-xl border border-slate-200/80 px-2.5 sm:px-3 py-1 flex items-center justify-between cursor-pointer transition-colors"
               >
                 <div className="flex items-center gap-2 min-w-0">
                   <Users className="w-4 h-4 text-[#6b4f4f] shrink-0" />
                   <div className="flex flex-col min-w-0 text-left">
-                    <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider leading-none">
+                    <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider leading-none whitespace-nowrap">
                       Travelers
                     </span>
                     <span className="text-xs sm:text-xs xl:text-sm font-semibold text-slate-800 truncate mt-0.5">
@@ -791,7 +803,7 @@ export function TravelportFlightSearch({
                 type="button"
                 onClick={() => handleSearch()}
                 disabled={isSearching}
-                className="w-full h-full min-h-[50px] bg-[#6b4f4f] hover:bg-[#382626] text-[#fff3e4] font-heading font-black text-xs sm:text-sm uppercase tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center gap-2 px-4 shadow-md hover:shadow-xl hover:-translate-y-0.5 disabled:opacity-60 whitespace-nowrap"
+                className="w-full h-[52px] min-h-[52px] bg-[#6b4f4f] hover:bg-[#382626] text-[#fff3e4] font-heading font-black text-xs sm:text-sm uppercase tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center gap-2 px-4 shadow-md hover:shadow-xl hover:-translate-y-0.5 disabled:opacity-60 whitespace-nowrap"
               >
                 {isSearching ? (
                   <svg className="animate-spin w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none">
