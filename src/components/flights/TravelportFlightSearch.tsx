@@ -158,7 +158,7 @@ export function TravelportFlightSearch({
           to: "",
           toCode: "",
           date: "",
-          cabin: "Economy",
+          cabin: cabin || "Economy",
         },
       ]);
     }
@@ -174,9 +174,17 @@ export function TravelportFlightSearch({
   // Clear all multi-city legs
   const handleClearMultiCity = () => {
     setMultiCityLegs([
-      { from: "", fromCode: "", to: "", toCode: "", date: "", cabin: "Economy" },
-      { from: "", fromCode: "", to: "", toCode: "", date: "", cabin: "Economy" },
+      { from: "", fromCode: "", to: "", toCode: "", date: "", cabin: cabin || "Economy" },
+      { from: "", fromCode: "", to: "", toCode: "", date: "", cabin: cabin || "Economy" },
     ]);
+  };
+
+  // Set cabin across all multi-city legs and main cabin state
+  const handleSetCabin = (newCabin: string) => {
+    setCabin(newCabin);
+    setMultiCityLegs((prev) =>
+      prev.map((leg) => ({ ...leg, cabin: newCabin }))
+    );
   };
 
   // Core flight search executor
@@ -322,7 +330,10 @@ export function TravelportFlightSearch({
     const paramBags = searchParams.get("bags");
     const paramLegs = searchParams.get("legs");
 
-    if (paramFromCode && paramToCode && paramDep) {
+    const isMultiCityValid = paramTripType === "multi-city" && !!paramLegs;
+    const isSingleTripValid = !!(paramFromCode && paramToCode && paramDep);
+
+    if (isSingleTripValid || isMultiCityValid) {
       hasAutoSearched.current = true;
       if (paramTripType) setTripType(paramTripType);
       if (paramFrom) setOrigin(paramFrom);
@@ -349,9 +360,9 @@ export function TravelportFlightSearch({
 
       executeFlightSearch({
         tripType: paramTripType || "return",
-        originCode: paramFromCode,
-        destinationCode: paramToCode,
-        departureDate: paramDep,
+        originCode: paramFromCode || (parsedLegs[0]?.fromCode ?? ""),
+        destinationCode: paramToCode || (parsedLegs[0]?.toCode ?? ""),
+        departureDate: paramDep || (parsedLegs[0]?.date ?? ""),
         returnDate: paramRet || "",
         adults: paramAdults ? parseInt(paramAdults, 10) : 1,
         children: paramChildren ? parseInt(paramChildren, 10) : 0,
@@ -392,11 +403,11 @@ export function TravelportFlightSearch({
 
       const params = new URLSearchParams();
       params.set("tripType", tripType);
-      params.set("from", origin);
-      params.set("fromCode", originCode);
-      params.set("to", destination);
-      params.set("toCode", destinationCode);
-      params.set("departureDate", departureDate);
+      params.set("from", tripType === "multi-city" ? multiCityLegs[0]?.from || origin : origin);
+      params.set("fromCode", tripType === "multi-city" ? multiCityLegs[0]?.fromCode || originCode : originCode);
+      params.set("to", tripType === "multi-city" ? multiCityLegs[0]?.to || destination : destination);
+      params.set("toCode", tripType === "multi-city" ? multiCityLegs[0]?.toCode || destinationCode : destinationCode);
+      params.set("departureDate", tripType === "multi-city" ? multiCityLegs[0]?.date || departureDate : departureDate);
       if (tripType === "return" && returnDate) {
         params.set("returnDate", returnDate);
       }
@@ -420,7 +431,126 @@ export function TravelportFlightSearch({
   const totalPassengers = adults + children + infants;
   const passengerSummaryText = `${totalPassengers} ${
     totalPassengers === 1 ? "adult" : "travelers"
-  }, ${cabin}`;
+  }, ${cabin === "PremiumEconomy" ? "Prem Eco" : cabin}`;
+
+  const renderPassengerPopover = (alignClass: string = "right-0") => (
+    <div
+      className={`absolute ${alignClass} top-full mt-2 w-72 sm:w-80 max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 p-4 space-y-4`}
+    >
+      <div className="pb-1 border-b border-slate-100 flex items-center justify-between">
+        <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+          Travelers & Cabin
+        </span>
+        <span className="text-[11px] font-semibold text-[#6b4f4f] bg-[#f5f0eb] px-2 py-0.5 rounded-full">
+          {totalPassengers} {totalPassengers === 1 ? "traveler" : "travelers"}
+        </span>
+      </div>
+
+      {/* Adults */}
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="font-bold text-slate-800 text-xs">Adults</p>
+          <p className="text-[10px] text-slate-400">Age 12+</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setAdults((v) => Math.max(1, v - 1))}
+            className="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center font-bold text-slate-700 hover:bg-[#f5f0eb] active:scale-95 transition-all"
+          >
+            -
+          </button>
+          <span className="w-5 text-center font-bold text-xs">{adults}</span>
+          <button
+            type="button"
+            onClick={() => setAdults((v) => Math.min(9, v + 1))}
+            className="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center font-bold text-slate-700 hover:bg-[#f5f0eb] active:scale-95 transition-all"
+          >
+            +
+          </button>
+        </div>
+      </div>
+
+      {/* Children */}
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="font-bold text-slate-800 text-xs">Children</p>
+          <p className="text-[10px] text-slate-400">Age 2-11</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setChildren((v) => Math.max(0, v - 1))}
+            className="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center font-bold text-slate-700 hover:bg-[#f5f0eb] active:scale-95 transition-all"
+          >
+            -
+          </button>
+          <span className="w-5 text-center font-bold text-xs">{children}</span>
+          <button
+            type="button"
+            onClick={() => setChildren((v) => Math.min(8, v + 1))}
+            className="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center font-bold text-slate-700 hover:bg-[#f5f0eb] active:scale-95 transition-all"
+          >
+            +
+          </button>
+        </div>
+      </div>
+
+      {/* Infants */}
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="font-bold text-slate-800 text-xs">Infants</p>
+          <p className="text-[10px] text-slate-400">Under 2 (on lap)</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setInfants((v) => Math.max(0, v - 1))}
+            className="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center font-bold text-slate-700 hover:bg-[#f5f0eb] active:scale-95 transition-all"
+          >
+            -
+          </button>
+          <span className="w-5 text-center font-bold text-xs">{infants}</span>
+          <button
+            type="button"
+            onClick={() => setInfants((v) => Math.min(4, v + 1))}
+            className="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center font-bold text-slate-700 hover:bg-[#f5f0eb] active:scale-95 transition-all"
+          >
+            +
+          </button>
+        </div>
+      </div>
+
+      {/* Cabin Class */}
+      <div className="pt-2 border-t border-slate-100">
+        <p className="font-bold text-slate-800 text-xs mb-2">Cabin Class</p>
+        <div className="grid grid-cols-2 gap-1.5">
+          {["Economy", "PremiumEconomy", "Business", "First"].map((c) => (
+            <button
+              key={c}
+              type="button"
+              onClick={() => handleSetCabin(c)}
+              className={`px-2.5 py-1.5 rounded-lg text-xs font-bold text-left transition-colors ${
+                cabin === c
+                  ? "bg-[#6b4f4f] text-white shadow-xs"
+                  : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+              }`}
+            >
+              {c === "PremiumEconomy" ? "Premium Eco" : c}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <button
+        type="button"
+        onClick={() => setShowPassengerDropdown(false)}
+        className="w-full py-2 bg-[#6b4f4f] text-[#fff3e4] rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-[#382626] transition-colors cursor-pointer"
+      >
+        Done
+      </button>
+    </div>
+  );
 
   return (
     <div
@@ -438,7 +568,7 @@ export function TravelportFlightSearch({
       >
         {/* Top Selectors (Trip Type & Bags) */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-4 text-xs sm:text-sm font-semibold">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
             {/* Trip Type Dropdown */}
             <div
               className={`relative px-3 py-1.5 rounded-xl border transition-all ${
@@ -458,6 +588,34 @@ export function TravelportFlightSearch({
               </select>
               <ChevronDown className="w-3.5 h-3.5 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500" />
             </div>
+
+            {/* Passenger Selector for Multi-city */}
+            {tripType === "multi-city" && (
+              <div
+                ref={tripType === "multi-city" ? passengerDropdownRef : undefined}
+                className="relative z-50"
+              >
+                <button
+                  type="button"
+                  onClick={() => setShowPassengerDropdown(!showPassengerDropdown)}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
+                    isHome
+                      ? "bg-[#f5f0eb] text-slate-800 border-slate-200/80 shadow-xs hover:border-[#6b4f4f]/50"
+                      : "bg-[#f5f0eb] text-slate-800 border-slate-200/80 hover:border-[#6b4f4f]"
+                  }`}
+                >
+                  <Users className="w-3.5 h-3.5 text-[#6b4f4f] shrink-0" />
+                  <span className="font-bold">{passengerSummaryText}</span>
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 text-slate-500 shrink-0 transition-transform ${
+                      showPassengerDropdown ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {showPassengerDropdown && renderPassengerPopover("left-0")}
+              </div>
+            )}
 
             {/* Bags Dropdown */}
             <div
@@ -685,116 +843,7 @@ export function TravelportFlightSearch({
               </div>
 
               {/* Passenger Dropdown Popover */}
-              {showPassengerDropdown && (
-                <div
-                  ref={passengerDropdownRef}
-                  className="absolute right-0 top-full mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 p-4 space-y-4"
-                >
-                  {/* Adults */}
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-bold text-slate-800 text-xs">Adults</p>
-                      <p className="text-[10px] text-slate-400">Age 12+</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setAdults((v) => Math.max(1, v - 1))}
-                        className="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100"
-                      >
-                        -
-                      </button>
-                      <span className="w-5 text-center font-bold text-xs">{adults}</span>
-                      <button
-                        type="button"
-                        onClick={() => setAdults((v) => Math.min(9, v + 1))}
-                        className="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Children */}
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-bold text-slate-800 text-xs">Children</p>
-                      <p className="text-[10px] text-slate-400">Age 2-11</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setChildren((v) => Math.max(0, v - 1))}
-                        className="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100"
-                      >
-                        -
-                      </button>
-                      <span className="w-5 text-center font-bold text-xs">{children}</span>
-                      <button
-                        type="button"
-                        onClick={() => setChildren((v) => Math.min(8, v + 1))}
-                        className="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Infants */}
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-bold text-slate-800 text-xs">Infants</p>
-                      <p className="text-[10px] text-slate-400">Under 2 (on lap)</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setInfants((v) => Math.max(0, v - 1))}
-                        className="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100"
-                      >
-                        -
-                      </button>
-                      <span className="w-5 text-center font-bold text-xs">{infants}</span>
-                      <button
-                        type="button"
-                        onClick={() => setInfants((v) => Math.min(4, v + 1))}
-                        className="w-7 h-7 rounded-full border border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Cabin Class */}
-                  <div className="pt-2 border-t border-slate-100">
-                    <p className="font-bold text-slate-800 text-xs mb-2">Cabin Class</p>
-                    <div className="grid grid-cols-2 gap-1.5">
-                      {["Economy", "PremiumEconomy", "Business", "First"].map((c) => (
-                        <button
-                          key={c}
-                          type="button"
-                          onClick={() => setCabin(c)}
-                          className={`px-2.5 py-1.5 rounded-lg text-xs font-bold text-left transition-colors ${
-                            cabin === c
-                              ? "bg-[#6b4f4f] text-white"
-                              : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                          }`}
-                        >
-                          {c === "PremiumEconomy" ? "Premium Eco" : c}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => setShowPassengerDropdown(false)}
-                    className="w-full py-2 bg-[#6b4f4f] text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-[#382626] transition-colors"
-                  >
-                    Apply
-                  </button>
-                </div>
-              )}
+              {showPassengerDropdown && renderPassengerPopover("right-0")}
             </div>
 
             {/* Search Button */}
@@ -945,8 +994,27 @@ export function TravelportFlightSearch({
                 </div>
 
                 {/* Cabin */}
-                <div className="lg:col-span-1 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2 py-2.5 text-center text-xs font-bold text-slate-700">
-                  {leg.cabin}
+                <div className="lg:col-span-1 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2 py-1.5 text-center text-xs font-bold text-slate-700 focus-within:bg-white focus-within:border-[#6b4f4f] transition-all">
+                  <span className="text-[9px] font-bold text-slate-400 uppercase block leading-none mb-0.5">
+                    Cabin
+                  </span>
+                  <select
+                    value={leg.cabin || cabin}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setMultiCityLegs((prev) => {
+                        const copy = [...prev];
+                        copy[index] = { ...copy[index], cabin: val };
+                        return copy;
+                      });
+                    }}
+                    className="w-full bg-transparent text-xs font-bold text-slate-800 focus:outline-none cursor-pointer text-center appearance-none hover:text-[#6b4f4f] py-0.5"
+                  >
+                    <option value="Economy">Economy</option>
+                    <option value="PremiumEconomy">Prem Eco</option>
+                    <option value="Business">Business</option>
+                    <option value="First">First</option>
+                  </select>
                 </div>
 
                 {/* Remove Leg Button */}
@@ -955,7 +1023,7 @@ export function TravelportFlightSearch({
                     <button
                       type="button"
                       onClick={() => handleRemoveMultiCityLeg(index)}
-                      className="p-2 text-slate-400 hover:text-red-500 rounded-lg transition-colors"
+                      className="p-2 text-slate-400 hover:text-red-500 rounded-lg transition-colors cursor-pointer"
                       title="Remove Leg"
                     >
                       <X className="w-4 h-4" />
@@ -969,11 +1037,11 @@ export function TravelportFlightSearch({
 
             {/* Bottom Actions for Multi-City */}
             <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
-              <div className="flex items-center gap-4 text-xs font-bold">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-bold">
                 <button
                   type="button"
                   onClick={handleAddMultiCityLeg}
-                  className="flex items-center gap-1.5 text-slate-700 hover:text-[#6b4f4f] transition-colors"
+                  className="flex items-center gap-1.5 text-slate-700 hover:text-[#6b4f4f] transition-colors cursor-pointer"
                 >
                   <Plus className="w-4 h-4 text-[#6b4f4f]" />
                   <span>Add another flight</span>
@@ -981,9 +1049,17 @@ export function TravelportFlightSearch({
                 <button
                   type="button"
                   onClick={handleClearMultiCity}
-                  className="text-slate-400 hover:text-slate-600 transition-colors"
+                  className="text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
                 >
                   Clear all
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowPassengerDropdown((prev) => !prev)}
+                  className="flex items-center gap-1.5 text-[#6b4f4f] bg-[#f5f0eb] hover:bg-slate-200/80 px-2.5 py-1.5 rounded-xl border border-slate-200/80 transition-colors cursor-pointer"
+                >
+                  <Users className="w-3.5 h-3.5" />
+                  <span>{passengerSummaryText}</span>
                 </button>
               </div>
 
