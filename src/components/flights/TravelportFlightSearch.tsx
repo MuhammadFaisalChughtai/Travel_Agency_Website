@@ -501,10 +501,10 @@ export function TravelportFlightSearch({
                   : "lg:col-span-5 xl:col-span-5"
               } grid grid-cols-1 sm:grid-cols-11 gap-1 items-center bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2 py-1 relative ${
                 activeAirportField ? "z-50" : "z-10"
-              } focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all duration-300 min-h-[52px] h-[52px]`}
+              } focus-within:bg-white focus-within:border-[#6b4f4f] focus-within:ring-1 focus-within:ring-[#6b4f4f] transition-all duration-300 min-h-[52px] sm:h-[52px]`}
             >
               {/* Origin */}
-              <div className="sm:col-span-5 relative flex items-center">
+              <div className="sm:col-span-5 relative flex items-center h-[46px] sm:h-auto">
                 <Plane className="w-4 h-4 text-[#6b4f4f] shrink-0 mr-1 pointer-events-none ml-1" />
                 <input
                   type="text"
@@ -533,7 +533,7 @@ export function TravelportFlightSearch({
               </div>
 
               {/* Swap Button */}
-              <div className="sm:col-span-1 flex justify-center">
+              <div className="sm:col-span-1 flex justify-center py-1 sm:py-0">
                 <button
                   type="button"
                   onClick={handleSwapAirports}
@@ -545,7 +545,7 @@ export function TravelportFlightSearch({
               </div>
 
               {/* Destination */}
-              <div className="sm:col-span-5 relative flex items-center">
+              <div className="sm:col-span-5 relative flex items-center h-[46px] sm:h-auto">
                 <Plane className="w-4 h-4 text-[#6b4f4f] shrink-0 mr-1 pointer-events-none rotate-90 ml-1" />
                 <input
                   type="text"

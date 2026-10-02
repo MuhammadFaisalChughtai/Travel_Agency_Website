@@ -791,17 +791,17 @@ export function FlightResultsView({
                     <div className="p-4 sm:p-5 flex-1 space-y-4">
                       {/* Airline Header */}
                       <div className="flex items-center justify-between pb-2.5 border-b border-slate-100">
-                        <div className="flex items-center gap-2.5">
+                        <div className="flex items-center gap-3">
                           <AirlineLogo
                             carrier={flight.carrier}
                             name={flight.airline}
-                            className="w-10 h-10"
+                            className="w-20 h-12 sm:w-28 sm:h-14 p-1.5"
                           />
                           <div>
-                            <span className="font-heading font-black text-sm text-[#382626] block">
+                            <span className="font-heading font-black text-sm sm:text-base text-[#382626] block">
                               {flight.airline}
                             </span>
-                            <span className="text-[11px] text-slate-400 block">
+                            <span className="text-xs text-slate-500 font-semibold block mt-0.5">
                               {flight.tripType === "multi-city" && flight.legs
                                 ? flight.legs.map((l, i) => `Flight ${i + 1}: ${l.flightNumbers}`).join(" • ")
                                 : flight.outbound.flightNumbers}
