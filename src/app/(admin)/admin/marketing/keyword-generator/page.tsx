@@ -4,7 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { 
   getAutopilotSettings, 
   saveAutopilotSettings, 
-  getAutopilotLogs 
+  getAutopilotLogs,
+  testGscAction
 } from "./actions";
 import { 
   Play, 
@@ -21,7 +22,9 @@ import {
   RefreshCw,
   ChevronLeft,
   ChevronRight,
-  ExternalLink
+  ExternalLink,
+  Search,
+  KeyRound
 } from "lucide-react";
 
 export default function KeywordGeneratorPage() {
@@ -35,6 +38,19 @@ export default function KeywordGeneratorPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [running, setRunning] = useState(false);
+
+  // Google Search Console State
+  const [gscSiteUrl, setGscSiteUrl] = useState("");
+  const [gscClientEmail, setGscClientEmail] = useState("");
+  const [gscPrivateKey, setGscPrivateKey] = useState("");
+  const [testingGsc, setTestingGsc] = useState(false);
+  const [gscTestResult, setGscTestResult] = useState<{
+    success: boolean;
+    message: string;
+    siteUrl?: string;
+    rowCount?: number;
+    sampleQueries?: string[];
+  } | null>(null);
 
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
   const [dbLogs, setDbLogs] = useState<any[]>([]);
@@ -71,6 +87,10 @@ export default function KeywordGeneratorPage() {
       setContentType(config.seo_autopilot_content_type || "ALL");
       setLastRun(config.seo_autopilot_last_run || "Never");
 
+      setGscSiteUrl(config.gsc_site_url || "");
+      setGscClientEmail(config.gsc_client_email || "");
+      setGscPrivateKey(config.gsc_private_key || "");
+
       const logs = await getAutopilotLogs();
       setDbLogs(logs);
     } catch (err) {
@@ -91,6 +111,9 @@ export default function KeywordGeneratorPage() {
         seo_autopilot_seed_keywords: seeds,
         seo_autopilot_package_type: packageType,
         seo_autopilot_content_type: contentType,
+        gsc_site_url: gscSiteUrl,
+        gsc_client_email: gscClientEmail,
+        gsc_private_key: gscPrivateKey,
       });
       alert("Settings saved successfully!");
     } catch (err) {
@@ -98,6 +121,22 @@ export default function KeywordGeneratorPage() {
       alert("Failed to save settings.");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleTestGsc = async () => {
+    setTestingGsc(true);
+    setGscTestResult(null);
+    try {
+      const res = await testGscAction();
+      setGscTestResult(res);
+    } catch (err: any) {
+      setGscTestResult({
+        success: false,
+        message: err.message || "Failed to execute GSC test.",
+      });
+    } finally {
+      setTestingGsc(false);
     }
   };
 
@@ -316,12 +355,114 @@ export default function KeywordGeneratorPage() {
               <button
                 type="submit"
                 disabled={saving}
-                className="w-full flex items-center justify-center gap-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2.5 transition-all disabled:opacity-60 shadow-sm"
+                className="w-full flex items-center justify-center gap-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2.5 transition-all disabled:opacity-60 shadow-sm cursor-pointer"
               >
                 <Save className="h-4 w-4" />
                 {saving ? "Saving Configuration..." : "Save Settings"}
               </button>
             </form>
+          </div>
+
+          {/* Google Search Console API Card */}
+          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <Search className="h-4 w-4 text-emerald-600" />
+                Google Search Console API
+              </h3>
+              <span className="text-[10px] bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded-full border border-emerald-200">
+                Live Intent Feeder
+              </span>
+            </div>
+
+            <p className="text-xs text-slate-500">
+              Pulls actual Google search queries & striking-distance keywords (positions 4–20) directly into ChatGPT to optimize pages for keywords real searchers type.
+            </p>
+
+            <div className="space-y-3 pt-1">
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  GSC Property URL
+                </label>
+                <input
+                  type="text"
+                  value={gscSiteUrl}
+                  onChange={(e) => setGscSiteUrl(e.target.value)}
+                  placeholder="sc-domain:terrifictravel.co.uk or https://terrifictravel.co.uk"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 font-mono"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  Service Account Email
+                </label>
+                <input
+                  type="email"
+                  value={gscClientEmail}
+                  onChange={(e) => setGscClientEmail(e.target.value)}
+                  placeholder="gsc-seo-bot@project.iam.gserviceaccount.com"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 font-mono"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                  Private Key (PEM format)
+                </label>
+                <textarea
+                  rows={3}
+                  value={gscPrivateKey}
+                  onChange={(e) => setGscPrivateKey(e.target.value)}
+                  placeholder="-----BEGIN PRIVATE KEY----- ... -----END PRIVATE KEY-----"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 font-mono resize-none text-[11px]"
+                />
+              </div>
+
+              <div className="flex items-center gap-2 pt-1">
+                <button
+                  type="button"
+                  onClick={handleTestGsc}
+                  disabled={testingGsc}
+                  className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 transition-all disabled:opacity-60 shadow-xs cursor-pointer"
+                >
+                  {testingGsc ? (
+                    <RefreshCw className="h-3.5 w-3.5 animate-spin" />
+                  ) : (
+                    <KeyRound className="h-3.5 w-3.5" />
+                  )}
+                  {testingGsc ? "Verifying GSC Connection..." : "Test GSC Connection"}
+                </button>
+              </div>
+
+              {/* Test Result Display */}
+              {gscTestResult && (
+                <div
+                  className={`rounded-lg p-3 text-xs border ${
+                    gscTestResult.success
+                      ? "bg-emerald-50 border-emerald-200 text-emerald-800"
+                      : "bg-rose-50 border-rose-200 text-rose-800"
+                  }`}
+                >
+                  <div className="flex items-center gap-1.5 font-bold mb-1">
+                    {gscTestResult.success ? (
+                      <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
+                    ) : (
+                      <XCircle className="h-4 w-4 text-rose-600 shrink-0" />
+                    )}
+                    <span>{gscTestResult.message}</span>
+                  </div>
+                  {gscTestResult.sampleQueries && gscTestResult.sampleQueries.length > 0 && (
+                    <div className="mt-2 space-y-1 text-[11px] font-mono text-emerald-900 bg-white/70 p-2 rounded border border-emerald-200">
+                      <p className="font-bold font-sans text-emerald-950">Sample High-Intent Queries:</p>
+                      {gscTestResult.sampleQueries.map((q, idx) => (
+                        <p key={idx}>• {q}</p>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 

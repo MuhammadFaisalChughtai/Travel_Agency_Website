@@ -2,6 +2,13 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { GoogleAdsApi } from "google-ads-api";
 import { fetchRelevantImage } from "@/lib/imageFetcher";
+import { 
+  getGscCredentials, 
+  fetchSearchConsoleAnalytics, 
+  analyzeSearchConsoleOpportunities, 
+  GscOpportunities, 
+  GscSearchRow 
+} from "@/lib/googleSearchConsole";
 
 export async function POST(req: Request) {
   const executionLogs: string[] = [];
@@ -68,45 +75,67 @@ export async function POST(req: Request) {
     const limitCount = Math.max(1, Math.min(100, Number(config.limit) || 10));
     log(`Autopilot configured: mode=${config.mode}, limit=${limitCount}, contentType=${config.contentType}, packageType=${config.packageType}, seeds='${config.seedKeywords}'`);
 
-    // 3. Setup Google Ads API credentials
-    const developerToken = process.env['GOOGLE_ADS_DEVELOPER_TOKEN'];
-    const rawCustomerId = process.env['GOOGLE_ADS_CUSTOMER_ID'] || "";
-    const customerId = rawCustomerId.replace(/[^0-9]/g, ""); // Strip any dashes, spaces, or quotes
-    const client_id = process.env['GOOGLE_ADS_CLIENT_ID'];
-    const client_secret = process.env['GOOGLE_ADS_CLIENT_SECRET'];
-    const refresh_token = process.env['GOOGLE_ADS_REFRESH_TOKEN'];
+    // 3. Check ChatGPT API key (Required for AI content generation and optimization)
     const openAiApiKey = process.env['GPT_KEY'];
-
-    log(`[DEBUG] rawCustomerId='${rawCustomerId}' | customerId='${customerId}' | client_id='${client_id ? "SET" : "MISSING"}' | refresh_token='${refresh_token ? "SET" : "MISSING"}' | openAiApiKey='${openAiApiKey ? "SET" : "MISSING"}'`);
-
-    const missingVars: string[] = [];
-    if (!developerToken) missingVars.push("GOOGLE_ADS_DEVELOPER_TOKEN");
-    if (!customerId) missingVars.push("GOOGLE_ADS_CUSTOMER_ID");
-    if (!client_id) missingVars.push("GOOGLE_ADS_CLIENT_ID");
-    if (!client_secret) missingVars.push("GOOGLE_ADS_CLIENT_SECRET");
-    if (!refresh_token) missingVars.push("GOOGLE_ADS_REFRESH_TOKEN");
-    if (!openAiApiKey) missingVars.push("GPT_KEY");
-
-    if (missingVars.length > 0) {
-      const errorMsg = `Missing environment variables in container: ${missingVars.join(", ")}`;
+    if (!openAiApiKey) {
+      const errorMsg = "Missing GPT_KEY in environment variables. ChatGPT API is required.";
       log(errorMsg);
       return NextResponse.json({ error: errorMsg, logs: executionLogs }, { status: 500 });
     }
 
-    // Initialize Google Ads client
-    const googleAdsClient = new GoogleAdsApi({
-      client_id: client_id!,
-      client_secret: client_secret!,
-      developer_token: developerToken!,
-    });
+    let keywordIdeas: Array<{ 
+      text: string; 
+      searches: number; 
+      competition: string; 
+      competitionIndex: number;
+      source?: string;
+      page?: string;
+      position?: number;
+    }> = [];
+    let gscOpportunities: GscOpportunities | null = null;
 
-    const customer = googleAdsClient.Customer({
-      customer_id: customerId,
-      login_customer_id: "1886283319", // Manager account 188-628-3319
-      refresh_token: refresh_token!,
-    });
+    // 4. TIER 1: Fetch Real Search Queries from Google Search Console API
+    try {
+      const gscCreds = await getGscCredentials();
+      if (gscCreds) {
+        log(`[GSC] Connecting to Google Search Console for property: '${gscCreds.siteUrl}'...`);
+        const gscRows = await fetchSearchConsoleAnalytics({ daysBack: 28, rowLimit: 1000 });
+        if (gscRows.length > 0) {
+          gscOpportunities = analyzeSearchConsoleOpportunities(gscRows);
+          log(`[GSC] Successfully fetched ${gscRows.length} real Google search queries! Found ${gscOpportunities.strikingDistance.length} striking-distance queries (Pos 4-20) and ${gscOpportunities.highImpressionLowCtr.length} high-impression/low-CTR opportunities.`);
 
-    // 4. Fetch Keyword Ideas from Google Ads API or GPT Fallback
+          // Map GSC striking-distance and high-intent queries into keywordIdeas
+          const gscKeywords = gscOpportunities.strikingDistance.map(r => ({
+            text: r.query,
+            searches: r.impressions,
+            competition: r.position <= 10 ? "HIGH" : "MEDIUM",
+            competitionIndex: Math.round(r.position),
+            source: "GOOGLE_SEARCH_CONSOLE",
+            page: r.page,
+            position: r.position,
+          }));
+
+          keywordIdeas = [...keywordIdeas, ...gscKeywords];
+        } else {
+          log("[GSC] Connected to Google Search Console, but 0 search rows were returned for this date window.");
+        }
+      } else {
+        log("[GSC] Google Search Console credentials not detected. Proceeding to secondary keyword sources.");
+      }
+    } catch (gscErr: any) {
+      log(`[GSC Notice] Could not fetch Google Search Console queries: ${gscErr.message}`);
+    }
+
+    // 5. TIER 2: Google Ads API (Optional if configured)
+    const developerToken = process.env['GOOGLE_ADS_DEVELOPER_TOKEN'];
+    const rawCustomerId = process.env['GOOGLE_ADS_CUSTOMER_ID'] || "";
+    const customerId = rawCustomerId.replace(/[^0-9]/g, "");
+    const client_id = process.env['GOOGLE_ADS_CLIENT_ID'];
+    const client_secret = process.env['GOOGLE_ADS_CLIENT_SECRET'];
+    const refresh_token = process.env['GOOGLE_ADS_REFRESH_TOKEN'];
+
+    const hasGoogleAds = developerToken && customerId && client_id && client_secret && refresh_token;
+
     const defaultSeeds = config.packageType === "HOLIDAY" 
       ? ["family holiday deals", "luxury beach resort", "cheap flights from uk", "summer holiday packages"]
       : config.packageType === "UMRAH"
@@ -121,44 +150,52 @@ export async function POST(req: Request) {
       ? config.seedKeywords.split(",").map(k => k.trim()).filter(Boolean)
       : defaultSeeds;
 
-    log(`Querying Google Keyword Planner for seeds: ${seedPhrases.join(", ")}`);
-    
-    let keywordIdeas: Array<{ text: string; searches: number; competition: string; competitionIndex: number }> = [];
-
-    for (const seed of seedPhrases.slice(0, 3)) { // Limit to 3 seeds to respect quotas
+    if (keywordIdeas.length < 5 && hasGoogleAds) {
+      log(`[Google Ads] Querying Google Keyword Planner for seeds: ${seedPhrases.join(", ")}`);
       try {
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        const googleAdsClient = new GoogleAdsApi({
+          client_id: client_id!,
+          client_secret: client_secret!,
+          developer_token: developerToken!,
+        });
 
-        const response = await customer.keywordPlanIdeas.generateKeywordIdeas({
+        const customer = googleAdsClient.Customer({
           customer_id: customerId,
-          keyword_seed: { keywords: [seed] },
-          geo_target_constants: ["geoTargetConstants/2826"], // UK targeting
-          keyword_plan_network: "GOOGLE_SEARCH",
-          language: "languageConstants/1000", // English
-        } as any);
+          login_customer_id: "1886283319",
+          refresh_token: refresh_token!,
+        });
 
-        if (Array.isArray(response)) {
-          const mapped = response.map((item: any) => {
-            const metrics = item.keywordIdeaMetrics || item.keyword_idea_metrics || {};
-            return {
-              text: item.text || "",
-              searches: Number(metrics.avgMonthlySearches || metrics.avg_monthly_searches || 0),
-              competition: metrics.competition || "UNSPECIFIED",
-              competitionIndex: Number(metrics.competitionIndex || metrics.competition_index || 0)
-            };
-          });
-          keywordIdeas = [...keywordIdeas, ...mapped];
+        for (const seed of seedPhrases.slice(0, 3)) {
+          try {
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            const response = await customer.keywordPlanIdeas.generateKeywordIdeas({
+              customer_id: customerId,
+              keyword_seed: { keywords: [seed] },
+              geo_target_constants: ["geoTargetConstants/2826"],
+              keyword_plan_network: "GOOGLE_SEARCH",
+              language: "languageConstants/1000",
+            } as any);
+
+            if (Array.isArray(response)) {
+              const mapped = response.map((item: any) => {
+                const metrics = item.keywordIdeaMetrics || item.keyword_idea_metrics || {};
+                return {
+                  text: item.text || "",
+                  searches: Number(metrics.avgMonthlySearches || metrics.avg_monthly_searches || 0),
+                  competition: metrics.competition || "UNSPECIFIED",
+                  competitionIndex: Number(metrics.competitionIndex || metrics.competition_index || 0),
+                  source: "GOOGLE_ADS"
+                };
+              });
+              keywordIdeas = [...keywordIdeas, ...mapped];
+            }
+          } catch (seedErr: any) {
+            log(`[Google Ads Notice] Seed '${seed}': ${seedErr.message || "Failed"}`);
+          }
         }
       } catch (err: any) {
-        let errMsg = err.message || err.details;
-        if (!errMsg && err.errors) errMsg = JSON.stringify(err.errors);
-        if (!errMsg) errMsg = JSON.stringify(err);
-        
-        if (errMsg.includes("invalid_grant")) {
-          log(`Google Ads API Auth Notice for seed '${seed}': Refresh token expired/invalid (invalid_grant). Falling back to GPT AI keyword generation.`);
-        } else {
-          log(`Failed to fetch keywords for seed '${seed}': ${errMsg}`);
-        }
+        log(`[Google Ads Client Notice] ${err.message}`);
       }
     }
 
@@ -337,27 +374,54 @@ Output JSON matching this schema exactly:
           if (processedCount >= limitCount) break;
 
           const pTypeKey = (pkg.type || config.packageType || "").toLowerCase();
-          let kwMatch = filteredKeywords.find(k => {
-            const txt = k.text.toLowerCase();
-            if (pTypeKey === "umrah" || pTypeKey === "cruise_umrah") return txt.includes("umrah") || txt.includes("makkah") || txt.includes("madinah");
-            if (pTypeKey === "hajj") return txt.includes("hajj");
-            if (pTypeKey === "holiday") return !txt.includes("umrah") && !txt.includes("hajj");
-            return txt.includes((pkg.destination || "").toLowerCase());
-          })?.text;
 
-          if (!kwMatch) {
-            kwMatch = filteredKeywords[0]?.text || (
-              pTypeKey === "umrah" ? "cheap umrah packages from uk" :
-              pTypeKey === "hajj" ? "hajj packages 2026 uk" :
-              pTypeKey === "cruise_umrah" ? "red sea umrah cruise deals" :
-              "luxury holiday packages from uk"
-            );
+          // Check if Google Search Console has specific search queries for this package
+          let pkgGscQueries: GscSearchRow[] = [];
+          if (gscOpportunities) {
+            const pkgSlug = (pkg.slug || "").toLowerCase().trim();
+            for (const [pageUrl, queries] of Object.entries(gscOpportunities.pageQueryMap)) {
+              if (pageUrl.toLowerCase().includes(pkgSlug)) {
+                pkgGscQueries = [...pkgGscQueries, ...queries];
+              }
+            }
           }
 
-          log(`Optimizing Package: '${pkg.title}' (ID: ${pkg.id}) [Type: ${pkg.type || config.packageType}] targeting keyword: [${kwMatch}]`);
+          let kwMatch = "";
+          let gscDetailNotice = "";
+
+          if (pkgGscQueries.length > 0) {
+            const striking = pkgGscQueries
+              .filter(q => q.position >= 4 && q.position <= 20)
+              .sort((a, b) => b.impressions - a.impressions);
+            const chosen = striking[0] || pkgGscQueries.sort((a, b) => b.impressions - a.impressions)[0];
+            kwMatch = chosen.query;
+            gscDetailNotice = `[GSC Live Query: Pos ${chosen.position}, ${chosen.impressions} imps]`;
+          } else {
+            kwMatch = filteredKeywords.find(k => {
+              const txt = k.text.toLowerCase();
+              if (pTypeKey === "umrah" || pTypeKey === "cruise_umrah") return txt.includes("umrah") || txt.includes("makkah") || txt.includes("madinah");
+              if (pTypeKey === "hajj") return txt.includes("hajj");
+              if (pTypeKey === "holiday") return !txt.includes("umrah") && !txt.includes("hajj");
+              return txt.includes((pkg.destination || "").toLowerCase());
+            })?.text || "";
+
+            if (!kwMatch) {
+              kwMatch = filteredKeywords[0]?.text || (
+                pTypeKey === "umrah" ? "cheap umrah packages from uk" :
+                pTypeKey === "hajj" ? "hajj packages 2026 uk" :
+                pTypeKey === "cruise_umrah" ? "red sea umrah cruise deals" :
+                "luxury holiday packages from uk"
+              );
+            }
+          }
+
+          log(`Optimizing Package: '${pkg.title}' (ID: ${pkg.id}) [Type: ${pkg.type || config.packageType}] targeting: [${kwMatch}] ${gscDetailNotice}`);
 
           try {
             const pRules = getPackageRules(pkg.type || config.packageType);
+            const gscInstruction = pkgGscQueries.length > 0
+              ? `\nREAL GOOGLE SEARCH CONSOLE DATA FOR THIS URL:\nGoogle is already ranking this exact page for these queries:\n${pkgGscQueries.slice(0, 4).map(q => `- "${q.query}" (Current Pos: ${q.position}, Impressions: ${q.impressions})`).join("\n")}\nYou MUST seamlessly integrate these real queries into the title, headings, and FAQ schema to push this page to top 3 rankings.`
+              : `\nTarget Primary Keyword: "${kwMatch}"`;
 
             const response = await fetch("https://api.openai.com/v1/chat/completions", {
               method: "POST",
@@ -371,7 +435,7 @@ Output JSON matching this schema exactly:
                   {
                     role: "system",
                     content: `${baseRulebook} ${pRules}
-You are an expert SEO optimizer. Refine the existing travel package title, description, meta elements, and FAQs to rank for: "${kwMatch}".
+You are an expert SEO optimizer. Refine the existing travel package title, description, meta elements, and FAQs. ${gscInstruction}
 Return valid JSON matching this schema:
 {
   "title": "Optimized Package Title",
@@ -456,10 +520,31 @@ Return valid JSON matching this schema:
         for (const blog of blogsToOptimize) {
           if (processedCount >= limitCount) break;
 
-          const kwMatch = filteredKeywords[0]?.text || "uk travel tips";
-          log(`Optimizing Blog Article: '${blog.title}' (ID: ${blog.id})`);
+          let blogGscQueries: GscSearchRow[] = [];
+          if (gscOpportunities) {
+            const blogSlug = (blog.slug || "").toLowerCase().trim();
+            for (const [pageUrl, queries] of Object.entries(gscOpportunities.pageQueryMap)) {
+              if (pageUrl.toLowerCase().includes(blogSlug)) {
+                blogGscQueries = [...blogGscQueries, ...queries];
+              }
+            }
+          }
+
+          const kwMatch = blogGscQueries.length > 0 
+            ? blogGscQueries[0].query 
+            : (filteredKeywords[0]?.text || "uk travel tips");
+
+          const gscBlogNotice = blogGscQueries.length > 0
+            ? `[GSC Live Query: Pos ${blogGscQueries[0].position}, ${blogGscQueries[0].impressions} imps]`
+            : "";
+
+          log(`Optimizing Blog Article: '${blog.title}' (ID: ${blog.id}) targeting: [${kwMatch}] ${gscBlogNotice}`);
 
           try {
+            const gscBlogContext = blogGscQueries.length > 0
+              ? `\nREAL GOOGLE SEARCH CONSOLE DATA:\nGoogle ranks this article for:\n${blogGscQueries.slice(0, 3).map(q => `- "${q.query}" (Pos ${q.position})`).join("\n")}\nIncorporate these queries naturally into headings and content.`
+              : "";
+
             const response = await fetch("https://api.openai.com/v1/chat/completions", {
               method: "POST",
               headers: {
@@ -472,8 +557,8 @@ Return valid JSON matching this schema:
                   {
                     role: "system",
                     content: `${baseRulebook}
-Refine this travel blog article to improve E-E-A-T, structure, headings (<h2>, <h3>), and meta tags targeting: "${kwMatch}".
-Include helpful FAQs and internal link references to "/v/economy-flight-london-to-dhaka" or relevant packages.
+Refine this travel blog article to improve E-E-A-T, structure, headings (<h2>, <h3>), and meta tags targeting: "${kwMatch}". ${gscBlogContext}
+Include helpful FAQs and internal link references to relevant packages or flight destinations.
 Return JSON matching schema:
 {
   "title": "Refined Blog Title",

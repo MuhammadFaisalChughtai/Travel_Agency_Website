@@ -5,6 +5,8 @@ import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 
+import { testSearchConsoleConnection } from "@/lib/googleSearchConsole";
+
 async function requireAuth() {
   const session = await getServerSession(authOptions);
   if (!session) {
@@ -22,7 +24,10 @@ export async function getAutopilotSettings() {
     "seo_autopilot_seed_keywords",
     "seo_autopilot_package_type",
     "seo_autopilot_content_type",
-    "seo_autopilot_last_run"
+    "seo_autopilot_last_run",
+    "gsc_site_url",
+    "gsc_client_email",
+    "gsc_private_key"
   ];
   
   const settings = await prisma.systemSetting.findMany({
@@ -38,7 +43,10 @@ export async function getAutopilotSettings() {
     seo_autopilot_seed_keywords: "",
     seo_autopilot_package_type: "ALL",
     seo_autopilot_content_type: "ALL",
-    seo_autopilot_last_run: "Never"
+    seo_autopilot_last_run: "Never",
+    gsc_site_url: process.env.GSC_SITE_URL || "",
+    gsc_client_email: process.env.GSC_CLIENT_EMAIL || "",
+    gsc_private_key: process.env.GSC_PRIVATE_KEY || ""
   };
   
   for (const s of settings) {
@@ -62,6 +70,11 @@ export async function saveAutopilotSettings(config: Record<string, string>) {
   await Promise.all(promises);
   revalidatePath("/admin/marketing/keyword-generator");
   return { success: true };
+}
+
+export async function testGscAction() {
+  await requireAuth();
+  return await testSearchConsoleConnection();
 }
 
 export async function getAutopilotLogs() {
