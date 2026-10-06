@@ -649,6 +649,237 @@ Return JSON matching schema:
           }
         }
       }
+
+      // OPTIMIZE FLIGHTS
+      if (targetEntityTypes.includes("FLIGHT") && processedCount < limitCount) {
+        const flightsToOptimize = await prisma.flight.findMany({
+          take: Math.max(1, limitCount - processedCount),
+          orderBy: { createdAt: "asc" }
+        });
+
+        if (flightsToOptimize.length === 0) {
+          log("[Notice] 0 existing flight deals found in database to optimize. Auto-initiating initial flight deal generation...");
+          const kw = filteredKeywords[0] || { text: "cheap flights from london" };
+          const slug = kw.text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+          try {
+            log(`Generating initial flight deal for keyword: '${kw.text}'`);
+            const response = await fetch("https://api.openai.com/v1/chat/completions", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${openAiApiKey}`,
+              },
+              body: JSON.stringify({
+                model: "gpt-4o-mini",
+                messages: [
+                  {
+                    role: "system",
+                    content: `${baseRulebook}
+Generate a new Flight deal record for UK departures targeting keyword: "${kw.text}".
+Return JSON matching schema:
+{
+  "airline": "Saudia",
+  "airlineCode": "SV",
+  "departure": "London Heathrow",
+  "departureCode": "LHR",
+  "destination": "Jeddah",
+  "destinationCode": "JED",
+  "price": 549.00,
+  "duration": "6h 30m",
+  "isTransit": false,
+  "country": "Saudi Arabia",
+  "metaTitle": "Cheap Flights from London to Jeddah | Best UK Fares",
+  "metaDescription": "Book flights from London Heathrow to Jeddah with Saudia. Great fares, direct routing, and luggage included.",
+  "metaKeywords": "cheap flights to jeddah, london to jeddah flights"
+}`
+                  },
+                  {
+                    role: "user",
+                    content: `Generate flight deal for: ${kw.text}`
+                  }
+                ],
+                response_format: { type: "json_object" },
+                temperature: 0.7,
+              }),
+            });
+
+            const resJson = await response.json();
+            if (resJson.choices?.[0]?.message?.content) {
+              const data = JSON.parse(resJson.choices[0].message.content);
+
+              const newFlight = await prisma.flight.create({
+                data: {
+                  slug,
+                  airline: data.airline || "Saudia",
+                  airlineCode: data.airlineCode || "SV",
+                  departure: data.departure || "London Heathrow",
+                  departureCode: data.departureCode || "LHR",
+                  destination: data.destination || "Jeddah",
+                  destinationCode: data.destinationCode || "JED",
+                  price: Number(data.price) || 499.0,
+                  duration: data.duration || "6h 30m",
+                  isTransit: Boolean(data.isTransit),
+                  country: data.country || "Saudi Arabia",
+                  metaTitle: data.metaTitle,
+                  metaDescription: data.metaDescription,
+                  metaKeywords: data.metaKeywords || kw.text,
+                }
+              });
+
+              await prisma.seoAutopilotLog.create({
+                data: {
+                  actionType: "GENERATE",
+                  targetType: "FLIGHT",
+                  targetId: newFlight.id,
+                  targetTitle: `${newFlight.airline} ${newFlight.departure} to ${newFlight.destination}`,
+                  keywords: kw.text,
+                  status: "SUCCESS",
+                  details: `Auto-generated initial flight deal (fallback from 0 existing flights in database).`
+                }
+              });
+
+              log(`Successfully generated new flight deal: '${newFlight.airline} ${newFlight.departure} to ${newFlight.destination}'`);
+              affectedPages.push({
+                action: "GENERATE",
+                targetType: "FLIGHT",
+                id: newFlight.id,
+                title: `${newFlight.departure} → ${newFlight.destination} (${newFlight.airline})`,
+                slug: newFlight.slug,
+                keywords: kw.text
+              });
+              processedCount++;
+            }
+          } catch (err: any) {
+            log(`Failed to generate initial flight deal: ${err.message}`);
+          }
+        } else {
+          for (const fl of flightsToOptimize) {
+            if (processedCount >= limitCount) break;
+
+            let flGscQueries: GscSearchRow[] = [];
+            if (gscOpportunities) {
+              const flSlug = (fl.slug || "").toLowerCase().trim();
+              const flDest = (fl.destination || "").toLowerCase().trim();
+              const flAirline = (fl.airline || "").toLowerCase().trim();
+              for (const [pageUrl, queries] of Object.entries(gscOpportunities.pageQueryMap)) {
+                if (
+                  (flSlug && pageUrl.toLowerCase().includes(flSlug)) ||
+                  (flDest && pageUrl.toLowerCase().includes(flDest)) ||
+                  (flAirline && pageUrl.toLowerCase().includes(flAirline))
+                ) {
+                  flGscQueries = [...flGscQueries, ...queries];
+                }
+              }
+            }
+
+            let kwMatch = "";
+            let gscDetailNotice = "";
+
+            if (flGscQueries.length > 0) {
+              const striking = flGscQueries
+                .filter(q => q.position >= 4 && q.position <= 20)
+                .sort((a, b) => b.impressions - a.impressions);
+              const chosen = striking[0] || flGscQueries.sort((a, b) => b.impressions - a.impressions)[0];
+              kwMatch = chosen.query;
+              gscDetailNotice = `[GSC Live Query: Pos ${chosen.position}, ${chosen.impressions} imps]`;
+            } else {
+              const flightKw = filteredKeywords.find(k => {
+                const txt = k.text.toLowerCase();
+                return txt.includes((fl.destination || "").toLowerCase()) ||
+                       txt.includes((fl.airline || "").toLowerCase()) ||
+                       txt.includes("flight");
+              });
+              kwMatch = flightKw?.text || filteredKeywords[0]?.text || `cheap flights from ${fl.departure} to ${fl.destination}`;
+            }
+
+            const flTitle = `${fl.airline} ${fl.departure} (${fl.departureCode || "UK"}) to ${fl.destination} (${fl.destinationCode || "INTL"})`;
+            log(`Optimizing Flight Deal: '${flTitle}' (ID: ${fl.id}) targeting: [${kwMatch}] ${gscDetailNotice}`);
+
+            try {
+              const gscFlightInstruction = flGscQueries.length > 0
+                ? `\nREAL GOOGLE SEARCH CONSOLE DATA:\nGoogle ranks this route for:\n${flGscQueries.slice(0, 3).map(q => `- "${q.query}" (Pos ${q.position})`).join("\n")}\nIncorporate these exact terms into the metaTitle, metaDescription, and keywords.`
+                : `\nTarget Primary Keyword: "${kwMatch}"`;
+
+              const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${openAiApiKey}`,
+                },
+                body: JSON.stringify({
+                  model: "gpt-4o-mini",
+                  messages: [
+                    {
+                      role: "system",
+                      content: `${baseRulebook}
+You are an expert flight deals SEO copywriter. Optimize this UK flight deal route. ${gscFlightInstruction}
+Return valid JSON matching schema:
+{
+  "metaTitle": "Compelling SEO title under 60 chars (e.g. Cheap Flights from London to Jeddah | Terrific Travel)",
+  "metaDescription": "SEO meta description under 160 chars highlighting airlines, baggage, best fares",
+  "metaKeywords": "comma-separated high-intent search terms",
+  "baggage": "e.g. 30kg Checked, 7kg Cabin",
+  "aircraft": "e.g. Boeing 777-300ER"
+}`
+                    },
+                    {
+                      role: "user",
+                      content: `Existing Flight: Airline: ${fl.airline}, Route: ${fl.departure} to ${fl.destination}, Price: £${fl.price}`
+                    }
+                  ],
+                  response_format: { type: "json_object" },
+                  temperature: 0.7,
+                }),
+              });
+
+              const resJson = await response.json();
+              if (resJson.choices?.[0]?.message?.content) {
+                const data = JSON.parse(resJson.choices[0].message.content);
+
+                const updatedSlug = fl.slug || `${fl.departureCode || "lhr"}-to-${fl.destinationCode || "jed"}-${fl.airline.toLowerCase().replace(/[^a-z0-9]+/g, "")}`.toLowerCase();
+
+                await prisma.flight.update({
+                  where: { id: fl.id },
+                  data: {
+                    slug: updatedSlug,
+                    metaTitle: data.metaTitle || fl.metaTitle,
+                    metaDescription: data.metaDescription || fl.metaDescription,
+                    metaKeywords: data.metaKeywords || kwMatch,
+                    baggage: data.baggage || fl.baggage,
+                    aircraft: data.aircraft || fl.aircraft,
+                  }
+                });
+
+                await prisma.seoAutopilotLog.create({
+                  data: {
+                    actionType: "OPTIMIZE",
+                    targetType: "FLIGHT",
+                    targetId: fl.id,
+                    targetTitle: flTitle,
+                    keywords: kwMatch,
+                    status: "SUCCESS",
+                    details: `Optimized flight SEO metadata and route keywords.`
+                  }
+                });
+
+                log(`Successfully optimized flight deal: '${flTitle}'`);
+                affectedPages.push({
+                  action: "OPTIMIZE",
+                  targetType: "FLIGHT",
+                  id: fl.id,
+                  title: flTitle,
+                  slug: updatedSlug,
+                  keywords: kwMatch
+                });
+                processedCount++;
+              }
+            } catch (err: any) {
+              log(`Failed to optimize flight '${flTitle}': ${err.message}`);
+            }
+          }
+        }
+      }
     }
 
     // GENERATE NEW DRAFTS
