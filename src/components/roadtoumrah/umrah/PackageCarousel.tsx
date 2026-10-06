@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { useState } from "react";
 import { PackageCard } from "./PackageCard";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface PackageItem {
   id: string;
@@ -26,19 +25,20 @@ export function PackageCarousel({
   subtitle,
   packages,
 }: PackageCarouselProps) {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const INITIAL_COUNT = 6;
+  const LOAD_STEP = 3;
+  const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const { current } = scrollRef;
-      const scrollAmount = direction === "left" ? -350 : 350;
-      current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + LOAD_STEP, packages.length));
   };
 
+  const visiblePackages = packages.slice(0, visibleCount);
+  const hasMore = visibleCount < packages.length;
+
   return (
-    <div className="py-6 relative group max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center mb-6">
+    <div className="py-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="text-center mb-8">
         <span className="text-[#064e3b] font-bold uppercase tracking-[0.2em] text-[11px] bg-[#064e3b]/10 px-3 py-1 rounded-full mb-2 inline-block">
           {subtitle}
         </span>
@@ -49,41 +49,29 @@ export function PackageCarousel({
         </h2>
       </div>
 
-      <div className="relative">
-        <button
-          onClick={() => scroll("left")}
-          className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white text-[#064e3b] border border-[#d4af37]/50 shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#064e3b] hover:text-[#F9FAFB] hover:border-[#064e3b] disabled:opacity-0 focus:opacity-100"
-          aria-label="Previous"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-
-        <div
-          ref={scrollRef}
-          className="flex overflow-x-auto gap-4 pb-6 snap-x snap-mandatory hide-scrollbar pt-2 px-1"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {packages.map((pkg) => (
-            <div key={pkg.id} className="snap-start shrink-0">
-              <PackageCard {...pkg} />
-            </div>
-          ))}
-        </div>
-
-        <button
-          onClick={() => scroll("right")}
-          className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white text-[#064e3b] border border-[#d4af37]/50 shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#064e3b] hover:text-[#F9FAFB] hover:border-[#064e3b] disabled:opacity-0 focus:opacity-100"
-          aria-label="Next"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
+      {/* Grid of Fixed Width Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-items-center">
+        {visiblePackages.map((pkg) => (
+          <div key={pkg.id} className="w-full max-w-[360px] flex">
+            <PackageCard {...pkg} />
+          </div>
+        ))}
       </div>
 
-      <style jsx global>{`
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
+      {/* Load More Button */}
+      {hasMore && (
+        <div className="flex justify-center mt-10">
+          <button
+            onClick={handleLoadMore}
+            className="group px-8 py-3.5 bg-[#064e3b] hover:bg-[#043427] text-white text-xs font-black uppercase tracking-widest rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-[#d4af37]/40 flex items-center gap-2 hover:-translate-y-0.5 active:translate-y-0"
+          >
+            <span>Load More Packages</span>
+            <span className="text-[10px] opacity-75 font-normal">
+              ({visibleCount} of {packages.length})
+            </span>
+          </button>
+        </div>
+      )}
     </div>
   );
 }
