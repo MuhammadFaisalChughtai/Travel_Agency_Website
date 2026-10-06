@@ -2048,13 +2048,8 @@ export default function KeywordGeneratorPage() {
                 </tr>
               ) : (
                 currentLogs.map((logItem) => {
-                  const itemSlug =
-                    logItem.slug ||
-                    logItem.targetTitle
-                      .toLowerCase()
-                      .replace(/[^a-z0-9]+/g, "-")
-                      .replace(/(^-|-$)/g, "");
-                  const viewUrl = `/v/${itemSlug}`;
+                  const itemSlug = logItem.slug;
+                  const viewUrl = itemSlug ? `/v/${itemSlug}` : null;
                   const pkgType =
                     logItem.packageType ||
                     logItem.details?.match(/\[Type:\s*([A-Za-z_]+)\]/)?.[1];
@@ -2104,16 +2099,20 @@ export default function KeywordGeneratorPage() {
                         className="px-4 py-3 font-medium text-slate-900 max-w-[200px] truncate"
                         title={logItem.targetTitle}
                       >
-                        <a
-                          href={viewUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="hover:text-indigo-600 hover:underline flex items-center gap-1 group"
-                        >
-                          <span className="truncate">
-                            {logItem.targetTitle}
-                          </span>
-                        </a>
+                        {viewUrl ? (
+                          <a
+                            href={viewUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-indigo-600 hover:underline flex items-center gap-1 group"
+                          >
+                            <span className="truncate">
+                              {logItem.targetTitle}
+                            </span>
+                          </a>
+                        ) : (
+                          <span className="truncate text-slate-700">{logItem.targetTitle}</span>
+                        )}
                       </td>
                       <td
                         className="px-4 py-3 text-slate-500 max-w-[150px] truncate"
@@ -2135,15 +2134,21 @@ export default function KeywordGeneratorPage() {
                         )}
                       </td>
                       <td className="whitespace-nowrap px-4 py-3">
-                        <a
-                          href={viewUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 rounded-lg bg-indigo-50 border border-indigo-200 px-2.5 py-1 text-[11px] font-bold text-indigo-700 hover:bg-indigo-600 hover:text-white transition-all shadow-sm"
-                        >
-                          <ExternalLink className="h-3 w-3" />
-                          View Page
-                        </a>
+                        {viewUrl ? (
+                          <a
+                            href={viewUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 rounded-lg bg-indigo-50 border border-indigo-200 px-2.5 py-1 text-[11px] font-bold text-indigo-700 hover:bg-indigo-600 hover:text-white transition-all shadow-xs"
+                          >
+                            <ExternalLink className="h-3 w-3" />
+                            View Page
+                          </a>
+                        ) : (
+                          <span className="inline-flex items-center text-[10px] font-medium text-slate-400 bg-slate-50 px-2 py-0.5 rounded border border-slate-200">
+                            No Live Page
+                          </span>
+                        )}
                       </td>
                       <td
                         className="px-4 py-3 text-slate-400 max-w-[200px] truncate"

@@ -369,6 +369,37 @@ Output JSON matching this schema exactly:
       return NextResponse.json({ message: "No eligible keywords found.", logs: executionLogs });
     }
 
+    // Helper: Sanitize internal links to prevent hallucinated URLs
+    const allowedStaticPaths = new Set([
+      "/flights",
+      "/umrah",
+      "/holiday",
+      "/hajj",
+      "/visa",
+      "/transport",
+      "/contact",
+      "/about",
+    ]);
+
+    const sanitizeInternalLinks = (html: string): string => {
+      if (!html) return "";
+      // Replace <a href="...">text</a> where href is an unverified /v/[slug] or unknown route
+      return html.replace(/<a\s+(?:[^>]*?\s+)?href=["']([^"']*)["'][^>]*>(.*?)<\/a>/gi, (match, href, text) => {
+        const cleanHref = href.trim();
+        // Allow valid static hub paths
+        if (allowedStaticPaths.has(cleanHref.toLowerCase())) {
+          return match;
+        }
+        // Check /v/[slug] links
+        const vMatch = cleanHref.match(/^\/v\/([a-z0-9-]+)$/i);
+        if (vMatch && usedSlugs.has(vMatch[1].toLowerCase())) {
+          return match;
+        }
+        // Hallucinated or non-existent internal link: strip <a> tag, keep inner anchor text
+        return text;
+      });
+    };
+
     // 5. Execute Actions
     let processedCount = 0;
 
@@ -377,8 +408,16 @@ Output JSON matching this schema exactly:
 1. HUMANIZED STYLE: Write in a natural, premium, professional tone. Must read as if written by an elite travel consultant.
 2. NO AI JARGON/CLICHÉS: Strictly avoid AI vocabulary (e.g. "embark on a journey", "testament to", "delve", "furthermore", "moreover", "discover the magic").
 3. NO HALLUCINATIONS: Do not invent unrealistic data. Ensure airport codes (LHR, LGW, MAN, BHX), airline codes, and duration calculations are realistic.
-4. CLEAN HTML: Output clean structural HTML tags (<h3>, <strong>, <ul>, <li>, <p>). No inline style attributes.
-5. UK DEPARTURES ONLY: All generated flight routes must originate from a UK airport (LHR/LGW/MAN/BHX) and return back to the UK.
+4. STRICT INTERNAL LINKING (ZERO HALLUCINATIONS):
+   - You MUST ONLY link to these verified site hub pages:
+     * "/umrah" (for Umrah pilgrimage packages and guidance)
+     * "/flights" (for airline tickets and flight bookings)
+     * "/holiday" (for holiday and vacation packages)
+     * "/visa" (for visa processing and assistance)
+     * "/contact" (for customer support, queries, and bookings)
+   - NEVER invent or guess custom article or package URLs (such as /v/anything, /packages/anything, or /blog/anything). If referencing another topic without a verified URL, write plain text without an <a> tag.
+5. CLEAN HTML: Output clean structural HTML tags (<h3>, <strong>, <ul>, <li>, <p>). No inline style attributes.
+6. UK DEPARTURES ONLY: All generated flight routes must originate from a UK airport (LHR/LGW/MAN/BHX) and return back to the UK.
 `;
 
     const getPackageRules = (pType: string) => {
@@ -542,11 +581,13 @@ Return valid JSON matching this schema:
                 fallbackTitle: data.title || pkg.title
               });
 
+              const cleanDescription = data.description ? sanitizeInternalLinks(data.description) : pkg.description;
+
               await prisma.package.update({
                 where: { id: pkg.id },
                 data: {
                   title: data.title || pkg.title,
-                  description: data.description || pkg.description,
+                  description: cleanDescription,
                   images: JSON.stringify([imgRes.url]),
                   meccaHotel: data.meccaHotel ?? pkg.meccaHotel,
                   meccaNights: data.meccaNights ?? pkg.meccaNights,
@@ -664,12 +705,14 @@ Return JSON matching schema:
             if (resJson.choices?.[0]?.message?.content) {
               const data = JSON.parse(resJson.choices[0].message.content);
 
+              const cleanContent = data.content ? sanitizeInternalLinks(data.content) : blog.content;
+
               await prisma.blog.update({
                 where: { id: blog.id },
                 data: {
                   title: data.title || blog.title,
                   excerpt: data.excerpt || blog.excerpt,
-                  content: data.content || blog.content,
+                  content: cleanContent,
                   metaTitle: data.metaTitle || blog.metaTitle,
                   metaDescription: data.metaDescription || blog.metaDescription,
                   metaKeywords: data.metaKeywords || blog.metaKeywords,
@@ -1026,6 +1069,8 @@ Output valid JSON matching schema:
                 fallbackTitle: data.title
               });
 
+              const cleanDescription = data.description ? sanitizeInternalLinks(data.description) : "<p>Package details</p>";
+
               const newPkg = await prisma.package.create({
                 data: {
                   slug,
@@ -1034,7 +1079,7 @@ Output valid JSON matching schema:
                   destination: data.destination || "Worldwide",
                   duration: data.duration || "7 Nights",
                   price: Number(data.price) || 899.0,
-                  description: data.description || "<p>Package details</p>",
+                  description: cleanDescription,
                   includedServices: "Flights, Hotel, Transfers, Visa Assistance",
                   images: JSON.stringify([imgRes.url]),
                   travelDates: data.travelDates || "Flexible departures 2026",
@@ -1183,12 +1228,12 @@ Return JSON matching schema:
                     role: "system",
                     content: `${baseRulebook}
 Write an authoritative, high E-E-A-T travel article targeting keyword: "${kw.text}".
-Include HTML headings (<h2>, <h3>), internal links to "/terrific-travel/umrah" or "/terrific-travel/flights", and helpful FAQs.
+Include HTML headings (<h2>, <h3>), internal links only to verified hubs such as "/umrah" or "/flights", and helpful FAQs. Do NOT invent specific URLs.
 Return JSON matching schema:
 {
   "title": "Informative Blog Article Title",
   "excerpt": "Engaging summary under 160 characters",
-  "content": "Full article HTML with headings, guidance, internal links, and FAQs",
+  "content": "Full article HTML with headings, guidance, internal links to /umrah or /flights, and FAQs",
   "category": "Travel Guide",
   "readTime": "5 min read",
   "metaTitle": "SEO title under 60 characters",
@@ -1215,12 +1260,14 @@ Return JSON matching schema:
                 fallbackTitle: data.title
               });
 
+              const cleanContent = data.content ? sanitizeInternalLinks(data.content) : `<p>Article content</p>`;
+
               const newBlog = await prisma.blog.create({
                 data: {
                   slug,
                   title: data.title || `Guide: ${kw.text}`,
                   excerpt: data.excerpt || `Complete guide to ${kw.text}`,
-                  content: data.content || `<p>Article content</p>`,
+                  content: cleanContent,
                   category: data.category || "Travel Guide",
                   readTime: data.readTime || "5 min read",
                   date: new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }),

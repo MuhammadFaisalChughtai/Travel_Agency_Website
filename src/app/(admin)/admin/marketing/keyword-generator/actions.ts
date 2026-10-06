@@ -137,13 +137,10 @@ export async function getAutopilotLogs() {
       }
     }
 
-    if (!slug && log.keywords) {
-      slug = log.keywords.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || null;
-    }
-
     return {
       ...log,
       slug,
+      isVerified: Boolean(slug),
       packageType,
     };
   });

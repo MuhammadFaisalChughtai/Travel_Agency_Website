@@ -263,7 +263,22 @@ export default async function UniversalViewPage({ params }: ViewPageProps) {
   const item: any = await resolveItem(slug);
 
   if (!item) {
-    notFound();
+    // Intelligent fallback redirection: If slug doesn't exist, redirect to appropriate category hub
+    const lowerSlug = (slug || "").toLowerCase();
+    if (lowerSlug.includes("flight") || lowerSlug.includes("airline") || lowerSlug.includes("ticket") || lowerSlug.includes("airport")) {
+      permanentRedirect("/flights");
+    } else if (lowerSlug.includes("umrah") || lowerSlug.includes("makkah") || lowerSlug.includes("madinah") || lowerSlug.includes("ramadan") || lowerSlug.includes("ziyarat")) {
+      permanentRedirect("/umrah");
+    } else if (lowerSlug.includes("hajj")) {
+      permanentRedirect("/hajj");
+    } else if (lowerSlug.includes("visa")) {
+      permanentRedirect("/visa");
+    } else if (lowerSlug.includes("transport") || lowerSlug.includes("transfer") || lowerSlug.includes("taxi")) {
+      permanentRedirect("/transport");
+    } else {
+      // Default to holiday packages hub
+      permanentRedirect("/holiday");
+    }
   }
 
   // 301 Redirect for ID-based URLs (UUIDs) to their friendly slugs to prevent duplicate content
