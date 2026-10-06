@@ -185,8 +185,7 @@ export function HeroSection() {
                     : "text-[#eed6c4] hover:bg-[#eed6c4]/15 hover:text-white"
                 }`}
               >
-                Find Flight
-              </button>
+Live Flight Deals              </button>
             )}
             {siteConfig.allowedTabs.includes("umrah") && (
               <button
