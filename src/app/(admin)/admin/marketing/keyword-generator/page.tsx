@@ -1,20 +1,20 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { 
-  getAutopilotSettings, 
-  saveAutopilotSettings, 
+import {
+  getAutopilotSettings,
+  saveAutopilotSettings,
   getAutopilotLogs,
   testGscAction,
-  getSeoAnalyticsData
+  getSeoAnalyticsData,
 } from "./actions";
-import { 
-  Play, 
-  Settings, 
-  Activity, 
-  History, 
-  Save, 
-  Sparkles, 
+import {
+  Play,
+  Settings,
+  Activity,
+  History,
+  Save,
+  Sparkles,
   AlertCircle,
   CheckCircle2,
   XCircle,
@@ -45,7 +45,7 @@ import {
   Filter,
   Plane,
   Palmtree,
-  BookOpen
+  BookOpen,
 } from "lucide-react";
 
 export default function KeywordGeneratorPage() {
@@ -57,7 +57,9 @@ export default function KeywordGeneratorPage() {
   const [keywordsPackages, setKeywordsPackages] = useState("");
   const [keywordsHolidays, setKeywordsHolidays] = useState("");
   const [keywordsBlogs, setKeywordsBlogs] = useState("");
-  const [activeKeywordPocketTab, setActiveKeywordPocketTab] = useState<"flights" | "packages" | "holidays" | "blogs">("flights");
+  const [activeKeywordPocketTab, setActiveKeywordPocketTab] = useState<
+    "flights" | "packages" | "holidays" | "blogs"
+  >("flights");
   const [viewAllPockets, setViewAllPockets] = useState(false);
   const [packageType, setPackageType] = useState("ALL");
   const [contentType, setContentType] = useState("ALL");
@@ -66,7 +68,9 @@ export default function KeywordGeneratorPage() {
   const [saving, setSaving] = useState(false);
   const [running, setRunning] = useState(false);
   const [copiedCurl, setCopiedCurl] = useState(false);
-  const [selectedReportTab, setSelectedReportTab] = useState<"ALL" | "OPTIMIZE" | "GENERATE">("ALL");
+  const [selectedReportTab, setSelectedReportTab] = useState<
+    "ALL" | "OPTIMIZE" | "GENERATE"
+  >("ALL");
 
   // Google Search Console State
   const [gscSiteUrl, setGscSiteUrl] = useState("");
@@ -99,7 +103,13 @@ export default function KeywordGeneratorPage() {
       successCount: number;
       failedCount: number;
       successRate: number;
-      last7Days: { date: string; label: string; count: number; updated: number; generated: number }[];
+      last7Days: {
+        date: string;
+        label: string;
+        count: number;
+        updated: number;
+        generated: number;
+      }[];
     };
     actionReport?: {
       totalUpdates: number;
@@ -140,7 +150,9 @@ export default function KeywordGeneratorPage() {
       strikingQueries: any[];
     };
   } | null>(null);
-  const [selectedGscTab, setSelectedGscTab] = useState<"striking" | "top">("striking");
+  const [selectedGscTab, setSelectedGscTab] = useState<"striking" | "top">(
+    "striking",
+  );
 
   const [consoleLogs, setConsoleLogs] = useState<string[]>([]);
   const [dbLogs, setDbLogs] = useState<any[]>([]);
@@ -148,7 +160,7 @@ export default function KeywordGeneratorPage() {
   const [pageSize, setPageSize] = useState(10);
   const consoleEndRef = useRef<HTMLDivElement>(null);
 
-  const filteredLogs = dbLogs.filter(log => {
+  const filteredLogs = dbLogs.filter((log) => {
     if (selectedReportTab === "ALL") return true;
     return log.actionType === selectedReportTab;
   });
@@ -176,17 +188,29 @@ export default function KeywordGeneratorPage() {
       const [config, logs, analytics] = await Promise.all([
         getAutopilotSettings(),
         getAutopilotLogs(),
-        getSeoAnalyticsData()
+        getSeoAnalyticsData(),
       ]);
 
       setEnabled(config.seo_autopilot_enabled === "true");
       setMode(config.seo_autopilot_mode || "optimize_existing");
       setLimit(config.seo_autopilot_limit || "50");
       setSeeds(config.seo_autopilot_seed_keywords || "");
-      setKeywordsFlights(config.seo_autopilot_keywords_flights || "cheap flights from london, flights to jeddah, flight deals uk, direct flights to makkah, airline tickets discount");
-      setKeywordsPackages(config.seo_autopilot_keywords_packages || "umrah packages 2026, cheap umrah from london, 5 star umrah packages, family umrah packages, ramadan umrah deals, hajj packages");
-      setKeywordsHolidays(config.seo_autopilot_keywords_holidays || "family holiday deals, luxury beach holidays, dubai holiday packages, all inclusive holidays from uk, turkey holiday deals");
-      setKeywordsBlogs(config.seo_autopilot_keywords_blogs || "visa for umrah from uk, best time to perform umrah, umrah packing list, saudi tourist visa guide, uk travel requirements");
+      setKeywordsFlights(
+        config.seo_autopilot_keywords_flights ||
+          "cheap flights from london, flights to jeddah, flight deals uk, direct flights to makkah, airline tickets discount",
+      );
+      setKeywordsPackages(
+        config.seo_autopilot_keywords_packages ||
+          "umrah packages 2026, cheap umrah from london, 5 star umrah packages, family umrah packages, ramadan umrah deals, hajj packages",
+      );
+      setKeywordsHolidays(
+        config.seo_autopilot_keywords_holidays ||
+          "family holiday deals, luxury beach holidays, dubai holiday packages, all inclusive holidays from uk, turkey holiday deals",
+      );
+      setKeywordsBlogs(
+        config.seo_autopilot_keywords_blogs ||
+          "visa for umrah from uk, best time to perform umrah, umrah packing list, saudi tourist visa guide, uk travel requirements",
+      );
       setPackageType(config.seo_autopilot_package_type || "ALL");
       setContentType(config.seo_autopilot_content_type || "ALL");
       setLastRun(config.seo_autopilot_last_run || "Never");
@@ -255,28 +279,34 @@ export default function KeywordGeneratorPage() {
 
   const handleManualRun = async () => {
     if (running) return;
-    if (!confirm("Are you sure you want to trigger a manual SEO autopilot cycle now?")) return;
-    
+    if (
+      !confirm(
+        "Are you sure you want to trigger a manual SEO autopilot cycle now?",
+      )
+    )
+      return;
+
     setRunning(true);
     setConsoleLogs(["[System] Starting manual trigger execution..."]);
-    
+
     try {
       const res = await fetch("/api/cron/seo-autopilot?manual=true", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-        }
+        },
       });
-      
+
       if (!res.ok) {
         let errorMsg = `Server response HTTP ${res.status}: ${res.statusText || "Execution notice"}`;
         if (res.status === 504) {
-          errorMsg = "Gateway Time-out (504): The reverse proxy reached its 60s timeout limit. Operations completed before cutoff have been committed to the database.";
+          errorMsg =
+            "Gateway Time-out (504): The reverse proxy reached its 60s timeout limit. Operations completed before cutoff have been committed to the database.";
         }
-        setConsoleLogs(prev => [
-          ...prev, 
+        setConsoleLogs((prev) => [
+          ...prev,
           `[System] ${errorMsg}`,
-          `[System] Fetching latest database audit logs and analytics...`
+          `[System] Fetching latest database audit logs and analytics...`,
         ]);
         await loadData();
         return;
@@ -285,10 +315,10 @@ export default function KeywordGeneratorPage() {
       const contentTypeHeader = res.headers.get("content-type") || "";
       if (!contentTypeHeader.includes("application/json")) {
         const rawText = await res.text();
-        setConsoleLogs(prev => [
+        setConsoleLogs((prev) => [
           ...prev,
           `[System] Non-JSON server response (HTTP ${res.status}): ${rawText.slice(0, 120)}...`,
-          `[System] Fetching latest database audit logs...`
+          `[System] Fetching latest database audit logs...`,
         ]);
         await loadData();
         return;
@@ -298,31 +328,35 @@ export default function KeywordGeneratorPage() {
       if (data.logs) {
         setConsoleLogs(data.logs);
       }
-      
+
       if (data.success) {
-        const updateStr = data.updatedCount !== undefined 
-          ? `[System] Run succeeded! Updated: ${data.updatedCount} pages, Created: ${data.generatedCount} new pages.`
-          : `[System] Run succeeded. Processed ${data.processed} operations.`;
-        setConsoleLogs(prev => [...prev, updateStr]);
+        const updateStr =
+          data.updatedCount !== undefined
+            ? `[System] Run succeeded! Updated: ${data.updatedCount} pages, Created: ${data.generatedCount} new pages.`
+            : `[System] Run succeeded. Processed ${data.processed} operations.`;
+        setConsoleLogs((prev) => [...prev, updateStr]);
       } else {
-        setConsoleLogs(prev => [...prev, `[System] Run failed: ${data.error || "Unknown error"}`]);
+        setConsoleLogs((prev) => [
+          ...prev,
+          `[System] Run failed: ${data.error || "Unknown error"}`,
+        ]);
       }
-      
+
       // Reload logs, analytics, and last run
       const [updatedLogs, updatedAnalytics, updatedConfig] = await Promise.all([
         getAutopilotLogs(),
         getSeoAnalyticsData(),
-        getAutopilotSettings()
+        getAutopilotSettings(),
       ]);
       setDbLogs(updatedLogs);
       setAnalyticsData(updatedAnalytics);
       setLastRun(updatedConfig.seo_autopilot_last_run || "Never");
     } catch (err: any) {
       console.error(err);
-      setConsoleLogs(prev => [
-        ...prev, 
+      setConsoleLogs((prev) => [
+        ...prev,
         `[System] Execution notice: ${err.message}`,
-        `[System] Fetching updated database records...`
+        `[System] Fetching updated database records...`,
       ]);
       await loadData();
     } finally {
@@ -335,7 +369,9 @@ export default function KeywordGeneratorPage() {
       <div className="flex h-96 items-center justify-center">
         <div className="flex flex-col items-center gap-2">
           <RefreshCw className="h-8 w-8 animate-spin text-indigo-600" />
-          <span className="text-sm font-medium text-slate-500">Loading Autopilot Settings...</span>
+          <span className="text-sm font-medium text-slate-500">
+            Loading Autopilot Settings...
+          </span>
         </div>
       </div>
     );
@@ -351,18 +387,23 @@ export default function KeywordGeneratorPage() {
             AI SEO Autopilot
           </h1>
           <p className="text-sm text-slate-500 mt-1">
-            Automate keyword research, page metadata optimization, and content draft generation.
+            Automate keyword research, page metadata optimization, and content
+            draft generation.
           </p>
         </div>
 
         {/* Status Indicator & Trigger Button */}
         <div className="flex items-center gap-3">
-          <div className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold ${
-            enabled 
-              ? "bg-emerald-50 text-emerald-700 border border-emerald-200" 
-              : "bg-slate-50 text-slate-600 border border-slate-200"
-          }`}>
-            <span className={`h-2.5 w-2.5 rounded-full ${enabled ? "bg-emerald-500 animate-pulse" : "bg-slate-400"}`} />
+          <div
+            className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold ${
+              enabled
+                ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                : "bg-slate-50 text-slate-600 border border-slate-200"
+            }`}
+          >
+            <span
+              className={`h-2.5 w-2.5 rounded-full ${enabled ? "bg-emerald-500 animate-pulse" : "bg-slate-400"}`}
+            />
             Autopilot: {enabled ? "Active" : "Disabled"}
           </div>
 
@@ -394,55 +435,86 @@ export default function KeywordGeneratorPage() {
             {/* KPI 1: Overall Content Coverage */}
             <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Catalog Coverage</span>
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                  Catalog Coverage
+                </span>
                 <div className="h-8 w-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
                   <CheckCircle2 className="h-4 w-4" />
                 </div>
               </div>
               <div className="mt-3 flex items-baseline gap-2">
-                <span className="text-2xl font-black text-slate-900">{analyticsData.progress.overallProgressPct}%</span>
+                <span className="text-2xl font-black text-slate-900">
+                  {analyticsData.progress.overallProgressPct}%
+                </span>
                 <span className="text-xs text-slate-500">optimized</span>
               </div>
-              
+
               {/* Progress Bar */}
               <div className="mt-3">
                 <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div 
-                    className="bg-linear-to-r from-indigo-500 to-emerald-500 h-2 rounded-full transition-all duration-500" 
-                    style={{ width: `${Math.min(analyticsData.progress.overallProgressPct, 100)}%` }}
+                  <div
+                    className="bg-linear-to-r from-indigo-500 to-emerald-500 h-2 rounded-full transition-all duration-500"
+                    style={{
+                      width: `${Math.min(analyticsData.progress.overallProgressPct, 100)}%`,
+                    }}
                   />
                 </div>
                 <div className="mt-2 flex items-center justify-between text-[11px] text-slate-500 font-medium">
-                  <span>{analyticsData.progress.totalOptimized} of {analyticsData.inventory.totalContent} items</span>
-                  <span className="text-emerald-600 font-bold">{analyticsData.progress.totalOptimized} done</span>
+                  <span>
+                    {analyticsData.progress.totalOptimized} of{" "}
+                    {analyticsData.inventory.totalContent} items
+                  </span>
+                  <span className="text-emerald-600 font-bold">
+                    {analyticsData.progress.totalOptimized} done
+                  </span>
                 </div>
               </div>
 
               {/* Sub-breakdowns */}
               <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-500 font-medium">
-                <span>📦 Pkg: <strong className="text-slate-800">{analyticsData.progress.optimizedPackages}/{analyticsData.inventory.totalPackages}</strong></span>
-                <span>📝 Blog: <strong className="text-slate-800">{analyticsData.progress.optimizedBlogs}/{analyticsData.inventory.totalBlogs}</strong></span>
-                <span>✈️ Flight: <strong className="text-slate-800">{analyticsData.progress.optimizedFlights}/{analyticsData.inventory.totalFlights}</strong></span>
+                <span>
+                  📦 Pkg:{" "}
+                  <strong className="text-slate-800">
+                    {analyticsData.progress.optimizedPackages}/
+                    {analyticsData.inventory.totalPackages}
+                  </strong>
+                </span>
+                <span>
+                  📝 Blog:{" "}
+                  <strong className="text-slate-800">
+                    {analyticsData.progress.optimizedBlogs}/
+                    {analyticsData.inventory.totalBlogs}
+                  </strong>
+                </span>
+                <span>
+                  ✈️ Flight:{" "}
+                  <strong className="text-slate-800">
+                    {analyticsData.progress.optimizedFlights}/
+                    {analyticsData.inventory.totalFlights}
+                  </strong>
+                </span>
               </div>
             </div>
 
             {/* KPI 2: Google Search Console Impressions */}
             <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Search Impressions</span>
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                  Search Impressions
+                </span>
                 <div className="h-8 w-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
                   <Eye className="h-4 w-4" />
                 </div>
               </div>
               <div className="mt-3 flex items-baseline gap-2">
                 <span className="text-2xl font-black text-slate-900">
-                  {analyticsData.gsc.totalImpressions > 0 
-                    ? analyticsData.gsc.totalImpressions.toLocaleString() 
+                  {analyticsData.gsc.totalImpressions > 0
+                    ? analyticsData.gsc.totalImpressions.toLocaleString()
                     : "0"}
                 </span>
                 <span className="text-xs text-slate-500">last 28d</span>
               </div>
-              
+
               <div className="mt-3 flex items-center justify-between text-xs text-slate-600">
                 <span className="flex items-center gap-1 font-semibold text-slate-700">
                   <MousePointerClick className="h-3.5 w-3.5 text-indigo-500" />
@@ -454,15 +526,26 @@ export default function KeywordGeneratorPage() {
               </div>
 
               <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[10px]">
-                <span className="text-slate-400 truncate max-w-[170px]" title={analyticsData.gsc.siteUrl}>
+                <span
+                  className="text-slate-400 truncate max-w-[170px]"
+                  title={analyticsData.gsc.siteUrl}
+                >
                   {analyticsData.gsc.siteUrl || "terrifictravel.co.uk"}
                 </span>
-                <span className={`inline-flex items-center gap-1 font-semibold ${
-                  analyticsData.gsc.connected ? "text-emerald-600" : "text-amber-600"
-                }`}>
-                  <span className={`h-1.5 w-1.5 rounded-full ${
-                    analyticsData.gsc.connected ? "bg-emerald-500" : "bg-amber-500"
-                  }`} />
+                <span
+                  className={`inline-flex items-center gap-1 font-semibold ${
+                    analyticsData.gsc.connected
+                      ? "text-emerald-600"
+                      : "text-amber-600"
+                  }`}
+                >
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${
+                      analyticsData.gsc.connected
+                        ? "bg-emerald-500"
+                        : "bg-amber-500"
+                    }`}
+                  />
                   {analyticsData.gsc.connected ? "GSC Live" : "Pending API"}
                 </span>
               </div>
@@ -471,46 +554,73 @@ export default function KeywordGeneratorPage() {
             {/* KPI 3: Average SERP Position */}
             <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Average SERP Rank</span>
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                  Average SERP Rank
+                </span>
                 <div className="h-8 w-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
                   <Target className="h-4 w-4" />
                 </div>
               </div>
               <div className="mt-3 flex items-baseline gap-2">
                 <span className="text-2xl font-black text-slate-900">
-                  {analyticsData.gsc.avgPosition > 0 ? analyticsData.gsc.avgPosition.toFixed(1) : "—"}
+                  {analyticsData.gsc.avgPosition > 0
+                    ? analyticsData.gsc.avgPosition.toFixed(1)
+                    : "—"}
                 </span>
                 <span className="text-xs text-slate-500">Google Position</span>
               </div>
 
               <div className="mt-3 flex items-center gap-1.5 text-xs text-emerald-700 bg-emerald-50 font-bold px-2.5 py-1 rounded-md border border-emerald-200">
                 <TrendingUp className="h-3.5 w-3.5" />
-                <span>{analyticsData.gsc.positionDistribution.strikingDistance} Striking Distance Keywords</span>
+                <span>
+                  {analyticsData.gsc.positionDistribution.strikingDistance}{" "}
+                  Striking Distance Keywords
+                </span>
               </div>
 
               <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-500 font-medium">
-                <span>Top 3: <strong className="text-emerald-700">{analyticsData.gsc.positionDistribution.top3}</strong></span>
-                <span>Page 2: <strong className="text-amber-700">{analyticsData.gsc.positionDistribution.page2}</strong></span>
-                <span>Beyond: <strong className="text-slate-600">{analyticsData.gsc.positionDistribution.beyond}</strong></span>
+                <span>
+                  Top 3:{" "}
+                  <strong className="text-emerald-700">
+                    {analyticsData.gsc.positionDistribution.top3}
+                  </strong>
+                </span>
+                <span>
+                  Page 2:{" "}
+                  <strong className="text-amber-700">
+                    {analyticsData.gsc.positionDistribution.page2}
+                  </strong>
+                </span>
+                <span>
+                  Beyond:{" "}
+                  <strong className="text-slate-600">
+                    {analyticsData.gsc.positionDistribution.beyond}
+                  </strong>
+                </span>
               </div>
             </div>
 
             {/* KPI 4: Autopilot Reliability & Health */}
             <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Autopilot Reliability</span>
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                  Autopilot Reliability
+                </span>
                 <div className="h-8 w-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
                   <Zap className="h-4 w-4" />
                 </div>
               </div>
               <div className="mt-3 flex items-baseline gap-2">
-                <span className="text-2xl font-black text-slate-900">{analyticsData.progress.successRate}%</span>
+                <span className="text-2xl font-black text-slate-900">
+                  {analyticsData.progress.successRate}%
+                </span>
                 <span className="text-xs text-slate-500">success rate</span>
               </div>
 
               <div className="mt-3 flex items-center justify-between text-xs text-slate-600">
                 <span className="text-emerald-600 font-semibold flex items-center gap-1">
-                  <Check className="h-3 w-3" /> {analyticsData.progress.successCount} Successful
+                  <Check className="h-3 w-3" />{" "}
+                  {analyticsData.progress.successCount} Successful
                 </span>
                 <span className="text-rose-500 font-semibold">
                   {analyticsData.progress.failedCount} Failed
@@ -518,7 +628,9 @@ export default function KeywordGeneratorPage() {
               </div>
 
               <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-500">
-                <span className="font-semibold text-indigo-600">Tier 1: GSC + GPT-4o</span>
+                <span className="font-semibold text-indigo-600">
+                  Tier 1: GSC + GPT-4o
+                </span>
                 <span>Cron: 02:00 UTC</span>
               </div>
             </div>
@@ -535,50 +647,68 @@ export default function KeywordGeneratorPage() {
                     Google SERP Ranking Distribution
                   </h3>
                   <span className="text-[11px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">
-                    {analyticsData.gsc.positionDistribution.top3 + 
-                     analyticsData.gsc.positionDistribution.strikingDistance + 
-                     analyticsData.gsc.positionDistribution.page2 + 
-                     analyticsData.gsc.positionDistribution.beyond} Ranked Queries
+                    {analyticsData.gsc.positionDistribution.top3 +
+                      analyticsData.gsc.positionDistribution.strikingDistance +
+                      analyticsData.gsc.positionDistribution.page2 +
+                      analyticsData.gsc.positionDistribution.beyond}{" "}
+                    Ranked Queries
                   </span>
                 </div>
                 <p className="text-xs text-slate-500 mb-4">
-                  Visual breakdown of ranked queries. Striking distance keywords (positions 4–10) are prioritized for AI enrichment to enter the top 3.
+                  Visual breakdown of ranked queries. Striking distance keywords
+                  (positions 4–10) are prioritized for AI enrichment to enter
+                  the top 3.
                 </p>
 
                 {/* Segmented Cumulative Visual Bar */}
                 {(() => {
-                  const total = (
-                    analyticsData.gsc.positionDistribution.top3 + 
-                    analyticsData.gsc.positionDistribution.strikingDistance + 
-                    analyticsData.gsc.positionDistribution.page2 + 
-                    analyticsData.gsc.positionDistribution.beyond
-                  ) || 1;
-                  const pTop3 = Math.max((analyticsData.gsc.positionDistribution.top3 / total) * 100, 2);
-                  const pStrike = Math.max((analyticsData.gsc.positionDistribution.strikingDistance / total) * 100, 3);
-                  const pPage2 = Math.max((analyticsData.gsc.positionDistribution.page2 / total) * 100, 3);
-                  const pBeyond = Math.max((analyticsData.gsc.positionDistribution.beyond / total) * 100, 3);
+                  const total =
+                    analyticsData.gsc.positionDistribution.top3 +
+                      analyticsData.gsc.positionDistribution.strikingDistance +
+                      analyticsData.gsc.positionDistribution.page2 +
+                      analyticsData.gsc.positionDistribution.beyond || 1;
+                  const pTop3 = Math.max(
+                    (analyticsData.gsc.positionDistribution.top3 / total) * 100,
+                    2,
+                  );
+                  const pStrike = Math.max(
+                    (analyticsData.gsc.positionDistribution.strikingDistance /
+                      total) *
+                      100,
+                    3,
+                  );
+                  const pPage2 = Math.max(
+                    (analyticsData.gsc.positionDistribution.page2 / total) *
+                      100,
+                    3,
+                  );
+                  const pBeyond = Math.max(
+                    (analyticsData.gsc.positionDistribution.beyond / total) *
+                      100,
+                    3,
+                  );
 
                   return (
                     <div className="space-y-2">
                       <div className="h-4 w-full rounded-full bg-slate-100 overflow-hidden flex shadow-inner">
-                        <div 
-                          style={{ width: `${pTop3}%` }} 
-                          className="bg-emerald-500 transition-all hover:opacity-80" 
+                        <div
+                          style={{ width: `${pTop3}%` }}
+                          className="bg-emerald-500 transition-all hover:opacity-80"
                           title={`Top 3: ${analyticsData.gsc.positionDistribution.top3} queries`}
                         />
-                        <div 
-                          style={{ width: `${pStrike}%` }} 
-                          className="bg-indigo-600 transition-all hover:opacity-80" 
+                        <div
+                          style={{ width: `${pStrike}%` }}
+                          className="bg-indigo-600 transition-all hover:opacity-80"
                           title={`Striking Distance (4-10): ${analyticsData.gsc.positionDistribution.strikingDistance} queries`}
                         />
-                        <div 
-                          style={{ width: `${pPage2}%` }} 
-                          className="bg-amber-500 transition-all hover:opacity-80" 
+                        <div
+                          style={{ width: `${pPage2}%` }}
+                          className="bg-amber-500 transition-all hover:opacity-80"
                           title={`Page 2 (11-20): ${analyticsData.gsc.positionDistribution.page2} queries`}
                         />
-                        <div 
-                          style={{ width: `${pBeyond}%` }} 
-                          className="bg-slate-300 transition-all hover:opacity-80" 
+                        <div
+                          style={{ width: `${pBeyond}%` }}
+                          className="bg-slate-300 transition-all hover:opacity-80"
                           title={`Beyond 20: ${analyticsData.gsc.positionDistribution.beyond} queries`}
                         />
                       </div>
@@ -591,7 +721,9 @@ export default function KeywordGeneratorPage() {
                   <div className="flex items-center justify-between p-2.5 rounded-lg bg-emerald-50 border border-emerald-100">
                     <div className="flex items-center gap-2">
                       <span className="h-3 w-3 rounded-full bg-emerald-500" />
-                      <span className="font-semibold text-emerald-950">Top 3 (Pos 1–3)</span>
+                      <span className="font-semibold text-emerald-950">
+                        Top 3 (Pos 1–3)
+                      </span>
                     </div>
                     <span className="font-bold text-emerald-700 text-sm">
                       {analyticsData.gsc.positionDistribution.top3}
@@ -602,8 +734,12 @@ export default function KeywordGeneratorPage() {
                     <div className="flex items-center gap-2">
                       <span className="h-3 w-3 rounded-full bg-indigo-600" />
                       <div>
-                        <span className="font-semibold text-indigo-950">Striking (Pos 4–10)</span>
-                        <span className="block text-[9px] text-indigo-700 font-bold">🎯 Highest Opportunity</span>
+                        <span className="font-semibold text-indigo-950">
+                          Striking (Pos 4–10)
+                        </span>
+                        <span className="block text-[9px] text-indigo-700 font-bold">
+                          🎯 Highest Opportunity
+                        </span>
                       </div>
                     </div>
                     <span className="font-bold text-indigo-700 text-sm">
@@ -614,7 +750,9 @@ export default function KeywordGeneratorPage() {
                   <div className="flex items-center justify-between p-2.5 rounded-lg bg-amber-50 border border-amber-100">
                     <div className="flex items-center gap-2">
                       <span className="h-3 w-3 rounded-full bg-amber-500" />
-                      <span className="font-semibold text-amber-950">Page 2 (Pos 11–20)</span>
+                      <span className="font-semibold text-amber-950">
+                        Page 2 (Pos 11–20)
+                      </span>
                     </div>
                     <span className="font-bold text-amber-700 text-sm">
                       {analyticsData.gsc.positionDistribution.page2}
@@ -624,7 +762,9 @@ export default function KeywordGeneratorPage() {
                   <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-50 border border-slate-200">
                     <div className="flex items-center gap-2">
                       <span className="h-3 w-3 rounded-full bg-slate-400" />
-                      <span className="font-semibold text-slate-700">Beyond (Pos 21+)</span>
+                      <span className="font-semibold text-slate-700">
+                        Beyond (Pos 21+)
+                      </span>
                     </div>
                     <span className="font-bold text-slate-700 text-sm">
                       {analyticsData.gsc.positionDistribution.beyond}
@@ -655,37 +795,46 @@ export default function KeywordGeneratorPage() {
                   </span>
                 </div>
                 <p className="text-xs text-slate-500 mb-4">
-                  Visual daily volume showing pages updated (Indigo) vs brand-new draft pages generated (Emerald).
+                  Visual daily volume showing pages updated (Indigo) vs
+                  brand-new draft pages generated (Emerald).
                 </p>
 
                 {/* Vertical Stacked Bar Chart */}
                 {(() => {
-                  const maxCount = Math.max(...analyticsData.progress.last7Days.map(d => d.count), 5);
+                  const maxCount = Math.max(
+                    ...analyticsData.progress.last7Days.map((d) => d.count),
+                    5,
+                  );
                   return (
                     <div className="h-40 flex items-end justify-between gap-2 pt-6 pb-2 px-1">
                       {analyticsData.progress.last7Days.map((day, idx) => {
-                        const isLatest = idx === analyticsData.progress.last7Days.length - 1;
+                        const isLatest =
+                          idx === analyticsData.progress.last7Days.length - 1;
                         const updatedHeightPct = (day.updated / maxCount) * 100;
-                        const generatedHeightPct = (day.generated / maxCount) * 100;
+                        const generatedHeightPct =
+                          (day.generated / maxCount) * 100;
 
                         return (
-                          <div key={day.date} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+                          <div
+                            key={day.date}
+                            className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group"
+                          >
                             {/* Bar value tooltip */}
                             <span className="text-[10px] font-bold text-slate-600 opacity-90 group-hover:text-indigo-600 transition-colors">
                               {day.count}
                             </span>
-                            
+
                             {/* Stacked Bar element */}
                             <div className="w-full max-w-[36px] bg-slate-100 rounded-t-md h-full flex flex-col justify-end overflow-hidden">
                               {day.generated > 0 && (
-                                <div 
+                                <div
                                   style={{ height: `${generatedHeightPct}%` }}
                                   className="w-full bg-emerald-500 transition-all hover:opacity-85"
                                   title={`${day.generated} Newly Created Pages`}
                                 />
                               )}
                               {day.updated > 0 && (
-                                <div 
+                                <div
                                   style={{ height: `${updatedHeightPct}%` }}
                                   className="w-full bg-indigo-600 transition-all hover:opacity-85"
                                   title={`${day.updated} Pages Updated`}
@@ -713,14 +862,24 @@ export default function KeywordGeneratorPage() {
                 <div className="flex items-center gap-3">
                   <span className="flex items-center gap-1">
                     <span className="h-2.5 w-2.5 rounded-xs bg-indigo-600" />
-                    <strong>Updates:</strong> {analyticsData.progress.last7Days.reduce((a, b) => a + b.updated, 0)}
+                    <strong>Updates:</strong>{" "}
+                    {analyticsData.progress.last7Days.reduce(
+                      (a, b) => a + b.updated,
+                      0,
+                    )}
                   </span>
                   <span className="flex items-center gap-1">
                     <span className="h-2.5 w-2.5 rounded-xs bg-emerald-500" />
-                    <strong>New Pages:</strong> {analyticsData.progress.last7Days.reduce((a, b) => a + b.generated, 0)}
+                    <strong>New Pages:</strong>{" "}
+                    {analyticsData.progress.last7Days.reduce(
+                      (a, b) => a + b.generated,
+                      0,
+                    )}
                   </span>
                 </div>
-                <span className="text-indigo-600 font-semibold">Autonomous Cron Active</span>
+                <span className="text-indigo-600 font-semibold">
+                  Autonomous Cron Active
+                </span>
               </div>
             </div>
 
@@ -731,15 +890,19 @@ export default function KeywordGeneratorPage() {
                   <div>
                     <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
                       <PieChart className="h-4 w-4 text-indigo-600" />
-                      Content Impact Report: Updated Pages vs. Newly Added Content
+                      Content Impact Report: Updated Pages vs. Newly Added
+                      Content
                     </h3>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      Visual comparison of existing pages enriched with high-intent keywords versus brand-new content generated automatically.
+                      Visual comparison of existing pages enriched with
+                      high-intent keywords versus brand-new content generated
+                      automatically.
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-bold text-indigo-700 bg-indigo-50 px-3 py-1 rounded-md border border-indigo-200">
-                      Total Operations: {analyticsData.actionReport.totalOperations}
+                      Total Operations:{" "}
+                      {analyticsData.actionReport.totalOperations}
                     </span>
                   </div>
                 </div>
@@ -747,30 +910,46 @@ export default function KeywordGeneratorPage() {
                 {/* Split Segmented Visual Ratio Bar */}
                 <div className="space-y-2">
                   <div className="h-5 w-full rounded-full bg-slate-100 overflow-hidden flex shadow-inner">
-                    <div 
-                      style={{ width: `${Math.max(analyticsData.actionReport.updatesRatio, 2)}%` }} 
-                      className="bg-indigo-600 transition-all hover:opacity-90 flex items-center justify-center text-[10px] font-black text-white px-2 truncate" 
+                    <div
+                      style={{
+                        width: `${Math.max(analyticsData.actionReport.updatesRatio, 2)}%`,
+                      }}
+                      className="bg-indigo-600 transition-all hover:opacity-90 flex items-center justify-center text-[10px] font-black text-white px-2 truncate"
                       title={`Updated Pages: ${analyticsData.actionReport.totalUpdates} (${analyticsData.actionReport.updatesRatio}%)`}
                     >
-                      {analyticsData.actionReport.updatesRatio > 12 ? `${analyticsData.actionReport.updatesRatio}% Updates` : ''}
+                      {analyticsData.actionReport.updatesRatio > 12
+                        ? `${analyticsData.actionReport.updatesRatio}% Updates`
+                        : ""}
                     </div>
-                    <div 
-                      style={{ width: `${Math.max(analyticsData.actionReport.createdRatio, 2)}%` }} 
-                      className="bg-emerald-500 transition-all hover:opacity-90 flex items-center justify-center text-[10px] font-black text-white px-2 truncate" 
+                    <div
+                      style={{
+                        width: `${Math.max(analyticsData.actionReport.createdRatio, 2)}%`,
+                      }}
+                      className="bg-emerald-500 transition-all hover:opacity-90 flex items-center justify-center text-[10px] font-black text-white px-2 truncate"
                       title={`Newly Created: ${analyticsData.actionReport.totalCreated} (${analyticsData.actionReport.createdRatio}%)`}
                     >
-                      {analyticsData.actionReport.createdRatio > 12 ? `${analyticsData.actionReport.createdRatio}% New Pages` : ''}
+                      {analyticsData.actionReport.createdRatio > 12
+                        ? `${analyticsData.actionReport.createdRatio}% New Pages`
+                        : ""}
                     </div>
                   </div>
 
                   <div className="flex justify-between items-center text-xs text-slate-600 font-semibold px-1">
                     <span className="flex items-center gap-1.5 text-indigo-700">
                       <RefreshCw className="h-3.5 w-3.5 text-indigo-600" />
-                      Updated Existing Pages: <strong>{analyticsData.actionReport.totalUpdates}</strong> ({analyticsData.actionReport.updatesRatio}%)
+                      Updated Existing Pages:{" "}
+                      <strong>
+                        {analyticsData.actionReport.totalUpdates}
+                      </strong>{" "}
+                      ({analyticsData.actionReport.updatesRatio}%)
                     </span>
                     <span className="flex items-center gap-1.5 text-emerald-700">
                       <PlusCircle className="h-3.5 w-3.5 text-emerald-600" />
-                      Newly Created Pages: <strong>{analyticsData.actionReport.totalCreated}</strong> ({analyticsData.actionReport.createdRatio}%)
+                      Newly Created Pages:{" "}
+                      <strong>
+                        {analyticsData.actionReport.totalCreated}
+                      </strong>{" "}
+                      ({analyticsData.actionReport.createdRatio}%)
                     </span>
                   </div>
                 </div>
@@ -780,17 +959,26 @@ export default function KeywordGeneratorPage() {
                   {/* Packages Card */}
                   <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2.5">
                     <div className="flex items-center justify-between font-bold text-slate-900">
-                      <span className="flex items-center gap-1.5">📦 Travel Packages</span>
+                      <span className="flex items-center gap-1.5">
+                        📦 Travel Packages
+                      </span>
                       <span className="text-[11px] text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200 font-bold">
-                        {analyticsData.actionReport.byType.packagesUpdated + analyticsData.actionReport.byType.packagesCreated} Total
+                        {analyticsData.actionReport.byType.packagesUpdated +
+                          analyticsData.actionReport.byType
+                            .packagesCreated}{" "}
+                        Total
                       </span>
                     </div>
                     <div className="flex items-center justify-between text-xs pt-1 border-t border-slate-200/60">
                       <span className="text-indigo-700 font-bold flex items-center gap-1">
-                        <RefreshCw className="h-3 w-3" /> {analyticsData.actionReport.byType.packagesUpdated} Updated
+                        <RefreshCw className="h-3 w-3" />{" "}
+                        {analyticsData.actionReport.byType.packagesUpdated}{" "}
+                        Updated
                       </span>
                       <span className="text-emerald-700 font-bold flex items-center gap-1">
-                        <PlusCircle className="h-3 w-3" /> {analyticsData.actionReport.byType.packagesCreated} Created
+                        <PlusCircle className="h-3 w-3" />{" "}
+                        {analyticsData.actionReport.byType.packagesCreated}{" "}
+                        Created
                       </span>
                     </div>
                   </div>
@@ -798,17 +986,25 @@ export default function KeywordGeneratorPage() {
                   {/* Flights Card */}
                   <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2.5">
                     <div className="flex items-center justify-between font-bold text-slate-900">
-                      <span className="flex items-center gap-1.5">✈️ Flight Deals</span>
+                      <span className="flex items-center gap-1.5">
+                        ✈️ Flight Deals
+                      </span>
                       <span className="text-[11px] text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200 font-bold">
-                        {analyticsData.actionReport.byType.flightsUpdated + analyticsData.actionReport.byType.flightsCreated} Total
+                        {analyticsData.actionReport.byType.flightsUpdated +
+                          analyticsData.actionReport.byType.flightsCreated}{" "}
+                        Total
                       </span>
                     </div>
                     <div className="flex items-center justify-between text-xs pt-1 border-t border-slate-200/60">
                       <span className="text-indigo-700 font-bold flex items-center gap-1">
-                        <RefreshCw className="h-3 w-3" /> {analyticsData.actionReport.byType.flightsUpdated} Updated
+                        <RefreshCw className="h-3 w-3" />{" "}
+                        {analyticsData.actionReport.byType.flightsUpdated}{" "}
+                        Updated
                       </span>
                       <span className="text-emerald-700 font-bold flex items-center gap-1">
-                        <PlusCircle className="h-3 w-3" /> {analyticsData.actionReport.byType.flightsCreated} Created
+                        <PlusCircle className="h-3 w-3" />{" "}
+                        {analyticsData.actionReport.byType.flightsCreated}{" "}
+                        Created
                       </span>
                     </div>
                   </div>
@@ -816,17 +1012,23 @@ export default function KeywordGeneratorPage() {
                   {/* Blogs Card */}
                   <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2.5">
                     <div className="flex items-center justify-between font-bold text-slate-900">
-                      <span className="flex items-center gap-1.5">📝 Travel Guides & Blogs</span>
+                      <span className="flex items-center gap-1.5">
+                        📝 Travel Guides & Blogs
+                      </span>
                       <span className="text-[11px] text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200 font-bold">
-                        {analyticsData.actionReport.byType.blogsUpdated + analyticsData.actionReport.byType.blogsCreated} Total
+                        {analyticsData.actionReport.byType.blogsUpdated +
+                          analyticsData.actionReport.byType.blogsCreated}{" "}
+                        Total
                       </span>
                     </div>
                     <div className="flex items-center justify-between text-xs pt-1 border-t border-slate-200/60">
                       <span className="text-indigo-700 font-bold flex items-center gap-1">
-                        <RefreshCw className="h-3 w-3" /> {analyticsData.actionReport.byType.blogsUpdated} Updated
+                        <RefreshCw className="h-3 w-3" />{" "}
+                        {analyticsData.actionReport.byType.blogsUpdated} Updated
                       </span>
                       <span className="text-emerald-700 font-bold flex items-center gap-1">
-                        <PlusCircle className="h-3 w-3" /> {analyticsData.actionReport.byType.blogsCreated} Created
+                        <PlusCircle className="h-3 w-3" />{" "}
+                        {analyticsData.actionReport.byType.blogsCreated} Created
                       </span>
                     </div>
                   </div>
@@ -845,7 +1047,9 @@ export default function KeywordGeneratorPage() {
                     Live Google Search Intent Feeder
                   </h3>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    Real-world queries identified by Google Search Console. These exact high-intent search terms are fed directly into AI prompts to capture user bookings.
+                    Real-world queries identified by Google Search Console.
+                    These exact high-intent search terms are fed directly into
+                    AI prompts to capture user bookings.
                   </p>
                 </div>
 
@@ -858,7 +1062,8 @@ export default function KeywordGeneratorPage() {
                         : "text-slate-600 hover:text-slate-900"
                     }`}
                   >
-                    🎯 Striking Distance ({analyticsData.gsc.strikingQueries.length})
+                    🎯 Striking Distance (
+                    {analyticsData.gsc.strikingQueries.length})
                   </button>
                   <button
                     onClick={() => setSelectedGscTab("top")}
@@ -887,46 +1092,54 @@ export default function KeywordGeneratorPage() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-200 text-slate-600">
-                    {(selectedGscTab === "striking" 
-                      ? analyticsData.gsc.strikingQueries 
+                    {(selectedGscTab === "striking"
+                      ? analyticsData.gsc.strikingQueries
                       : analyticsData.gsc.topQueries
                     ).length === 0 ? (
                       <tr>
-                        <td colSpan={6} className="px-4 py-6 text-center text-slate-400 italic">
+                        <td
+                          colSpan={6}
+                          className="px-4 py-6 text-center text-slate-400 italic"
+                        >
                           No queries available for this segment.
                         </td>
                       </tr>
                     ) : (
-                      (selectedGscTab === "striking" 
-                        ? analyticsData.gsc.strikingQueries 
+                      (selectedGscTab === "striking"
+                        ? analyticsData.gsc.strikingQueries
                         : analyticsData.gsc.topQueries
                       ).map((item: any, idx: number) => {
                         const pos = item.position;
-                        const posBadge = 
-                          pos < 4.0 
-                            ? "bg-emerald-50 text-emerald-700 border-emerald-200" 
-                            : pos <= 10.0 
-                            ? "bg-indigo-50 text-indigo-700 border-indigo-200" 
-                            : pos <= 20.0 
-                            ? "bg-amber-50 text-amber-700 border-amber-200" 
-                            : "bg-slate-100 text-slate-700 border-slate-200";
+                        const posBadge =
+                          pos < 4.0
+                            ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                            : pos <= 10.0
+                              ? "bg-indigo-50 text-indigo-700 border-indigo-200"
+                              : pos <= 20.0
+                                ? "bg-amber-50 text-amber-700 border-amber-200"
+                                : "bg-slate-100 text-slate-700 border-slate-200";
 
-                        const statusText = 
-                          pos < 4.0 
-                            ? "Top 3 Rank (High Intent)" 
-                            : pos <= 10.0 
-                            ? "🎯 Striking Target (Page 1)" 
-                            : pos <= 20.0 
-                            ? "🚀 Page 2 (Boosting Intent)" 
-                            : "Discovery Keyword";
+                        const statusText =
+                          pos < 4.0
+                            ? "Top 3 Rank (High Intent)"
+                            : pos <= 10.0
+                              ? "🎯 Striking Target (Page 1)"
+                              : pos <= 20.0
+                                ? "🚀 Page 2 (Boosting Intent)"
+                                : "Discovery Keyword";
 
                         return (
-                          <tr key={idx} className="hover:bg-slate-50/80 transition-colors">
+                          <tr
+                            key={idx}
+                            className="hover:bg-slate-50/80 transition-colors"
+                          >
                             <td className="px-4 py-3 font-semibold text-slate-900 font-mono">
                               "{item.query}"
                             </td>
                             <td className="px-4 py-3 whitespace-nowrap">
-                              <span className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold border ${posBadge}`}>
+                              <span
+                                className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold border ${posBadge}`}
+                              >
                                 Pos {pos.toFixed(1)}
                               </span>
                             </td>
@@ -955,9 +1168,14 @@ export default function KeywordGeneratorPage() {
 
               <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1">
                 <span>
-                  💡 <strong>Tip:</strong> The autopilot dynamically pairs queries with matching packages (e.g. Umrah queries into Umrah packages, Birmingham queries into Birmingham departure flights).
+                  💡 <strong>Tip:</strong> The autopilot dynamically pairs
+                  queries with matching packages (e.g. Umrah queries into Umrah
+                  packages, Birmingham queries into Birmingham departure
+                  flights).
                 </span>
-                <span className="font-semibold text-indigo-600">Auto-prioritization Active</span>
+                <span className="font-semibold text-indigo-600">
+                  Auto-prioritization Active
+                </span>
               </div>
             </div>
           )}
@@ -966,7 +1184,6 @@ export default function KeywordGeneratorPage() {
 
       {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
         {/* Left Column: Config Panel */}
         <div className="lg:col-span-5 space-y-6">
           <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm space-y-4">
@@ -979,8 +1196,12 @@ export default function KeywordGeneratorPage() {
               {/* Autopilot Enabled toggle */}
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                 <div>
-                  <label className="text-sm font-bold text-slate-700">Autopilot Mode</label>
-                  <p className="text-xs text-slate-400">Trigger daily SEO keyword runs automatically</p>
+                  <label className="text-sm font-bold text-slate-700">
+                    Autopilot Mode
+                  </label>
+                  <p className="text-xs text-slate-400">
+                    Trigger daily SEO keyword runs automatically
+                  </p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
@@ -995,21 +1216,32 @@ export default function KeywordGeneratorPage() {
 
               {/* Mode Select */}
               <div className="space-y-1">
-                <label className="text-xs font-bold text-indigo-950 uppercase tracking-wider">SEO Strategy</label>
+                <label className="text-xs font-bold text-indigo-950 uppercase tracking-wider">
+                  SEO Strategy
+                </label>
                 <select
                   value={mode}
                   onChange={(e) => setMode(e.target.value)}
                   className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none bg-white font-medium"
                 >
-                  <option value="both">Hybrid Mode (Update Existing & Add New Content) [RECOMMENDED]</option>
-                  <option value="optimize_existing">Optimize Existing Content (In-place updates only)</option>
-                  <option value="generate_new">Generate New Content (Draft new pages only)</option>
+                  <option value="both">
+                    Hybrid Mode (Update Existing & Add New Content)
+                    [RECOMMENDED]
+                  </option>
+                  <option value="optimize_existing">
+                    Optimize Existing Content (In-place updates only)
+                  </option>
+                  <option value="generate_new">
+                    Generate New Content (Draft new pages only)
+                  </option>
                 </select>
               </div>
 
               {/* Target Content Type Select */}
               <div className="space-y-1">
-                <label className="text-xs font-bold text-indigo-950 uppercase tracking-wider">Target Content Type</label>
+                <label className="text-xs font-bold text-indigo-950 uppercase tracking-wider">
+                  Target Content Type
+                </label>
                 <select
                   value={contentType}
                   onChange={(e) => {
@@ -1018,48 +1250,77 @@ export default function KeywordGeneratorPage() {
                     if (val === "FLIGHT") setActiveKeywordPocketTab("flights");
                     else if (val === "BLOG") setActiveKeywordPocketTab("blogs");
                     else if (val.startsWith("PACKAGE")) {
-                      if (packageType === "HOLIDAY") setActiveKeywordPocketTab("holidays");
+                      if (packageType === "HOLIDAY")
+                        setActiveKeywordPocketTab("holidays");
                       else setActiveKeywordPocketTab("packages");
                     }
                   }}
                   className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none bg-white font-medium"
                 >
-                  <option value="ALL">ALL Content Types (Packages, Flights, Blogs)</option>
-                  <option value="PACKAGE">Packages Only (Travel & Pilgrimage Packages)</option>
-                  <option value="FLIGHT">Flights Only (Airlines & UK Route Deals)</option>
-                  <option value="BLOG">Blogs Only (Travel Guides & Articles)</option>
+                  <option value="ALL">
+                    ALL Content Types (Packages, Flights, Blogs)
+                  </option>
+                  <option value="PACKAGE">
+                    Packages Only (Travel & Pilgrimage Packages)
+                  </option>
+                  <option value="FLIGHT">
+                    Flights Only (Airlines & UK Route Deals)
+                  </option>
+                  <option value="BLOG">
+                    Blogs Only (Travel Guides & Articles)
+                  </option>
                 </select>
               </div>
 
               {/* Package Type Niche Select */}
               <div className="space-y-1">
-                <label className="text-xs font-bold text-indigo-950 uppercase tracking-wider">Package Niche / Type</label>
+                <label className="text-xs font-bold text-indigo-950 uppercase tracking-wider">
+                  Package Niche / Type
+                </label>
                 <select
                   value={packageType}
                   onChange={(e) => {
                     const val = e.target.value;
                     setPackageType(val);
-                    if (val === "HOLIDAY") setActiveKeywordPocketTab("holidays");
-                    else if (val === "UMRAH" || val === "HAJJ" || val === "Cruise_Umrah") setActiveKeywordPocketTab("packages");
+                    if (val === "HOLIDAY")
+                      setActiveKeywordPocketTab("holidays");
+                    else if (
+                      val === "UMRAH" ||
+                      val === "HAJJ" ||
+                      val === "Cruise_Umrah"
+                    )
+                      setActiveKeywordPocketTab("packages");
                   }}
                   className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none bg-white font-medium"
                 >
-                  <option value="ALL">ALL Categories (Dynamic auto-detection)</option>
-                  <option value="UMRAH">UMRAH (Pilgrimage Packages Only)</option>
-                  <option value="HOLIDAY">HOLIDAY (General Vacations - Excludes Hajj/Umrah)</option>
-                  <option value="Cruise_Umrah">Cruise_Umrah (Red Sea Cruise + Umrah Combo)</option>
+                  <option value="ALL">
+                    ALL Categories (Dynamic auto-detection)
+                  </option>
+                  <option value="UMRAH">
+                    UMRAH (Pilgrimage Packages Only)
+                  </option>
+                  <option value="HOLIDAY">
+                    HOLIDAY (General Vacations - Excludes Hajj/Umrah)
+                  </option>
+                  <option value="Cruise_Umrah">
+                    Cruise_Umrah (Red Sea Cruise + Umrah Combo)
+                  </option>
                   <option value="HAJJ">HAJJ (Hajj Pilgrimage Only)</option>
                 </select>
                 {packageType === "HOLIDAY" && (
                   <p className="text-[10px] text-amber-700 font-semibold bg-amber-50 p-2 rounded border border-amber-200">
-                    ⚠️ Holiday mode selected: The AI strictly isolates general holidays from Hajj & Umrah content to prevent mixing religious pilgrimages into leisure vacations.
+                    ⚠️ Holiday mode selected: The AI strictly isolates general
+                    holidays from Hajj & Umrah content to prevent mixing
+                    religious pilgrimages into leisure vacations.
                   </p>
                 )}
               </div>
 
               {/* Daily Limit */}
               <div className="space-y-1">
-                <label className="text-xs font-bold text-indigo-950 uppercase tracking-wider">Max Daily Pages Limit</label>
+                <label className="text-xs font-bold text-indigo-950 uppercase tracking-wider">
+                  Max Daily Pages Limit
+                </label>
                 <input
                   type="number"
                   min="1"
@@ -1068,7 +1329,10 @@ export default function KeywordGeneratorPage() {
                   onChange={(e) => setLimit(e.target.value)}
                   className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none"
                 />
-                <p className="text-[10px] text-slate-400">Caps total API/GPT operations daily to prevent token over-utilization.</p>
+                <p className="text-[10px] text-slate-400">
+                  Caps total API/GPT operations daily to prevent token
+                  over-utilization.
+                </p>
               </div>
 
               {/* Category Keyword Pockets */}
@@ -1080,12 +1344,13 @@ export default function KeywordGeneratorPage() {
                       Category Keyword Pockets
                     </label>
                     <p className="text-[11px] text-slate-500 mt-0.5">
-                      Dedicated keyword sets isolated by category to prevent cross-contamination.
+                      Dedicated keyword sets isolated by category to prevent
+                      cross-contamination.
                     </p>
                   </div>
                   <button
                     type="button"
-                    onClick={() => setViewAllPockets(prev => !prev)}
+                    onClick={() => setViewAllPockets((prev) => !prev)}
                     className="text-[10px] font-bold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-2.5 py-1 rounded-md border border-indigo-200 transition-colors"
                   >
                     {viewAllPockets ? "Tabbed View" : "View All Pockets"}
@@ -1107,7 +1372,10 @@ export default function KeywordGeneratorPage() {
                       <Plane className="h-3.5 w-3.5 text-sky-500" />
                       Flights
                       <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-sky-100 text-sky-800 font-extrabold">
-                        {keywordsFlights.split(",").filter(s => s.trim()).length}
+                        {
+                          keywordsFlights.split(",").filter((s) => s.trim())
+                            .length
+                        }
                       </span>
                     </button>
 
@@ -1123,7 +1391,10 @@ export default function KeywordGeneratorPage() {
                       <Sparkles className="h-3.5 w-3.5 text-emerald-500" />
                       Umrah
                       <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-800 font-extrabold">
-                        {keywordsPackages.split(",").filter(s => s.trim()).length}
+                        {
+                          keywordsPackages.split(",").filter((s) => s.trim())
+                            .length
+                        }
                       </span>
                     </button>
 
@@ -1139,7 +1410,10 @@ export default function KeywordGeneratorPage() {
                       <Palmtree className="h-3.5 w-3.5 text-amber-500" />
                       Holidays
                       <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-100 text-amber-800 font-extrabold">
-                        {keywordsHolidays.split(",").filter(s => s.trim()).length}
+                        {
+                          keywordsHolidays.split(",").filter((s) => s.trim())
+                            .length
+                        }
                       </span>
                     </button>
 
@@ -1155,7 +1429,10 @@ export default function KeywordGeneratorPage() {
                       <BookOpen className="h-3.5 w-3.5 text-purple-500" />
                       Blogs
                       <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-purple-100 text-purple-800 font-extrabold">
-                        {keywordsBlogs.split(",").filter(s => s.trim()).length}
+                        {
+                          keywordsBlogs.split(",").filter((s) => s.trim())
+                            .length
+                        }
                       </span>
                     </button>
                   </div>
@@ -1172,11 +1449,16 @@ export default function KeywordGeneratorPage() {
                           ✈️ Flights Keyword Pocket
                         </span>
                         <span className="text-[10px] font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded-full border border-sky-200">
-                          {keywordsFlights.split(",").filter(s => s.trim()).length} keywords active
+                          {
+                            keywordsFlights.split(",").filter((s) => s.trim())
+                              .length
+                          }{" "}
+                          keywords active
                         </span>
                       </div>
                       <p className="text-[10px] text-sky-800">
-                        Target keywords used exclusively when generating or optimizing flight deals & UK airline routes.
+                        Target keywords used exclusively when generating or
+                        optimizing flight deals & UK airline routes.
                       </p>
                       <textarea
                         rows={2}
@@ -1186,17 +1468,25 @@ export default function KeywordGeneratorPage() {
                         className="w-full rounded-md border border-sky-300 bg-white px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-sky-500 outline-none resize-none"
                       />
                       <div className="flex flex-wrap gap-1 max-h-16 overflow-y-auto pt-1">
-                        {keywordsFlights.split(",").map(k => k.trim()).filter(Boolean).map((kw, i) => (
-                          <span key={i} className="inline-flex items-center gap-1 rounded bg-sky-100/90 text-sky-900 px-1.5 py-0.5 text-[10px] font-medium border border-sky-200">
-                            ✈️ {kw}
-                          </span>
-                        ))}
+                        {keywordsFlights
+                          .split(",")
+                          .map((k) => k.trim())
+                          .filter(Boolean)
+                          .map((kw, i) => (
+                            <span
+                              key={i}
+                              className="inline-flex items-center gap-1 rounded bg-sky-100/90 text-sky-900 px-1.5 py-0.5 text-[10px] font-medium border border-sky-200"
+                            >
+                              ✈️ {kw}
+                            </span>
+                          ))}
                       </div>
                     </div>
                   )}
 
                   {/* Pocket 2: Umrah Packages */}
-                  {(viewAllPockets || activeKeywordPocketTab === "packages") && (
+                  {(viewAllPockets ||
+                    activeKeywordPocketTab === "packages") && (
                     <div className="rounded-lg border border-emerald-200 bg-emerald-50/40 p-3 space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-bold text-emerald-950 flex items-center gap-1.5">
@@ -1204,11 +1494,16 @@ export default function KeywordGeneratorPage() {
                           🕋 Umrah & Pilgrimage Packages Pocket
                         </span>
                         <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full border border-emerald-200">
-                          {keywordsPackages.split(",").filter(s => s.trim()).length} keywords active
+                          {
+                            keywordsPackages.split(",").filter((s) => s.trim())
+                              .length
+                          }{" "}
+                          keywords active
                         </span>
                       </div>
                       <p className="text-[10px] text-emerald-800">
-                        Target keywords used exclusively for religious pilgrimage packages (Umrah, Hajj & Cruise Umrah).
+                        Target keywords used exclusively for religious
+                        pilgrimage packages (Umrah, Hajj & Cruise Umrah).
                       </p>
                       <textarea
                         rows={2}
@@ -1218,17 +1513,25 @@ export default function KeywordGeneratorPage() {
                         className="w-full rounded-md border border-emerald-300 bg-white px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 outline-none resize-none"
                       />
                       <div className="flex flex-wrap gap-1 max-h-16 overflow-y-auto pt-1">
-                        {keywordsPackages.split(",").map(k => k.trim()).filter(Boolean).map((kw, i) => (
-                          <span key={i} className="inline-flex items-center gap-1 rounded bg-emerald-100/90 text-emerald-900 px-1.5 py-0.5 text-[10px] font-medium border border-emerald-200">
-                            🕋 {kw}
-                          </span>
-                        ))}
+                        {keywordsPackages
+                          .split(",")
+                          .map((k) => k.trim())
+                          .filter(Boolean)
+                          .map((kw, i) => (
+                            <span
+                              key={i}
+                              className="inline-flex items-center gap-1 rounded bg-emerald-100/90 text-emerald-900 px-1.5 py-0.5 text-[10px] font-medium border border-emerald-200"
+                            >
+                              🕋 {kw}
+                            </span>
+                          ))}
                       </div>
                     </div>
                   )}
 
                   {/* Pocket 3: Holiday Packages */}
-                  {(viewAllPockets || activeKeywordPocketTab === "holidays") && (
+                  {(viewAllPockets ||
+                    activeKeywordPocketTab === "holidays") && (
                     <div className="rounded-lg border border-amber-200 bg-amber-50/40 p-3 space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-bold text-amber-950 flex items-center gap-1.5">
@@ -1236,11 +1539,17 @@ export default function KeywordGeneratorPage() {
                           🏖️ Holiday Packages Pocket
                         </span>
                         <span className="text-[10px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-200">
-                          {keywordsHolidays.split(",").filter(s => s.trim()).length} keywords active
+                          {
+                            keywordsHolidays.split(",").filter((s) => s.trim())
+                              .length
+                          }{" "}
+                          keywords active
                         </span>
                       </div>
                       <p className="text-[10px] text-amber-800">
-                        Target keywords used exclusively for general vacations and leisure packages (strictly isolated from pilgrimages).
+                        Target keywords used exclusively for general vacations
+                        and leisure packages (strictly isolated from
+                        pilgrimages).
                       </p>
                       <textarea
                         rows={2}
@@ -1250,11 +1559,18 @@ export default function KeywordGeneratorPage() {
                         className="w-full rounded-md border border-amber-300 bg-white px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-amber-500 outline-none resize-none"
                       />
                       <div className="flex flex-wrap gap-1 max-h-16 overflow-y-auto pt-1">
-                        {keywordsHolidays.split(",").map(k => k.trim()).filter(Boolean).map((kw, i) => (
-                          <span key={i} className="inline-flex items-center gap-1 rounded bg-amber-100/90 text-amber-900 px-1.5 py-0.5 text-[10px] font-medium border border-amber-200">
-                            🏖️ {kw}
-                          </span>
-                        ))}
+                        {keywordsHolidays
+                          .split(",")
+                          .map((k) => k.trim())
+                          .filter(Boolean)
+                          .map((kw, i) => (
+                            <span
+                              key={i}
+                              className="inline-flex items-center gap-1 rounded bg-amber-100/90 text-amber-900 px-1.5 py-0.5 text-[10px] font-medium border border-amber-200"
+                            >
+                              🏖️ {kw}
+                            </span>
+                          ))}
                       </div>
                     </div>
                   )}
@@ -1268,11 +1584,17 @@ export default function KeywordGeneratorPage() {
                           📝 Blogs & Travel Guides Pocket
                         </span>
                         <span className="text-[10px] font-bold text-purple-700 bg-purple-100 px-2 py-0.5 rounded-full border border-purple-200">
-                          {keywordsBlogs.split(",").filter(s => s.trim()).length} keywords active
+                          {
+                            keywordsBlogs.split(",").filter((s) => s.trim())
+                              .length
+                          }{" "}
+                          keywords active
                         </span>
                       </div>
                       <p className="text-[10px] text-purple-800">
-                        Target keywords used exclusively for travel guide articles, visa advice, packing lists, and editorial content.
+                        Target keywords used exclusively for travel guide
+                        articles, visa advice, packing lists, and editorial
+                        content.
                       </p>
                       <textarea
                         rows={2}
@@ -1282,11 +1604,18 @@ export default function KeywordGeneratorPage() {
                         className="w-full rounded-md border border-purple-300 bg-white px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-purple-500 outline-none resize-none"
                       />
                       <div className="flex flex-wrap gap-1 max-h-16 overflow-y-auto pt-1">
-                        {keywordsBlogs.split(",").map(k => k.trim()).filter(Boolean).map((kw, i) => (
-                          <span key={i} className="inline-flex items-center gap-1 rounded bg-purple-100/90 text-purple-900 px-1.5 py-0.5 text-[10px] font-medium border border-purple-200">
-                            📝 {kw}
-                          </span>
-                        ))}
+                        {keywordsBlogs
+                          .split(",")
+                          .map((k) => k.trim())
+                          .filter(Boolean)
+                          .map((kw, i) => (
+                            <span
+                              key={i}
+                              className="inline-flex items-center gap-1 rounded bg-purple-100/90 text-purple-900 px-1.5 py-0.5 text-[10px] font-medium border border-purple-200"
+                            >
+                              📝 {kw}
+                            </span>
+                          ))}
                       </div>
                     </div>
                   )}
@@ -1297,7 +1626,9 @@ export default function KeywordGeneratorPage() {
               <div className="rounded-lg bg-slate-50 p-3 flex justify-between items-center text-xs text-slate-500">
                 <span>Last Run Timestamp:</span>
                 <span className="font-semibold text-slate-700">
-                  {lastRun !== "Never" ? new Date(lastRun).toLocaleString() : "Never"}
+                  {lastRun !== "Never"
+                    ? new Date(lastRun).toLocaleString()
+                    : "Never"}
                 </span>
               </div>
 
@@ -1320,18 +1651,24 @@ export default function KeywordGeneratorPage() {
                 <Clock className="h-4 w-4 text-indigo-600" />
                 Automated Cron Job Scheduler
               </h3>
-              <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border flex items-center gap-1.5 ${
-                enabled 
-                  ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-                  : "bg-slate-50 text-slate-600 border-slate-200"
-              }`}>
-                <span className={`h-1.5 w-1.5 rounded-full ${enabled ? "bg-emerald-500 animate-pulse" : "bg-slate-400"}`} />
+              <span
+                className={`text-[10px] font-bold px-2 py-0.5 rounded-full border flex items-center gap-1.5 ${
+                  enabled
+                    ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                    : "bg-slate-50 text-slate-600 border-slate-200"
+                }`}
+              >
+                <span
+                  className={`h-1.5 w-1.5 rounded-full ${enabled ? "bg-emerald-500 animate-pulse" : "bg-slate-400"}`}
+                />
                 {enabled ? "Daily Cron Active" : "Cron Paused"}
               </span>
             </div>
 
             <p className="text-xs text-slate-500">
-              The autonomous SEO engine runs automatically on a scheduled daily cron job to enrich your current inventory and generate new high-converting travel content.
+              The autonomous SEO engine runs automatically on a scheduled daily
+              cron job to enrich your current inventory and generate new
+              high-converting travel content.
             </p>
 
             {/* Quick Strategy Recommendation Banner */}
@@ -1339,10 +1676,17 @@ export default function KeywordGeneratorPage() {
               <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs space-y-2">
                 <div className="flex items-start gap-2 text-amber-900 font-semibold">
                   <AlertCircle className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
-                  <span>Current strategy is set to "{mode === 'optimize_existing' ? 'Optimize Existing Only' : 'Generate New Only'}".</span>
+                  <span>
+                    Current strategy is set to "
+                    {mode === "optimize_existing"
+                      ? "Optimize Existing Only"
+                      : "Generate New Only"}
+                    ".
+                  </span>
                 </div>
                 <p className="text-[11px] text-amber-800">
-                  To both update existing pages AND generate new content automatically on each cron run, switch to Hybrid Mode.
+                  To both update existing pages AND generate new content
+                  automatically on each cron run, switch to Hybrid Mode.
                 </p>
                 <button
                   type="button"
@@ -1356,24 +1700,37 @@ export default function KeywordGeneratorPage() {
             ) : (
               <div className="p-2.5 bg-emerald-50 border border-emerald-200 rounded-lg text-xs flex items-center gap-2 text-emerald-900 font-semibold">
                 <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
-                <span>Hybrid Mode active: The cron will both update existing content and generate new pages!</span>
+                <span>
+                  Hybrid Mode active: The cron will both update existing content
+                  and generate new pages!
+                </span>
               </div>
             )}
 
             {/* Schedule Info Box */}
             <div className="space-y-2 text-xs">
               <div className="flex justify-between items-center py-2 px-3 bg-slate-50 rounded-lg border border-slate-100">
-                <span className="text-slate-500 font-medium">Cron Schedule:</span>
-                <span className="font-bold text-slate-800 font-mono">0 0 * * * (Daily Midnight UTC)</span>
+                <span className="text-slate-500 font-medium">
+                  Cron Schedule:
+                </span>
+                <span className="font-bold text-slate-800 font-mono">
+                  0 0 * * * (Daily Midnight UTC)
+                </span>
               </div>
 
               <div className="flex justify-between items-center py-2 px-3 bg-slate-50 rounded-lg border border-slate-100">
-                <span className="text-slate-500 font-medium">Webhook Endpoint:</span>
-                <span className="font-bold text-indigo-700 font-mono text-[11px]">/api/cron/seo-autopilot</span>
+                <span className="text-slate-500 font-medium">
+                  Webhook Endpoint:
+                </span>
+                <span className="font-bold text-indigo-700 font-mono text-[11px]">
+                  /api/cron/seo-autopilot
+                </span>
               </div>
 
               <div className="flex justify-between items-center py-2 px-3 bg-slate-50 rounded-lg border border-slate-100">
-                <span className="text-slate-500 font-medium">Vercel Cron Integration:</span>
+                <span className="text-slate-500 font-medium">
+                  Vercel Cron Integration:
+                </span>
                 <span className="font-bold text-emerald-700 flex items-center gap-1">
                   <Check className="h-3.5 w-3.5" /> Active in vercel.json
                 </span>
@@ -1408,18 +1765,26 @@ export default function KeywordGeneratorPage() {
                   <button
                     type="button"
                     onClick={() => {
-                      navigator.clipboard.writeText(`curl -X GET "https://terrifictravel.co.uk/api/cron/seo-autopilot" -H "Authorization: Bearer terrific_travel_seo_cron_secret_2026"`);
+                      navigator.clipboard.writeText(
+                        `curl -X GET "https://terrifictravel.co.uk/api/cron/seo-autopilot" -H "Authorization: Bearer terrific_travel_seo_cron_secret_2026"`,
+                      );
                       setCopiedCurl(true);
                       setTimeout(() => setCopiedCurl(false), 2000);
                     }}
                     className="text-indigo-600 font-bold hover:underline flex items-center gap-1 cursor-pointer"
                   >
-                    {copiedCurl ? <Check className="h-3 w-3 text-emerald-600" /> : <Copy className="h-3 w-3" />}
+                    {copiedCurl ? (
+                      <Check className="h-3 w-3 text-emerald-600" />
+                    ) : (
+                      <Copy className="h-3 w-3" />
+                    )}
                     {copiedCurl ? "Copied!" : "Copy cURL"}
                   </button>
                 </div>
                 <div className="bg-slate-900 text-slate-300 font-mono text-[10px] p-2.5 rounded-lg overflow-x-auto select-all">
-                  curl -X GET "https://terrifictravel.co.uk/api/cron/seo-autopilot" -H "Authorization: Bearer ***"
+                  curl -X GET
+                  "https://terrifictravel.co.uk/api/cron/seo-autopilot" -H
+                  "Authorization: Bearer ***"
                 </div>
               </div>
             </div>
@@ -1438,7 +1803,9 @@ export default function KeywordGeneratorPage() {
             </div>
 
             <p className="text-xs text-slate-500">
-              Pulls actual Google search queries & striking-distance keywords (positions 4–20) directly into ChatGPT to optimize pages for keywords real searchers type.
+              Pulls actual Google search queries & striking-distance keywords
+              (positions 4–20) directly into ChatGPT to optimize pages for
+              keywords real searchers type.
             </p>
 
             <div className="space-y-3 pt-1">
@@ -1493,7 +1860,9 @@ export default function KeywordGeneratorPage() {
                   ) : (
                     <KeyRound className="h-3.5 w-3.5" />
                   )}
-                  {testingGsc ? "Verifying GSC Connection..." : "Test GSC Connection"}
+                  {testingGsc
+                    ? "Verifying GSC Connection..."
+                    : "Test GSC Connection"}
                 </button>
               </div>
 
@@ -1514,14 +1883,17 @@ export default function KeywordGeneratorPage() {
                     )}
                     <span>{gscTestResult.message}</span>
                   </div>
-                  {gscTestResult.sampleQueries && gscTestResult.sampleQueries.length > 0 && (
-                    <div className="mt-2 space-y-1 text-[11px] font-mono text-emerald-900 bg-white/70 p-2 rounded border border-emerald-200">
-                      <p className="font-bold font-sans text-emerald-950">Sample High-Intent Queries:</p>
-                      {gscTestResult.sampleQueries.map((q, idx) => (
-                        <p key={idx}>• {q}</p>
-                      ))}
-                    </div>
-                  )}
+                  {gscTestResult.sampleQueries &&
+                    gscTestResult.sampleQueries.length > 0 && (
+                      <div className="mt-2 space-y-1 text-[11px] font-mono text-emerald-900 bg-white/70 p-2 rounded border border-emerald-200">
+                        <p className="font-bold font-sans text-emerald-950">
+                          Sample High-Intent Queries:
+                        </p>
+                        {gscTestResult.sampleQueries.map((q, idx) => (
+                          <p key={idx}>• {q}</p>
+                        ))}
+                      </div>
+                    )}
                 </div>
               )}
             </div>
@@ -1536,8 +1908,8 @@ export default function KeywordGeneratorPage() {
                 <Terminal className="h-4 w-4" />
                 LIVE PIPELINE OUTPUT
               </div>
-              <button 
-                onClick={() => setConsoleLogs([])} 
+              <button
+                onClick={() => setConsoleLogs([])}
                 className="text-[10px] text-slate-400 hover:text-white"
               >
                 Clear Console
@@ -1547,11 +1919,21 @@ export default function KeywordGeneratorPage() {
             <div className="flex-1 overflow-y-auto space-y-1.5 font-mono text-[10px] pr-2 text-slate-300 select-text leading-relaxed">
               {consoleLogs.length === 0 ? (
                 <div className="text-slate-500 italic h-full flex items-center justify-center">
-                  Autopilot idle. Click "Run Manual Cycle" above to check live logs.
+                  Autopilot idle. Click "Run Manual Cycle" above to check live
+                  logs.
                 </div>
               ) : (
                 consoleLogs.map((logStr, idx) => (
-                  <div key={idx} className={logStr.includes("Successfully") ? "text-emerald-400" : logStr.includes("Failed") ? "text-red-400" : ""}>
+                  <div
+                    key={idx}
+                    className={
+                      logStr.includes("Successfully")
+                        ? "text-emerald-400"
+                        : logStr.includes("Failed")
+                          ? "text-red-400"
+                          : ""
+                    }
+                  >
                     {logStr}
                   </div>
                 ))
@@ -1571,7 +1953,13 @@ export default function KeywordGeneratorPage() {
               AI Operation Audit History
             </h3>
             <span className="text-xs text-slate-400 font-medium">
-              ({totalLogs} {selectedReportTab === "ALL" ? "total records" : selectedReportTab === "OPTIMIZE" ? "updates" : "new drafts"})
+              ({totalLogs}{" "}
+              {selectedReportTab === "ALL"
+                ? "total records"
+                : selectedReportTab === "OPTIMIZE"
+                  ? "updates"
+                  : "new drafts"}
+              )
             </span>
           </div>
 
@@ -1579,7 +1967,10 @@ export default function KeywordGeneratorPage() {
             <div className="flex items-center rounded-lg bg-slate-100 p-1 border border-slate-200">
               <button
                 type="button"
-                onClick={() => { setSelectedReportTab("ALL"); setCurrentPage(1); }}
+                onClick={() => {
+                  setSelectedReportTab("ALL");
+                  setCurrentPage(1);
+                }}
                 className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition-all ${
                   selectedReportTab === "ALL"
                     ? "bg-white text-slate-900 shadow-sm"
@@ -1590,7 +1981,10 @@ export default function KeywordGeneratorPage() {
               </button>
               <button
                 type="button"
-                onClick={() => { setSelectedReportTab("OPTIMIZE"); setCurrentPage(1); }}
+                onClick={() => {
+                  setSelectedReportTab("OPTIMIZE");
+                  setCurrentPage(1);
+                }}
                 className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition-all ${
                   selectedReportTab === "OPTIMIZE"
                     ? "bg-blue-600 text-white shadow-sm"
@@ -1598,24 +1992,28 @@ export default function KeywordGeneratorPage() {
                 }`}
               >
                 <RefreshCw className="h-3 w-3" />
-                🔄 Updated Pages ({dbLogs.filter(l => l.actionType === "OPTIMIZE").length})
+                🔄 Updated Pages (
+                {dbLogs.filter((l) => l.actionType === "OPTIMIZE").length})
               </button>
               <button
                 type="button"
-                onClick={() => { setSelectedReportTab("GENERATE"); setCurrentPage(1); }}
+                onClick={() => {
+                  setSelectedReportTab("GENERATE");
+                  setCurrentPage(1);
+                }}
                 className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition-all ${
                   selectedReportTab === "GENERATE"
                     ? "bg-emerald-600 text-white shadow-sm"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
-                <PlusCircle className="h-3 w-3" />
-                ➕ Newly Added Pages ({dbLogs.filter(l => l.actionType === "GENERATE").length})
+                <PlusCircle className="h-3 w-3" />➕ Newly Added Pages (
+                {dbLogs.filter((l) => l.actionType === "GENERATE").length})
               </button>
             </div>
 
-            <button 
-              onClick={loadData} 
+            <button
+              onClick={loadData}
               className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs text-indigo-600 hover:bg-slate-50 font-bold transition-colors shadow-sm"
             >
               <RefreshCw className="h-3.5 w-3.5" />
@@ -1641,59 +2039,86 @@ export default function KeywordGeneratorPage() {
             <tbody className="divide-y divide-slate-200 text-slate-600">
               {currentLogs.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="px-4 py-8 text-center text-slate-400 italic">
+                  <td
+                    colSpan={8}
+                    className="px-4 py-8 text-center text-slate-400 italic"
+                  >
                     No autopilot operations have been logged yet.
                   </td>
                 </tr>
               ) : (
                 currentLogs.map((logItem) => {
-                  const itemSlug = logItem.slug || logItem.targetTitle.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-                  const viewUrl = `/terrific-travel/v/${itemSlug}`;
-                  const pkgType = logItem.packageType || (logItem.details?.match(/\[Type:\s*([A-Za-z_]+)\]/)?.[1]);
+                  const itemSlug =
+                    logItem.slug ||
+                    logItem.targetTitle
+                      .toLowerCase()
+                      .replace(/[^a-z0-9]+/g, "-")
+                      .replace(/(^-|-$)/g, "");
+                  const viewUrl = `/v/${itemSlug}`;
+                  const pkgType =
+                    logItem.packageType ||
+                    logItem.details?.match(/\[Type:\s*([A-Za-z_]+)\]/)?.[1];
 
                   return (
-                    <tr key={logItem.id} className="hover:bg-slate-50 transition-colors">
+                    <tr
+                      key={logItem.id}
+                      className="hover:bg-slate-50 transition-colors"
+                    >
                       <td className="whitespace-nowrap px-4 py-3 text-slate-400">
                         {new Date(logItem.createdAt).toLocaleString()}
                       </td>
                       <td className="whitespace-nowrap px-4 py-3">
-                        <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                          logItem.actionType === "OPTIMIZE" 
-                            ? "bg-blue-50 text-blue-700 border border-blue-200" 
-                            : "bg-purple-50 text-purple-700 border border-purple-200"
-                        }`}>
+                        <span
+                          className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                            logItem.actionType === "OPTIMIZE"
+                              ? "bg-blue-50 text-blue-700 border border-blue-200"
+                              : "bg-purple-50 text-purple-700 border border-purple-200"
+                          }`}
+                        >
                           {logItem.actionType}
                         </span>
                       </td>
                       <td className="whitespace-nowrap px-4 py-3 font-semibold text-slate-700">
                         <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="font-bold">{logItem.targetType}</span>
+                          <span className="font-bold">
+                            {logItem.targetType}
+                          </span>
                           {pkgType && (
-                            <span className={`px-2 py-0.5 rounded text-[10px] font-extrabold uppercase border ${
-                              pkgType === "UMRAH"
-                                ? "bg-emerald-50 text-emerald-800 border-emerald-300"
-                                : pkgType === "HOLIDAY"
-                                ? "bg-amber-50 text-amber-800 border-amber-300"
-                                : pkgType === "HAJJ"
-                                ? "bg-purple-50 text-purple-800 border-purple-300"
-                                : "bg-cyan-50 text-cyan-800 border-cyan-300"
-                            }`}>
+                            <span
+                              className={`px-2 py-0.5 rounded text-[10px] font-extrabold uppercase border ${
+                                pkgType === "UMRAH"
+                                  ? "bg-emerald-50 text-emerald-800 border-emerald-300"
+                                  : pkgType === "HOLIDAY"
+                                    ? "bg-amber-50 text-amber-800 border-amber-300"
+                                    : pkgType === "HAJJ"
+                                      ? "bg-purple-50 text-purple-800 border-purple-300"
+                                      : "bg-cyan-50 text-cyan-800 border-cyan-300"
+                              }`}
+                            >
                               {pkgType}
                             </span>
                           )}
                         </div>
                       </td>
-                      <td className="px-4 py-3 font-medium text-slate-900 max-w-[200px] truncate" title={logItem.targetTitle}>
-                        <a 
-                          href={viewUrl} 
-                          target="_blank" 
+                      <td
+                        className="px-4 py-3 font-medium text-slate-900 max-w-[200px] truncate"
+                        title={logItem.targetTitle}
+                      >
+                        <a
+                          href={viewUrl}
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="hover:text-indigo-600 hover:underline flex items-center gap-1 group"
                         >
-                          <span className="truncate">{logItem.targetTitle}</span>
+                          <span className="truncate">
+                            {logItem.targetTitle}
+                          </span>
                         </a>
                       </td>
-                      <td className="px-4 py-3 text-slate-500 max-w-[150px] truncate" title={logItem.keywords}>
+                      <td
+                        className="px-4 py-3 text-slate-500 max-w-[150px] truncate"
+                        title={logItem.keywords}
+                      >
                         {logItem.keywords}
                       </td>
                       <td className="whitespace-nowrap px-4 py-3">
@@ -1720,7 +2145,10 @@ export default function KeywordGeneratorPage() {
                           View Page
                         </a>
                       </td>
-                      <td className="px-4 py-3 text-slate-400 max-w-[200px] truncate" title={logItem.details}>
+                      <td
+                        className="px-4 py-3 text-slate-400 max-w-[200px] truncate"
+                        title={logItem.details}
+                      >
                         {logItem.details}
                       </td>
                     </tr>
@@ -1736,9 +2164,19 @@ export default function KeywordGeneratorPage() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-3 border-t border-slate-100 text-xs text-slate-600">
             <div className="flex flex-wrap items-center gap-3">
               <span>
-                Showing <strong className="font-semibold text-slate-900">{totalLogs > 0 ? startIndex + 1 : 0}</strong> to{" "}
-                <strong className="font-semibold text-slate-900">{endIndex}</strong> of{" "}
-                <strong className="font-semibold text-slate-900">{totalLogs}</strong> entries
+                Showing{" "}
+                <strong className="font-semibold text-slate-900">
+                  {totalLogs > 0 ? startIndex + 1 : 0}
+                </strong>{" "}
+                to{" "}
+                <strong className="font-semibold text-slate-900">
+                  {endIndex}
+                </strong>{" "}
+                of{" "}
+                <strong className="font-semibold text-slate-900">
+                  {totalLogs}
+                </strong>{" "}
+                entries
               </span>
               <div className="flex items-center gap-1.5 ml-2">
                 <span className="text-slate-400">Per page:</span>
@@ -1771,7 +2209,11 @@ export default function KeywordGeneratorPage() {
               <div className="flex items-center gap-1 px-1">
                 {Array.from({ length: totalPages }, (_, i) => i + 1)
                   .filter((p) => {
-                    return p === 1 || p === totalPages || Math.abs(p - safeCurrentPage) <= 1;
+                    return (
+                      p === 1 ||
+                      p === totalPages ||
+                      Math.abs(p - safeCurrentPage) <= 1
+                    );
                   })
                   .map((p, idx, arr) => {
                     const prevPage = arr[idx - 1];
@@ -1779,7 +2221,9 @@ export default function KeywordGeneratorPage() {
 
                     return (
                       <React.Fragment key={p}>
-                        {showEllipsis && <span className="px-1 text-slate-400">…</span>}
+                        {showEllipsis && (
+                          <span className="px-1 text-slate-400">…</span>
+                        )}
                         <button
                           onClick={() => setCurrentPage(p)}
                           className={`min-w-[28px] h-7 px-2 rounded text-xs font-bold transition-colors ${
@@ -1796,7 +2240,9 @@ export default function KeywordGeneratorPage() {
               </div>
 
               <button
-                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
                 disabled={safeCurrentPage >= totalPages}
                 className="flex items-center justify-center rounded border border-slate-200 bg-white p-1.5 text-slate-500 hover:bg-slate-50 hover:text-slate-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                 title="Next Page"
