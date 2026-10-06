@@ -10,23 +10,41 @@ import {
   GscSearchRow 
 } from "@/lib/googleSearchConsole";
 
+export async function GET(req: Request) {
+  return handleAutopilotRequest(req);
+}
+
 export async function POST(req: Request) {
+  return handleAutopilotRequest(req);
+}
+
+async function handleAutopilotRequest(req: Request) {
   const executionLogs: string[] = [];
+  const affectedPages: Array<{
+    action: "OPTIMIZE" | "GENERATE";
+    targetType: string;
+    id: string;
+    title: string;
+    slug?: string | null;
+    keywords: string;
+  }> = [];
+
   const log = (msg: string) => {
     console.log(msg);
     executionLogs.push(`[${new Date().toISOString()}] ${msg}`);
   };
 
   try {
-    // 1. Security check - verify CRON_SECRET or check if manually triggered by admin
+    // 1. Security check - verify CRON_SECRET, Vercel cron header, or check if manually triggered by admin
     const authHeader = req.headers.get("Authorization");
-    const isCronSecretValid = authHeader === `Bearer ${process.env.CRON_SECRET}`;
+    const isVercelCron = req.headers.get("x-vercel-cron") === "1";
+    const isCronSecretValid = Boolean(process.env.CRON_SECRET && authHeader === `Bearer ${process.env.CRON_SECRET}`);
     
     // Also allow request if there is a query param manual=true
     const url = new URL(req.url);
     const isManual = url.searchParams.get("manual") === "true";
 
-    if (!isCronSecretValid && !isManual) {
+    if (!isCronSecretValid && !isVercelCron && !isManual) {
       return NextResponse.json({ error: "Unauthorized access. Invalid CRON_SECRET." }, { status: 401 });
     }
 
@@ -502,6 +520,14 @@ Return valid JSON matching this schema:
               });
 
               log(`Successfully optimized package: '${pkg.title}'`);
+              affectedPages.push({
+                action: "OPTIMIZE",
+                targetType: "PACKAGE",
+                id: pkg.id,
+                title: pkg.title,
+                slug: pkg.slug,
+                keywords: kwMatch
+              });
               processedCount++;
             }
           } catch (err: any) {
@@ -608,6 +634,14 @@ Return JSON matching schema:
               });
 
               log(`Successfully optimized blog: '${blog.title}'`);
+              affectedPages.push({
+                action: "OPTIMIZE",
+                targetType: "BLOG",
+                id: blog.id,
+                title: blog.title,
+                slug: blog.slug,
+                keywords: kwMatch
+              });
               processedCount++;
             }
           } catch (err: any) {
@@ -736,6 +770,14 @@ Output valid JSON matching schema:
               });
 
               log(`Successfully generated new package draft: '${data.title}' [Type: ${pType}]`);
+              affectedPages.push({
+                action: "GENERATE",
+                targetType: "PACKAGE",
+                id: newPkg.id,
+                title: newPkg.title,
+                slug: newPkg.slug,
+                keywords: kw.text
+              });
               processedCount++;
             }
           } catch (err: any) {
@@ -819,6 +861,14 @@ Return JSON matching schema:
               });
 
               log(`Successfully generated new flight deal: '${newFlight.airline} ${newFlight.departure} to ${newFlight.destination}'`);
+              affectedPages.push({
+                action: "GENERATE",
+                targetType: "FLIGHT",
+                id: newFlight.id,
+                title: `${newFlight.departure} → ${newFlight.destination} (${newFlight.airline})`,
+                slug: newFlight.slug,
+                keywords: kw.text
+              });
               processedCount++;
             }
           } catch (err: any) {
@@ -900,6 +950,14 @@ Return JSON matching schema:
               });
 
               log(`Successfully generated new blog draft: '${newBlog.title}'`);
+              affectedPages.push({
+                action: "GENERATE",
+                targetType: "BLOG",
+                id: newBlog.id,
+                title: newBlog.title,
+                slug: newBlog.slug,
+                keywords: kw.text
+              });
               processedCount++;
             }
           } catch (err: any) {
@@ -921,6 +979,9 @@ Return JSON matching schema:
     return NextResponse.json({
       success: true,
       processed: processedCount,
+      updatedCount: affectedPages.filter(p => p.action === "OPTIMIZE").length,
+      generatedCount: affectedPages.filter(p => p.action === "GENERATE").length,
+      affectedPages,
       logs: executionLogs
     });
 

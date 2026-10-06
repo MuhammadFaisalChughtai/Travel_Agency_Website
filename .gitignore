@@ -142,5 +142,6 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
 
-# Google client secrets
+# Google client secrets & Service Account keys
 client_secret_*.json
+strong-jetty-*.json

@@ -101,7 +101,7 @@ export function FlightListCard({
         <div className="grid grid-cols-12 items-center gap-2">
           {/* Col 1: Route & Airline */}
           <div className="col-span-5 flex items-center gap-2.5">
-            <AirlineLogo carrier={airlineCode} name={airline} className="w-8 h-8 rounded-lg shrink-0" />
+            <AirlineLogo carrier={airlineCode} name={airline} className="w-8 h-8 rounded-lg shrink-0" variant="square" />
             <div className="min-w-0">
               <div className="flex items-center gap-1">
                 <span className="text-xs font-bold text-[#382626]">{departureCode}</span>
@@ -139,7 +139,7 @@ export function FlightListCard({
           <div className="grid grid-cols-12 items-center gap-2 pt-3 border-t border-dashed border-slate-100">
             {/* Col 1: Route & Airline */}
             <div className="col-span-5 flex items-center gap-2.5">
-              <AirlineLogo carrier={returnAirlineCode || airlineCode} name={returnAirline || airline} className="w-8 h-8 rounded-lg shrink-0" />
+              <AirlineLogo carrier={returnAirlineCode || airlineCode} name={returnAirline || airline} className="w-8 h-8 rounded-lg shrink-0" variant="square" />
               <div className="min-w-0">
                 <div className="flex items-center gap-1">
                   <span className="text-xs font-bold text-[#382626]">{destinationCode}</span>

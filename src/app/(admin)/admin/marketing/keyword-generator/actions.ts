@@ -5,7 +5,12 @@ import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 
-import { testSearchConsoleConnection } from "@/lib/googleSearchConsole";
+import { 
+  testSearchConsoleConnection,
+  getGscCredentials,
+  fetchSearchConsoleAnalytics,
+  GscSearchRow
+} from "@/lib/googleSearchConsole";
 
 async function requireAuth() {
   const session = await getServerSession(authOptions);
@@ -134,4 +139,169 @@ export async function getAutopilotLogs() {
       packageType,
     };
   });
+}
+
+export async function getSeoAnalyticsData() {
+  await requireAuth();
+
+  // 1. Fetch inventory counts
+  const [totalPackages, totalBlogs, totalFlights, packagesByType] = await Promise.all([
+    prisma.package.count(),
+    prisma.blog.count(),
+    prisma.flight.count(),
+    prisma.package.groupBy({
+      by: ["type"],
+      _count: { id: true },
+    }),
+  ]);
+
+  // 2. Fetch all logs to calculate progress
+  const logs = await prisma.seoAutopilotLog.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+
+  const successLogs = logs.filter((l) => l.status === "SUCCESS");
+  const failedLogs = logs.filter((l) => l.status === "FAILED");
+
+  // Track unique IDs that have been optimized
+  const optimizedPackageIds = new Set(
+    successLogs.filter((l) => l.targetType === "PACKAGE" && l.targetId).map((l) => l.targetId!)
+  );
+  const optimizedBlogIds = new Set(
+    successLogs.filter((l) => l.targetType === "BLOG" && l.targetId).map((l) => l.targetId!)
+  );
+  const optimizedFlightIds = new Set(
+    successLogs.filter((l) => l.targetType === "FLIGHT" && l.targetId).map((l) => l.targetId!)
+  );
+
+  const totalContent = totalPackages + totalBlogs + totalFlights;
+  const totalOptimized = optimizedPackageIds.size + optimizedBlogIds.size + optimizedFlightIds.size;
+  const overallProgressPct = totalContent > 0 ? Math.round((totalOptimized / totalContent) * 100) : 0;
+
+  // Breakdown by category
+  const packageTypeCountMap: Record<string, number> = {};
+  packagesByType.forEach((p) => {
+    packageTypeCountMap[p.type] = p._count.id;
+  });
+
+  // Breakdown by action type: Updated vs Generated
+  const updatedLogs = successLogs.filter((l) => l.actionType === "OPTIMIZE");
+  const generatedLogs = successLogs.filter((l) => l.actionType === "GENERATE");
+
+  const actionReport = {
+    totalUpdates: updatedLogs.length,
+    totalCreated: generatedLogs.length,
+    totalOperations: successLogs.length,
+    updatesRatio: successLogs.length > 0 ? Math.round((updatedLogs.length / successLogs.length) * 100) : 0,
+    createdRatio: successLogs.length > 0 ? Math.round((generatedLogs.length / successLogs.length) * 100) : 0,
+    byType: {
+      packagesUpdated: updatedLogs.filter((l) => l.targetType === "PACKAGE").length,
+      packagesCreated: generatedLogs.filter((l) => l.targetType === "PACKAGE").length,
+      blogsUpdated: updatedLogs.filter((l) => l.targetType === "BLOG").length,
+      blogsCreated: generatedLogs.filter((l) => l.targetType === "BLOG").length,
+      flightsUpdated: updatedLogs.filter((l) => l.targetType === "FLIGHT").length,
+      flightsCreated: generatedLogs.filter((l) => l.targetType === "FLIGHT").length,
+    }
+  };
+
+  // Calculate activity in the last 7 days with update vs create split
+  const last7Days: { date: string; label: string; count: number; updated: number; generated: number }[] = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const dateStr = d.toISOString().split("T")[0];
+    const label = d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric" });
+    const dayLogs = logs.filter((l) => l.createdAt.toISOString().split("T")[0] === dateStr);
+    const updated = dayLogs.filter((l) => l.status === "SUCCESS" && l.actionType === "OPTIMIZE").length;
+    const generated = dayLogs.filter((l) => l.status === "SUCCESS" && l.actionType === "GENERATE").length;
+    last7Days.push({ date: dateStr, label, count: dayLogs.length, updated, generated });
+  }
+
+  // 3. Live Google Search Console Data
+  let gscData = {
+    connected: false,
+    siteUrl: "",
+    totalImpressions: 0,
+    totalClicks: 0,
+    avgPosition: 0,
+    avgCtr: 0,
+    positionDistribution: {
+      top3: 0,
+      strikingDistance: 0,
+      page2: 0,
+      beyond: 0,
+    },
+    topQueries: [] as any[],
+    strikingQueries: [] as any[],
+  };
+
+  try {
+    const creds = await getGscCredentials();
+    if (creds) {
+      gscData.siteUrl = creds.siteUrl;
+      const rows = await fetchSearchConsoleAnalytics({ daysBack: 28, rowLimit: 250 });
+      if (rows && rows.length > 0) {
+        gscData.connected = true;
+        const totalImps = rows.reduce((acc: number, r: GscSearchRow) => acc + r.impressions, 0);
+        const totalClicks = rows.reduce((acc: number, r: GscSearchRow) => acc + r.clicks, 0);
+        const weightedPosSum = rows.reduce((acc: number, r: GscSearchRow) => acc + r.position * r.impressions, 0);
+        const avgPos = totalImps > 0 ? weightedPosSum / totalImps : 0;
+        const avgCtr = totalImps > 0 ? totalClicks / totalImps : 0;
+
+        gscData.totalImpressions = totalImps;
+        gscData.totalClicks = totalClicks;
+        gscData.avgPosition = Number(avgPos.toFixed(1));
+        gscData.avgCtr = Number((avgCtr * 100).toFixed(1));
+
+        rows.forEach((r: GscSearchRow) => {
+          if (r.position < 4.0) gscData.positionDistribution.top3++;
+          else if (r.position <= 10.0) gscData.positionDistribution.strikingDistance++;
+          else if (r.position <= 20.0) gscData.positionDistribution.page2++;
+          else gscData.positionDistribution.beyond++;
+        });
+
+        // Top queries by impressions
+        gscData.topQueries = [...rows].sort((a: GscSearchRow, b: GscSearchRow) => b.impressions - a.impressions).slice(0, 6);
+        // Striking distance queries (pos 4-20)
+        gscData.strikingQueries = rows
+          .filter((r: GscSearchRow) => r.position >= 4.0 && r.position <= 20.0)
+          .sort((a: GscSearchRow, b: GscSearchRow) => b.impressions - a.impressions)
+          .slice(0, 6);
+      }
+    }
+  } catch (err: any) {
+    console.error("[getSeoAnalyticsData] GSC Error:", err);
+  }
+
+  const cronInfo = {
+    configured: true,
+    schedule: "0 0 * * *",
+    humanSchedule: "Every Day at Midnight (00:00 UTC)",
+    endpoint: "/api/cron/seo-autopilot",
+    secretConfigured: Boolean(process.env.CRON_SECRET),
+  };
+
+  return {
+    inventory: {
+      totalContent,
+      totalPackages,
+      totalBlogs,
+      totalFlights,
+      packageTypeCountMap,
+    },
+    progress: {
+      totalOptimized,
+      overallProgressPct,
+      optimizedPackages: optimizedPackageIds.size,
+      optimizedBlogs: optimizedBlogIds.size,
+      optimizedFlights: optimizedFlightIds.size,
+      successCount: successLogs.length,
+      failedCount: failedLogs.length,
+      successRate: logs.length > 0 ? Math.round((successLogs.length / logs.length) * 100) : 100,
+      last7Days,
+    },
+    actionReport,
+    cronInfo,
+    gsc: gscData,
+  };
 }

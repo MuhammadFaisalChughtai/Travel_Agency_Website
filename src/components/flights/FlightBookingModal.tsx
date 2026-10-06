@@ -261,7 +261,8 @@ ${form.message || "None"}
                 <AirlineLogo
                   carrier={flight.carrier}
                   name={flight.airline}
-                  className="w-10 h-10"
+                  className="w-20 sm:w-24 h-10 sm:h-11 px-2 py-1"
+                  variant="banner"
                 />
                 <div>
                   <span className="font-black text-sm text-[#382626] block">

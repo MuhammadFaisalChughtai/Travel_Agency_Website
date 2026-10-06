@@ -795,7 +795,8 @@ export function FlightResultsView({
                           <AirlineLogo
                             carrier={flight.carrier}
                             name={flight.airline}
-                            className="w-20 h-12 sm:w-28 sm:h-14 p-1.5"
+                            className="w-24 sm:w-36 h-12 sm:h-14 px-2.5 py-1.5"
+                            variant="banner"
                           />
                           <div>
                             <span className="font-heading font-black text-sm sm:text-base text-[#382626] block">
