@@ -268,6 +268,32 @@ export default function KeywordGeneratorPage() {
         }
       });
       
+      if (!res.ok) {
+        let errorMsg = `Server response HTTP ${res.status}: ${res.statusText || "Execution notice"}`;
+        if (res.status === 504) {
+          errorMsg = "Gateway Time-out (504): The reverse proxy reached its 60s timeout limit. Operations completed before cutoff have been committed to the database.";
+        }
+        setConsoleLogs(prev => [
+          ...prev, 
+          `[System] ${errorMsg}`,
+          `[System] Fetching latest database audit logs and analytics...`
+        ]);
+        await loadData();
+        return;
+      }
+
+      const contentTypeHeader = res.headers.get("content-type") || "";
+      if (!contentTypeHeader.includes("application/json")) {
+        const rawText = await res.text();
+        setConsoleLogs(prev => [
+          ...prev,
+          `[System] Non-JSON server response (HTTP ${res.status}): ${rawText.slice(0, 120)}...`,
+          `[System] Fetching latest database audit logs...`
+        ]);
+        await loadData();
+        return;
+      }
+
       const data = await res.json();
       if (data.logs) {
         setConsoleLogs(data.logs);
@@ -293,7 +319,12 @@ export default function KeywordGeneratorPage() {
       setLastRun(updatedConfig.seo_autopilot_last_run || "Never");
     } catch (err: any) {
       console.error(err);
-      setConsoleLogs(prev => [...prev, `[System] Critical failure: ${err.message}`]);
+      setConsoleLogs(prev => [
+        ...prev, 
+        `[System] Execution notice: ${err.message}`,
+        `[System] Fetching updated database records...`
+      ]);
+      await loadData();
     } finally {
       setRunning(false);
     }

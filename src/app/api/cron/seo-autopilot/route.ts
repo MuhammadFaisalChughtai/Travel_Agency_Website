@@ -10,6 +10,9 @@ import {
   GscSearchRow 
 } from "@/lib/googleSearchConsole";
 
+export const maxDuration = 300;
+export const dynamic = "force-dynamic";
+
 export async function GET(req: Request) {
   return handleAutopilotRequest(req);
 }
@@ -19,6 +22,13 @@ export async function POST(req: Request) {
 }
 
 async function handleAutopilotRequest(req: Request) {
+  const executionStartTime = Date.now();
+  const SAFE_TIME_LIMIT_MS = 38000; // 38s safety cutoff (prevents 60s Nginx proxy timeout)
+
+  const isTimeBudgetExhausted = () => {
+    return (Date.now() - executionStartTime) >= SAFE_TIME_LIMIT_MS;
+  };
+
   const executionLogs: string[] = [];
   const affectedPages: Array<{
     action: "OPTIMIZE" | "GENERATE";
@@ -217,6 +227,10 @@ async function handleAutopilotRequest(req: Request) {
         });
 
         for (const seed of seedPhrases.slice(0, 3)) {
+          if (isTimeBudgetExhausted()) {
+            log("[Time Guard] Skipping remaining Google Ads keyword queries to preserve execution budget.");
+            break;
+          }
           try {
             await new Promise(resolve => setTimeout(resolve, 1500));
 
@@ -423,6 +437,10 @@ Output JSON matching this schema exactly:
 
         for (const pkg of packagesToOptimize) {
           if (processedCount >= limitCount) break;
+          if (isTimeBudgetExhausted()) {
+            log(`[Time Guard] Approaching 38s safety cutoff to prevent proxy/Nginx timeout. Completed ${processedCount} package operations in this batch.`);
+            break;
+          }
 
           const pTypeKey = (pkg.type || config.packageType || "").toLowerCase();
 
@@ -578,6 +596,10 @@ Return valid JSON matching this schema:
 
         for (const blog of blogsToOptimize) {
           if (processedCount >= limitCount) break;
+          if (isTimeBudgetExhausted()) {
+            log(`[Time Guard] Approaching 38s safety cutoff to prevent proxy/Nginx timeout. Completed ${processedCount} operations in this batch.`);
+            break;
+          }
 
           let blogGscQueries: GscSearchRow[] = [];
           if (gscOpportunities) {
@@ -789,6 +811,10 @@ Return JSON matching schema:
         } else {
           for (const fl of flightsToOptimize) {
             if (processedCount >= limitCount) break;
+            if (isTimeBudgetExhausted()) {
+              log(`[Time Guard] Approaching 38s safety cutoff to prevent proxy/Nginx timeout. Completed ${processedCount} flight operations in this batch.`);
+              break;
+            }
 
             let flGscQueries: GscSearchRow[] = [];
             if (gscOpportunities) {
@@ -923,6 +949,10 @@ Return valid JSON matching schema:
 
       for (const kw of keywordsToDraft) {
         if (processedCount >= limitCount) break;
+        if (isTimeBudgetExhausted()) {
+          log(`[Time Guard] Approaching 38s safety cutoff to prevent proxy/Nginx timeout. Completed ${processedCount} total operations in this batch.`);
+          break;
+        }
 
         const slug = kw.text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
@@ -1231,7 +1261,8 @@ Return JSON matching schema:
       }
     }
 
-    log(`SEO Autopilot completed. Processed ${processedCount} operations.`);
+    const elapsedSec = ((Date.now() - executionStartTime) / 1000).toFixed(1);
+    log(`SEO Autopilot cycle completed in ${elapsedSec}s. Processed ${processedCount} operations.`);
 
     // 6. Update last run date in SystemSettings
     await prisma.systemSetting.upsert({
