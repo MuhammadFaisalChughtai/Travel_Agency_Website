@@ -59,6 +59,10 @@ async function handleAutopilotRequest(req: Request) {
             "seo_autopilot_mode",
             "seo_autopilot_limit",
             "seo_autopilot_seed_keywords",
+            "seo_autopilot_keywords_flights",
+            "seo_autopilot_keywords_packages",
+            "seo_autopilot_keywords_holidays",
+            "seo_autopilot_keywords_blogs",
             "seo_autopilot_package_type",
             "seo_autopilot_content_type"
           ]
@@ -71,6 +75,10 @@ async function handleAutopilotRequest(req: Request) {
       mode: "optimize_existing",
       limit: "10",
       seedKeywords: "",
+      keywordsFlights: "cheap flights from london, flights to jeddah, flight deals uk, direct flights to makkah, airline tickets discount",
+      keywordsPackages: "umrah packages 2026, cheap umrah from london, 5 star umrah packages, family umrah packages, ramadan umrah deals, hajj packages",
+      keywordsHolidays: "family holiday deals, luxury beach holidays, dubai holiday packages, all inclusive holidays from uk, turkey holiday deals",
+      keywordsBlogs: "visa for umrah from uk, best time to perform umrah, umrah packing list, saudi tourist visa guide, uk travel requirements",
       packageType: "ALL",
       contentType: "ALL"
     };
@@ -80,6 +88,10 @@ async function handleAutopilotRequest(req: Request) {
       if (s.key === "seo_autopilot_mode") config.mode = s.value;
       if (s.key === "seo_autopilot_limit") config.limit = s.value;
       if (s.key === "seo_autopilot_seed_keywords") config.seedKeywords = s.value;
+      if (s.key === "seo_autopilot_keywords_flights") config.keywordsFlights = s.value;
+      if (s.key === "seo_autopilot_keywords_packages") config.keywordsPackages = s.value;
+      if (s.key === "seo_autopilot_keywords_holidays") config.keywordsHolidays = s.value;
+      if (s.key === "seo_autopilot_keywords_blogs") config.keywordsBlogs = s.value;
       if (s.key === "seo_autopilot_package_type") config.packageType = s.value;
       if (s.key === "seo_autopilot_content_type") config.contentType = s.value;
     }
@@ -91,7 +103,38 @@ async function handleAutopilotRequest(req: Request) {
     }
 
     const limitCount = Math.max(1, Math.min(100, Number(config.limit) || 10));
-    log(`Autopilot configured: mode=${config.mode}, limit=${limitCount}, contentType=${config.contentType}, packageType=${config.packageType}, seeds='${config.seedKeywords}'`);
+    log(`Autopilot configured: mode=${config.mode}, limit=${limitCount}, contentType=${config.contentType}, packageType=${config.packageType}`);
+
+    // Parse category keyword pockets
+    const flightSeeds = (config.keywordsFlights || "").split(",").map(k => k.trim()).filter(Boolean);
+    const packageSeeds = (config.keywordsPackages || "").split(",").map(k => k.trim()).filter(Boolean);
+    const holidaySeeds = (config.keywordsHolidays || "").split(",").map(k => k.trim()).filter(Boolean);
+    const blogSeeds = (config.keywordsBlogs || "").split(",").map(k => k.trim()).filter(Boolean);
+
+    let seedPhrases: string[] = [];
+    if (config.contentType === "FLIGHT") {
+      seedPhrases = flightSeeds.length > 0 ? flightSeeds : ["cheap flights from london", "flights to jeddah", "flight deals uk"];
+      log(`[Pocket Active] FLIGHTS Pocket: ${seedPhrases.length} keywords active.`);
+    } else if (config.contentType === "BLOG") {
+      seedPhrases = blogSeeds.length > 0 ? blogSeeds : ["visa for umrah from uk", "best time to perform umrah", "travel guide"];
+      log(`[Pocket Active] BLOGS Pocket: ${seedPhrases.length} keywords active.`);
+    } else if (config.contentType === "PACKAGE") {
+      if (config.packageType === "HOLIDAY") {
+        seedPhrases = holidaySeeds.length > 0 ? holidaySeeds : ["family holiday deals", "luxury beach resort", "dubai holiday packages"];
+        log(`[Pocket Active] HOLIDAYS Pocket: ${seedPhrases.length} keywords active.`);
+      } else {
+        seedPhrases = packageSeeds.length > 0 ? packageSeeds : ["umrah packages 2026", "cheap umrah from london", "5 star umrah packages"];
+        log(`[Pocket Active] UMRAH / PILGRIMAGE Pocket: ${seedPhrases.length} keywords active.`);
+      }
+    } else {
+      seedPhrases = Array.from(new Set([
+        ...flightSeeds,
+        ...packageSeeds,
+        ...holidaySeeds,
+        ...blogSeeds
+      ])).filter(Boolean);
+      log(`[Pockets Active] ALL 4 Pockets: ${seedPhrases.length} keywords active across categories.`);
+    }
 
     // 3. Check ChatGPT API key (Required for AI content generation and optimization)
     const openAiApiKey = process.env['GPT_KEY'];
@@ -154,19 +197,9 @@ async function handleAutopilotRequest(req: Request) {
 
     const hasGoogleAds = developerToken && customerId && client_id && client_secret && refresh_token;
 
-    const defaultSeeds = config.packageType === "HOLIDAY" 
-      ? ["family holiday deals", "luxury beach resort", "cheap flights from uk", "summer holiday packages"]
-      : config.packageType === "UMRAH"
-      ? ["umrah packages 2026", "cheap umrah from london", "5 star umrah packages", "family umrah deals"]
-      : config.packageType === "HAJJ"
-      ? ["hajj packages 2026", "uk hajj deals", "non shifting hajj package"]
-      : config.packageType === "Cruise_Umrah"
-      ? ["red sea umrah cruise", "jeddah cruise package", "luxury cruise umrah"]
-      : ["umrah packages", "holiday deals", "cheap flights"];
-
-    const seedPhrases = config.seedKeywords
-      ? config.seedKeywords.split(",").map(k => k.trim()).filter(Boolean)
-      : defaultSeeds;
+    const effectiveSeeds = seedPhrases.length > 0
+      ? seedPhrases
+      : ["cheap flights from london", "umrah packages 2026", "holiday deals"];
 
     if (keywordIdeas.length < 5 && hasGoogleAds) {
       log(`[Google Ads] Querying Google Keyword Planner for seeds: ${seedPhrases.join(", ")}`);

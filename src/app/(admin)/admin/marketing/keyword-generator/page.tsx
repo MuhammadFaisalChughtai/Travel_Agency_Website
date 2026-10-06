@@ -42,7 +42,10 @@ import {
   FileText,
   PlusCircle,
   CheckCheck,
-  Filter
+  Filter,
+  Plane,
+  Palmtree,
+  BookOpen
 } from "lucide-react";
 
 export default function KeywordGeneratorPage() {
@@ -50,6 +53,12 @@ export default function KeywordGeneratorPage() {
   const [mode, setMode] = useState("optimize_existing");
   const [limit, setLimit] = useState("50");
   const [seeds, setSeeds] = useState("");
+  const [keywordsFlights, setKeywordsFlights] = useState("");
+  const [keywordsPackages, setKeywordsPackages] = useState("");
+  const [keywordsHolidays, setKeywordsHolidays] = useState("");
+  const [keywordsBlogs, setKeywordsBlogs] = useState("");
+  const [activeKeywordPocketTab, setActiveKeywordPocketTab] = useState<"flights" | "packages" | "holidays" | "blogs">("flights");
+  const [viewAllPockets, setViewAllPockets] = useState(false);
   const [packageType, setPackageType] = useState("ALL");
   const [contentType, setContentType] = useState("ALL");
   const [lastRun, setLastRun] = useState("Never");
@@ -174,6 +183,10 @@ export default function KeywordGeneratorPage() {
       setMode(config.seo_autopilot_mode || "optimize_existing");
       setLimit(config.seo_autopilot_limit || "50");
       setSeeds(config.seo_autopilot_seed_keywords || "");
+      setKeywordsFlights(config.seo_autopilot_keywords_flights || "cheap flights from london, flights to jeddah, flight deals uk, direct flights to makkah, airline tickets discount");
+      setKeywordsPackages(config.seo_autopilot_keywords_packages || "umrah packages 2026, cheap umrah from london, 5 star umrah packages, family umrah packages, ramadan umrah deals, hajj packages");
+      setKeywordsHolidays(config.seo_autopilot_keywords_holidays || "family holiday deals, luxury beach holidays, dubai holiday packages, all inclusive holidays from uk, turkey holiday deals");
+      setKeywordsBlogs(config.seo_autopilot_keywords_blogs || "visa for umrah from uk, best time to perform umrah, umrah packing list, saudi tourist visa guide, uk travel requirements");
       setPackageType(config.seo_autopilot_package_type || "ALL");
       setContentType(config.seo_autopilot_content_type || "ALL");
       setLastRun(config.seo_autopilot_last_run || "Never");
@@ -200,6 +213,10 @@ export default function KeywordGeneratorPage() {
         seo_autopilot_mode: mode,
         seo_autopilot_limit: limit,
         seo_autopilot_seed_keywords: seeds,
+        seo_autopilot_keywords_flights: keywordsFlights,
+        seo_autopilot_keywords_packages: keywordsPackages,
+        seo_autopilot_keywords_holidays: keywordsHolidays,
+        seo_autopilot_keywords_blogs: keywordsBlogs,
         seo_autopilot_package_type: packageType,
         seo_autopilot_content_type: contentType,
         gsc_site_url: gscSiteUrl,
@@ -964,11 +981,20 @@ export default function KeywordGeneratorPage() {
                 <label className="text-xs font-bold text-indigo-950 uppercase tracking-wider">Target Content Type</label>
                 <select
                   value={contentType}
-                  onChange={(e) => setContentType(e.target.value)}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setContentType(val);
+                    if (val === "FLIGHT") setActiveKeywordPocketTab("flights");
+                    else if (val === "BLOG") setActiveKeywordPocketTab("blogs");
+                    else if (val.startsWith("PACKAGE")) {
+                      if (packageType === "HOLIDAY") setActiveKeywordPocketTab("holidays");
+                      else setActiveKeywordPocketTab("packages");
+                    }
+                  }}
                   className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none bg-white font-medium"
                 >
                   <option value="ALL">ALL Content Types (Packages, Flights, Blogs)</option>
-                  <option value="PACKAGE font-semibold">Packages Only (Travel & Pilgrimage Packages)</option>
+                  <option value="PACKAGE">Packages Only (Travel & Pilgrimage Packages)</option>
                   <option value="FLIGHT">Flights Only (Airlines & UK Route Deals)</option>
                   <option value="BLOG">Blogs Only (Travel Guides & Articles)</option>
                 </select>
@@ -979,7 +1005,12 @@ export default function KeywordGeneratorPage() {
                 <label className="text-xs font-bold text-indigo-950 uppercase tracking-wider">Package Niche / Type</label>
                 <select
                   value={packageType}
-                  onChange={(e) => setPackageType(e.target.value)}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setPackageType(val);
+                    if (val === "HOLIDAY") setActiveKeywordPocketTab("holidays");
+                    else if (val === "UMRAH" || val === "HAJJ" || val === "Cruise_Umrah") setActiveKeywordPocketTab("packages");
+                  }}
                   className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none bg-white font-medium"
                 >
                   <option value="ALL">ALL Categories (Dynamic auto-detection)</option>
@@ -1009,17 +1040,226 @@ export default function KeywordGeneratorPage() {
                 <p className="text-[10px] text-slate-400">Caps total API/GPT operations daily to prevent token over-utilization.</p>
               </div>
 
-              {/* Seed Keywords */}
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-indigo-950 uppercase tracking-wider">Seed Keywords</label>
-                <textarea
-                  rows={3}
-                  value={seeds}
-                  onChange={(e) => setSeeds(e.target.value)}
-                  placeholder="e.g. umrah packages, cheap flights, family holidays"
-                  className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none resize-none"
-                />
-                <p className="text-[10px] text-slate-400">Comma-separated topics sent to Google Ads to search for long-tail ideas.</p>
+              {/* Category Keyword Pockets */}
+              <div className="space-y-3 pt-3 border-t border-slate-100">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <label className="text-xs font-bold text-indigo-950 uppercase tracking-wider flex items-center gap-1.5">
+                      <Layers className="h-3.5 w-3.5 text-indigo-600" />
+                      Category Keyword Pockets
+                    </label>
+                    <p className="text-[11px] text-slate-500 mt-0.5">
+                      Dedicated keyword sets isolated by category to prevent cross-contamination.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setViewAllPockets(prev => !prev)}
+                    className="text-[10px] font-bold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-2.5 py-1 rounded-md border border-indigo-200 transition-colors"
+                  >
+                    {viewAllPockets ? "Tabbed View" : "View All Pockets"}
+                  </button>
+                </div>
+
+                {/* Pocket Category Switcher Tabs (when not in View All mode) */}
+                {!viewAllPockets && (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 bg-slate-100 p-1 rounded-lg">
+                    <button
+                      type="button"
+                      onClick={() => setActiveKeywordPocketTab("flights")}
+                      className={`flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-md text-xs font-bold transition-all ${
+                        activeKeywordPocketTab === "flights"
+                          ? "bg-white text-sky-800 shadow-xs border border-sky-300 ring-1 ring-sky-400/20"
+                          : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      <Plane className="h-3.5 w-3.5 text-sky-500" />
+                      Flights
+                      <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-sky-100 text-sky-800 font-extrabold">
+                        {keywordsFlights.split(",").filter(s => s.trim()).length}
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setActiveKeywordPocketTab("packages")}
+                      className={`flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-md text-xs font-bold transition-all ${
+                        activeKeywordPocketTab === "packages"
+                          ? "bg-white text-emerald-800 shadow-xs border border-emerald-300 ring-1 ring-emerald-400/20"
+                          : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      <Sparkles className="h-3.5 w-3.5 text-emerald-500" />
+                      Umrah
+                      <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-800 font-extrabold">
+                        {keywordsPackages.split(",").filter(s => s.trim()).length}
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setActiveKeywordPocketTab("holidays")}
+                      className={`flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-md text-xs font-bold transition-all ${
+                        activeKeywordPocketTab === "holidays"
+                          ? "bg-white text-amber-800 shadow-xs border border-amber-300 ring-1 ring-amber-400/20"
+                          : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      <Palmtree className="h-3.5 w-3.5 text-amber-500" />
+                      Holidays
+                      <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-100 text-amber-800 font-extrabold">
+                        {keywordsHolidays.split(",").filter(s => s.trim()).length}
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setActiveKeywordPocketTab("blogs")}
+                      className={`flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-md text-xs font-bold transition-all ${
+                        activeKeywordPocketTab === "blogs"
+                          ? "bg-white text-purple-800 shadow-xs border border-purple-300 ring-1 ring-purple-400/20"
+                          : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      <BookOpen className="h-3.5 w-3.5 text-purple-500" />
+                      Blogs
+                      <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-purple-100 text-purple-800 font-extrabold">
+                        {keywordsBlogs.split(",").filter(s => s.trim()).length}
+                      </span>
+                    </button>
+                  </div>
+                )}
+
+                {/* Pocket Panels */}
+                <div className="space-y-3">
+                  {/* Pocket 1: Flights */}
+                  {(viewAllPockets || activeKeywordPocketTab === "flights") && (
+                    <div className="rounded-lg border border-sky-200 bg-sky-50/40 p-3 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-sky-950 flex items-center gap-1.5">
+                          <Plane className="h-3.5 w-3.5 text-sky-600" />
+                          ✈️ Flights Keyword Pocket
+                        </span>
+                        <span className="text-[10px] font-bold text-sky-700 bg-sky-100 px-2 py-0.5 rounded-full border border-sky-200">
+                          {keywordsFlights.split(",").filter(s => s.trim()).length} keywords active
+                        </span>
+                      </div>
+                      <p className="text-[10px] text-sky-800">
+                        Target keywords used exclusively when generating or optimizing flight deals & UK airline routes.
+                      </p>
+                      <textarea
+                        rows={2}
+                        value={keywordsFlights}
+                        onChange={(e) => setKeywordsFlights(e.target.value)}
+                        placeholder="e.g. cheap flights from london, flights to jeddah, flight deals uk, direct flights to makkah"
+                        className="w-full rounded-md border border-sky-300 bg-white px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-sky-500 outline-none resize-none"
+                      />
+                      <div className="flex flex-wrap gap-1 max-h-16 overflow-y-auto pt-1">
+                        {keywordsFlights.split(",").map(k => k.trim()).filter(Boolean).map((kw, i) => (
+                          <span key={i} className="inline-flex items-center gap-1 rounded bg-sky-100/90 text-sky-900 px-1.5 py-0.5 text-[10px] font-medium border border-sky-200">
+                            ✈️ {kw}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Pocket 2: Umrah Packages */}
+                  {(viewAllPockets || activeKeywordPocketTab === "packages") && (
+                    <div className="rounded-lg border border-emerald-200 bg-emerald-50/40 p-3 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-emerald-950 flex items-center gap-1.5">
+                          <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
+                          🕋 Umrah & Pilgrimage Packages Pocket
+                        </span>
+                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full border border-emerald-200">
+                          {keywordsPackages.split(",").filter(s => s.trim()).length} keywords active
+                        </span>
+                      </div>
+                      <p className="text-[10px] text-emerald-800">
+                        Target keywords used exclusively for religious pilgrimage packages (Umrah, Hajj & Cruise Umrah).
+                      </p>
+                      <textarea
+                        rows={2}
+                        value={keywordsPackages}
+                        onChange={(e) => setKeywordsPackages(e.target.value)}
+                        placeholder="e.g. umrah packages 2026, cheap umrah from london, 5 star umrah packages, family umrah"
+                        className="w-full rounded-md border border-emerald-300 bg-white px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 outline-none resize-none"
+                      />
+                      <div className="flex flex-wrap gap-1 max-h-16 overflow-y-auto pt-1">
+                        {keywordsPackages.split(",").map(k => k.trim()).filter(Boolean).map((kw, i) => (
+                          <span key={i} className="inline-flex items-center gap-1 rounded bg-emerald-100/90 text-emerald-900 px-1.5 py-0.5 text-[10px] font-medium border border-emerald-200">
+                            🕋 {kw}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Pocket 3: Holiday Packages */}
+                  {(viewAllPockets || activeKeywordPocketTab === "holidays") && (
+                    <div className="rounded-lg border border-amber-200 bg-amber-50/40 p-3 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-amber-950 flex items-center gap-1.5">
+                          <Palmtree className="h-3.5 w-3.5 text-amber-600" />
+                          🏖️ Holiday Packages Pocket
+                        </span>
+                        <span className="text-[10px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-200">
+                          {keywordsHolidays.split(",").filter(s => s.trim()).length} keywords active
+                        </span>
+                      </div>
+                      <p className="text-[10px] text-amber-800">
+                        Target keywords used exclusively for general vacations and leisure packages (strictly isolated from pilgrimages).
+                      </p>
+                      <textarea
+                        rows={2}
+                        value={keywordsHolidays}
+                        onChange={(e) => setKeywordsHolidays(e.target.value)}
+                        placeholder="e.g. family holiday deals, luxury beach holidays, dubai holiday packages, all inclusive holidays"
+                        className="w-full rounded-md border border-amber-300 bg-white px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-amber-500 outline-none resize-none"
+                      />
+                      <div className="flex flex-wrap gap-1 max-h-16 overflow-y-auto pt-1">
+                        {keywordsHolidays.split(",").map(k => k.trim()).filter(Boolean).map((kw, i) => (
+                          <span key={i} className="inline-flex items-center gap-1 rounded bg-amber-100/90 text-amber-900 px-1.5 py-0.5 text-[10px] font-medium border border-amber-200">
+                            🏖️ {kw}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Pocket 4: Blogs & Guides */}
+                  {(viewAllPockets || activeKeywordPocketTab === "blogs") && (
+                    <div className="rounded-lg border border-purple-200 bg-purple-50/40 p-3 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-purple-950 flex items-center gap-1.5">
+                          <BookOpen className="h-3.5 w-3.5 text-purple-600" />
+                          📝 Blogs & Travel Guides Pocket
+                        </span>
+                        <span className="text-[10px] font-bold text-purple-700 bg-purple-100 px-2 py-0.5 rounded-full border border-purple-200">
+                          {keywordsBlogs.split(",").filter(s => s.trim()).length} keywords active
+                        </span>
+                      </div>
+                      <p className="text-[10px] text-purple-800">
+                        Target keywords used exclusively for travel guide articles, visa advice, packing lists, and editorial content.
+                      </p>
+                      <textarea
+                        rows={2}
+                        value={keywordsBlogs}
+                        onChange={(e) => setKeywordsBlogs(e.target.value)}
+                        placeholder="e.g. visa for umrah from uk, best time to perform umrah, umrah packing list, saudi tourist visa guide"
+                        className="w-full rounded-md border border-purple-300 bg-white px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-purple-500 outline-none resize-none"
+                      />
+                      <div className="flex flex-wrap gap-1 max-h-16 overflow-y-auto pt-1">
+                        {keywordsBlogs.split(",").map(k => k.trim()).filter(Boolean).map((kw, i) => (
+                          <span key={i} className="inline-flex items-center gap-1 rounded bg-purple-100/90 text-purple-900 px-1.5 py-0.5 text-[10px] font-medium border border-purple-200">
+                            📝 {kw}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Last Run Info */}
