@@ -871,169 +871,192 @@ export function TravelportFlightSearch({
         ) : (
           /* MULTI-CITY LAYOUT */
           <div className="space-y-3">
-            {multiCityLegs.map((leg, index) => (
-              <div
-                key={index}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-2.5 p-2 bg-white/40 backdrop-blur-md rounded-2xl border border-white/40 items-center"
-              >
-                {/* Leg From */}
+            {multiCityLegs.map((leg, index) => {
+              const isLegActive =
+                activeAirportField === `multi-from-${index}` ||
+                activeAirportField === `multi-to-${index}`;
+
+              return (
                 <div
-                  className={`lg:col-span-4 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-2 relative ${
-                    activeAirportField === `multi-from-${index}` ? "z-50" : "z-10"
-                  } focus-within:bg-white focus-within:border-[#6b4f4f] transition-all`}
+                  key={index}
+                  style={{ zIndex: isLegActive ? 50 : 30 - index }}
+                  className={`grid grid-cols-1 lg:grid-cols-12 gap-2.5 p-2 bg-white/40 backdrop-blur-md rounded-2xl border border-white/40 items-center relative transition-all`}
                 >
-                  <div className="flex items-center gap-1.5 mb-0.5">
-                    <Plane className="w-3.5 h-3.5 text-[#6b4f4f]" />
-                    <span className="text-[10px] font-bold text-slate-400 uppercase block">
-                      From (Flight {index + 1})
-                    </span>
-                  </div>
-                  <input
-                    type="text"
-                    value={activeAirportField === `multi-from-${index}` ? airportQuery : leg.from}
-                    onFocus={() => {
-                      setActiveAirportField(`multi-from-${index}`);
-                      setAirportQuery("");
-                    }}
-                    onChange={(e) => setAirportQuery(e.target.value)}
-                    placeholder="From?"
-                    className="w-full text-xs sm:text-sm font-semibold text-slate-800 placeholder-slate-400 focus:outline-none bg-transparent"
-                  />
-                  {activeAirportField === `multi-from-${index}` && (
-                    <div
-                      ref={airportDropdownRef}
-                      className="absolute left-0 top-full mt-2 w-full sm:w-[350px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 p-2 max-h-60 overflow-y-auto"
-                    >
-                      {searchAirports(airportQuery).map((item) => (
-                        <button
-                          key={item.code}
-                          type="button"
-                          onClick={() => handleSelectAirport(`multi-from-${index}`, item)}
-                          className="w-full text-left px-3 py-1.5 hover:bg-[#f5f0eb] rounded-xl flex items-center justify-between text-xs"
-                        >
-                          <span className="font-bold text-slate-800">
-                            {item.city} ({item.code})
-                          </span>
-                          <span className="text-[10px] font-mono bg-slate-100 px-1.5 py-0.5 rounded">
-                            {item.code}
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Leg To */}
-                <div
-                  className={`lg:col-span-4 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-2 relative ${
-                    activeAirportField === `multi-to-${index}` ? "z-50" : "z-10"
-                  } focus-within:bg-white focus-within:border-[#6b4f4f] transition-all`}
-                >
-                  <div className="flex items-center gap-1.5 mb-0.5">
-                    <Plane className="w-3.5 h-3.5 text-[#6b4f4f] rotate-90" />
-                    <span className="text-[10px] font-bold text-slate-400 uppercase block">
-                      To
-                    </span>
-                  </div>
-                  <input
-                    type="text"
-                    value={activeAirportField === `multi-to-${index}` ? airportQuery : leg.to}
-                    onFocus={() => {
-                      setActiveAirportField(`multi-to-${index}`);
-                      setAirportQuery("");
-                    }}
-                    onChange={(e) => setAirportQuery(e.target.value)}
-                    placeholder="To?"
-                    className="w-full text-xs sm:text-sm font-semibold text-slate-800 placeholder-slate-400 focus:outline-none bg-transparent"
-                  />
-                  {activeAirportField === `multi-to-${index}` && (
-                    <div
-                      ref={airportDropdownRef}
-                      className="absolute left-0 top-full mt-2 w-full sm:w-[350px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 p-2 max-h-60 overflow-y-auto"
-                    >
-                      {searchAirports(airportQuery).map((item) => (
-                        <button
-                          key={item.code}
-                          type="button"
-                          onClick={() => handleSelectAirport(`multi-to-${index}`, item)}
-                          className="w-full text-left px-3 py-1.5 hover:bg-[#f5f0eb] rounded-xl flex items-center justify-between text-xs"
-                        >
-                          <span className="font-bold text-slate-800">
-                            {item.city} ({item.code})
-                          </span>
-                          <span className="text-[10px] font-mono bg-slate-100 px-1.5 py-0.5 rounded">
-                            {item.code}
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Leg Departure Date */}
-                <div className="lg:col-span-2 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-2 focus-within:bg-white focus-within:border-[#6b4f4f] transition-all">
-                  <div className="flex items-center gap-1.5 mb-0.5">
-                    <Calendar className="w-3.5 h-3.5 text-[#6b4f4f]" />
-                    <span className="text-[10px] font-bold text-slate-400 uppercase block">
-                      Departure
-                    </span>
-                  </div>
-                  <input
-                    type="date"
-                    value={leg.date}
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      setMultiCityLegs((prev) => {
-                        const copy = [...prev];
-                        copy[index] = { ...copy[index], date: val };
-                        return copy;
-                      });
-                    }}
-                    className="w-full text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none bg-transparent cursor-pointer"
-                  />
-                </div>
-
-                {/* Cabin */}
-                <div className="lg:col-span-1 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2 py-1.5 text-center text-xs font-bold text-slate-700 focus-within:bg-white focus-within:border-[#6b4f4f] transition-all">
-                  <span className="text-[9px] font-bold text-slate-400 uppercase block leading-none mb-0.5">
-                    Cabin
-                  </span>
-                  <select
-                    value={leg.cabin || cabin}
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      setMultiCityLegs((prev) => {
-                        const copy = [...prev];
-                        copy[index] = { ...copy[index], cabin: val };
-                        return copy;
-                      });
-                    }}
-                    className="w-full bg-transparent text-xs font-bold text-slate-800 focus:outline-none cursor-pointer text-center appearance-none hover:text-[#6b4f4f] py-0.5"
+                  {/* Leg From */}
+                  <div
+                    className={`lg:col-span-4 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-2 relative ${
+                      activeAirportField === `multi-from-${index}` ? "z-50" : "z-10"
+                    } focus-within:bg-white focus-within:border-[#6b4f4f] transition-all`}
                   >
-                    <option value="Economy">Economy</option>
-                    <option value="PremiumEconomy">Prem Eco</option>
-                    <option value="Business">Business</option>
-                    <option value="First">First</option>
-                  </select>
-                </div>
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <Plane className="w-3.5 h-3.5 text-[#6b4f4f]" />
+                      <span className="text-[10px] font-bold text-slate-400 uppercase block">
+                        From (Flight {index + 1})
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      value={activeAirportField === `multi-from-${index}` ? airportQuery : leg.from}
+                      onFocus={() => {
+                        setActiveAirportField(`multi-from-${index}`);
+                        setAirportQuery("");
+                      }}
+                      onChange={(e) => setAirportQuery(e.target.value)}
+                      placeholder="From?"
+                      className="w-full text-xs sm:text-sm font-semibold text-slate-800 placeholder-slate-400 focus:outline-none bg-transparent"
+                    />
+                    {activeAirportField === `multi-from-${index}` && (
+                      <div
+                        ref={airportDropdownRef}
+                        className="absolute left-0 top-full mt-2 w-full sm:w-[380px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 p-2 max-h-72 overflow-y-auto"
+                      >
+                        <p className="px-3 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                          {airportQuery ? "Matching Airports" : "Popular Airports"}
+                        </p>
+                        {searchAirports(airportQuery).map((item) => (
+                          <button
+                            key={item.code}
+                            type="button"
+                            onClick={() => handleSelectAirport(`multi-from-${index}`, item)}
+                            className="w-full text-left px-3 py-2 hover:bg-[#f5f0eb] rounded-xl flex items-center justify-between text-xs transition-colors cursor-pointer"
+                          >
+                            <div>
+                              <span className="font-bold text-slate-800">
+                                {item.city} ({item.code})
+                              </span>
+                              <p className="text-[11px] text-slate-400 truncate max-w-[240px]">
+                                {item.name}, {item.country}
+                              </p>
+                            </div>
+                            <span className="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">
+                              {item.code}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
 
-                {/* Remove Leg Button */}
-                <div className="lg:col-span-1 flex justify-center">
-                  {index >= 2 ? (
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveMultiCityLeg(index)}
-                      className="p-2 text-slate-400 hover:text-red-500 rounded-lg transition-colors cursor-pointer"
-                      title="Remove Leg"
+                  {/* Leg To */}
+                  <div
+                    className={`lg:col-span-4 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-2 relative ${
+                      activeAirportField === `multi-to-${index}` ? "z-50" : "z-10"
+                    } focus-within:bg-white focus-within:border-[#6b4f4f] transition-all`}
+                  >
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <Plane className="w-3.5 h-3.5 text-[#6b4f4f] rotate-90" />
+                      <span className="text-[10px] font-bold text-slate-400 uppercase block">
+                        To
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      value={activeAirportField === `multi-to-${index}` ? airportQuery : leg.to}
+                      onFocus={() => {
+                        setActiveAirportField(`multi-to-${index}`);
+                        setAirportQuery("");
+                      }}
+                      onChange={(e) => setAirportQuery(e.target.value)}
+                      placeholder="To?"
+                      className="w-full text-xs sm:text-sm font-semibold text-slate-800 placeholder-slate-400 focus:outline-none bg-transparent"
+                    />
+                    {activeAirportField === `multi-to-${index}` && (
+                      <div
+                        ref={airportDropdownRef}
+                        className="absolute left-0 sm:left-auto sm:right-0 top-full mt-2 w-full sm:w-[380px] bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 p-2 max-h-72 overflow-y-auto"
+                      >
+                        <p className="px-3 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                          {airportQuery ? "Matching Airports" : "Popular Airports"}
+                        </p>
+                        {searchAirports(airportQuery).map((item) => (
+                          <button
+                            key={item.code}
+                            type="button"
+                            onClick={() => handleSelectAirport(`multi-to-${index}`, item)}
+                            className="w-full text-left px-3 py-2 hover:bg-[#f5f0eb] rounded-xl flex items-center justify-between text-xs transition-colors cursor-pointer"
+                          >
+                            <div>
+                              <span className="font-bold text-slate-800">
+                                {item.city} ({item.code})
+                              </span>
+                              <p className="text-[11px] text-slate-400 truncate max-w-[240px]">
+                                {item.name}, {item.country}
+                              </p>
+                            </div>
+                            <span className="text-[10px] font-mono font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">
+                              {item.code}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Leg Departure Date */}
+                  <div className="lg:col-span-2 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-3 py-2 focus-within:bg-white focus-within:border-[#6b4f4f] transition-all">
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <Calendar className="w-3.5 h-3.5 text-[#6b4f4f]" />
+                      <span className="text-[10px] font-bold text-slate-400 uppercase block">
+                        Departure
+                      </span>
+                    </div>
+                    <input
+                      type="date"
+                      value={leg.date}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setMultiCityLegs((prev) => {
+                          const copy = [...prev];
+                          copy[index] = { ...copy[index], date: val };
+                          return copy;
+                        });
+                      }}
+                      className="w-full text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none bg-transparent cursor-pointer"
+                    />
+                  </div>
+
+                  {/* Cabin */}
+                  <div className="lg:col-span-1 bg-[#f5f0eb] rounded-xl border border-slate-200/80 px-2 py-1.5 text-center text-xs font-bold text-slate-700 focus-within:bg-white focus-within:border-[#6b4f4f] transition-all">
+                    <span className="text-[9px] font-bold text-slate-400 uppercase block leading-none mb-0.5">
+                      Cabin
+                    </span>
+                    <select
+                      value={leg.cabin || cabin}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setMultiCityLegs((prev) => {
+                          const copy = [...prev];
+                          copy[index] = { ...copy[index], cabin: val };
+                          return copy;
+                        });
+                      }}
+                      className="w-full bg-transparent text-xs font-bold text-slate-800 focus:outline-none cursor-pointer text-center appearance-none hover:text-[#6b4f4f] py-0.5"
                     >
-                      <X className="w-4 h-4" />
-                    </button>
-                  ) : (
-                    <div className="w-8" />
-                  )}
+                      <option value="Economy">Economy</option>
+                      <option value="PremiumEconomy">Prem Eco</option>
+                      <option value="Business">Business</option>
+                      <option value="First">First</option>
+                    </select>
+                  </div>
+
+                  {/* Remove Leg Button */}
+                  <div className="lg:col-span-1 flex justify-center">
+                    {index >= 2 ? (
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveMultiCityLeg(index)}
+                        className="p-2 text-slate-400 hover:text-red-500 rounded-lg transition-colors cursor-pointer"
+                        title="Remove Leg"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    ) : (
+                      <div className="w-8" />
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
 
             {/* Bottom Actions for Multi-City */}
             <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
@@ -1052,14 +1075,6 @@ export function TravelportFlightSearch({
                   className="text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
                 >
                   Clear all
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setShowPassengerDropdown((prev) => !prev)}
-                  className="flex items-center gap-1.5 text-[#6b4f4f] bg-[#f5f0eb] hover:bg-slate-200/80 px-2.5 py-1.5 rounded-xl border border-slate-200/80 transition-colors cursor-pointer"
-                >
-                  <Users className="w-3.5 h-3.5" />
-                  <span>{passengerSummaryText}</span>
                 </button>
               </div>
 
