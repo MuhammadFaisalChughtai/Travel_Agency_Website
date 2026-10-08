@@ -165,6 +165,20 @@ async function handleAutopilotRequest(req: Request) {
     }> = [];
     let gscOpportunities: GscOpportunities | null = null;
 
+    // 3.5 SEED POCKET KEYWORDS: Always inject high-intent keywords from the selected category pocket(s)
+    // This guarantees the AI evaluates and utilizes user-curated pocket keywords even when GSC/Google Ads are active or empty.
+    const pocketKeywordItems = seedPhrases.map((phrase, idx) => ({
+      text: phrase,
+      searches: 2500 - (idx * 20), // High priority base search weight
+      competition: "HIGH",
+      competitionIndex: 75,
+      source: "CATEGORY_KEYWORD_POCKET"
+    }));
+    if (pocketKeywordItems.length > 0) {
+      log(`[Pocket Ingestion] Injected ${pocketKeywordItems.length} curated high-intent pocket keywords into candidate pool.`);
+      keywordIdeas = [...keywordIdeas, ...pocketKeywordItems];
+    }
+
     // 4. TIER 1: Fetch Real Search Queries from Google Search Console API
     try {
       const gscCreds = await getGscCredentials();
@@ -404,11 +418,19 @@ Output JSON matching this schema exactly:
     let processedCount = 0;
 
     const baseRulebook = `
-=== WRITING RULEBOOK ===
-1. HUMANIZED STYLE: Write in a natural, premium, professional tone. Must read as if written by an elite travel consultant.
-2. NO AI JARGON/CLICHÉS: Strictly avoid AI vocabulary (e.g. "embark on a journey", "testament to", "delve", "furthermore", "moreover", "discover the magic").
-3. NO HALLUCINATIONS: Do not invent unrealistic data. Ensure airport codes (LHR, LGW, MAN, BHX), airline codes, and duration calculations are realistic.
-4. STRICT INTERNAL LINKING (ZERO HALLUCINATIONS):
+=== MASTER TRAVEL COPYWRITING & SEO RANKING RULEBOOK ===
+1. 15-YEAR VETERAN COPYWRITER EXPERTISE:
+   - Write with the voice, authority, and emotional resonance of a seasoned 15+ years British travel copywriter and search intent specialist.
+   - Craft irresistible, conversion-oriented copy with punchy benefits, high clarity, and effortless readability.
+   - Use vivid sensory details, authentic UK traveler context (e.g. ATOL protection, direct UK flight convenience from London Heathrow, Gatwick, Manchester, or Birmingham), and reassuring customer confidence.
+2. ADVANCED KEYWORD RESEARCH & RANKING INTEGRATION:
+   - Seamlessly blend primary and secondary high-intent keywords naturally into titles, subheadings (H2/H3), and paragraphs without keyword stuffing (maintain optimal 1.5% - 2.5% keyword density).
+   - Answer search intent immediately above the fold to maximize dwell time, minimize bounce rates, and target Google featured snippets.
+3. CONCISE & TOKEN-EFFICIENT (MODERATE USAGE):
+   - Strictly avoid bloat, repetitive filler, and excessive tokens. Keep descriptions tight, high-impact, and richly informative without run-on sentences.
+4. STRICT BAN ON AI JARGON & CLICHÉS:
+   - NEVER use robotic clichés (e.g. "embark on a journey", "testament to", "delve into", "furthermore", "moreover", "discover the magic", "tapestry", "nestled in the heart of"). Write like a genuine human industry specialist.
+5. STRICT INTERNAL LINKING (ZERO HALLUCINATIONS):
    - You MUST ONLY link to these verified site hub pages:
      * "/umrah" (for Umrah pilgrimage packages and guidance)
      * "/flights" (for airline tickets and flight bookings)
@@ -416,8 +438,12 @@ Output JSON matching this schema exactly:
      * "/visa" (for visa processing and assistance)
      * "/contact" (for customer support, queries, and bookings)
    - NEVER invent or guess custom article or package URLs (such as /v/anything, /packages/anything, or /blog/anything). If referencing another topic without a verified URL, write plain text without an <a> tag.
-5. CLEAN HTML: Output clean structural HTML tags (<h3>, <strong>, <ul>, <li>, <p>). No inline style attributes.
-6. UK DEPARTURES ONLY: All generated flight routes must originate from a UK airport (LHR/LGW/MAN/BHX) and return back to the UK.
+6. NO DATA HALLUCINATIONS:
+   - Ensure UK airport codes (LHR, LGW, MAN, BHX), airline names, baggage terms, and durations are 100% accurate and realistic.
+7. CLEAN STRUCTURAL HTML:
+   - Output clean semantic tags (<h3>, <strong>, <ul>, <li>, <p>). Do not include inline style attributes.
+8. UK DEPARTURES ONLY:
+   - All generated itineraries and flight routes must originate from a major UK airport and return to the UK.
 `;
 
     const getPackageRules = (pType: string) => {

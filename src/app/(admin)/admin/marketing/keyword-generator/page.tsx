@@ -46,6 +46,7 @@ import {
   Plane,
   Palmtree,
   BookOpen,
+  Timer,
 } from "lucide-react";
 
 export default function KeywordGeneratorPage() {
@@ -61,6 +62,12 @@ export default function KeywordGeneratorPage() {
     "flights" | "packages" | "holidays" | "blogs"
   >("flights");
   const [viewAllPockets, setViewAllPockets] = useState(false);
+  const [cronTimer, setCronTimer] = useState<{
+    hours: number;
+    minutes: number;
+    seconds: number;
+    targetDate: Date | null;
+  }>({ hours: 0, minutes: 0, seconds: 0, targetDate: null });
   const [packageType, setPackageType] = useState("ALL");
   const [contentType, setContentType] = useState("ALL");
   const [lastRun, setLastRun] = useState("Never");
@@ -174,6 +181,45 @@ export default function KeywordGeneratorPage() {
 
   useEffect(() => {
     loadData();
+  }, []);
+
+  // Live countdown timer to next daily cron run (00:00 UTC)
+  useEffect(() => {
+    const updateCountdown = () => {
+      const now = new Date();
+      // Target next midnight UTC (00:00:00 UTC)
+      const nextRunUtc = new Date(Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate() + 1,
+        0, 0, 0, 0
+      ));
+
+      const diffMs = nextRunUtc.getTime() - now.getTime();
+      if (diffMs > 0) {
+        const totalSeconds = Math.floor(diffMs / 1000);
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        setCronTimer({
+          hours,
+          minutes,
+          seconds,
+          targetDate: nextRunUtc,
+        });
+      } else {
+        setCronTimer({
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+          targetDate: nextRunUtc,
+        });
+      }
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -1344,8 +1390,7 @@ export default function KeywordGeneratorPage() {
                       Category Keyword Pockets
                     </label>
                     <p className="text-[11px] text-slate-500 mt-0.5">
-                      Dedicated keyword sets isolated by category to prevent
-                      cross-contamination.
+                      Dedicated keyword sets isolated by category to prevent cross-contamination.
                     </p>
                   </div>
                   <button
@@ -1355,6 +1400,19 @@ export default function KeywordGeneratorPage() {
                   >
                     {viewAllPockets ? "Tabbed View" : "View All Pockets"}
                   </button>
+                </div>
+
+                {/* Persona & Pocket Ingestion Guidance */}
+                <div className="p-2.5 bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 border border-indigo-100 rounded-lg text-xs flex items-center gap-2 text-indigo-950 shadow-2xs">
+                  <Sparkles className="h-4 w-4 text-indigo-600 shrink-0" />
+                  <div className="leading-tight">
+                    <span className="font-bold text-[11px] text-indigo-900 block">
+                      15-Year Senior Copywriter & SEO Ranking Engine Active:
+                    </span>
+                    <span className="text-[10px] text-slate-600">
+                      The AI directly pulls high-intent keywords from your category pockets, crafts high-converting copy without token over-utilization, and optimizes for Google top-ranking results.
+                    </span>
+                  </div>
                 </div>
 
                 {/* Pocket Category Switcher Tabs (when not in View All mode) */}
@@ -1709,6 +1767,29 @@ export default function KeywordGeneratorPage() {
 
             {/* Schedule Info Box */}
             <div className="space-y-2 text-xs">
+              {/* Live Countdown Timer */}
+              <div className="flex justify-between items-center py-2.5 px-3 bg-gradient-to-r from-indigo-50/80 to-purple-50/80 rounded-lg border border-indigo-100">
+                <div className="flex items-center gap-2">
+                  <Timer className="h-4 w-4 text-indigo-600 animate-pulse" />
+                  <div>
+                    <span className="text-slate-700 font-bold block leading-none">
+                      Next Scheduled Run:
+                    </span>
+                    <span className="text-[10px] text-slate-500 font-medium">
+                      {cronTimer.targetDate ? cronTimer.targetDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' }) : "Calculating..."}
+                    </span>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <span className="font-mono font-black text-indigo-950 text-xs sm:text-sm tracking-wider bg-white px-2.5 py-1 rounded-md border border-indigo-200/80 shadow-xs inline-block">
+                    ⏳ {cronTimer.hours}h {cronTimer.minutes}m {cronTimer.seconds}s
+                  </span>
+                  <span className="block text-[9px] font-semibold text-indigo-600 mt-0.5">
+                    Starts in ~{cronTimer.hours}h {cronTimer.minutes}m
+                  </span>
+                </div>
+              </div>
+
               <div className="flex justify-between items-center py-2 px-3 bg-slate-50 rounded-lg border border-slate-100">
                 <span className="text-slate-500 font-medium">
                   Cron Schedule:
