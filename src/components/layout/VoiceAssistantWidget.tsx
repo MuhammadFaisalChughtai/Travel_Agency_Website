@@ -114,6 +114,73 @@ export function VoiceAssistantWidget() {
     }
   }, [messages, isOpen, isListening, isLoading]);
 
+  const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
+
+  // Load and cache browser voices (handling asynchronous loading in Chrome, Safari, Edge)
+  useEffect(() => {
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      const loadVoices = () => {
+        const vList = window.speechSynthesis.getVoices();
+        if (vList.length > 0) {
+          setAvailableVoices(vList);
+        }
+      };
+
+      loadVoices();
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+  }, []);
+
+  // Helper to pick the best authentic British voice
+  const getBestBritishVoice = (voiceList: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null => {
+    if (!voiceList || voiceList.length === 0) return null;
+
+    // 1. Top Tier: Distinct Premium British English voices
+    const premiumBritishKeywords = [
+      "google uk english female",
+      "google uk english male",
+      "google uk english",
+      "microsoft hazel",
+      "microsoft george",
+      "microsoft susan",
+      "serena",
+      "arthur",
+      "oliver",
+      "daniel",
+      "fiona",
+      "kate",
+      "stephanie",
+      "en-gb",
+      "en_gb",
+      "united kingdom"
+    ];
+
+    for (const kw of premiumBritishKeywords) {
+      const match = voiceList.find((v) => {
+        const name = (v.name || "").toLowerCase();
+        const lang = (v.lang || "").toLowerCase().replace("_", "-");
+        return (lang === "en-gb" || lang.startsWith("en-gb")) && name.includes(kw);
+      });
+      if (match) return match;
+    }
+
+    // 2. Any en-GB voice
+    const anyGbVoice = voiceList.find((v) => {
+      const lang = (v.lang || "").toLowerCase().replace("_", "-");
+      return lang === "en-gb" || lang.startsWith("en-gb");
+    });
+    if (anyGbVoice) return anyGbVoice;
+
+    // 3. Fallback to British English by name
+    const nameMatch = voiceList.find((v) => {
+      const name = (v.name || "").toLowerCase();
+      return name.includes("united kingdom") || name.includes("uk english") || name.includes("british");
+    });
+    if (nameMatch) return nameMatch;
+
+    return null;
+  };
+
   // Speech Synthesis helper
   const speakResponse = (text: string) => {
     if (!soundEnabled || typeof window === "undefined" || !("speechSynthesis" in window)) {
@@ -124,16 +191,11 @@ export function VoiceAssistantWidget() {
       window.speechSynthesis.cancel(); // Stop prior speech
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = "en-GB";
-      utterance.rate = 1.0;
+      utterance.rate = 0.96; // Slightly more deliberate, authentic British conversational pacing
       utterance.pitch = 1.0;
 
-      // Select a natural British English voice if available
-      const voices = window.speechSynthesis.getVoices();
-      const britishVoice = voices.find(
-        (v) =>
-          (v.lang === "en-GB" || v.lang.includes("GB")) &&
-          (v.name.includes("Female") || v.name.includes("Natural") || v.name.includes("Google") || v.name.includes("Serena"))
-      ) || voices.find((v) => v.lang === "en-GB") || voices.find((v) => v.lang.startsWith("en"));
+      const voicePool = availableVoices.length > 0 ? availableVoices : window.speechSynthesis.getVoices();
+      const britishVoice = getBestBritishVoice(voicePool);
 
       if (britishVoice) {
         utterance.voice = britishVoice;
