@@ -226,19 +226,19 @@ export function VoiceAssistantWidget() {
 
   return (
     <>
-      {/* Floating Trigger Button (Positioned cleanly on bottom right) */}
-      <div className="fixed bottom-6 right-6 z-[999] flex flex-col items-end gap-2">
+      {/* Floating Trigger Button: offset to the left of Tawk.to widget (bottom-6 right-24 sm:right-28) */}
+      <div className="fixed bottom-6 right-20 sm:right-24 z-[998] flex flex-col items-end gap-2">
         {!isOpen && (
           <button
             type="button"
             onClick={() => setIsOpen(true)}
             aria-label="Open Terrific Travel AI Voice Assistant"
-            className="group relative flex items-center gap-2.5 px-4 py-3 bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4] rounded-full shadow-2xl hover:shadow-[#6b4f4f]/50 border border-[#eed6c4]/40 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+            className="group relative flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4] rounded-full shadow-2xl hover:shadow-[#6b4f4f]/50 border border-[#eed6c4]/40 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
           >
             {/* Glowing Pulse Orb */}
-            <span className="relative flex h-3 w-3">
+            <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#eed6c4] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-[#eed6c4]"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#eed6c4]"></span>
             </span>
 
             <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm tracking-wide font-heading">
@@ -247,7 +247,7 @@ export function VoiceAssistantWidget() {
             </div>
 
             {/* Quick badge */}
-            <span className="bg-[#eed6c4]/20 text-[#eed6c4] text-[10px] uppercase font-extrabold px-1.5 py-0.5 rounded-md">
+            <span className="hidden sm:inline-block bg-[#eed6c4]/20 text-[#eed6c4] text-[10px] uppercase font-extrabold px-1.5 py-0.5 rounded-md">
               Terrific Travel
             </span>
           </button>
