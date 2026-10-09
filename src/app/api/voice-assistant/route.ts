@@ -211,9 +211,23 @@ ${inventoryContext}
       data.choices?.[0]?.message?.content?.trim() ||
       "I'm here to help with your flight, Umrah, and holiday bookings. What destination are you looking for?";
 
-    // Detect if we should suggest a navigation action or card
+    // Detect if user wants to connect with a human agent or if we should suggest a navigation action
     let suggestedAction: { type: string; url?: string; label?: string } | null = null;
-    if (cleanQuery.includes("flight") || cleanQuery.includes("ticket")) {
+    const isAgentRequest =
+      cleanQuery.includes("agent") ||
+      cleanQuery.includes("human") ||
+      cleanQuery.includes("real person") ||
+      cleanQuery.includes("live person") ||
+      cleanQuery.includes("talk to someone") ||
+      cleanQuery.includes("speak to someone") ||
+      cleanQuery.includes("representative") ||
+      cleanQuery.includes("operator") ||
+      cleanQuery.includes("customer service") ||
+      cleanQuery.includes("live chat");
+
+    if (isAgentRequest) {
+      suggestedAction = { type: "CONNECT_AGENT", label: "Connect with Live Agent (Tawk.to)" };
+    } else if (cleanQuery.includes("flight") || cleanQuery.includes("ticket")) {
       suggestedAction = { type: "NAVIGATE", url: "/flights", label: "Search Flights" };
     } else if (cleanQuery.includes("umrah") || cleanQuery.includes("makkah")) {
       suggestedAction = { type: "NAVIGATE", url: "/umrah", label: "View Umrah Packages" };
