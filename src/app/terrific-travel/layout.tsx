@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingActions } from "@/components/layout/FloatingActions";
+import { VoiceAssistantWidget } from "@/components/layout/VoiceAssistantWidget";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { getSiteConfig } from "@/lib/siteConfig";
 import { SiteProvider } from "@/components/SiteProvider";
@@ -44,6 +45,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <FloatingActions />
+        <VoiceAssistantWidget />
         <CookieConsent />
         <TawkToWidget propertyId="658f9a8d0ff6374032ba772c" widgetId="1hisf7f6b" />
       </div>

@@ -1,0 +1,248 @@
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+
+export const dynamic = "force-dynamic";
+
+export async function POST(req: Request) {
+  try {
+    const { message, history } = await req.json();
+
+    if (!message || typeof message !== "string" || !message.trim()) {
+      return NextResponse.json(
+        { error: "Message is required." },
+        { status: 400 }
+      );
+    }
+
+    const openAiApiKey = process.env.GPT_KEY;
+    if (!openAiApiKey) {
+      return NextResponse.json(
+        { error: "AI service is currently unconfigured." },
+        { status: 500 }
+      );
+    }
+
+    const cleanQuery = message.trim().toLowerCase();
+
+    // 1. Fetch relevant real inventory from DB based on user query
+    let relevantPackages: any[] = [];
+    let relevantFlights: any[] = [];
+
+    try {
+      if (
+        cleanQuery.includes("umrah") ||
+        cleanQuery.includes("makkah") ||
+        cleanQuery.includes("madinah") ||
+        cleanQuery.includes("pilgrim") ||
+        cleanQuery.includes("hajj")
+      ) {
+        relevantPackages = await prisma.package.findMany({
+          where: {
+            availability: true,
+            type: { in: ["UMRAH", "HAJJ", "Cruise_Umrah"] },
+          },
+          take: 4,
+          orderBy: { price: "asc" },
+          select: {
+            title: true,
+            duration: true,
+            price: true,
+            meccaHotel: true,
+            medinaHotel: true,
+            slug: true,
+            type: true,
+          },
+        });
+      } else if (
+        cleanQuery.includes("holiday") ||
+        cleanQuery.includes("vacation") ||
+        cleanQuery.includes("dubai") ||
+        cleanQuery.includes("turkey") ||
+        cleanQuery.includes("beach") ||
+        cleanQuery.includes("resort")
+      ) {
+        relevantPackages = await prisma.package.findMany({
+          where: {
+            availability: true,
+            type: "HOLIDAY",
+          },
+          take: 4,
+          orderBy: { price: "asc" },
+          select: {
+            title: true,
+            destination: true,
+            duration: true,
+            price: true,
+            slug: true,
+          },
+        });
+      }
+
+      if (
+        cleanQuery.includes("flight") ||
+        cleanQuery.includes("airline") ||
+        cleanQuery.includes("ticket") ||
+        cleanQuery.includes("saudia") ||
+        cleanQuery.includes("jeddah") ||
+        cleanQuery.includes("heathrow") ||
+        cleanQuery.includes("manchester")
+      ) {
+        relevantFlights = await prisma.flight.findMany({
+          where: { status: "AVAILABLE" },
+          take: 4,
+          orderBy: { price: "asc" },
+          select: {
+            airline: true,
+            departure: true,
+            destination: true,
+            price: true,
+            duration: true,
+            slug: true,
+          },
+        });
+      }
+    } catch (dbErr) {
+      console.error("[Voice Assistant DB Search Error]:", dbErr);
+    }
+
+    // Format DB context
+    const inventoryContext = `
+REAL TERRIFIC TRAVEL INVENTORY:
+${
+  relevantPackages.length > 0
+    ? `Available Packages:\n` +
+      relevantPackages
+        .map(
+          (p) =>
+            `- "${p.title}" (${p.duration}, From £${p.price}) | Hotels: ${
+              p.meccaHotel || ""
+            } ${p.medinaHotel ? "& " + p.medinaHotel : ""} | Link: /v/${p.slug}`
+        )
+        .join("\n")
+    : "No exact package match in quick cache."
+}
+
+${
+  relevantFlights.length > 0
+    ? `Available Flights:\n` +
+      relevantFlights
+        .map(
+          (f) =>
+            `- ${f.airline}: ${f.departure} to ${f.destination} from £${f.price} (${f.duration})`
+        )
+        .join("\n")
+    : "No exact flight match in quick cache."
+}
+`;
+
+    // 2. Strict Domain System Prompt
+    const systemPrompt = `You are "Sara", the Senior UK Travel Consultant and AI Voice Assistant for Terrific Travel Ltd (terrifictravel.co.uk).
+Your telephone is 01215 291630 and WhatsApp is 07888 461474. Your offices are in the UK (ATOL Protected).
+
+=== CRITICAL BOUNDARY & GUARDRAILS (STRICT DOMAIN ONLY) ===
+1. EXCLUSIVE SCOPE:
+   - You ONLY assist with Terrific Travel queries: UK flights (LHR, LGW, MAN, BHX), Umrah & Hajj packages, holiday deals (Dubai, Turkey, worldwide), visas (Saudi Umrah & tourist visas), hotel accommodations, transfers, and booking consultations.
+   - If the user asks about ANYTHING ELSE (general trivia, coding, homework, math, politics, weather outside travel, other companies, recipes, etc.), POLITELY AND FIRMLY DECLINE with:
+     "I am your Terrific Travel assistant, so I can only help you with UK flight deals, Umrah and holiday packages, and visa guidance. How can I help with your journey today?"
+
+2. CONCISE SPOKEN STYLE (FOR SPEECH SYNTHESIS):
+   - You are speaking aloud through voice synthesis!
+   - Keep answers very conversational, warm, British, and brief (2 to 4 sentences maximum).
+   - NEVER use bullet lists, markdown headers, asterisk bolding (* or **), or HTML in the spoken response.
+   - Speak numbers and prices naturally (e.g. write "from five hundred and forty-nine pounds" or "from £549").
+
+3. INVENTORY & NAVIGATION:
+   - Use the live inventory data provided when mentioning prices.
+   - If they are ready to book, offer our WhatsApp at 07888 461474 or our phone at 01215 291630.
+   - Suggest relevant site sections: /flights, /umrah, /holiday, or /visa.
+
+${inventoryContext}
+`;
+
+    // Prepare messages history
+    const conversationMessages: any[] = [
+      { role: "system", content: systemPrompt },
+    ];
+
+    if (Array.isArray(history)) {
+      // Keep last 4 turns for low token footprint and fast latency
+      const recentHistory = history.slice(-4);
+      for (const turn of recentHistory) {
+        if (turn.role === "user" || turn.role === "assistant") {
+          conversationMessages.push({
+            role: turn.role,
+            content: turn.content,
+          });
+        }
+      }
+    }
+
+    conversationMessages.push({
+      role: "user",
+      content: message,
+    });
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${openAiApiKey}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: conversationMessages,
+        max_tokens: 180, // Keep token cost low and responses voice-friendly
+        temperature: 0.6,
+      }),
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      console.error("[Voice Assistant OpenAI Error]:", errText);
+      return NextResponse.json(
+        { error: "AI voice engine temporarily unavailable." },
+        { status: 502 }
+      );
+    }
+
+    const data = await response.json();
+    const replyText =
+      data.choices?.[0]?.message?.content?.trim() ||
+      "I'm here to help with your flight, Umrah, and holiday bookings. What destination are you looking for?";
+
+    // Detect if we should suggest a navigation action or card
+    let suggestedAction: { type: string; url?: string; label?: string } | null = null;
+    if (cleanQuery.includes("flight") || cleanQuery.includes("ticket")) {
+      suggestedAction = { type: "NAVIGATE", url: "/flights", label: "Search Flights" };
+    } else if (cleanQuery.includes("umrah") || cleanQuery.includes("makkah")) {
+      suggestedAction = { type: "NAVIGATE", url: "/umrah", label: "View Umrah Packages" };
+    } else if (cleanQuery.includes("holiday") || cleanQuery.includes("dubai")) {
+      suggestedAction = { type: "NAVIGATE", url: "/holiday", label: "Explore Holidays" };
+    } else if (cleanQuery.includes("visa")) {
+      suggestedAction = { type: "NAVIGATE", url: "/visa", label: "Visa Assistance" };
+    }
+
+    return NextResponse.json({
+      reply: replyText,
+      suggestedAction,
+      featuredItems: [
+        ...relevantPackages.slice(0, 2).map((p) => ({
+          title: p.title,
+          subtitle: `${p.duration} • From £${p.price}`,
+          url: `/v/${p.slug}`,
+        })),
+        ...relevantFlights.slice(0, 2).map((f) => ({
+          title: `${f.airline}: ${f.departure} → ${f.destination}`,
+          subtitle: `From £${f.price} • ${f.duration}`,
+          url: `/flights`,
+        })),
+      ],
+    });
+  } catch (error: any) {
+    console.error("[Voice Assistant Error]:", error);
+    return NextResponse.json(
+      { error: "Internal server error." },
+      { status: 500 }
+    );
+  }
+}
