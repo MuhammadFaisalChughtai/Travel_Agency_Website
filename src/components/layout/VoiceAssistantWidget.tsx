@@ -15,6 +15,8 @@ import {
   ChevronRight,
   Plane,
   RotateCcw,
+  Send,
+  MessageSquare,
 } from "lucide-react";
 
 interface FeaturedItem {
@@ -38,6 +40,7 @@ export function VoiceAssistantWidget() {
   const [speechSupported, setSpeechSupported] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [transcript, setTranscript] = useState("");
+  const [textInput, setTextInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: "assistant",
@@ -226,13 +229,13 @@ export function VoiceAssistantWidget() {
 
   return (
     <>
-      {/* Floating Trigger Button: offset to the left of Tawk.to widget (bottom-6 right-24 sm:right-28) */}
+      {/* Floating Trigger Button: offset to the left of Tawk.to widget (bottom-6 right-20 sm:right-24) */}
       <div className="fixed bottom-6 right-20 sm:right-24 z-[998] flex flex-col items-end gap-2">
         {!isOpen && (
           <button
             type="button"
             onClick={() => setIsOpen(true)}
-            aria-label="Open Terrific Travel AI Voice Assistant"
+            aria-label="Open Terrific Travel AI Voice and Chat Assistant"
             className="group relative flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-[#6b4f4f] hover:bg-[#483434] text-[#fff3e4] rounded-full shadow-2xl hover:shadow-[#6b4f4f]/50 border border-[#eed6c4]/40 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
           >
             {/* Glowing Pulse Orb */}
@@ -243,20 +246,21 @@ export function VoiceAssistantWidget() {
 
             <div className="flex items-center gap-1.5 font-bold text-xs sm:text-sm tracking-wide font-heading">
               <Mic className="w-4 h-4 text-[#eed6c4] group-hover:scale-110 transition-transform" />
-              <span>Ask AI Voice</span>
+              <span>Ask AI</span>
+              <MessageSquare className="w-3.5 h-3.5 text-[#eed6c4]/80 ml-0.5" />
             </div>
 
             {/* Quick badge */}
             <span className="hidden sm:inline-block bg-[#eed6c4]/20 text-[#eed6c4] text-[10px] uppercase font-extrabold px-1.5 py-0.5 rounded-md">
-              Terrific Travel
+              Voice & Chat
             </span>
           </button>
         )}
       </div>
 
-      {/* Slide-over Voice Assistant Modal */}
+      {/* Slide-over Voice & Chat Assistant Modal */}
       {isOpen && (
-        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[1000] w-[calc(100vw-32px)] sm:w-[380px] max-w-[420px] h-[550px] max-h-[85vh] bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-[#eed6c4]/60 flex flex-col overflow-hidden transition-all duration-300 animate-in fade-in slide-in-from-bottom-6">
+        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-20 z-[1000] w-[calc(100vw-32px)] sm:w-[390px] max-w-[430px] h-[560px] max-h-[85vh] bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-[#eed6c4]/60 flex flex-col overflow-hidden transition-all duration-300 animate-in fade-in slide-in-from-bottom-6">
           {/* Header */}
           <div className="bg-gradient-to-r from-[#6b4f4f] via-[#543b3b] to-[#382626] text-[#fff3e4] p-4 flex items-center justify-between border-b border-[#eed6c4]/20 shadow-md">
             <div className="flex items-center gap-2.5">
@@ -274,7 +278,7 @@ export function VoiceAssistantWidget() {
               <div>
                 <div className="flex items-center gap-1.5">
                   <h4 className="font-heading font-black text-sm text-[#fff3e4]">
-                    Sara • Travel Voice AI
+                    Sara • Travel Voice & Chat AI
                   </h4>
                   <span className="text-[9px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.2 rounded-full font-bold">
                     Terrific Only
@@ -285,7 +289,7 @@ export function VoiceAssistantWidget() {
                     ? "Speaking response..."
                     : isListening
                     ? "Listening to you..."
-                    : "Terrific Travel Specialist"}
+                    : "Terrific Travel Specialist (Voice & Text)"}
                 </p>
               </div>
             </div>
@@ -437,60 +441,57 @@ export function VoiceAssistantWidget() {
           {/* Voice Interaction Bottom Console */}
           <div className="p-3 bg-white border-t border-slate-100 flex flex-col gap-2">
             {/* Visual Waveform / Mic Bar */}
-            <div className="flex items-center gap-2">
+            {/* Text Input & Mic Control Combined Bar */}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (textInput.trim() && !isLoading) {
+                  handleSend(textInput.trim());
+                  setTextInput("");
+                }
+              }}
+              className="flex items-center gap-1.5 bg-[#f5f0eb] p-1.5 rounded-2xl border border-slate-200 focus-within:border-[#6b4f4f] focus-within:bg-white transition-all shadow-inner"
+            >
+              {/* Voice Mic Button */}
               <button
                 type="button"
                 onClick={toggleListening}
                 disabled={isLoading}
-                aria-label={isListening ? "Stop listening" : "Start speaking"}
-                className={`relative flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 shadow-md ${
+                title={isListening ? "Stop listening" : "Speak with voice"}
+                className={`relative flex items-center justify-center w-9 h-9 rounded-xl transition-all duration-300 shrink-0 ${
                   isListening
-                    ? "bg-red-500 hover:bg-red-600 text-white scale-110 shadow-red-500/40 ring-4 ring-red-200 animate-pulse"
+                    ? "bg-red-500 hover:bg-red-600 text-white shadow-red-500/40 ring-2 ring-red-200 animate-pulse"
                     : isSpeaking
                     ? "bg-emerald-600 text-white"
-                    : "bg-[#6b4f4f] hover:bg-[#382626] text-[#fff3e4] hover:scale-105"
+                    : "bg-[#6b4f4f] hover:bg-[#382626] text-[#fff3e4]"
                 }`}
               >
                 {isListening ? (
-                  <MicOff className="w-5 h-5" />
+                  <MicOff className="w-4 h-4" />
                 ) : (
-                  <Mic className="w-5 h-5 text-[#eed6c4]" />
+                  <Mic className="w-4 h-4 text-[#eed6c4]" />
                 )}
               </button>
 
-              {/* Status / Instructions */}
-              <div className="flex-1 leading-tight">
-                {isListening ? (
-                  <div>
-                    <span className="text-xs font-bold text-red-600 flex items-center gap-1">
-                      <span className="h-2 w-2 rounded-full bg-red-500 animate-ping inline-block" />
-                      Listening to your query...
-                    </span>
-                    <p className="text-[10px] text-slate-400">
-                      Tap the red mic when finished speaking
-                    </p>
-                  </div>
-                ) : isSpeaking ? (
-                  <div>
-                    <span className="text-xs font-bold text-emerald-700 flex items-center gap-1">
-                      <Volume2 className="w-3.5 h-3.5 animate-pulse" />
-                      Sara is speaking...
-                    </span>
-                    <p className="text-[10px] text-slate-400">
-                      Tap mic to interrupt or speak again
-                    </p>
-                  </div>
-                ) : (
-                  <div>
-                    <span className="text-xs font-bold text-slate-700">
-                      Tap microphone to speak
-                    </span>
-                    <p className="text-[10px] text-slate-400">
-                      Ask about flights, Umrah, holidays, or visas
-                    </p>
-                  </div>
-                )}
-              </div>
+              {/* Text Input Field */}
+              <input
+                type="text"
+                value={textInput}
+                onChange={(e) => setTextInput(e.target.value)}
+                placeholder={isListening ? "Listening to your voice..." : "Type a message or tap mic..."}
+                disabled={isLoading || isListening}
+                className="flex-1 bg-transparent text-xs text-slate-800 placeholder-slate-400 focus:outline-none px-2 py-1 font-medium"
+              />
+
+              {/* Send Button */}
+              <button
+                type="submit"
+                disabled={!textInput.trim() || isLoading}
+                title="Send message"
+                className="w-9 h-9 flex items-center justify-center rounded-xl bg-[#6b4f4f] hover:bg-[#382626] disabled:opacity-40 text-[#fff3e4] transition-all shrink-0 cursor-pointer"
+              >
+                <Send className="w-4 h-4 text-[#eed6c4]" />
+              </button>
 
               {/* Reset History button */}
               <button
@@ -509,32 +510,32 @@ export function VoiceAssistantWidget() {
                   ]);
                 }}
                 title="Reset conversation"
-                className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 transition-colors"
+                className="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-200/50 transition-colors shrink-0"
               >
-                <RotateCcw className="w-4 h-4" />
+                <RotateCcw className="w-3.5 h-3.5" />
               </button>
-            </div>
+            </form>
 
             {/* Quick Prompt Suggestions */}
-            <div className="flex gap-1.5 overflow-x-auto pt-1 pb-0.5 no-scrollbar text-[10px]">
+            <div className="flex gap-1.5 overflow-x-auto pt-0.5 pb-0.5 no-scrollbar text-[10px]">
               <button
                 type="button"
                 onClick={() => handleSend("Do you have cheap flights to Jeddah?")}
-                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-[#f5f0eb] hover:bg-[#eed6c4]/40 text-slate-700 font-semibold border border-slate-200 transition-colors"
+                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-[#f5f0eb] hover:bg-[#eed6c4]/40 text-slate-700 font-semibold border border-slate-200 transition-colors cursor-pointer"
               >
                 ✈️ Flights to Jeddah
               </button>
               <button
                 type="button"
                 onClick={() => handleSend("Show me 5 star Umrah packages for 2 people")}
-                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-[#f5f0eb] hover:bg-[#eed6c4]/40 text-slate-700 font-semibold border border-slate-200 transition-colors"
+                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-[#f5f0eb] hover:bg-[#eed6c4]/40 text-slate-700 font-semibold border border-slate-200 transition-colors cursor-pointer"
               >
                 🕋 5-Star Umrah
               </button>
               <button
                 type="button"
                 onClick={() => handleSend("What holiday deals do you have for Dubai?")}
-                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-[#f5f0eb] hover:bg-[#eed6c4]/40 text-slate-700 font-semibold border border-slate-200 transition-colors"
+                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-[#f5f0eb] hover:bg-[#eed6c4]/40 text-slate-700 font-semibold border border-slate-200 transition-colors cursor-pointer"
               >
                 🏖️ Dubai Holidays
               </button>
