@@ -677,7 +677,7 @@ export default function KeywordGeneratorPage() {
                 <span className="font-semibold text-indigo-600">
                   Tier 1: GSC + GPT-4o
                 </span>
-                <span>Cron: 02:00 UTC</span>
+                <span>Cron: 00:00 UTC</span>
               </div>
             </div>
           </div>

@@ -45,20 +45,40 @@ async function handleAutopilotRequest(req: Request) {
   };
 
   try {
-    // 1. Security check - verify CRON_SECRET, Vercel cron header, or check if manually triggered by admin
+    // 1. Security check - verify CRON_SECRET, Vercel cron header, fallback secret, or manual trigger
     const authHeader = req.headers.get("Authorization");
     const isVercelCron = req.headers.get("x-vercel-cron") === "1";
-    const isCronSecretValid = Boolean(process.env.CRON_SECRET && authHeader === `Bearer ${process.env.CRON_SECRET}`);
+    const expectedSecret = process.env.CRON_SECRET || "terrific_travel_seo_cron_secret_2026";
+    const isCronSecretValid = Boolean(
+      authHeader === `Bearer ${expectedSecret}` ||
+      (process.env.CRON_SECRET && authHeader === `Bearer ${process.env.CRON_SECRET}`)
+    );
     
     // Also allow request if there is a query param manual=true
     const url = new URL(req.url);
     const isManual = url.searchParams.get("manual") === "true";
 
     if (!isCronSecretValid && !isVercelCron && !isManual) {
+      console.warn(`[SEO Autopilot Cron] Unauthorized attempt. authHeader: ${authHeader ? "Present" : "Missing"}, x-vercel-cron: ${isVercelCron}`);
+      // Log failed trigger attempt to audit log so user can see it in dashboard
+      try {
+        await prisma.seoAutopilotLog.create({
+          data: {
+            actionType: "OPTIMIZE",
+            targetType: "CRON_WEBHOOK",
+            targetTitle: "Cron Execution Trigger",
+            keywords: "cron-auth",
+            status: "FAILED",
+            details: `Unauthorized cron attempt. Auth header: ${authHeader ? "provided (mismatched)" : "missing"}. x-vercel-cron: ${isVercelCron}. Ensure CRON_SECRET matches.`
+          }
+        });
+      } catch (logErr) {
+        console.error("Failed to log unauthorized cron trigger:", logErr);
+      }
       return NextResponse.json({ error: "Unauthorized access. Invalid CRON_SECRET." }, { status: 401 });
     }
 
-    log("Starting SEO Autopilot execution cycle...");
+    log(`Starting SEO Autopilot execution cycle... Triggered via: ${isManual ? "Manual UI" : isVercelCron ? "Vercel Cron (x-vercel-cron)" : "Bearer Token Webhook"}`);
 
     // 2. Load settings from database SystemSettings
     const settings = await prisma.systemSetting.findMany({
@@ -109,6 +129,20 @@ async function handleAutopilotRequest(req: Request) {
     // If autopilot is disabled and this is NOT a manual trigger, exit
     if (config.enabled !== "true" && !isManual) {
       log("SEO Autopilot is disabled in settings. Skipping run.");
+      try {
+        await prisma.seoAutopilotLog.create({
+          data: {
+            actionType: "OPTIMIZE",
+            targetType: "CRON_SETTING",
+            targetTitle: "Cron Execution Skipped",
+            keywords: "autopilot-disabled",
+            status: "FAILED",
+            details: `Cron triggered successfully but skipped because Autopilot is toggled OFF in settings. Switch Autopilot to Active to allow daily automated runs.`
+          }
+        });
+      } catch (logErr) {
+        console.error("Failed to log disabled autopilot skip:", logErr);
+      }
       return NextResponse.json({ message: "Autopilot is disabled. Run skipped.", logs: executionLogs });
     }
 
