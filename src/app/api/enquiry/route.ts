@@ -445,3 +445,82 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+export async function GET(req: NextRequest) {
+  try {
+    const authHeader = req.headers.get("Authorization");
+    const url = new URL(req.url);
+    const queryKey = url.searchParams.get("api_key");
+
+    const expectedKey =
+      process.env.CRM_API_KEY ||
+      process.env.CRON_SECRET ||
+      "terrific_crm_leads_secret_2026";
+
+    const isAuthorized =
+      authHeader === `Bearer ${expectedKey}` ||
+      queryKey === expectedKey ||
+      (process.env.CRM_API_KEY && authHeader === `Bearer ${process.env.CRM_API_KEY}`);
+
+    if (!isAuthorized) {
+      return NextResponse.json(
+        { error: "Unauthorized. Invalid or missing CRM API key." },
+        { status: 401 }
+      );
+    }
+
+    const limitParam = parseInt(url.searchParams.get("limit") || "50", 10);
+    const limit = Math.min(Math.max(1, limitParam), 200);
+    const statusParam = url.searchParams.get("status"); // optional filter: PENDING, CONTACTED, RESOLVED
+    const sinceParam = url.searchParams.get("since"); // ISO date string
+
+    const where: any = {};
+    if (statusParam) {
+      where.status = statusParam;
+    }
+    if (sinceParam) {
+      const sinceDate = new Date(sinceParam);
+      if (!isNaN(sinceDate.getTime())) {
+        where.createdAt = { gte: sinceDate };
+      }
+    }
+
+    const [leads, total] = await Promise.all([
+      prisma.enquiry.findMany({
+        where,
+        orderBy: { createdAt: "desc" },
+        take: limit,
+      }),
+      prisma.enquiry.count({ where }),
+    ]);
+
+    // Parse tripDetails JSON for cleaner CRM ingestion
+    const formattedLeads = leads.map((lead) => {
+      let parsedTripDetails = null;
+      if (lead.tripDetails) {
+        try {
+          parsedTripDetails = JSON.parse(lead.tripDetails);
+        } catch (e) {
+          parsedTripDetails = lead.tripDetails;
+        }
+      }
+      return {
+        ...lead,
+        tripDetails: parsedTripDetails,
+      };
+    });
+
+    return NextResponse.json({
+      success: true,
+      total,
+      count: formattedLeads.length,
+      leads: formattedLeads,
+    });
+  } catch (err: any) {
+    console.error("[CRM GET ENQUIRIES ERROR]", err);
+    return NextResponse.json(
+      { error: "Failed to fetch enquiries." },
+      { status: 500 }
+    );
+  }
+}
