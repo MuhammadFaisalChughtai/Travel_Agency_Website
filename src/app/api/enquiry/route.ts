@@ -124,7 +124,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true, duplicate: true }, { status: 200 });
     }
 
-    await prisma.enquiry.create({
+    const savedEnquiry = await prisma.enquiry.create({
       data: {
         name,
         email,
@@ -135,6 +135,30 @@ export async function POST(req: NextRequest) {
         status: "PENDING",
       },
     });
+
+    // Real-time dispatch to Terrific Travel CRM Leads Log Book
+    try {
+      const crmWebhookUrl = process.env.CRM_WEBHOOK_URL || "https://api.terrifictravel.co.uk/api/leads/webhook";
+      const crmWebhookSecret = process.env.CRM_WEBHOOK_SECRET || "tms_lead_webhook_secret_key_2026";
+      fetch(crmWebhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-webhook-secret": crmWebhookSecret,
+        },
+        body: JSON.stringify({
+          fullName: name,
+          phoneNumber: phone || "Not provided",
+          email,
+          campaignName: `Website Enquiry - ${formattedType}`,
+          platform: "Website (terrifictravel.co.uk)",
+          metaLeadId: savedEnquiry.id,
+          notes: `Enquiry Type: ${formattedType}\nMessage: ${message || "N/A"}\nTrip Details: ${tripDetails}`,
+        }),
+      }).catch((e) => console.error("[CRM Webhook Push Error]", e));
+    } catch (crmErr) {
+      console.error("[CRM Push Exception]", crmErr);
+    }
 
     const subject = type
       ? `New ${formattedType} Enquiry${packageId ? ` — ${packageId}` : ""} from ${name}`
