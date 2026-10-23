@@ -67,7 +67,40 @@ export function FlightBookingModal({
       setErrorMsg("");
       setIsMathValid(false);
       setResetMathKey((prev) => prev + 1);
+
+      // Hide Tawk.to widget and proactive popup while modal is open to avoid blocking form/CTA on all screens
+      if (typeof window !== "undefined" && (window as any).Tawk_API) {
+        try {
+          if (typeof (window as any).Tawk_API.hideWidget === "function") {
+            (window as any).Tawk_API.hideWidget();
+          }
+        } catch (e) {
+          console.warn("Tawk hideWidget error", e);
+        }
+      }
+    } else {
+      // Restore Tawk.to widget when modal closes
+      if (typeof window !== "undefined" && (window as any).Tawk_API) {
+        try {
+          if (typeof (window as any).Tawk_API.showWidget === "function") {
+            (window as any).Tawk_API.showWidget();
+          }
+        } catch (e) {
+          console.warn("Tawk showWidget error", e);
+        }
+      }
     }
+
+    return () => {
+      // Cleanup: always restore Tawk.to widget on unmount
+      if (typeof window !== "undefined" && (window as any).Tawk_API) {
+        try {
+          if (typeof (window as any).Tawk_API.showWidget === "function") {
+            (window as any).Tawk_API.showWidget();
+          }
+        } catch (e) {}
+      }
+    };
   }, [isOpen]);
 
   if (!isOpen || !flight || !mounted) return null;
@@ -227,11 +260,11 @@ ${form.message || "None"}
       onClick={onClose}
     >
       <div
-        className="relative z-10 w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#eed6c4]/70 my-8"
+        className="relative z-10 w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#eed6c4]/70 my-auto sm:my-8 max-h-[92vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#382626] to-[#6b4f4f] px-6 py-4 flex items-center justify-between text-white">
+        <div className="bg-gradient-to-r from-[#382626] to-[#6b4f4f] px-5 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between text-white shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-[#eed6c4]">
               <Plane className="w-5 h-5" />
@@ -253,8 +286,10 @@ ${form.message || "None"}
           </button>
         </div>
 
-        {/* Selected Flight Summary Card */}
-        <div className="bg-[#f5f0eb]/70 p-4 sm:p-5 border-b border-[#eed6c4]/40">
+        {/* Modal Scrollable Body */}
+        <div className="overflow-y-auto flex-1 overscroll-contain">
+          {/* Selected Flight Summary Card */}
+          <div className="bg-[#f5f0eb]/70 p-4 sm:p-5 border-b border-[#eed6c4]/40">
           <div className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
               <div className="flex items-center gap-2.5">
@@ -463,7 +498,7 @@ ${form.message || "None"}
         </div>
 
         {/* Modal Form */}
-        <form onSubmit={handleSubmit} className="p-5 sm:p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 pb-8 sm:pb-8 space-y-4">
           {status === "success" ? (
             <div className="py-8 flex flex-col items-center gap-4 text-center">
               <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
@@ -629,7 +664,7 @@ ${form.message || "None"}
                 </button>
               </div>
 
-              <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-400 pt-1">
+              <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-400 pt-1 pb-2">
                 <span>Official Airline Booking</span>
                 <div className="flex items-center gap-3">
                   <a
@@ -652,6 +687,7 @@ ${form.message || "None"}
             </>
           )}
         </form>
+        </div>
       </div>
     </div>,
     document.body
