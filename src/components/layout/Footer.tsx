@@ -10,7 +10,6 @@ import {
   Compass,
 } from "lucide-react";
 import Image from "next/image";
-import { TrustpilotWidget } from "./TrustpilotWidget";
 import { useSiteConfig } from "@/components/SiteProvider";
 
 export function Footer() {
@@ -163,7 +162,6 @@ export function Footer() {
               Terrific Travel Ltd – Committed to making your journeys
               meaningful, safe, and unforgettable.
             </p>
-            <TrustpilotWidget />
           </div>
 
           {/* Column 2: Useful Links (lg:col-span-2) */}

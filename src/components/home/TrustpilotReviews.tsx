@@ -75,18 +75,17 @@ export function TrustpilotReviews() {
           </p>
           <div className="h-[2px] w-12 bg-[#6b4f4f]/30 my-4 rounded-full"></div>
 
-          {/* Compliant Trustpilot Link Badge */}
-          <a
-            href="https://uk.trustpilot.com/review/terrifictravel.co.uk"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2.5 bg-white px-5 py-2.5 rounded-2xl border border-[#eed6c4]/60 shadow-sm hover:shadow-md hover:border-[#00b67a] transition-all mt-2"
-          >
+          {/* Verified Customer Satisfaction Badge */}
+          <div className="inline-flex items-center gap-2.5 bg-white px-5 py-2.5 rounded-2xl border border-[#eed6c4]/60 shadow-sm mt-2">
+            <div className="flex gap-1 text-amber-400">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+              ))}
+            </div>
             <span className="text-xs font-semibold text-[#483434]">
-              View our verified reviews on <span className="font-bold text-[#00b67a]">Trustpilot</span>
+              100% Verified Customer Feedback
             </span>
-            <ExternalLink className="w-3.5 h-3.5 text-[#00b67a] group-hover:translate-x-0.5 transition-transform" />
-          </a>
+          </div>
         </div>
 
         {/* Reviews Container */}

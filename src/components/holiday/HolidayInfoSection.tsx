@@ -184,7 +184,7 @@ export function HolidayInfoSection() {
                   {
                     icon: Award,
                     title: "Award-Winning Service",
-                    desc: "Rated Excellent on Trustpilot with verified customer ratings. We never compromise on the quality of your trip.",
+                    desc: "Rated 5-stars with verified customer ratings. We never compromise on the quality of your trip.",
                   },
                 ].map((item, i) => (
                   <div
