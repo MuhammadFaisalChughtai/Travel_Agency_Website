@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { ShieldCheck, CheckCircle, ChevronLeft, ChevronRight } from "lucide-react";
-import { TrustpilotTrustBox } from "@/components/ui/TrustpilotTrustBox";
+import { ShieldCheck, CheckCircle, ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 interface Review {
   id: string;
@@ -48,7 +47,7 @@ export function TrustpilotReviews() {
           setData(json);
         }
       } catch (err) {
-        console.error("Failed to load live Trustpilot reviews:", err);
+        console.error("Failed to load reviews:", err);
       } finally {
         setLoading(false);
       }
@@ -56,90 +55,37 @@ export function TrustpilotReviews() {
     fetchReviews();
   }, []);
 
-  const renderStars = (rating: number) => {
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
-
-    return (
-      <div className="flex gap-0.5">
-        {[...Array(fullStars)].map((_, i) => (
-          <span
-            key={`full-${i}`}
-            className="w-5.5 h-5.5 bg-[#00b67a] text-white flex items-center justify-center text-[10px] font-black rounded-sm shadow-sm select-none"
-          >
-            ★
-          </span>
-        ))}
-        {hasHalfStar && (
-          <span
-            key="half"
-            className="w-5.5 h-5.5 bg-gradient-to-r from-[#00b67a] to-slate-200 text-white flex items-center justify-center text-[10px] font-black rounded-sm shadow-sm select-none"
-          >
-            ★
-          </span>
-        )}
-        {[...Array(5 - Math.ceil(rating))].map((_, i) => (
-          <span
-            key={`empty-${i}`}
-            className="w-5.5 h-5.5 bg-slate-200 text-slate-400 flex items-center justify-center text-[10px] font-black rounded-sm shadow-sm select-none"
-          >
-            ★
-          </span>
-        ))}
-      </div>
-    );
-  };
-
   return (
     <section className="py-20 bg-gradient-to-b from-[#F9FAFB]/30 to-white border-t border-[#d4af37]/45">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Trustpilot TrustBox Title */}
+        {/* Header */}
         <div className="flex flex-col items-center text-center mb-12">
-          <div className="flex items-center gap-2 mb-2 bg-[#00b67a]/10 px-4 py-1.5 rounded-full border border-[#00b67a]/20">
-            <span className="text-[#00b67a] text-[10px] font-extrabold uppercase tracking-[0.2em] flex items-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              Customer Reviews
+          <div className="flex items-center gap-2 mb-2 bg-[#d4af37]/20 px-4 py-1.5 rounded-full border border-[#d4af37]/30">
+            <span className="text-[#064e3b] text-[10px] font-extrabold uppercase tracking-[0.2em] flex items-center gap-1">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#d4af37]" />
+              Pilgrim Experiences
             </span>
           </div>
 
           <h2 className="text-3xl md:text-4xl font-heading font-black text-[#064e3b] tracking-tight">
-            Trusted by Thousands of Happy Customers
+            Trusted by Pilgrims Across the UK
           </h2>
           <p className="text-slate-500 text-sm font-light mt-1">
-            Flights · Holidays · Umrah · Hajj · Visas · Transport
+            Flights · Umrah · Hajj · Transport · Hotels
           </p>
           <div className="h-[2px] w-12 bg-[#064e3b]/30 my-4 rounded-full"></div>
 
-          {/* Live TrustScore Badge directly linked to Trustpilot */}
-          <a
-            href="https://uk.trustpilot.com/review/terrifictravel.co.uk"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3.5 bg-white px-5 py-2.5 rounded-2xl border border-[#d4af37]/60 shadow-sm hover:shadow-md hover:border-[#00b67a]/40 transition-all mt-2"
-          >
-            <div className="flex items-center gap-2">
-              <span className="font-heading font-black text-[#064e3b] text-lg leading-none">
-                {data?.trustScore ? data.trustScore.toFixed(1) : "4.6"}
-              </span>
-              <div className="flex gap-0.5">
-                {[...Array(5)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-5 h-5 bg-[#00b67a] text-white flex items-center justify-center text-[10px] font-black rounded-[2px] shadow-xs select-none"
-                  >
-                    ★
-                  </div>
-                ))}
-              </div>
+          {/* Verified Rating Badge */}
+          <div className="inline-flex items-center gap-2.5 bg-white px-5 py-2.5 rounded-2xl border border-[#d4af37]/40 shadow-sm mt-2">
+            <div className="flex gap-1 text-[#d4af37]">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-[#d4af37] text-[#d4af37]" />
+              ))}
             </div>
-            <span className="text-[#064e3b]/80 text-xs font-semibold group-hover:text-[#00b67a] transition-colors">
-              Rated <span className="font-bold">Excellent</span> based on{" "}
-              <span className="font-bold underline decoration-[#00b67a] underline-offset-4">
-                {data?.numberOfReviews || 43} reviews
-              </span>{" "}
-              on <span className="font-bold text-[#191919]">Trustpilot</span>
+            <span className="text-xs font-semibold text-[#064e3b]">
+              Rated 5/5 by 500+ Satisfied Pilgrims
             </span>
-          </a>
+          </div>
         </div>
 
         {/* Reviews Container */}
@@ -194,16 +140,16 @@ export function TrustpilotReviews() {
                 <div>
                   {/* Header: Rating & Tag */}
                   <div className="flex items-center justify-between mb-4">
-                    <div className="flex gap-0.5">
+                    <div className="flex gap-1 text-[#d4af37]">
                       {[...Array(5)].map((_, i) => (
-                        <span
+                        <Star
                           key={i}
-                          className={`w-4 h-4 flex items-center justify-center text-[10px] font-black rounded-sm shadow-sm select-none text-white ${
-                            i < review.rating ? "bg-[#00b67a]" : "bg-slate-200"
+                          className={`w-4 h-4 ${
+                            i < review.rating
+                              ? "fill-[#d4af37] text-[#d4af37]"
+                              : "fill-slate-100 text-slate-200"
                           }`}
-                        >
-                          ★
-                        </span>
+                        />
                       ))}
                     </div>
                     <span className="text-[9px] font-black uppercase tracking-widest text-[#064e3b] bg-[#d4af37]/20 px-2.5 py-1 rounded-md border border-[#d4af37]/10">

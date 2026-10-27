@@ -46,7 +46,6 @@ export function TrustpilotTrustBox({
         data-style-height={height}
         data-style-width={width}
         data-theme={theme}
-        data-stars="4,5"
         data-review-languages="en"
       >
         <a

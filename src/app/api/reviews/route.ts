@@ -97,95 +97,6 @@ const FALLBACK_REVIEWS = [
   },
 ];
 
-async function fetchDirectFromTrustpilot() {
-  const [res1, res2] = await Promise.allSettled([
-    fetch(
-      "https://r.jina.ai/https://uk.trustpilot.com/review/terrifictravel.co.uk",
-      {
-        headers: { "X-Return-Format": "html" },
-        next: { revalidate: 1800 },
-      }
-    ),
-    fetch(
-      "https://r.jina.ai/https://uk.trustpilot.com/review/terrifictravel.co.uk?page=2",
-      {
-        headers: { "X-Return-Format": "html" },
-        next: { revalidate: 1800 },
-      }
-    ),
-  ]);
-
-  let businessUnit: any = null;
-  const allRawReviews: any[] = [];
-
-  if (res1.status === "fulfilled" && res1.value.ok) {
-    const html1 = await res1.value.text();
-    const match1 = html1.match(/__NEXT_DATA__.*?>(.*?)<\/script>/);
-    if (match1) {
-      try {
-        const d1 = JSON.parse(match1[1]);
-        businessUnit = d1.props?.pageProps?.businessUnit || null;
-        if (Array.isArray(d1.props?.pageProps?.reviews)) {
-          allRawReviews.push(...d1.props.pageProps.reviews);
-        }
-      } catch (e) {
-        console.error("[reviews] Error parsing Trustpilot page 1 JSON:", e);
-      }
-    }
-  }
-
-  if (res2.status === "fulfilled" && res2.value.ok) {
-    const html2 = await res2.value.text();
-    const match2 = html2.match(/__NEXT_DATA__.*?>(.*?)<\/script>/);
-    if (match2) {
-      try {
-        const d2 = JSON.parse(match2[1]);
-        if (Array.isArray(d2.props?.pageProps?.reviews)) {
-          allRawReviews.push(...d2.props.pageProps.reviews);
-        }
-      } catch (e) {
-        console.error("[reviews] Error parsing Trustpilot page 2 JSON:", e);
-      }
-    }
-  }
-
-  if (!businessUnit && allRawReviews.length === 0) {
-    return null;
-  }
-
-  const reviews = allRawReviews.map((r: any) => {
-    let dateStr = "Recently";
-    const rawDate = r.dates?.publishedDate || r.dates?.experiencedDate;
-    if (rawDate) {
-      try {
-        dateStr = new Date(rawDate).toLocaleDateString("en-GB", {
-          month: "short",
-          year: "numeric",
-        });
-      } catch {}
-    }
-
-    return {
-      id: r.id || String(Math.random()),
-      author: r.consumer?.displayName || "Verified Customer",
-      location: r.consumer?.countryCode || "UK",
-      rating: r.rating || 5,
-      date: dateStr,
-      title: r.title || "",
-      text: r.text || "",
-      tag: (r.rating || 5) >= 5 ? "5-Star Experience" : "Verified Review",
-    };
-  });
-
-  return {
-    stars: businessUnit?.stars || 4.5,
-    trustScore: businessUnit?.trustScore || 4.6,
-    numberOfReviews: businessUnit?.numberOfReviews || reviews.length || 43,
-    reviews: reviews.length > 0 ? reviews : FALLBACK_REVIEWS,
-    source: "trustpilot-direct",
-  };
-}
-
 export async function GET() {
   const now = Date.now();
 
@@ -231,7 +142,7 @@ export async function GET() {
         const responseData = {
           stars: summary.score?.stars || 4.5,
           trustScore: summary.score?.trustScore || 4.6,
-          numberOfReviews: summary.numberOfReviews?.total || 43,
+          numberOfReviews: summary.numberOfReviews?.total || 46,
           reviews: reviews.length > 0 ? reviews : FALLBACK_REVIEWS,
           source: "live-api",
         };
@@ -240,19 +151,8 @@ export async function GET() {
         return NextResponse.json(responseData);
       }
     } catch (err: any) {
-      console.warn("[reviews] Trustpilot API key error, falling back to direct fetch:", err.message);
+      console.warn("[reviews] Trustpilot API key error, falling back:", err.message);
     }
-  }
-
-  // 2. Fetch directly from Trustpilot (automatic live parse of verified reviews & score)
-  try {
-    const directData = await fetchDirectFromTrustpilot();
-    if (directData && directData.reviews.length > 0) {
-      cache = { data: directData, timestamp: now };
-      return NextResponse.json(directData);
-    }
-  } catch (err: any) {
-    console.warn("[reviews] Direct Trustpilot fetch failed, using fallback:", err.message);
   }
 
   // 3. Fallback with realistic 4.6 TrustScore and 43 reviews

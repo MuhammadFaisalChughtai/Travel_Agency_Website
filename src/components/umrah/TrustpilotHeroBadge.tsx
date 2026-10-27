@@ -45,19 +45,19 @@ export function TrustpilotHeroBadge({ label = "Pilgrims" }: { label?: string }) 
       className="inline-flex items-center gap-2 pt-1 text-[11px] text-slate-300 font-medium hover:text-white transition-colors cursor-pointer group"
     >
       <div className="flex items-center gap-1.5">
-        <div className="flex gap-0.5 text-[#00b67a]">
-          {/* Trustpilot official green star color instead of tan, to make it clear it's Trustpilot */}
-          {[...Array(5)].map((_, i) => {
-            const isFull = i < Math.floor(data.trustScore);
-            const isHalf = !isFull && i < Math.ceil(data.trustScore);
-            return (
-              <div key={i} className={`w-3.5 h-3.5 rounded-[1px] flex items-center justify-center text-[8px] font-black ${isFull || isHalf ? 'bg-[#00b67a]' : 'bg-[#dcdce6]'} text-white`}>
-                ★
-              </div>
-            );
-          })}
+        <div className="flex gap-0.5 text-amber-400">
+          {[...Array(5)].map((_, i) => (
+            <Star
+              key={i}
+              className={`w-3.5 h-3.5 ${
+                i < Math.round(data.trustScore)
+                  ? "fill-amber-400 text-amber-400"
+                  : "fill-white/20 text-white/20"
+              }`}
+            />
+          ))}
         </div>
-        <span>• Rated {roundedScore}/5 on <span className="font-bold group-hover:underline">Trustpilot</span> by {formattedReviews}+ {label}</span>
+        <span>• Rated {roundedScore}/5 on <span className="font-bold group-hover:underline text-[#00b67a]">Trustpilot</span> ({formattedReviews}+ reviews)</span>
       </div>
     </a>
   );
