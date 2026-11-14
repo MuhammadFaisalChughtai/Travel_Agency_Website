@@ -330,13 +330,21 @@ export function Footer() {
                 </a>
               </li>
               <li className="flex items-center gap-4 pt-4 border-t border-[#483434]/15">
-                <img
+                <a
+                  href="/certificates/iata-certificate.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="IATA Certified Travel Agency - Click to view certificate"
+                  className="hover:scale-105 transition-all block"
+                >
+                  <img
                   src="/IATA.svg"
                   alt="IATA Logo"
                   width={60}
                   height={32}
                   className="h-8 w-auto object-contain mix-blend-multiply opacity-90"
                 />
+                </a>
                 <img
                   src="/ATOL.svg"
                   alt="ATOL Protected"
@@ -391,6 +399,18 @@ export function Footer() {
              <div className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center justify-center border border-[#6b4f4f]">
                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" className="h-3.5 w-auto object-contain" />
              </div>
+              <a
+                href="/certificates/pci-dss-compliance.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="PCI DSS SAQ 4.0.1 Certified - Click to view certificate"
+                className="bg-white px-2.5 py-1 rounded shadow-sm h-7 flex items-center gap-1.5 border border-[#6b4f4f] hover:border-emerald-600 hover:shadow transition-all group"
+              >
+                <svg className="h-3.5 w-auto text-[#0079C1]" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/>
+                </svg>
+                <span className="text-[10px] font-black text-slate-800 tracking-tight whitespace-nowrap group-hover:text-emerald-700">PCI DSS <span className="text-[9px] font-semibold text-slate-500">Certified</span></span>
+              </a>
           </div>
           
           <div className="flex flex-col border-[2px] border-[#eed6c4]/80 rounded overflow-hidden font-black uppercase shadow-lg shrink-0 w-[95px]">
