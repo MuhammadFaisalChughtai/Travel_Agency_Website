@@ -79,3 +79,45 @@ export function getAirportByCode(code: string): Airport | undefined {
   if (!code) return undefined;
   return ALL_AIRPORTS.find((a) => a.code.toUpperCase() === code.toUpperCase());
 }
+
+/**
+ * Returns a human-friendly, clean airport name (e.g. "Heathrow Airport", "Islamabad Intl", "King Abdulaziz Intl")
+ */
+export function getAirportCleanName(code: string, fallback?: string): string {
+  if (!code) return fallback || "";
+  const airport = getAirportByCode(code);
+  if (!airport) return fallback || code;
+
+  // Extract concise airport name
+  let raw = airport.name || airport.city || "";
+  // Strip trailing regional / administrative clutter
+  raw = raw
+    .replace(/\b(England UK|United Kingdom|Saudi Arabia|Pakistan|United Arab Emirates|Bangladesh|Tanzania|India|Russia|Turkey|Denmark)\b/gi, "")
+    .replace(/,\s*$/, "")
+    .trim();
+
+  // Special common shortcuts for clean display
+  const upper = code.toUpperCase();
+  if (upper === "LHR") return "Heathrow Airport";
+  if (upper === "LGW") return "Gatwick Airport";
+  if (upper === "MAN") return "Manchester Airport";
+  if (upper === "BHX") return "Birmingham Airport";
+  if (upper === "STN") return "Stansted Airport";
+  if (upper === "LTN") return "Luton Airport";
+  if (upper === "EDI") return "Edinburgh Airport";
+  if (upper === "JED") return "King Abdulaziz Intl";
+  if (upper === "MED") return "Prince Mohammad Intl";
+  if (upper === "RUH") return "King Khalid Intl";
+  if (upper === "DXB") return "Dubai International";
+  if (upper === "ISB") return "Islamabad International";
+  if (upper === "LHE") return "Allama Iqbal Intl";
+  if (upper === "KHI") return "Jinnah International";
+  if (upper === "DAC") return "Hazrat Shahjalal Intl";
+  if (upper === "IST") return "Istanbul Airport";
+  if (upper === "SAW") return "Sabiha Gökçen Intl";
+  if (upper === "DOH") return "Hamad International";
+  if (upper === "JFK") return "John F. Kennedy Intl";
+  if (upper === "JRO") return "Kilimanjaro Intl";
+
+  return raw || airport.city || fallback || code;
+}
