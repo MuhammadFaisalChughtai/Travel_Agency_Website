@@ -329,36 +329,53 @@ export function Footer() {
                   07888 461474 (WhatsApp)
                 </a>
               </li>
-              <li className="flex items-center gap-4 pt-4 border-t border-[#483434]/15">
-                <a
-                  href="/certificates/iata-certificate.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="IATA Certified Travel Agency - Click to view certificate"
-                  className="hover:scale-105 transition-all block"
-                >
+              <li className="pt-4 border-t border-emerald-800/40">
+                <div className="flex flex-wrap items-center gap-3.5">
+                  <a
+                    href="/certificates/iata-certificate.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="IATA Certified Travel Agency - Click to view certificate"
+                    className="hover:scale-105 transition-transform shrink-0 flex items-center bg-white px-2 py-1 rounded shadow-xs"
+                  >
+                    <img
+                      src="/IATA.svg"
+                      alt="IATA Logo"
+                      width={48}
+                      height={28}
+                      className="h-7 w-[48px] object-contain"
+                    />
+                  </a>
                   <img
-                  src="/IATA.svg"
-                  alt="IATA Logo"
-                  width={60}
-                  height={32}
-                  className="h-8 w-auto object-contain mix-blend-multiply opacity-90"
-                />
-                </a>
-                <img
-                  src="/ATOL.svg"
-                  alt="ATOL Protected"
-                  width={60}
-                  height={40}
-                  className="h-10 w-auto object-contain mix-blend-multiply"
-                />
-                <img
-                  src="/Ministry_Hajj.svg"
-                  alt="Ministry of Hajj and Umrah"
-                  width={60}
-                  height={64}
-                  className="h-16 w-auto object-contain mix-blend-multiply"
-                />
+                    src="/ATOL.svg"
+                    alt="ATOL Protected"
+                    width={50}
+                    height={36}
+                    className="h-9 w-auto object-contain shrink-0 bg-white/90 rounded px-1"
+                  />
+                  <img
+                    src="/Ministry_Hajj.svg"
+                    alt="Ministry of Hajj and Umrah"
+                    width={50}
+                    height={50}
+                    className="h-12 w-auto object-contain shrink-0"
+                  />
+                  <a
+                    href="/certificates/pci-dss-compliance.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="PCI DSS SAQ 4.0.1 Certified - Click to view certificate"
+                    className="hover:scale-105 transition-transform shrink-0 flex items-center"
+                  >
+                    <img
+                      src="/pci-dss-badge.svg"
+                      alt="PCI DSS Compliant"
+                      width={100}
+                      height={32}
+                      className="h-8 w-auto object-contain shadow-xs rounded"
+                    />
+                  </a>
+                </div>
               </li>
             </ul>
           </div>
