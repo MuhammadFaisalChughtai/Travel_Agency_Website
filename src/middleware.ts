@@ -36,14 +36,16 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // Skip rewriting if the path is intended for admin, api, login, or password recovery
+  // Skip rewriting if the path is intended for admin, api, login, password recovery, or static uploads/certificates
   if (
     url.pathname.startsWith("/admin") ||
     url.pathname.startsWith("/api") ||
     url.pathname.startsWith("/login") ||
     url.pathname.startsWith("/unsubscribe") ||
     url.pathname.startsWith("/forgot-password") ||
-    url.pathname.startsWith("/reset-password")
+    url.pathname.startsWith("/reset-password") ||
+    url.pathname.startsWith("/certificates") ||
+    url.pathname.startsWith("/uploads")
   ) {
     return NextResponse.next({
       request: {
@@ -73,7 +75,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next) and static files, plus robots/sitemap
-    "/((?!_next/static|_next/image|favicon.ico|robots\\.txt|sitemap\\.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    // Skip all internal paths (_next) and static files, plus robots/sitemap and certificates/uploads
+    "/((?!_next/static|_next/image|favicon\\.ico|robots\\.txt|sitemap\\.xml|certificates/.*|uploads/.*|.*\\.(?:svg|png|jpg|jpeg|gif|webp|pdf|ico|webmanifest)$).*)",
   ],
 };
