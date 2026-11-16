@@ -191,8 +191,8 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Informative Links (lg:col-span-2.5) */}
-          <div className="lg:col-span-2 md:col-span-1 lg:col-span-2.5 space-y-4">
+          {/* Column 3: Informative Links (lg:col-span-2) */}
+          <div className="lg:col-span-2 md:col-span-1 space-y-4">
             <div className="space-y-1.5">
               <h3 className="text-xs md:text-sm font-black tracking-wider uppercase text-[#6b4f4f] font-heading">
                 Informative Links
@@ -279,8 +279,8 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 5: Contact Us (lg:col-span-2.5) */}
-          <div className="lg:col-span-2.5 space-y-4">
+          {/* Column 5: Contact Us (lg:col-span-3) */}
+          <div className="lg:col-span-3 space-y-4">
             <div className="space-y-1.5">
               <h3 className="text-xs md:text-sm font-black tracking-wider uppercase text-[#6b4f4f] font-heading">
                 Contact Us
@@ -330,7 +330,7 @@ export function Footer() {
                 </a>
               </li>
               <li className="pt-4 border-t border-[#483434]/15">
-                <div className="flex flex-wrap items-center gap-3.5">
+                <div className="flex items-center flex-nowrap gap-2.5 sm:gap-3">
                   <a
                     href="/certificates/iata-certificate.pdf"
                     target="_blank"
@@ -341,24 +341,24 @@ export function Footer() {
                     <img
                       src="/IATA.svg"
                       alt="IATA Logo"
-                      width={56}
-                      height={36}
-                      className="h-9 w-[56px] object-contain"
+                      width={48}
+                      height={28}
+                      className="h-7 sm:h-8 w-auto object-contain"
                     />
                   </a>
                   <img
                     src="/ATOL.svg"
                     alt="ATOL Protected"
-                    width={50}
-                    height={36}
-                    className="h-9 w-auto object-contain mix-blend-multiply shrink-0"
+                    width={40}
+                    height={32}
+                    className="h-8 sm:h-9 w-auto object-contain mix-blend-multiply shrink-0"
                   />
                   <img
                     src="/Ministry_Hajj.svg"
                     alt="Ministry of Hajj and Umrah"
-                    width={50}
-                    height={50}
-                    className="h-12 w-auto object-contain mix-blend-multiply shrink-0"
+                    width={40}
+                    height={40}
+                    className="h-9 sm:h-10 w-auto object-contain mix-blend-multiply shrink-0"
                   />
                   <a
                     href="/certificates/pci-dss-compliance.pdf"
@@ -370,9 +370,9 @@ export function Footer() {
                     <img
                       src="/pci-dss-badge.svg"
                       alt="PCI DSS Compliant"
-                      width={100}
-                      height={32}
-                      className="h-8 w-auto object-contain shadow-xs rounded"
+                      width={85}
+                      height={28}
+                      className="h-7 w-auto object-contain shadow-xs rounded"
                     />
                   </a>
                 </div>

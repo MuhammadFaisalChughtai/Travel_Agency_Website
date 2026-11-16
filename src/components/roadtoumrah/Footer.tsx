@@ -330,35 +330,35 @@ export function Footer() {
                 </a>
               </li>
               <li className="pt-4 border-t border-emerald-800/40">
-                <div className="flex flex-wrap items-center gap-3.5">
+                <div className="flex items-center flex-nowrap gap-2.5 sm:gap-3">
                   <a
                     href="/certificates/iata-certificate.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     title="IATA Certified Travel Agency - Click to view certificate"
-                    className="hover:scale-105 transition-transform shrink-0 flex items-center bg-white px-2 py-1 rounded shadow-xs"
+                    className="hover:scale-105 transition-transform shrink-0 flex items-center bg-white px-1.5 py-1 rounded shadow-xs"
                   >
                     <img
                       src="/IATA.svg"
                       alt="IATA Logo"
-                      width={48}
-                      height={28}
-                      className="h-7 w-[48px] object-contain"
+                      width={44}
+                      height={26}
+                      className="h-6 sm:h-7 w-auto object-contain"
                     />
                   </a>
                   <img
                     src="/ATOL.svg"
                     alt="ATOL Protected"
-                    width={50}
-                    height={36}
-                    className="h-9 w-auto object-contain shrink-0 bg-white/90 rounded px-1"
+                    width={40}
+                    height={32}
+                    className="h-8 sm:h-9 w-auto object-contain shrink-0 bg-white/90 rounded px-1"
                   />
                   <img
                     src="/Ministry_Hajj.svg"
                     alt="Ministry of Hajj and Umrah"
-                    width={50}
-                    height={50}
-                    className="h-12 w-auto object-contain shrink-0"
+                    width={40}
+                    height={40}
+                    className="h-9 sm:h-10 w-auto object-contain shrink-0"
                   />
                   <a
                     href="/certificates/pci-dss-compliance.pdf"
@@ -370,9 +370,9 @@ export function Footer() {
                     <img
                       src="/pci-dss-badge.svg"
                       alt="PCI DSS Compliant"
-                      width={100}
-                      height={32}
-                      className="h-8 w-auto object-contain shadow-xs rounded"
+                      width={85}
+                      height={28}
+                      className="h-7 w-auto object-contain shadow-xs rounded"
                     />
                   </a>
                 </div>
