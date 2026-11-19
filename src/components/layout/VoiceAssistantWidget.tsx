@@ -35,6 +35,9 @@ interface ChatMessage {
 }
 
 export function VoiceAssistantWidget() {
+  // Widget hidden per user request
+  return null;
+
   const [isOpen, setIsOpen] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
